@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.0.1...cozy-sharing@28.0.2) (2025-12-08)
+
+### Bug Fixes
+
+- Use sharing provider to rename shared drive ([6208d72](https://github.com/cozy/cozy-libs/commit/6208d72bf6ebb7330dff82e90fb207754b135671))
+
 ## [28.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.0.0...cozy-sharing@28.0.1) (2025-12-05)
 
 ### Bug Fixes
