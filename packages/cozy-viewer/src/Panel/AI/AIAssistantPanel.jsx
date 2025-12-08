@@ -25,7 +25,7 @@ import styles from './styles.styl'
 import { getSummaryConfig, roughTokensEstimation } from '../../helpers'
 import { useViewer } from '../../providers/ViewerProvider'
 
-const AIAssistantPanel = () => {
+const AIAssistantPanel = ({ className }) => {
   const { t } = useI18n()
   const client = useClient()
   const { file, setIsOpenAiAssistant } = useViewer()
@@ -124,7 +124,10 @@ const AIAssistantPanel = () => {
 
   return (
     <>
-      <Stack spacing="s" className={cx('u-flex u-flex-column u-h-100')}>
+      <Stack
+        spacing="s"
+        className={cx('u-flex u-flex-column u-h-100', className)}
+      >
         <Paper
           className={cx({
             'u-flex-grow-1': !isLoading
