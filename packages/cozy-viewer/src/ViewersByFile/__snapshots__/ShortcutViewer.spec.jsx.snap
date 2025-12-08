@@ -51,7 +51,7 @@ exports[`Shortcutviewer renders the component 1`] = `
           />
         </svg>
         <span>
-          Go to 
+          Viewer.goto
         </span>
       </span>
     </a>
