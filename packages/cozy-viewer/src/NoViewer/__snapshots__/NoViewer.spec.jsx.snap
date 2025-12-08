@@ -40,7 +40,7 @@ exports[`NoViewer should render the viewer 1`] = `
     >
       <span>
         <span>
-          Download
+          Viewer.download
         </span>
       </span>
     </button>

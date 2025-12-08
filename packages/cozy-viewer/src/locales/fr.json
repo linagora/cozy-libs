@@ -79,6 +79,19 @@
         "success": "Copié dans le presse-papier",
         "error": "Impossible de copier dans le presse-papier"
       }
+    },
+    "summariseWithAi": "Résumer",
+    "ai": {
+      "panelTitle": "Assistant AI",
+      "bodyText": "Résumé",
+      "error": {
+        "summary": "Échec de la génération du résumé. Veuillez réessayer.",
+        "documentTooLarge": "Ce document est trop volumineux pour être résumé. Veuillez essayer avec un document plus court."
+      },
+      "copied": "Résumé copié dans le presse-papier",
+      "footerText": "Ce contenu est généré par AI et peut contenir des erreurs.",
+      "stop": "Arrêter",
+      "loadingText": "Résumé en cours"
     }
   }
 }

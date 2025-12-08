@@ -15,6 +15,7 @@ import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
 import Viewer from './Viewer'
 import ViewerInformationsWrapper from './ViewerInformationsWrapper'
+import { withViewerLocales } from './hoc/withViewerLocales'
 import { locales } from './locales'
 import { toolbarPropsPropType } from './proptypes'
 import ShareModalProvider from './providers/ShareModalProvider'
@@ -231,4 +232,4 @@ ViewerContainerWrapper.propTypes = {
   })
 }
 
-export default ViewerContainerWrapper
+export default withViewerLocales(ViewerContainerWrapper)
