@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.0.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.0.0...cozy-viewer@26.0.1) (2025-12-08)
+
+### Bug Fixes
+
+- Fix usage of twake-i18n :bug: ([5620f15](https://github.com/cozy/cozy-libs/commit/5620f156f1891a671393a41bf1d1f28c9ec06bda))
+
 # [26.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@25.0.1...cozy-viewer@26.0.0) (2025-12-08)
 
 ### Features
