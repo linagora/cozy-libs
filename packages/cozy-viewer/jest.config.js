@@ -8,10 +8,19 @@ module.exports = {
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/__mocks__/fileMock.js',
     '\\.styl$': 'identity-obj-proxy',
     'react-pdf/dist/esm/entry.webpack': 'react-pdf',
+    '^cozy-client/src/(.*)$': '<rootDir>/node_modules/cozy-client/dist/$1',
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index',
-    '^cozy-client/dist/types$':
-      '<rootDir>/node_modules/cozy-client/dist/types.js',
-    '^cozy-ui$': '<rootDir>/node_modules/cozy-ui/$1'
+    '^cozy-client/dist/(.*)$': '<rootDir>/node_modules/cozy-client/dist/$1',
+    '^cozy-ui/transpiled/react/providers/I18n$':
+      '<rootDir>/test/__mocks__/twake-i18n.js',
+    '^cozy-ui/transpiled/react/(.*)$':
+      '<rootDir>/node_modules/cozy-ui/transpiled/react/$1',
+    '^cozy-flags$': '<rootDir>/test/__mocks__/cozyFlagsMock.js',
+    '^cozy-intent$': '<rootDir>/test/__mocks__/cozy-intent.js',
+    '^cozy-sharing$': '<rootDir>/test/__mocks__/cozy-sharing.js',
+    '^twake-i18n$': '<rootDir>/test/__mocks__/twake-i18n.js',
+    '^cozy-harvest-lib/dist/components/KonnectorBlock$':
+      '<rootDir>/test/__mocks__/cozy-harvest-lib.js'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-harvest-lib))'],
   transform: {
