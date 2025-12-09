@@ -8,7 +8,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import FieldInput from './FieldInput'
 import FieldInputAccordion from './FieldInputAccordion'
 import FieldInputArray from './FieldInputArray'
-import { fieldsRequired } from './helpers'
+import { fieldsRequired, makeIsRequiredError } from './helpers'
 import { locales } from './locales'
 
 const FieldInputLayout = ({
@@ -19,10 +19,10 @@ const FieldInputLayout = ({
 }) => {
   useExtendI18n(locales)
   const { t } = useI18n()
-  const { valid, submitFailed, errors } = formProps
+  const { errors } = formProps
   const { name, label, ...restAttributes } = attributes
 
-  const isError = fieldsRequired.includes(name) && !valid && submitFailed
+  const isError = makeIsRequiredError(name, fieldsRequired, formProps)
 
   return (
     <div
