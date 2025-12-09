@@ -11,12 +11,7 @@ import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 
 import FieldInput from './FieldInput'
-import {
-  fieldsRequired,
-  addField,
-  removeField,
-  makeIsRequiredError
-} from './helpers'
+import { addField, removeField, makeIsRequiredError } from './helpers'
 import { locales } from './locales'
 
 const FieldInputArray = ({
@@ -38,8 +33,7 @@ const FieldInputArray = ({
               const showRemove = fields.value[index]?.[name]
               const inputName = `${nameWithIndex}.${name}`
               const isError = makeIsRequiredError(
-                inputName,
-                fieldsRequired,
+                restAttributes.required,
                 formProps
               )
 
