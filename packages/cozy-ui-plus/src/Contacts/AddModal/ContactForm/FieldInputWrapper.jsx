@@ -25,8 +25,8 @@ const FieldInputWrapper = ({
 
   return (
     <Component
-      {...restAttributes}
       {...input}
+      {...restAttributes}
       {...props}
       variant={variant}
       fullWidth={fullWidth}
