@@ -9,39 +9,63 @@ import { CONTACTS_DOCTYPE } from 'cozy-client/dist/models/contact'
 
 import contactToFormValues from './contactToFormValues'
 
-export const fieldsRequired = [
-  'givenName',
-  'familyName',
-  'email[0].email',
-  'cozy'
-]
-
-/**
- * Returns true if the input is required and the form is invalid
- * @param {string} inputName - The name of the input
- * @param {string[]} fieldsRequired - The fields that are required
- * @param {object} formProps - The form props
- * @returns {boolean} True if the input is required and the form is invalid
- */
-export const makeIsRequiredError = (inputName, fieldsRequired, formProps) => {
-  const { valid, submitFailed } = formProps
-
-  return fieldsRequired.includes(inputName) && !valid && submitFailed
+export const getFirstValueIfArray = values => {
+  return Object.keys(values).reduce((acc, key) => {
+    const val = values[key]
+    acc[key] = Array.isArray(val) ? val[0] : val
+    return acc
+  }, {})
 }
 
 /**
- * Returns errors if all required fields are empty
+ * Returns true if all fields have no values
  * @param {object} values - Fields values
- * @param {func} t - Translation function
+ * @param {import('../types').Field[]} fields - Fields configuration
+ * @returns {boolean} True if all fields have no values
+ */
+export const hasNoValues = (values, fields) => {
+  const _values = getFirstValueIfArray(values)
+
+  return fields.every(field => !get(_values, field.name))
+}
+
+/**
+ * Returns true if the input is required and the form is invalid
+ * @param {boolean} required - Whether the input is required
+ * @param {object} formProps - The form props
+ * @returns {boolean} True if the input is required and the form is invalid
+ */
+export const makeIsRequiredError = (required, formProps) => {
+  const { valid, submitFailed } = formProps
+
+  return required && !valid && submitFailed
+}
+
+/**
+ * Returns errors for required fields that are empty
+ * @param {object} values - Fields values
+ * @param {import('../types').Field[]} fields - Fields configuration
+ * @param {Function} t - Translation function
  * @returns {object} Errors
  */
-export const validateFields = (values, t) => {
+export const validateFields = (values, fields, t) => {
   const errors = {}
-  if (fieldsRequired.every(field => !get(values, field))) {
-    fieldsRequired.forEach(field => {
-      errors[field] = t('Contacts.AddModal.ContactForm.fields.required')
-    })
-  }
+  const fieldsRequired = fields.filter(field => field.required)
+  const _values = getFirstValueIfArray(values)
+
+  fieldsRequired.forEach(field => {
+    if (!get(_values, field.name)) {
+      errors[field.name] =
+        field.layout === 'array'
+          ? [
+              {
+                [field.name]: t('Contacts.AddModal.ContactForm.fields.required')
+              }
+            ]
+          : t('Contacts.AddModal.ContactForm.fields.required')
+    }
+  })
+
   return errors
 }
 

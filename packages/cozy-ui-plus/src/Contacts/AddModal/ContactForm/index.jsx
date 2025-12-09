@@ -10,7 +10,7 @@ import FieldInputLayout from './FieldInputLayout'
 import contactToFormValues from './contactToFormValues'
 import { fields as defaultFields } from './fieldsConfig'
 import formValuesToContact from './formValuesToContact'
-import { validateFields, makeFields } from './helpers'
+import { validateFields, makeFields, hasNoValues } from './helpers'
 import { locales } from './locales'
 // import { fullContactPropTypes } from '../../ContactPropTypes' // !!
 
@@ -55,9 +55,14 @@ const ContactForm = ({ contacts, contact, customFieldsProps, onSubmit }) => {
         makeCustomContactValues,
         t
       })}
-      validate={values => validateFields(values, t)}
-      onSubmit={formValues =>
-        onSubmit(
+      validate={values => validateFields(values, _fields, t)}
+      onSubmit={formValues => {
+        // avoid creating an empty contact
+        if (hasNoValues(formValues, _fields)) {
+          return
+        }
+
+        return onSubmit(
           formValuesToContact({
             formValues,
             oldContact: contact,
@@ -65,7 +70,7 @@ const ContactForm = ({ contacts, contact, customFieldsProps, onSubmit }) => {
             t
           })
         )
-      }
+      }}
       render={({ handleSubmit, valid, submitFailed, errors }) => {
         setSubmitContactForm(handleSubmit)
         return (
