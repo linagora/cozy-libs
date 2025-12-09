@@ -384,9 +384,20 @@ export const makeFields = (customFields, defaultFields) => {
 
   const fields = [...defaultFields]
 
-  customFields.map(customField => {
-    if (customField.position) {
-      fields.splice(customField.position, 0, customField)
+  customFields.forEach(customField => {
+    const defaultField = fields.find(field => field.name === customField.name)
+    const _field = defaultField || customField
+
+    if (defaultField) {
+      Object.assign(_field, customField)
+    }
+
+    if (_field.position) {
+      if (defaultField) {
+        const fieldIndex = fields.indexOf(defaultField)
+        fields.splice(fieldIndex, 1)
+      }
+      fields.splice(_field.position, 0, _field)
     }
   })
 
