@@ -388,4 +388,44 @@ describe('makeFields', () => {
 
     expect(res).toStrictEqual(defaultFields)
   })
+
+  it('should replace default fields values by custom fields', () => {
+    const defaultFields = [
+      { name: 'firstname', type: 'text', layout: 'accordion' },
+      { name: 'lastname' }
+    ]
+    const customFields = [
+      { name: 'firstname', isSecondary: true, layout: 'array' }
+    ]
+
+    const res = makeFields(customFields, defaultFields)
+
+    expect(res).toStrictEqual([
+      { name: 'firstname', type: 'text', isSecondary: true, layout: 'array' },
+      { name: 'lastname' }
+    ])
+  })
+
+  it('should replace default fields values and add custom fields at custom position', () => {
+    const defaultFields = [
+      { name: 'firstname', type: 'text', layout: 'accordion' },
+      { name: 'lastname' }
+    ]
+    const customFields = [
+      { name: 'firstname', isSecondary: true, layout: 'array', position: 1 }
+    ]
+
+    const res = makeFields(customFields, defaultFields)
+
+    expect(res).toStrictEqual([
+      { name: 'lastname' },
+      {
+        name: 'firstname',
+        type: 'text',
+        isSecondary: true,
+        layout: 'array',
+        position: 1
+      }
+    ])
+  })
 })
