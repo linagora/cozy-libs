@@ -17,6 +17,19 @@ export const fieldsRequired = [
 ]
 
 /**
+ * Returns true if the input is required and the form is invalid
+ * @param {string} inputName - The name of the input
+ * @param {string[]} fieldsRequired - The fields that are required
+ * @param {object} formProps - The form props
+ * @returns {boolean} True if the input is required and the form is invalid
+ */
+export const makeIsRequiredError = (inputName, fieldsRequired, formProps) => {
+  const { valid, submitFailed } = formProps
+
+  return fieldsRequired.includes(inputName) && !valid && submitFailed
+}
+
+/**
  * Returns errors if all required fields are empty
  * @param {object} values - Fields values
  * @param {func} t - Translation function
