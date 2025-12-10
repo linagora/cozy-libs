@@ -16,6 +16,10 @@
       "find_file": "Search a file",
       "reimbursements": "Check my repayments",
       "reorganise_files": "Reorganise my files"
+    },
+    "history": {
+      "new": "New chat",
+      "recent": "Recent chats"
     }
   }
 }

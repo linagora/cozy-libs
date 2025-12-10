@@ -47,7 +47,7 @@ const ConversationBar = ({ assistantStatus }) => {
     })
 
   return (
-    <div className="u-w-100 u-maw-7 u-mh-auto">
+    <div className="u-w-100 u-maw-7 u-mh-auto u-mb-1">
       <SearchBar
         className={styles['conversationBar']}
         icon={null}

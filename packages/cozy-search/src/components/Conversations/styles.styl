@@ -13,3 +13,26 @@
 
   +gt-mobile()
     max-height 155px
+
+.chatConversation
+  overflow-y scroll
+
+  &::-webkit-scrollbar
+    display: none
+
+.conversationHeaderBar
+  box-shadow inset 0 -1px 0 0 var(--dividerColor)
+  background-color var(--paperBackgroundColor)
+
+.conversationList
+  box-shadow inset -1px 0 0 0 var(--dividerColor)
+
+  &--container
+    overflow-y scroll
+
+    &::-webkit-scrollbar
+      display none
+
+.conversationListItem
+  &--selected
+    background-color var(--defaultBackgroundColor) !important

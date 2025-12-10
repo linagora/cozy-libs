@@ -8,6 +8,7 @@ import ChatUserItem from './ChatUserItem'
 import { useAssistant } from '../AssistantProvider'
 import { getInstantMessage } from '../helpers'
 import { buildChatConversationQueryById } from '../queries'
+import styles from './styles.styl'
 
 const ChatConversation = ({ conversation, myself }) => {
   const { assistantState } = useAssistant()
@@ -29,8 +30,18 @@ const ChatConversation = ({ conversation, myself }) => {
     instantMessageKeysCount
   ])
 
+  if (
+    !conversation ||
+    (conversation.messages.length == 0 && !showRealtimeMessage)
+  ) {
+    return null
+  }
+
   return (
-    <div ref={listRef}>
+    <div
+      ref={listRef}
+      className={`u-h-100 u-w-100 u-maw-7 ${styles['chatConversation']}`}
+    >
       {conversation?.messages?.map((message, idx) => {
         if (message.role === 'user') {
           return (
