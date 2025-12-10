@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import useExtendI18n from 'twake-i18n'
+import { useExtendI18n } from 'twake-i18n'
 
 import AssistantProvider from './AssistantProvider'
 import { locales } from '../locales'
