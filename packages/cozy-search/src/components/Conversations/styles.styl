@@ -33,6 +33,19 @@
     &::-webkit-scrollbar
       display none
 
+  &--hidden
+    display: none
+
 .conversationListItem
   &--selected
     background-color var(--defaultBackgroundColor) !important
+
+.menuToggler
+  position absolute
+  box-sizing border-box
+
+  &--disabled
+    border-bottom: 1px solid var(--dividerColor)
+    border-right: 1px solid var(--dividerColor)
+    border-bottom-right-radius: 1rem
+    background: var(--paperBackgroundColor)
