@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.14.0...cozy-search@0.14.1) (2025-12-10)
+
+### Bug Fixes
+
+- Resolve import problem of useExtendedI18n in twake-i18n :bug: ([b997dbf](https://github.com/cozy/cozy-libs/commit/b997dbfddc136ead43d32faba997ee7fb08d5094))
+
 # [0.14.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.13.8...cozy-search@0.14.0) (2025-12-04)
 
 ### Features

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.0.0...cozy-ui-plus@4.1.0) (2025-12-10)
+
+### Features
+
+- **ui-plus:** Add possibility to overrides fields in Contacts AddModal ([7224485](https://github.com/cozy/cozy-libs/commit/72244856a99c879d54b1317e402a095afcb8b3f6))
+- **ui-plus:** Change required logic for Contacts AddModal ([cdd5650](https://github.com/cozy/cozy-libs/commit/cdd565070ddb98a515c63ee9f2026b4e2fa1532d))
+- **ui-plus:** Contacts AddModal form input values are now overridable ([50e7502](https://github.com/cozy/cozy-libs/commit/50e7502e5143e0479941c8aeabe67e90796a735c))
+
 # [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@3.1.2...cozy-ui-plus@4.0.0) (2025-12-04)
 
 ### Features
