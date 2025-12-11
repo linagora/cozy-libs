@@ -12,6 +12,7 @@ const ShareSubmit = props => (
     busy={props.loading}
     label={props.label}
     disabled={props.disabled}
+    variant="ghost"
   />
 )
 
