@@ -1,6 +1,6 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React, { useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useI18n } from 'twake-i18n'
 
@@ -38,6 +38,9 @@ const AIAssistantPanel = ({ className }) => {
 
   const location = useLocation()
   const navigate = useNavigate()
+  const fetchedFileIdRef = useRef(null)
+  const inFlightFileIdRef = useRef(null)
+  const activeFileIdRef = useRef(file?._id || null)
 
   const handleClose = () => {
     setIsOpenAiAssistant(false)
@@ -85,31 +88,80 @@ const AIAssistantPanel = ({ className }) => {
     }
   }
 
-  const fetchSummary = useCallback(async () => {
-    if (!file) return
-
-    setIsLoading(true)
-    setError(null)
+  const persistedSummary = async (
+    fileMetadata,
+    targetFileId,
+    summaryContent
+  ) => {
     try {
-      const response = await summarizeFile({ client, file, stream: false })
-      if (response && response.content) {
-        setSummary(response.content)
-      } else if (response && response.choices && response.choices[0]) {
-        setSummary(response.choices[0].message.content)
-      }
-    } catch (err) {
-      const errorMessage =
-        err.code === 'DOCUMENT_TOO_LARGE'
-          ? t('Viewer.ai.error.documentTooLarge')
-          : t('Viewer.ai.error.summary')
-      setError(errorMessage)
-    } finally {
-      setIsLoading(false)
+      await client
+        .collection('io.cozy.files')
+        .updateMetadataAttribute(targetFileId, {
+          ...fileMetadata,
+          description: summaryContent
+        })
+      fetchedFileIdRef.current = targetFileId
+    } catch (error) {
+      logger.error('Error when persisting summary to file metadata:', error)
     }
-  }, [client, file, t])
+  }
+
+  useEffect(() => {
+    activeFileIdRef.current = file?._id || null
+  }, [file])
+
+  const fetchSummary = useCallback(
+    async (force = false) => {
+      const targetFileId = file?._id
+      if (!targetFileId) return
+
+      // Prevent duplicate fetches for the same file
+      if (
+        !force &&
+        (fetchedFileIdRef.current === targetFileId ||
+          inFlightFileIdRef.current === targetFileId)
+      ) {
+        return
+      }
+
+      inFlightFileIdRef.current = targetFileId
+      setIsLoading(true)
+      setError(null)
+
+      try {
+        const response = await summarizeFile({ client, file, stream: false })
+        const summaryContent =
+          response?.content || response?.choices?.[0]?.message?.content
+        // Ignore results if the user switched to another file meanwhile
+        if (activeFileIdRef.current !== targetFileId) {
+          return
+        }
+        setSummary(summaryContent)
+        const fileMetadata = file.metadata || {}
+        await persistedSummary(fileMetadata, targetFileId, summaryContent)
+      } catch (err) {
+        if (activeFileIdRef.current === targetFileId) {
+          const errorMessage =
+            err.code === 'DOCUMENT_TOO_LARGE'
+              ? t('Viewer.ai.error.documentTooLarge')
+              : t('Viewer.ai.error.summary')
+          setError(errorMessage)
+        }
+      } finally {
+        if (inFlightFileIdRef.current === targetFileId) {
+          inFlightFileIdRef.current = null
+        }
+        if (activeFileIdRef.current === targetFileId) {
+          setIsLoading(false)
+        }
+      }
+    },
+    [client, file, t]
+  )
 
   const handleRefresh = () => {
-    fetchSummary()
+    fetchedFileIdRef.current = null
+    fetchSummary(true)
   }
 
   const handleCopy = () => {
