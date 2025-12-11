@@ -11,11 +11,11 @@ jest.mock('cozy-flags')
 // Default mock for drive.summary flag
 flag.mockImplementation(flagName => {
   if (flagName === 'drive.summary') {
-    return JSON.stringify({
+    return {
       types: ['application/pdf', 'text/*'],
       pageLimit: 50,
       maxTokens: 100000
-    })
+    }
   }
   return null
 })
@@ -110,64 +110,58 @@ describe('helpers', () => {
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
     })
 
-    it('should return false if flag JSON is invalid', () => {
-      flag.mockReturnValue('invalid json')
+    it('should return false if flag config is invalid', () => {
+      flag.mockReturnValue('invalid config')
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
     })
 
     it('should return false if flag config is missing types array', () => {
-      flag.mockReturnValue(JSON.stringify({}))
+      flag.mockReturnValue({})
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
     })
 
     it('should return false if types array is empty', () => {
-      flag.mockReturnValue(JSON.stringify({ types: [] }))
+      flag.mockReturnValue({ types: [] })
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
     })
 
     it('should return false if types is not an array', () => {
-      flag.mockReturnValue(JSON.stringify({ types: 'application/pdf' }))
+      flag.mockReturnValue({ types: 'application/pdf' })
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
     })
 
     it('should return true if mime matches exactly', () => {
-      flag.mockReturnValue(
-        JSON.stringify({ types: ['application/pdf', 'text/plain'] })
-      )
+      flag.mockReturnValue({ types: ['application/pdf', 'text/plain'] })
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(true)
       expect(isFileSummaryCompatible({ mime: 'text/plain' })).toBe(true)
     })
 
     it('should handle case-insensitive mime matching', () => {
-      flag.mockReturnValue(
-        JSON.stringify({ types: ['application/PDF', 'TEXT/plain'] })
-      )
+      flag.mockReturnValue({ types: ['application/PDF', 'TEXT/plain'] })
       expect(isFileSummaryCompatible({ mime: 'APPLICATION/pdf' })).toBe(true)
       expect(isFileSummaryCompatible({ mime: 'text/PLAIN' })).toBe(true)
     })
 
     it('should return false if mime does not match', () => {
-      flag.mockReturnValue(JSON.stringify({ types: ['application/pdf'] }))
+      flag.mockReturnValue({ types: ['application/pdf'] })
       expect(isFileSummaryCompatible({ mime: 'text/plain' })).toBe(false)
     })
 
     it('should handle wildcard types', () => {
-      flag.mockReturnValue(JSON.stringify({ types: ['text/*'] }))
+      flag.mockReturnValue({ types: ['text/*'] })
       expect(isFileSummaryCompatible({ mime: 'text/plain' })).toBe(true)
       expect(isFileSummaryCompatible({ mime: 'text/markdown' })).toBe(true)
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(false)
     })
 
     it('should handle case-insensitive wildcard matching', () => {
-      flag.mockReturnValue(JSON.stringify({ types: ['TEXT/*'] }))
+      flag.mockReturnValue({ types: ['TEXT/*'] })
       expect(isFileSummaryCompatible({ mime: 'text/plain' })).toBe(true)
       expect(isFileSummaryCompatible({ mime: 'TEXT/markdown' })).toBe(true)
     })
 
     it('should respect page limit when pageCount is provided', () => {
-      flag.mockReturnValue(
-        JSON.stringify({ types: ['application/pdf'], pageLimit: 50 })
-      )
+      flag.mockReturnValue({ types: ['application/pdf'], pageLimit: 50 })
       expect(
         isFileSummaryCompatible({ mime: 'application/pdf' }, { pageCount: 10 })
       ).toBe(true)
@@ -180,9 +174,7 @@ describe('helpers', () => {
     })
 
     it('should return false if pageCount is 0 or negative', () => {
-      flag.mockReturnValue(
-        JSON.stringify({ types: ['application/pdf'], pageLimit: 50 })
-      )
+      flag.mockReturnValue({ types: ['application/pdf'], pageLimit: 50 })
       expect(
         isFileSummaryCompatible({ mime: 'application/pdf' }, { pageCount: 0 })
       ).toBe(false)
@@ -192,14 +184,12 @@ describe('helpers', () => {
     })
 
     it('should return true if pageCount is not provided and no pageLimit is set', () => {
-      flag.mockReturnValue(JSON.stringify({ types: ['application/pdf'] }))
+      flag.mockReturnValue({ types: ['application/pdf'] })
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(true)
     })
 
     it('should return true if pageCount is not provided but pageLimit is set', () => {
-      flag.mockReturnValue(
-        JSON.stringify({ types: ['application/pdf'], pageLimit: 50 })
-      )
+      flag.mockReturnValue({ types: ['application/pdf'], pageLimit: 50 })
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(true)
     })
   })
