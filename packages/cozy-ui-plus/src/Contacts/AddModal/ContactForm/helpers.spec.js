@@ -7,7 +7,10 @@ import {
   makeImppValues,
   makeCustomLabel,
   makeFields,
-  makeInitialCustomValue
+  makeInitialCustomValue,
+  hasNoValues,
+  getFirstValueIfArray,
+  validateFields
 } from './helpers'
 import { locales } from './locales'
 
@@ -387,5 +390,345 @@ describe('makeFields', () => {
     const res = makeFields(undefined, defaultFields)
 
     expect(res).toStrictEqual(defaultFields)
+  })
+
+  it('should replace default fields values by custom fields', () => {
+    const defaultFields = [
+      { name: 'firstname', type: 'text', layout: 'accordion' },
+      { name: 'lastname' }
+    ]
+    const customFields = [
+      { name: 'firstname', isSecondary: true, layout: 'array' }
+    ]
+
+    const res = makeFields(customFields, defaultFields)
+
+    expect(res).toStrictEqual([
+      { name: 'firstname', type: 'text', isSecondary: true, layout: 'array' },
+      { name: 'lastname' }
+    ])
+  })
+
+  it('should replace default fields values and add custom fields at custom position', () => {
+    const defaultFields = [
+      { name: 'firstname', type: 'text', layout: 'accordion' },
+      { name: 'lastname' }
+    ]
+    const customFields = [
+      { name: 'firstname', isSecondary: true, layout: 'array', position: 1 }
+    ]
+
+    const res = makeFields(customFields, defaultFields)
+
+    expect(res).toStrictEqual([
+      { name: 'lastname' },
+      {
+        name: 'firstname',
+        type: 'text',
+        isSecondary: true,
+        layout: 'array',
+        position: 1
+      }
+    ])
+  })
+})
+
+describe('hasNoValues', () => {
+  it('should return true when all fields have no values', () => {
+    const values = {}
+    const fields = [{ name: 'firstname' }, { name: 'lastname' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(true)
+  })
+
+  it('should return true when all field values are undefined', () => {
+    const values = { firstname: undefined, lastname: undefined }
+    const fields = [{ name: 'firstname' }, { name: 'lastname' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(true)
+  })
+
+  it('should return true when all field values are null', () => {
+    const values = { firstname: null, lastname: null }
+    const fields = [{ name: 'firstname' }, { name: 'lastname' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(true)
+  })
+
+  it('should return true when all field values are empty strings', () => {
+    const values = { firstname: '', lastname: '' }
+    const fields = [{ name: 'firstname' }, { name: 'lastname' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(true)
+  })
+
+  it('should return true when all field values are empty arrays', () => {
+    const values = { email: [], phone: [] }
+    const fields = [{ name: 'email' }, { name: 'phone' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(true)
+  })
+
+  it('should return false when at least one field has a value', () => {
+    const values = { firstname: 'John', lastname: undefined }
+    const fields = [{ name: 'firstname' }, { name: 'lastname' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(false)
+  })
+
+  it('should return false when at least one field has a non-empty string', () => {
+    const values = { firstname: '', lastname: 'Doe' }
+    const fields = [{ name: 'firstname' }, { name: 'lastname' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(false)
+  })
+
+  it('should return false when at least one field has a non-empty array', () => {
+    const values = { email: [{ address: 'john.doe@cozycloud.cc' }], phone: [] }
+    const fields = [{ name: 'email' }, { name: 'phone' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(false)
+  })
+
+  it('should return true for nested field paths with no values', () => {
+    const values = { phone: [{ number: undefined }] }
+    const fields = [{ name: 'phone[0].number' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(true)
+  })
+
+  it('should handle mixed array and non-array values', () => {
+    const values = { firstname: 'John', lastname: ['Doe'] }
+    const fields = [{ name: 'firstname' }, { name: 'lastname' }]
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(false)
+  })
+
+  it('should return true when fields array is empty', () => {
+    const values = { firstname: 'John', lastname: 'Doe' }
+    const fields = []
+
+    const res = hasNoValues(values, fields)
+
+    expect(res).toBe(true)
+  })
+})
+
+describe('getFirstValueIfArray', () => {
+  it('should return the first value of arrays', () => {
+    const values = {
+      phone: [{ phone: '123' }, { phone: '456' }],
+      email: [{ email: 'test@example.com' }],
+      name: 'John'
+    }
+
+    const res = getFirstValueIfArray(values)
+
+    expect(res).toEqual({
+      phone: { phone: '123' },
+      email: { email: 'test@example.com' },
+      name: 'John'
+    })
+  })
+
+  it('should return undefined for empty arrays', () => {
+    const values = {
+      phone: [],
+      email: [{ email: 'test@example.com' }]
+    }
+
+    const res = getFirstValueIfArray(values)
+
+    expect(res).toEqual({
+      phone: undefined,
+      email: { email: 'test@example.com' }
+    })
+  })
+
+  it('should not mutate the original object', () => {
+    const values = {
+      phone: [{ phone: '123' }, { phone: '456' }],
+      name: 'John'
+    }
+    const originalValues = JSON.parse(JSON.stringify(values))
+
+    getFirstValueIfArray(values)
+
+    expect(values).toEqual(originalValues)
+  })
+
+  it('should handle non-array values', () => {
+    const values = {
+      name: 'John',
+      age: 30,
+      active: true,
+      address: null
+    }
+
+    const res = getFirstValueIfArray(values)
+
+    expect(res).toEqual({
+      name: 'John',
+      age: 30,
+      active: true,
+      address: null
+    })
+  })
+
+  it('should handle mixed array and non-array values', () => {
+    const values = {
+      phone: [{ phone: '123' }],
+      name: 'John',
+      email: []
+    }
+
+    const res = getFirstValueIfArray(values)
+
+    expect(res).toEqual({
+      phone: { phone: '123' },
+      name: 'John',
+      email: undefined
+    })
+  })
+
+  it('should return empty object for empty input', () => {
+    const values = {}
+
+    const res = getFirstValueIfArray(values)
+
+    expect(res).toEqual({})
+  })
+})
+
+describe('validateFields', () => {
+  it('should return errors for required fields that are empty (non-array fields)', () => {
+    const values = {
+      name: '',
+      email: undefined
+    }
+    const fields = [
+      { name: 'name', required: true },
+      { name: 'email', required: true },
+      { name: 'phone', required: false }
+    ]
+
+    const res = validateFields(values, fields, t)
+
+    expect(res).toEqual({
+      name: 'All required fields must be filled in',
+      email: 'All required fields must be filled in'
+    })
+  })
+
+  it('should return errors for required array fields that are empty', () => {
+    const values = {
+      phone: []
+    }
+    const fields = [{ name: 'phone', required: true, layout: 'array' }]
+
+    const res = validateFields(values, fields, t)
+
+    expect(res).toEqual({
+      phone: [
+        {
+          phone: 'All required fields must be filled in'
+        }
+      ]
+    })
+  })
+
+  it('should not return errors for required array fields with valid first element', () => {
+    const values = {
+      phone: [{ phone: '123456789' }]
+    }
+    const fields = [{ name: 'phone', required: true, layout: 'array' }]
+
+    const res = validateFields(values, fields, t)
+
+    expect(res).toEqual({})
+  })
+
+  it('should not return errors for non-required fields', () => {
+    const values = {
+      name: '',
+      phone: []
+    }
+    const fields = [
+      { name: 'name', required: false },
+      { name: 'phone', required: false, layout: 'array' }
+    ]
+
+    const res = validateFields(values, fields, t)
+
+    expect(res).toEqual({})
+  })
+
+  it('should handle mixed array and non-array required fields', () => {
+    const values = {
+      name: '',
+      phone: []
+    }
+    const fields = [
+      { name: 'name', required: true },
+      { name: 'phone', required: true, layout: 'array' }
+    ]
+
+    const res = validateFields(values, fields, t)
+
+    expect(res).toEqual({
+      name: 'All required fields must be filled in',
+      phone: [
+        {
+          phone: 'All required fields must be filled in'
+        }
+      ]
+    })
+  })
+
+  it('should use getFirstValueIfArray to check only first element of arrays', () => {
+    const values = {
+      phone: [{ phone: '123' }, {}]
+    }
+    const fields = [{ name: 'phone', required: true, layout: 'array' }]
+
+    const res = validateFields(values, fields, t)
+
+    // Should not return error because first element has phone value
+    expect(res).toEqual({})
+  })
+
+  it('should return empty errors object when no required fields are empty', () => {
+    const values = {
+      name: 'John',
+      phone: [{ phone: '123456789' }]
+    }
+    const fields = [
+      { name: 'name', required: true },
+      { name: 'phone', required: true, layout: 'array' }
+    ]
+
+    const res = validateFields(values, fields, t)
+
+    expect(res).toEqual({})
   })
 })

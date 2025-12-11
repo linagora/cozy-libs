@@ -22,8 +22,7 @@ const FieldInput = ({
   error,
   helperText,
   label,
-  isInvisible,
-  required
+  isInvisible
 }) => {
   const [id] = useState(uniqueId('field_')) // state only use to generate id once and not at each render
   const [hasBeenFocused, setHasBeenFocused] = useState(false)
@@ -57,7 +56,6 @@ const FieldInput = ({
       )}
     >
       <Field
-        required={required}
         error={error}
         helperText={helperText}
         label={label}
@@ -111,13 +109,11 @@ FieldInput.propTypes = {
   }),
   // Destructuring props
   id: PropTypes.string,
-  label: PropTypes.string,
-  required: PropTypes.bool
+  label: PropTypes.string
 }
 
 FieldInput.defaultProps = {
-  labelProps: null,
-  required: false
+  labelProps: null
 }
 
 export default FieldInput
