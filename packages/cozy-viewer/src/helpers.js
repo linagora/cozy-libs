@@ -5,7 +5,6 @@ import {
   normalize
 } from 'cozy-client/dist/models/file'
 import flag from 'cozy-flags'
-import logger from 'cozy-logger'
 
 /**
  * @typedef {object} Reference
@@ -86,24 +85,6 @@ export const roughTokensEstimation = text => {
 }
 
 /**
- * Get and parse the drive.summary flag configuration
- * @returns {object|null} Parsed summary config or null if not available/invalid
- */
-export const getSummaryConfig = () => {
-  const summaryConfigRawValue = flag('drive.summary')
-  if (!summaryConfigRawValue) {
-    return null
-  }
-
-  try {
-    return JSON.parse(summaryConfigRawValue)
-  } catch (e) {
-    logger.error('Failed to parse drive.summary flag:', e)
-    return null
-  }
-}
-
-/**
  * Check if a file is compatible with AI summary feature
  * Compatible file types are defined in the drive.summary flag
  * Flag structure: { types: ["mime/type", ...], pageLimit: number }
@@ -120,16 +101,12 @@ export const isFileSummaryCompatible = (
     return false
   }
 
-  const summaryConfig = getSummaryConfig()
+  const summaryConfig = flag('drive.summary')
   if (!summaryConfig) {
     return false
   }
 
-  if (
-    !summaryConfig ||
-    !Array.isArray(summaryConfig.types) ||
-    summaryConfig.types.length === 0
-  ) {
+  if (!Array.isArray(summaryConfig.types) || summaryConfig.types.length === 0) {
     return false
   }
 

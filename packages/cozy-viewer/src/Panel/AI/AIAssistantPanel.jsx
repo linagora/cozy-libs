@@ -7,6 +7,7 @@ import { useI18n } from 'twake-i18n'
 import { useClient } from 'cozy-client'
 import { extractText, chatCompletion } from 'cozy-client/dist/models/ai'
 import { fetchBlobFileById } from 'cozy-client/dist/models/file'
+import flag from 'cozy-flags'
 import logger from 'cozy-logger'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -22,7 +23,7 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
 import { SUMMARY_SYSTEM_PROMPT, getSummaryUserPrompt } from './prompts'
 import styles from './styles.styl'
-import { getSummaryConfig, roughTokensEstimation } from '../../helpers'
+import { roughTokensEstimation } from '../../helpers'
 import { useViewer } from '../../providers/ViewerProvider'
 
 const AIAssistantPanel = ({ className }) => {
@@ -54,7 +55,7 @@ const AIAssistantPanel = ({ className }) => {
         mime: file.mime
       })
 
-      const summaryConfig = getSummaryConfig()
+      const summaryConfig = flag('drive.summary')
       if (
         summaryConfig?.maxTokens &&
         roughTokensEstimation(textContent) > summaryConfig.maxTokens
