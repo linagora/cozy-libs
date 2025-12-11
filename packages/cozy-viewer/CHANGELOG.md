@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.0.3...cozy-viewer@26.1.0) (2025-12-11)
+
+### Features
+
+- Update components use in summarization to use in app :sparkles: ([bcc5447](https://github.com/cozy/cozy-libs/commit/bcc54474b11ed9753fff7c67fa91483588e10e2c))
+
 ## [26.0.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.0.2...cozy-viewer@26.0.3) (2025-12-10)
 
 ### Bug Fixes
