@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.0.3...cozy-sharing@28.1.0) (2025-12-11)
+
+### Features
+
+- Change add button color ([d6bad5e](https://github.com/cozy/cozy-libs/commit/d6bad5edc25a3a3a123350e602b87315e521f3af))
+
 ## [28.0.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.0.2...cozy-sharing@28.0.3) (2025-12-10)
 
 **Note:** Version bump only for package cozy-sharing
