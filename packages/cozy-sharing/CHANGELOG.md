@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.1.0...cozy-sharing@28.1.1) (2025-12-12)
+
+### Bug Fixes
+
+- Do not disable save button when name is unchanged ([4fcff36](https://github.com/cozy/cozy-libs/commit/4fcff366987fea025a9cf2df447e265221406487))
+
 # [28.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.0.3...cozy-sharing@28.1.0) (2025-12-11)
 
 ### Features
