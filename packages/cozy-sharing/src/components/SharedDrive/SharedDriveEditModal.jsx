@@ -51,7 +51,6 @@ export const SharedDriveEditModal = withLocales(
         sharedDriveName={name}
         handleSharedDriveNameChange={handleNameChange}
         onRename={onRename}
-        originalSharedDriveName={sharing?.description}
       />
     )
   }

@@ -24,8 +24,7 @@ export const DumbSharedDriveModal = withLocales(
     onCreate,
     onClose,
     onShare,
-    onRename,
-    originalSharedDriveName
+    onRename
   }) => {
     const { t } = useI18n()
 
@@ -97,7 +96,6 @@ export const DumbSharedDriveModal = withLocales(
             {onRename && (
               <>
                 <Button
-                  disabled={originalSharedDriveName === sharedDriveName}
                   variant="primary"
                   label={t('SharedDrive.sharedDriveModal.save')}
                   onClick={() => onRename(sharedDriveName)}
@@ -123,6 +121,5 @@ DumbSharedDriveModal.propTypes = {
   onCreate: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
-  onRename: PropTypes.func.isRequired,
-  originalSharedDriveName: PropTypes.string.isRequired
+  onRename: PropTypes.func.isRequired
 }
