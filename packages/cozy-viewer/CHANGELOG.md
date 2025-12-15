@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.2.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.1.2...cozy-viewer@26.2.0) (2025-12-15)
+
+### Bug Fixes
+
+- Remove json parser when getting drive.summary flag :bug: ([a565f84](https://github.com/cozy/cozy-libs/commit/a565f848918c9dbf2819e370b3b84a77188ba28f))
+
+### Features
+
+- Save result from summarization by AI :sparkles: ([c89a034](https://github.com/cozy/cozy-libs/commit/c89a034ea912e0ff444920a7611488fcc8734c23))
+
 ## [26.1.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.1.1...cozy-viewer@26.1.2) (2025-12-12)
 
 **Note:** Version bump only for package cozy-viewer
