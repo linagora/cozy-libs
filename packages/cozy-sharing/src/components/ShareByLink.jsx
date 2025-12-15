@@ -40,11 +40,14 @@ const ShareByLink = ({ link, document, documentType }) => {
       }
       await navigator.share(shareData)
     } catch (error) {
-      showAlert({
-        message: t(`${documentType}.share.error.generic`),
-        severity: 'error',
-        variant: 'filled'
-      })
+      // Don't show error when user cancels the share dialog
+      if (error.name !== 'AbortError') {
+        showAlert({
+          message: t(`${documentType}.share.error.generic`),
+          severity: 'error',
+          variant: 'filled'
+        })
+      }
     }
   }
 
