@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.2.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.2.1...cozy-viewer@26.2.2) (2025-12-16)
+
+### Bug Fixes
+
+- Sanitize text content for AI ([85f3f04](https://github.com/cozy/cozy-libs/commit/85f3f04d7c81fe383e4dc20a0964a90deb99ed12))
+
 ## [26.2.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.2.0...cozy-viewer@26.2.1) (2025-12-15)
 
 **Note:** Version bump only for package cozy-viewer
