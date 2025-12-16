@@ -53,10 +53,11 @@ const AIAssistantPanel = ({ className }) => {
     try {
       const fileBlob = await fetchBlobFileById(client, file?._id)
 
-      const textContent = await extractText(client, fileBlob, {
+      const rawTextContent = await extractText(client, fileBlob, {
         name: file.name,
         mime: file.mime
       })
+      const textContent = rawTextContent ? JSON.stringify(rawTextContent) : ''
 
       const summaryConfig = flag('drive.summary')
       if (
