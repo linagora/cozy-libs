@@ -5,25 +5,23 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
-import { extractText, chatCompletion } from 'cozy-client/dist/models/ai'
+import { chatCompletion } from 'cozy-client/dist/models/ai'
 import { fetchBlobFileById } from 'cozy-client/dist/models/file'
 import flag from 'cozy-flags'
 import logger from 'cozy-logger'
-import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import AssistantIcon from 'cozy-ui/transpiled/react/Icons/Assistant'
-import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
-import CrossMediumIcon from 'cozy-ui/transpiled/react/Icons/CrossMedium'
-import RefreshIcon from 'cozy-ui/transpiled/react/Icons/Refresh'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
+import LoadingState from './LoadingState'
+import PanelHeader from './PanelHeader'
+import SummaryContent from './SummaryContent'
+import {
+  extractFileContent,
+  validateContentSize,
+  getErrorMessage
+} from './helpers'
 import { SUMMARY_SYSTEM_PROMPT, getSummaryUserPrompt } from './prompts'
-import styles from './styles.styl'
-import { roughTokensEstimation } from '../../helpers'
 import { useViewer } from '../../providers/ViewerProvider'
 
 const AIAssistantPanel = ({ className }) => {
@@ -52,22 +50,10 @@ const AIAssistantPanel = ({ className }) => {
   const summarizeFile = async ({ client, file, stream = false, model }) => {
     try {
       const fileBlob = await fetchBlobFileById(client, file?._id)
+      const textContent = await extractFileContent(client, fileBlob, file)
 
-      const rawTextContent = await extractText(client, fileBlob, {
-        name: file.name,
-        mime: file.mime
-      })
-      const textContent = rawTextContent ? JSON.stringify(rawTextContent) : ''
-
-      const summaryConfig = flag('drive.summary')
-      if (
-        summaryConfig?.maxTokens &&
-        roughTokensEstimation(textContent) > summaryConfig.maxTokens
-      ) {
-        const error = new Error('DOCUMENT_TOO_LARGE')
-        error.code = 'DOCUMENT_TOO_LARGE'
-        throw error
-      }
+      const { maxTokens } = flag('drive.summary') ?? {}
+      validateContentSize(textContent, maxTokens)
 
       const messages = [
         { role: 'system', content: SUMMARY_SYSTEM_PROMPT },
@@ -89,23 +75,22 @@ const AIAssistantPanel = ({ className }) => {
     }
   }
 
-  const persistedSummary = async (
-    fileMetadata,
-    targetFileId,
-    summaryContent
-  ) => {
-    try {
-      await client
-        .collection('io.cozy.files')
-        .updateMetadataAttribute(targetFileId, {
-          ...fileMetadata,
-          description: summaryContent
-        })
-      fetchedFileIdRef.current = targetFileId
-    } catch (error) {
-      logger.error('Error when persisting summary to file metadata:', error)
-    }
-  }
+  const persistedSummary = useCallback(
+    async (fileMetadata, targetFileId, summaryContent) => {
+      try {
+        await client
+          .collection('io.cozy.files')
+          .updateMetadataAttribute(targetFileId, {
+            ...fileMetadata,
+            description: summaryContent
+          })
+        fetchedFileIdRef.current = targetFileId
+      } catch (error) {
+        logger.error('Error when persisting summary to file metadata:', error)
+      }
+    },
+    [client]
+  )
 
   useEffect(() => {
     activeFileIdRef.current = file?._id || null
@@ -142,11 +127,7 @@ const AIAssistantPanel = ({ className }) => {
         await persistedSummary(fileMetadata, targetFileId, summaryContent)
       } catch (err) {
         if (activeFileIdRef.current === targetFileId) {
-          const errorMessage =
-            err.code === 'DOCUMENT_TOO_LARGE'
-              ? t('Viewer.ai.error.documentTooLarge')
-              : t('Viewer.ai.error.summary')
-          setError(errorMessage)
+          setError(getErrorMessage(err, t))
         }
       } finally {
         if (inFlightFileIdRef.current === targetFileId) {
@@ -157,7 +138,7 @@ const AIAssistantPanel = ({ className }) => {
         }
       }
     },
-    [client, file, t]
+    [client, file, persistedSummary, t]
   )
 
   const handleRefresh = () => {
@@ -177,102 +158,35 @@ const AIAssistantPanel = ({ className }) => {
   }, [fetchSummary])
 
   return (
-    <>
-      <Stack
-        spacing="s"
-        className={cx('u-flex u-flex-column u-h-100', className)}
+    <Stack
+      spacing="s"
+      className={cx('u-flex u-flex-column u-h-100', className)}
+    >
+      <Paper
+        className={cx({
+          'u-flex-grow-1': !isLoading
+        })}
+        elevation={2}
+        square
       >
-        <Paper
-          className={cx({
-            'u-flex-grow-1': !isLoading
-          })}
-          elevation={2}
-          square
-        >
-          <div className="u-flex u-flex-items-center u-flex-justify-between u-h-3 u-ph-1 u-flex-shrink-0">
-            <Typography variant="h4">
-              <Icon icon={AssistantIcon} /> {t('Viewer.ai.panelTitle')}
-            </Typography>
-            <IconButton aria-label="Close AI Assistant" onClick={handleClose}>
-              <Icon icon={CrossMediumIcon} />
-            </IconButton>
-          </div>
-          {!isLoading && (
-            <Stack spacing="s" className="u-ph-1">
-              <div>
-                <div className="u-flex u-flex-items-center u-flex-justify-between u-mb-1">
-                  <Typography variant="subtitle1">
-                    {t('Viewer.ai.bodyText')}
-                  </Typography>
-                  <div className="u-flex">
-                    <IconButton size="small" onClick={handleRefresh}>
-                      <Icon icon={RefreshIcon} />
-                    </IconButton>
-                    {summary && (
-                      <IconButton size="small" onClick={handleCopy}>
-                        <Icon icon={CopyIcon} />
-                      </IconButton>
-                    )}
-                  </div>
-                </div>
-                <Typography className="u-mb-1">
-                  {error ? (
-                    <span style={{ color: 'var(--errorColor)' }}>{error}</span>
-                  ) : (
-                    summary
-                  )}
-                </Typography>
-                {!isLoading && summary && (
-                  <Typography variant="caption" color="textSecondary">
-                    {t('Viewer.ai.footerText')}
-                  </Typography>
-                )}
-              </div>
-            </Stack>
-          )}
-        </Paper>
-        {isLoading ? (
-          <>
-            <div className={styles.loaderContainer}>
-              <div className={styles.loaderBar} />
-            </div>
-            <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-1">
-              <Typography
-                variant="body1"
-                className="u-flex u-flex-items-center"
-              >
-                <Icon
-                  icon={AssistantIcon}
-                  color="var(--primaryColor)"
-                  className="u-mr-1"
-                />
-                {t('Viewer.ai.loadingText')}
-              </Typography>
-              <Button
-                size="small"
-                variant="text"
-                color="default"
-                label={t('Viewer.ai.stop')}
-                onClick={handleClose}
-              />
-            </div>
-          </>
-        ) : null}
-      </Stack>
-    </>
+        <PanelHeader onClose={handleClose} t={t} />
+        {!isLoading && (
+          <SummaryContent
+            summary={summary}
+            error={error}
+            onRefresh={handleRefresh}
+            onCopy={handleCopy}
+            t={t}
+          />
+        )}
+      </Paper>
+      {isLoading && <LoadingState onStop={handleClose} t={t} />}
+    </Stack>
   )
 }
 
 AIAssistantPanel.propTypes = {
-  isLoading: PropTypes.bool,
-  summary: PropTypes.string,
-  onStop: PropTypes.func,
-  onSend: PropTypes.func
-}
-
-AIAssistantPanel.defaultProps = {
-  isLoading: false,
-  summary: ''
+  className: PropTypes.string
 }
 
 export default AIAssistantPanel

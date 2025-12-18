@@ -86,7 +86,8 @@
       "bodyText": "Tóm tắt",
       "error": {
         "summary": "Không thể tạo tóm tắt. Vui lòng thử lại.",
-        "documentTooLarge": "Tài liệu này quá lớn để tóm tắt. Vui lòng thử với tài liệu ngắn hơn."
+        "documentTooLarge": "Tài liệu này quá lớn để tóm tắt. Vui lòng thử với tài liệu ngắn hơn.",
+        "extractContent": "Không thể trích xuất nội dung từ tệp"
       },
       "copied": "Đã sao chép tóm tắt vào khay nhớ tạm",
       "footerText": "Nội dung này được tạo bởi AI và có thể chứa lỗi.",
