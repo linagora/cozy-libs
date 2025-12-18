@@ -85,6 +85,21 @@ export const roughTokensEstimation = text => {
 }
 
 /**
+ * Sanitize text, typically from after file text extraction
+ * @param {string} text - The text to sanitize
+ * @returns {string} The sanitized text
+ */
+export const sanitizeText = text => {
+  return (
+    text
+      .replace(/[^\S\r\n]{4,}/g, ' ') // Compress spaces
+      .replace(/\n{2,}/g, '\n') // Remove empty lines
+      // eslint-disable-next-line no-control-regex
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '') // Remove control chars
+  )
+}
+
+/**
  * Check if a file is compatible with AI summary feature
  * Compatible file types are defined in the drive.summary flag
  * Flag structure: { types: ["mime/type", ...], pageLimit: number }

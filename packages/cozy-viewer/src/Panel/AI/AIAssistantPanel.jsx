@@ -23,7 +23,7 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
 import { SUMMARY_SYSTEM_PROMPT, getSummaryUserPrompt } from './prompts'
 import styles from './styles.styl'
-import { roughTokensEstimation } from '../../helpers'
+import { roughTokensEstimation, sanitizeText } from '../../helpers'
 import { useViewer } from '../../providers/ViewerProvider'
 
 const AIAssistantPanel = ({ className }) => {
@@ -57,7 +57,9 @@ const AIAssistantPanel = ({ className }) => {
         name: file.name,
         mime: file.mime
       })
-      const textContent = rawTextContent ? JSON.stringify(rawTextContent) : ''
+      const textContent = rawTextContent
+        ? sanitizeText(JSON.stringify(rawTextContent))
+        : ''
 
       const summaryConfig = flag('drive.summary')
       if (

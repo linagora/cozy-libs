@@ -3,7 +3,8 @@ import flag from 'cozy-flags'
 import {
   isEditableAttribute,
   removeFilenameFromPath,
-  isFileSummaryCompatible
+  isFileSummaryCompatible,
+  sanitizeText
 } from './helpers'
 
 jest.mock('cozy-flags')
@@ -191,6 +192,38 @@ describe('helpers', () => {
     it('should return true if pageCount is not provided but pageLimit is set', () => {
       flag.mockReturnValue({ types: ['application/pdf'], pageLimit: 50 })
       expect(isFileSummaryCompatible({ mime: 'application/pdf' })).toBe(true)
+    })
+  })
+
+  describe('sanitizeText', () => {
+    it('compresses 4+ consecutive spaces into a single space', () => {
+      const input = 'Hello    world     !'
+      const output = sanitizeText(input)
+      expect(output).toBe('Hello world !')
+    })
+
+    it('does not modify sequences of less than 4 spaces', () => {
+      const input = 'a b  c   d'
+      const output = sanitizeText(input)
+      expect(output).toBe('a b  c   d')
+    })
+
+    it('collapses multiple empty lines into a single newline', () => {
+      const input = 'line 1\n\n\nline 2\nline 3'
+      const output = sanitizeText(input)
+      expect(output).toBe('ligne 1line 2line 3')
+    })
+
+    it('removes ASCII control characters but keeps accents and punctuation', () => {
+      const input = 'A\u0001B\u001F C éàç €'
+      const output = sanitizeText(input)
+      expect(output).toBe('AB C éàç €')
+    })
+
+    it('handles a mix of spaces, newlines and control characters', () => {
+      const input = 'Foo    \n\n\nbar\u0003   baz'
+      const output = sanitizeText(input)
+      expect(output).toBe('Foo \nbar baz')
     })
   })
 })
