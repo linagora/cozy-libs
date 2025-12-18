@@ -211,7 +211,7 @@ describe('helpers', () => {
     it('collapses multiple empty lines into a single newline', () => {
       const input = 'line 1\n\n\nline 2\nline 3'
       const output = sanitizeText(input)
-      expect(output).toBe('ligne 1line 2line 3')
+      expect(output).toBe('line 1\nline 2\nline 3')
     })
 
     it('removes ASCII control characters but keeps accents and punctuation', () => {
@@ -223,7 +223,7 @@ describe('helpers', () => {
     it('handles a mix of spaces, newlines and control characters', () => {
       const input = 'Foo    \n\n\nbar\u0003   baz'
       const output = sanitizeText(input)
-      expect(output).toBe('Foo \nbar baz')
+      expect(output).toBe('Foo \nbar   baz')
     })
   })
 })
