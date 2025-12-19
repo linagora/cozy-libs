@@ -90,8 +90,10 @@ export const roughTokensEstimation = text => {
  * @returns {string} The sanitized text
  */
 export const sanitizeText = text => {
+  if (!text) return ''
   return (
     text
+      .replace(/\r\n?/g, '\n') // Normalize line endings
       .replace(/[^\S\r\n]{4,}/g, ' ') // Compress spaces
       .replace(/\n{2,}/g, '\n') // Remove empty lines
       // eslint-disable-next-line no-control-regex
