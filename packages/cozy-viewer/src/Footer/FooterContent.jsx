@@ -41,7 +41,7 @@ const FooterContent = ({ toolbarRef, children, isDisplayChildrenDirectly }) => {
 
   const bottomSheetSettings = {
     isOpenMin: true,
-    mediumHeightRatio: isPublic ? undefined : 0.5
+    mediumHeightRatio: isPublic ? undefined : 0.2
   }
 
   return (
