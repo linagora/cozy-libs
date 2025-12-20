@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.2.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.2.2...cozy-viewer@26.2.3) (2025-12-20)
+
+### Bug Fixes
+
+- **cozy-viewer:** Reduce the default height of the bottom sheet ([808bddd](https://github.com/cozy/cozy-libs/commit/808bdddaf6675e73e5b1d87ec8d4dfe26e9f32a7))
+
 ## [26.2.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.2.1...cozy-viewer@26.2.2) (2025-12-16)
 
 ### Bug Fixes
