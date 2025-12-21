@@ -86,7 +86,8 @@
       "bodyText": "Résumé",
       "error": {
         "summary": "Échec de la génération du résumé. Veuillez réessayer.",
-        "documentTooLarge": "Ce document est trop volumineux pour être résumé. Veuillez essayer avec un document plus court."
+        "documentTooLarge": "Ce document est trop volumineux pour être résumé. Veuillez essayer avec un document plus court.",
+        "extractContent": "Échec de l'extraction du contenu du fichier"
       },
       "copied": "Résumé copié dans le presse-papier",
       "footerText": "Ce contenu est généré par AI et peut contenir des erreurs.",

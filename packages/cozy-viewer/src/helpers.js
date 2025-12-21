@@ -85,6 +85,14 @@ export const roughTokensEstimation = text => {
 }
 
 /**
+ * Check if a file is a text-based file type
+ * @param {string} mime - MIME type of the file
+ * @returns {boolean} Whether the file is a text file
+ */
+export const isTextMimeType = mime =>
+  typeof mime === 'string' && mime.toLowerCase().startsWith('text/')
+
+/**
  * Check if a file is compatible with AI summary feature
  * Compatible file types are defined in the drive.summary flag
  * Flag structure: { types: ["mime/type", ...], pageLimit: number }
