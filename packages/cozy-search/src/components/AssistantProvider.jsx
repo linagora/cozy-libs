@@ -27,6 +27,7 @@ const AssistantProvider = ({ children }) => {
     status: 'idle',
     messagesId: []
   })
+  const [isOpenCreateAssistant, setIsOpenCreateAssistant] = useState(false)
 
   useRealtime(
     client,
@@ -117,11 +118,13 @@ const AssistantProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       assistantState,
+      isOpenCreateAssistant,
       setAssistantState,
       clearAssistant,
-      onAssistantExecute
+      onAssistantExecute,
+      setIsOpenCreateAssistant
     }),
-    [assistantState, clearAssistant, onAssistantExecute]
+    [assistantState, clearAssistant, isOpenCreateAssistant, onAssistantExecute]
   )
 
   return (

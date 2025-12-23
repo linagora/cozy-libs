@@ -9,6 +9,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Database from 'cozy-ui/transpiled/react/Icons/Database'
 import Expert from 'cozy-ui/transpiled/react/Icons/Expert'
 
+import AssistantSelection from './AssistantSelection'
 import styles from './styles.styl'
 import { TwakeAssistantIconColor } from '../AssistantIcon/TwakeAssistantIconColor'
 
@@ -134,7 +135,7 @@ const ChatKnowledges = ({
   )
 }
 
-const ChatModes = () => {
+const ChatModes = ({ onCreateAssistant }) => {
   const { t } = useI18n()
 
   // Data
@@ -267,7 +268,7 @@ const ChatModes = () => {
   }, [selectedExpert, experts, knowledges])
 
   return (
-    <div className="u-flex u-flex-column u-flex-items-center u-flex-justify-center u-maw-7 u-mh-auto u-w-100 u-mb-1">
+    <div className="u-flex u-flex-column u-maw-7 u-w-100 u-mb-1">
       <ChatKnowledges
         knowledges={knowledges}
         selectedKnowledges={selectedKnowledges}
@@ -277,6 +278,13 @@ const ChatModes = () => {
         experts={experts}
         selectedExpert={selectedExpert}
         setSelectedExpert={setSelectedExpert}
+      />
+
+      <AssistantSelection
+        assistants={[]}
+        selectedAssistant={null}
+        onSelect={() => {}}
+        onCreate={onCreateAssistant}
       />
 
       {isExternalExpertSelected && <ExternalExpertWarning />}

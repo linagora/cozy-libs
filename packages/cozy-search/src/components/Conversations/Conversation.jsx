@@ -5,13 +5,13 @@ import flag from 'cozy-flags'
 import { CircularProgress } from 'cozy-ui/transpiled/react/Progress'
 
 import ChatConversation from './ChatConversation'
+import { useAssistant } from '../AssistantProvider'
 import { buildChatConversationQueryById, buildMyselfQuery } from '../queries'
 import ConversationBar from './ConversationBar'
-import { useAssistant } from '../AssistantProvider'
 import ConversationGreetings from './ConversationGreetings'
 import ChatModes from './ConversationsChips'
 
-const Conversation = ({ id }) => {
+const Conversation = ({ id, onCreateAssistant }) => {
   const { assistantState } = useAssistant()
 
   const myselfQuery = buildMyselfQuery()
@@ -47,7 +47,9 @@ const Conversation = ({ id }) => {
 
       <ConversationBar assistantStatus={assistantState.status} />
 
-      {flag('cozy.assistant.demo') && <ChatModes />}
+      {flag('cozy.assistant.demo') && (
+        <ChatModes onCreateAssistant={onCreateAssistant} />
+      )}
     </div>
   )
 }

@@ -1,0 +1,48 @@
+
+
+.BasicInfoStep
+  & .avatar-container
+    border-radius 50%
+    border: 1px solid #E5E5E5
+
+  & .avatar-image
+    border-radius 50%
+
+  & .file-input
+    display none
+
+.ModelSelectionStep
+  & .grid-container
+    display grid
+    grid-template-columns 1fr 1fr
+    gap 16px
+
+  & .model-card
+    border-radius 16px
+    border 1px solid #E5E5E5
+    position relative
+    transition border-color 0.2s ease
+
+    &.selected
+      border 1px solid var(--primaryColor)
+
+    &.openrag
+      background linear-gradient(90deg, #EFF6FF 0%, #FAF5FF 100%)
+
+  & .icon-container
+    width 53px
+    height 53px
+    border-radius 16px
+    background-size cover
+    background-position center
+
+  & .check-icon
+    position absolute
+    top 16px
+    right 16px
+
+.CreateAssistantDialog
+  & .close-button
+    position absolute
+    top 10px
+    right 10px

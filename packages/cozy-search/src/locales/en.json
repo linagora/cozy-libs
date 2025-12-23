@@ -48,5 +48,37 @@
       "other": "Other knowledge base",
       "more": "knowledge bases"
     }
+  },
+  "assistant_create": {
+    "title": "Create Assistant",
+    "steps": {
+      "basic_info": {
+        "description": "Customize your assistant's identity and behavior to match your specific needs.",
+        "avatar": "Avatar (optional)",
+        "name": "Name",
+        "name_placeholder": "Name your assistant",
+        "instructions": "Instructions",
+        "instructions_placeholder": "What does this assistant do? How should it behave? What should it avoid doing?"
+      },
+      "model_selection": {
+        "description": "Choose the AI model that best matches your requirements.",
+        "by": "by"
+      },
+      "api_key": {
+        "description": "Enter your %{provider} API key to enable integration. Your key will be stored securely.",
+        "label": "API Key",
+        "placeholder": "sk-...",
+        "hint": "Your API key should start with \"sk-\"",
+        "no_key": "Don't have an API key?",
+        "generate": "You can generate a new API key from your %{provider} account dashboard.",
+        "learn": "Learn"
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "next": "Next",
+      "create": "Create"
+    },
+    "configure_api_key": "Configure %{provider} API Key"
   }
 }

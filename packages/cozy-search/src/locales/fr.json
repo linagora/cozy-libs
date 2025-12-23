@@ -48,5 +48,37 @@
       "other": "Autre base de connaissances",
       "more": "bases de connaissances"
     }
+  },
+  "assistant_create": {
+    "title": "Créer un assistant",
+    "steps": {
+      "basic_info": {
+        "description": "Personnalisez l'identité et le comportement de votre assistant pour répondre à vos besoins spécifiques.",
+        "avatar": "Avatar (optionnel)",
+        "name": "Nom",
+        "name_placeholder": "Nommez votre assistant",
+        "instructions": "Instructions",
+        "instructions_placeholder": "Que fait cet assistant ? Comment doit-il se comporter ? Que doit-il éviter de faire ?"
+      },
+      "model_selection": {
+        "description": "Choisissez le modèle d'IA qui correspond le mieux à vos besoins.",
+        "by": "par"
+      },
+      "api_key": {
+        "description": "Entrez votre clé API %{provider} pour activer l'intégration. Votre clé sera stockée en toute sécurité.",
+        "label": "Clé API",
+        "placeholder": "sk-...",
+        "hint": "Votre clé API doit commencer par \"sk-\"",
+        "no_key": "Vous n'avez pas de clé API ?",
+        "generate": "Vous pouvez générer une nouvelle clé API depuis votre tableau de bord %{provider}.",
+        "learn": "En savoir plus"
+      }
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "next": "Suivant",
+      "create": "Créer"
+    },
+    "configure_api_key": "Configurer la clé API %{provider}"
   }
 }
