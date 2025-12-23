@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.3.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.2.3...cozy-viewer@26.3.0) (2025-12-23)
+
+### Bug Fixes
+
+- Handle Windows CRLF line endings :bug: ([e415041](https://github.com/cozy/cozy-libs/commit/e41504102b12b0d51a63db368c4c028c5d1e18c3))
+- Resolve failed test cases :bug: ([8a7bc67](https://github.com/cozy/cozy-libs/commit/8a7bc67aa3856b4707b69bd8e2deafc21a9d4827))
+
+### Features
+
+- Sanitize text content for AI ([6a4dc7b](https://github.com/cozy/cozy-libs/commit/6a4dc7bc52126a39fd89284cfd3c7b142699c5eb))
+
 ## [26.2.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.2.2...cozy-viewer@26.2.3) (2025-12-20)
 
 ### Bug Fixes
