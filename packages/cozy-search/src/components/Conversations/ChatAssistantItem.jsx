@@ -4,7 +4,7 @@ import { useI18n } from 'twake-i18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import ChatItem from './ChatItem'
-import Sources from './Sources/Sources'
+import Sources from './TwakeKnowledge/Sources'
 import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
 
 const ChatAssistantItem = ({ label, className, id, sources, ...props }) => {

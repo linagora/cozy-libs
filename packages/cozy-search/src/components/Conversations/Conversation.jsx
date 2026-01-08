@@ -1,17 +1,17 @@
 import React from 'react'
 
 import { useQuery, isQueryLoading } from 'cozy-client'
-import flag from 'cozy-flags'
 import { CircularProgress } from 'cozy-ui/transpiled/react/Progress'
 
 import ChatConversation from './ChatConversation'
 import { useAssistant } from '../AssistantProvider'
 import { buildChatConversationQueryById, buildMyselfQuery } from '../queries'
+import ChatModes from './ChatModes'
 import ConversationBar from './ConversationBar'
 import ConversationGreetings from './ConversationGreetings'
-import ChatModes from './ConversationsChips'
+import styles from './styles.styl'
 
-const Conversation = ({ id, onCreateAssistant }) => {
+const Conversation = ({ id, onCreateAssistant, onSelectTwakeKnowledge }) => {
   const { assistantState } = useAssistant()
 
   const myselfQuery = buildMyselfQuery()
@@ -34,7 +34,9 @@ const Conversation = ({ id, onCreateAssistant }) => {
     isQueryLoading(queryMyselfResult) || isQueryLoading(queryConversationResult)
 
   return (
-    <div className="u-flex-auto u-flex u-flex-column u-flex-items-center u-flex-justify-center">
+    <div
+      className={`u-flex-auto u-flex u-flex-column u-flex-items-center u-flex-justify-center ${styles['conversation-container']}`}
+    >
       {isLoading ? (
         <div className="u-h-100 u-w-100 u-maw-7 u-flex u-flex-column u-flex-items-center u-flex-justify-center">
           <CircularProgress />
@@ -47,9 +49,10 @@ const Conversation = ({ id, onCreateAssistant }) => {
 
       <ConversationBar assistantStatus={assistantState.status} />
 
-      {flag('cozy.assistant.demo') && (
-        <ChatModes onCreateAssistant={onCreateAssistant} />
-      )}
+      <ChatModes
+        onCreateAssistant={onCreateAssistant}
+        onSelectTwakeKnowledge={onSelectTwakeKnowledge}
+      />
     </div>
   )
 }

@@ -3,7 +3,7 @@
 .conversationBar
     max-height 95px
     min-height 48px
-    z-index calc(var(--zIndex-modal) + 15)
+    z-index 1
 
     +gt-mobile()
       max-height 178px
@@ -40,6 +40,9 @@
   &--selected
     background-color var(--defaultBackgroundColor) !important
 
+.menu-container
+  background-color var(--paperBackgroundColor)
+
 .menuToggler
   position absolute
   box-sizing border-box
@@ -50,24 +53,31 @@
     border-bottom-right-radius: 1rem
     background: var(--paperBackgroundColor)
 
-.conversationChips-container
-    gap 0px
+.conversation-container
+  background-color var(--paperBackgroundColor)
 
-.conversationChips-startIcon
-    opacity 0.6
+.conversation-chips-container
+    gap 0.5rem
 
-.conversationChips-chipIcon
-    margin-left 12px !important
+.conversation-chips-icon
+  height 1rem
+  margin-left 0.5rem !important
 
-.conversationChips-deleteIcon
-    height 1rem !important
-    &.is-warning
-        fill var(--warningColor)
-        color var(--warningColor)
+.conversation-chips-item
+  border-style solid !important
+  margin-right 0 !important
 
-.conversationChips-chip
-    border-style solid
-    margin-right 0 !important
+.conversation-chips-counter
+  border-radius 100%
+  background-color var(--primaryColor)
+  height 16px !important
+  width 16px !important
+  color white !important
+  margin-right 0.5rem !important
+  font-size 0.7rem !important
+  display flex
+  align-items center
+  justify-content center
 
 .trigger-button
   border-radius 20px
@@ -76,13 +86,10 @@
   background-color var(--paperBackgroundColor)
   text-transform none
   min-width 0
+  height 32px
 
 .assistant-icon
-  width 24px
-  height 24px
-  border-radius 50%
   margin-right 8px
-  object-fit cover
 
 .menu-item
   display flex
@@ -96,3 +103,44 @@
 
 .create-icon
   margin-right 8px
+
+.create-assistant-item
+  border-top 1px solid var(--dividerColor)
+
+.knowledge-source-container
+  display flex
+  gap 8px
+  margin-top 12px
+  justify-content center
+  align-items center
+
+.knowledge-source-button
+  border-radius 20px
+  padding 6px 16px
+  text-transform none
+  min-width 0
+  font-size 14px
+  transition all 0.2s ease
+
+  &--selected
+    background-color var(--primaryColor)
+    color white
+    border-color var(--primaryColor)
+
+.search-conversation-container
+  background-color var(--paperBackgroundColor)
+  padding 2rem 0
+  overflow auto
+
+.search-conversation-list
+  flex 1
+  overflow-y auto
+  margin-top 16px
+
+.upload-file-item
+  display flex
+  align-items center
+  gap 1rem
+
+  .upload-file-item-icon
+    height 16px

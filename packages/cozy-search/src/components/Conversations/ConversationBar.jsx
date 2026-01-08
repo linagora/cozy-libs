@@ -12,6 +12,7 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import styles from './styles.styl'
 import { useAssistant } from '../AssistantProvider'
+import UploadFileButton from './UploadFileButton'
 
 const ConversationBar = ({ assistantStatus }) => {
   const { t } = useI18n()
@@ -65,6 +66,7 @@ const ConversationBar = ({ assistantStatus }) => {
               className: styles['conversationBar-input']
             },
             autoFocus: !isMobile,
+            startAdornment: <UploadFileButton />,
             endAdornment:
               assistantStatus !== 'idle' ? (
                 <Button

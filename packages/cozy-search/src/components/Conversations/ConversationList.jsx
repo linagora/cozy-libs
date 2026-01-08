@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useI18n } from 'twake-i18n'
 
 import { useQuery } from 'cozy-client'
@@ -14,14 +14,15 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { makeConversationId } from '../helpers'
-import { buildRecentConversationsQuery } from '../queries'
+import { useAssistant } from '../AssistantProvider'
 import styles from './styles.styl'
+import useConversation from '../../hooks/useConversation'
+import { buildRecentConversationsQuery } from '../queries'
 
 const ConversationList = () => {
   const { t } = useI18n()
-  const navigate = useNavigate()
-  const location = useLocation()
+  const { setIsOpenSearchConversation } = useAssistant()
+  const { createNewConversation, goToConversation } = useConversation()
 
   const [visible, setVisible] = useState(true)
 
@@ -29,36 +30,13 @@ const ConversationList = () => {
 
   const recentConvsQuery = buildRecentConversationsQuery()
 
-  const goToConversation = conversationId => {
-    const parts = location.pathname.split('/')
-    const assistantIndex = parts.findIndex(part => part === 'assistant')
-
-    if (assistantIndex !== -1 && parts.length > assistantIndex + 1) {
-      parts[assistantIndex + 1] = conversationId
-    } else {
-      parts.push('assistant', conversationId)
-    }
-    const newPathname = parts.join('/')
-
-    navigate({
-      pathname: newPathname,
-      search: location.search,
-      hash: location.hash
-    })
-  }
-
-  const createNewConversation = () => {
-    const newConversationId = makeConversationId()
-    goToConversation(newConversationId)
-  }
-
   const { data: conversations } = useQuery(
     recentConvsQuery.definition,
     recentConvsQuery.options
   )
 
   return (
-    <>
+    <div className={`${styles['menu-container']}`}>
       <div
         className={`u-h-3 u-ph-1 u-flex u-flex-row u-flex-items-center u-flex-justify-start ${
           styles['menuToggler']
@@ -86,6 +64,7 @@ const ConversationList = () => {
             label={<Icon icon={MagnifierIcon} />}
             variant="text"
             color="text"
+            onClick={() => setIsOpenSearchConversation(true)}
           />
         )}
       </div>
@@ -150,7 +129,7 @@ const ConversationList = () => {
           </List>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

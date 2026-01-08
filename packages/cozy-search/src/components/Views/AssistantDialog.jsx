@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import AssistantProvider, { useAssistant } from '../AssistantProvider'
@@ -15,14 +14,14 @@ const AssistantDialog = () => {
   }
 
   return (
-    <Dialog open fullScreen size="full" disableGutters>
+    <>
       <ConversationView />
 
       <CreateAssistantDialog
         open={isOpenCreateAssistant}
         onClose={closeCreateAssistantDialog}
       />
-    </Dialog>
+    </>
   )
 }
 

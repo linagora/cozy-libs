@@ -3,24 +3,42 @@ import { useParams } from 'react-router-dom'
 
 import { useAssistant } from '../AssistantProvider'
 import Conversation from '../Conversations/Conversation'
-import ConversationHeader from '../Conversations/ConversationHeader'
 import ConversationList from '../Conversations/ConversationList'
+import SearchConversation from '../Conversations/SearchConversation'
+import TwakeKnowledgePanel from '../TwakeKnowledge'
 
 const ConversationView = () => {
   const { conversationId } = useParams()
-  const { setIsOpenCreateAssistant } = useAssistant()
+  const {
+    setIsOpenCreateAssistant,
+    openedKnowledgePanel,
+    setOpenedKnowledgePanel,
+    isOpenSearchConversation
+  } = useAssistant()
 
   return (
-    <div className="u-h-100 u-flex u-flex-column">
-      <ConversationHeader />
+    <div className="u-h-100 u-flex u-flex-row">
+      <ConversationList />
 
-      <div className="u-h-100 u-flex u-flex-row u-mih-1 u-flex-grow-1">
-        <ConversationList />
-        <Conversation
-          id={conversationId}
-          onCreateAssistant={() => setIsOpenCreateAssistant(true)}
-        />
+      <div className="u-h-100 u-w-100 u-flex u-mih-1">
+        {isOpenSearchConversation ? (
+          <SearchConversation />
+        ) : (
+          <Conversation
+            id={conversationId}
+            onCreateAssistant={() => setIsOpenCreateAssistant(true)}
+            onSelectTwakeKnowledge={setOpenedKnowledgePanel}
+          />
+        )}
       </div>
+
+      {openedKnowledgePanel && (
+        <div className="u-ml-half u-h-100 u-w-7">
+          <TwakeKnowledgePanel
+            onClose={() => setOpenedKnowledgePanel(undefined)}
+          />
+        </div>
+      )}
     </div>
   )
 }
