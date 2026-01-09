@@ -1,21 +1,17 @@
 import React from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
-import AssistantProvider, { useAssistant } from '../AssistantProvider'
-import Conversation from '../Conversations/Conversation'
-import ConversationBar from '../Conversations/ConversationBar'
+import CozyAssistantRuntimeProvider from '../CozyAssistantRuntimeProvider'
+import CozyThread from '../Conversations/CozyThread'
 
 const AssistantDialog = () => {
-  const { assistantState } = useAssistant()
   const { isMobile } = useBreakpoints()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-
-  const { conversationId } = useParams()
 
   const onClose = () => {
     try {
@@ -38,11 +34,30 @@ const AssistantDialog = () => {
       componentsProps={{
         dialogTitle: { className: isMobile ? 'u-ph-0' : '' },
         dialogActions: { className: isMobile ? 'u-mh-half' : 'u-mb-2' },
-        divider: { className: 'u-dn' }
+        divider: { className: 'u-dn' },
+        dialogContent: {
+          style: {
+            display: 'flex',
+            flexDirection: 'column',
+            flexGrow: 1,
+            padding: 0,
+            overflow: 'hidden' // Prevent double scrollbar - let viewport handle scroll
+          }
+        }
       }}
-      title={isMobile ? ' ' : ' '}
-      content={<Conversation id={conversationId} />}
-      actions={<ConversationBar assistantStatus={assistantState.status} />}
+      title={isMobile ? ' ' : ' '}
+      content={
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          flexGrow: 1,
+          minHeight: 0, // Allow flex child to shrink below content size
+          overflow: 'hidden'
+        }}>
+          <CozyThread />
+        </div>
+      }
       onClose={onClose}
     />
   )
@@ -51,9 +66,9 @@ const AssistantDialog = () => {
 const AssistantDialogWithProviders = () => {
   return (
     <CozyTheme variant="normal">
-      <AssistantProvider>
+      <CozyAssistantRuntimeProvider>
         <AssistantDialog />
-      </AssistantProvider>
+      </CozyAssistantRuntimeProvider>
     </CozyTheme>
   )
 }
