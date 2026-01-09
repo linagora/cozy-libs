@@ -13,3 +13,47 @@
 
   +gt-mobile()
     max-height 155px
+
+// Thread root - full height flex column
+.cozyThread-root
+  display flex
+  flex-direction column
+  height 100%
+  min-height 0
+
+// Thread layout - messages centered with max-width
+.cozyThread-viewport
+  display flex
+  flex-direction column
+  flex-grow 1
+  overflow-y auto
+  overflow-x hidden
+  padding 0 1rem
+  min-height 0
+
+.cozyThread-messages
+  max-width 800px
+  width 100%
+  margin 0 auto
+  padding-bottom 1rem
+
+// Prevent horizontal overflow on message content
+.cozyThread-messageContent
+  overflow-wrap break-word
+  word-wrap break-word
+  word-break break-word
+  hyphens auto
+
+// Composer container - fixed at bottom, centered
+.cozyThread-composer
+  flex-shrink 0
+  padding 0.5rem 1rem 1rem
+  display flex
+  justify-content center
+
+// Fix dialog content inner wrapper to fill height
+:global(.dialogContentInner)
+  display flex
+  flex-direction column
+  flex-grow 1
+  height 100%
