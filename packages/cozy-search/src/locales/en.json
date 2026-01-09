@@ -16,6 +16,13 @@
       "find_file": "Search a file",
       "reimbursements": "Check my repayments",
       "reorganise_files": "Reorganise my files"
+    },
+    "actions": {
+      "copy": "Copy",
+      "copied": "Copied to clipboard",
+      "reload": "Regenerate response",
+      "edit": "Edit",
+      "edited": "Message saved"
     }
   }
 }
