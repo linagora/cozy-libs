@@ -1,0 +1,77 @@
+diff --git a/node_modules/@assistant-ui/react/dist/context/react/hooks/useAssistantState.js b/node_modules/@assistant-ui/react/dist/context/react/hooks/useAssistantState.js
+index 1234567..abcdefg 100644
+--- a/node_modules/@assistant-ui/react/dist/context/react/hooks/useAssistantState.js
++++ b/node_modules/@assistant-ui/react/dist/context/react/hooks/useAssistantState.js
+@@ -1,4 +1,5 @@
+-import { useMemo, useSyncExternalStore, useDebugValue } from "react";
++import { useMemo } from "react";
++import { useSyncExternalStore } from "use-sync-external-store/shim";
+ import { useAssistantApi, } from "../AssistantApiContext.js";
+ class ProxiedAssistantState {
+     #api;
+@@ -34,7 +35,7 @@ export const useAssistantState = (selector) => {
+     const api = useAssistantApi();
+     const proxiedState = useMemo(() => new ProxiedAssistantState(api), [api]);
+     const slice = useSyncExternalStore(api.subscribe, () => selector(proxiedState), () => selector(proxiedState));
+-    useDebugValue(slice);
++    // useDebugValue(slice); // Commented out for React 16 compatibility
+     if (slice instanceof ProxiedAssistantState)
+         throw new Error("You tried to return the entire AssistantState. This is not supported due to technical limitations.");
+     return slice;
+diff --git a/node_modules/@assistant-ui/react/dist/context/react/utils/useRuntimeState.js b/node_modules/@assistant-ui/react/dist/context/react/utils/useRuntimeState.js
+index 1234567..abcdefg 100644
+--- a/node_modules/@assistant-ui/react/dist/context/react/utils/useRuntimeState.js
++++ b/node_modules/@assistant-ui/react/dist/context/react/utils/useRuntimeState.js
+@@ -1,10 +1,11 @@
+-import { useDebugValue, useSyncExternalStore } from "react";
++import { useSyncExternalStore } from "use-sync-external-store/shim";
+ import { ensureBinding } from "./ensureBinding.js";
+ export function useRuntimeStateInternal(runtime, selector = identity) {
+     // TODO move to useRuntimeState
+     ensureBinding(runtime);
+     const slice = useSyncExternalStore(runtime.subscribe, () => selector(runtime.getState()), () => selector(runtime.getState()));
+-    useDebugValue(slice);
++    // useDebugValue(slice); // Commented out for React 16 compatibility
+     return slice;
+ }
+ const identity = (arg) => arg;
+diff --git a/node_modules/@assistant-ui/react/dist/legacy-runtime/runtime-cores/remote-thread-list/RemoteThreadListThreadListRuntimeCore.js b/node_modules/@assistant-ui/react/dist/legacy-runtime/runtime-cores/remote-thread-list/RemoteThreadListThreadListRuntimeCore.js
+index 1234567..abcdefg 100644
+--- a/node_modules/@assistant-ui/react/dist/legacy-runtime/runtime-cores/remote-thread-list/RemoteThreadListThreadListRuntimeCore.js
++++ b/node_modules/@assistant-ui/react/dist/legacy-runtime/runtime-cores/remote-thread-list/RemoteThreadListThreadListRuntimeCore.js
+@@ -5,7 +5,14 @@ import { RemoteThreadListHookInstanceManager } from "./RemoteThreadListHookInsta
+ import { BaseSubscribable } from "./BaseSubscribable.js";
+ import { EMPTY_THREAD_CORE } from "./EMPTY_THREAD_CORE.js";
+ import { OptimisticState } from "./OptimisticState.js";
+-import { Fragment, useEffect, useId } from "react";
++import { Fragment, useEffect, useRef } from "react";
++
++// Polyfill for useId (React 18+)
++let idCounter = 0;
++function useId() {
++    const idRef = useRef(null);
++    if (idRef.current === null) { idRef.current = ':r' + (idCounter++).toString(36) + ':'; }
++    return idRef.current;
++}
+ import { create } from "zustand";
+ import { AssistantMessageStream } from "assistant-stream";
+ import { RuntimeAdapterProvider } from "../adapters/RuntimeAdapterProvider.js";
+diff --git a/node_modules/@assistant-ui/react/dist/model-context/makeAssistantVisible.js b/node_modules/@assistant-ui/react/dist/model-context/makeAssistantVisible.js
+index 1234567..abcdefg 100644
+--- a/node_modules/@assistant-ui/react/dist/model-context/makeAssistantVisible.js
++++ b/node_modules/@assistant-ui/react/dist/model-context/makeAssistantVisible.js
+@@ -1,5 +1,12 @@
+ "use client";
+-import { useEffect, useRef, forwardRef, useId, createContext, useContext, } from "react";
++import { useEffect, useRef, forwardRef, createContext, useContext, } from "react";
++
++// Polyfill for useId (React 18+)
++let idCounter = 0;
++function useId() {
++    const idRef = useRef(null);
++    if (idRef.current === null) { idRef.current = ':r' + (idCounter++).toString(36) + ':'; }
++    return idRef.current;
++}
+ import { AssistantVisibleAPI } from "./AssistantVisibleAPI.js";
+ const makeContext = () => {
+     const VisibilityContext = createContext(null);
