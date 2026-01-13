@@ -10,7 +10,12 @@ import FieldInputLayout from './FieldInputLayout'
 import contactToFormValues from './contactToFormValues'
 import { fields as defaultFields } from './fieldsConfig'
 import formValuesToContact from './formValuesToContact'
-import { validateFields, makeFields, hasNoValues } from './helpers'
+import {
+  validateFields,
+  makeFields,
+  hasNoValues,
+  initializationFieldValues
+} from './helpers'
 import { locales } from './locales'
 // import { fullContactPropTypes } from '../../ContactPropTypes' // !!
 
@@ -50,11 +55,15 @@ const ContactForm = ({ contacts, contact, customFieldsProps, onSubmit }) => {
   return (
     <Form
       mutators={{ ...arrayMutators }}
-      initialValues={contactToFormValues({
-        contact,
-        makeCustomContactValues,
-        t
-      })}
+      initialValues={
+        !contact
+          ? initializationFieldValues(_fields)
+          : contactToFormValues({
+              contact,
+              makeCustomContactValues,
+              t
+            })
+      }
       validate={values => validateFields(values, _fields, t)}
       onSubmit={formValues => {
         // avoid creating an empty contact

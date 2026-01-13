@@ -366,6 +366,18 @@ export const makeImppValues = (oldContact, value) => {
   )
 }
 
+export const initializationFieldValues = fields => {
+  const initialFieldValues = fields.reduce(
+    (initialValues, { name, layout }) => {
+      initialValues[name] = layout === 'array' ? [undefined] : undefined
+      return initialValues
+    },
+    {}
+  )
+
+  return initialFieldValues
+}
+
 /**
  *
  * @param {string} name
