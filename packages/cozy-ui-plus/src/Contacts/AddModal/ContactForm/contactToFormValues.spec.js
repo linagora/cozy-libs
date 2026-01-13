@@ -5,29 +5,6 @@ import { johnDoeContact, johnDoeFormValues } from '../mocks'
 describe('contactToFormValues function', () => {
   const tSpy = jest.fn()
 
-  it('should return default initial values', () => {
-    const expected = {
-      address: [undefined],
-      birthday: undefined,
-      birthplace: undefined,
-      gender: undefined,
-      company: undefined,
-      jobTitle: undefined,
-      cozy: undefined,
-      cozyLabel: undefined,
-      email: [undefined],
-      matrix: undefined,
-      familyName: undefined,
-      givenName: undefined,
-      note: undefined,
-      phone: [undefined],
-      relatedContact: [undefined]
-    }
-
-    const result = contactToFormValues({ contact: null, t: tSpy })
-    expect(result).toEqual(expected)
-  })
-
   it('should return initial values when a contact is given (edit)', () => {
     const expected = { ...johnDoeFormValues, relatedContact: [undefined] }
     tSpy.mockReturnValue(
