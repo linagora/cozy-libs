@@ -6,6 +6,7 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
+import AntivirusAlert from './AntivirusAlert'
 import { default as DumbShareByLink } from './ShareByLink'
 import WhoHasAccess from './WhoHasAccess'
 
@@ -34,6 +35,7 @@ const ShareDialogOnlyByLink = ({
       })}
       content={
         <>
+          <AntivirusAlert document={document} />
           <Typography
             variant="h6"
             className={cx(isMobile ? 'u-ph-1 u-mt-1' : 'u-ph-2 u-mt-1-half')}

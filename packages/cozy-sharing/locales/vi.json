@@ -109,6 +109,7 @@
           "rw": "Bạn có thể xem, cập nhật, xóa và thêm nội dung này vào Twake của mình. Các bản cập nhật bạn thực hiện sẽ được thấy trên các Cozies khác."
         }
       },
+      "notScannedWarning": "Tệp này chưa được quét vi-rút. Vui lòng lưu ý điều này trước khi chia sẻ.",
       "sharedByMe": "Được chia sẻ bởi tôi",
       "shared": "Đã chia sẻ",
       "sharedWithMe": "Được chia sẻ với tôi",
@@ -163,7 +164,7 @@
       }
     }
   },
-"Notes": {
+  "Notes": {
     "share": {
       "cta": "Chia sẻ",
       "title": "Chia sẻ \"%{name}\"",

@@ -5,6 +5,7 @@ import { useI18n } from 'twake-i18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
+import AntivirusAlert from './AntivirusAlert'
 import { default as DumbShareByEmail } from './ShareByEmail'
 import { default as DumbShareByLink } from './ShareByLink'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
@@ -36,10 +37,10 @@ const SharingContent = ({
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
-
   return (
     <div className={cx(styles['share-modal-content'])}>
       <div className={cx('u-pt-1-half', isMobile ? 'u-ph-1' : 'u-ph-2')}>
+        <AntivirusAlert document={document} />
         {showShareOnlyByLink && (
           <div className={styles['share-byemail-onlybylink']}>
             {t(`${documentType}.share.shareByEmail.onlyByLink`, {

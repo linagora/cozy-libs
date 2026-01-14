@@ -109,6 +109,7 @@
           "rw": "You can view, update, delete and add this content to your Twake. Updates you make will be seen on other Cozies."
         }
       },
+      "notScannedWarning": "This file has not yet been scanned for viruses. Please keep this in mind before sharing.",
       "sharedByMe": "Shared by me",
       "shared": "Shared",
       "sharedWithMe": "Shared with me",
@@ -472,4 +473,3 @@
     }
   }
 }
-
