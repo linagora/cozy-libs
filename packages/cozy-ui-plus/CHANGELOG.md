@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.1.0...cozy-ui-plus@4.2.0) (2026-01-14)
+
+### Features
+
+- **AddModal:** Add possibility to set field default value ([db6e8f7](https://github.com/cozy/cozy-libs/commit/db6e8f723cf3c155765458c8e022005006403351))
+
 # [4.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.0.0...cozy-ui-plus@4.1.0) (2025-12-10)
 
 ### Features
