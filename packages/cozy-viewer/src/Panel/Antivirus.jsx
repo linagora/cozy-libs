@@ -5,9 +5,6 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import InfoIcon from 'cozy-ui/transpiled/react/Icons/InfoOutlined'
 import ShieldIcon from 'cozy-ui/transpiled/react/Icons/Shield'
-import ShieldCleanIcon from 'cozy-ui/transpiled/react/Icons/ShieldClean'
-import ShieldInfectedIcon from 'cozy-ui/transpiled/react/Icons/ShieldInfected'
-import SpinnerIcon from 'cozy-ui/transpiled/react/Icons/Spinner'
 import Link from 'cozy-ui/transpiled/react/Link'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -16,6 +13,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Popover from 'cozy-ui/transpiled/react/Popover'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import { getAntivirusStatus } from './helpers'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
 const Antivirus = ({ file, t }) => {
@@ -31,21 +29,7 @@ const Antivirus = ({ file, t }) => {
 
   const open = Boolean(anchorEl)
 
-  const fileState = file?.antivirus_scan?.status
-  let icon = null
-  let text = null
-  let isError = false
-  if (['pending', 'error', 'skipped'].includes(fileState)) {
-    icon = SpinnerIcon
-    text = t('Viewer.panel.antivirus.scanning')
-  } else if (fileState === 'clean') {
-    icon = ShieldCleanIcon
-    text = t('Viewer.panel.antivirus.scanned')
-  } else if (fileState === 'infected') {
-    icon = ShieldInfectedIcon
-    text = t('Viewer.panel.antivirus.infected')
-    isError = true
-  }
+  const { icon, text, isError } = getAntivirusStatus(file, t)
 
   if (!icon || !text) {
     return null
@@ -104,7 +88,7 @@ const Antivirus = ({ file, t }) => {
 
 Antivirus.propTypes = {
   file: PropTypes.object.isRequired,
-  t: PropTypes.func
+  t: PropTypes.func.isRequired
 }
 
 export default withViewerLocales(Antivirus)

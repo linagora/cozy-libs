@@ -2,6 +2,9 @@ import get from 'lodash/get'
 
 import { splitFilename, isFromKonnector } from 'cozy-client/dist/models/file'
 import { KNOWN_BILLS_ATTRIBUTES_NAMES } from 'cozy-client/dist/models/paper'
+import ShieldCleanIcon from 'cozy-ui/transpiled/react/Icons/ShieldClean'
+import ShieldInfectedIcon from 'cozy-ui/transpiled/react/Icons/ShieldInfected'
+import SpinnerIcon from 'cozy-ui/transpiled/react/Icons/Spinner'
 
 /**
  * Returns file extension or class
@@ -202,3 +205,30 @@ export const isExpirationAlertHidden = file => {
  */
 export const canEditQualification = (file, isReadOnly) =>
   !isFromKonnector(file) && !isReadOnly
+
+/**
+ * Returns the antivirus status of a file
+ * @param {import("cozy-client/types").IOCozyFile} file - io.cozy.file
+ * @param {Function} t - translation function
+ * @returns {object}
+ */
+export const getAntivirusStatus = (file, t) => {
+  const fileState = file.antivirus_scan?.status
+  let icon = null
+  let text = null
+  let isError = false
+
+  if (['pending', 'error', 'skipped'].includes(fileState)) {
+    icon = SpinnerIcon
+    text = t('Viewer.panel.antivirus.scanning')
+  } else if (fileState === 'clean') {
+    icon = ShieldCleanIcon
+    text = t('Viewer.panel.antivirus.scanned')
+  } else if (fileState === 'infected') {
+    icon = ShieldInfectedIcon
+    text = t('Viewer.panel.antivirus.infected')
+    isError = true
+  }
+
+  return { icon, text, isError }
+}
