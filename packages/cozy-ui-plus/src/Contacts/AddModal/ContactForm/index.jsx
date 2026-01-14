@@ -64,6 +64,7 @@ const ContactForm = ({ contacts, contact, customFieldsProps, onSubmit }) => {
               t
             })
       }
+      keepDirtyOnReinitialize
       validate={values => validateFields(values, _fields, t)}
       onSubmit={formValues => {
         // avoid creating an empty contact
