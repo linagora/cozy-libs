@@ -8,6 +8,7 @@ import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import withLocales from '../../hoc/withLocales'
+import AntivirusAlert from '../AntivirusAlert'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import WhoHasAccess from '../WhoHasAccess'
 
@@ -41,6 +42,7 @@ export const DumbSharedDriveModal = withLocales(
         content={
           <div>
             <div className="u-ph-2">
+              <AntivirusAlert document={document} />
               {handleSharedDriveNameChange && (
                 <TextField
                   required

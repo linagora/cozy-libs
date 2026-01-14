@@ -107,6 +107,7 @@
           "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
         }
       },
+      "notScannedWarning": "Ce fichier n'a pas encore été analysé par l'antivirus. Veuillez en tenir compte avant de le partager.",
       "sharedByMe": "Partagé",
       "shared": "Partagé",
       "sharedWithMe": "Partagé avec moi",
