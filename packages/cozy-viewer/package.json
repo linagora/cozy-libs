@@ -19,7 +19,7 @@
     "start": "yarn build --watch",
     "prepublishOnly": "yarn build",
     "test": "env NODE_ENV=test jest",
-    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-viewer"
+    "lint": "cd ../.. && yarn eslint --ext js,jsx packages/cozy-viewer"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",
