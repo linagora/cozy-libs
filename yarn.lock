@@ -17954,6 +17954,48 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cozy-ui@npm:^135.2.0":
+  version: 135.2.0
+  resolution: "cozy-ui@npm:135.2.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.3.4"
+    "@date-io/date-fns": "npm:1"
+    "@material-ui/core": "npm:4.12.3"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@material-ui/pickers": "npm:3.3.11"
+    "@popperjs/core": "npm:^2.4.4"
+    chart.js: "npm:3.7.1"
+    classnames: "npm:^2.2.5"
+    date-fns: "npm:2.30.0"
+    hammerjs: "npm:^2.0.8"
+    intersection-observer: "npm:0.11.0"
+    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
+    node-polyglot: "npm:^2.5.0"
+    normalize.css: "npm:^8.0.0"
+    patch-package: "npm:^8.0.0"
+    pdf-lib: "npm:1.17.1"
+    react-chartjs-2: "npm:4.1.0"
+    react-markdown: "npm:^4.0.8"
+    react-popper: "npm:^2.2.3"
+    react-remove-scroll: "npm:^2.4.0"
+    react-select: "npm:^4.3.0"
+    react-swipeable-views: "npm:^0.13.3"
+    react-virtuoso: "npm:^4.13.0"
+    rooks: "npm:7.14.1"
+  peerDependencies:
+    cozy-device-helper: ">=2.0.0"
+    cozy-intent: ">=2.29.1"
+    react: ^16 || ^17 || ^18
+    react-dnd: ^16.0.1
+    react-dnd-html5-backend: ^16.0.1
+    react-dom: ^16 || ^17 || ^18
+    twake-i18n: ">=0.3.0"
+  bin:
+    rsg-screenshots: scripts/screenshots.js
+  checksum: 10c0/0073d097db9dc305c7204c685f5e25d7985aa8f94efb57ed4e5bf08422e1ad2db0e3097b9902c8b4973d4209e81b0dd563fc912bf437c3598781d883a32b1f89
+  languageName: node
+  linkType: hard
+
 "cozy-ui@npm:^40.9.1":
   version: 40.10.0
   resolution: "cozy-ui@npm:40.10.0"
@@ -18006,7 +18048,7 @@ __metadata:
     cozy-intent: "npm:^2.30.1"
     cozy-logger: "npm:^1.17.0"
     cozy-sharing: "npm:^28.1.4"
-    cozy-ui: "npm:^135.0.0"
+    cozy-ui: "npm:^135.2.0"
     cozy-ui-plus: "npm:^4.3.0"
     hammerjs: "npm:^2.0.8"
     identity-obj-proxy: "npm:3.0.0"

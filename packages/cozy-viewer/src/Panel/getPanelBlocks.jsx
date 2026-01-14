@@ -1,6 +1,7 @@
 import { isFromKonnector } from 'cozy-client/dist/models/file'
 import KonnectorBlock from 'cozy-harvest-lib/dist/components/KonnectorBlock'
 
+import Antivirus from './Antivirus'
 import Informations from './Informations'
 import Qualification from './Qualification'
 import Sharing from './Sharing'
@@ -22,6 +23,10 @@ import Summary from './Summary'
  * @returns {PanelBlocksSpecs}
  */
 export const getPanelBlocksSpecs = (isPublic = false, panelProps) => ({
+  antivirus: {
+    condition: () => !panelProps?.antivirus?.disabled,
+    component: Antivirus
+  },
   qualifications: {
     condition: () => !panelProps?.qualifications?.disabled,
     component: Qualification

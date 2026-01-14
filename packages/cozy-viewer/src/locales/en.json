@@ -59,6 +59,16 @@
           "edit": "Edit"
         }
       },
+      "antivirus": {
+        "scanning": "Scanning by Twake system",
+        "scanned": "Scanned by Twake system",
+        "infected": "Virus detected by Twake system",
+        "info": {
+          "title": "Attachment Scanning in Twake",
+          "description": "To safeguard your workspace, Twake automatically blocks attachments identified as malicious. Always ensure you download files only from trusted sources.",
+          "learnMore": "Learn more"
+        }
+      },
       "expiration": {
         "dismiss": "I understood"
       },

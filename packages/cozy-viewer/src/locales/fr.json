@@ -59,6 +59,16 @@
           "edit": "Modifier"
         }
       },
+      "antivirus": {
+        "scanning": "Analyse par le système Twake",
+        "scanned": "Analysé par le système Twake",
+        "infected": "Virus détecté par le système Twake",
+        "info": {
+          "title": "Analyse des pièces jointes dans Twake",
+          "description": "Pour protéger votre espace de travail, Twake bloque automatiquement les pièces jointes identifiées comme malveillantes. Assurez-vous toujours de télécharger des fichiers uniquement à partir de sources fiables.",
+          "learnMore": "En savoir plus"
+        }
+      },
       "expiration": {
         "dismiss": "J'ai compris"
       },
