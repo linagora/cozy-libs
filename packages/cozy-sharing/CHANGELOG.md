@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.1.4...cozy-sharing@28.2.0) (2026-01-14)
+
+### Features
+
+- Add antivirus alert when a file not been scanned yet ([9146347](https://github.com/cozy/cozy-libs/commit/91463475a1852b53442711aa8aa2efd848992f5e))
+
 ## [28.1.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.1.3...cozy-sharing@28.1.4) (2026-01-14)
 
 **Note:** Version bump only for package cozy-sharing
