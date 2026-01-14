@@ -59,6 +59,16 @@
           "edit": "Chỉnh sửa"
         }
       },
+      "antivirus": {
+        "scanning": "Đang quét bởi hệ thống Twake",
+        "scanned": "Đã quét bởi hệ thống Twake",
+        "infected": "Phát hiện virus bởi hệ thống Twake",
+        "info": {
+          "title": "Quét tệp đính kèm trong Twake",
+          "description": "Để bảo vệ không gian làm việc của bạn, Twake tự động chặn các tệp đính kèm được xác định là độc hại. Luôn đảm bảo bạn chỉ tải xuống tệp từ các nguồn đáng tin cậy.",
+          "learnMore": "Tìm hiểu thêm"
+        }
+      },
       "expiration": {
         "dismiss": "Tôi đã hiểu"
       },
