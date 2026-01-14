@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.2.0...cozy-ui-plus@4.3.0) (2026-01-14)
+
+### Features
+
+- AddModal contact form now keeps input values when rerendering ([95bb344](https://github.com/cozy/cozy-libs/commit/95bb34443b1e5ca7caa72f4b68aec03d9c2d6399))
+
 # [4.2.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.1.0...cozy-ui-plus@4.2.0) (2026-01-14)
 
 ### Features
