@@ -26,7 +26,8 @@
           "relationship": "Relationship",
           "note": "Notes",
           "label": "Label",
-          "required": "All required fields must be filled in"
+          "required": "All required fields must be filled in",
+          "not-valid": "Some fields are not filled correctly"
         },
         "label": {
           "none": "None",

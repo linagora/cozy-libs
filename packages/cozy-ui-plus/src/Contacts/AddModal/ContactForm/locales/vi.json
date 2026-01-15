@@ -26,7 +26,8 @@
           "relationship": "Mối quan hệ",
           "note": "Ghi chú",
           "label": "Nhãn",
-          "required": "Tất cả các trường bắt buộc phải được điền"
+          "required": "Tất cả các trường bắt buộc phải được điền",
+          "not-valid": "Một số trường không được điền chính xác"
         },
         "label": {
           "none": "Không có",

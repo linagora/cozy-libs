@@ -50,19 +50,33 @@ export const makeIsRequiredError = (required, formProps) => {
  */
 export const validateFields = (values, fields, t) => {
   const errors = {}
-  const fieldsRequired = fields.filter(field => field.required)
   const _values = getFirstValueIfArray(values)
 
-  fieldsRequired.forEach(field => {
-    if (!get(_values, field.name)) {
-      errors[field.name] =
-        field.layout === 'array'
-          ? [
-              {
-                [field.name]: t('Contacts.AddModal.ContactForm.fields.required')
-              }
-            ]
-          : t('Contacts.AddModal.ContactForm.fields.required')
+  fields.forEach(field => {
+    // test if required fields are empty
+    if (field.required) {
+      if (!get(_values, field.name)) {
+        errors[field.name] =
+          field.layout === 'array'
+            ? [
+                {
+                  [field.name]: t(
+                    'Contacts.AddModal.ContactForm.fields.required'
+                  )
+                }
+              ]
+            : t('Contacts.AddModal.ContactForm.fields.required')
+      }
+    }
+
+    // test if validate fn on field is verified
+    if (field.validate) {
+      const fieldValue = _values[field.name]
+      const isFieldValid = field.validate(fieldValue)
+
+      if (!isFieldValid) {
+        errors[field.name] = t('Contacts.AddModal.ContactForm.fields.not-valid')
+      }
     }
   })
 
