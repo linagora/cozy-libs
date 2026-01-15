@@ -12,7 +12,8 @@ import { makeIsRequiredError } from './helpers'
 import { locales } from './locales'
 
 const FieldInputLayout = ({
-  attributes: { layout, icon, isSecondary, ...attributes }, // ⚠️ `layout` `icon` `isSecondary` here are removed from attributes to avoid DOM propagration
+  // eslint-disable-next-line no-unused-vars
+  attributes: { layout, icon, isSecondary, validate, ...attributes }, // ⚠️ `layout` `icon` `isSecondary` `validate` here are removed from attributes to avoid DOM propagration
   contacts,
   showSecondaryFields,
   formProps

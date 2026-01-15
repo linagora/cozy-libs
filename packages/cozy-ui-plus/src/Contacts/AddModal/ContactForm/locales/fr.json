@@ -26,7 +26,8 @@
           "relationship": "Relation",
           "note": "Notes",
           "label": "Libellé",
-          "required": "Tous les champs requis doivent être renseignés"
+          "required": "Tous les champs requis doivent être renseignés",
+          "not-valid": "Certains champs ne sont pas correctement remplis"
         },
         "label": {
           "none": "Aucun",

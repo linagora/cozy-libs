@@ -14,7 +14,7 @@ import {
 } from './helpers'
 import { locales } from './locales'
 
-const t = x => get(locales.en, x)
+const t = x => get(locales.en, x, x)
 
 describe('makeCustomLabel', () => {
   it('should return custom type and supported label', () => {
@@ -730,5 +730,14 @@ describe('validateFields', () => {
     const res = validateFields(values, fields, t)
 
     expect(res).toEqual({})
+  })
+
+  it('should return errors for not validated fields', () => {
+    const values = { mail: '0mymail@domain.com' }
+    const fields = [{ name: 'mail', validate: () => false }]
+
+    const res = validateFields(values, fields, t)
+
+    expect(res).toEqual({ mail: 'Some fields are not filled correctly' })
   })
 })
