@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.4.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.3.0...cozy-ui-plus@4.4.0) (2026-01-15)
+
+### Features
+
+- **ContactForm:** Add `validate` attr on fields ([d8f36a0](https://github.com/cozy/cozy-libs/commit/d8f36a03c7474ebe581691d376d4b7b8a107a22a))
+
 # [4.3.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.2.0...cozy-ui-plus@4.3.0) (2026-01-14)
 
 ### Features
