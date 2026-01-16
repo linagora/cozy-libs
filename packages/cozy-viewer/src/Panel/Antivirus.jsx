@@ -19,11 +19,11 @@ import { withViewerLocales } from '../hoc/withViewerLocales'
 const Antivirus = ({ file, t }) => {
   const [anchorEl, setAnchorEl] = useState(null)
 
-  const handleInfoClick = event => {
+  const handlePopoverOpen = event => {
     setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = () => {
+  const handlePopoverClose = () => {
     setAnchorEl(null)
   }
 
@@ -44,21 +44,31 @@ const Antivirus = ({ file, t }) => {
           <Typography color={isError ? 'error' : 'default'}>{text}</Typography>
         </ListItemText>
         <ListItemIcon>
-          <IconButton onClick={handleInfoClick} size="small">
+          <IconButton
+            onClick={handlePopoverOpen}
+            onFocus={handlePopoverOpen}
+            onBlur={handlePopoverClose}
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
+            size="small"
+            aria-label={t('Viewer.panel.antivirus.info.title')}
+            aria-describedby={open ? 'antivirus-popover' : undefined}
+          >
             <Icon icon={InfoIcon} />
           </IconButton>
         </ListItemIcon>
       </ListItem>
       <Popover
+        id="antivirus-popover"
         open={open}
         anchorEl={anchorEl}
-        onClose={handleClose}
+        onClose={handlePopoverClose}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'right'
         }}
       >
-        <div className="u-p-1 u-flex u-maw-5">
+        <div className="u-p-1 u-flex u-maw-5" onMouseLeave={handlePopoverClose}>
           <div className="u-mr-half u-flex-shrink-0">
             <Icon icon={ShieldIcon} color="var(--primaryColor)" />
           </div>
