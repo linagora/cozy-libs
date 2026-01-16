@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.5.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.4.2...cozy-viewer@26.5.0) (2026-01-16)
+
+### Features
+
+- Display antivirus popover on hover ([078dc88](https://github.com/cozy/cozy-libs/commit/078dc88281776c88ad9794882f865b7b46ae9aa1))
+
 ## [26.4.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.4.1...cozy-viewer@26.4.2) (2026-01-15)
 
 **Note:** Version bump only for package cozy-viewer
