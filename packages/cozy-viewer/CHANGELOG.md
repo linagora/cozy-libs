@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.5.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.5.0...cozy-viewer@26.5.1) (2026-01-16)
+
+### Bug Fixes
+
+- **cozy-viewer:** Shorten antivirus locales ([3ee10b0](https://github.com/cozy/cozy-libs/commit/3ee10b00d022cc7f9af9020b268239d59afd6af1))
+
 # [26.5.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.4.2...cozy-viewer@26.5.0) (2026-01-16)
 
 ### Features
