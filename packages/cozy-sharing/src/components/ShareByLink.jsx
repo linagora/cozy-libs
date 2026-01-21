@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
-import React, { useReducer } from 'react'
+import React, { useReducer, useState } from 'react'
 import { useI18n } from 'twake-i18n'
 
+import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
@@ -10,33 +11,86 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import { ShareRestrictionModal } from './ShareRestrictionModal/ShareRestrictionModal'
-import { copyToClipboard } from './ShareRestrictionModal/helpers'
+import {
+  copyToClipboard,
+  createSharingLink
+} from './ShareRestrictionModal/helpers'
+import { useSharingContext } from '../hooks/useSharingContext'
 
 const ShareByLink = ({ link, document, documentType }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const { showAlert } = useAlert()
+  const client = useClient()
+  const { shareByLink } = useSharingContext()
+  const [isGenerating, setIsGenerating] = useState(false)
 
-  const showCopyAndSendButtons = link && isMobile && navigator.share
-  const showOnlyCopyButton =
-    (link && !isMobile) || (link && isMobile && !navigator.share)
+  const canShare = typeof navigator?.share === 'function'
+  const showCopyAndSendButtons = isMobile && canShare
+  const showOnlyCopyButton = !isMobile || !canShare
 
   const [isEditDialogOpen, toggleEditDialogOpen] = useReducer(
     state => !state,
     false
   )
 
-  const copyLinkToClipboard = async () => {
-    await copyToClipboard(link, { t, showAlert })
+  const handleGenerateLink = async () => {
+    setIsGenerating(true)
+    try {
+      return await createSharingLink({
+        client,
+        file: document,
+        documentType,
+        shareByLink,
+        t,
+        showAlert,
+        password: '',
+        ttl: undefined,
+        editingRights: 'readOnly'
+      })
+    } catch (error) {
+      return null
+    } finally {
+      setIsGenerating(false)
+    }
+  }
+
+  const generateLinkAndCopyLinkToClipboard = async () => {
+    let linkToCopy = link
+    if (!linkToCopy) {
+      linkToCopy = await handleGenerateLink()
+    }
+    if (linkToCopy) {
+      await copyToClipboard(linkToCopy, { t, showAlert })
+    } else {
+      showAlert({
+        message: t(`${documentType}.share.error.generic`),
+        severity: 'error',
+        variant: 'filled'
+      })
+    }
   }
 
   const shareLink = async () => {
+    let linkToShare = link
+    if (!linkToShare) {
+      linkToShare = await handleGenerateLink()
+    }
+    if (!linkToShare) {
+      showAlert({
+        message: t(`${documentType}.share.error.generic`),
+        severity: 'error',
+        variant: 'filled'
+      })
+      return
+    }
+
     try {
       const shareData = {
         text: t(`${documentType}.share.shareByLink.shareDescription`, {
           name: document.name || ''
         }),
-        url: link
+        url: linkToShare
       }
       await navigator.share(shareData)
     } catch (error) {
@@ -53,17 +107,6 @@ const ShareByLink = ({ link, document, documentType }) => {
 
   return (
     <div className="u-w-100 u-flex u-flex-justify-center">
-      {!link && (
-        <Button
-          label={t(`${documentType}.share.shareByLink.create`)}
-          variant="secondary"
-          size="medium"
-          startIcon={<Icon icon={LinkIcon} />}
-          className="u-flex-auto"
-          style={{ position: 'initial' }} // fix z-index bug on iOS when under a BottomDrawer due to relative position
-          onClick={toggleEditDialogOpen}
-        />
-      )}
       {showCopyAndSendButtons && (
         <>
           <Button
@@ -73,12 +116,14 @@ const ShareByLink = ({ link, document, documentType }) => {
             startIcon={<Icon icon={LinkIcon} />}
             className="u-flex-auto u-mr-half"
             onClick={shareLink}
+            busy={isGenerating}
           />
           <Button
             label={<Icon icon={CopyIcon} />}
             variant="secondary"
             size="medium"
-            onClick={copyLinkToClipboard}
+            onClick={generateLinkAndCopyLinkToClipboard}
+            disabled={isGenerating}
           />
         </>
       )}
@@ -89,7 +134,8 @@ const ShareByLink = ({ link, document, documentType }) => {
           size="medium"
           startIcon={<Icon icon={LinkIcon} />}
           className="u-flex-auto u-mr-half"
-          onClick={copyLinkToClipboard}
+          onClick={generateLinkAndCopyLinkToClipboard}
+          busy={isGenerating}
         />
       )}
       {isEditDialogOpen && (
