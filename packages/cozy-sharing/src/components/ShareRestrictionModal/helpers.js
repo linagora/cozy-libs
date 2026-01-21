@@ -1,9 +1,61 @@
+import { generateWebLink } from 'cozy-client'
 import minilog from 'cozy-minilog'
+
+import { getAppSlugFromDocumentType } from '../../helpers/link'
 
 const log = minilog('ShareRestrictionModal/helpers')
 
 export const WRITE_PERMS = ['GET', 'POST', 'PUT', 'PATCH']
 export const READ_ONLY_PERMS = ['GET']
+
+/**
+ * Create a sharing link for a file with specified options
+ * @param {object} options
+ * @param {object} options.client - CozyClient instance
+ * @param {object} options.file - File to share
+ * @param {string} options.documentType - Type of the document
+ * @param {Function} options.shareByLink - Function to create permissions
+ * @param {Function} options.t - Translation function
+ * @param {Function} options.showAlert - Function to display an alert
+ * @param {Date|string} [options.ttl] - Time to live of the sharing link
+ * @param {'readOnly'|'write'} [options.editingRights] - Editing rights
+ * @param {string} [options.password] - Password
+ * @param {boolean} [options.withTTL] - Whether to add a default TTL
+ * @returns {Promise<string|null>} - The generated web link or null if permissions creation fails
+ */
+export const createSharingLink = async ({
+  client,
+  file,
+  documentType,
+  shareByLink,
+  t,
+  ttl,
+  editingRights = 'readOnly',
+  password,
+  showAlert
+}) => {
+  const permsResult = await createPermissions({
+    file,
+    t,
+    ttl,
+    editingRights,
+    password,
+    documentType,
+    shareByLink,
+    showAlert
+  })
+  if (!permsResult?.data?.attributes?.shortcodes?.code) {
+    return null
+  }
+  const { data: perms } = permsResult
+  return generateWebLink({
+    cozyUrl: client.getStackClient().uri,
+    searchParams: [['sharecode', perms.attributes.shortcodes.code]],
+    pathname: '/public',
+    slug: getAppSlugFromDocumentType({ documentType }),
+    subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'
+  })
+}
 
 /**
  * Copy a string to the clipboard
