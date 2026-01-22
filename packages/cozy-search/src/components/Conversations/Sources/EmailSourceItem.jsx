@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { useClient, generateWebLink } from 'cozy-client'
+import logger from 'cozy-logger'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import MailIcon from 'cozy-ui/transpiled/react/Icons/Mail'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -12,14 +13,21 @@ import styles from './styles.styl'
 const EmailSourceItem = ({ email }) => {
   const client = useClient()
 
+  if (!client) {
+    logger.info('Client not available for EmailSourceItem')
+    return null
+  }
+
   const docUrl = generateWebLink({
     slug: 'mail',
-    cozyUrl: client?.getStackClient().uri,
-    subDomainType: client?.getInstanceOptions().subdomain,
+    cozyUrl: client.getStackClient().uri,
+    subDomainType: client.getInstanceOptions().subdomain,
     hash: `/bridge/dashboard/${email.id}`
   })
 
-  const emailDate = email['datetime'] ? email['datetime'].split('T')[0] : ''
+  const emailDate = email['datetime']
+    ? new Date(email['datetime']).toISOString().slice(0, 10)
+    : ''
 
   return (
     <ListItem

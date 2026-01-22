@@ -4,6 +4,7 @@ const CONTACTS_DOCTYPE = 'io.cozy.contacts'
 export const CHAT_CONVERSATIONS_DOCTYPE = 'io.cozy.ai.chat.conversations'
 export const CHAT_EVENTS_DOCTYPE = 'io.cozy.ai.chat.events'
 export const FILES_DOCTYPE = 'io.cozy.files'
+export const EMAIL_DOCTYPE = 'com.linagora.email'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(86400) // 24 hours
 
@@ -13,7 +14,7 @@ export const buildFilesByIds = (ids, enabled) => {
     options: {
       as: `${FILES_DOCTYPE}/${ids.join('')}`,
       fetchPolicy: defaultFetchPolicy,
-      enabled: enabled
+      enabled
     }
   }
 }
