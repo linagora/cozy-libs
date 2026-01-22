@@ -35,6 +35,7 @@ const EmailSourceItem = ({ email }) => {
       component="a"
       href={docUrl}
       target="_blank"
+      rel="noopener noreferrer"
       button
     >
       <ListItemIcon>
