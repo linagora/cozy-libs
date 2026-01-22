@@ -11,7 +11,7 @@ import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 
 import EmailSourceItem from './EmailSourceItem'
 import FileSourcesItem from './FileSourcesItem'
-import { buildFilesByIds } from '../../queries'
+import { EMAIL_DOCTYPE, buildFilesByIds } from '../../queries'
 
 const Sources = ({ messageId, files, emails }) => {
   const [showSources, setShowSources] = useState(false)
@@ -80,7 +80,7 @@ const SourcesWithFilesQuery = ({ messageId, sources }) => {
   const emails = []
   let files = []
   sources.map(source => {
-    source.doctype === 'com.linagora.email'
+    source.doctype === EMAIL_DOCTYPE
       ? emails.push(source)
       : fileIds.push(source.id)
   })
