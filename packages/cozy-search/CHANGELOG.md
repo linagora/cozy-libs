@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.14.4...cozy-search@0.15.0) (2026-01-22)
+
+### Bug Fixes
+
+- **email:** Enhancing style ([bb28d8f](https://github.com/cozy/cozy-libs/commit/bb28d8f0d569eab15bd52c89e5f450804cfdf5c3))
+- **email:** Renaming emailSources to email to have consistent naming ([9c0a566](https://github.com/cozy/cozy-libs/commit/9c0a56617d3ce7a0a46c87b865755fd34975c2c3))
+
+### Features
+
+- Add email source ([f10da09](https://github.com/cozy/cozy-libs/commit/f10da098528ef42cad4b9df8f682b989f4b5b78b))
+- **aiAssistant:** Finxing lint ([b4b2f56](https://github.com/cozy/cozy-libs/commit/b4b2f56aefdd02cae5743bba87765823ec13b5d8))
+- **email:** Adding noopener noreferrer to email link ([dbc80d6](https://github.com/cozy/cozy-libs/commit/dbc80d66f2262e47045c86528ce03d4ad758eda6))
+- **email:** Enhancing display + handling redirect link ([72cdcf2](https://github.com/cozy/cozy-libs/commit/72cdcf28e431524848c849a27351b179c592e3bc))
+- **email:** Fix metadata and empty file handling ([9196d49](https://github.com/cozy/cozy-libs/commit/9196d495fc170e9147497d275d545e1e455fefde))
+
 ## [0.14.4](https://github.com/cozy/cozy-libs/compare/cozy-search@0.14.3...cozy-search@0.14.4) (2026-01-15)
 
 **Note:** Version bump only for package cozy-search
