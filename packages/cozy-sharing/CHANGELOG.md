@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.2.1...cozy-sharing@28.3.0) (2026-01-26)
+
+### Features
+
+- Generate and copy folder link in one click ([7b806da](https://github.com/cozy/cozy-libs/commit/7b806dae2564c45d1a469150832ebed3ac47235a))
+
 ## [28.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.2.0...cozy-sharing@28.2.1) (2026-01-15)
 
 **Note:** Version bump only for package cozy-sharing
