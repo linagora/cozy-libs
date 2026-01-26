@@ -154,7 +154,9 @@ const isInsideCozy = (targetOrigin: string): boolean => {
       targetUrl.hostname.endsWith('.lin-saas.dev') ||
       targetUrl.hostname.endsWith('.mycozy.cloud') ||
       targetUrl.hostname.endsWith('.cozy.works') ||
-      targetUrl.hostname.endsWith('.cozy.company')
+      targetUrl.hostname.endsWith('.cozy.company') ||
+      targetUrl.hostname.endsWith('.localhost') ||
+      targetUrl.hostname.endsWith('.local')
     )
   } catch {
     return false
