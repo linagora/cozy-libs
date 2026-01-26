@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.1](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.19.0...cozy-external-bridge@0.19.1) (2026-01-26)
+
+### Bug Fixes
+
+- Enable isInsideCozy in local environment ([64d9ea8](https://github.com/cozy/cozy-libs/commit/64d9ea8580d0ad02647026f1589efd97e3cf9ed7))
+
 # [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.18.0...cozy-external-bridge@0.19.0) (2025-11-19)
 
 ### Features
