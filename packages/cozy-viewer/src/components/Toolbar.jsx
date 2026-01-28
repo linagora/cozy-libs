@@ -39,7 +39,8 @@ const Toolbar = ({
   breakpoints: { isDesktop },
   children,
   showFilePath,
-  onPaywallRedirect
+  onPaywallRedirect,
+  hideSummarizeBtn
 }) => {
   const client = useClient()
   const { t } = useI18n()
@@ -111,7 +112,9 @@ const Toolbar = ({
               isShortLabel
             />
           )}
-          <SummarizeByAIButton onPaywallRedirect={onPaywallRedirect} />
+          {!hideSummarizeBtn && (
+            <SummarizeByAIButton onPaywallRedirect={onPaywallRedirect} />
+          )}
           <Button
             className="u-white"
             variant="text"
@@ -141,7 +144,8 @@ Toolbar.propTypes = {
   onMouseLeave: PropTypes.func.isRequired,
   onClose: PropTypes.func,
   showFilePath: PropTypes.bool,
-  onPaywallRedirect: PropTypes.func
+  onPaywallRedirect: PropTypes.func,
+  hideSummarizeBtn: PropTypes.bool
 }
 
 export default withBreakpoints()(Toolbar)
