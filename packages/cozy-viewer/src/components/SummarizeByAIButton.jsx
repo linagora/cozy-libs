@@ -6,7 +6,7 @@ import { useI18n } from 'twake-i18n'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import TextIcon from 'cozy-ui/transpiled/react/Icons/Text'
+import ArticleIcon from 'cozy-ui/transpiled/react/Icons/Article'
 
 import styles from './styles.styl'
 import { isFileSummaryCompatible } from '../helpers'
@@ -36,7 +36,7 @@ const SummarizeByAIButton = ({ onPaywallRedirect, className }) => {
       variant="text"
       startIcon={
         <Icon
-          icon={TextIcon}
+          icon={ArticleIcon}
           className={cx(styles['viewer-ai-summarise-btn'])}
         />
       }

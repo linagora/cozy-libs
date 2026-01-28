@@ -11,6 +11,7 @@
     "cancel": "Отмена",
     "ok": "Ok",
     "download": "Скачать",
+    "share_btn": "Поделиться",
     "complete": "Заполнить документ",
     "noImage": "Нет изображения",
     "error": {
@@ -26,8 +27,13 @@
     "openWith": "Открыть с помощью...",
     "openInOnlyOffice": "Открыть в Only Office",
     "panel": {
+      "header": "Сведения",
       "summary": "Сводка",
+      "edit_summary": "Изменить",
+      "shorter": "Сделать короче",
+      "expand": "Добавить больше деталей",
       "sharing": "У кого есть доступ?",
+      "manage_access": "Управлять доступом",
       "informations": {
         "format": {
           "title": "Документ %{format}",
@@ -72,7 +78,9 @@
       "expiration": {
         "dismiss": "Понятно"
       },
-      "title": "Полезная информация"
+      "title": "Полезная информация",
+      "more_menu": "Подробнее",
+      "collapse_btn": "Свернуть"
     },
     "previous": "Предыдущий",
     "retry": "Повторить",

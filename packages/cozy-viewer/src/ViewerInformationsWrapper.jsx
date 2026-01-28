@@ -21,7 +21,12 @@ const ViewerInformationsWrapper = ({
 }) => {
   const theme = useTheme()
   const { isLight } = useCozyTheme()
-  const { isOpenAiAssistant, setIsOpenAiAssistant } = useViewer()
+  const {
+    isOpenAiAssistant,
+    isOpenFileViewerPanel,
+    setIsOpenFileViewerPanel,
+    setIsOpenAiAssistant
+  } = useViewer()
   const sidebar = document.querySelector('[class*="sidebar"]')
   const location = useLocation()
 
@@ -29,7 +34,11 @@ const ViewerInformationsWrapper = ({
     if (location?.state?.showAIAssistant) {
       setIsOpenAiAssistant(true)
     }
-  }, [location, setIsOpenAiAssistant])
+
+    if (location?.state?.showDetailPanel) {
+      setIsOpenFileViewerPanel(true)
+    }
+  }, [location, setIsOpenAiAssistant, setIsOpenFileViewerPanel])
 
   useSetFlagshipUI(
     {
@@ -43,7 +52,7 @@ const ViewerInformationsWrapper = ({
 
   return (
     <>
-      {isOpenAiAssistant ? (
+      {isOpenAiAssistant && (
         <>
           {!disableFooter && (
             <Footer>
@@ -61,7 +70,8 @@ const ViewerInformationsWrapper = ({
             </InformationPanel>
           )}
         </>
-      ) : (
+      )}
+      {isOpenFileViewerPanel && (
         <>
           {!disableFooter && (
             <Footer>

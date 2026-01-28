@@ -4,12 +4,13 @@ import React, { Component } from 'react'
 import ViewerByFile from './components/ViewerByFile'
 import ViewerControls from './components/ViewerControls'
 import { toolbarPropsPropType } from './proptypes'
+import { useViewer } from './providers/ViewerProvider'
 
 const KEY_CODE_LEFT = 37
 const KEY_CODE_RIGHT = 39
 const KEY_CODE_ESCAPE = 27
 
-class Viewer extends Component {
+class ViewerClassComp extends Component {
   constructor() {
     super()
   }
@@ -68,8 +69,10 @@ class Viewer extends Component {
       renderFallbackExtraContent,
       validForPanel,
       children,
-      componentsProps
+      componentsProps,
+      viewer
     } = this.props
+    const { isOpenFileViewerPanel } = viewer
 
     return (
       <>
@@ -82,6 +85,7 @@ class Viewer extends Component {
           onPrevious={this.onPrevious}
           onNext={this.onNext}
           onClose={this.onClose}
+          fullWidth={!isOpenFileViewerPanel}
         >
           {children}
           <ViewerByFile
@@ -93,6 +97,11 @@ class Viewer extends Component {
       </>
     )
   }
+}
+
+const Viewer = props => {
+  const viewer = useViewer()
+  return <ViewerClassComp {...props} viewer={viewer} />
 }
 
 Viewer.propTypes = {

@@ -192,44 +192,48 @@ const AIAssistantPanel = ({ className }) => {
           square
         >
           <div className="u-flex u-flex-items-center u-flex-justify-between u-h-3 u-ph-1 u-flex-shrink-0">
-            <Typography variant="h4">
-              <Icon icon={AssistantIcon} /> {t('Viewer.ai.panelTitle')}
-            </Typography>
+            <Typography variant="h4">{t('Viewer.ai.panelTitle')}</Typography>
             <IconButton aria-label="Close AI Assistant" onClick={handleClose}>
               <Icon icon={CrossMediumIcon} />
             </IconButton>
           </div>
           {!isLoading && (
-            <Stack spacing="s" className="u-ph-1">
-              <div>
-                <div className="u-flex u-flex-items-center u-flex-justify-between u-mb-1">
-                  <Typography variant="subtitle1">
-                    {t('Viewer.ai.bodyText')}
-                  </Typography>
-                  <div className="u-flex">
-                    <IconButton size="small" onClick={handleRefresh}>
-                      <Icon icon={RefreshIcon} />
-                    </IconButton>
-                    {summary && (
-                      <IconButton size="small" onClick={handleCopy}>
-                        <Icon icon={CopyIcon} />
-                      </IconButton>
-                    )}
-                  </div>
-                </div>
-                <Typography className="u-mb-1">
-                  {error ? (
-                    <span style={{ color: 'var(--errorColor)' }}>{error}</span>
-                  ) : (
-                    summary
-                  )}
+            <Stack spacing="s" className="u-p-1">
+              <div className="u-flex u-flex-items-center u-flex-justify-between u-mb-1">
+                <Typography variant="subtitle1">
+                  {t('Viewer.ai.bodyText')}
                 </Typography>
-                {!isLoading && summary && (
-                  <Typography variant="caption" color="textSecondary">
-                    {t('Viewer.ai.footerText')}
-                  </Typography>
-                )}
+                <div className="u-flex">
+                  <IconButton
+                    size="small"
+                    onClick={handleRefresh}
+                    aria-label="Refresh"
+                  >
+                    <Icon icon={RefreshIcon} />
+                  </IconButton>
+                  {summary && (
+                    <IconButton
+                      size="small"
+                      onClick={handleCopy}
+                      aria-label="Copy"
+                    >
+                      <Icon icon={CopyIcon} />
+                    </IconButton>
+                  )}
+                </div>
               </div>
+              <Typography className="u-mb-1">
+                {error ? (
+                  <span style={{ color: 'var(--errorColor)' }}>{error}</span>
+                ) : (
+                  summary
+                )}
+              </Typography>
+              {!isLoading && summary && (
+                <Typography variant="caption" color="textSecondary">
+                  {t('Viewer.ai.footerText')}
+                </Typography>
+              )}
             </Stack>
           )}
         </Paper>

@@ -1,4 +1,5 @@
 import { isFromKonnector } from 'cozy-client/dist/models/file'
+import flag from 'cozy-flags'
 import KonnectorBlock from 'cozy-harvest-lib/dist/components/KonnectorBlock'
 
 import Antivirus from './Antivirus'
@@ -22,33 +23,66 @@ import Summary from './Summary'
  * @param {boolean} isPublic - Whether the panel is displayed in public view
  * @returns {PanelBlocksSpecs}
  */
-export const getPanelBlocksSpecs = (isPublic = false, panelProps) => ({
-  antivirus: {
-    condition: () => !panelProps?.antivirus?.disabled,
-    component: Antivirus
-  },
-  qualifications: {
-    condition: () => !panelProps?.qualifications?.disabled,
-    component: Qualification
-  },
-  summary: {
-    condition: () => !panelProps?.summary?.disabled,
-    component: Summary
-  },
-  konnector: {
-    condition: file =>
-      !panelProps?.konnector?.disabled && isFromKonnector(file) && !isPublic,
-    component: KonnectorBlock
-  },
-  informations: {
-    condition: () => !panelProps?.informations?.disabled,
-    component: Informations
-  },
-  sharing: {
-    condition: () => !panelProps?.sharing?.disabled && !isPublic,
-    component: Sharing
-  }
-})
+export const getPanelBlocksSpecs = (isPublic = false, panelProps) =>
+  flag('drive.new-file-viewer-ui.enabled')
+    ? {
+        antivirus: {
+          condition: () => !panelProps?.antivirus?.disabled,
+          component: Antivirus
+        },
+        sharing: {
+          condition: () => !panelProps?.sharing?.disabled && !isPublic,
+          component: Sharing
+        },
+        summary: {
+          condition: () => !panelProps?.summary?.disabled,
+          component: Summary
+        },
+        konnector: {
+          condition: file =>
+            !panelProps?.konnector?.disabled &&
+            isFromKonnector(file) &&
+            !isPublic,
+          component: KonnectorBlock
+        },
+        informations: {
+          condition: () => !panelProps?.informations?.disabled,
+          component: Informations
+        },
+        qualifications: {
+          condition: () => !panelProps?.qualifications?.disabled,
+          component: Qualification
+        }
+      }
+    : {
+        antivirus: {
+          condition: () => !panelProps?.antivirus?.disabled,
+          component: Antivirus
+        },
+        qualifications: {
+          condition: () => !panelProps?.qualifications?.disabled,
+          component: Qualification
+        },
+        summary: {
+          condition: () => !panelProps?.summary?.disabled,
+          component: Summary
+        },
+        konnector: {
+          condition: file =>
+            !panelProps?.konnector?.disabled &&
+            isFromKonnector(file) &&
+            !isPublic,
+          component: KonnectorBlock
+        },
+        informations: {
+          condition: () => !panelProps?.informations?.disabled,
+          component: Informations
+        },
+        sharing: {
+          condition: () => !panelProps?.sharing?.disabled && !isPublic,
+          component: Sharing
+        }
+      }
 
 /**
  * Returns the blocks to display in the panel

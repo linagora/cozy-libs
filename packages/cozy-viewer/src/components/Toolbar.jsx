@@ -74,7 +74,12 @@ const Toolbar = ({
           <Icon icon={PreviousIcon} />
         </IconButton>
       )}
-      <div className="u-pl-half u-ov-auto u-w-100">
+      <div
+        className={cx(
+          'u-pl-half u-ov-auto',
+          styles['viewer-toolbar__filename']
+        )}
+      >
         <Typography
           variant={isDesktop ? 'h3' : 'h4'}
           color={isDesktop ? 'inherit' : 'textPrimary'}

@@ -14,7 +14,9 @@ const QualificationListItemText = ({
     <ListItemText
       {...props}
       disableTypography
-      primary={<Typography variant="caption">{primary}</Typography>}
+      primary={
+        primary ? <Typography variant="caption">{primary}</Typography> : null
+      }
       secondary={
         <Typography
           component="div"
