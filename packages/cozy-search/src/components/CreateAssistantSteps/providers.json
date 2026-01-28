@@ -1,0 +1,63 @@
+[
+  {
+    "id": "openrag",
+    "name": "LINAGORA",
+    "models": ["openrag"],
+    "description": "assistant_create.steps.provider_selection.openrag.description",
+    "icon": "OpenRagLogo",
+    "baseUrl": "/api/openrag",
+    "external": false
+  },
+  {
+    "id": "google",
+    "name": "Google",
+    "models": ["gemini-3-pro", "gemini-3-pro-001", "gemini-3-flash", "gemini-2.5-pro", "gemini-2.5-flash", "gemini-nano-banana-pro"],
+    "description": "assistant_create.steps.provider_selection.google.description",
+    "icon": "GeminiLogo",
+    "baseUrl": "https://generativelanguage.googleapis.com/v1beta",
+    "external": true
+  },
+  {
+    "id": "openai",
+    "name": "OpenAI",
+    "models": ["gpt-5.1", "gpt-5-2025-11-14", "o3", "o4-mini", "gpt-5-mini", "gpt-4.1-mini", "sora-v2"],
+    "description": "assistant_create.steps.provider_selection.openai.description",
+    "icon": "OpenAILogo",
+    "baseUrl": "https://api.openai.com/v1",
+    "external": true
+  },
+  {
+    "id": "mistral_ai",
+    "name": "Mistral AI",
+    "models": ["mistral-large-3", "mistral-large-2512", "mistral-medium-3.1", "ministral-3b", "ministral-8b", "ministral-14b", "codestral-2", "devstral-small-2", "pixtral-large-2502"],
+    "description": "assistant_create.steps.provider_selection.mistral_ai.description",
+    "icon": "MistralLogo",
+    "baseUrl": "https://api.mistral.ai/v1",
+    "external": true
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic",
+    "models": ["claude-4-5-opus-20251124", "claude-4-5-sonnet-20250929", "claude-4-5-haiku-20251015", "claude-3-7-sonnet-20250219"],
+    "description": "assistant_create.steps.provider_selection.anthropic.description",
+    "icon": "AnthropicLogo",
+    "baseUrl": "https://api.anthropic.com/v1",
+    "external": true
+  },
+  {
+    "id": "custom",
+    "name": "assistant_create.steps.provider_selection.custom.name",
+    "description": "assistant_create.steps.provider_selection.custom.description",
+    "icon": "PlusSmallIcon",
+    "external": true
+  },
+  {
+    "id": "meta",
+    "name": "Meta",
+    "models": ["meta-llama/Llama-4-Scout-17B-16E-Instruct", "meta-llama/Llama-4-Maverick-402B-Instruct", "meta-llama/Llama-3.3-70B-Instruct", "meta-llama/Llama-3.2-90B-Vision-Instruct"],
+    "description": "assistant_create.steps.provider_selection.meta.description",
+    "icon": "MetaLogo",
+    "baseUrl": "https://api.llama.com/v1",
+    "external": true
+  }
+]
