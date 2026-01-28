@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [26.6.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.5.2...cozy-viewer@26.6.0) (2026-01-28)
+
+### Features
+
+- Implement new UI of file viewer :sparkles: ([23ab4b2](https://github.com/cozy/cozy-libs/commit/23ab4b2c2859a8115d94dabbd30594fea00358e9))
+
 ## [26.5.2](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.5.1...cozy-viewer@26.5.2) (2026-01-26)
 
 **Note:** Version bump only for package cozy-viewer
