@@ -8,5 +8,7 @@ export const toolbarPropsPropType = {
   /** React reference of the toolbar node */
   toolbarRef: PropTypes.object,
   /** Whether to show file path below his name */
-  showFilePath: PropTypes.bool
+  showFilePath: PropTypes.bool,
+  /** Whether to hide summize button or not */
+  hideSummarizeBtn: PropTypes.bool
 }

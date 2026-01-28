@@ -129,7 +129,8 @@ class ViewerControls extends Component {
       showClose,
       toolbarRef,
       showFilePath,
-      onPaywallRedirect
+      onPaywallRedirect,
+      hideSummarizeBtn
     } = toolbarProps
     const { hidden } = this.state
 
@@ -152,6 +153,7 @@ class ViewerControls extends Component {
             onMouseLeave={this.hideControls}
             onClose={showClose ? onClose : undefined}
             onPaywallRedirect={onPaywallRedirect}
+            hideSummarizeBtn={hideSummarizeBtn}
           >
             {children}
           </Toolbar>
