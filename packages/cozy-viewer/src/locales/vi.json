@@ -11,6 +11,7 @@
     "cancel": "Hủy",
     "ok": "Ok",
     "download": "Tải xuống",
+    "share_btn": "Chia sẻ",
     "complete": "Hoàn thành tài liệu",
     "noImage": "Không có hình ảnh",
     "error": {
@@ -26,8 +27,13 @@
     "openWith": "Mở bằng...",
     "openInOnlyOffice": "Mở bằng Only Office",
     "panel": {
+      "header": "Chi tiết",
       "summary": "Tóm tắt",
+      "edit_summary": "Chỉnh sửa tóm tắt",
+      "shorter": "Rút ngắn",
+      "expand": "Thêm chi tiết",  
       "sharing": "Ai có quyền truy cập?",
+      "manage_access": "Quản lý quyền truy cập",
       "informations": {
         "format": {
           "title": "Tài liệu %{format}",
@@ -72,7 +78,9 @@
       "expiration": {
         "dismiss": "Tôi đã hiểu"
       },
-      "title": "Thông tin hữu ích"
+      "title": "Thông tin hữu ích",
+      "more_menu": "Xem thêm",
+      "collapse_btn": "Thu gọn"
     },
     "previous": "Trước đó",
     "retry": "Thử lại",

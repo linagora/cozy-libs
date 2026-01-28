@@ -18,6 +18,9 @@ const ACTIONS_HIDE_DELAY = 3000
 const customStyles = () => ({
   viewerControlsWithInfo: {
     width: `calc(100% - ${infoWidth}) !important`
+  },
+  viewerControlsWithoutInfo: {
+    width: `100% !important`
   }
 })
 
@@ -118,7 +121,8 @@ class ViewerControls extends Component {
       showInfoPanel,
       children,
       classes,
-      isDesktop
+      isDesktop,
+      fullWidth
     } = this.props
     const {
       showToolbar,
@@ -133,7 +137,8 @@ class ViewerControls extends Component {
       <div
         className={cx(styles['viewer-controls'], {
           [styles['viewer-controls--expanded']]: expanded,
-          [classes.viewerControlsWithInfo]: showInfoPanel
+          [classes.viewerControlsWithInfo]: showInfoPanel && !fullWidth,
+          [classes.viewerControlsWithoutInfo]: fullWidth
         })}
         ref={wrapped => {
           this.wrapped = wrapped

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import TextField from 'cozy-ui/transpiled/react/TextField'
@@ -25,12 +26,12 @@ const SummaryDialog = ({ file, t, onClose }) => {
   return (
     <ConfirmDialog
       open
-      title={t('Viewer.panel.summary')}
+      title={t('Viewer.panel.edit_summary')}
       content={
         <TextField
           multiline
           value={value}
-          rows={4}
+          rows={flag('drive.new-file-viewer-ui.enabled') ? 10 : 4}
           autoFocus
           fullWidth
           required
@@ -55,6 +56,7 @@ const SummaryDialog = ({ file, t, onClose }) => {
         </>
       }
       onClose={onClose}
+      size={flag('drive.new-file-viewer-ui.enabled') ? 'large' : 'medium'}
     />
   )
 }

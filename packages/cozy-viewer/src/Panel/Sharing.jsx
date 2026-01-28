@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import flag from 'cozy-flags'
 import {
   useSharingContext,
   MemberRecipientLite,
   OwnerRecipientDefaultLite,
   LinkRecipientLite
 } from 'cozy-sharing'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import List from 'cozy-ui/transpiled/react/List'
@@ -33,13 +35,19 @@ const Sharing = ({ file, t }) => {
   const link = getSharingLink(file._id)
   const _isOwner = isOwner(file._id)
 
+  const showModal = () => {
+    if (!flag('drive.new-file-viewer-ui.enabled')) {
+      setShowShareModal(true)
+    }
+  }
+
   return (
     <>
       <ListItem
         size="large"
         divider
-        button
-        onClick={() => setShowShareModal(true)}
+        button={!flag('drive.new-file-viewer-ui.enabled')}
+        onClick={showModal}
       >
         <ListItemText
           primary={
@@ -50,9 +58,11 @@ const Sharing = ({ file, t }) => {
           }
           primaryTypographyProps={{ variant: 'h6' }}
         />
-        <ListItemIcon>
-          <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
-        </ListItemIcon>
+        {!flag('drive.new-file-viewer-ui.enabled') && (
+          <ListItemIcon>
+            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+          </ListItemIcon>
+        )}
       </ListItem>
       <List>
         <LinkRecipientLite permissions={permissions} link={link} />
@@ -66,6 +76,15 @@ const Sharing = ({ file, t }) => {
           ))
         ) : (
           <OwnerRecipientDefaultLite />
+        )}
+        {flag('drive.new-file-viewer-ui.enabled') && (
+          <ListItem>
+            <Button
+              variant="secondary"
+              label={t('Viewer.panel.manage_access')}
+              onClick={() => setShowShareModal(true)}
+            />
+          </ListItem>
         )}
       </List>
     </>

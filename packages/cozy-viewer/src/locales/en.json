@@ -11,6 +11,7 @@
     "cancel": "Cancel",
     "ok": "Ok",
     "download": "Download",
+    "share_btn": "Share",
     "complete": "Complete the document",
     "noImage": "No image",
     "error": {
@@ -26,8 +27,13 @@
     "openWith": "Open with...",
     "openInOnlyOffice": "Open with Only Office",
     "panel": {
+      "header": "Details",
       "summary": "Summary",
+      "edit_summary": "Edit summary",
+      "shorter": "Make it shorter",
+      "expand": "Add more details",
       "sharing": "Who has access?",
+      "manage_access": "Manage access",
       "informations": {
         "format": {
           "title": "%{format} Document",
@@ -72,7 +78,9 @@
       "expiration": {
         "dismiss": "I understood"
       },
-      "title": "Useful information"
+      "title": "Useful information",
+      "more_menu": "More menu",
+      "collapse_btn": "Collapse"
     },
     "previous": "Previous",
     "retry": "Retry",

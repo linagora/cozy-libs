@@ -20,6 +20,7 @@ const ViewerProvider = ({
 }) => {
   const [isOpenAiAssistant, setIsOpenAiAssistant] = useState(false)
   const [pdfPageCount, setPdfPageCount] = useState(null)
+  const [isOpenFileViewerPanel, setIsOpenFileViewerPanel] = useState(true)
 
   return (
     <ViewerContext.Provider
@@ -31,7 +32,9 @@ const ViewerProvider = ({
         isOpenAiAssistant,
         setIsOpenAiAssistant,
         pdfPageCount,
-        setPdfPageCount
+        setPdfPageCount,
+        isOpenFileViewerPanel,
+        setIsOpenFileViewerPanel
       }}
     >
       {children}
