@@ -62,6 +62,9 @@ function getRsbuildConfig({
         port: '<port>'
       }
     },
+    source: {
+      preEntry: './node_modules/rsbuild-config-cozy-app/src/setPublicPath.js'
+    },
     output: {
       cleanDistPath: true,
       filename: {
