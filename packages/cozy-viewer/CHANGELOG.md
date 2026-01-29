@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.6.1](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.6.0...cozy-viewer@26.6.1) (2026-01-29)
+
+### Bug Fixes
+
+- Hide summarize button in public view :bug: ([d0317a0](https://github.com/cozy/cozy-libs/commit/d0317a0a663ddfbf63414a181161fa0de006b10d))
+
 # [26.6.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.5.2...cozy-viewer@26.6.0) (2026-01-28)
 
 ### Features
