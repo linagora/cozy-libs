@@ -15,7 +15,8 @@
   "files": [
     "index.js",
     "getRsbuildConfig.js",
-    "helpers.js"
+    "helpers.js",
+    "src"
   ],
   "devDependencies": {
     "@rsbuild/core": "1.5.4",
