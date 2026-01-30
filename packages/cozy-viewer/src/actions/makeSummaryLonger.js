@@ -18,21 +18,29 @@ const makeComponent = (label, icon) => {
     )
   })
 
-  Component.displayName = 'expand'
+  Component.displayName = 'makeSummaryLonger'
 
   return Component
 }
 
-export const expand = ({ t, makeLonger, isExpanded }) => {
+export const makeSummaryLonger = ({ t, navigate, location }) => {
   const icon = ExpandIcon
   const label = t('Viewer.panel.expand')
 
   return {
-    name: 'expand',
+    name: 'makeSummaryLonger',
     icon,
     label,
     Component: makeComponent(label, icon),
-    displayCondition: () => !isExpanded,
-    action: () => makeLonger()
+    action: () => {
+      navigate(location.pathname, {
+        replace: true,
+        state: {
+          ...location.state,
+          showAIAssistant: true,
+          type: 'makeSummaryLonger'
+        }
+      })
+    }
   }
 }

@@ -21,7 +21,12 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
-import { SUMMARY_SYSTEM_PROMPT, getSummaryUserPrompt } from './prompts'
+import {
+  SUMMARY_SYSTEM_PROMPT,
+  LONG_SUMMARY_SYSTEM_PROMPT,
+  SHORT_SUMMARY_SYSTEM_PROMPT,
+  getSummaryUserPrompt
+} from './prompts'
 import styles from './styles.styl'
 import { roughTokensEstimation, sanitizeText } from '../../helpers'
 import { useViewer } from '../../providers/ViewerProvider'
@@ -45,7 +50,7 @@ const AIAssistantPanel = ({ className }) => {
   const handleClose = () => {
     setIsOpenAiAssistant(false)
     if (location?.state?.showAIAssistant) {
-      navigate('..')
+      navigate(location.pathname)
     }
   }
 
@@ -71,8 +76,15 @@ const AIAssistantPanel = ({ className }) => {
         throw error
       }
 
+      let systemPrompt = SUMMARY_SYSTEM_PROMPT
+      if (location.state?.type === 'makeSummaryLonger') {
+        systemPrompt = LONG_SUMMARY_SYSTEM_PROMPT
+      } else if (location.state?.type === 'makeSummaryShorter') {
+        systemPrompt = SHORT_SUMMARY_SYSTEM_PROMPT
+      }
+
       const messages = [
-        { role: 'system', content: SUMMARY_SYSTEM_PROMPT },
+        { role: 'system', content: systemPrompt },
         {
           role: 'user',
           content: getSummaryUserPrompt(textContent)
@@ -159,7 +171,7 @@ const AIAssistantPanel = ({ className }) => {
         }
       }
     },
-    [client, file, t]
+    [client, file, t, location]
   )
 
   const handleRefresh = () => {
