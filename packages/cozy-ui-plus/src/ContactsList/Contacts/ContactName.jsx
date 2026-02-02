@@ -1,4 +1,3 @@
-import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -6,9 +5,12 @@ import { getDisplayName } from 'cozy-client/dist/models/contact'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const ContactName = ({ contact, disable }) => {
-  const familyName = contact.name?.familyName
-  const displayName = getDisplayName(contact)
-  const namesToDisplay = displayName?.split(' ')
+  const { familyName } = contact.name || {}
+  const displayName = getDisplayName(contact)?.trim()
+  const hasFamilyName = familyName && displayName?.endsWith(familyName)
+  const namePrefix = hasFamilyName
+    ? displayName.slice(0, -familyName.length).trimEnd()
+    : null
 
   return (
     <Typography
@@ -18,21 +20,14 @@ const ContactName = ({ contact, disable }) => {
       display="inline"
       color={disable ? 'textSecondary' : 'textPrimary'}
     >
-      {namesToDisplay?.map((name, index) => {
-        const isLastItem = index === namesToDisplay.length - 1
-
-        return (
-          <span
-            key={`display-${index}`}
-            className={cx({
-              'u-fw-bold': name === familyName
-            })}
-          >
-            {name}
-            {!isLastItem && <>&nbsp;</>}
-          </span>
-        )
-      })}
+      {hasFamilyName ? (
+        <>
+          {namePrefix && <>{namePrefix}&nbsp;</>}
+          <span className="u-fw-bold">{familyName}</span>
+        </>
+      ) : (
+        displayName
+      )}
     </Typography>
   )
 }
