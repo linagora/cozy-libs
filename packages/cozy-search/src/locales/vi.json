@@ -16,6 +16,109 @@
       "find_file": "Tìm một tệp",
       "reimbursements": "Kiểm tra các khoản hoàn trả của tôi",
       "reorganise_files": "Sắp xếp lại các tệp của tôi"
+    },
+    "default_error": "Đã xảy ra lỗi, vui lòng thử lại",
+    "hide": "Ẩn",
+    "show": "Hiện"
+  },
+  "assistant_create": {
+    "title": "Tạo trợ lý",
+    "steps": {
+      "basic_info": {
+        "description": "Tùy chỉnh danh tính và hành vi của trợ lý để phù hợp với nhu cầu của bạn.",
+        "avatar": "Ảnh đại diện (tùy chọn)",
+        "name": "Tên",
+        "name_placeholder": "Đặt tên cho trợ lý của bạn",
+        "instructions": "Hướng dẫn (tùy chọn)",
+        "instructions_placeholder": "Trợ lý này làm gì? Nên hành xử như thế nào? Nên tránh điều gì?",
+        "knowledge_base": "Cơ sở tri thức (tùy chọn)",
+        "knowledge_base_placeholder": "Các cuộc trò chuyện có thể làm lộ một phần hoặc toàn bộ các tệp đã được tải lên.",
+        "load_file": "Tải tệp",
+        "from_drive": "Từ Drive",
+        "from_mail": "Từ Mail"
+      },
+      "provider_selection": {
+        "description": "Chọn mô hình AI phù hợp nhất với yêu cầu của bạn.",
+        "by": "bởi",
+        "openrag": {
+          "description": "Làm việc với tệp trên Drive, chat, email từ Twake Workplace của bạn"
+        },
+        "google": {
+          "description": "Mô hình mạnh nhất của Google cho tác vụ văn bản và đa phương thức"
+        },
+        "openai": {
+          "description": "Mô hình GPT mạnh nhất, phù hợp cho suy luận phức tạp và tác vụ sáng tạo"
+        },
+        "mistral_ai": {
+          "description": "Mô hình hiệu quả và mạnh mẽ với hiệu năng cao"
+        },
+        "anthropic": {
+          "description": "Trợ lý AI hữu ích, an toàn và trung thực với khả năng suy luận mạnh"
+        },
+        "meta": {
+          "description": "Mô hình ngôn ngữ lớn mã nguồn mở cho nhiều ứng dụng"
+        },
+        "custom": {
+          "name": "Thêm nhà cung cấp tùy chỉnh",
+          "description": "Cấu hình nhà cung cấp AI của riêng bạn"
+        },
+        "external_warning": "Dữ liệu của bạn sẽ được xử lý trên máy chủ bên ngoài. Chế độ này không cung cấp các biện pháp bảo vệ bảo mật nâng cao."
+      },
+      "configuration": {
+        "description": "Nhập URL nhà cung cấp, mô hình và khóa API của bạn để định cấu hình trợ lý mới. Khóa của bạn sẽ được lưu trữ an toàn.",
+        "custom_provider_description": "Cấu hình cài đặt nhà cung cấp AI tùy chỉnh",
+        "model": {
+          "label": "Mô hình"
+        },
+        "provider": {
+          "label": "Tên nhà cung cấp",
+          "placeholder": "Tuỳ chỉnh OpenAI"
+        },
+        "url": {
+          "label": "URL",
+          "placeholder": "https://api.example.com/v1"
+        },
+        "api_key": {
+          "label": "Khóa API",
+          "placeholder": "sk-..."
+        },
+        "no_key": "Bạn không có khóa API?",
+        "generate": "Bạn có thể tạo khóa API mới từ bảng điều khiển tài khoản %{provider} của mình.",
+        "custom_provider": "nhà cung cấp tùy chỉnh",
+        "read_docs": "Đọc tại đây"
+      }
+    },
+    "buttons": {
+      "cancel": "Hủy",
+      "next": "Tiếp",
+      "create": "Tạo"
+    },
+    "configure_api_key_title": "Cấu hình trợ lý mới",
+    "configure_api_key_description": "Nhập URL nhà cung cấp, mô hình và khóa API của bạn để định cấu hình trợ lý mới. Khóa của bạn sẽ được lưu trữ an toàn.",
+    "from_drive": {
+      "actions": {
+        "cancel": "Hủy",
+        "add": "Thêm"
+      }
+    },
+    "success": "Tạo trợ lý thành công"
+  },
+  "assistant_edit": {
+    "title": "Chỉnh sửa trợ lý",
+    "buttons": {
+      "cancel": "Hủy",
+      "next": "Tiếp",
+      "edit": "Lưu"
+    },
+    "configure_api_key_title": "Cấu hình trợ lý của bạn",
+    "success": "Chỉnh sửa trợ lý thành công"
+  },
+  "assistant_delete": {
+    "title": "Xóa trợ lý",
+    "content": "Bạn có chắc chắn muốn xóa %{name}? Hành động này không thể hoàn tác và sẽ xóa vĩnh viễn trợ lý này khỏi Twake của bạn.",
+    "buttons": {
+      "cancel": "Hủy",
+      "confirm": "Xóa"
     }
   }
 }

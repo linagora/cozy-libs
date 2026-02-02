@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useClient } from 'cozy-client'
 import useRealtime from 'cozy-realtime/dist/useRealtime'
 
+import { DEFAULT_ASSISTANT } from './constants'
 import { pushMessagesIdInState, isMessageForThisConversation } from './helpers'
 import { CHAT_EVENTS_DOCTYPE, CHAT_CONVERSATIONS_DOCTYPE } from './queries'
 
@@ -27,6 +28,13 @@ const AssistantProvider = ({ children }) => {
     status: 'idle',
     messagesId: []
   })
+  const [isOpenCreateAssistant, setIsOpenCreateAssistant] = useState(false)
+  const [isOpenDeleteAssistant, setIsOpenDeleteAssistant] = useState(false)
+  const [isOpenEditAssistant, setIsOpenEditAssistant] = useState(false)
+  const [assistantIdInAction, setAssistantIdInAction] = useState(null)
+  const [selectedAssistantId, setSelectedAssistantId] = useState(
+    DEFAULT_ASSISTANT.id
+  )
 
   useRealtime(
     client,
@@ -117,11 +125,30 @@ const AssistantProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       assistantState,
+      isOpenCreateAssistant,
+      isOpenDeleteAssistant,
+      isOpenEditAssistant,
+      assistantIdInAction,
+      selectedAssistantId,
+      setAssistantIdInAction,
+      setIsOpenDeleteAssistant,
       setAssistantState,
       clearAssistant,
-      onAssistantExecute
+      onAssistantExecute,
+      setIsOpenCreateAssistant,
+      setIsOpenEditAssistant,
+      setSelectedAssistantId
     }),
-    [assistantState, clearAssistant, onAssistantExecute]
+    [
+      assistantState,
+      isOpenCreateAssistant,
+      isOpenDeleteAssistant,
+      isOpenEditAssistant,
+      assistantIdInAction,
+      selectedAssistantId,
+      clearAssistant,
+      onAssistantExecute
+    ]
   )
 
   return (
