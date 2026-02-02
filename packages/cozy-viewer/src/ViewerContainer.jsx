@@ -122,6 +122,7 @@ const ViewerContainer = props => {
                 disableFooter={disableFooter}
                 validForPanel={validForPanel}
                 toolbarRef={toolbarRef}
+                currentIndex={currentIndex}
               >
                 {children}
               </ViewerInformationsWrapper>
