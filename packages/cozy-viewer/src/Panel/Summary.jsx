@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import flag from 'cozy-flags'
 import Accordion from 'cozy-ui/transpiled/react/Accordion'
@@ -32,7 +33,7 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import QualificationListItemText from './Qualifications/QualificationListItemText'
 import SummaryDialog from './SummaryDialog'
 import styles from './styles.styl'
-import { expand, shorter } from '../actions'
+import { makeSummaryLonger, makeSummaryShorter } from '../actions'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 
 const Summary = ({ file, isReadOnly, t }) => {
@@ -41,6 +42,8 @@ const Summary = ({ file, isReadOnly, t }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const anchorRef = useRef()
   const { showAlert } = useAlert()
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const label = t('Viewer.panel.summary')
   const value = file.metadata?.description
@@ -51,16 +54,15 @@ const Summary = ({ file, isReadOnly, t }) => {
       flag('drive.new-file-viewer-ui.enabled') && divider,
       flag('drive.new-file-viewer-ui.enabled') && exportToText,
       flag('drive.new-file-viewer-ui.enabled') && divider,
-      flag('drive.new-file-viewer-ui.enabled') && shorter,
-      flag('drive.new-file-viewer-ui.enabled') && expand
+      flag('drive.new-file-viewer-ui.enabled') && makeSummaryShorter,
+      flag('drive.new-file-viewer-ui.enabled') && makeSummaryLonger
     ],
     {
       t,
       exportedText: value,
-      makeShorter: () => setIsExpanded(false),
-      makeLonger: () => setIsExpanded(true),
-      isExpanded,
-      file
+      file,
+      location,
+      navigate
     }
   )
 

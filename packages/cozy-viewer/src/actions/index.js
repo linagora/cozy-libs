@@ -1,2 +1,2 @@
-export { expand } from './expand'
-export { shorter } from './shorter'
+export { makeSummaryLonger } from './makeSummaryLonger'
+export { makeSummaryShorter } from './makeSummaryShorter'
