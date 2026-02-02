@@ -27,6 +27,7 @@
     "openWith": "Открыть с помощью...",
     "openInOnlyOffice": "Открыть в Only Office",
     "panel": {
+      "collapse": "Свернуть",
       "header": "Сведения",
       "summary": "Сводка",
       "edit_summary": "Изменить",

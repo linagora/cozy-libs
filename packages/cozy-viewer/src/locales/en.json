@@ -27,6 +27,7 @@
     "openWith": "Open with...",
     "openInOnlyOffice": "Open with Only Office",
     "panel": {
+      "collapse": "Collapse",
       "header": "Details",
       "summary": "Summary",
       "edit_summary": "Edit summary",
