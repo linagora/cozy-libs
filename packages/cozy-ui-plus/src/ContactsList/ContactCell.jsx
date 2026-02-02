@@ -4,9 +4,9 @@ import ActionsMenuButton from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuB
 
 import ContactIdentity from './Contacts/ContactIdentity'
 
-const Cell = ({ row, column, cell, actions }) => {
+const Cell = ({ row, column, cell, actions, disable }) => {
   if (column.id === 'fullname') {
-    return <ContactIdentity contact={row} noWrapper />
+    return <ContactIdentity contact={row} disable={disable} noWrapper />
   }
 
   if (column.id === 'actions') {

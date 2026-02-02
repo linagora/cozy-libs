@@ -5,7 +5,7 @@ import React from 'react'
 import { getDisplayName } from 'cozy-client/dist/models/contact'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-const ContactName = ({ contact }) => {
+const ContactName = ({ contact, disable }) => {
   const familyName = contact.name?.familyName
   const displayName = getDisplayName(contact)
   const namesToDisplay = displayName?.split(' ')
@@ -16,6 +16,7 @@ const ContactName = ({ contact }) => {
       className="u-ml-1"
       noWrap
       display="inline"
+      color={disable ? 'textSecondary' : 'textPrimary'}
     >
       {namesToDisplay?.map((name, index) => {
         const isLastItem = index === namesToDisplay.length - 1
@@ -37,7 +38,8 @@ const ContactName = ({ contact }) => {
 }
 
 ContactName.propTypes = {
-  contact: PropTypes.object.isRequired
+  contact: PropTypes.object.isRequired,
+  disable: PropTypes.bool
 }
 
 export default ContactName

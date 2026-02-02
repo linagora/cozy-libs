@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useI18n, useExtendI18n } from 'twake-i18n'
@@ -17,22 +18,23 @@ const MyselfMarker = () => {
   return <span className={`${styles['contact-myself']}`}>({t('me')})</span>
 }
 
-const ContactIdentity = ({ contact }) => {
+const ContactIdentity = ({ contact, disable }) => {
   const isMyself = !!contact.me
 
   return (
     <>
-      <Avatar display="inline" size="s">
+      <Avatar className={cx({ 'u-o-60': disable })} display="inline" size="s">
         {getInitials(contact)}
       </Avatar>
-      <ContactName contact={contact} />
+      <ContactName contact={contact} disable={disable} />
       {isMyself && <MyselfMarker />}
     </>
   )
 }
 
 ContactIdentity.propTypes = {
-  contact: PropTypes.object.isRequired
+  contact: PropTypes.object.isRequired,
+  disable: PropTypes.bool
 }
 
 const ContactIdentityWrapper = ({ noWrapper, ...props }) => {
