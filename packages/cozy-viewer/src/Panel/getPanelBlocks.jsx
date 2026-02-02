@@ -7,6 +7,7 @@ import Informations from './Informations'
 import Qualification from './Qualification'
 import Sharing from './Sharing'
 import Summary from './Summary'
+import { getAntivirusStatus } from './helpers'
 
 /**
  * @typedef {Object} PanelBlockSpec
@@ -27,7 +28,10 @@ export const getPanelBlocksSpecs = (isPublic = false, panelProps) =>
   flag('drive.new-file-viewer-ui.enabled')
     ? {
         antivirus: {
-          condition: () => !panelProps?.antivirus?.disabled,
+          condition: (file, t) => {
+            const { icon, text } = getAntivirusStatus(file, t)
+            return !panelProps?.antivirus?.disabled && icon && text
+          },
           component: Antivirus
         },
         sharing: {
@@ -56,7 +60,10 @@ export const getPanelBlocksSpecs = (isPublic = false, panelProps) =>
       }
     : {
         antivirus: {
-          condition: () => !panelProps?.antivirus?.disabled,
+          condition: (file, t) => {
+            const { icon, text } = getAntivirusStatus(file, t)
+            return !panelProps?.antivirus?.disabled && icon && text
+          },
           component: Antivirus
         },
         qualifications: {
@@ -91,11 +98,11 @@ export const getPanelBlocksSpecs = (isPublic = false, panelProps) =>
  * @param {import('cozy-client/types/types').FileDocument} options.file - File object
  * @returns {Array.<React.Component>}
  */
-const getPanelBlocks = ({ panelBlocksSpecs, file }) => {
+const getPanelBlocks = ({ panelBlocksSpecs, file, t }) => {
   const panelBlocks = []
 
   Object.values(panelBlocksSpecs).forEach(panelBlock => {
-    panelBlock.condition(file) && panelBlocks.push(panelBlock.component)
+    panelBlock.condition(file, t) && panelBlocks.push(panelBlock.component)
   })
 
   return panelBlocks
