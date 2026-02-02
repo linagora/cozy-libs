@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [26.6.4](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.6.3...cozy-viewer@26.6.4) (2026-02-02)
+
+### Bug Fixes
+
+- Add missing translation key :bug: ([48751e2](https://github.com/cozy/cozy-libs/commit/48751e255b5939c94ddf288722a2a4cb89a20265))
+- Adjust actions change summarization content :bug: ([23c041a](https://github.com/cozy/cozy-libs/commit/23c041a39ed37219a548f1c1bb3da055489918e2))
+- Hide antivirus block if display condition is false :bug: ([3bf6d1b](https://github.com/cozy/cozy-libs/commit/3bf6d1bc174f1b604825672bedffe537f8abfae5))
+- Toogle details panel by using action :bug: ([6c5d7ee](https://github.com/cozy/cozy-libs/commit/6c5d7ee63f70e96172fd2264e202655b32a14c2f))
+
 ## [26.6.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.6.2...cozy-viewer@26.6.3) (2026-02-02)
 
 **Note:** Version bump only for package cozy-viewer
