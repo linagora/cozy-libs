@@ -39,3 +39,27 @@ export const buildMyselfQuery = () => {
     }
   }
 }
+
+export const buildAssistantsQuery = () => ({
+  definition: () =>
+    Q('io.cozy.ai.chat.assistants')
+      .where({})
+      .include(['provider'])
+      .indexFields(['cozyMetadata.updatedAt'])
+      .sortBy([{ 'cozyMetadata.updatedAt': 'desc' }]),
+  options: {
+    as: 'io.cozy.ai.chat.assistants/list',
+    fetchPolicy: defaultFetchPolicy
+  }
+})
+
+export const buildAssistantByIdQuery = id => ({
+  definition: () =>
+    Q('io.cozy.ai.chat.assistants').getById(id).include(['provider']),
+  options: {
+    as: 'io.cozy.ai.chat.assistants/' + id,
+    fetchPolicy: defaultFetchPolicy,
+    singleDocData: true,
+    enabled: !!id
+  }
+})

@@ -16,6 +16,109 @@
       "find_file": "Search a file",
       "reimbursements": "Check my repayments",
       "reorganise_files": "Reorganise my files"
+    },
+    "default_error": "There was an error, please try again",
+    "hide": "Hide",
+    "show": "Show"
+  },
+  "assistant_create": {
+    "title": "Create Assistant",
+    "steps": {
+      "basic_info": {
+        "description": "Customize your assistant's identity and behavior to match your specific needs.",
+        "avatar": "Avatar (optional)",
+        "name": "Name",
+        "name_placeholder": "Name your assistant",
+        "instructions": "Instructions (optional)",
+        "instructions_placeholder": "What does this assistant do? How should it behave? What should it avoid doing?",
+        "knowledge_base": "Knowledge Base (optional)",
+        "knowledge_base_placeholder": "Conversations may reveal some or all of the files that have been uploaded.",
+        "load_file": "Load files",
+        "from_drive": "From Drive",
+        "from_mail": "From Mail"
+      },
+      "provider_selection": {
+        "description": "Choose the AI model that best matches your requirements.",
+        "by": "by",
+        "openrag": {
+          "description": "Work with drive files, chat, email from your Twake Workplace"
+        },
+        "google": {
+          "description": "Google's most capable model for text and multimodal tasks"
+        },
+        "openai": {
+          "description": "Most capable GPT model, great for complex reasoning and creative tasks"
+        },
+        "mistral_ai": {
+          "description": "Efficient and powerful model with strong performance"
+        },
+        "anthropic": {
+          "description": "Helpful, harmless, and honest AI assistant with strong reasoning"
+        },
+        "meta": {
+          "description": "Open-source large language model for various applications"
+        },
+        "custom": {
+          "name": "Add custom provider",
+          "description": "Configure your own AI provider"
+        },
+        "external_warning": "Your data will be processed on external servers. This mode does not provide enhanced security protections."
+      },
+      "configuration": {
+        "description": "Enter provider URL, model and your API key to configure the new assistant. Your key will be stored securely.",
+        "custom_provider_description": "Configure your custom AI provider settings",
+        "model": {
+          "label": "Model"
+        },
+        "provider": {
+          "label": "Provider name",
+          "placeholder": "Custom OpenAI"
+        },
+        "url": {
+          "label": "Base URL",
+          "placeholder": "https://api.example.com/v1"
+        },
+        "api_key": {
+          "label": "API Key",
+          "placeholder": "sk-..."
+        },
+        "no_key": "Don't have an API key?",
+        "generate": "You can generate a new API key from your %{provider} account dashboard.",
+        "custom_provider": "custom provider",
+        "read_docs": "Read here"
+      }
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "next": "Next",
+      "create": "Create"
+    },
+    "configure_api_key_title": "Configure a new assistant",
+    "configure_api_key_description": "Enter provider URL, model and your API key to configure the new assistant. Your key will be stored securely.",
+    "from_drive": {
+      "actions": {
+        "cancel": "Cancel",
+        "add": "Add"
+      }
+    },
+    "success": "Assistant created successfully"
+  },
+  "assistant_edit": {
+    "title": "Edit Assistant",
+    "buttons": {
+      "cancel": "Cancel",
+      "next": "Next",
+      "edit": "Edit"
+    },
+    "configure_api_key_title": "Configure your assistant",
+    "success": "Assistant updated successfully"
+  },
+  "assistant_delete": {
+    "title": "Delete AI Assistant",
+    "content": "Are you sure you want to delete %{name}? This action cannot be undone and will permanently remove this assistant from your Twake.",
+    "buttons": {
+      "cancel": "Cancel",
+      "confirm": "Delete"
     }
   }
 }

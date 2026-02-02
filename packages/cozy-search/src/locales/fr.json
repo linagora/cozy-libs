@@ -16,6 +16,109 @@
       "find_file": "Rechercher un fichier",
       "reimbursements": "Vérifier mes remboursements",
       "reorganise_files": "Réorganiser mes fichiers"
+    },
+    "default_error": "Une erreur s'est produite, veuillez réessayer",
+    "hide": "Masquer",
+    "show": "Afficher"
+  },
+  "assistant_create": {
+    "title": "Créer un assistant",
+    "steps": {
+      "basic_info": {
+        "description": "Personnalisez l'identité et le comportement de votre assistant pour répondre à vos besoins spécifiques.",
+        "avatar": "Avatar (optionnel)",
+        "name": "Nom",
+        "name_placeholder": "Nommez votre assistant",
+        "instructions": "Instructions (optionnel)",
+        "instructions_placeholder": "Que fait cet assistant ? Comment doit-il se comporter ? Que doit-il éviter de faire ?",
+        "knowledge_base": "Base de connaissances (optionnel)",
+        "knowledge_base_placeholder": "Les conversations peuvent révéler une partie ou l'intégralité des fichiers qui ont été téléversés.",
+        "load_file": "Charger des fichiers",
+        "from_drive": "Depuis Drive",
+        "from_mail": "Depuis Mail"
+      },
+      "provider_selection": {
+        "description": "Choisissez le modèle d'IA qui correspond le mieux à vos besoins.",
+        "by": "par",
+        "openrag": {
+          "description": "Travaillez avec des fichiers Drive, le chat et les emails depuis votre Twake Workplace"
+        },
+        "google": {
+          "description": "Le modèle le plus performant de Google pour les tâches textuelles et multimodales"
+        },
+        "openai": {
+          "description": "Le modèle GPT le plus performant, idéal pour le raisonnement complexe et les tâches créatives"
+        },
+        "mistral_ai": {
+          "description": "Modèle efficace et puissant avec de très bonnes performances"
+        },
+        "anthropic": {
+          "description": "Assistant IA utile, inoffensif et honnête avec de solides capacités de raisonnement"
+        },
+        "meta": {
+          "description": "Grand modèle de langage open source pour diverses applications"
+        },
+        "custom": {
+          "name": "Ajouter un fournisseur personnalisé",
+          "description": "Configurez votre propre fournisseur d'IA"
+        },
+        "external_warning": "Vos données seront traitées sur des serveurs externes. Ce mode ne fournit pas de protections de sécurité renforcées."
+      },
+      "configuration": {
+        "description": "Saisissez l'URL du fournisseur, le modèle et votre clé API pour configurer le nouvel assistant. Votre clé sera stockée de manière sécurisée.",
+        "custom_provider_description": "Configurez les paramètres de votre fournisseur d'IA personnalisé",
+        "model": {
+          "label": "Modèle"
+        },
+        "provider": {
+          "label": "Nom du fournisseur",
+          "placeholder": "OpenAI personnalisé"
+        },
+        "url": {
+          "label": "URL de base",
+          "placeholder": "https://api.example.com/v1"
+        },
+        "api_key": {
+          "label": "Clé API",
+          "placeholder": "sk-..."
+        },
+        "no_key": "Vous n'avez pas de clé API\u00A0?",
+        "generate": "Vous pouvez générer une nouvelle clé API depuis le tableau de bord de votre compte %{provider}.",
+        "custom_provider": "fournisseur personnalisé",
+        "read_docs": "Lire ici"
+      }
+    },
+    "buttons": {
+      "cancel": "Annuler",
+      "next": "Suivant",
+      "create": "Créer"
+    },
+    "configure_api_key_title": "Configurer un nouvel assistant",
+    "configure_api_key_description": "Saisissez l'URL du fournisseur, le modèle et votre clé API pour configurer le nouvel assistant. Votre clé sera stockée de manière sécurisée.",
+    "from_drive": {
+      "actions": {
+        "cancel": "Annuler",
+        "add": "Ajouter"
+      }
+    },
+    "success": "Assistant créé avec succès"
+  },
+  "assistant_edit": {
+    "title": "Modifier l'assistant",
+    "buttons": {
+      "cancel": "Annuler",
+      "next": "Suivant",
+      "edit": "Modifier"
+    },
+    "configure_api_key_title": "Configurer votre assistant",
+    "success": "Assistant modifié avec succès"
+  },
+  "assistant_delete": {
+    "title": "Supprimer l'assistant",
+    "content": "Êtes-vous sûr de vouloir supprimer %{name}\u00A0? Cette action ne peut pas être annulée et supprimera définitivement cet assistant de votre Twake.",
+    "buttons": {
+      "cancel": "Annuler",
+      "confirm": "Supprimer"
     }
   }
 }
