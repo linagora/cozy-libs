@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.5.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.4.1...cozy-ui-plus@4.5.0) (2026-02-02)
+
+### Features
+
+- **cozy-ui-plus:** Add `disable` prop on ContactCell ([2249927](https://github.com/cozy/cozy-libs/commit/22499270ab1b110cb4e01cf83297fd69d33f5d3b))
+
 ## [4.4.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.4.0...cozy-ui-plus@4.4.1) (2026-01-29)
 
 **Note:** Version bump only for package cozy-ui-plus
