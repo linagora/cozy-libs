@@ -28,7 +28,8 @@ const PanelContent = () => {
 
   const panelBlocks = getPanelBlocks({
     panelBlocksSpecs: getPanelBlocksSpecs(isPublic, componentsProps?.panel),
-    file
+    file,
+    t
   })
 
   const closePanel = () => {
