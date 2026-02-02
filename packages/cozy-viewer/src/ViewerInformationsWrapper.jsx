@@ -17,7 +17,8 @@ const ViewerInformationsWrapper = ({
   disableFooter,
   validForPanel,
   toolbarRef,
-  children
+  children,
+  currentIndex
 }) => {
   const theme = useTheme()
   const { isLight } = useCozyTheme()
@@ -35,10 +36,16 @@ const ViewerInformationsWrapper = ({
       setIsOpenAiAssistant(true)
     }
 
-    if (location?.state?.showDetailPanel) {
-      setIsOpenFileViewerPanel(true)
+    if (location?.state?.triggerDetailPanelTime !== undefined) {
+      setIsOpenFileViewerPanel(prev => !prev)
     }
   }, [location, setIsOpenAiAssistant, setIsOpenFileViewerPanel])
+
+  useEffect(() => {
+    if (!isOpenAiAssistant) {
+      setIsOpenFileViewerPanel(true)
+    }
+  }, [isOpenAiAssistant, currentIndex, setIsOpenFileViewerPanel])
 
   useSetFlagshipUI(
     {
@@ -71,7 +78,7 @@ const ViewerInformationsWrapper = ({
           )}
         </>
       )}
-      {isOpenFileViewerPanel && (
+      {isOpenFileViewerPanel && !isOpenAiAssistant && (
         <>
           {!disableFooter && (
             <Footer>
