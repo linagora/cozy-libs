@@ -27,6 +27,7 @@
     "openWith": "Mở bằng...",
     "openInOnlyOffice": "Mở bằng Only Office",
     "panel": {
+      "collapse": "Thu gọn",
       "header": "Chi tiết",
       "summary": "Tóm tắt",
       "edit_summary": "Chỉnh sửa tóm tắt",
