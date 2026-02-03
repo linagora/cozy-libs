@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.5.0...cozy-ui-plus@4.5.1) (2026-02-03)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Fix ContactName not bolding multi-word family names ([e8015c0](https://github.com/cozy/cozy-libs/commit/e8015c05bda2272b85bf96cb1d560251097fef07))
+
 # [4.5.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.4.1...cozy-ui-plus@4.5.0) (2026-02-02)
 
 ### Features
