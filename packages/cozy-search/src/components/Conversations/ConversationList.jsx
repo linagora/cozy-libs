@@ -99,7 +99,7 @@ const ConversationList = () => {
             : styles['conversationList--hidden']
         }`}
       >
-        <div className="u-h-3 u-mb-half" />
+        <div className="u-h-4 u-mb-half" />
 
         <div className="u-p-1">
           <Button
