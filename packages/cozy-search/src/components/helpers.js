@@ -20,7 +20,7 @@ export const pushMessagesIdInState = (id, res, setState) => {
 }
 
 export const isMessageForThisConversation = (res, messagesId) =>
-  messagesId.includes(res._id)
+  messagesId.length === 0 || messagesId.includes(res._id)
 
 export const isAssistantEnabled = () => flag('cozy.assistant.enabled')
 
