@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.7.0...rsbuild-config-cozy-app@0.7.1) (2026-02-05)
+
+### Bug Fixes
+
+- Fix rsbuild HMR ([a89d62c](https://github.com/cozy/cozy-libs/commit/a89d62c5fcca7cec8bc4339744fd20921535b1e8))
+
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.6.0...rsbuild-config-cozy-app@0.7.0) (2025-11-13)
 
 ### Features
