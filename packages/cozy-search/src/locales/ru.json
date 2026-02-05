@@ -17,9 +17,25 @@
       "reimbursements": "Проверить возмещения расходов",
       "reorganise_files": "Реорганизовать мои файлы"
     },
+    "sidebar": {
+      "create_new": "Новый чат",
+      "conversation": {
+        "actions": {
+          "delete": "Удалить",
+          "rename": "Переименовать",
+          "share": "Поделиться"
+        }
+      }
+    },
     "default_error": "Произошла ошибка, попробуйте снова",
     "hide": "Скрыть",
-    "show": "Показать"
+    "show": "Показать",
+    "search_conversation": {
+      "placeholder": "Поиск в переписках...",
+      "new_chat": "Новый чат",
+      "recent": "Недавние переписки",
+      "older": "Старые"
+    }
   },
   "assistant_create": {
     "title": "Создать ассистента",

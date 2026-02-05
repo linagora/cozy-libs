@@ -45,3 +45,38 @@ export const sanitizeChatContent = content => {
       .replace(/\s?\[doc_\d+\]/g, '')
   )
 }
+
+export const formatConversationDate = (dateString, t, lang) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  const now = new Date()
+  const yesterday = new Date(now)
+  yesterday.setDate(yesterday.getDate() - 1)
+
+  const isToday =
+    date.getDate() === now.getDate() &&
+    date.getMonth() === now.getMonth() &&
+    date.getFullYear() === now.getFullYear()
+
+  const isYesterday =
+    date.getDate() === yesterday.getDate() &&
+    date.getMonth() === yesterday.getMonth() &&
+    date.getFullYear() === yesterday.getFullYear()
+
+  if (isToday || isYesterday) {
+    const timeStr = date.toLocaleTimeString(lang, {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    })
+    return `${
+      isToday ? t('assistant.time.today') : t('assistant.time.yesterday')
+    }, ${timeStr}`
+  }
+
+  return date.toLocaleDateString(lang, {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric'
+  })
+}
