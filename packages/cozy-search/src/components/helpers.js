@@ -45,3 +45,58 @@ export const sanitizeChatContent = content => {
       .replace(/\s?\[doc_\d+\]/g, '')
   )
 }
+
+export const formatConversationDate = (dateString, t, lang) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+
+  if (isNaN(date.getTime())) return ''
+
+  const now = new Date()
+  const yesterday = new Date(now)
+  yesterday.setDate(yesterday.getDate() - 1)
+
+  const isToday =
+    date.getDate() === now.getDate() &&
+    date.getMonth() === now.getMonth() &&
+    date.getFullYear() === now.getFullYear()
+
+  const isYesterday =
+    date.getDate() === yesterday.getDate() &&
+    date.getMonth() === yesterday.getMonth() &&
+    date.getFullYear() === yesterday.getFullYear()
+
+  if (isToday || isYesterday) {
+    const timeStr = date.toLocaleTimeString(lang, {
+      hour: 'numeric',
+      minute: '2-digit'
+    })
+    return `${
+      isToday ? t('assistant.time.today') : t('assistant.time.yesterday')
+    }, ${timeStr}`
+  }
+
+  return date.toLocaleDateString(lang, {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric'
+  })
+}
+
+/**
+ * Get name of the conversation
+ * Since we don't have rule for conversation's name
+ * So temporary we get the last question from user as name of the conversation
+ */
+export const getNameOfConversation = conversation => {
+  return conversation.messages?.[conversation.messages?.length - 2]?.content
+}
+
+/**
+ * Get description of the conversation
+ * Since we don't have rule for description of the conversation
+ * So temporary we get the last answer from assistant as description of the conversation
+ */
+export const getDescriptionOfConversation = conversation => {
+  return conversation.messages?.[conversation.messages.length - 1]?.content
+}

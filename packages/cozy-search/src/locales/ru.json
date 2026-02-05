@@ -17,9 +17,30 @@
       "reimbursements": "Проверить возмещения расходов",
       "reorganise_files": "Реорганизовать мои файлы"
     },
+    "sidebar": {
+      "create_new": "Новый чат",
+      "recent_chats": "Недавние переписки",
+      "conversation": {
+        "actions": {
+          "delete": "Удалить",
+          "rename": "Переименовать",
+          "share": "Поделиться"
+        }
+      }
+    },
+    "time": {
+      "today": "Сегодня",
+      "yesterday": "Вчера"
+    },
     "default_error": "Произошла ошибка, попробуйте снова",
     "hide": "Скрыть",
     "show": "Показать",
+    "search_conversation": {
+      "placeholder": "Поиск в переписках...",
+      "new_chat": "Новый чат",
+      "recent": "Недавние переписки",
+      "older": "Старые"
+    },
     "actions": {
       "copy": "Копировать",
       "copied": "Копировано в буфер обмена",
