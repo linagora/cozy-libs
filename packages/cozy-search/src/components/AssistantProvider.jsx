@@ -35,6 +35,8 @@ const AssistantProvider = ({ children }) => {
   const [selectedAssistantId, setSelectedAssistantId] = useState(
     DEFAULT_ASSISTANT.id
   )
+  const [isOpenSearchConversation, setIsOpenSearchConversation] =
+    useState(false)
 
   useRealtime(
     client,
@@ -130,6 +132,7 @@ const AssistantProvider = ({ children }) => {
       isOpenEditAssistant,
       assistantIdInAction,
       selectedAssistantId,
+      isOpenSearchConversation,
       setAssistantIdInAction,
       setIsOpenDeleteAssistant,
       setAssistantState,
@@ -137,7 +140,8 @@ const AssistantProvider = ({ children }) => {
       onAssistantExecute,
       setIsOpenCreateAssistant,
       setIsOpenEditAssistant,
-      setSelectedAssistantId
+      setSelectedAssistantId,
+      setIsOpenSearchConversation
     }),
     [
       assistantState,
@@ -146,6 +150,8 @@ const AssistantProvider = ({ children }) => {
       isOpenEditAssistant,
       assistantIdInAction,
       selectedAssistantId,
+      isOpenSearchConversation,
+      setIsOpenSearchConversation,
       clearAssistant,
       onAssistantExecute
     ]

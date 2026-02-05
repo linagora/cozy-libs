@@ -24,9 +24,30 @@
       "edit": "Modifier",
       "edited": "Message enregistré"
     },
+    "sidebar": {
+      "create_new": "Nouveau chat",
+      "recent_chats": "Conversations récentes",
+      "conversation": {
+        "actions": {
+          "delete": "Supprimer",
+          "rename": "Renommer",
+          "share": "Partager"
+        }
+      }
+    },
+    "time": {
+      "today": "Aujourd'hui",
+      "yesterday": "Hier"
+    },
     "default_error": "Une erreur s'est produite, veuillez réessayer",
     "hide": "Masquer",
     "show": "Afficher",
+    "search_conversation": {
+      "placeholder": "Rechercher dans vos conversations...",
+      "new_chat": "Nouvelle conversation",
+      "recent": "Conversations récentes",
+      "older": "Plus ancien"
+    },
     "message": {
       "welcome": "Comment puis-je vous aider aujourd'hui ?",
       "running": "Assistant en cours..."

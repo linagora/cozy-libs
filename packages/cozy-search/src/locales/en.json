@@ -24,6 +24,17 @@
       "edit": "Edit",
       "edited": "Message saved"
     },
+    "sidebar": {
+      "create_new": "New Chat",
+      "recent_chats": "Recent Chats",
+      "conversation": {
+        "actions": {
+          "delete": "Delete",
+          "rename": "Rename",
+          "share": "Share"
+        }
+      }
+    },
     "time": {
       "today": "Today",
       "yesterday": "Yesterday"
@@ -31,6 +42,12 @@
     "default_error": "There was an error, please try again",
     "hide": "Hide",
     "show": "Show",
+    "search_conversation": {
+      "placeholder": "Search in your conversations...",
+      "new_chat": "New Chat",
+      "recent": "Recent Conversations",
+      "older": "Older"
+    },
     "message": {
       "welcome": "How can I help you today?",
       "running": "Assistant is running..."

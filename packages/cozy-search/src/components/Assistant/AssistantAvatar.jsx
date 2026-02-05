@@ -5,7 +5,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import AssistantIcon from 'cozy-ui/transpiled/react/Icons/Assistant'
 import AssistantColorIcon from 'cozy-ui/transpiled/react/Icons/AssistantColor'
 
-import styles from '../Conversations/styles.styl'
+import styles from './styles.styl'
 import { DEFAULT_ASSISTANT } from '../constants'
 
 const AssistantAvatar = ({ assistant, isSmall }) => {
