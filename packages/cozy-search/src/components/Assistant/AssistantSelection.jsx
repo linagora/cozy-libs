@@ -53,13 +53,15 @@ const AssistantSelection = ({ className }) => {
     <>
       <div className={className} ref={buttonRef}>
         <Button
-          className={styles['trigger-button']}
+          className={cx('u-pv-half', styles['trigger-button'])}
           onClick={handleClick}
           variant="outlined"
           size="small"
         >
-          <AssistantAvatar assistant={selectedAssistant} />
-          <Typography variant="body1">{selectedAssistant.name}</Typography>
+          <AssistantAvatar isSmall={true} assistant={selectedAssistant} />
+          <Typography className="u-fz-small">
+            {selectedAssistant.name}
+          </Typography>
         </Button>
       </div>
       {open && (
