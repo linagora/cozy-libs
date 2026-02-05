@@ -1,7 +1,7 @@
+import cx from 'classnames'
 import React from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
-import flag from 'cozy-flags'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
@@ -10,13 +10,12 @@ import AssistantProvider, { useAssistant } from '../AssistantProvider'
 import CreateAssistantDialog from './CreateAssistantDialog'
 import DeleteAssistantDialog from './DeleteAssistantDialog'
 import EditAssistantDialog from './EditAssistantDialog'
-import AssistantSelection from '../Conversations/AssistantSelection'
-import Conversation from '../Conversations/Conversation'
-import ConversationBar from '../Conversations/ConversationBar'
+import AssistantContainer from '../Assistant/AssistantContainer'
+import CozyAssistantRuntimeProvider from '../CozyAssistantRuntimeProvider'
+import styles from '../styles.styl'
 
 const AssistantDialog = () => {
   const {
-    assistantState,
     isOpenCreateAssistant,
     setIsOpenCreateAssistant,
     isOpenEditAssistant,
@@ -27,8 +26,6 @@ const AssistantDialog = () => {
   const { isMobile } = useBreakpoints()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
-
-  const { conversationId } = useParams()
 
   const onClose = () => {
     try {
@@ -48,20 +45,33 @@ const AssistantDialog = () => {
       open
       fullScreen
       size="full"
+      disableGutters={true}
       componentsProps={{
         dialogTitle: { className: isMobile ? 'u-ph-0' : '' },
-        dialogActions: { className: isMobile ? 'u-mh-half' : 'u-mb-2' },
-        divider: { className: 'u-dn' }
+        dialogActions: { className: isMobile ? 'u-mh-half' : 'u-m-0' },
+        divider: { className: 'u-dn' },
+        dialogContent: {
+          style: {
+            display: 'flex',
+            flexDirection: 'column',
+            flexGrow: 1,
+            padding: 0
+          }
+        }
       }}
-      title={isMobile ? ' ' : ' '}
-      content={<Conversation id={conversationId} />}
+      title={isMobile ? ' ' : ' '}
+      content={
+        <div
+          className={cx(
+            'u-w-100 u-flex u-flex-column u-ov-hidden',
+            styles['assistantWrapper']
+          )}
+        >
+          <AssistantContainer />
+        </div>
+      }
       actions={
         <div className="u-w-100">
-          <ConversationBar assistantStatus={assistantState.status} />
-          {flag('cozy.create-assistant.enabled') && (
-            <AssistantSelection className="u-w-100 u-maw-7 u-mh-auto u-mt-1" />
-          )}
-
           {isOpenCreateAssistant && (
             <CreateAssistantDialog
               open={isOpenCreateAssistant}
@@ -92,9 +102,11 @@ const AssistantDialog = () => {
 const AssistantDialogWithProviders = () => {
   return (
     <CozyTheme variant="normal">
-      <AssistantProvider>
-        <AssistantDialog />
-      </AssistantProvider>
+      <CozyAssistantRuntimeProvider>
+        <AssistantProvider>
+          <AssistantDialog />
+        </AssistantProvider>
+      </CozyAssistantRuntimeProvider>
     </CozyTheme>
   )
 }

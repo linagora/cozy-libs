@@ -17,9 +17,24 @@
       "reimbursements": "Check my repayments",
       "reorganise_files": "Reorganise my files"
     },
+    "actions": {
+      "copy": "Copy",
+      "copied": "Copied to clipboard",
+      "reload": "Regenerate response",
+      "edit": "Edit",
+      "edited": "Message saved"
+    },
+    "time": {
+      "today": "Today",
+      "yesterday": "Yesterday"
+    },
     "default_error": "There was an error, please try again",
     "hide": "Hide",
-    "show": "Show"
+    "show": "Show",
+    "message": {
+      "welcome": "How can I help you today?",
+      "running": "Assistant is running..."
+    }
   },
   "assistant_create": {
     "title": "Create Assistant",
