@@ -75,3 +75,20 @@
   word-wrap break-word
   word-break break-word
   hyphens auto
+
+.conversation-list-item
+  &:hover
+    .conversation-list-item-action
+      display block !important
+  &:focus-within
+    .conversation-list-item-action
+      display block !important
+
+  .conversation-list-item-action
+    display none !important
+    position absolute
+    top 6px
+    right 12px
+
+  &--selected
+    background var(--grey100) !important
