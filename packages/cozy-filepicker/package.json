@@ -1,0 +1,86 @@
+{
+  "name": "cozy-filepicker",
+  "version": "28.3.3",
+  "description": "Provides filepicker for React applications.",
+  "main": "dist/index.js",
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-filepicker/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "build": "env BABEL_ENV=transpilation babel src -d dist --copy-files --verbose",
+    "postbuild": "find dist -name '*.snap' -exec rm {} \\;",
+    "build:doc:react": "(cd ../.. && TARGET=cozy-filepicker yarn build:doc:react)",
+    "deploy:doc": "(cd ../.. && yarn deploy:doc)",
+    "prepublishOnly": "yarn build",
+    "test": "env NODE_ENV=test jest",
+    "lint": "cd ../.. && yarn eslint --ext js,jsx packages/cozy-filepicker",
+    "start": "yarn build --watch",
+    "watch": "yarn run start",
+    "watch:doc:react": "(cd ../.. && TARGET=cozy-filepicker yarn watch:doc:react)",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@cozy/minilog": "^1.0.0",
+    "classnames": "^2.5.1",
+    "cozy-device-helper": "^4.0.2",
+    "cozy-doctypes": "^1.98.3",
+    "date-fns": "2.30.0",
+    "lodash": "^4.17.21",
+    "react-autosuggest": "^10.1.0",
+    "react-tooltip": "^3.11.1",
+    "snarkdown": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.16.8",
+    "@babel/core": "7.16.12",
+    "@storybook/addon-essentials": "7.6.0",
+    "@storybook/addon-interactions": "7.6.0",
+    "@storybook/addon-links": "7.6.0",
+    "@storybook/blocks": "7.6.0",
+    "@storybook/react": "7.6.0",
+    "@storybook/react-webpack5": "7.6.0",
+    "@storybook/testing-library": "0.2.2",
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "10.4.9",
+    "@testing-library/react-hooks": "8.0.1",
+    "babel-jest": "26.6.3",
+    "babel-plugin-css-modules-transform": "1.6.2",
+    "babel-plugin-inline-react-svg": "1.1.2",
+    "cozy-client": "^60.19.0",
+    "cozy-device-helper": "^3.7.1",
+    "cozy-intent": "^2.30.2",
+    "cozy-minilog": "^3.10.0",
+    "cozy-ui": "^135.0.0",
+    "cozy-ui-plus": "^4.5.1",
+    "jest": "26.6.3",
+    "jest-environment-jsdom": "26.6.2",
+    "react": "16.12.0",
+    "react-dom": "16.13.0",
+    "react-router": "^5.0.1",
+    "storybook": "7.6.0",
+    "twake-i18n": "^0.3.1"
+  },
+  "peerDependencies": {
+    "cozy-client": ">=60.19.0",
+    "cozy-device-helper": ">=3.7.1",
+    "cozy-intent": ">=2.29.1",
+    "cozy-minilog": ">=3.9.1",
+    "cozy-ui": ">=135.0.0",
+    "cozy-ui-plus": ">=1.2.0",
+    "prop-types": ">=15.7.2",
+    "react": ">=16.12.0",
+    "react-router": ">=5.0.1",
+    "twake-i18n": ">=0.3.0"
+  },
+  "sideEffects": [
+    "*.css"
+  ]
+}

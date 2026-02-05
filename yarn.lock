@@ -17100,6 +17100,60 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"cozy-filepicker@workspace:packages/cozy-filepicker":
+  version: 0.0.0-use.local
+  resolution: "cozy-filepicker@workspace:packages/cozy-filepicker"
+  dependencies:
+    "@babel/cli": "npm:7.16.8"
+    "@babel/core": "npm:7.16.12"
+    "@cozy/minilog": "npm:^1.0.0"
+    "@storybook/addon-essentials": "npm:7.6.0"
+    "@storybook/addon-interactions": "npm:7.6.0"
+    "@storybook/addon-links": "npm:7.6.0"
+    "@storybook/blocks": "npm:7.6.0"
+    "@storybook/react": "npm:7.6.0"
+    "@storybook/react-webpack5": "npm:7.6.0"
+    "@storybook/testing-library": "npm:0.2.2"
+    "@testing-library/jest-dom": "npm:5.16.4"
+    "@testing-library/react": "npm:10.4.9"
+    "@testing-library/react-hooks": "npm:8.0.1"
+    babel-jest: "npm:26.6.3"
+    babel-plugin-css-modules-transform: "npm:1.6.2"
+    babel-plugin-inline-react-svg: "npm:1.1.2"
+    classnames: "npm:^2.5.1"
+    cozy-client: "npm:^60.19.0"
+    cozy-device-helper: "npm:^3.7.1"
+    cozy-doctypes: "npm:^1.98.3"
+    cozy-intent: "npm:^2.30.2"
+    cozy-minilog: "npm:^3.10.0"
+    cozy-ui: "npm:^135.0.0"
+    cozy-ui-plus: "npm:^4.5.1"
+    date-fns: "npm:2.30.0"
+    jest: "npm:26.6.3"
+    jest-environment-jsdom: "npm:26.6.2"
+    lodash: "npm:^4.17.21"
+    react: "npm:16.12.0"
+    react-autosuggest: "npm:^10.1.0"
+    react-dom: "npm:16.13.0"
+    react-router: "npm:^5.0.1"
+    react-tooltip: "npm:^3.11.1"
+    snarkdown: "npm:^2.0.0"
+    storybook: "npm:7.6.0"
+    twake-i18n: "npm:^0.3.1"
+  peerDependencies:
+    cozy-client: ">=60.19.0"
+    cozy-device-helper: ">=3.7.1"
+    cozy-intent: ">=2.29.1"
+    cozy-minilog: ">=3.9.1"
+    cozy-ui: ">=135.0.0"
+    cozy-ui-plus: ">=1.2.0"
+    prop-types: ">=15.7.2"
+    react: ">=16.12.0"
+    react-router: ">=5.0.1"
+    twake-i18n: ">=0.3.0"
+  languageName: unknown
+  linkType: soft
+
 "cozy-flags@npm:^2.5.0":
   version: 2.12.0
   resolution: "cozy-flags@npm:2.12.0"
