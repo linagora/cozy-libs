@@ -24,9 +24,25 @@
       "edit": "Modifier",
       "edited": "Message enregistré"
     },
+    "sidebar": {
+      "create_new": "Nouveau chat",
+      "conversation": {
+        "actions": {
+          "delete": "Supprimer",
+          "rename": "Renommer",
+          "share": "Partager"
+        }
+      }
+    },
     "default_error": "Une erreur s'est produite, veuillez réessayer",
     "hide": "Masquer",
-    "show": "Afficher"
+    "show": "Afficher",
+    "search_conversation": {
+      "placeholder": "Rechercher dans vos conversations...",
+      "new_chat": "Nouvelle conversation",
+      "recent": "Conversations récentes",
+      "older": "Plus ancien"
+    }
   },
   "assistant_create": {
     "title": "Créer un assistant",

@@ -24,9 +24,29 @@
       "edit": "Chỉnh sửa",
       "edited": "Đã lưu tin nhắn"
     },
+    "sidebar": {
+      "create_new": "Cuộc trò chuyện mới",
+      "conversation": {
+        "actions": {
+          "delete": "Xóa",
+          "rename": "Đổi tên",
+          "share": "Chia sẻ"
+        }
+      }
+    },
+    "time": {
+      "today": "Hôm nay",
+      "yesterday": "Hôm qua"
+    },
     "default_error": "Đã xảy ra lỗi, vui lòng thử lại",
     "hide": "Ẩn",
-    "show": "Hiện"
+    "show": "Hiện",
+    "search_conversation": {
+      "placeholder": "Tìm kiếm trong các cuộc trò chuyện...",
+      "new_chat": "Cuộc trò chuyện mới",
+      "recent": "Cuộc trò chuyện gần đây",
+      "older": "Cũ hơn"
+    }
   },
   "assistant_create": {
     "title": "Tạo trợ lý",
