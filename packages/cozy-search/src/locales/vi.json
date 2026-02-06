@@ -51,6 +51,33 @@
       "new_chat": "Cuộc trò chuyện mới",
       "recent": "Cuộc trò chuyện gần đây",
       "older": "Cũ hơn"
+    },
+    "twake_knowledges": {
+      "chat": "Chat",
+      "drive": "Drive",
+      "mail": "Email",
+      "title_drive": "Chọn thư mục Drive",
+      "title_mail": "Chọn nguồn Email",
+      "title_chat": "Chọn nguồn Trò chuyện",
+      "title_default": "Chọn nguồn",
+      "desc_drive": "Các mục đã chọn sẽ được sử dụng để trả lời câu hỏi của bạn.",
+      "desc_mail": "Các email đã chọn sẽ được sử dụng để trả lời câu hỏi của bạn.",
+      "desc_chat": "Các tin nhắn đã chọn sẽ được sử dụng để trả lời câu hỏi của bạn.",
+      "search_placeholder": "Tìm kiếm",
+      "items_selected": "%{smart_count} mục đã chọn |||| %{smart_count} mục đã chọn",
+      "clear_all": "Xóa tất cả",
+      "cancel": "Hủy",
+      "select_folders": "Chọn thư mục",
+      "select_emails": "Chọn email",
+      "select_messages": "Chọn tin nhắn",
+      "my_drive": "Drive của tôi",
+      "shared_with_me": "Được chia sẻ với tôi",
+      "inbox": "Hộp thư đến",
+      "starred": "Có gắn sao",
+      "sent": "Đã gửi",
+      "draft": "Nháp",
+      "outbox": "Hộp thư đi",
+      "spam": "Thư rác"
     }
   },
   "assistant_create": {

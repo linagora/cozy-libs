@@ -34,6 +34,8 @@ const ConversationBar = ({
   })
 
   const handleSend = () => {
+    if (isEmpty) return
+
     onSend()
     if (inputRef.current) {
       inputRef.current.style.height = 'auto'

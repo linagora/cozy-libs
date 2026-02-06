@@ -37,6 +37,12 @@ const AssistantProvider = ({ children }) => {
   )
   const [isOpenSearchConversation, setIsOpenSearchConversation] =
     useState(false)
+  const [selectedTwakeKnowledge, setSelectedTwakeKnowledge] = useState({
+    drive: [],
+    mail: [],
+    chat: []
+  })
+  const [openedKnowledgePanel, setOpenedKnowledgePanel] = useState(null)
 
   useRealtime(
     client,
@@ -133,6 +139,8 @@ const AssistantProvider = ({ children }) => {
       assistantIdInAction,
       selectedAssistantId,
       isOpenSearchConversation,
+      openedKnowledgePanel,
+      selectedTwakeKnowledge,
       setAssistantIdInAction,
       setIsOpenDeleteAssistant,
       setAssistantState,
@@ -141,7 +149,9 @@ const AssistantProvider = ({ children }) => {
       setIsOpenCreateAssistant,
       setIsOpenEditAssistant,
       setSelectedAssistantId,
-      setIsOpenSearchConversation
+      setIsOpenSearchConversation,
+      setOpenedKnowledgePanel,
+      setSelectedTwakeKnowledge
     }),
     [
       assistantState,
@@ -151,7 +161,8 @@ const AssistantProvider = ({ children }) => {
       assistantIdInAction,
       selectedAssistantId,
       isOpenSearchConversation,
-      setIsOpenSearchConversation,
+      openedKnowledgePanel,
+      selectedTwakeKnowledge,
       clearAssistant,
       onAssistantExecute
     ]
