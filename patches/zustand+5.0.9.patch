@@ -1,0 +1,23 @@
+diff --git a/node_modules/zustand/react.js b/node_modules/zustand/react.js
+index 1234567..abcdefg 100644
+--- a/node_modules/zustand/react.js
++++ b/node_modules/zustand/react.js
+@@ -1,14 +1,15 @@
+ 'use strict';
+
+ var React = require('react');
++var useSyncExternalStoreShim = require('use-sync-external-store/shim');
+ var vanilla = require('zustand/vanilla');
+
+ const identity = (arg) => arg;
+ function useStore(api, selector = identity) {
+-  const slice = React.useSyncExternalStore(
++  const slice = useSyncExternalStoreShim.useSyncExternalStore(
+     api.subscribe,
+     React.useCallback(() => selector(api.getState()), [api, selector]),
+     React.useCallback(() => selector(api.getInitialState()), [api, selector])
+   );
+-  React.useDebugValue(slice);
++  // React.useDebugValue(slice); // Commented out for React 16 compatibility
+   return slice;
+ }
