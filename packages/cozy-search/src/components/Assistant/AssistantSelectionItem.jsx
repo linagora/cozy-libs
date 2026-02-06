@@ -8,8 +8,8 @@ import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import styles from './styles.styl'
 import AssistantAvatar from '../Assistant/AssistantAvatar'
-import styles from '../Conversations/styles.styl'
 
 const AssistantSelectionItem = ({
   assistant,

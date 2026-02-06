@@ -8,16 +8,20 @@ import AssistantColorIcon from 'cozy-ui/transpiled/react/Icons/AssistantColor'
 import styles from './styles.styl'
 import { DEFAULT_ASSISTANT } from '../constants'
 
-const AssistantAvatar = ({ assistant, isSmall }) => {
+const AssistantAvatar = ({ assistant, isSmall, className }) => {
   if (!assistant) return
 
   if (assistant.id !== DEFAULT_ASSISTANT.id && !assistant.icon) {
     return (
       <Icon
         icon={AssistantIcon}
-        className={cx(styles['assistant-icon'], {
-          [styles['assistant-icon--small']]: isSmall
-        })}
+        className={cx(
+          styles['assistant-icon'],
+          {
+            [styles['assistant-icon--small']]: isSmall
+          },
+          className
+        )}
       />
     )
   }
@@ -25,17 +29,25 @@ const AssistantAvatar = ({ assistant, isSmall }) => {
   return assistant.id === DEFAULT_ASSISTANT.id ? (
     <Icon
       icon={AssistantColorIcon}
-      className={cx(styles['assistant-icon'], {
-        [styles['assistant-icon--small']]: isSmall
-      })}
+      className={cx(
+        styles['assistant-icon'],
+        {
+          [styles['assistant-icon--small']]: isSmall
+        },
+        className
+      )}
     />
   ) : (
     <img
       src={assistant.icon}
       alt={assistant.name}
-      className={cx(styles['assistant-icon'], {
-        [styles['assistant-icon--small']]: isSmall
-      })}
+      className={cx(
+        styles['assistant-icon'],
+        {
+          [styles['assistant-icon--small']]: isSmall
+        },
+        className
+      )}
     />
   )
 }
