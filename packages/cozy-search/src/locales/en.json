@@ -51,6 +51,33 @@
     "message": {
       "welcome": "How can I help you today?",
       "running": "Assistant is running..."
+    },
+    "twake_knowledges": {
+      "chat": "Chat",
+      "drive": "Drive",
+      "mail": "Mail",
+      "title_drive": "Select Drive folders",
+      "title_mail": "Select Mail sources",
+      "title_chat": "Select Chat sources",
+      "title_default": "Select sources",
+      "desc_drive": "Selected items will be used to answer your questions.",
+      "desc_mail": "Selected emails will be used to answer your questions.",
+      "desc_chat": "Selected messages will be used to answer your questions.",
+      "search_placeholder": "Search",
+      "items_selected": "%{smart_count} item selected |||| %{smart_count} items selected",
+      "clear_all": "Clear all",
+      "cancel": "Cancel",
+      "select_folders": "Select folders",
+      "select_emails": "Select emails",
+      "select_messages": "Select messages",
+      "my_drive": "My Drive",
+      "shared_with_me": "Shared with me",
+      "inbox": "Inbox",
+      "starred": "Starred",
+      "sent": "Sent",
+      "draft": "Draft",
+      "outbox": "Outbox",
+      "spam": "Spam"
     }
   },
   "assistant_create": {
