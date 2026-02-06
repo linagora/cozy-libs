@@ -11,11 +11,14 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
 import AssistantSelection from '../Assistant/AssistantSelection'
+import { useAssistant } from '../AssistantProvider'
+import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
 
 const ConversationComposer = () => {
   const { isMobile } = useBreakpoints()
   const composerRuntime = useComposerRuntime()
   const isRunning = useThread(state => state.isRunning)
+  const { setOpenedKnowledgePanel } = useAssistant()
 
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
@@ -55,9 +58,12 @@ const ConversationComposer = () => {
         onSend={handleSend}
       />
 
-      {flag('cozy.create-assistant.enabled') && (
-        <AssistantSelection className="u-w-100 u-maw-7 u-mt-1" />
-      )}
+      <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">
+        {flag('cozy.create-assistant.enabled') && <AssistantSelection />}
+        <TwakeKnowledgeSelector
+          onSelectTwakeKnowledge={setOpenedKnowledgePanel}
+        />
+      </div>
     </ComposerPrimitive.Root>
   )
 }

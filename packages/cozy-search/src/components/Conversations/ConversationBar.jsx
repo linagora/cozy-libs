@@ -38,12 +38,20 @@ const ConversationBar = ({
   })
 
   const handleSend = () => {
+    if (isEmpty) return
+
     onSend()
     onAssistantExecute({ value, conversationId })
     if (inputRef.current) {
       inputRef.current.style.height = 'auto'
       inputRef.current.value = '' // Force clear the input
     }
+  }
+
+  const handleKeyDown = () => {
+    if (isEmpty) return
+
+    onKeyDown()
   }
 
   return (
@@ -90,7 +98,7 @@ const ConversationBar = ({
                 />
               </IconButton>
             ),
-            onKeyDown
+            onKeyDown: () => handleKeyDown()
           }
         }}
       />

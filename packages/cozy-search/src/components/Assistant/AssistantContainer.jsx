@@ -7,9 +7,14 @@ import { useAssistant } from '../AssistantProvider'
 import Conversation from '../Conversations/Conversation'
 import SearchConversation from '../Search/SearchConversation'
 import Sidebar from '../Sidebar'
+import TwakeKnowledgePanel from '../TwakeKnowledges/TwakeKnowledgePanel'
 
 const AssistantContainer = () => {
-  const { isOpenSearchConversation } = useAssistant()
+  const {
+    isOpenSearchConversation,
+    openedKnowledgePanel,
+    setOpenedKnowledgePanel
+  } = useAssistant()
 
   return (
     <div className="u-flex u-ov-hidden u-h-100">
@@ -22,6 +27,14 @@ const AssistantContainer = () => {
       <div className="u-flex-auto u-flex u-flex-column u-pb-1 u-ov-hidden">
         {isOpenSearchConversation ? <SearchConversation /> : <Conversation />}
       </div>
+
+      {openedKnowledgePanel && (
+        <div className="u-ml-half u-h-100 u-maw-7">
+          <TwakeKnowledgePanel
+            onClose={() => setOpenedKnowledgePanel(undefined)}
+          />
+        </div>
+      )}
     </div>
   )
 }

@@ -42,6 +42,33 @@
       "new_chat": "Nouvelle conversation",
       "recent": "Conversations récentes",
       "older": "Plus ancien"
+    },
+    "twake_knowledges": {
+      "chat": "Chat",
+      "drive": "Drive",
+      "mail": "Email",
+      "title_drive": "Sélectionner des dossiers Drive",
+      "title_mail": "Sélectionner des sources d'email",
+      "title_chat": "Sélectionner des sources de discussion",
+      "title_default": "Sélectionner des sources",
+      "desc_drive": "Les éléments sélectionnés seront utilisés pour répondre à vos questions.",
+      "desc_mail": "Les emails sélectionnés seront utilisés pour répondre à vos questions.",
+      "desc_chat": "Les messages sélectionnés seront utilisés pour répondre à vos questions.",
+      "search_placeholder": "Rechercher",
+      "items_selected": "%{smart_count} élément sélectionné |||| %{smart_count} éléments sélectionnés",
+      "clear_all": "Tout effacer",
+      "cancel": "Annuler",
+      "select_folders": "Sélectionner des dossiers",
+      "select_emails": "Sélectionner des emails",
+      "select_messages": "Sélectionner des messages",
+      "my_drive": "Mon Drive",
+      "shared_with_me": "Partagé avec moi",
+      "inbox": "Boîte de réception",
+      "starred": "Favoris",
+      "sent": "Envoyé",
+      "draft": "Brouillon",
+      "outbox": "Boîte d'envoi",
+      "spam": "Spam"
     }
   },
   "assistant_create": {
