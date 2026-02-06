@@ -12,7 +12,8 @@ const FilePickerDialogTitle = ({
   dialogTitleProps,
   dividerProps,
   onClose,
-  selectedFiles
+  selectedFiles,
+  multiple
 }) => {
   const { isMobile } = useBreakpoints()
 
@@ -21,7 +22,10 @@ const FilePickerDialogTitle = ({
       <DialogCloseButton onClick={onClose} />
       <DialogTitle {...dialogTitleProps}>
         {isMobile ? <DialogBackButton onClick={onClose} /> : null}
-        Open {selectedFiles.length > 0 ? `(${selectedFiles.length} files)` : ''}
+        Open{' '}
+        {multiple && selectedFiles.length > 0
+          ? `(${selectedFiles.length} files)`
+          : ''}
       </DialogTitle>
       <Divider {...dividerProps} />
     </>

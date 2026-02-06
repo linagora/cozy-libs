@@ -8,7 +8,7 @@ import FilePickerDialogActions from './FilePickerDialogActions'
 import FilePickerDialogTitle from './FilePickerDialogTitle'
 import { useEffect } from 'react'
 
-const FilePickerDialog = ({ open, onClose, onFilesSelected }) => {
+const FilePickerDialog = ({ open, onClose, onFilesSelected, multiple = true }) => {
   const {
     dialogProps,
     dialogTitleProps,
@@ -31,7 +31,11 @@ const FilePickerDialog = ({ open, onClose, onFilesSelected }) => {
     if (selectedFiles.includes(file)) {
       setSelectedFiles(selectedFiles.filter(f => f !== file))
     } else {
-      setSelectedFiles([...selectedFiles, file])
+      if (!multiple) {
+        setSelectedFiles([file])
+      } else {
+        setSelectedFiles([...selectedFiles, file])
+      }
     }
   }
 
@@ -52,6 +56,7 @@ const FilePickerDialog = ({ open, onClose, onFilesSelected }) => {
         dividerProps={dividerProps}
         onClose={onClose}
         selectedFiles={selectedFiles}
+        multiple={multiple}
       />
       <div
         className="u-h-6"

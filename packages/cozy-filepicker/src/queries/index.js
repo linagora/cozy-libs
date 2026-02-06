@@ -6,9 +6,14 @@ const defaultFetchPolicy = CozyClient.fetchPolicies.olderThan(
 )
 
 export const buildFilesQuery = () => ({
-  definition: () => Q('io.cozy.files'),
+  definition: () =>
+    Q('io.cozy.files').where({
+      dir_id: {
+        $ne: 'io.cozy.files.trash-dir'
+      }
+    }),
   options: {
-    as: 'io.cozy.files/*',
+    as: 'io.cozy.files/picker/*',
     fetchPolicy: defaultFetchPolicy
   }
 })
