@@ -12,3 +12,4 @@ export {
   StreamBridge,
   createCozyRealtimeChatAdapter
 } from './components/adapters'
+export { default as AssistantView } from './components/Views/AssistantView'

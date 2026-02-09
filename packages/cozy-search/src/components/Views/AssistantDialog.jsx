@@ -58,7 +58,7 @@ const AssistantDialog = () => {
           }
         }
       }}
-      title={isMobile ? ' ' : ' '}
+      title=" "
       content={
         <div
           className={cx(
