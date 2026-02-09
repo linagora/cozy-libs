@@ -41,7 +41,7 @@ const Sidebar = () => {
 
   return (
     <div className="u-flex u-flex-column u-h-100 u-bdw-1">
-      <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pb-1">
+      <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1">
         <IconButton
           size="medium"
           className={cx('u-bdrs-6', {

@@ -4,6 +4,7 @@ import React from 'react'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 
 import { useAssistant } from '../AssistantProvider'
+import styles from './styles.styl'
 import Conversation from '../Conversations/Conversation'
 import SearchConversation from '../Search/SearchConversation'
 import Sidebar from '../Sidebar'
@@ -17,14 +18,19 @@ const AssistantContainer = () => {
   } = useAssistant()
 
   return (
-    <div className="u-flex u-ov-hidden u-h-100">
-      <div className={cx('u-transition-width u-maw-5 u-pb-1')}>
+    <div
+      className={cx(
+        'u-flex u-ov-hidden u-h-100',
+        styles['assistant-container']
+      )}
+    >
+      <div className={cx('u-maw-5 u-pb-1 u-bg-white')}>
         <Sidebar />
       </div>
 
       <Divider orientation="vertical" flexItem />
 
-      <div className="u-flex-auto u-flex u-flex-column u-pb-1 u-ov-hidden">
+      <div className="u-flex-auto u-flex u-flex-column u-pb-1 u-ov-hidden u-bg-white">
         {isOpenSearchConversation ? <SearchConversation /> : <Conversation />}
       </div>
 
