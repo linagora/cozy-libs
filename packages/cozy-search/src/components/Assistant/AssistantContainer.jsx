@@ -1,9 +1,11 @@
+import cx from 'classnames'
 import React from 'react'
 
 import flag from 'cozy-flags'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 
 import { useAssistant } from '../AssistantProvider'
+import styles from './styles.styl'
 import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import Conversation from '../Conversations/Conversation'
 import CozyAssistantRuntimeProvider from '../CozyAssistantRuntimeProvider'
@@ -19,7 +21,12 @@ const AssistantContainer = () => {
   } = useAssistant()
 
   return (
-    <div className="u-flex u-ov-hidden u-h-100">
+    <div
+      className={cx(
+        'u-flex u-ov-hidden u-h-100',
+        styles['assistant-container']
+      )}
+    >
       <Sidebar className="u-w-5 u-pb-1 u-bg-white" />
 
       <Divider orientation="vertical" flexItem />
