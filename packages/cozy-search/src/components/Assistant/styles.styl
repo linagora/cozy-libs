@@ -1,0 +1,36 @@
+.trigger-button
+  border-radius 20px
+  padding 4px 12px
+  border 1px solid var(--borderMainColor)
+  background-color var(--paperBackgroundColor)
+  text-transform none
+  min-width 0
+
+.assistant-icon
+  width 24px
+  height 24px
+  border-radius 50%
+  margin-right 8px
+  object-fit cover
+
+  &--small
+    width 20px
+    height 20px
+
+.menu-item
+  display flex !important
+  align-items center !important
+  justify-content space-between !important
+
+  &.create-item
+    border-top 1px solid var(--dividerColor)
+
+  &:hover
+    .menu-item-icon-button
+      display block !important
+
+.menu-item-icon-button
+  display none !important
+
+.create-icon
+  margin-right 8px
