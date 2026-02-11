@@ -17,6 +17,13 @@
       "reimbursements": "Kiểm tra các khoản hoàn trả của tôi",
       "reorganise_files": "Sắp xếp lại các tệp của tôi"
     },
+    "actions": {
+      "copy": "Sao chép",
+      "copied": "Đã sao chép vào bộ nhớ tạm",
+      "reload": "Tạo lại phản hồi",
+      "edit": "Chỉnh sửa",
+      "edited": "Đã lưu tin nhắn"
+    },
     "default_error": "Đã xảy ra lỗi, vui lòng thử lại",
     "hide": "Ẩn",
     "show": "Hiện"
