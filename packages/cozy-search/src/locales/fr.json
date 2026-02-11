@@ -1,7 +1,7 @@
 {
   "assistant": {
     "search": {
-      "placeholder": "Une question ?",
+      "placeholder": "Une question ?",
       "send": "Envoyer",
       "noItem": "Aucun résultat",
       "notEnough": "Votre recherche doit contenir au moins 3 caractères"
@@ -17,9 +17,20 @@
       "reimbursements": "Vérifier mes remboursements",
       "reorganise_files": "Réorganiser mes fichiers"
     },
+    "actions": {
+      "copy": "Copier",
+      "copied": "Copié dans le presse-papiers",
+      "reload": "Régénérer la réponse",
+      "edit": "Modifier",
+      "edited": "Message enregistré"
+    },
     "default_error": "Une erreur s'est produite, veuillez réessayer",
     "hide": "Masquer",
-    "show": "Afficher"
+    "show": "Afficher",
+    "message": {
+      "welcome": "Comment puis-je vous aider aujourd'hui ?",
+      "running": "Assistant en cours..."
+    }
   },
   "assistant_create": {
     "title": "Créer un assistant",
