@@ -47,7 +47,7 @@ const ConversationListItem = ({
       <ListItemText
         primary={
           <div className="u-flex u-flex-items-center u-flex-justify-between">
-            <Typography className="u-ellipsis u-lh-xlarge u-mb-half">
+            <Typography className="u-ellipsis u-lh-xlarge">
               {conversation.messages[conversation.messages.length - 2]?.content}
             </Typography>
             <IconButton
@@ -56,7 +56,7 @@ const ConversationListItem = ({
               ref={anchorRef}
               onClick={toggleMenu}
             >
-              <Icon icon={DotsIcon} />
+              <Icon icon={DotsIcon} size={8} />
             </IconButton>
             <ActionsMenu
               ref={anchorRef}

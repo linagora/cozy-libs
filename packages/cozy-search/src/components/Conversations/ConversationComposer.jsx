@@ -10,6 +10,7 @@ import flag from 'cozy-flags'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
+import { AttachmentPreviews } from './Previews'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
 import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
@@ -19,7 +20,6 @@ const ConversationComposer = () => {
   const composerRuntime = useComposerRuntime()
   const isRunning = useThread(state => state.isRunning)
   const { setOpenedKnowledgePanel } = useAssistant()
-
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
 
@@ -49,6 +49,8 @@ const ConversationComposer = () => {
 
   return (
     <ComposerPrimitive.Root className="u-w-100 u-maw-7 u-mh-auto">
+      <ComposerPrimitive.Attachments components={AttachmentPreviews} />
+
       <ConversationBar
         value={value}
         isEmpty={isEmpty}

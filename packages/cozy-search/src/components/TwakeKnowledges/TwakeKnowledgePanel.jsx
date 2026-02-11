@@ -1,3 +1,4 @@
+import { useComposerRuntime } from '@assistant-ui/react'
 import cx from 'classnames'
 import React, { useState, useEffect } from 'react'
 import { useI18n } from 'twake-i18n'
@@ -25,6 +26,7 @@ const TwakeKnowledgePanel = ({ onClose }) => {
     selectedTwakeKnowledge,
     setSelectedTwakeKnowledge
   } = useAssistant()
+  const composerRuntime = useComposerRuntime()
   const [selectedItems, setSelectedItems] = useState([])
 
   useEffect(() => {
@@ -52,6 +54,14 @@ const TwakeKnowledgePanel = ({ onClose }) => {
     setSelectedTwakeKnowledge({
       ...selectedTwakeKnowledge,
       [openedKnowledgePanel]: selectedItems
+    })
+    composerRuntime.setRunConfig({
+      custom: {
+        sources: {
+          ...selectedTwakeKnowledge,
+          [openedKnowledgePanel]: selectedItems
+        }
+      }
     })
     onClose()
   }
@@ -177,8 +187,8 @@ const TwakeKnowledgePanel = ({ onClose }) => {
               openedKnowledgePanel === 'drive'
                 ? t('assistant.twake_knowledges.select_folders')
                 : openedKnowledgePanel === 'mail'
-                  ? t('assistant.twake_knowledges.select_emails')
-                  : t('assistant.twake_knowledges.select_messages')
+                ? t('assistant.twake_knowledges.select_emails')
+                : t('assistant.twake_knowledges.select_messages')
             }
             onClick={handleConfirm}
             disabled={selectedItems.length === 0}

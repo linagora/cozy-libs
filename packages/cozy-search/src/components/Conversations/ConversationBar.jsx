@@ -7,6 +7,7 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
+import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
@@ -48,10 +49,10 @@ const ConversationBar = ({
     }
   }
 
-  const handleKeyDown = () => {
+  const handleKeyDown = ev => {
     if (isEmpty) return
 
-    onKeyDown()
+    onKeyDown(ev)
   }
 
   return (
@@ -66,7 +67,7 @@ const ConversationBar = ({
         componentsProps={{
           inputBase: {
             inputRef: inputRef,
-            className: 'u-pv-0',
+            className: 'u-pv-0 u-pl-0',
             rows: 1,
             multiline: true,
             inputProps: {
@@ -74,6 +75,13 @@ const ConversationBar = ({
             },
             autoFocus: !isMobile,
             inputComponent: ComposerPrimitive.Input,
+            startAdornment: (
+              <ComposerPrimitive.AddAttachment asChild>
+                <IconButton size="small" className="u-ml-half">
+                  <Icon icon={PlusIcon} size={12} />
+                </IconButton>
+              </ComposerPrimitive.AddAttachment>
+            ),
             endAdornment: isRunning ? (
               <IconButton className="u-p-0 u-mr-half">
                 <Button
@@ -81,7 +89,7 @@ const ConversationBar = ({
                   component="div"
                   className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
                   classes={{ label: 'u-flex u-w-auto' }}
-                  label={<Icon icon={StopIcon} size={12} />}
+                  label={<Icon icon={StopIcon} size={14} />}
                   onClick={onCancel}
                 />
               </IconButton>
@@ -98,7 +106,7 @@ const ConversationBar = ({
                 />
               </IconButton>
             ),
-            onKeyDown: () => handleKeyDown()
+            onKeyDown: handleKeyDown
           }
         }}
       />

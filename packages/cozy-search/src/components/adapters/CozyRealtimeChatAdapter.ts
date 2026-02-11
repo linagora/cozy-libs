@@ -60,7 +60,8 @@ export const createCozyRealtimeChatAdapter = (
 ): ChatModelAdapter => ({
   async *run({
     messages,
-    abortSignal
+    abortSignal,
+    runConfig
   }: ChatModelRunOptions): AsyncGenerator<ChatModelRunResult> {
     const { client, conversationId, streamBridge } = options
 
@@ -81,7 +82,10 @@ export const createCozyRealtimeChatAdapter = (
       await client.stackClient.fetchJSON(
         'POST',
         `/ai/chat/conversations/${conversationId}`,
-        { q: userQuery }
+        {
+          q: userQuery,
+          ...(runConfig?.custom || {})
+        }
       )
       console.log('[CozyRealtimeChatAdapter] POST successful, waiting for stream...')
 

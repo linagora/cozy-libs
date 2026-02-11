@@ -23,6 +23,7 @@ import type { ThreadMessageLike } from '@assistant-ui/react'
 
 import { StreamBridge } from './adapters/StreamBridge'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
+import { CozyAttachmentAdapter } from './adapters/CozyAttachmentAdapter'
 import {
   CHAT_EVENTS_DOCTYPE,
   CHAT_CONVERSATIONS_DOCTYPE,
@@ -251,9 +252,14 @@ const CozyAssistantRuntimeProviderInner = ({
     [client, conversationId]
   )
 
+  const attachmentAdapter = useMemo(() => new CozyAttachmentAdapter(), [])
+
   // Create runtime with adapter and initial messages
   const runtime = useLocalRuntime(adapter, {
-    initialMessages
+    initialMessages,
+    adapters: {
+      attachments: attachmentAdapter
+    }
   })
 
   // Cleanup on unmount or conversation change

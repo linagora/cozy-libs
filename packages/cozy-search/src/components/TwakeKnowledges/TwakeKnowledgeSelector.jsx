@@ -61,7 +61,7 @@ const TwakeKnowledgeSelector = ({ onSelectTwakeKnowledge }) => {
                   </span>
                 ) : null
               }
-              onDelete={numberOfSelectedItems > 0 ? () => { } : null}
+              onDelete={numberOfSelectedItems > 0 ? () => {} : null}
               label={twakeKnowledge.label}
               clickable
               variant={
