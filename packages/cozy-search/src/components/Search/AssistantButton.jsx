@@ -6,17 +6,14 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 
 import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
-import { useAssistant } from '../AssistantProvider'
 import { makeConversationId } from '../helpers'
 
 export const AssistantButton = ({ size }) => {
-  const { onAssistantExecute } = useAssistant()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
   const onClick = () => {
     const conversationId = makeConversationId()
-    onAssistantExecute({ value: '', conversationId })
     navigate(`assistant/${conversationId}?returnPath=${pathname}`)
   }
 
