@@ -34,6 +34,7 @@
     "cozy-doctypes": "^1.98.3",
     "date-fns": "2.30.0",
     "lodash": "^4.17.21",
+    "motion": "^12.34.0",
     "react-autosuggest": "^10.1.0",
     "react-tooltip": "^3.11.1",
     "snarkdown": "^2.0.0"

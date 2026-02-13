@@ -1,0 +1,19 @@
+{
+  "filepicker": {
+    "title": {
+      "open": "Open",
+      "search": "Search results"
+    },
+    "search_placeholder": "Search",
+    "no_files_found": "No files found",
+    "actions": {
+      "cancel": "Cancel",
+      "open": "Open",
+      "unselect": "Unselect all",
+      "upload": "Upload"
+    },
+    "items": {
+      "already_imported": "Already imported"
+    }
+  }
+}

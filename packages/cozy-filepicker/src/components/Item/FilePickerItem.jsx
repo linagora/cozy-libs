@@ -1,4 +1,5 @@
 import React from 'react'
+import { useI18n } from 'twake-i18n'
 
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import Filename from 'cozy-ui/transpiled/react/Filename'
@@ -9,37 +10,39 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import FileItemIcon from 'cozy-ui-plus/src/ListItem/ListItemFile/ItemIcon'
 
-const FilePickerItem = ({
-  file,
-  listItemProps,
-  selectFile,
-  selectedFiles,
-  setDirectory,
-  fileTypes,
-  exists
-}) => {
+import { useFilePicker } from '../FilePickerContext'
+
+const FilePickerItem = ({ file, ...props }) => {
+  const {
+    listItemProps,
+    selectFile,
+    openDirectory,
+    isMimeTypeValid,
+    existingFiles,
+    isFileSelected
+  } = useFilePicker()
+
+  const { t } = useI18n()
+  const exists = existingFiles.includes(file._id)
+
   return (
     <ListItem
       {...listItemProps}
+      {...props}
       onClick={() => {
         if (file.type === 'directory') {
-          setDirectory(file._id)
+          openDirectory(file._id)
         } else {
           selectFile(file)
         }
       }}
       button
-      disabled={
-        exists ||
-        (file.type !== 'directory' &&
-          fileTypes &&
-          !fileTypes.includes(file.mime))
-      }
+      disabled={exists || !isMimeTypeValid(file)}
     >
       <ListItemIcon>
         {file.type !== 'directory' && (
           <Checkbox
-            checked={selectedFiles.includes(file)}
+            checked={isFileSelected(file)}
             onClick={() => selectFile(file)}
           />
         )}
@@ -62,12 +65,11 @@ const FilePickerItem = ({
         />
         {exists && (
           <Typography variant="caption" color="textSecondary">
-            Already imported
+            {t('filepicker.items.already_imported')}
           </Typography>
         )}
       </div>
     </ListItem>
   )
 }
-
 export default FilePickerItem
