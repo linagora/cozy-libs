@@ -7,6 +7,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
+import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
@@ -17,11 +18,11 @@ const FilePickerDialogTitle = ({
   selectedFiles,
   multiple,
   currentDir,
-  goBack
+  goBack,
+  search,
+  setSearch
 }) => {
   const { isMobile } = useBreakpoints()
-
-  console.log('currentDir', currentDir)
 
   return (
     <>
@@ -40,6 +41,17 @@ const FilePickerDialogTitle = ({
             </Typography>
           )}
         </div>
+
+        {!isMobile && (
+          <SearchBar
+            placeholder="Search"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            elevation={0}
+            className="u-w-6"
+          />
+        )}
+
         <IconButton onClick={() => onClose()}>
           <Icon icon={CrossIcon} />
         </IconButton>

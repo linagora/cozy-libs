@@ -1,20 +1,23 @@
 import React from 'react'
 import { useEffect } from 'react'
 
+import { useQuery } from 'cozy-client'
 import { useCozyDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import FilePickerContent from './FilePickerContent'
 import FilePickerDialogActions from './FilePickerDialogActions'
 import FilePickerDialogTitle from './FilePickerDialogTitle'
 import { buildFileQuery } from '../queries'
-import { useQuery } from 'cozy-client'
 
 const FilePickerDialog = ({
   open,
   onClose,
   onFilesSelected,
-  multiple = true
+  multiple = true,
+  fileTypes,
+  existingFiles
 }) => {
   const {
     dialogProps,
@@ -31,6 +34,8 @@ const FilePickerDialog = ({
     onClose,
     disableEnforceFocus: true
   })
+
+  const { isMobile } = useBreakpoints()
 
   const [selectedFiles, setSelectedFiles] = React.useState([])
 
@@ -80,6 +85,9 @@ const FilePickerDialog = ({
     }
   }, [open])
 
+  const [search, setSearch] = React.useState('')
+  const normalizedSearch = search.normalize('NFD').replace(/\p{M}/gu, '')
+
   return (
     <Dialog {...dialogProps}>
       <FilePickerDialogTitle
@@ -90,9 +98,11 @@ const FilePickerDialog = ({
         multiple={multiple}
         currentDir={currentDir}
         goBack={goBack}
+        search={search}
+        setSearch={setSearch}
       />
       <div
-        className="u-h-6"
+        className={isMobile ? 'u-h-100' : 'u-h-6'}
         style={{
           overflowY: 'auto'
         }}
@@ -104,6 +114,9 @@ const FilePickerDialog = ({
           directory={directory}
           setDirectory={setDirectory}
           currentDir={currentDir}
+          fileTypes={fileTypes}
+          search={normalizedSearch}
+          existingFiles={existingFiles}
         />
       </div>
       <FilePickerDialogActions

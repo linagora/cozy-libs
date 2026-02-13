@@ -1,20 +1,11 @@
 import React from 'react'
 
 import { RealTimeQueries, useQuery } from 'cozy-client'
-import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import Filename from 'cozy-ui/transpiled/react/Filename'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import FileTypeFolderIcon from 'cozy-ui/transpiled/react/Icons/FileTypeFolder'
 import List from 'cozy-ui/transpiled/react/List'
-import ListItem from 'cozy-ui/transpiled/react/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
-import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import ListSubheader from 'cozy-ui/transpiled/react/ListSubheader'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import FileItemIcon from 'cozy-ui-plus/src/ListItem/ListItemFile/ItemIcon'
 
+import FilePickerItem from './FilePickerItem'
 import { buildFilesQuery } from '../queries'
 
 const FilePickerContent = ({
@@ -23,9 +14,11 @@ const FilePickerContent = ({
   selectedFiles,
   directory,
   setDirectory,
-  currentDir
+  fileTypes,
+  search,
+  existingFiles
 }) => {
-  const filesQuery = buildFilesQuery(directory)
+  const filesQuery = buildFilesQuery(search ? null : directory, search)
   const files = useQuery(filesQuery.definition, filesQuery.options)
 
   const sortedFiles = files.data
@@ -57,43 +50,16 @@ const FilePickerContent = ({
           file =>
             file.name && (
               <>
-                <ListItem
-                  {...listItemProps}
-                  onClick={() => {
-                    if (file.type === 'directory') {
-                      setDirectory(file._id)
-                    } else {
-                      selectFile(file)
-                    }
-                  }}
-                  button
-                >
-                  <ListItemIcon>
-                    {file.type !== 'directory' && (
-                      <Checkbox
-                        checked={selectedFiles.includes(file)}
-                        onClick={() => selectFile(file)}
-                      />
-                    )}
-                  </ListItemIcon>
-                  <ListItemIcon>
-                    <FileItemIcon
-                      file={file}
-                      icon={
-                        file.type == 'directory' && (
-                          <Icon size={32} icon={FileTypeFolderIcon} />
-                        )
-                      }
-                    />
-                  </ListItemIcon>
-                  <Filename
-                    variant="body1"
-                    filename={file.name.split('.')[0]}
-                    extension={
-                      file.type !== 'directory' && '.' + file.name.split('.')[1]
-                    }
-                  />
-                </ListItem>
+                <FilePickerItem
+                  key={file._id}
+                  file={file}
+                  listItemProps={listItemProps}
+                  selectFile={selectFile}
+                  selectedFiles={selectedFiles}
+                  setDirectory={setDirectory}
+                  fileTypes={fileTypes}
+                  exists={existingFiles.includes(file._id)}
+                />
                 <Divider />
               </>
             )
