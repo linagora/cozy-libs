@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.19.2...cozy-external-bridge@0.20.0) (2026-02-16)
+
+### Features
+
+- **bridge:** Add isInIframe embedded method ([4edbd5c](https://github.com/cozy/cozy-libs/commit/4edbd5c7a896d33c0763b251a6f826533cc7ac91))
+
 ## [0.19.2](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.19.1...cozy-external-bridge@0.19.2) (2026-01-29)
 
 **Note:** Version bump only for package cozy-external-bridge
