@@ -68,11 +68,6 @@
   ],
   "license": "MIT",
   "main": "dist/index.js",
-  "exports": {
-    ".": "./dist/index.js",
-    "./container": "./dist/container/index.js",
-    "./embedded": "./dist/embedded/bundle.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cozy/cozy-libs.git",
