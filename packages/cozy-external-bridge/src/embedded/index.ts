@@ -141,6 +141,10 @@ const requestParentOrigin = (): Promise<string | undefined> => {
   })
 }
 
+const isInIframe = (): boolean => {
+  return window.self !== window.top
+}
+
 const isInsideCozy = (targetOrigin: string): boolean => {
   try {
     if (!targetOrigin) return false
@@ -200,6 +204,7 @@ const setupBridge = (targetOrigin: string): boolean => {
 // @ts-expect-error No type
 window._cozyBridge = {
   requestParentOrigin,
+  isInIframe,
   isInsideCozy,
   setupBridge
 }
