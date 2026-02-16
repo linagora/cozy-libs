@@ -18,11 +18,13 @@ const EmailSourceItem = ({ email }) => {
     return null
   }
 
+  const emailId = email.id.startsWith('tmail_') ? email.id.slice(6) : email.id
+
   const docUrl = generateWebLink({
     slug: 'mail',
     cozyUrl: client.getStackClient().uri,
     subDomainType: client.getInstanceOptions().subdomain,
-    hash: `/bridge/dashboard/${email.id}`
+    hash: `/bridge/dashboard/${emailId}`
   })
 
   const emailDate = email['datetime']
