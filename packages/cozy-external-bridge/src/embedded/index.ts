@@ -146,6 +146,11 @@ const isInIframe = (): boolean => {
 }
 
 const isInsideCozy = (targetOrigin: string): boolean => {
+  console.log(
+    `[DEPRECATED] isInsideCozy is deprecated:
+    - please use isInIframe to check if you are inside an iframe
+    - please setup the bridge directly with the legitimate container target origin or check the container target origin on your side`
+  )
   try {
     if (!targetOrigin) return false
 
