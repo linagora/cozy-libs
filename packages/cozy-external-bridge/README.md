@@ -26,7 +26,7 @@ After setupping bridge, you have the following methods in `window._cozyBridge` :
 - `startHistorySyncing: () => void` : start sending history updates to parent window
 - `stopHistorySyncing: () => void` : stop sending history updates to parent window
 - `getLang: () => Promise<string>` : get lang from parent window
-- `getContacts: () => Promise<IOCozyContact>` : get contacts from parent window
+- `getContacts: () => Promise<IOCozyContact[]>` : get contacts from parent window
 - `getFlag: (key: string) => Promise<string | boolean>` : get flags from parent window
 
 ### How to determine the target origin?
