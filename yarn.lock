@@ -16907,7 +16907,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-dataproxy-lib@workspace:packages/cozy-dataproxy-lib":
+"cozy-dataproxy-lib@npm:^4.0.0, cozy-dataproxy-lib@workspace:packages/cozy-dataproxy-lib":
   version: 0.0.0-use.local
   resolution: "cozy-dataproxy-lib@workspace:packages/cozy-dataproxy-lib"
   dependencies:
@@ -17070,6 +17070,7 @@ __metadata:
     babel-preset-cozy-app: "npm:^2.8.3"
     comlink: "npm:4.4.1"
     cozy-client: "npm:^54.0.0"
+    cozy-dataproxy-lib: "npm:^4.0.0"
     cozy-flags: "npm:^4.8.2"
     cozy-minilog: "npm:^3.10.0"
     jest: "npm:26.6.3"
@@ -17079,6 +17080,7 @@ __metadata:
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-client: ">=58.4.0"
+    cozy-dataproxy-lib: ">=4.0.0"
     cozy-flags: ">=4.7.0"
     cozy-minilog: ">=3.10.0"
     react: ">=16.12.0"
