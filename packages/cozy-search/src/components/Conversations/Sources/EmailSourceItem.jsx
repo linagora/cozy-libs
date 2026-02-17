@@ -18,7 +18,13 @@ const EmailSourceItem = ({ email }) => {
     return null
   }
 
-  const emailId = email.id.startsWith('tmail_') ? email.id.slice(6) : email.id
+  // FIXME: This prefix removal is a temporary workaround for tmail indexing.
+  // The tmail_ prefix have to be removed from tmail indexing
+
+  const TMAIL_PREFIX = 'tmail_'
+  const emailId = email.id.startsWith(TMAIL_PREFIX)
+    ? email.id.slice(TMAIL_PREFIX.length)
+    : email.id
 
   const docUrl = generateWebLink({
     slug: 'mail',
