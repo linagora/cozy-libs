@@ -35,9 +35,9 @@ export const useListenBridgeRequests = (
 
     const exposedMethods = {
       // Proof of concepts of Twake <-> Cozy communication
-      getContacts: async (): Promise<IOCozyContact> => {
+      getContacts: async (): Promise<IOCozyContact[]> => {
         const { data } = (await client.query(Q('io.cozy.contacts'))) as {
-          data: Promise<IOCozyContact>
+          data: Promise<IOCozyContact[]>
         }
 
         return data

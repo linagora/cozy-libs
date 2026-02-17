@@ -6,7 +6,7 @@ import { IOCozyContact } from 'cozy-client/types/types'
 
 let availableMethods: {
   updateHistory: (url: string) => void
-  getContacts: () => Promise<IOCozyContact>
+  getContacts: () => Promise<IOCozyContact[]>
   getLang: () => Promise<string>
   getFlag: (key: string) => Promise<string | boolean>
   createDocs: (data: object) => Promise<object>
@@ -51,7 +51,7 @@ const stopHistorySyncing = (): void => {
   window.removeEventListener('popstate', onPopstate)
 }
 
-const getContacts = async (): Promise<IOCozyContact> => {
+const getContacts = async (): Promise<IOCozyContact[]> => {
   console.log('🟣 Fetching contacts...')
   const contacts = await availableMethods.getContacts()
   console.log('🟣 Twake received contacts...', contacts)
