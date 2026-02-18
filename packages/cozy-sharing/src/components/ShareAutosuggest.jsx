@@ -20,6 +20,7 @@ import {
 
 const ShareAutocomplete = ({
   loading,
+  disabled,
   contactsAndGroups,
   recipients,
   onPick,
@@ -192,7 +193,8 @@ const ShareAutocomplete = ({
         value: inputValue,
         type: 'email',
         placeholder,
-        className: styles['suggestionInput']
+        className: styles['suggestionInput'],
+        disabled
       }}
     />
   )
@@ -200,6 +202,7 @@ const ShareAutocomplete = ({
 
 ShareAutocomplete.propTypes = {
   loading: PropTypes.bool,
+  disabled: PropTypes.bool,
   contactsAndGroups: PropTypes.array,
   recipients: PropTypes.array.isRequired,
   onPick: PropTypes.func.isRequired,

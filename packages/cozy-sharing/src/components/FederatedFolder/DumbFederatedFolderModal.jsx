@@ -5,23 +5,19 @@ import { useI18n } from 'twake-i18n'
 import withLocales from '../../hoc/withLocales'
 import DumbBatchSharedFolderModal from '../SharedFolder/DumbBatchSharedFolderModal'
 
-export const DumbSharedDriveModal = withLocales(
+export const DumbFederatedFolderModal = withLocales(
   ({
     title,
     document,
-    sharedDriveName,
-    handleSharedDriveNameChange,
     createContact,
     recipients,
+    readOnlyRecipients,
     currentRecipients,
     onRevoke,
     onSetType,
-    onCreate,
     onSend,
     onClose,
     onShare,
-    onRename,
-    showNameField = true,
     sharingLink
   }) => {
     const { t } = useI18n()
@@ -29,49 +25,38 @@ export const DumbSharedDriveModal = withLocales(
       <DumbBatchSharedFolderModal
         title={title}
         document={document}
-        folderName={sharedDriveName}
-        handleFolderNameChange={handleSharedDriveNameChange}
         createContact={createContact}
         recipients={recipients}
+        readOnlyRecipients={readOnlyRecipients}
         currentRecipients={currentRecipients}
         onRevoke={onRevoke}
         onSetType={onSetType}
-        onCreate={onCreate}
         onSend={onSend}
         onClose={onClose}
         onShare={onShare}
-        onRename={onRename}
-        showNameField={showNameField}
         sharingLink={sharingLink}
-        nameLabel={t('SharedDrive.sharedDriveModal.nameLabel')}
-        addPeopleLabel={t('SharedDrive.sharedDriveModal.addPeople')}
-        addButtonLabel={t('SharedDrive.sharedDriveModal.add')}
-        cancelLabel={t('SharedDrive.sharedDriveModal.cancel')}
-        createLabel={t('SharedDrive.sharedDriveModal.create')}
+        showNameField={false}
+        addPeopleLabel={t('FederatedFolder.addPeople')}
+        addButtonLabel={t('FederatedFolder.add')}
         shareLabel={t('FederatedFolder.share')}
-        saveLabel={t('SharedDrive.sharedDriveModal.save')}
       />
     )
   }
 )
 
-DumbSharedDriveModal.propTypes = {
+DumbFederatedFolderModal.propTypes = {
   title: PropTypes.string,
   document: PropTypes.object,
-  sharedDriveName: PropTypes.string,
-  handleSharedDriveNameChange: PropTypes.func,
   createContact: PropTypes.func.isRequired,
   recipients: PropTypes.array,
+  readOnlyRecipients: PropTypes.array,
   currentRecipients: PropTypes.array,
   onRevoke: PropTypes.func.isRequired,
   onSetType: PropTypes.func.isRequired,
-  onCreate: PropTypes.func,
-  onSend: PropTypes.func,
+  onSend: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
-  onRename: PropTypes.func,
-  showNameField: PropTypes.bool,
   sharingLink: PropTypes.string
 }
 
-export default DumbSharedDriveModal
+export default DumbFederatedFolderModal

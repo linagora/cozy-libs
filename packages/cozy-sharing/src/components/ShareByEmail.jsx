@@ -29,11 +29,14 @@ export const ShareByEmail = ({
   currentRecipients,
   sharing,
   submitLabel,
-  showNotifications = true
+  showNotifications = true,
+  sharedDrive = false
 }) => {
   const client = useClient()
   const { t } = useI18n()
   const { showAlert } = useAlert()
+
+  const isFederatedMode = flag('drive.federated-shared-folder.enabled')
 
   const [recipients, setRecipients] = useState([])
   const [loading, setLoading] = useState(false)
@@ -50,7 +53,39 @@ export const ShareByEmail = ({
     setSelectedOption(value)
   }
 
-  const onRecipientPick = recipient => {
+  const onRecipientPick = async recipient => {
+    // In federated mode, directly share with the recipient with readWrite access
+    if (isFederatedMode) {
+      setLoading(true)
+      try {
+        const contacts = await getOrCreateFromArray(
+          client,
+          [recipient],
+          createContact
+        )
+        await onShare({
+          document,
+          recipients: contacts,
+          readOnlyRecipients: [],
+          description: sharingDesc,
+          openSharing: false,
+          sharedDrive: true
+        })
+      } catch (err) {
+        if (showNotifications) {
+          showAlert({
+            message: t('Share.shareByEmail.error.addingRecipient'),
+            severity: 'error',
+            variant: 'filled'
+          })
+        }
+      } finally {
+        reset()
+      }
+      return
+    }
+
+    // Normal mode: just add to the list
     const mergedRecipients = flag('sharing.show-recipient-groups')
       ? mergeRecipients(recipients, recipient)
       : spreadGroupAndMergeRecipients(recipients, recipient)
@@ -95,7 +130,8 @@ export const ShareByEmail = ({
         recipients: readWriteRecipients,
         readOnlyRecipients,
         description: sharingDesc,
-        openSharing: readWriteRecipients.length > 0
+        openSharing: readWriteRecipients.length > 0,
+        sharedDrive
       })
 
       if (showNotifications) {
@@ -130,7 +166,7 @@ export const ShareByEmail = ({
 
   const getSharingOptions = () => {
     const isSharingReadOnly = sharing
-      ? isReadOnlySharing(sharing, document._id)
+      ? isReadOnlySharing(sharing, document?._id)
       : false
     const readWrite = {
       value: 'readWrite',
@@ -162,9 +198,10 @@ export const ShareByEmail = ({
           onRemove={recipient => onRecipientRemove(recipient)}
           currentRecipients={currentRecipients}
           recipients={recipients}
+          disabled={loading}
         />
       </div>
-      {showShareControl && (
+      {!isFederatedMode && showShareControl && (
         <div className={styles['share-type-control']}>
           <ShareTypeSelect
             value={selectedOption}
@@ -181,7 +218,7 @@ export const ShareByEmail = ({
       )}
       {showRecipientsLimit ? (
         <ShareRecipientsLimitModal
-          documentName={document.name}
+          documentName={document?.name}
           onConfirm={() => setRecipientsLimit(false)}
         />
       ) : null}
@@ -191,7 +228,7 @@ export const ShareByEmail = ({
 
 ShareByEmail.propTypes = {
   currentRecipients: PropTypes.arrayOf(PropTypes.object),
-  document: PropTypes.object.isRequired,
+  document: PropTypes.object,
   documentType: PropTypes.string.isRequired,
   sharingDesc: PropTypes.string.isRequired,
   onShare: PropTypes.func.isRequired,
@@ -201,7 +238,9 @@ ShareByEmail.propTypes = {
   // Customize the label of the button that submit contacts
   submitLabel: PropTypes.string,
   // Display success or error notifications
-  showNotifications: PropTypes.bool
+  showNotifications: PropTypes.bool,
+  // Set to true for shared drive context
+  sharedDrive: PropTypes.bool
 }
 
 export default ShareByEmail

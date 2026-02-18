@@ -6,7 +6,11 @@ import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
 import { DumbSharedDriveModal } from './DumbSharedDriveModal'
-import { mergeAndDeduplicateRecipients, formatRecipients } from './helpers'
+import {
+  mergeAndDeduplicateRecipients,
+  formatRecipients,
+  RECIPIENT_INDEX_PREFIX
+} from './helpers'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
@@ -56,7 +60,8 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
         document: sharedDriveFolder,
         recipients: sharedDriveRecipients.recipients,
         readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
-        sharedDrive: true
+        sharedDrive: true,
+        openSharing: false
       })
 
       showAlert({
@@ -76,7 +81,7 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
   }
 
   const onSetType = (index, newType) => {
-    const _id = index.split('virtual-shared-drive-sharing-')[1]
+    const _id = index.split(RECIPIENT_INDEX_PREFIX)[1]
 
     if (newType === 'two-way') {
       setSharedDriveRecipients(prev => {
@@ -100,7 +105,7 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
   }
 
   const onRevoke = index => {
-    const _id = index.split('virtual-shared-drive-sharing-')[1]
+    const _id = index.split(RECIPIENT_INDEX_PREFIX)[1]
 
     setSharedDriveRecipients(prev => {
       return {
@@ -121,11 +126,16 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
       handleSharedDriveNameChange={handleSharedDriveNameChange}
       createContact={createContact}
       recipients={recipients}
+      currentRecipients={[]}
       onRevoke={onRevoke}
       onSetType={onSetType}
       onCreate={onCreate}
+      onSend={undefined}
       onClose={onClose}
       onShare={onShare}
+      showNameField={true}
+      sharingLink={undefined}
+      document={undefined}
     />
   )
 })

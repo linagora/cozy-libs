@@ -329,6 +329,9 @@
         "email": "Send to:",
         "emailPlaceholder": "Enter the email address or name of the recipient",
         "send": "Send",
+        "error": {
+          "addingRecipient": "An error occurred while adding the recipient. Please try again."
+        },
         "singleContactSuccess": "You sent an invite to %{email}.",
         "contactSuccess": "You sent an invite to %{smart_count} contact. |||| You sent an invite to %{smart_count} contacts.",
         "singleGroupSuccess": "You sent an invite to the members of the %{groupName} group.",
@@ -456,6 +459,15 @@
     "error": "Problem with link recovery: %{error}",
     "text": "Link to my document %{name}: |||| Link to my documents %{name}: ",
     "title": "Link to my document %{name} |||| Link to my documents %{name}"
+  },
+  "FederatedFolder": {
+    "title": "Shared folder",
+    "share": "Share",
+    "shareTitle": "Share \"%{name}\"",
+    "successNotification": "Folder has been shared",
+    "errorNotification": "Error while sharing folder",
+    "addPeople": "Add people to the shared folder :",
+    "add": "Add"
   },
   "SharedDrive": {
     "sharedDriveModal": {

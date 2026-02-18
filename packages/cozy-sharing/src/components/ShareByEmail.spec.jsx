@@ -6,12 +6,24 @@ import flag from 'cozy-flags'
 
 import { ShareByEmail } from './ShareByEmail'
 import AppLike from '../../test/AppLike'
+import { getOrCreateFromArray } from '../helpers/contacts'
 
 jest.mock('../helpers/contacts', () => ({
-  getOrCreateFromArray: (client, recipients) => recipients
+  // eslint-disable-next-line no-unused-vars
+  getOrCreateFromArray: jest.fn((client, recipients, _createContact) => {
+    // Return the recipients as-is by default (simulating contact creation/lookup)
+    return Promise.resolve(recipients)
+  })
 }))
 
-jest.mock('cozy-flags')
+jest.mock('cozy-flags', () =>
+  jest.fn(flagName => {
+    if (flagName === 'drive.federated-shared-folder.enabled') {
+      return false
+    }
+    return null
+  })
+)
 
 describe('ShareByEmailComponent', () => {
   const defaultDocument = {
@@ -24,7 +36,8 @@ describe('ShareByEmailComponent', () => {
   const setup = ({
     sharingDesc = 'test',
     document = defaultDocument,
-    currentRecipients = []
+    currentRecipients = [],
+    sharedDrive = false
   } = {}) => {
     const props = {
       documentType: 'Files',
@@ -32,7 +45,8 @@ describe('ShareByEmailComponent', () => {
       document,
       sharingDesc,
       currentRecipients,
-      createContact: jest.fn()
+      createContact: jest.fn(),
+      sharedDrive
     }
     return render(
       <AppLike>
@@ -43,6 +57,13 @@ describe('ShareByEmailComponent', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
+    // Reset flag mock to default (non-federated mode)
+    flag.mockImplementation(flagName => {
+      if (flagName === 'drive.federated-shared-folder.enabled') {
+        return false
+      }
+      return null
+    })
   })
 
   it('shoud call share if submited', async () => {
@@ -77,13 +98,22 @@ describe('ShareByEmailComponent', () => {
         document: defaultDocument,
         openSharing: true,
         readOnlyRecipients: [],
-        recipients: [{ email: 'quentin@cozycloud.cc' }]
+        recipients: [{ email: 'quentin@cozycloud.cc' }],
+        sharedDrive: false
       })
     })
   })
 
   it('should alert user when it has reached the recipients limit for a document', async () => {
-    flag.mockReturnValue(2)
+    flag.mockImplementation(flagName => {
+      if (flagName === 'sharing.recipients-limit') {
+        return 2
+      }
+      if (flagName === 'drive.federated-shared-folder.enabled') {
+        return false
+      }
+      return null
+    })
 
     setup({
       currentRecipients: [
@@ -127,6 +157,66 @@ describe('ShareByEmailComponent', () => {
 
     await waitFor(() => {
       expect(onShare).not.toBeCalled()
+    })
+  })
+
+  describe('federated mode', () => {
+    beforeEach(() => {
+      flag.mockImplementation(flagName => {
+        if (flagName === 'drive.federated-shared-folder.enabled') {
+          return true
+        }
+        return null
+      })
+      getOrCreateFromArray.mockResolvedValue([
+        { _id: 'contact1', email: 'quentin@cozycloud.cc' }
+      ])
+    })
+
+    it('should directly share when selecting a recipient in federated mode', async () => {
+      const sharingDesc = 'test'
+      const createContact = jest.fn()
+
+      setup({ sharingDesc, createContact })
+
+      act(() => {
+        fireEvent.change(
+          screen.getByPlaceholderText('Add contacts or groups'),
+          {
+            target: { value: 'quentin@cozycloud.cc' }
+          }
+        )
+      })
+
+      act(() => {
+        fireEvent.keyPress(
+          screen.getByPlaceholderText('Add contacts or groups'),
+          {
+            key: 'Enter',
+            code: 'Enter',
+            charCode: 13
+          }
+        )
+      })
+
+      await waitFor(() => {
+        expect(getOrCreateFromArray).toHaveBeenCalledWith(
+          expect.any(Object),
+          [{ email: 'quentin@cozycloud.cc' }],
+          expect.any(Function)
+        )
+      })
+
+      await waitFor(() => {
+        expect(onShare).toHaveBeenCalledWith({
+          document: defaultDocument,
+          recipients: [{ _id: 'contact1', email: 'quentin@cozycloud.cc' }],
+          readOnlyRecipients: [],
+          description: sharingDesc,
+          openSharing: true,
+          sharedDrive: true
+        })
+      })
     })
   })
 })
