@@ -26,7 +26,7 @@ export const ShareModal = ({
   sharingDesc,
   twoStepsConfirmationMethods
 }) => {
-  if (isSharedDrive) {
+  if (isSharedDrive && !flag('drive.federated-shared-folder.enabled')) {
     return (
       <SharedDriveEditModal
         document={document}

@@ -329,6 +329,9 @@
         "email": "Gửi đến:",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
         "send": "Gửi",
+        "error": {
+          "addingRecipient": "Đã xảy ra lỗi khi thêm người nhận. Vui lòng thử lại."
+        },
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -454,6 +457,15 @@
     "error": "Sự cố với việc khôi phục liên kết: %{error}",
     "text": "Liên kết đến tài liệu của tôi %{name}: |||| Liên kết đến các tài liệu của tôi %{name}: ",
     "title": "Liên kết đến tài liệu của tôi %{name} |||| Liên kết đến các tài liệu của tôi %{name}"
+  },
+  "FederatedFolder": {
+    "title": "Thư mục chia sẻ",
+    "share": "Chia sẻ",
+    "shareTitle": "Chia sẻ \"%{name}\"",
+    "successNotification": "Thư mục đã được chia sẻ",
+    "errorNotification": "Lỗi khi chia sẻ thư mục",
+    "addPeople": "Thêm người vào thư mục được chia sẻ:",
+    "add": "Thêm"
   },
   "SharedDrive": {
     "sharedDriveModal": {

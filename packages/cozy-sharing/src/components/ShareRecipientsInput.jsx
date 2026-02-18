@@ -22,7 +22,8 @@ const ShareRecipientsInput = ({
   recipients,
   placeholder,
   onPick,
-  onRemove
+  onRemove,
+  disabled
 }) => {
   const reachableContactsQuery = buildReachableContactsQuery()
   const reachableContactsResult = useQueryAll(
@@ -102,6 +103,7 @@ const ShareRecipientsInput = ({
   return (
     <ShareAutosuggest
       loading={isLoading}
+      disabled={disabled}
       contactsAndGroups={contactsAndGroups}
       recipients={recipients}
       onPick={onPick}
@@ -116,7 +118,8 @@ ShareRecipientsInput.propTypes = {
   recipients: PropTypes.array,
   placeholder: PropTypes.string,
   onPick: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired
+  onRemove: PropTypes.func.isRequired,
+  disabled: PropTypes.bool
 }
 
 ShareRecipientsInput.defaultProps = {

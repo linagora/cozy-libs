@@ -327,6 +327,9 @@
         "email": "Envoyer à :",
         "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
         "send": "Envoyer",
+        "error": {
+          "addingRecipient": "Une erreur s'est produite lors de l'ajout du destinataire. Veuillez réessayer."
+        },
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -451,9 +454,18 @@
     "error": "Impossible de copier dans le presse-papier"
   },
   "shareFile": {
-    "error": "Problème avec la récupération du lien : %{error}",
-    "text": "Voici un lien vers mon document %{name} : |||| Voici un lien contenant mes documents %{name} : ",
+    "error": "Problème avec la récupération du lien : %{error}",
+    "text": "Voici un lien vers mon document %{name} : |||| Voici un lien contenant mes documents %{name} : ",
     "title": "Lien vers mon document %{name} |||| Lien vers mes documents %{name}"
+  },
+  "FederatedFolder": {
+    "title": "Dossier partagé",
+    "share": "Partager",
+    "shareTitle": "Partager \"%{name}\"",
+    "successNotification": "Le dossier a été partagé",
+    "errorNotification": "Erreur lors du partage du dossier",
+    "addPeople": "Ajouter des utilisateurs au dossier partagé :",
+    "add": "Ajouter"
   },
   "SharedDrive": {
     "sharedDriveModal": {

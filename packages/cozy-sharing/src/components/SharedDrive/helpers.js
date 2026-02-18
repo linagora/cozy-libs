@@ -2,6 +2,8 @@ import { models } from 'cozy-client'
 
 const ContactModel = models.contact
 
+export const RECIPIENT_INDEX_PREFIX = 'virtual-shared-drive-sharing-'
+
 export const mergeAndDeduplicateRecipients = arrays => {
   const combinedArray = arrays.flat()
 
@@ -18,12 +20,41 @@ export const mergeAndDeduplicateRecipients = arrays => {
   return uniqueArray
 }
 
+export const moveRecipientToReadWrite = (federatedRecipients, _id) => {
+  const recipientToMove = federatedRecipients.readOnlyRecipients.find(
+    r => r._id === _id
+  )
+  if (!recipientToMove) return federatedRecipients
+
+  return {
+    recipients: [...federatedRecipients.recipients, recipientToMove],
+    readOnlyRecipients: federatedRecipients.readOnlyRecipients.filter(
+      r => r._id !== _id
+    )
+  }
+}
+
+export const moveRecipientToReadOnly = (federatedRecipients, _id) => {
+  const recipientToMove = federatedRecipients.recipients.find(
+    r => r._id === _id
+  )
+  if (!recipientToMove) return federatedRecipients
+
+  return {
+    recipients: federatedRecipients.recipients.filter(r => r._id !== _id),
+    readOnlyRecipients: [
+      ...federatedRecipients.readOnlyRecipients,
+      recipientToMove
+    ]
+  }
+}
+
 export const formatRecipients = sharedDriveRecipients => {
   const recipients = []
 
   sharedDriveRecipients.recipients.forEach(r => {
     recipients.push({
-      index: `virtual-shared-drive-sharing-${r._id}`,
+      index: `${RECIPIENT_INDEX_PREFIX}${r._id}`,
       email: ContactModel.getPrimaryEmail(r),
       public_name: r.displayName || r.name,
       memberIndex: r._id,
@@ -34,7 +65,7 @@ export const formatRecipients = sharedDriveRecipients => {
 
   sharedDriveRecipients.readOnlyRecipients.forEach(r => {
     recipients.push({
-      index: `virtual-shared-drive-sharing-${r._id}`,
+      index: `${RECIPIENT_INDEX_PREFIX}${r._id}`,
       email: ContactModel.getPrimaryEmail(r),
       public_name: r.displayName || r.name,
       memberIndex: r._id,
