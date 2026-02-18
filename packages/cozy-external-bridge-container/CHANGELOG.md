@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.1.0 (2026-02-18)
+
+### Bug Fixes
+
+- **bridge:** Update getContacts typing ([6fd1611](https://github.com/cozy/cozy-libs/commit/6fd1611ee1f26628e87f006c73fd04914fd2d4b8))
+
+### Features
+
+- **bridge:** Duplicate cozy-external-bridge ([eada09e](https://github.com/cozy/cozy-libs/commit/eada09ea73f892485381e460c8b120bee679844f))
+- **bridge:** Manually bump libraries to 1.0.0 ([b8e0bc9](https://github.com/cozy/cozy-libs/commit/b8e0bc982164b3ee011cee94f617a3a7c4ce9bb8))
+- **container-bridge:** Add missing cozy-dataproxy-lib ([6565b01](https://github.com/cozy/cozy-libs/commit/6565b019b372ba82a5edd6fe5e3b9e90112029c8))
+- **container-bridge:** Move container code at root src ([494c897](https://github.com/cozy/cozy-libs/commit/494c8972604a722d9be6b332fbd95e1cace4a80a))
+- **container-bridge:** Remove embedded app build and dep ([d1f4a90](https://github.com/cozy/cozy-libs/commit/d1f4a906c1448f66751b505ce89c4256063a02a4))
+- **container-bridge:** Remove embedded app code ([5cfd73a](https://github.com/cozy/cozy-libs/commit/5cfd73ac1b88e33e7b80f6ccb188b19bc0519313))
+- **container-bridge:** Remove unused dep and update devDep ([6ffa908](https://github.com/cozy/cozy-libs/commit/6ffa9080e6c94c5a49749f8a7212c5241788d111))
+
 # [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.19.2...cozy-external-bridge@0.20.0) (2026-02-16)
 
 ### Features

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.20.0...cozy-external-bridge@1.1.0) (2026-02-18)
+
+### Bug Fixes
+
+- **bridge:** Update getContacts typing ([6fd1611](https://github.com/cozy/cozy-libs/commit/6fd1611ee1f26628e87f006c73fd04914fd2d4b8))
+
+### Features
+
+- **bridge:** Manually bump libraries to 1.0.0 ([b8e0bc9](https://github.com/cozy/cozy-libs/commit/b8e0bc982164b3ee011cee94f617a3a7c4ce9bb8))
+- **embedded-bridge:** Move embedded code at root src ([754d058](https://github.com/cozy/cozy-libs/commit/754d058dd35b006ab3588792d5600364559ff346))
+- **embedded-bridge:** Remove container app build and dep ([ee7a2d6](https://github.com/cozy/cozy-libs/commit/ee7a2d686be65df02e17dee19e9f19e1b167700f))
+- **embedded-bridge:** Remove container app code ([a278534](https://github.com/cozy/cozy-libs/commit/a278534354d5beb2d656f4f81554b92703c32593))
+
 # [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.19.2...cozy-external-bridge@0.20.0) (2026-02-16)
 
 ### Features
