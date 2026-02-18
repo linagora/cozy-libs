@@ -4,100 +4,126 @@ import * as Comlink from 'comlink'
 
 import { IOCozyContact } from 'cozy-client/types/types'
 
-let availableMethods: {
-  updateHistory: (url: string) => void
-  getContacts: () => Promise<IOCozyContact[]>
-  getLang: () => Promise<string>
-  getFlag: (key: string) => Promise<string | boolean>
-  createDocs: (data: object) => Promise<object>
-  updateDocs: (data: object) => Promise<object>
-  requestNotificationPermission: () => Promise<NotificationPermission>
-  sendNotification: (data: { title: string; body: string }) => Promise<void>
-  search: (searchQuery: string) => Promise<object[]>
-}
-
-// eslint-disable-next-line @typescript-eslint/unbound-method
-const originalPushState = history.pushState
-// eslint-disable-next-line @typescript-eslint/unbound-method
-const originalReplaceState = history.replaceState
-
-const onPopstate = (): void => {
-  availableMethods.updateHistory(document.location.href)
-}
-
-const startHistorySyncing = (): void => {
-  console.log('🟣 Starting history syncing')
-  history.pushState = (state, title, url): void => {
-    originalPushState.call(history, state, title, url)
-    if (url) {
-      availableMethods.updateHistory(url.toString())
-    }
+export class CozyBridge {
+  private availableMethods?: {
+    updateHistory: (url: string) => void
+    getContacts: () => Promise<IOCozyContact[]>
+    getLang: () => Promise<string>
+    getFlag: (key: string) => Promise<string | boolean>
+    createDocs: (data: object) => Promise<object>
+    updateDocs: (data: object) => Promise<object>
+    requestNotificationPermission: () => Promise<NotificationPermission>
+    sendNotification: (data: { title: string; body: string }) => Promise<void>
+    search: (searchQuery: string) => Promise<object[]>
   }
 
-  history.replaceState = (state, title, url): void => {
-    originalReplaceState.call(history, state, title, url)
-    if (url) {
-      availableMethods.updateHistory(url.toString())
-    }
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  private originalPushState = history.pushState
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  private originalReplaceState = history.replaceState
+
+  private onPopstate = (): void => {
+    this.availableMethods?.updateHistory(document.location.href)
   }
 
-  window.addEventListener('popstate', onPopstate)
-}
+  startHistorySyncing = (): void => {
+    if (!this.availableMethods) {
+      console.log('🟣 Bridge not setup, cannot start history syncing')
+      return
+    }
+    console.log('🟣 Starting history syncing')
+    const methods = this.availableMethods
+    history.pushState = (state, title, url): void => {
+      this.originalPushState.call(history, state, title, url)
+      if (url) {
+        methods.updateHistory(url.toString())
+      }
+    }
 
-const stopHistorySyncing = (): void => {
-  console.log('🟣 Stopping history syncing')
-  history.pushState = originalPushState
-  history.replaceState = originalReplaceState
-  window.removeEventListener('popstate', onPopstate)
-}
+    history.replaceState = (state, title, url): void => {
+      this.originalReplaceState.call(history, state, title, url)
+      if (url) {
+        methods.updateHistory(url.toString())
+      }
+    }
 
-const getContacts = async (): Promise<IOCozyContact[]> => {
-  console.log('🟣 Fetching contacts...')
-  const contacts = await availableMethods.getContacts()
-  console.log('🟣 Twake received contacts...', contacts)
-  return contacts
-}
+    window.addEventListener('popstate', this.onPopstate)
+  }
 
-const getLang = async (): Promise<string> => {
-  console.log('🟣 Fetching lang...')
-  const lang = await availableMethods.getLang()
-  console.log('🟣 Twake received lang...', lang)
-  return lang
-}
+  stopHistorySyncing = (): void => {
+    console.log('🟣 Stopping history syncing')
+    history.pushState = this.originalPushState
+    history.replaceState = this.originalReplaceState
+    window.removeEventListener('popstate', this.onPopstate)
+  }
 
-const getFlag = async (key: string): Promise<string | boolean> => {
-  console.log('🟣 Getting flag...')
-  const flag = await availableMethods.getFlag(key)
-  console.log('🟣 Twake received flag...', flag)
-  return flag
-}
+  getContacts = async (): Promise<IOCozyContact[]> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
+    }
+    console.log('🟣 Fetching contacts...')
+    const contacts = await this.availableMethods.getContacts()
+    console.log('🟣 Twake received contacts...', contacts)
+    return contacts
+  }
 
-const createDocs = async (data: object): Promise<object> => {
-  console.log('🟣 Creating file...')
-  const createdDocs = await availableMethods.createDocs(data)
-  console.log('🟣 Twake received created file...', createdDocs)
-  return createdDocs
-}
+  getLang = async (): Promise<string> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
+    }
+    console.log('🟣 Fetching lang...')
+    const lang = await this.availableMethods.getLang()
+    console.log('🟣 Twake received lang...', lang)
+    return lang
+  }
 
-const updateDocs = async (data: object): Promise<object> => {
-  console.log('🟣 Updating data...')
-  const updatedDocs = await availableMethods.updateDocs(data)
-  console.log('🟣 Twake received updated file...', updatedDocs)
-  return updatedDocs
-}
+  getFlag = async (key: string): Promise<string | boolean> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
+    }
+    console.log('🟣 Getting flag...')
+    const flag = await this.availableMethods.getFlag(key)
+    console.log('🟣 Twake received flag...', flag)
+    return flag
+  }
 
-const search = async (searchQuery: string): Promise<object[]> => {
-  console.log('🟣 Search...')
-  const results = await availableMethods.search(searchQuery)
-  console.log('🟣 Search results: ', results)
-  return results
-}
+  createDocs = async (data: object): Promise<object> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
+    }
+    console.log('🟣 Creating file...')
+    const createdDocs = await this.availableMethods.createDocs(data)
+    console.log('🟣 Twake received created file...', createdDocs)
+    return createdDocs
+  }
 
-const requestNotificationPermission =
-  async (): Promise<NotificationPermission> => {
+  updateDocs = async (data: object): Promise<object> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
+    }
+    console.log('🟣 Updating data...')
+    const updatedDocs = await this.availableMethods.updateDocs(data)
+    console.log('🟣 Twake received updated file...', updatedDocs)
+    return updatedDocs
+  }
+
+  search = async (searchQuery: string): Promise<object[]> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
+    }
+    console.log('🟣 Search...')
+    const results = await this.availableMethods.search(searchQuery)
+    console.log('🟣 Search results: ', results)
+    return results
+  }
+
+  requestNotificationPermission = async (): Promise<NotificationPermission> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
+    }
     console.log('🟣 Requesting notification permission...')
     const notificationPermission =
-      await availableMethods.requestNotificationPermission()
+      await this.availableMethods.requestNotificationPermission()
     console.log(
       '🟣 Notification permission request result: ',
       notificationPermission
@@ -105,111 +131,91 @@ const requestNotificationPermission =
     return notificationPermission
   }
 
-const sendNotification = async (data: {
-  title: string
-  body: string
-}): Promise<void> => {
-  console.log('🟣 Sending notification...')
-  await availableMethods.sendNotification(data)
-  console.log('🟣 Notification sent')
-}
-
-const requestParentOrigin = (): Promise<string | undefined> => {
-  return new Promise(resolve => {
-    // If we are not in an iframe, we return undefined directly
-    if (window.self === window.parent) {
-      return resolve(undefined)
+  sendNotification = async (data: {
+    title: string
+    body: string
+  }): Promise<void> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
     }
+    console.log('🟣 Sending notification...')
+    await this.availableMethods.sendNotification(data)
+    console.log('🟣 Notification sent')
+  }
 
-    const handleMessage = (event: MessageEvent): void => {
-      if (event.data === 'answerParentOrigin') {
-        clearTimeout(timeout)
-        window.removeEventListener('message', handleMessage)
-        return resolve(event.origin)
+  requestParentOrigin = (): Promise<string | undefined> => {
+    return new Promise(resolve => {
+      // If we are not in an iframe, we return undefined directly
+      if (window.self === window.parent) {
+        return resolve(undefined)
       }
-    }
 
-    window.addEventListener('message', handleMessage)
+      const handleMessage = (event: MessageEvent): void => {
+        if (event.data === 'answerParentOrigin') {
+          clearTimeout(timeout)
+          window.removeEventListener('message', handleMessage)
+          return resolve(event.origin)
+        }
+      }
 
-    window.parent.postMessage('requestParentOrigin', '*')
+      window.addEventListener('message', handleMessage)
 
-    // If no answer from parent window, we return undefined after 1s
-    const timeout = setTimeout(() => {
-      window.removeEventListener('message', handleMessage)
-      return resolve(undefined)
-    }, 1000)
-  })
-}
+      window.parent.postMessage('requestParentOrigin', '*')
 
-const isInIframe = (): boolean => {
-  return window.self !== window.top
-}
+      // If no answer from parent window, we return undefined after 1s
+      const timeout = setTimeout(() => {
+        window.removeEventListener('message', handleMessage)
+        return resolve(undefined)
+      }, 1000)
+    })
+  }
 
-const isInsideCozy = (targetOrigin: string): boolean => {
-  console.log(
-    `[DEPRECATED] isInsideCozy is deprecated:
+  isInIframe = (): boolean => {
+    return window.self !== window.top
+  }
+
+  isInsideCozy = (targetOrigin: string): boolean => {
+    console.log(
+      `[DEPRECATED] isInsideCozy is deprecated:
     - please use isInIframe to check if you are inside an iframe
     - please setup the bridge directly with the legitimate container target origin or check the container target origin on your side`
-  )
-  try {
-    if (!targetOrigin) return false
-
-    const targetUrl = new URL(targetOrigin)
-
-    return (
-      targetUrl.hostname.endsWith('.linagora.com') ||
-      targetUrl.hostname.endsWith('.twake.app') ||
-      targetUrl.hostname.endsWith('.lin-saas.com') ||
-      targetUrl.hostname.endsWith('.lin-saas.dev') ||
-      targetUrl.hostname.endsWith('.mycozy.cloud') ||
-      targetUrl.hostname.endsWith('.cozy.works') ||
-      targetUrl.hostname.endsWith('.cozy.company') ||
-      targetUrl.hostname.endsWith('.localhost') ||
-      targetUrl.hostname.endsWith('.local')
     )
-  } catch {
-    return false
+    try {
+      if (!targetOrigin) return false
+
+      const targetUrl = new URL(targetOrigin)
+
+      return (
+        targetUrl.hostname.endsWith('.linagora.com') ||
+        targetUrl.hostname.endsWith('.twake.app') ||
+        targetUrl.hostname.endsWith('.lin-saas.com') ||
+        targetUrl.hostname.endsWith('.lin-saas.dev') ||
+        targetUrl.hostname.endsWith('.mycozy.cloud') ||
+        targetUrl.hostname.endsWith('.cozy.works') ||
+        targetUrl.hostname.endsWith('.cozy.company') ||
+        targetUrl.hostname.endsWith('.localhost') ||
+        targetUrl.hostname.endsWith('.local')
+      )
+    } catch {
+      return false
+    }
+  }
+
+  setupBridge = (targetOrigin: string): boolean => {
+    if (!targetOrigin) {
+      console.log('🟣 No target origin, doing nothing')
+      return false
+    }
+
+    console.log('🟣 Setup bridge to', targetOrigin)
+
+    this.availableMethods = Comlink.wrap(
+      Comlink.windowEndpoint(self.parent, self, targetOrigin)
+    )
+
+    // Expose methods on the instance
+    return true
   }
 }
 
-const setupBridge = (targetOrigin: string): boolean => {
-  if (!targetOrigin) {
-    console.log('🟣 No target origin, doing nothing')
-    return false
-  }
-
-  console.log('🟣 Setup bridge to', targetOrigin)
-
-  availableMethods = Comlink.wrap(
-    Comlink.windowEndpoint(self.parent, self, targetOrigin)
-  )
-
-  // Full bridge
-  // @ts-expect-error No type
-  window._cozyBridge = {
-    // @ts-expect-error No type
-    ...window._cozyBridge,
-    startHistorySyncing,
-    stopHistorySyncing,
-    getContacts,
-    getLang,
-    getFlag,
-    createDocs,
-    updateDocs,
-    requestNotificationPermission,
-    sendNotification,
-    search
-  }
-
-  console.log('🟣 Bridge ready')
-  return true
-}
-
-// Default bridge
-// @ts-expect-error No type
-window._cozyBridge = {
-  requestParentOrigin,
-  isInIframe,
-  isInsideCozy,
-  setupBridge
-}
+export default CozyBridge
