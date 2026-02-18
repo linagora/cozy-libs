@@ -151,7 +151,11 @@ export class CozyBridge {
       }
 
       const handleMessage = (event: MessageEvent): void => {
-        if (event.data === 'answerParentOrigin') {
+        if (
+          event.data === 'answerParentOrigin' &&
+          event.source === window.parent &&
+          event.origin
+        ) {
           clearTimeout(timeout)
           window.removeEventListener('message', handleMessage)
           return resolve(event.origin)
