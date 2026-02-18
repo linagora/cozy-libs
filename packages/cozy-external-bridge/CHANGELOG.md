@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@1.1.0...cozy-external-bridge@1.2.0) (2026-02-18)
+
+### Bug Fixes
+
+- Prevent message spoofing in requestParentOrigin ([ba2ca45](https://github.com/cozy/cozy-libs/commit/ba2ca4579c889f0387914bc1b0c1232c849564cc))
+
+### Features
+
+- **embedded-bridge:** Expose a Class based API ([4faea33](https://github.com/cozy/cozy-libs/commit/4faea33d88e352d3ada7264d6f9a1e853644ace7))
+
 # [1.1.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@0.20.0...cozy-external-bridge@1.1.0) (2026-02-18)
 
 ### Bug Fixes
