@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useLocation } from 'react-router'
 
+import flag from 'cozy-flags'
+
 import EditableSharingModal from './EditableSharingModal'
 import { SharingDetailsModal } from './SharingDetailsModal'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { FederatedFolderModal } from '../FederatedFolder/FederatedFolderModal'
 
 export const ShareModal = withLocales(props => {
   const location = useLocation?.()
@@ -22,12 +25,21 @@ export const ShareModal = withLocales(props => {
     getOwner,
     getSharingType,
     getRecipients,
-    revokeSelf
+    revokeSelf,
+    allLoaded
   } = useSharingContext()
 
   const handleRevokeSelf = async document => {
     await revokeSelf(document)
     onRevokeSuccess?.(document)
+  }
+
+  const isFederatedMode = flag('drive.federated-shared-folder.enabled')
+  const hasSharings = byDocId[document.id]?.sharings?.length > 0
+
+  // In federated mode, show FederatedFolderModal for unshared documents (sharing an existing folder)
+  if (isFederatedMode && allLoaded && !hasSharings) {
+    return <FederatedFolderModal document={document} onClose={rest.onClose} />
   }
 
   const isEditable =

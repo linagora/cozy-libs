@@ -56,7 +56,8 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
         document: sharedDriveFolder,
         recipients: sharedDriveRecipients.recipients,
         readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
-        sharedDrive: true
+        sharedDrive: true,
+        openSharing: false
       })
 
       showAlert({
@@ -121,11 +122,17 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
       handleSharedDriveNameChange={handleSharedDriveNameChange}
       createContact={createContact}
       recipients={recipients}
+      currentRecipients={[]}
+      hasRecipientsInitially={false}
       onRevoke={onRevoke}
       onSetType={onSetType}
       onCreate={onCreate}
+      onSend={undefined}
       onClose={onClose}
       onShare={onShare}
+      showNameField={true}
+      sharingLink={undefined}
+      document={undefined}
     />
   )
 })

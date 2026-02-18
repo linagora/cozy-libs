@@ -3,6 +3,7 @@ import React, { useReducer, useState } from 'react'
 import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
@@ -28,6 +29,7 @@ const ShareByLink = ({ link, document, documentType }) => {
   const canShare = typeof navigator?.share === 'function'
   const showCopyAndSendButtons = isMobile && canShare
   const showOnlyCopyButton = !isMobile || !canShare
+  const isFederated = flag('drive.federated-shared-folder.enabled')
 
   const [isEditDialogOpen, toggleEditDialogOpen] = useReducer(
     state => !state,
@@ -106,7 +108,11 @@ const ShareByLink = ({ link, document, documentType }) => {
   }
 
   return (
-    <div className="u-w-100 u-flex u-flex-justify-center">
+    <div
+      className={
+        isFederated ? 'u-w-100' : 'u-w-100 u-flex u-flex-justify-center'
+      }
+    >
       {showCopyAndSendButtons && (
         <>
           <Button
@@ -114,7 +120,6 @@ const ShareByLink = ({ link, document, documentType }) => {
             variant="secondary"
             size="medium"
             startIcon={<Icon icon={LinkIcon} />}
-            className="u-flex-auto u-mr-half"
             onClick={shareLink}
             busy={isGenerating}
           />
@@ -133,7 +138,6 @@ const ShareByLink = ({ link, document, documentType }) => {
           variant="secondary"
           size="medium"
           startIcon={<Icon icon={LinkIcon} />}
-          className="u-flex-auto u-mr-half"
           onClick={generateLinkAndCopyLinkToClipboard}
           busy={isGenerating}
         />
