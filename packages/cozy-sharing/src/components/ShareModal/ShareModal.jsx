@@ -37,7 +37,10 @@ export const ShareModal = withLocales(props => {
   const isFederatedMode = flag('drive.federated-shared-folder.enabled')
   const hasSharings = byDocId[document.id]?.sharings?.length > 0
 
-  // In federated mode, show FederatedFolderModal for unshared documents (sharing an existing folder)
+  // In federated mode, show FederatedFolderModal for unshared documents (sharing an existing folder).
+  // When isFederatedMode && hasSharings is true, we intentionally fall through to the legacy
+  // modals (EditableSharingModal / SharingDetailsModal) because federated-shared folders are
+  // handled by those components.
   if (isFederatedMode && allLoaded && !hasSharings) {
     return <FederatedFolderModal document={document} onClose={rest.onClose} />
   }
