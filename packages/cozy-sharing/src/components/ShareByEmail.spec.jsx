@@ -213,7 +213,7 @@ describe('ShareByEmailComponent', () => {
           recipients: [{ _id: 'contact1', email: 'quentin@cozycloud.cc' }],
           readOnlyRecipients: [],
           description: sharingDesc,
-          openSharing: true,
+          openSharing: false,
           sharedDrive: true
         })
       })
