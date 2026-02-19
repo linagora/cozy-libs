@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.6.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.5.1...cozy-ui-plus@4.6.0) (2026-02-19)
+
+### Features
+
+- **cozy-ui-plus:** Add menu to select phone number by country ([7750965](https://github.com/cozy/cozy-libs/commit/775096555b17dd2464b5fcad653d58ae8993d0a4))
+- **cozy-ui-plus:** Add react-international-phone package ([c6eaa2e](https://github.com/cozy/cozy-libs/commit/c6eaa2ebf6218cc81ef09c4a415c3ec0d6137436))
+- **cozy-ui-plus:** Add simple small component ([aabfed6](https://github.com/cozy/cozy-libs/commit/aabfed68b92d8ba31868c4e7eebc4ad6043b57b2))
+- **cozy-ui-plus:** Use new textfield for phone number ([6b47fc5](https://github.com/cozy/cozy-libs/commit/6b47fc5b742b9108f35cd0e7164e942669e93c6c))
+
 ## [4.5.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.5.0...cozy-ui-plus@4.5.1) (2026-02-03)
 
 ### Bug Fixes
