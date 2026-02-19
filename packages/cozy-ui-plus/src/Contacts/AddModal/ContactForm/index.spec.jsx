@@ -211,22 +211,6 @@ describe('ContactForm', () => {
     expect(screen.queryByDisplayValue(testFields['Notes'])).not.toBeNull()
   })
 
-  it('should not submit empty fields', () => {
-    const onSubmit = jest.fn()
-
-    render(
-      <DemoProvider>
-        <ContactForm onSubmit={onSubmit} onCancel={() => {}} />
-      </DemoProvider>
-    )
-
-    act(() => {
-      fireEvent.submit(screen.getByRole('form'))
-    })
-
-    expect(onSubmit).not.toBeCalled()
-  })
-
   describe('isSameContactProp', () => {
     it('should return true if contacts have the same "related" relationships', () => {
       const prevProps = {

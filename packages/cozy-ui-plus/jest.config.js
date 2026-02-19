@@ -5,7 +5,7 @@ module.exports = {
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/fileMock.js',
-    '\\.styl$': 'identity-obj-proxy',
+    '\\.(styl|css)$': 'identity-obj-proxy',
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index',
     '^cozy-client/dist/types$':
       '<rootDir>/node_modules/cozy-client/dist/types.js',

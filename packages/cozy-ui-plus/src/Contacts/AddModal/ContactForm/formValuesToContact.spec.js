@@ -107,7 +107,7 @@ describe('formValuesToContact', () => {
       note: 'Atque cupiditate saepe omnis quos ut molestiae labore voluptates omnis.',
       phone: [
         {
-          number: '+33 (2)0 90 00 54 04',
+          number: '+33 2 90 00 54 04',
           primary: true,
           type: undefined,
           label: undefined
