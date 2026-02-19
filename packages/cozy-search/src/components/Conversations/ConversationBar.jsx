@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import { ComposerPrimitive } from '@assistant-ui/react'
+import React, { useRef } from 'react'
 import { useI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
@@ -11,40 +12,41 @@ import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import styles from './styles.styl'
-import { useAssistant } from '../AssistantProvider'
 
-const ConversationBar = ({ assistantStatus }) => {
+const ConversationBar = ({
+  value,
+  isEmpty,
+  isRunning,
+  onKeyDown,
+  onSend,
+  onCancel
+}) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
-  const { onAssistantExecute } = useAssistant()
-  const [inputValue, setInputValue] = useState('')
   const inputRef = useRef()
-  const { conversationId } = useParams()
 
   // to adjust input height for multiline when typing in it
   useEventListener(inputRef.current, 'input', () => {
-    inputRef.current.style.height = 'auto' // to resize input when emptying it
-    inputRef.current.style.height = `${inputRef.current.scrollHeight}px`
+    if (inputRef.current) {
+      inputRef.current.style.height = 'auto'
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`
+    }
   })
 
-  const handleClear = () => {
-    setInputValue('')
-  }
+  const handleSend = () => {
+    if (isEmpty) return
 
-  const handleChange = ev => {
-    setInputValue(ev.target.value)
-  }
-
-  const handleStop = () => {
-    // not supported right now
-    return
-  }
-
-  const handleClick = () =>
-    onAssistantExecute({ value: inputValue, conversationId }, () => {
-      handleClear()
+    onSend()
+    if (inputRef.current) {
       inputRef.current.style.height = 'auto'
-    })
+    }
+  }
+
+  const handleKeyDown = e => {
+    if (isEmpty) return
+
+    onKeyDown(e)
+  }
 
   return (
     <div className="u-w-100 u-maw-7 u-mh-auto">
@@ -53,7 +55,7 @@ const ConversationBar = ({ assistantStatus }) => {
         icon={null}
         size="auto"
         placeholder={t('assistant.search.placeholder')}
-        value={inputValue}
+        value={value}
         disabledClear
         componentsProps={{
           inputBase: {
@@ -65,40 +67,34 @@ const ConversationBar = ({ assistantStatus }) => {
               className: styles['conversationBar-input']
             },
             autoFocus: !isMobile,
-            endAdornment:
-              assistantStatus !== 'idle' ? (
+            inputComponent: ComposerPrimitive.Input,
+            endAdornment: isRunning ? (
+              <IconButton className="u-p-0 u-mr-half">
                 <Button
+                  size="small"
                   component="div"
-                  className="u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle u-p-1 u-mr-1"
+                  className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
                   classes={{ label: 'u-flex u-w-auto' }}
                   label={<Icon icon={StopIcon} size={12} />}
-                  onClick={handleStop}
+                  onClick={onCancel}
                 />
-              ) : (
+              </IconButton>
+            ) : (
+              <IconButton className="u-p-0 u-mr-half">
                 <Button
+                  size="small"
                   component="div"
-                  className="u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle u-p-1 u-mr-1"
+                  className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
                   classes={{ label: 'u-flex u-w-auto' }}
-                  label={<Icon icon={PaperplaneIcon} size={12} />}
-                  disabled={!inputValue}
-                  onClick={handleClick}
+                  label={<Icon icon={PaperplaneIcon} size={12} rotate={-45} />}
+                  disabled={isEmpty}
+                  onClick={handleSend}
                 />
-              ),
-            onKeyDown: ev => {
-              if (!isMobile) {
-                if (ev.shiftKey && ev.key === 'Enter') {
-                  return ev
-                }
-
-                if (ev.key === 'Enter') {
-                  ev.preventDefault() // prevent form submit
-                  return handleClick()
-                }
-              }
-            }
+              </IconButton>
+            ),
+            onKeyDown: handleKeyDown
           }
         }}
-        onChange={handleChange}
       />
     </div>
   )

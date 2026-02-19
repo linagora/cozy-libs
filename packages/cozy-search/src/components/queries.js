@@ -63,3 +63,18 @@ export const buildAssistantByIdQuery = id => ({
     enabled: !!id
   }
 })
+
+export const buildChatConversationsQuery = () => {
+  return {
+    definition: () =>
+      Q(CHAT_CONVERSATIONS_DOCTYPE)
+        .where({})
+        .indexFields(['cozyMetadata.updatedAt'])
+        .sortBy([{ 'cozyMetadata.updatedAt': 'desc' }])
+        .limitBy(50),
+    options: {
+      as: CHAT_CONVERSATIONS_DOCTYPE + '/recent',
+      fetchPolicy: defaultFetchPolicy
+    }
+  }
+}

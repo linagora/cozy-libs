@@ -4,7 +4,7 @@ import React, { useState, useRef } from 'react'
 import { useQuery } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import Button from 'cozy-ui/transpiled/react/Button'
+import Chips from 'cozy-ui/transpiled/react/Chips'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -52,15 +52,18 @@ const AssistantSelection = ({ className }) => {
   return (
     <>
       <div className={className} ref={buttonRef}>
-        <Button
-          className={styles['trigger-button']}
+        <Chips
+          icon={
+            <AssistantAvatar
+              className="u-ml-half"
+              isSmall={true}
+              assistant={selectedAssistant}
+            />
+          }
+          label={selectedAssistant.name}
+          clickable
           onClick={handleClick}
-          variant="outlined"
-          size="small"
-        >
-          <AssistantAvatar assistant={selectedAssistant} />
-          <Typography variant="body1">{selectedAssistant.name}</Typography>
-        </Button>
+        />
       </div>
       {open && (
         <ActionsMenu
