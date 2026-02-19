@@ -14,6 +14,8 @@ import RelationshipIcon from 'cozy-ui/transpiled/react/Icons/Relationship'
 import TelephoneIcon from 'cozy-ui/transpiled/react/Icons/Telephone'
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 
+import TextFieldPhone from './TextFieldPhone/index'
+
 /**
  * @type {import('../types').Field[]}
  */
@@ -74,6 +76,7 @@ export const fields = [
     icon: TelephoneIcon,
     type: 'tel',
     layout: 'array',
+    component: TextFieldPhone,
     label: {
       name: 'phoneLabel',
       select: true,
