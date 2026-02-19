@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge-container@1.1.0...cozy-external-bridge-container@1.1.1) (2026-02-19)
+
+**Note:** Version bump only for package cozy-external-bridge-container
+
 # 1.1.0 (2026-02-18)
 
 ### Bug Fixes
