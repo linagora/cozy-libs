@@ -2,4 +2,7 @@
   "extends": "cozy-tsconfig",
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "dist"],
+  "compilerOptions": {
+    "declarationDir": "./dist"
+  }
 }
