@@ -80,7 +80,7 @@ export const johnDoeContact = {
   note: 'Atque cupiditate saepe omnis quos ut molestiae labore voluptates omnis.',
   phone: [
     {
-      number: '+33 (2)0 90 00 54 04',
+      number: '+33 2 90 00 54 04',
       primary: true
     },
     {
@@ -155,7 +155,7 @@ export const johnDoeFormValues = {
   phone: [
     {
       fieldId: 'fieldId_5',
-      phone: '+33 (2)0 90 00 54 04',
+      phone: '+33 2 90 00 54 04',
       phoneLabel: undefined
     },
     {
@@ -254,7 +254,7 @@ export const johnDoeContactWithRelated = {
   note: 'Atque cupiditate saepe omnis quos ut molestiae labore voluptates omnis.',
   phone: [
     {
-      number: '+33 (2)0 90 00 54 04',
+      number: '+33 2 90 00 54 04',
       primary: true
     },
     {
