@@ -89,7 +89,7 @@ WhoHasAccess.propTypes = {
       email: PropTypes.string.isRequired
     })
   ),
-  document: PropTypes.object.isRequired,
+  document: PropTypes.object,
   documentType: PropTypes.string.isRequired,
   onRevoke: PropTypes.func.isRequired,
   onRevokeSelf: PropTypes.func,

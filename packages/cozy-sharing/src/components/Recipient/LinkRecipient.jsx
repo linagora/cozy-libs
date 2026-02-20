@@ -29,7 +29,7 @@ const LinkRecipient = props => {
   const { recipientConfirmationData, verifyRecipient, link, fadeIn, document } =
     props
 
-  const permissions = getDocumentPermissions(document._id)
+  const permissions = getDocumentPermissions(document?._id)
   const hasPassword = checkIsPermissionHasPassword(permissions)
   const expiresDate = getPermissionExpiresDate(permissions)
   const dateFormatted = expiresDate
