@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.4](https://github.com/cozy/cozy-libs/compare/cozy-search@0.16.3...cozy-search@0.16.4) (2026-02-20)
+
+### Bug Fixes
+
+- Adding FIXME comment ([b2ba5ff](https://github.com/cozy/cozy-libs/commit/b2ba5ff5787f72e5283b75cbd1eb73e8fee976f1))
+- **email:** Fixing email link ([04b643b](https://github.com/cozy/cozy-libs/commit/04b643bb4e2dffec133115a709028a50cc7f0649))
+
 ## [0.16.3](https://github.com/cozy/cozy-libs/compare/cozy-search@0.16.2...cozy-search@0.16.3) (2026-02-19)
 
 **Note:** Version bump only for package cozy-search
