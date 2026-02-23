@@ -110,7 +110,7 @@ describe('Paywall', () => {
     })
     fireEvent.click(actionButton)
     expect(openSpy).toBeCalledWith(
-      'http://mycozy.cloud/cozy/instances/123/premium',
+      'http://mycozy.cloud/cozy/instances/123/premium?lang=en',
       '_self'
     )
   })
@@ -220,7 +220,7 @@ describe('Paywall', () => {
       })
       fireEvent.click(actionButton)
       expect(openSpy).toBeCalledWith(
-        'http://mycozy.cloud/cozy/instances/123/premium',
+        'http://mycozy.cloud/cozy/instances/123/premium?lang=en',
         '_self'
       )
     })
