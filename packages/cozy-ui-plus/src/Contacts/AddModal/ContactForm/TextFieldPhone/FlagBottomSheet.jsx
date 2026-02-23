@@ -11,12 +11,9 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import ButtonBase from './ButtonBase'
+import FlagImage from './FlagImage'
 
-import {
-  defaultCountries,
-  FlagImage,
-  parseCountry
-} from 'react-international-phone'
+import { defaultCountries, parseCountry } from 'react-international-phone'
 
 const FlagBottomSheet = ({ value, setCountry }) => {
   const [open, setOpen] = useState(false)
