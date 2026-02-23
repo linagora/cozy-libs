@@ -1,5 +1,5 @@
 import React from 'react'
-import 'react-international-phone/style.css'
+import { defaultCountries, parseCountry } from 'react-international-phone'
 
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -8,12 +8,7 @@ import Select from 'cozy-ui/transpiled/react/Select'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import CustomInput from './CustomInput'
-
-import {
-  defaultCountries,
-  FlagImage,
-  parseCountry
-} from 'react-international-phone'
+import FlagImage from './FlagImage'
 
 const FlagMenu = ({ value, setCountry }) => {
   return (
@@ -29,12 +24,7 @@ const FlagMenu = ({ value, setCountry }) => {
         }
       }}
       value={value}
-      renderValue={v => (
-        <FlagImage
-          iso2={v}
-          style={{ verticalAlign: 'bottom', marginLeft: '0.5rem' }}
-        />
-      )}
+      renderValue={v => <FlagImage className="u-ml-half" iso2={v} />}
       onChange={e => setCountry(e.target.value)}
     >
       {defaultCountries.map(c => {
