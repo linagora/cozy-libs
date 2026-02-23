@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.6.0...cozy-ui-plus@5.0.0) (2026-02-23)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Adjust mobile style of flags items in TextFieldPhone ([9cdd431](https://github.com/cozy/cozy-libs/commit/9cdd431c536d6629a9bc4acd1b097d7772a46538))
+
+### Features
+
+- **cozy-ui-plus:** Create own FlagImage to show country flags ([1a1ccaf](https://github.com/cozy/cozy-libs/commit/1a1ccaf40c8671e3af6607a031be04477a7abee5))
+- **cozy-ui-plus:** Upgrade packages ([e859c05](https://github.com/cozy/cozy-libs/commit/e859c053e13b145f00a1ca75ff39668eb3974cde))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** You must have `cozy-client >= 60.21.3`
+
 # [4.6.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.5.1...cozy-ui-plus@4.6.0) (2026-02-19)
 
 ### Features
