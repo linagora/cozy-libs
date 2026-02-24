@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.3.5...cozy-sharing@28.4.0) (2026-02-24)
+
+### Features
+
+- **cozy-sharing:** Implement federated folder sharing modal ([94d52b1](https://github.com/cozy/cozy-libs/commit/94d52b1801f4ddc3253e26a8eb5cfdccfbb5388d))
+
 ## [28.3.5](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.3.4...cozy-sharing@28.3.5) (2026-02-23)
 
 **Note:** Version bump only for package cozy-sharing
