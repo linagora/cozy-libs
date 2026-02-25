@@ -57,7 +57,6 @@ const FieldInputArray = ({
                     <ListItemIcon className="u-ml-half">
                       <IconButton
                         aria-label="delete"
-                        color="error"
                         size="medium"
                         onClick={() => removeField(fields, index)}
                       >
