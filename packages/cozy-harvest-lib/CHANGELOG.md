@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@36.0.30...cozy-harvest-lib@36.1.0) (2026-02-25)
+
+### Features
+
+- Migrate or remove enzyme tests in cozy-harvest-lib ([a113a11](https://github.com/cozy/cozy-libs/commit/a113a110f6d4fa1bb376a091abee9bc11685ea9f))
+
 ## [36.0.30](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@36.0.29...cozy-harvest-lib@36.0.30) (2026-02-24)
 
 **Note:** Version bump only for package cozy-harvest-lib
