@@ -1,13 +1,9 @@
 import minilog from '@cozy/minilog'
 import '@testing-library/jest-dom'
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
 import 'isomorphic-fetch'
 
 minilog.suggest.deny('harvest', 'warn')
 minilog.suggest.deny('harvest', 'error')
-
-configure({ adapter: new Adapter() })
 
 const isComponentWillMountOrWillUpdateWarning = message => {
   return (
@@ -25,11 +21,17 @@ const shouldIgnoreWarning = (message, component) => {
    * componentWillMount and componentWillUpdate
    */
   return (
-    isComponentWillMountOrWillUpdateWarning(message) &&
-    (component === 'ReactSwipableView' ||
-      component === 'ReactFinalForm' ||
-      component === 'Select')
+    (isComponentWillMountOrWillUpdateWarning(message) &&
+      (component === 'ReactSwipableView' ||
+        component === 'ReactFinalForm' ||
+        component === 'Select')) ||
+    message.includes('Infos component API has changed')
   )
+}
+
+// Allow to ignore error logs from some cozy-ui components not up to date
+const shouldIgnoreError = message => {
+  return message.includes('Invalid value for prop')
 }
 
 const originalConsoleWarn = console.warn // eslint-disable-line no-console
@@ -46,9 +48,13 @@ console.warn = function (message, component) {
 }
 
 // eslint-disable-next-line no-console
-console.error = function () {
-  originalConsoleError.apply(this, arguments)
-  throw new Error('console.error should not be called during tests')
+console.error = function (message) {
+  if (shouldIgnoreError(message)) {
+    return
+  } else {
+    originalConsoleError.apply(this, arguments)
+    throw new Error('console.error should not be called during tests')
+  }
 }
 
 // Needed for now because `cozy-ui` can't be updated to the latest version in devDependencies

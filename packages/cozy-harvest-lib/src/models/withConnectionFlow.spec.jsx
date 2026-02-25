@@ -1,6 +1,5 @@
-import { mount } from 'enzyme'
+import { render, screen, act } from '@testing-library/react'
 import React from 'react'
-import { act } from 'react-dom/test-utils'
 
 import CozyClient from 'cozy-client'
 
@@ -33,11 +32,11 @@ describe('with connection flow', () => {
     const client = new CozyClient({})
     client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, null, konnectorFixture)
-    const root = mount(<TriggerStatus flow={flow} />)
-    expect(root.find('div').text()).toBe('IDLE')
+    render(<TriggerStatus flow={flow} />)
+    expect(screen.getByText('IDLE')).toBeInTheDocument()
     act(() => {
       flow.setState({ status: 'SUCCESS' })
     })
-    expect(root.find('div').text()).toBe('SUCCESS')
+    expect(screen.getByText('SUCCESS')).toBeInTheDocument()
   })
 })

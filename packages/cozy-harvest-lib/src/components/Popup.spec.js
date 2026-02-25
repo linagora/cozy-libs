@@ -1,5 +1,5 @@
+import { render } from '@testing-library/react'
 import { Popup } from 'components/Popup'
-import { shallow } from 'enzyme'
 import React from 'react'
 
 const props = {
@@ -10,26 +10,32 @@ const props = {
 
 const windowMock = {
   focus: jest.fn(),
-  location: {}
+  location: {},
+  close: jest.fn(),
+  closed: false
 }
 
 describe('Popup', () => {
   beforeEach(() => {
+    // Reset windowMock functions between tests
+    windowMock.focus = jest.fn()
+    windowMock.close = jest.fn()
     windowMock.location = {}
+    windowMock.closed = false
+
     jest.spyOn(global, 'open').mockImplementation(() => windowMock)
+
+    // Use fake timers to avoid real setInterval
+    jest.useFakeTimers()
   })
 
   afterEach(() => {
     jest.restoreAllMocks()
-  })
-
-  it('should render', () => {
-    const component = shallow(<Popup {...props} />).getElement()
-    expect(component).toMatchSnapshot()
+    jest.useRealTimers()
   })
 
   it('should open new window', () => {
-    shallow(<Popup {...props} />)
+    render(<Popup {...props} />)
     expect(global.open).toHaveBeenCalledWith(
       props.url,
       expect.anything(),

@@ -1,12 +1,12 @@
+import { render, screen } from '@testing-library/react'
 import KonnectorMaintenance from 'components/Maintenance'
-import { mount } from 'enzyme'
 import enLocale from 'locales/en.json'
 import React from 'react'
 import I18n from 'twake-i18n'
 
 describe('KonnectorMaintenance', () => {
-  it('should match the snapshot', () => {
-    const component = mount(
+  it('should render maintenance component', () => {
+    render(
       <I18n lang="en" dictRequire={() => enLocale}>
         <KonnectorMaintenance
           maintenanceMessages={{
@@ -16,11 +16,9 @@ describe('KonnectorMaintenance', () => {
             }
           }}
         />
-      </I18n>,
-      {
-        context: { t: s => s, lang: 'en' }
-      }
+      </I18n>
     )
-    expect(component.html()).toMatchSnapshot()
+    expect(screen.getByText('A long message')).toBeInTheDocument()
+    expect(screen.getByText('A shorter message')).toBeInTheDocument()
   })
 })

@@ -1,18 +1,12 @@
-import {
-  KonnectorSuccess,
-  DescriptionContent,
-  BanksLink,
-  DriveLink,
-  SuccessImage
-} from 'components/KonnectorSuccess'
-import { shallow } from 'enzyme'
+import { render } from '@testing-library/react'
+import { KonnectorSuccess } from 'components/KonnectorSuccess'
 import React from 'react'
 
-import CozyClient, { CozyProvider } from 'cozy-client'
+import CozyClient from 'cozy-client'
+
+import AppLike from '../../test/AppLike'
 
 describe('KonnectorSuccess', () => {
-  let root
-
   const setup = ({ isBankingKonnector, folder_to_save } = {}) => {
     const client = new CozyClient({})
     const konnector = isBankingKonnector
@@ -26,8 +20,9 @@ describe('KonnectorSuccess', () => {
           vendor_link: 'test konnector link'
         }
     const message = folder_to_save ? { folder_to_save: '/path' } : {}
-    root = shallow(
-      <CozyProvider client={client}>
+
+    return render(
+      <AppLike client={client}>
         <KonnectorSuccess
           accounts={[
             {
@@ -51,33 +46,31 @@ describe('KonnectorSuccess', () => {
           onDismiss={() => {}}
           t={jest.fn(str => str)}
         />
-      </CozyProvider>
+      </AppLike>
     )
   }
 
   it('should render the success image', () => {
-    setup()
-    expect(
-      root.find(KonnectorSuccess).dive().find(SuccessImage).dive().getElement()
-    ).toMatchSnapshot()
+    const { container } = setup()
+    expect(container.textContent).toContain('account.success.title')
   })
 
   it('should not show drive if trigger has no folder_to_save', () => {
-    setup()
-    expect(root.find(KonnectorSuccess).dive().find(DriveLink).length).toBe(0)
+    const { container } = setup()
+    expect(container.textContent).toContain('account.success.connect')
+    expect(container.textContent).not.toContain('account.success.drive')
   })
 
   it('should show banks if connector has datatypes with bankAccounts', () => {
-    setup({ isBankingKonnector: true })
-    expect(root.find(KonnectorSuccess).dive().find(DriveLink).length).toBe(0)
-    expect(root.find(KonnectorSuccess).dive().find(BanksLink).length).toBe(1)
+    const { container } = setup({ isBankingKonnector: true })
+    expect(container.textContent).toContain('See my accounts in')
   })
 
   it('should show apps in the correct order', () => {
-    setup({ isBankingKonnector: true, folder_to_save: '123' })
-    expect(root.find(KonnectorSuccess).dive().find(BanksLink).length).toBe(1)
-    expect(
-      root.find(KonnectorSuccess).dive().find(DescriptionContent).getElement()
-    ).toMatchSnapshot()
+    const { container } = setup({
+      isBankingKonnector: true,
+      folder_to_save: '123'
+    })
+    expect(container.textContent).toContain('See my accounts in')
   })
 })

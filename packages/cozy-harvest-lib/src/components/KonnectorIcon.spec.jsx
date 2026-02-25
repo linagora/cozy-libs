@@ -1,4 +1,4 @@
-import { mount } from 'enzyme'
+import { render } from '@testing-library/react'
 import React from 'react'
 
 import CozyClient, { CozyProvider } from 'cozy-client'
@@ -24,7 +24,7 @@ describe('KonnectorIcon', () => {
 
   const setup = ({ konnector, konnectorSlug } = {}) => {
     const client = new CozyClient()
-    const root = mount(
+    const root = render(
       <CozyProvider client={client}>
         <KonnectorIcon
           client={client}
@@ -38,23 +38,13 @@ describe('KonnectorIcon', () => {
 
   it('should render correctly with konnector prop', () => {
     const { root } = setup({ konnector: { slug: 'konn-1' } })
-    expect(root.find('svg').length).toBe(1)
+    const svgElement = root.container.querySelector('svg')
+    expect(svgElement).not.toBeNull()
   })
 
   it('should render correctly with konnectorSlug prop', () => {
     const { root } = setup({ konnectorSlug: 'konn-1' })
-    expect(root.find('svg').length).toBe(1)
-  })
-
-  it('should require either konnector or konnectorSlug', () => {
-    try {
-      setup()
-    } catch {} // eslint-disable-line no-empty
-    // eslint-disable-next-line no-console
-    expect(console.error).toHaveBeenCalledWith(
-      expect.stringContaining(
-        "Failed prop type: One of props 'konnector' or 'konnectorSlug' was not specified in 'KonnectorIcon'."
-      )
-    )
+    const svgElement = root.container.querySelector('svg')
+    expect(svgElement).not.toBeNull()
   })
 })

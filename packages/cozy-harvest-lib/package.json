@@ -76,8 +76,6 @@
     "cozy-ui": "^135.0.0",
     "cozy-ui-plus": "^5.0.0",
     "cozy-viewer": "^26.6.8",
-    "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.6",
     "form-data": "4.0.0",
     "identity-obj-proxy": "3.0.0",
     "isomorphic-fetch": "^2.2.1",
