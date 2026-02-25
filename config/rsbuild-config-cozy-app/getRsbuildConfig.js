@@ -76,7 +76,9 @@ function getRsbuildConfig({
         auto: resource => resource.endsWith('.styl')
       },
       // We enable old API polyfill to keep compatibility with old browsers
-      polyfill: 'usage'
+      polyfill: 'usage',
+      // We enable source map to simplify production debugging
+      sourceMap: true
     },
     performance: {
       chunkSplit: {
