@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@5.0.0...cozy-ui-plus@5.1.0) (2026-02-25)
+
+### Features
+
+- Replace remove field cross button error color by default color ([18f0850](https://github.com/cozy/cozy-libs/commit/18f0850d1b4b7a7ef96bce189c160051534ad52d))
+
 # [5.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@4.6.0...cozy-ui-plus@5.0.0) (2026-02-23)
 
 ### Bug Fixes
