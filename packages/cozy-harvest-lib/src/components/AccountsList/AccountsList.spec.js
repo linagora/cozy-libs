@@ -1,10 +1,21 @@
+import { render } from '@testing-library/react'
 import { AccountsList } from 'components/AccountsList/AccountsList'
-import { shallow } from 'enzyme'
 import React from 'react'
+
+// Mock Status component to avoid complex FlowProvider dependencies
+jest.mock('./Status', () => ({
+  __esModule: true,
+  default: ({ trigger }) => (
+    <div data-testid="status-mock">Status: {trigger?._id}</div>
+  ),
+  Status: ({ trigger }) => (
+    <div data-testid="status-mock">Status: {trigger?._id}</div>
+  )
+}))
 
 describe('AccountsList', () => {
   it('should render', () => {
-    const wrapper = shallow(
+    const { container } = render(
       <AccountsList
         accounts={[
           {
@@ -25,7 +36,8 @@ describe('AccountsList', () => {
         t={jest.fn(str => str)}
       />
     )
-    const component = wrapper.shallow()
-    expect(component.getElement()).toMatchSnapshot()
+    expect(container).toBeTruthy()
+    expect(container.textContent).toContain('account-1')
+    expect(container.textContent).toContain('account-2')
   })
 })

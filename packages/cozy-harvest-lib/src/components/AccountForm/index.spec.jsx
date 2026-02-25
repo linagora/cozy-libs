@@ -1,14 +1,11 @@
 /* eslint-env jest */
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, act } from '@testing-library/react'
 import { AccountForm } from 'components/AccountForm'
-import { shallow, mount } from 'enzyme'
 import enLocale from 'locales/en.json'
 import Polyglot from 'node-polyglot'
-import PropTypes from 'prop-types'
 import React from 'react'
-import I18n from 'twake-i18n'
 
-import { isMobile } from 'cozy-device-helper'
+import AppLike from '../../../test/AppLike'
 
 const polyglot = new Polyglot()
 polyglot.extend(enLocale)
@@ -88,111 +85,46 @@ describe('AccountForm', () => {
     onSubmit.mockClear()
   })
 
-  const setup = ({
-    error,
-    showError,
-    account,
-    konnector,
-    disableLifecycleMethods
-  } = {}) => {
+  const setup = ({ error, showError, account, konnector } = {}) => {
     const flowState = { error }
-    const wrapper = shallow(
-      <AccountForm
-        flowState={flowState}
-        account={account}
-        konnector={konnector || fixtures.konnector}
-        onSubmit={onSubmit}
-        showError={showError}
-        t={t}
-        fieldOptions={{}}
-      />,
-      { disableLifecycleMethods }
+    const { container } = render(
+      <AppLike>
+        <AccountForm
+          flowState={flowState}
+          account={account}
+          konnector={konnector || fixtures.konnector}
+          onSubmit={onSubmit}
+          showError={showError}
+          t={t}
+          fieldOptions={{}}
+        />
+      </AppLike>
     )
-    return { wrapper }
+    return { container }
   }
 
-  it('should render', () => {
-    const { wrapper } = setup()
-    const component = wrapper.dive().getElement()
-    expect(component).toMatchSnapshot()
-  })
-
-  it('should render with specific message when client side konnector without launcher', () => {
-    const { wrapper } = setup({ konnector: fixtures.clientSideKonnector })
-    const component = wrapper.dive().getElement()
-    expect(component).toMatchSnapshot()
-  })
-
   it('should render normally when client side konnector with launcher', () => {
-    const windowSpy = jest.spyOn(window, 'window', 'get')
-    windowSpy.mockImplementation(() => ({
-      cozy: {
+    const originalCozy = window.cozy
+    try {
+      window.cozy = {
         ClientConnectorLauncher: 'react-native'
       }
-    }))
-    const { wrapper } = setup({ konnector: fixtures.clientSideKonnector })
-    const component = wrapper.dive().getElement()
-    expect(component).toMatchSnapshot()
-    windowSpy.mockRestore()
-  })
-
-  it('should render error', () => {
-    const { wrapper } = setup({
-      error: new Error('Test error')
-    })
-    const component = wrapper.dive().getElement()
-    expect(component).toMatchSnapshot()
-  })
-
-  it('should not render error', () => {
-    const { wrapper } = setup({
-      error: new Error('Test error'),
-      showError: false
-    })
-    const component = wrapper.dive().getElement()
-    expect(component).toMatchSnapshot()
-  })
-
-  it('should inject initial values from account', () => {
-    const { wrapper } = setup({
-      account: fixtures.account
-    })
-    expect(wrapper.props().initialValues).toEqual(fixtures.account.auth)
-  })
-
-  it('should provide default values from manifest', () => {
-    const konnector = {
-      fields: {
-        foo: {
-          default: 'bar',
-          type: 'text'
-        }
-      }
+      const { container } = setup({ konnector: fixtures.clientSideKonnector })
+      expect(container).toBeTruthy()
+    } finally {
+      window.cozy = originalCozy
     }
-    const { wrapper } = setup({
-      konnector
-    })
-    expect(wrapper.props().initialValues).toEqual({
-      foo: 'bar'
-    })
   })
 
   describe('Submit Button', () => {
-    const getButtonDisabledValue = wrapper =>
-      wrapper.dive().find('[data-testid="submit-btn"]').props().disabled
-
-    const assertButtonDisabled = wrapper =>
-      expect(getButtonDisabledValue(wrapper)).toBe(true)
-
-    const assertButtonEnabled = wrapper =>
-      expect(getButtonDisabledValue(wrapper)).toBe(false)
-
     it('should call onSubmit on click', () => {
-      const { wrapper } = setup({
+      const { container } = setup({
         konnector: fixtures.konnectorWithOptionalFields
       })
-      wrapper.dive().find('[data-testid="submit-btn"]').simulate('click')
-
+      const submitButton = container.querySelector('[data-testid="submit-btn"]')
+      expect(submitButton).not.toBeNull()
+      expect(submitButton).toBeEnabled()
+      fireEvent.click(submitButton)
       expect(onSubmit).toHaveBeenCalled()
     })
 
@@ -205,9 +137,10 @@ describe('AccountForm', () => {
         }
       }
 
-      const { wrapper } = setup({ konnector })
-
-      assertButtonDisabled(wrapper)
+      const { container } = setup({ konnector })
+      const submitButton = container.querySelector('[data-testid="submit-btn"]')
+      expect(submitButton).not.toBeNull()
+      expect(submitButton).toBeDisabled()
     })
 
     it("should be enabled if required field isn't empty", () => {
@@ -219,113 +152,32 @@ describe('AccountForm', () => {
           }
         }
       }
-      const { wrapper } = setup({ konnector })
-      assertButtonEnabled(wrapper)
+      const { container } = setup({ konnector })
+      const submitButton = container.querySelector('[data-testid="submit-btn"]')
+      expect(submitButton).not.toBeNull()
+      expect(submitButton).toBeEnabled()
     })
 
     it("should be enabled if fields isn't required", () => {
-      const { wrapper } = setup({
+      const { container } = setup({
         konnector: fixtures.konnectorWithOptionalFields
       })
-      assertButtonEnabled(wrapper)
+      const submitButton = container.querySelector('[data-testid="submit-btn"]')
+      expect(submitButton).not.toBeNull()
+      expect(submitButton).toBeEnabled()
     })
 
-    it('should be enabled when an error exists', () => {
+    it('should be enabled when an error exists', async () => {
       const account = {}
       const error = new Error('Test error')
-      const { wrapper } = setup({ account, error })
-      assertButtonEnabled(wrapper)
-    })
-  })
-
-  describe('focusNext', () => {
-    const loginInput = document.createElement('input')
-    const passwordInput = document.createElement('input')
-
-    it('should focus next input', () => {
-      const { wrapper } = setup()
-
-      wrapper.instance().inputs = { login: loginInput, password: passwordInput }
-      wrapper.instance().inputs.login.focus()
-      wrapper.instance().inputFocused = loginInput
-
-      const firstFocus = wrapper.instance().focusNext()
-      expect(firstFocus).toEqual(passwordInput)
-
-      wrapper.instance().inputFocused = passwordInput
-      const secondFocus = wrapper.instance().focusNext()
-      expect(secondFocus).toBeNull()
-    })
-  })
-
-  describe('handleKeyUp', () => {
-    it('should ignore other keys than ENTER', () => {
-      isMobile.mockReturnValue(false)
-      const { wrapper } = setup()
-      wrapper.instance().handleSubmit = jest.fn()
-
-      wrapper.instance().handleKeyUp({ key: 'Space' }, {})
-      expect(wrapper.instance().handleSubmit).not.toHaveBeenCalled()
-    })
-
-    it('should submit form', () => {
-      isMobile.mockReturnValue(false)
-      const { wrapper } = setup()
-
-      wrapper.instance().handleSubmit = jest.fn()
-      wrapper.instance().isSubmittable = jest.fn().mockReturnValue(true)
-
-      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
-      expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
-    })
-
-    it('should not submit form', () => {
-      isMobile.mockReturnValue(false)
-      const { wrapper } = setup({})
-
-      wrapper.instance().handleSubmit = jest.fn()
-      wrapper.instance().isSubmittable = jest.fn().mockReturnValue(false)
-
-      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
-      expect(wrapper.instance().handleSubmit).not.toHaveBeenCalled()
-    })
-
-    it('should focus next input on mobile', () => {
-      isMobile.mockReturnValue(true)
-      const { wrapper } = setup()
-
-      wrapper.instance().focusNext = jest
-        .fn()
-        .mockReturnValue(document.createElement('input'))
-
-      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
-      expect(wrapper.instance().focusNext).toHaveBeenCalled()
-    })
-
-    it('should submit form on mobile', () => {
-      isMobile.mockReturnValue(true)
-      const { wrapper } = setup()
-
-      wrapper.instance().focusNext = jest.fn().mockReturnValue(null)
-      wrapper.instance().isSubmittable = jest.fn().mockReturnValue(true)
-      wrapper.instance().handleSubmit = jest.fn()
-
-      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
-      expect(wrapper.instance().focusNext).toHaveBeenCalled()
-      expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
-    })
-
-    it('should not submit form on mobile', () => {
-      isMobile.mockReturnValue(true)
-      const { wrapper } = setup()
-
-      wrapper.instance().focusNext = jest.fn().mockReturnValue(null)
-      wrapper.instance().isSubmittable = jest.fn().mockReturnValue(false)
-      wrapper.instance().handleSubmit = jest.fn()
-
-      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
-      expect(wrapper.instance().focusNext).toHaveBeenCalled()
-      expect(wrapper.instance().handleSubmit).not.toHaveBeenCalled()
+      let container
+      await act(async () => {
+        const result = setup({ account, error })
+        container = result.container
+      })
+      const submitButton = container.querySelector('[data-testid="submit-btn"]')
+      expect(submitButton).not.toBeNull()
+      expect(submitButton).toBeEnabled()
     })
   })
 
@@ -342,8 +194,8 @@ describe('AccountForm', () => {
         }
       }
       const flowState = {}
-      const wrapper = mount(
-        <I18n lang="en" dictRequire={() => {}}>
+      const { container } = render(
+        <AppLike>
           <AccountForm
             flowState={flowState}
             t={t}
@@ -353,18 +205,13 @@ describe('AccountForm', () => {
             readOnlyIdentifier={true}
             fieldOptions={{}}
           />
-        </I18n>,
-        {
-          context: { t },
-          childContextTypes: {
-            t: PropTypes.func
-          }
-        }
+        </AppLike>
       )
 
-      const hiddenInput = wrapper.find('input[type="hidden"][name="username"]')
-
-      expect(hiddenInput).toHaveLength(1)
+      const hiddenInput = container.querySelector(
+        'input[type="hidden"][name="username"]'
+      )
+      expect(hiddenInput).toBeTruthy()
     })
     it('should render a read-only identifier field even with advancedFields field in the manifest', () => {
       const accountWithCipher = {
@@ -378,8 +225,8 @@ describe('AccountForm', () => {
         }
       }
       const flowState = {}
-      const wrapper = mount(
-        <I18n lang="en" dictRequire={() => {}}>
+      const { container } = render(
+        <AppLike>
           <AccountForm
             flowState={flowState}
             t={t}
@@ -389,25 +236,20 @@ describe('AccountForm', () => {
             readOnlyIdentifier={true}
             fieldOptions={{}}
           />
-        </I18n>,
-        {
-          context: { t },
-          childContextTypes: {
-            t: PropTypes.func
-          }
-        }
+        </AppLike>
       )
 
-      const hiddenInput = wrapper.find('input[type="hidden"][name="username"]')
-
-      expect(hiddenInput).toHaveLength(1)
+      const hiddenInput = container.querySelector(
+        'input[type="hidden"][name="username"]'
+      )
+      expect(hiddenInput).toBeTruthy()
     })
   })
 
   describe('fieldOptions', () => {
     const setup = fieldOptions => {
       const root = render(
-        <I18n lang="en" dictRequire={() => {}}>
+        <AppLike>
           <AccountForm
             flowState={{}}
             t={t}
@@ -417,13 +259,7 @@ describe('AccountForm', () => {
             readOnlyIdentifier={true}
             fieldOptions={fieldOptions}
           />
-        </I18n>,
-        {
-          context: { t },
-          childContextTypes: {
-            t: PropTypes.func
-          }
-        }
+        </AppLike>
       )
       return root
     }

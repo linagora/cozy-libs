@@ -1,20 +1,27 @@
 import { render, fireEvent, act } from '@testing-library/react'
 import React from 'react'
 
-import CozyClient, { useQuery } from 'cozy-client'
+import { createMockClient, useQuery } from 'cozy-client'
 
 import EditContract from './EditContract'
 import bankAccount from './bank-account-fixture.json'
 import AppLike from '../../../../test/AppLike'
 
-jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
+jest.mock('cozy-client', () => ({
+  ...jest.requireActual('cozy-client'),
+  useQuery: jest.fn()
+}))
 
 describe('EditContract', () => {
+  beforeEach(() => {
+    jest.resetAllMocks()
+    useQuery.mockReturnValue({ data: {}, fetchStatus: 'loaded' })
+  })
+
   const setup = ({ konnector } = {}) => {
-    const client = new CozyClient({})
+    const client = createMockClient()
     client.save = jest.fn()
     client.destroy = jest.fn()
-    useQuery.mockReturnValue({ data: {}, fetchStatus: 'loaded' })
 
     const mockKonnector = konnector || {
       slug: 'mock-konnector'
