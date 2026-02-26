@@ -13,12 +13,6 @@
   "bugs": {
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
-  "scripts": {
-    "test": "jest --env node ./*.spec.js"
-  },
-  "devDependencies": {
-    "jest-cli": "24.9.0"
-  },
   "files": [
     "index.js",
     "README.md"
