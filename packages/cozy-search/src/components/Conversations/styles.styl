@@ -69,35 +69,26 @@
     border-style solid
     margin-right 0 !important
 
-.trigger-button
-  border-radius 20px
-  padding 4px 12px
-  border 1px solid var(--borderMainColor)
-  background-color var(--paperBackgroundColor)
-  text-transform none
-  min-width 0
+// Prevent horizontal overflow on message content
+.cozyThread-messageContent
+  overflow-wrap break-word
+  word-wrap break-word
+  word-break break-word
+  hyphens auto
 
-.assistant-icon
-  width 24px
-  height 24px
-  border-radius 50%
-  margin-right 8px
-  object-fit cover
-
-.menu-item
-  display flex !important
-  align-items center !important
-  justify-content space-between !important
-
-  &.create-item
-    border-top 1px solid var(--dividerColor)
-
+.conversation-list-item
   &:hover
-    .menu-item-icon-button
+    .conversation-list-item-action
+      display block !important
+  &:focus-within
+    .conversation-list-item-action
       display block !important
 
-.menu-item-icon-button
-  display none !important
+  .conversation-list-item-action
+    display none !important
+    position absolute
+    top 6px
+    right 12px
 
-.create-icon
-  margin-right 8px
+  &--selected
+    background var(--grey100) !important

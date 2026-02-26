@@ -1,7 +1,7 @@
 {
   "assistant": {
     "search": {
-      "placeholder": "Une question ?",
+      "placeholder": "Une question ?",
       "send": "Envoyer",
       "noItem": "Aucun résultat",
       "notEnough": "Votre recherche doit contenir au moins 3 caractères"
@@ -17,9 +17,68 @@
       "reimbursements": "Vérifier mes remboursements",
       "reorganise_files": "Réorganiser mes fichiers"
     },
+    "actions": {
+      "copy": "Copier",
+      "copied": "Copié dans le presse-papiers",
+      "reload": "Régénérer la réponse",
+      "edit": "Modifier",
+      "edited": "Message enregistré"
+    },
+    "sidebar": {
+      "create_new": "Nouveau chat",
+      "recent_chats": "Conversations récentes",
+      "conversation": {
+        "actions": {
+          "delete": "Supprimer",
+          "rename": "Renommer",
+          "share": "Partager"
+        }
+      }
+    },
+    "time": {
+      "today": "Aujourd'hui",
+      "yesterday": "Hier"
+    },
     "default_error": "Une erreur s'est produite, veuillez réessayer",
     "hide": "Masquer",
-    "show": "Afficher"
+    "show": "Afficher",
+    "search_conversation": {
+      "placeholder": "Rechercher dans vos conversations...",
+      "new_chat": "Nouvelle conversation",
+      "recent": "Conversations récentes",
+      "older": "Plus ancien"
+    },
+    "message": {
+      "welcome": "Comment puis-je vous aider aujourd'hui ?",
+      "running": "Assistant en cours..."
+    },
+    "twake_knowledges": {
+      "chat": "Chat",
+      "drive": "Drive",
+      "mail": "Email",
+      "title_drive": "Sélectionner des dossiers Drive",
+      "title_mail": "Sélectionner des sources d'email",
+      "title_chat": "Sélectionner des sources de discussion",
+      "title_default": "Sélectionner des sources",
+      "desc_drive": "Les éléments sélectionnés seront utilisés pour répondre à vos questions.",
+      "desc_mail": "Les emails sélectionnés seront utilisés pour répondre à vos questions.",
+      "desc_chat": "Les messages sélectionnés seront utilisés pour répondre à vos questions.",
+      "search_placeholder": "Rechercher",
+      "items_selected": "%{smart_count} élément sélectionné |||| %{smart_count} éléments sélectionnés",
+      "clear_all": "Tout effacer",
+      "cancel": "Annuler",
+      "select_folders": "Sélectionner des dossiers",
+      "select_emails": "Sélectionner des emails",
+      "select_messages": "Sélectionner des messages",
+      "my_drive": "Mon Drive",
+      "shared_with_me": "Partagé avec moi",
+      "inbox": "Boîte de réception",
+      "starred": "Favoris",
+      "sent": "Envoyé",
+      "draft": "Brouillon",
+      "outbox": "Boîte d'envoi",
+      "spam": "Spam"
+    }
   },
   "assistant_create": {
     "title": "Créer un assistant",
