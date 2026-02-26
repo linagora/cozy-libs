@@ -7,6 +7,14 @@ import React from 'react'
 
 import AppLike from '../../../test/AppLike'
 
+jest.mock('../../helpers/konnectors', () => {
+  const originalModule = jest.requireActual('../../helpers/konnectors')
+  return {
+    ...originalModule,
+    fetchSupportMail: jest.fn().mockResolvedValue('support@example.com')
+  }
+})
+
 const polyglot = new Polyglot()
 polyglot.extend(enLocale)
 
@@ -70,7 +78,7 @@ const fixtures = {
 const onSubmit = jest.fn()
 
 jest.mock('cozy-device-helper', () => ({
-  ...require.requireActual('cozy-device-helper'),
+  ...jest.requireActual('cozy-device-helper'),
   isMobile: jest.fn()
 }))
 

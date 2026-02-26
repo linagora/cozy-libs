@@ -1,6 +1,7 @@
 // Sync object
 /** @type {import('@jest/types').Config.InitialOptions} */
 const config = {
+  testEnvironment: 'jsdom',
   collectCoverage: true,
   collectCoverageFrom: ['./**/*.{ts,tsx}'],
   coverageDirectory: './tests/coverage',
