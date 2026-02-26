@@ -66,7 +66,7 @@ describe('OAuthForm', () => {
       </AppLike>
     )
     // Wait for next tick so the effects of useOAuthExtraParams are done
-    await act(() => new Promise(setImmediate))
+    await act(() => new Promise(jest.requireActual('timers').setImmediate))
 
     return { root, client }
   }

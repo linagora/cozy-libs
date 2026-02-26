@@ -1,6 +1,7 @@
 import { SynchronousJobQueue } from './synchronousJobQueue'
 
-const flushPromises = () => new Promise(process.nextTick)
+const flushPromises = () =>
+  new Promise(resolve => jest.requireActual('timers').setImmediate(resolve))
 
 const callback = jest.fn()
 
@@ -39,9 +40,11 @@ describe('SynchronousJobQueue', () => {
     synchronousJobQueue.push({ function: resolveAfter500Ms })
     synchronousJobQueue.push({ function: resolveAfter100Ms })
 
-    jest.runAllTimers()
+    // Advance timers to let first job's setTimeout resolve
+    jest.advanceTimersByTime(500)
     await flushPromises()
-    jest.runAllTimers()
+    // Advance timers to let second job's setTimeout resolve
+    jest.advanceTimersByTime(100)
     await flushPromises()
 
     const expectedCallbackOrder = [
@@ -58,9 +61,7 @@ describe('SynchronousJobQueue', () => {
     resolveAfter500Ms()
     resolveAfter100Ms()
 
-    jest.runAllTimers()
-    await flushPromises()
-    jest.runAllTimers()
+    jest.advanceTimersByTime(600)
     await flushPromises()
 
     const expectedCallbackOrder = [

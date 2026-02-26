@@ -51,7 +51,7 @@ describe('onLaunch', () => {
         konnector: { slug: 'testkonnectorslug' }
       }),
       new Promise(resolve => {
-        setImmediate(() => {
+        jest.requireActual('timers').setImmediate(() => {
           window.postMessage(
             JSON.stringify({
               type: 'Clisk',
@@ -83,7 +83,7 @@ describe('onLaunch', () => {
         trigger: { _id: 'testtriggerid' }
       }),
       new Promise(resolve => {
-        setImmediate(() => {
+        jest.requireActual('timers').setImmediate(() => {
           window.postMessage(
             JSON.stringify({
               type: 'Clisk',
@@ -118,7 +118,7 @@ describe('onLaunch', () => {
         flow
       }),
       new Promise(resolve => {
-        setImmediate(() => {
+        jest.requireActual('timers').setImmediate(() => {
           window.postMessage(
             JSON.stringify({
               type: 'Clisk',

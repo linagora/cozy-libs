@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, act } from '@testing-library/react'
 import { KonnectorSuccess } from 'components/KonnectorSuccess'
 import React from 'react'
 
@@ -7,7 +7,7 @@ import CozyClient from 'cozy-client'
 import AppLike from '../../test/AppLike'
 
 describe('KonnectorSuccess', () => {
-  const setup = ({ isBankingKonnector, folder_to_save } = {}) => {
+  const setup = async ({ isBankingKonnector, folder_to_save } = {}) => {
     const client = new CozyClient({})
     const konnector = isBankingKonnector
       ? {
@@ -21,53 +21,58 @@ describe('KonnectorSuccess', () => {
         }
     const message = folder_to_save ? { folder_to_save: '/path' } : {}
 
-    return render(
-      <AppLike client={client}>
-        <KonnectorSuccess
-          accounts={[
-            {
-              account: { _id: 'account-1' },
-              trigger: {
-                _id: 'trigger-1',
-                message: message
+    let container
+    await act(async () => {
+      const result = render(
+        <AppLike client={client}>
+          <KonnectorSuccess
+            accounts={[
+              {
+                account: { _id: 'account-1' },
+                trigger: {
+                  _id: 'trigger-1',
+                  message: message
+                }
+              },
+              {
+                account: { _id: 'account-2' },
+                trigger: { _id: 'trigger-2' }
               }
-            },
-            {
-              account: { _id: 'account-2' },
-              trigger: { _id: 'trigger-2' }
-            }
-          ]}
-          konnector={konnector}
-          accountId="account-1"
-          title="Fake title"
-          successButtonLabel="Fake label"
-          error={null}
-          onDone={() => {}}
-          onDismiss={() => {}}
-          t={jest.fn(str => str)}
-        />
-      </AppLike>
-    )
+            ]}
+            konnector={konnector}
+            accountId="account-1"
+            title="Fake title"
+            successButtonLabel="Fake label"
+            error={null}
+            onDone={() => {}}
+            onDismiss={() => {}}
+            t={jest.fn(str => str)}
+          />
+        </AppLike>
+      )
+      container = result.container
+    })
+    return { container }
   }
 
-  it('should render the success image', () => {
-    const { container } = setup()
+  it('should render the success image', async () => {
+    const { container } = await setup()
     expect(container.textContent).toContain('account.success.title')
   })
 
-  it('should not show drive if trigger has no folder_to_save', () => {
-    const { container } = setup()
+  it('should not show drive if trigger has no folder_to_save', async () => {
+    const { container } = await setup()
     expect(container.textContent).toContain('account.success.connect')
     expect(container.textContent).not.toContain('account.success.drive')
   })
 
-  it('should show banks if connector has datatypes with bankAccounts', () => {
-    const { container } = setup({ isBankingKonnector: true })
+  it('should show banks if connector has datatypes with bankAccounts', async () => {
+    const { container } = await setup({ isBankingKonnector: true })
     expect(container.textContent).toContain('See my accounts in')
   })
 
-  it('should show apps in the correct order', () => {
-    const { container } = setup({
+  it('should show apps in the correct order', async () => {
+    const { container } = await setup({
       isBankingKonnector: true,
       folder_to_save: '123'
     })

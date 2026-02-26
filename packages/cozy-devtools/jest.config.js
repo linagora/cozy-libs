@@ -1,7 +1,7 @@
 module.exports = {
   testPathIgnorePatterns: ['node_modules', 'dist'],
-  testEnvironment: 'jest-environment-jsdom-sixteen',
   testURL: 'http://localhost/',
+  testEnvironment: 'jsdom',
   moduleFileExtensions: ['js', 'jsx', 'json', 'ts', 'tsx'],
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {

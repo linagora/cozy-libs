@@ -19,6 +19,7 @@ describe('watchKonnectorJob', () => {
       realtime: { subscribe: jest.fn(), unsubscribe: jest.fn() }
     }
     client.on = jest.fn()
+    client.query = jest.fn().mockResolvedValue({ data: job })
     const result = await watchKonnectorJob(client, job)
     expect(result instanceof KonnectorJobWatcher).toBe(true)
   })
