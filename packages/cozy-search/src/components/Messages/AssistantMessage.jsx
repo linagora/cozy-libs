@@ -12,11 +12,11 @@ import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
 const AssistantMessage = () => {
   const { t } = useI18n()
 
-  const isRunning = useMessage(s => s.status?.type === 'running')
+  const isThinking = useMessage(s => s.status?.type === 'requires-action')
 
   return (
     <MessagePrimitive.Root className="u-mt-1-half u-mr-3">
-      {isRunning && (
+      {isThinking && (
         <Box display="flex" alignItems="center" gridGap={12}>
           <Icon
             icon={TwakeAssistantIcon}

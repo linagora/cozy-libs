@@ -79,6 +79,10 @@ export const createCozyRealtimeChatAdapter = (
 
     try {
       // Note: For reload, this sends the same query again to regenerate
+      yield {
+        content: [{ type: 'text', text: '' }],
+        status: { type: 'requires-action', reason: 'tool-calls' }
+      }
       await client.stackClient.fetchJSON(
         'POST',
         `/ai/chat/conversations/${conversationId}`,
