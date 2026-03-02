@@ -31,7 +31,8 @@
         "actions": {
           "delete": "Delete",
           "rename": "Rename",
-          "share": "Share"
+          "share": "Share",
+          "load_more": "Load more"
         }
       }
     },
@@ -46,7 +47,9 @@
       "placeholder": "Search in your conversations...",
       "new_chat": "New Chat",
       "recent": "Recent Conversations",
-      "older": "Older"
+      "older": "Older",
+      "not_found_title": "No conversations found",
+      "not_found_desc": "Click \"New Chat\" to begin a conversation or select from your recent chats"
     },
     "message": {
       "welcome": "How can I help you today?",

@@ -34,7 +34,7 @@ export const remove = ({ t }) => {
     Component: makeComponent(label, icon),
     displayCondition: () => true,
     action: () => {
-      // TO DO: Add action to remove
+      // TO DO: Add action to remove due to this action does not exist yet in backend, we will implement it later
     }
   }
 }

@@ -31,7 +31,8 @@
         "actions": {
           "delete": "Supprimer",
           "rename": "Renommer",
-          "share": "Partager"
+          "share": "Partager",
+          "load_more": "Charger plus"
         }
       }
     },
@@ -46,7 +47,9 @@
       "placeholder": "Rechercher dans vos conversations...",
       "new_chat": "Nouvelle conversation",
       "recent": "Conversations récentes",
-      "older": "Plus ancien"
+      "older": "Plus ancien",
+      "not_found_title": "Aucune conversation trouvée",
+      "not_found_desc": "Cliquez sur \"Nouvelle conversation\" pour commencer une conversation ou sélectionnez parmi vos discussions récentes"
     },
     "message": {
       "welcome": "Comment puis-je vous aider aujourd'hui ?",

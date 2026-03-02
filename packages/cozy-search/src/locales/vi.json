@@ -31,7 +31,8 @@
         "actions": {
           "delete": "Xóa",
           "rename": "Đổi tên",
-          "share": "Chia sẻ"
+          "share": "Chia sẻ",
+          "load_more": "Tải thêm"
         }
       }
     },
@@ -50,7 +51,9 @@
       "placeholder": "Tìm kiếm trong các cuộc trò chuyện...",
       "new_chat": "Cuộc trò chuyện mới",
       "recent": "Cuộc trò chuyện gần đây",
-      "older": "Cũ hơn"
+      "older": "Cũ hơn",
+      "not_found_title": "Không tìm thấy cuộc trò chuyện nào",
+      "not_found_desc": "Nhấp vào \"Cuộc trò chuyện mới\" để bắt đầu một cuộc trò chuyện hoặc chọn từ các cuộc trò chuyện gần đây của bạn"
     },
     "twake_knowledges": {
       "chat": "Chat",
