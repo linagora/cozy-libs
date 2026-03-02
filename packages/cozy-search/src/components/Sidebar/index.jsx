@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useI18n } from 'twake-i18n'
 
-import { useQuery } from 'cozy-client'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -11,13 +10,14 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import BurgerIcon from 'cozy-ui/transpiled/react/Icons/Burger'
 import SearchIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
+import LoadMore from 'cozy-ui/transpiled/react/LoadMore'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import useConversation from '../../hooks/useConversation'
+import useFetchConversations from '../../hooks/useFetchConversations'
 import { useAssistant } from '../AssistantProvider'
 import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import ConversationList from '../Conversations/ConversationList'
-import { buildChatConversationsQuery } from '../queries'
 
 const Sidebar = ({ className }) => {
   const { t } = useI18n()
@@ -27,11 +27,7 @@ const Sidebar = ({ className }) => {
     useAssistant()
   const [sidebarOpen, setSidebarOpen] = useState(true)
 
-  const conversationsQuery = buildChatConversationsQuery()
-  const { data: conversations } = useQuery(
-    conversationsQuery.definition,
-    conversationsQuery.options
-  )
+  const { conversations, hasMore, fetchMore } = useFetchConversations()
 
   const onToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen)
@@ -99,6 +95,14 @@ const Sidebar = ({ className }) => {
               currentConversationId={currentConversationId}
               onOpenConversation={goToConversation}
             />
+            {hasMore && (
+              <div className="u-flex u-flex-items-center u-flex-justify-center u-mt-1">
+                <LoadMore
+                  fetchMore={fetchMore}
+                  label={t('assistant.sidebar.conversation.actions.load_more')}
+                />
+              </div>
+            )}
           </PrettyScrollbar>
         </>
       )}

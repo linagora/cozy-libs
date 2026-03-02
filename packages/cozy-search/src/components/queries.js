@@ -1,5 +1,7 @@
 import { Q, fetchPolicies } from 'cozy-client'
 
+import { FETCH_CONVERSATIONS_LIMIT } from './constants'
+
 const CONTACTS_DOCTYPE = 'io.cozy.contacts'
 export const CHAT_CONVERSATIONS_DOCTYPE = 'io.cozy.ai.chat.conversations'
 export const CHAT_EVENTS_DOCTYPE = 'io.cozy.ai.chat.events'
@@ -66,16 +68,17 @@ export const buildAssistantByIdQuery = id => ({
 
 export const buildChatConversationsQuery = () => {
   return {
-    definition: () =>
+    definition: ({ bookmark, query = {} }) =>
       Q(CHAT_CONVERSATIONS_DOCTYPE)
-        .where({})
+        .where(query)
         .indexFields(['cozyMetadata.updatedAt'])
         .sortBy([{ 'cozyMetadata.updatedAt': 'desc' }])
         .include(['assistant'])
-        .limitBy(50),
-    options: {
-      as: CHAT_CONVERSATIONS_DOCTYPE + '/recent',
+        .offsetBookmark(bookmark)
+        .limitBy(FETCH_CONVERSATIONS_LIMIT),
+    options: ({ query = {} }) => ({
+      as: `${CHAT_CONVERSATIONS_DOCTYPE}/recent-${JSON.stringify(query)}`,
       fetchPolicy: defaultFetchPolicy
-    }
+    })
   }
 }
