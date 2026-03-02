@@ -35,6 +35,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
     step,
     formData,
     selectedProvider,
+    canSubmit,
     handleBack,
     handleNext,
     handleChange,
@@ -102,7 +103,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
           onClick={() => handleNext(onSubmit)}
           disabled={isNextDisabled()}
           label={
-            step === STEPS.API_KEY
+            canSubmit
               ? t('assistant_create.buttons.create')
               : t('assistant_create.buttons.next')
           }
