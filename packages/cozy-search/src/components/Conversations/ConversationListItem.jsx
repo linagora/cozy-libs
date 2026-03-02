@@ -6,6 +6,7 @@ import flag from 'cozy-flags'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import ConversationActions from './ConversationActions'
 import styles from './styles.styl'
@@ -22,6 +23,7 @@ const ConversationListItem = ({
   onOpenConversation
 }) => {
   const { t, lang } = useI18n()
+  const { type: theme } = useCozyTheme()
 
   return (
     <ListItem
@@ -31,7 +33,7 @@ const ConversationListItem = ({
         'u-bdrs-4 u-ov-hidden u-mb-half',
         styles['conversation-list-item'],
         {
-          [styles['conversation-list-item--selected']]: selected
+          [styles[`conversation-list-item--selected--${theme}`]]: selected
         }
       )}
       selected={selected}

@@ -1,5 +1,6 @@
 import cx from 'classnames'
 import React, { useState, useRef, useEffect } from 'react'
+import { useI18n } from 'twake-i18n'
 
 import { useQuery } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
@@ -17,6 +18,7 @@ import AssistantAvatar from './AssistantAvatar'
 import AssistantSelectionItem from './AssistantSelectionItem'
 
 const AssistantSelection = ({ className, disabled }) => {
+  const { t } = useI18n()
   const buttonRef = useRef(null)
   const [open, setOpen] = useState(false)
   const {
@@ -109,7 +111,9 @@ const AssistantSelection = ({ className, disabled }) => {
           >
             <div className="u-flex u-flex-items-center">
               <Icon icon={PlusIcon} className={styles['create-icon']} />
-              <Typography variant="body1">Create Assistant</Typography>
+              <Typography variant="body1">
+                {t('assistant_create.title')}
+              </Typography>
             </div>
           </ActionsMenuItem>
         </ActionsMenu>
