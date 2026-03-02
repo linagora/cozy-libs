@@ -3,8 +3,6 @@ import React from 'react'
 import { useI18n } from 'twake-i18n'
 
 import flag from 'cozy-flags'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import ImageIcon from 'cozy-ui/transpiled/react/Icons/Image'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -12,6 +10,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import ConversationActions from './ConversationActions'
 import styles from './styles.styl'
+import AssistantAvatar from '../Assistant/AssistantAvatar'
 import {
   formatConversationDate,
   getDescriptionOfConversation,
@@ -39,7 +38,11 @@ const ConversationListItemWider = ({
       selected={selected}
     >
       <ListItemIcon>
-        <Icon icon={ImageIcon} />
+        <AssistantAvatar
+          assistant={conversation.assistant}
+          className="u-mr-half"
+          isSmall
+        />
       </ListItemIcon>
       <ListItemText
         primary={

@@ -71,6 +71,7 @@ export const buildChatConversationsQuery = () => {
         .where({})
         .indexFields(['cozyMetadata.updatedAt'])
         .sortBy([{ 'cozyMetadata.updatedAt': 'desc' }])
+        .include(['assistant'])
         .limitBy(50),
     options: {
       as: CHAT_CONVERSATIONS_DOCTYPE + '/recent',

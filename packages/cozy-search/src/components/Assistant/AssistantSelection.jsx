@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import { useQuery } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
@@ -16,7 +16,7 @@ import { buildAssistantsQuery } from '../queries'
 import AssistantAvatar from './AssistantAvatar'
 import AssistantSelectionItem from './AssistantSelectionItem'
 
-const AssistantSelection = ({ className }) => {
+const AssistantSelection = ({ className, disabled }) => {
   const buttonRef = useRef(null)
   const [open, setOpen] = useState(false)
   const {
@@ -28,11 +28,18 @@ const AssistantSelection = ({ className }) => {
     setSelectedAssistantId
   } = useAssistant()
 
+  useEffect(() => {
+    if (disabled) {
+      setOpen(false)
+    }
+  }, [disabled])
+
   const assistantsQuery = buildAssistantsQuery()
   const assistants =
     useQuery(assistantsQuery.definition, assistantsQuery.options)?.data || []
 
   const handleClick = () => {
+    if (disabled) return
     setOpen(true)
   }
 
@@ -63,6 +70,7 @@ const AssistantSelection = ({ className }) => {
           label={selectedAssistant.name}
           clickable
           onClick={handleClick}
+          disabled={disabled}
         />
       </div>
       {open && (

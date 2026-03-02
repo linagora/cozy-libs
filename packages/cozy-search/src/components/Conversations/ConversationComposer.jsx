@@ -18,6 +18,7 @@ const ConversationComposer = () => {
   const { isMobile } = useBreakpoints()
   const composerRuntime = useComposerRuntime()
   const isRunning = useThread(state => state.isRunning)
+  const isThreadEmpty = useThread(state => state.messages.length === 0)
   const { setOpenedKnowledgePanel } = useAssistant()
 
   const value = useComposer(state => state.text)
@@ -59,7 +60,9 @@ const ConversationComposer = () => {
       />
 
       <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">
-        {flag('cozy.create-assistant.enabled') && <AssistantSelection />}
+        {flag('cozy.create-assistant.enabled') && (
+          <AssistantSelection disabled={!isThreadEmpty} />
+        )}
         {flag('cozy.source-knowledge.enabled') && (
           <TwakeKnowledgeSelector
             onSelectTwakeKnowledge={setOpenedKnowledgePanel}
