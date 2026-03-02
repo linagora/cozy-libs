@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.16.6...cozy-search@0.17.0) (2026-03-02)
+
+### Features
+
+- Add sidebar and search section :sparkles: ([17e3ee0](https://github.com/cozy/cozy-libs/commit/17e3ee0a7eae3d5544314c0fad992d3b3f4e33ae))
+- Display top bar in assistant page :sparkles: ([7ded482](https://github.com/cozy/cozy-libs/commit/7ded482744d23f3acc7dc12b0c148d6c172ab23f))
+- Implement source knowledge :sparkles: ([592dc39](https://github.com/cozy/cozy-libs/commit/592dc3985d1ded5e190f3dae9720253f74754413))
+- Migrate assistant-ui :sparkles: ([7457d72](https://github.com/cozy/cozy-libs/commit/7457d7271e737033a31c31ff4ec8f9b8e630fb09))
+
+### BREAKING CHANGES
+
+- You need to upgrade react >= 18.0.0 and react-dom >= 18.0.0
+
 ## [0.16.6](https://github.com/cozy/cozy-libs/compare/cozy-search@0.16.5...cozy-search@0.16.6) (2026-02-25)
 
 **Note:** Version bump only for package cozy-search
