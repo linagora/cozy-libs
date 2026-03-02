@@ -6,6 +6,7 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
+import Paper from 'cozy-ui/transpiled/react/Paper'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
@@ -129,7 +130,11 @@ const TwakeKnowledgePanel = ({ onClose }) => {
   if (!openedKnowledgePanel) return null
 
   return (
-    <div className={cx(styles['source-panel'], 'u-h-100')}>
+    <Paper
+      elevation={0}
+      square={true}
+      className={cx(styles['source-panel'], 'u-h-100')}
+    >
       <div className={styles['source-panel-header']}>
         <Typography variant="h4" className="u-flex u-flex-items-center">
           <img src={getIcon()} alt="" className="u-mr-1" />
@@ -185,7 +190,7 @@ const TwakeKnowledgePanel = ({ onClose }) => {
           />
         </div>
       </div>
-    </div>
+    </Paper>
   )
 }
 

@@ -4,16 +4,20 @@ import React from 'react'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import styles from './styles.styl'
 
 const UserMessage = () => {
+  const { type: theme } = useCozyTheme()
+
   return (
     <MessagePrimitive.Root className="u-mt-1">
       <Card
         className={cx(
-          'u-bg-paleGrey u-bdrs-5 u-bdw-0 u-ml-auto u-p-half',
-          styles['cozyThread-user-messages']
+          'u-bdrs-5 u-bdw-0 u-ml-auto u-p-half',
+          styles['cozyThread-user-messages'],
+          styles[`cozyThread-user-messages--${theme}`]
         )}
       >
         <MessagePrimitive.Parts

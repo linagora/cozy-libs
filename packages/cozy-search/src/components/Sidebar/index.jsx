@@ -5,6 +5,7 @@ import { useI18n } from 'twake-i18n'
 
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import BurgerIcon from 'cozy-ui/transpiled/react/Icons/Burger'
@@ -38,75 +39,84 @@ const Sidebar = ({ className }) => {
   }
 
   return (
-    <div
-      className={cx('u-flex u-flex-column u-h-100 u-bdw-1', className, {
-        'u-w-auto': !sidebarOpen
-      })}
-    >
-      <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1">
-        <IconButton
-          size="medium"
-          className={cx('u-bdrs-6', {
-            'u-bg-primaryBackgroundLight': sidebarOpen
-          })}
-          onClick={onToggleSidebar}
-        >
-          <Icon icon={BurgerIcon} />
-        </IconButton>
-        {sidebarOpen && flag('cozy.search-conversation.enabled') && (
+    <>
+      <div
+        className={cx('u-flex u-flex-column u-h-100 u-bdw-1', className, {
+          'u-w-auto': !sidebarOpen
+        })}
+      >
+        <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1">
           <IconButton
             size="medium"
-            className="u-bdrs-6"
-            onClick={onToggleSearch}
+            className={cx('u-bdrs-6 u-p-0')}
+            onClick={onToggleSidebar}
           >
-            <Icon icon={SearchIcon} />
-          </IconButton>
-        )}
-      </div>
-      <div className="u-ph-half u-pb-half">
-        {sidebarOpen ? (
-          <Button
-            className="u-w-100 u-bdrs-6"
-            label={t('assistant.sidebar.create_new')}
-            startIcon={<Icon icon={PlusIcon} />}
-            fullWidth
-            variant="primary"
-            onClick={createNewConversation}
-          />
-        ) : (
-          <IconButton
-            size="medium"
-            className="u-bg-primaryColor u-white u-bdrs-6"
-            onClick={createNewConversation}
-          >
-            <Icon icon={PlusIcon} />
-          </IconButton>
-        )}
-      </div>
-
-      {sidebarOpen && (
-        <>
-          <Typography variant="h6" className="u-ml-1 u-p-half">
-            {t('assistant.sidebar.recent_chats')}
-          </Typography>
-          <PrettyScrollbar className="u-flex-auto u-ov-auto u-ph-half u-pb-half">
-            <ConversationList
-              conversations={conversations}
-              currentConversationId={currentConversationId}
-              onOpenConversation={goToConversation}
+            <Button
+              component="div"
+              variant={sidebarOpen ? 'ghost' : 'text'}
+              className="u-miw-auto u-w-2-half u-h-2-half u-bdrs-6"
+              classes={{ label: 'u-flex u-w-auto' }}
+              label={<Icon icon={BurgerIcon} />}
             />
-            {hasMore && (
-              <div className="u-flex u-flex-items-center u-flex-justify-center u-mt-1">
-                <LoadMore
-                  fetchMore={fetchMore}
-                  label={t('assistant.sidebar.conversation.actions.load_more')}
-                />
-              </div>
-            )}
-          </PrettyScrollbar>
-        </>
-      )}
-    </div>
+          </IconButton>
+          {sidebarOpen && flag('cozy.search-conversation.enabled') && (
+            <IconButton
+              size="medium"
+              className="u-bdrs-6"
+              onClick={onToggleSearch}
+            >
+              <Icon icon={SearchIcon} />
+            </IconButton>
+          )}
+        </div>
+        <div className="u-ph-half u-pb-half">
+          {sidebarOpen ? (
+            <Button
+              className="u-w-100 u-bdrs-6"
+              label={t('assistant.sidebar.create_new')}
+              startIcon={<Icon icon={PlusIcon} />}
+              fullWidth
+              variant="primary"
+              onClick={createNewConversation}
+            />
+          ) : (
+            <IconButton
+              size="medium"
+              className="u-bg-primaryColor u-white u-bdrs-6"
+              onClick={createNewConversation}
+            >
+              <Icon icon={PlusIcon} />
+            </IconButton>
+          )}
+        </div>
+
+        {sidebarOpen && (
+          <>
+            <Typography variant="h6" className="u-ml-1 u-p-half">
+              {t('assistant.sidebar.recent_chats')}
+            </Typography>
+            <PrettyScrollbar className="u-flex-auto u-ov-auto u-ph-half u-pb-half">
+              <ConversationList
+                conversations={conversations}
+                currentConversationId={currentConversationId}
+                onOpenConversation={goToConversation}
+              />
+              {hasMore && (
+                <div className="u-flex u-flex-items-center u-flex-justify-center u-mt-1">
+                  <LoadMore
+                    fetchMore={fetchMore}
+                    label={t(
+                      'assistant.sidebar.conversation.actions.load_more'
+                    )}
+                  />
+                </div>
+              )}
+            </PrettyScrollbar>
+          </>
+        )}
+      </div>
+      {sidebarOpen && <Divider orientation="vertical" flexItem />}
+    </>
   )
 }
 

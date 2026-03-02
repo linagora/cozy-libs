@@ -2,7 +2,7 @@ import cx from 'classnames'
 import React from 'react'
 
 import flag from 'cozy-flags'
-import Divider from 'cozy-ui/transpiled/react/Divider'
+import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import { useAssistant } from '../AssistantProvider'
 import styles from './styles.styl'
@@ -19,6 +19,7 @@ const AssistantContainer = () => {
     openedKnowledgePanel,
     setOpenedKnowledgePanel
   } = useAssistant()
+  const { type: theme } = useCozyTheme()
 
   return (
     <div
@@ -27,11 +28,9 @@ const AssistantContainer = () => {
         styles['assistant-container']
       )}
     >
-      <Sidebar className="u-w-5 u-pb-1 u-bg-white" />
+      <Sidebar className="u-w-5 u-pb-1" />
 
-      <Divider orientation="vertical" flexItem />
-
-      <PrettyScrollbar className="u-flex-auto u-flex u-flex-column u-pb-1 u-ov-hidden u-bg-white">
+      <PrettyScrollbar className="u-flex-auto u-flex u-flex-column u-pb-1 u-ov-hidden">
         {isOpenSearchConversation &&
         flag('cozy.search-conversation.enabled') ? (
           <SearchConversation />
@@ -43,7 +42,12 @@ const AssistantContainer = () => {
       </PrettyScrollbar>
 
       {openedKnowledgePanel && flag('cozy.source-knowledge.enabled') && (
-        <div className="u-ml-half u-h-100 u-maw-7">
+        <div
+          className={cx(
+            'u-h-100 u-maw-7 u-pl-half',
+            styles[`knowledge-panel--${theme}`]
+          )}
+        >
           <TwakeKnowledgePanel
             onClose={() => setOpenedKnowledgePanel(undefined)}
           />

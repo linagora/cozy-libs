@@ -7,6 +7,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import ConversationActions from './ConversationActions'
 import styles from './styles.styl'
@@ -25,6 +26,7 @@ const ConversationListItemWider = ({
   onOpenConversation
 }) => {
   const { t, lang } = useI18n()
+  const { type: theme } = useCozyTheme()
 
   return (
     <ListItem
@@ -33,7 +35,10 @@ const ConversationListItemWider = ({
       onClick={() => onOpenConversation(conversation._id)}
       className={cx(
         'u-bdrs-0 u-ov-hidden u-flex u-flex-items-center u-flex-justify-between u-w-100',
-        styles['conversation-list-item']
+        styles['conversation-list-item'],
+        {
+          [styles[`conversation-list-item--selected--${theme}`]]: selected
+        }
       )}
       selected={selected}
     >
