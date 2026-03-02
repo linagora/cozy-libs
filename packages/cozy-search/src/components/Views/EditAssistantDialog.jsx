@@ -38,6 +38,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
     step,
     formData,
     selectedProvider,
+    canSubmit,
     setFormData,
     setSelectedProvider,
     handleBack,
@@ -67,7 +68,8 @@ const EditAssistantDialog = ({ open, onClose }) => {
         isCustomModel: assistant.isCustomModel || false,
         model: provider?.auth?.login || '',
         baseUrl: provider?.data?.baseUrl || '',
-        apiKey: provider?.auth?.apiKey || ''
+        apiKey: provider?.auth?.apiKey || '',
+        encryptedApiKey: provider?.auth?.credentials_encrypted || ''
       })
 
       const selectProviderDefault = getSelectedProviderByModel(
@@ -138,9 +140,9 @@ const EditAssistantDialog = ({ open, onClose }) => {
         <Button
           variant="primary"
           onClick={() => handleNext(onSubmit)}
-          disabled={isNextDisabled(true)}
+          disabled={isNextDisabled(!!formData.encryptedApiKey)}
           label={
-            step === STEPS.API_KEY
+            canSubmit
               ? t('assistant_edit.buttons.edit')
               : t('assistant_edit.buttons.next')
           }
