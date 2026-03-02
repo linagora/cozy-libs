@@ -31,6 +31,7 @@ export interface CozyRealtimeChatAdapterOptions {
   client: CozyClient
   conversationId: string
   streamBridge: StreamBridge
+  assistantId?: string
 }
 
 /**
@@ -66,7 +67,7 @@ export const createCozyRealtimeChatAdapter = (
     messages,
     abortSignal
   }: ChatModelRunOptions): AsyncGenerator<ChatModelRunResult> {
-    const { client, conversationId, streamBridge } = options
+    const { client, conversationId, streamBridge, assistantId } = options
 
     const userQuery = findUserQuery(messages)
     if (!userQuery) {
@@ -81,7 +82,7 @@ export const createCozyRealtimeChatAdapter = (
       await client.stackClient.fetchJSON(
         'POST',
         `/ai/chat/conversations/${conversationId}`,
-        { q: userQuery }
+        { q: userQuery, assistantId }
       )
 
       let fullText = ''

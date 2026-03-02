@@ -11,6 +11,9 @@ import { CHAT_EVENTS_DOCTYPE, CHAT_CONVERSATIONS_DOCTYPE } from './queries'
 
 export const AssistantContext = React.createContext()
 
+/**
+ * @returns {import('./AssistantProvider').AssistantContextValue}
+ */
 export const useAssistant = () => {
   const context = useContext(AssistantContext)
 

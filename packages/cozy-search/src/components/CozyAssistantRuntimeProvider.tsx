@@ -34,6 +34,8 @@ import {
   CHAT_CONVERSATIONS_DOCTYPE,
   buildChatConversationQueryById
 } from './queries'
+import { useAssistant } from './AssistantProvider'
+import { DEFAULT_ASSISTANT } from './constants'
 
 interface ConversationMessage {
   id: string
@@ -45,6 +47,13 @@ interface ConversationMessage {
 interface Conversation {
   _id: string
   messages?: ConversationMessage[]
+  relationships?: {
+    assistant?: {
+      data: {
+        _id: string
+      }
+    }
+  }
 }
 
 interface CozyAssistantRuntimeProviderProps {
@@ -73,6 +82,7 @@ const ConversationLoader = ({
 }: CozyAssistantRuntimeProviderProps & {
   conversationId: string
 }): JSX.Element | null => {
+  const { setSelectedAssistantId } = useAssistant()
   const conversationQuery = buildChatConversationQueryById(conversationId)
   const queryResult = useQuery(
     conversationQuery.definition,
@@ -85,6 +95,15 @@ const ConversationLoader = ({
     () => convertMessagesToThreadMessages(conversation?.messages),
     [conversation?.messages]
   )
+
+  useEffect(() => {
+    setSelectedAssistantId(
+      conversation?.relationships?.assistant?.data?._id || DEFAULT_ASSISTANT.id
+    )
+  }, [
+    conversation?.relationships?.assistant?.data?._id,
+    setSelectedAssistantId
+  ])
 
   if (isLoading) {
     return (
@@ -119,6 +138,11 @@ const CozyAssistantRuntimeProviderInner = ({
   const messagesIdRef = useRef<string[]>([])
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set())
   const currentStreamingMessageIdRef = useRef<string | null>(null)
+  const { selectedAssistantId } = useAssistant()
+
+  useEffect(() => {
+    cancelledMessageIdsRef.current.clear()
+  }, [conversationId])
 
   useEffect(() => {
     messagesIdRef.current = initialMessages
@@ -223,11 +247,12 @@ const CozyAssistantRuntimeProviderInner = ({
             typeof createCozyRealtimeChatAdapter
           >[0]['client'],
           conversationId,
-          streamBridge: streamBridgeRef.current
+          streamBridge: streamBridgeRef.current,
+          assistantId: selectedAssistantId
         },
         t
       ),
-    [client, conversationId, t]
+    [client, conversationId, selectedAssistantId, t]
   )
 
   const runtime = useLocalRuntime(adapter, {

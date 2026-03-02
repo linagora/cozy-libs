@@ -3,14 +3,13 @@ import React from 'react'
 import { useI18n } from 'twake-i18n'
 
 import flag from 'cozy-flags'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import AssistantIcon from 'cozy-ui/transpiled/react/Icons/Assistant'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import ConversationActions from './ConversationActions'
 import styles from './styles.styl'
+import AssistantAvatar from '../Assistant/AssistantAvatar'
 import {
   formatConversationDate,
   getDescriptionOfConversation,
@@ -62,7 +61,11 @@ const ConversationListItem = ({
               variant="h6"
               className="u-flex u-flex-items-center u-coolGrey"
             >
-              <Icon icon={AssistantIcon} className="u-mr-half" />
+              <AssistantAvatar
+                assistant={conversation.assistant}
+                className="u-mr-half"
+                isSmall
+              />
               {formatConversationDate(
                 conversation.cozyMetadata?.updatedAt,
                 t,

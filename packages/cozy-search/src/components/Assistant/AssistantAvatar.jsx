@@ -9,7 +9,7 @@ import styles from './styles.styl'
 import { DEFAULT_ASSISTANT } from '../constants'
 
 const AssistantAvatar = ({ assistant, isSmall, className }) => {
-  if (!assistant) return
+  if (!assistant) return null
 
   if (assistant.id !== DEFAULT_ASSISTANT.id && !assistant.icon) {
     return (
