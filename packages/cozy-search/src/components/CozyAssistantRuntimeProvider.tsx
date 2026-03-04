@@ -141,10 +141,6 @@ const CozyAssistantRuntimeProviderInner = ({
   const { selectedAssistantId } = useAssistant()
 
   useEffect(() => {
-    cancelledMessageIdsRef.current.clear()
-  }, [conversationId])
-
-  useEffect(() => {
     messagesIdRef.current = initialMessages
       .map(m => m.id)
       .filter((id): id is string => !!id)
@@ -208,6 +204,9 @@ const CozyAssistantRuntimeProviderInner = ({
           content?: string
         }) => {
           if (cancelledMessageIdsRef.current.has(res._id)) {
+            if (res.object === 'done') {
+              cancelledMessageIdsRef.current.delete(res._id)
+            }
             return
           }
 
