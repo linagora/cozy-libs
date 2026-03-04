@@ -9,17 +9,10 @@ const useConversation = () => {
   const { setIsOpenSearchConversation } = useAssistant()
 
   const goToConversation = conversationId => {
-    const parts = location.pathname.split('/')
-    const assistantIndex = parts.findIndex(part => part === 'assistant')
-
-    if (assistantIndex === -1) {
-      parts.push('assistant', conversationId)
-    } else if (parts.length > assistantIndex + 1) {
-      parts[assistantIndex + 1] = conversationId
-    } else {
-      parts.push(conversationId)
-    }
-    const newPathname = parts.join('/')
+    // Extract base path safely by identifying the start of '/assistant' if it exists.
+    const match = location.pathname.match(/^(.*?)(\/assistant(\/|$).*|$)/)
+    const basePath = (match?.[1] || location.pathname).replace(/\/$/, '')
+    const newPathname = `${basePath}/assistant/${conversationId}`
 
     setIsOpenSearchConversation(false)
 
