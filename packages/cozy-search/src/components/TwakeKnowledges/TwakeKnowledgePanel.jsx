@@ -21,6 +21,30 @@ import TChat from '../../assets/tchat.png'
 import TDrive from '../../assets/tdrive.png'
 import TMail from '../../assets/tmail.png'
 
+const PANEL_CONFIG = {
+  drive: {
+    title: 'assistant.twake_knowledges.title_drive',
+    desc: 'assistant.twake_knowledges.desc_drive',
+    icon: TDrive,
+    Component: DriveKnowledge,
+    actionLabel: 'assistant.twake_knowledges.select_folders'
+  },
+  mail: {
+    title: 'assistant.twake_knowledges.title_mail',
+    desc: 'assistant.twake_knowledges.desc_mail',
+    icon: TMail,
+    Component: MailKnowledge,
+    actionLabel: 'assistant.twake_knowledges.select_emails'
+  },
+  chat: {
+    title: 'assistant.twake_knowledges.title_chat',
+    desc: 'assistant.twake_knowledges.desc_chat',
+    icon: TChat,
+    Component: ChatKnowledge,
+    actionLabel: 'assistant.twake_knowledges.select_messages'
+  }
+}
+
 const TwakeKnowledgePanelContainer = ({ children, isMobile }) =>
   !isMobile ? (
     <Paper
@@ -75,75 +99,11 @@ const TwakeKnowledgePanel = ({ onClose }) => {
     onClose()
   }
 
-  const renderContent = () => {
-    switch (openedKnowledgePanel) {
-      case 'drive':
-        return (
-          <DriveKnowledge
-            selectedItems={selectedItems}
-            onToggleItems={handleToggleItems}
-            onClearItems={handleClearItems}
-          />
-        )
-      case 'mail':
-        return (
-          <MailKnowledge
-            selectedItems={selectedItems}
-            onToggleItems={handleToggleItems}
-            onClearItems={handleClearItems}
-          />
-        )
-      case 'chat':
-        return (
-          <ChatKnowledge
-            selectedItems={selectedItems}
-            onToggleItems={handleToggleItems}
-            onClearItems={handleClearItems}
-          />
-        )
-      default:
-        return null
-    }
-  }
+  const config = PANEL_CONFIG[openedKnowledgePanel]
 
-  const getTitle = () => {
-    switch (openedKnowledgePanel) {
-      case 'drive':
-        return t('assistant.twake_knowledges.title_drive')
-      case 'mail':
-        return t('assistant.twake_knowledges.title_mail')
-      case 'chat':
-        return t('assistant.twake_knowledges.title_chat')
-      default:
-        return t('assistant.twake_knowledges.title_default')
-    }
-  }
+  if (!openedKnowledgePanel || !config) return null
 
-  const getDescription = () => {
-    switch (openedKnowledgePanel) {
-      case 'drive':
-        return t('assistant.twake_knowledges.desc_drive')
-      case 'mail':
-        return t('assistant.twake_knowledges.desc_mail')
-      case 'chat':
-        return t('assistant.twake_knowledges.desc_chat')
-      default:
-        return ''
-    }
-  }
-
-  const getIcon = () => {
-    switch (openedKnowledgePanel) {
-      case 'drive':
-        return TDrive
-      case 'mail':
-        return TMail
-      case 'chat':
-        return TChat
-      default:
-        return null
-    }
-  }
+  const { title, desc, icon: IconImg, Component, actionLabel } = config
 
   if (!openedKnowledgePanel) return null
 
@@ -151,8 +111,8 @@ const TwakeKnowledgePanel = ({ onClose }) => {
     <TwakeKnowledgePanelContainer isMobile={isMobile}>
       <div className={styles['source-panel-header']}>
         <Typography variant="h4" className="u-flex u-flex-items-center">
-          <img src={getIcon()} alt="" className="u-mr-1" />
-          {getTitle()}
+          <img src={IconImg} alt="" className="u-mr-1" />
+          {t(title)}
         </Typography>
         <IconButton onClick={onClose}>
           <Icon icon={CrossIcon} />
@@ -161,7 +121,7 @@ const TwakeKnowledgePanel = ({ onClose }) => {
 
       <div className={styles['source-panel-description']}>
         <Typography variant="body2" color="textSecondary">
-          {getDescription()}
+          {t(desc)}
         </Typography>
       </div>
 
@@ -172,7 +132,13 @@ const TwakeKnowledgePanel = ({ onClose }) => {
         />
       </div>
 
-      <div className={styles['source-panel-content']}>{renderContent()}</div>
+      <div className={styles['source-panel-content']}>
+        <Component
+          selectedItems={selectedItems}
+          onToggleItems={handleToggleItems}
+          onClearItems={handleClearItems}
+        />
+      </div>
 
       <div className={styles['source-panel-footer']}>
         <div className="u-flex u-flex-justify-between u-flex-items-end u-flex-gap-half">
@@ -192,13 +158,7 @@ const TwakeKnowledgePanel = ({ onClose }) => {
           />
           <Button
             variant="primary"
-            label={
-              openedKnowledgePanel === 'drive'
-                ? t('assistant.twake_knowledges.select_folders')
-                : openedKnowledgePanel === 'mail'
-                ? t('assistant.twake_knowledges.select_emails')
-                : t('assistant.twake_knowledges.select_messages')
-            }
+            label={t(actionLabel)}
             onClick={handleConfirm}
             disabled={selectedItems.length === 0}
           />
