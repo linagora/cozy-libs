@@ -26,6 +26,9 @@
     },
     "sidebar": {
       "create_new": "New Chat",
+      "toggle_sidebar": "Toggle sidebar",
+      "toggle_search": "Toggle search",
+      "close_sidebar": "Close sidebar",
       "recent_chats": "Recent Chats",
       "conversation": {
         "actions": {
@@ -49,7 +52,8 @@
       "recent": "Recent Conversations",
       "older": "Older",
       "not_found_title": "No conversations found",
-      "not_found_desc": "Click \"New Chat\" to begin a conversation or select from your recent chats"
+      "not_found_desc": "Click \"New Chat\" to begin a conversation or select from your recent chats",
+      "close": "Close"
     },
     "message": {
       "welcome": "How can I help you today?",
@@ -80,7 +84,8 @@
       "sent": "Sent",
       "draft": "Draft",
       "outbox": "Outbox",
-      "spam": "Spam"
+      "spam": "Spam",
+      "search_in": "Search in"
     }
   },
   "assistant_create": {

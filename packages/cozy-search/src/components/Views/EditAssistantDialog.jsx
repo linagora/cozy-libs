@@ -14,6 +14,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import { locales } from '../../locales'
 import { useAssistant } from '../AssistantProvider'
@@ -31,6 +32,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
   const client = useClient()
   const { assistantIdInAction } = useAssistant()
   const { showAlert } = useAlert()
+  const { isMobile } = useBreakpoints()
 
   const {
     step,
@@ -105,6 +107,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
       open={open}
       onClose={onClose}
       maxWidth="lg"
+      fullScreen={!!isMobile}
       className={styles.CreateAssistantDialog}
     >
       <DialogTitle disableTypography={true}>{getTitle()}</DialogTitle>

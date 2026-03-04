@@ -1,28 +1,49 @@
+import cx from 'classnames'
 import debounce from 'lodash/debounce'
 import escapeRegExp from 'lodash/escapeRegExp'
 import React, { useEffect, useMemo, useState } from 'react'
 import { useI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import Dialog from 'cozy-ui/transpiled/react/Dialog'
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import NotFoundConversation from './NotFoundConversation'
 import { groupConversationsByDate } from './helpers'
+import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
+import { useAssistant } from '../AssistantProvider'
 import ConversationList from '../Conversations/ConversationList'
 import ConversationListItemWider from '../Conversations/ConversationListItemWider'
 
+const SearchConversationContainer = ({ children, isMobile }) =>
+  !isMobile ? (
+    <div className="u-w-100 u-h-100 u-flex u-flex-items-center u-flex-justify-center">
+      {children}
+    </div>
+  ) : (
+    <Dialog fullScreen open className="u-w-100 u-h-100">
+      {children}
+    </Dialog>
+  )
+
 const SearchConversation = () => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
   const [query, setQuery] = useState(undefined)
   const [searchStr, setSearchStr] = useState('')
 
   const { createNewConversation, goToConversation } = useConversation()
+  const { setIsOpenSearchConversation } = useAssistant()
   const { conversations, isLoading } = useFetchConversations({ query })
 
   const groupedConversations = useMemo(
@@ -67,16 +88,46 @@ const SearchConversation = () => {
   }
 
   return (
-    <div className="u-w-100 u-h-100 u-flex u-flex-items-center u-flex-justify-center">
-      <div className="u-w-7 u-ph-half u-h-100 u-flex u-flex-column u-flex-items-start u-ov-hidden">
-        <div className="u-w-100 u-mv-2">
-          <SearchBar
-            className="u-mb-2 u-w-100"
-            placeholder={t('assistant.search_conversation.placeholder')}
-            size="medium"
-            value={searchStr}
-            onChange={handleSearchChange}
-          />
+    <SearchConversationContainer isMobile={isMobile}>
+      <div
+        className={cx(
+          'u-h-100 u-flex u-flex-column u-flex-items-start u-ov-hidden',
+          {
+            'u-w-7 u-mh-half': !isMobile
+          }
+        )}
+      >
+        <div
+          className={cx('u-w-100', {
+            'u-mv-2': !isMobile
+          })}
+        >
+          <div className="u-flex u-flex-items-center">
+            <SearchBar
+              elevation={isMobile ? 0 : 1}
+              disabledHover={!!isMobile}
+              disabledClear={!!isMobile}
+              className={cx('u-w-100', styles['search-bar--mobile'], {
+                'u-mb-2': !isMobile
+              })}
+              placeholder={t('assistant.search_conversation.placeholder')}
+              size={isMobile ? 'small' : 'medium'}
+              value={searchStr}
+              onChange={handleSearchChange}
+            />
+
+            {isMobile && (
+              <IconButton
+                size="small"
+                onClick={() => setIsOpenSearchConversation(false)}
+                aria-label={t('assistant.search_conversation.close')}
+              >
+                <Icon icon={CrossIcon} />
+              </IconButton>
+            )}
+          </div>
+
+          {isMobile && <Divider className="u-mb-half" />}
 
           <Button
             label={t('assistant.search_conversation.new_chat')}
@@ -85,7 +136,7 @@ const SearchConversation = () => {
             startIcon={<Icon icon={PlusIcon} />}
             onClick={createNewConversation}
             size="large"
-            className="u-bdrs-6"
+            className="u-ml-half-t u-bdrs-6"
           />
         </div>
 
@@ -109,7 +160,7 @@ const SearchConversation = () => {
                   <Typography
                     variant="subtitle1"
                     color="textSecondary"
-                    className="u-mb-half"
+                    className="u-mb-half u-ml-half-t"
                   >
                     {t('assistant.search_conversation.recent')}
                   </Typography>
@@ -128,7 +179,7 @@ const SearchConversation = () => {
                   <Typography
                     variant="subtitle1"
                     color="textSecondary"
-                    className="u-mt-1 u-mb-half"
+                    className="u-mt-1 u-mb-half u-ml-half-t"
                   >
                     {t('assistant.search_conversation.older')}
                   </Typography>
@@ -149,7 +200,7 @@ const SearchConversation = () => {
           )}
         </div>
       </div>
-    </div>
+    </SearchConversationContainer>
   )
 }
 
