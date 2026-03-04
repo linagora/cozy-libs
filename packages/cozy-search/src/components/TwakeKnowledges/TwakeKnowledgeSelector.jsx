@@ -4,6 +4,8 @@ import { useI18n } from 'twake-i18n'
 
 import flag from 'cozy-flags'
 import Chip from 'cozy-ui/transpiled/react/Chips'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import styles from './styles.styl'
 import TChat from '../../assets/tchat.png'
@@ -13,6 +15,7 @@ import { useAssistant } from '../AssistantProvider'
 
 const TwakeKnowledgeSelector = ({ onSelectTwakeKnowledge }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
   const { openedKnowledgePanel, selectedTwakeKnowledge } = useAssistant()
   const twakeKnowledges = [
     {
@@ -37,6 +40,9 @@ const TwakeKnowledgeSelector = ({ onSelectTwakeKnowledge }) => {
 
   return (
     <div className="u-flex u-flex-row u-flex-wrap u-flex-items-center u-flex-justify-end">
+      <Typography className="u-mr-half u-db-t u-dn u-fz-tiny u-coolGrey">
+        {t('assistant.twake_knowledges.search_in')}
+      </Typography>
       {twakeKnowledges
         .filter(twakeKnowledge => twakeKnowledge.display)
         .map((twakeKnowledge, index) => {
@@ -45,9 +51,15 @@ const TwakeKnowledgeSelector = ({ onSelectTwakeKnowledge }) => {
             selectedTwakeKnowledge[twakeKnowledge.id].length
           return (
             <Chip
+              aria-label={twakeKnowledge.label}
               key={twakeKnowledge.id}
               icon={
-                <img src={twakeKnowledge.icon} className="u-h-1 u-ml-half" />
+                <img
+                  alt=""
+                  aria-hidden="true"
+                  src={twakeKnowledge.icon}
+                  className="u-h-1 u-mh-half-t u-ml-half"
+                />
               }
               deleteIcon={
                 numberOfSelectedItems > 0 ? (
@@ -62,7 +74,7 @@ const TwakeKnowledgeSelector = ({ onSelectTwakeKnowledge }) => {
                 ) : null
               }
               onDelete={numberOfSelectedItems > 0 ? () => {} : null}
-              label={twakeKnowledge.label}
+              label={isMobile ? '' : twakeKnowledge.label}
               clickable
               variant={
                 isSelected || numberOfSelectedItems > 0 ? 'ghost' : 'default'

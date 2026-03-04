@@ -7,8 +7,10 @@ import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Chips from 'cozy-ui/transpiled/react/Chips'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import DropdownIcon from 'cozy-ui/transpiled/react/Icons/Dropdown'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import styles from './styles.styl'
 import { useAssistant } from '../AssistantProvider'
@@ -19,6 +21,7 @@ import AssistantSelectionItem from './AssistantSelectionItem'
 
 const AssistantSelection = ({ className, disabled }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
   const buttonRef = useRef(null)
   const [open, setOpen] = useState(false)
   const {
@@ -69,7 +72,13 @@ const AssistantSelection = ({ className, disabled }) => {
               assistant={selectedAssistant}
             />
           }
-          label={selectedAssistant.name}
+          label={
+            isMobile ? (
+              <Icon className={styles['dropdown-icon']} icon={DropdownIcon} />
+            ) : (
+              selectedAssistant.name
+            )
+          }
           clickable
           onClick={handleClick}
           disabled={disabled}

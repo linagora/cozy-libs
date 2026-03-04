@@ -4,6 +4,7 @@ import {
   useThread,
   useComposer
 } from '@assistant-ui/react'
+import cx from 'classnames'
 import React, { useCallback } from 'react'
 
 import flag from 'cozy-flags'
@@ -49,8 +50,14 @@ const ConversationComposer = () => {
   )
 
   return (
-    <ComposerPrimitive.Root className="u-w-100 u-maw-7 u-mh-auto">
+    <ComposerPrimitive.Root
+      className={cx('u-w-100 u-maw-7 u-mh-auto', {
+        'u-card u-bxz u-elevation-1': isMobile
+      })}
+    >
       <ConversationBar
+        elevation={isMobile ? 0 : 1}
+        disabledHover={!!isMobile}
         value={value}
         isEmpty={isEmpty}
         isRunning={isRunning}

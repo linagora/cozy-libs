@@ -1,4 +1,5 @@
 import { ComposerPrimitive } from '@assistant-ui/react'
+import cx from 'classnames'
 import React, { useRef } from 'react'
 import { useI18n } from 'twake-i18n'
 
@@ -19,7 +20,8 @@ const ConversationBar = ({
   isRunning,
   onKeyDown,
   onSend,
-  onCancel
+  onCancel,
+  ...props
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -51,7 +53,10 @@ const ConversationBar = ({
   return (
     <div className="u-w-100 u-maw-7 u-mh-auto">
       <SearchBar
-        className={styles['conversationBar']}
+        {...props}
+        className={cx(styles['conversationBar'], {
+          [styles['conversationBar--mobile']]: isMobile
+        })}
         icon={null}
         size="auto"
         placeholder={t('assistant.search.placeholder')}

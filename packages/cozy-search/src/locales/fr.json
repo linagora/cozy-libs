@@ -26,6 +26,9 @@
     },
     "sidebar": {
       "create_new": "Nouveau chat",
+      "toggle_sidebar": "Basculer la barre latérale",
+      "toggle_search": "Basculer la recherche",
+      "close_sidebar": "Fermer la barre latérale",
       "recent_chats": "Conversations récentes",
       "conversation": {
         "actions": {
@@ -49,7 +52,8 @@
       "recent": "Conversations récentes",
       "older": "Plus ancien",
       "not_found_title": "Aucune conversation trouvée",
-      "not_found_desc": "Cliquez sur \"Nouvelle conversation\" pour commencer une conversation ou sélectionnez parmi vos discussions récentes"
+      "not_found_desc": "Cliquez sur \"Nouvelle conversation\" pour commencer une conversation ou sélectionnez parmi vos discussions récentes",
+      "close": "Fermer"
     },
     "message": {
       "welcome": "Comment puis-je vous aider aujourd'hui ?",
@@ -80,7 +84,8 @@
       "sent": "Envoyé",
       "draft": "Brouillon",
       "outbox": "Boîte d'envoi",
-      "spam": "Spam"
+      "spam": "Spam",
+      "search_in": "Rechercher dans"
     }
   },
   "assistant_create": {

@@ -26,6 +26,9 @@
     },
     "sidebar": {
       "create_new": "Cuộc trò chuyện mới",
+      "toggle_sidebar": "Bật/tắt thanh bên",
+      "toggle_search": "Bật/tắt tìm kiếm",
+      "close_sidebar": "Đóng thanh bên",
       "recent_chats": "Cuộc trò chuyện gần đây",
       "conversation": {
         "actions": {
@@ -53,7 +56,8 @@
       "recent": "Cuộc trò chuyện gần đây",
       "older": "Cũ hơn",
       "not_found_title": "Không tìm thấy cuộc trò chuyện nào",
-      "not_found_desc": "Nhấp vào \"Cuộc trò chuyện mới\" để bắt đầu một cuộc trò chuyện hoặc chọn từ các cuộc trò chuyện gần đây của bạn"
+      "not_found_desc": "Nhấp vào \"Cuộc trò chuyện mới\" để bắt đầu một cuộc trò chuyện hoặc chọn từ các cuộc trò chuyện gần đây của bạn",
+      "close": "Đóng"
     },
     "twake_knowledges": {
       "chat": "Chat",
@@ -80,7 +84,8 @@
       "sent": "Đã gửi",
       "draft": "Nháp",
       "outbox": "Hộp thư đi",
-      "spam": "Thư rác"
+      "spam": "Thư rác",
+      "search_in": "Tìm kiếm trong"
     }
   },
   "assistant_create": {

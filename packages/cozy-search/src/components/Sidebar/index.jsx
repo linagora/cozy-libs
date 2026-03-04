@@ -9,11 +9,14 @@ import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import BurgerIcon from 'cozy-ui/transpiled/react/Icons/Burger'
+import CrossSmallIcon from 'cozy-ui/transpiled/react/Icons/CrossSmall'
 import SearchIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import LoadMore from 'cozy-ui/transpiled/react/LoadMore'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
+import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
 import { useAssistant } from '../AssistantProvider'
@@ -26,7 +29,8 @@ const Sidebar = ({ className }) => {
   const { createNewConversation, goToConversation } = useConversation()
   const { isOpenSearchConversation, setIsOpenSearchConversation } =
     useAssistant()
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const { isMobile } = useBreakpoints()
+  const [sidebarOpen, setSidebarOpen] = useState(!isMobile)
 
   const { conversations, hasMore, fetchMore } = useFetchConversations()
 
@@ -36,13 +40,18 @@ const Sidebar = ({ className }) => {
 
   const onToggleSearch = () => {
     setIsOpenSearchConversation(!isOpenSearchConversation)
+    if (isMobile) {
+      setSidebarOpen(false)
+    }
   }
 
   return (
     <>
       <div
         className={cx('u-flex u-flex-column u-h-100 u-bdw-1', className, {
-          'u-w-auto': !sidebarOpen
+          'u-w-auto': !sidebarOpen,
+          [styles['sidebar-container']]: sidebarOpen,
+          'u-left-0 u-pos-absolute': isMobile
         })}
       >
         <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1">
@@ -50,24 +59,38 @@ const Sidebar = ({ className }) => {
             size="medium"
             className={cx('u-bdrs-6 u-p-0')}
             onClick={onToggleSidebar}
+            aria-label={t('assistant.sidebar.toggle_sidebar')}
           >
             <Button
               component="div"
               variant={sidebarOpen ? 'ghost' : 'text'}
               className="u-miw-auto u-w-2-half u-h-2-half u-bdrs-6"
               classes={{ label: 'u-flex u-w-auto' }}
-              label={<Icon icon={BurgerIcon} />}
+              label={<Icon icon={BurgerIcon} aria-hidden="true" />}
             />
           </IconButton>
-          {sidebarOpen && flag('cozy.search-conversation.enabled') && (
-            <IconButton
-              size="medium"
-              className="u-bdrs-6"
-              onClick={onToggleSearch}
-            >
-              <Icon icon={SearchIcon} />
-            </IconButton>
-          )}
+          <div>
+            {sidebarOpen && flag('cozy.search-conversation.enabled') && (
+              <IconButton
+                size="medium"
+                className="u-bdrs-6"
+                onClick={onToggleSearch}
+                aria-label={t('assistant.sidebar.toggle_search')}
+              >
+                <Icon icon={SearchIcon} aria-hidden="true" />
+              </IconButton>
+            )}
+            {sidebarOpen && isMobile && (
+              <IconButton
+                size="medium"
+                className="u-bdrs-6"
+                onClick={onToggleSidebar}
+                aria-label={t('assistant.sidebar.close_sidebar')}
+              >
+                <Icon icon={CrossSmallIcon} aria-hidden="true" />
+              </IconButton>
+            )}
+          </div>
         </div>
         <div className="u-ph-half u-pb-half">
           {sidebarOpen ? (
@@ -79,13 +102,14 @@ const Sidebar = ({ className }) => {
               variant="primary"
               onClick={createNewConversation}
             />
-          ) : (
+          ) : isMobile ? null : (
             <IconButton
               size="medium"
               className="u-bg-primaryColor u-white u-bdrs-6"
               onClick={createNewConversation}
+              aria-label={t('assistant.sidebar.create_new')}
             >
-              <Icon icon={PlusIcon} />
+              <Icon icon={PlusIcon} aria-hidden="true" />
             </IconButton>
           )}
         </div>
@@ -115,7 +139,14 @@ const Sidebar = ({ className }) => {
           </>
         )}
       </div>
-      {sidebarOpen && <Divider orientation="vertical" flexItem />}
+      {isMobile && sidebarOpen && (
+        <div
+          className={styles['sidebar-overlay--mobile']}
+          onClick={onToggleSidebar}
+          aria-hidden="true"
+        ></div>
+      )}
+      {sidebarOpen && !isMobile && <Divider orientation="vertical" flexItem />}
     </>
   )
 }

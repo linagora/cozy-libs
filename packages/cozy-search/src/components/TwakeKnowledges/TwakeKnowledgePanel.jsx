@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react'
 import { useI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import { useAssistant } from '../AssistantProvider'
 import ChatKnowledge from './ChatKnowledge'
@@ -19,8 +21,24 @@ import TChat from '../../assets/tchat.png'
 import TDrive from '../../assets/tdrive.png'
 import TMail from '../../assets/tmail.png'
 
+const TwakeKnowledgePanelContainer = ({ children, isMobile }) =>
+  !isMobile ? (
+    <Paper
+      elevation={0}
+      square={true}
+      className={cx(styles['source-panel'], 'u-h-100')}
+    >
+      {children}
+    </Paper>
+  ) : (
+    <Dialog fullScreen open>
+      {children}
+    </Dialog>
+  )
+
 const TwakeKnowledgePanel = ({ onClose }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
   const {
     openedKnowledgePanel,
     selectedTwakeKnowledge,
@@ -130,11 +148,7 @@ const TwakeKnowledgePanel = ({ onClose }) => {
   if (!openedKnowledgePanel) return null
 
   return (
-    <Paper
-      elevation={0}
-      square={true}
-      className={cx(styles['source-panel'], 'u-h-100')}
-    >
+    <TwakeKnowledgePanelContainer isMobile={isMobile}>
       <div className={styles['source-panel-header']}>
         <Typography variant="h4" className="u-flex u-flex-items-center">
           <img src={getIcon()} alt="" className="u-mr-1" />
@@ -190,7 +204,7 @@ const TwakeKnowledgePanel = ({ onClose }) => {
           />
         </div>
       </div>
-    </Paper>
+    </TwakeKnowledgePanelContainer>
   )
 }
 

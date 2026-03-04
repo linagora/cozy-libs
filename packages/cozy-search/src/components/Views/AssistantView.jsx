@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import React from 'react'
 
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import AssistantProvider, { useAssistant } from '../AssistantProvider'
@@ -19,12 +20,16 @@ const AssistantView = () => {
     isOpenDeleteAssistant,
     setIsOpenDeleteAssistant
   } = useAssistant()
+  const { isMobile } = useBreakpoints()
 
   return (
     <div
       className={cx(
         'u-w-100 u-flex u-flex-column u-ov-hidden',
-        styles['assistantWrapper']
+        styles['assistantWrapper'],
+        {
+          'u-ph-1-t u-pb-1-t u-bxz': isMobile
+        }
       )}
     >
       <AssistantContainer />
