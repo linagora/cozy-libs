@@ -23,8 +23,11 @@ import { useParams } from 'react-router-dom'
 import { useI18n } from 'twake-i18n'
 
 import { useClient, useQuery, isQueryLoading } from 'cozy-client'
+import Minilog from 'cozy-minilog'
 import useRealtime from 'cozy-realtime/dist/useRealtime'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
@@ -36,6 +39,8 @@ import {
 } from './queries'
 import { useAssistant } from './AssistantProvider'
 import { DEFAULT_ASSISTANT } from './constants'
+
+const log = Minilog('🔍 [CozyAssistantRuntimeProvider]')
 
 interface ConversationMessage {
   id: string
@@ -148,35 +153,45 @@ const CozyAssistantRuntimeProviderInner = ({
 
   useEffect(() => {
     streamBridgeRef.current.setCleanupCallback(() => {
-      if (currentStreamingMessageIdRef.current) {
-        cancelledMessageIdsRef.current.add(currentStreamingMessageIdRef.current)
-        currentStreamingMessageIdRef.current = null
+      try {
+        if (currentStreamingMessageIdRef.current) {
+          cancelledMessageIdsRef.current.add(
+            currentStreamingMessageIdRef.current
+          )
+          currentStreamingMessageIdRef.current = null
+        }
+      } catch (error) {
+        log.error('Error during StreamBridge cleanup callback:', error)
       }
     })
   }, [])
 
   const handleConversationChange = useCallback(
     (res: Conversation) => {
-      if (res._id === conversationId && res.messages) {
-        const newIds = res.messages.map(m => m.id)
-        const lastAssistantMsg = res.messages
-          .filter(m => m.role === 'assistant')
-          .pop()
-        if (
-          lastAssistantMsg &&
-          !messagesIdRef.current.includes(lastAssistantMsg.id)
-        ) {
+      try {
+        if (res._id === conversationId && res.messages) {
+          const newIds = res.messages.map(m => m.id)
+          const lastAssistantMsg = res.messages
+            .filter(m => m.role === 'assistant')
+            .pop()
           if (
-            currentStreamingMessageIdRef.current &&
-            currentStreamingMessageIdRef.current !== lastAssistantMsg.id
+            lastAssistantMsg &&
+            !messagesIdRef.current.includes(lastAssistantMsg.id)
           ) {
-            cancelledMessageIdsRef.current.add(
-              currentStreamingMessageIdRef.current
-            )
+            if (
+              currentStreamingMessageIdRef.current &&
+              currentStreamingMessageIdRef.current !== lastAssistantMsg.id
+            ) {
+              cancelledMessageIdsRef.current.add(
+                currentStreamingMessageIdRef.current
+              )
+            }
+            currentStreamingMessageIdRef.current = lastAssistantMsg.id
           }
-          currentStreamingMessageIdRef.current = lastAssistantMsg.id
+          messagesIdRef.current = newIds
         }
-        messagesIdRef.current = newIds
+      } catch (error) {
+        log.error('Error handling conversation change:', error)
       }
     },
     [conversationId]
@@ -224,13 +239,17 @@ const CozyAssistantRuntimeProviderInner = ({
             currentStreamingMessageIdRef.current = res._id
           }
 
-          if (res.object === 'delta' && res.content !== undefined) {
-            streamBridgeRef.current.onDelta(conversationId, res.content)
-          }
+          try {
+            if (res.object === 'delta' && res.content !== undefined) {
+              streamBridgeRef.current.onDelta(conversationId, res.content)
+            }
 
-          if (res.object === 'done') {
-            streamBridgeRef.current.onDone(conversationId)
-            currentStreamingMessageIdRef.current = null
+            if (res.object === 'done') {
+              streamBridgeRef.current.onDone(conversationId)
+              currentStreamingMessageIdRef.current = null
+            }
+          } catch (error) {
+            log.error('Error handling chat real-time event:', error)
           }
         }
       }
@@ -261,7 +280,11 @@ const CozyAssistantRuntimeProviderInner = ({
   useEffect(() => {
     const streamBridge = streamBridgeRef.current
     return () => {
-      streamBridge.cleanup(conversationId)
+      try {
+        streamBridge.cleanup(conversationId)
+      } catch (error) {
+        log.error('Error cleaning up StreamBridge on unmount:', error)
+      }
     }
   }, [conversationId])
 
@@ -292,4 +315,59 @@ const CozyAssistantRuntimeProvider = ({
   )
 }
 
-export default CozyAssistantRuntimeProvider
+class CozyAssistantErrorBoundary extends React.Component<
+  { children: ReactNode; t: (key: string) => string },
+  { hasError: boolean; error: Error | null }
+> {
+  constructor(props: { children: ReactNode; t: (key: string) => string }) {
+    super(props)
+    this.state = { hasError: false, error: null }
+  }
+
+  static getDerivedStateFromError(error: Error): {
+    hasError: boolean
+    error: Error
+  } {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+    log.error('Assistant Runtime UI crashed:', error, errorInfo)
+  }
+
+  handleRetry = (): void => {
+    this.setState({ hasError: false, error: null })
+  }
+
+  render(): ReactNode {
+    if (this.state.hasError) {
+      return (
+        <div className="u-flex u-flex-column u-flex-items-center u-flex-justify-center u-h-100 u-w-100 u-ta-center">
+          <Typography variant="h4" className="u-mb-1" color="error">
+            {this.props.t('assistant.default_error')}
+          </Typography>
+          <Button
+            label={this.props.t('assistant.actions.reload')}
+            onClick={this.handleRetry}
+            variant="secondary"
+          />
+        </div>
+      )
+    }
+
+    return this.props.children
+  }
+}
+
+const CozyAssistantRuntimeProviderWithErrorBoundary = (
+  props: CozyAssistantRuntimeProviderProps
+): JSX.Element | null => {
+  const { t } = useI18n()
+  return (
+    <CozyAssistantErrorBoundary t={t}>
+      <CozyAssistantRuntimeProvider {...props} />
+    </CozyAssistantErrorBoundary>
+  )
+}
+
+export default CozyAssistantRuntimeProviderWithErrorBoundary
