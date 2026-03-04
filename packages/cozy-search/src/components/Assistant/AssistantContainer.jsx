@@ -8,7 +8,7 @@ import { useAssistant } from '../AssistantProvider'
 import styles from './styles.styl'
 import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import Conversation from '../Conversations/Conversation'
-import CozyAssistantRuntimeProvider from '../CozyAssistantRuntimeProvider'
+import CozyAssistantRuntimeProviderWithErrorBoundary from '../CozyAssistantRuntimeProvider'
 import SearchConversation from '../Search/SearchConversation'
 import Sidebar from '../Sidebar'
 import TwakeKnowledgePanel from '../TwakeKnowledges/TwakeKnowledgePanel'
@@ -35,9 +35,9 @@ const AssistantContainer = () => {
         flag('cozy.search-conversation.enabled') ? (
           <SearchConversation />
         ) : (
-          <CozyAssistantRuntimeProvider>
+          <CozyAssistantRuntimeProviderWithErrorBoundary>
             <Conversation />
-          </CozyAssistantRuntimeProvider>
+          </CozyAssistantRuntimeProviderWithErrorBoundary>
         )}
       </PrettyScrollbar>
 
