@@ -21,7 +21,6 @@ import React, {
   useCallback
 } from 'react'
 import { useParams } from 'react-router-dom'
-import { useI18n } from 'twake-i18n'
 
 import { useClient, useQuery, isQueryLoading } from 'cozy-client'
 import Minilog from 'cozy-minilog'
@@ -29,6 +28,7 @@ import useRealtime from 'cozy-realtime/dist/useRealtime'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'

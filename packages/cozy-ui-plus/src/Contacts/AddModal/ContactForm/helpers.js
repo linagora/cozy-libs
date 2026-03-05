@@ -172,7 +172,7 @@ export const createAddress = ({ address, oldContact, t }) => {
 
           if (addressHasBeenModified) {
             // Use "code" instead "postcode", to be vcard 4.0 rfc 6350 compliant
-            // eslint-disable-next-line no-unused-vars
+
             const { postcode, ...oldContactAddressCleaned } =
               oldContactAddress || {}
             return {
