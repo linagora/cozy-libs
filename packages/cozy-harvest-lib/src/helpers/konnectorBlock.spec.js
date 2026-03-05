@@ -1,6 +1,5 @@
-import { I18n } from 'twake-i18n'
-
 import { createMockClient } from 'cozy-client'
+import { I18n } from 'twake-i18n'
 
 import konnectorBlock from './konnectorBlock'
 

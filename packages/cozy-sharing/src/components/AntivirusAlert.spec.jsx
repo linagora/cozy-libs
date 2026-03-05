@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react'
 import React from 'react'
+
 import { I18nContext } from 'twake-i18n'
 
 import AntivirusAlert from './AntivirusAlert'

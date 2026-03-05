@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
 
