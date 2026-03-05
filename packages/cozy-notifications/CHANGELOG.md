@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.2](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.23.1...cozy-notifications@0.23.2) (2026-03-05)
+
+**Note:** Version bump only for package cozy-notifications
+
 ## [0.23.1](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.23.0...cozy-notifications@0.23.1) (2025-10-30)
 
 **Note:** Version bump only for package cozy-notifications

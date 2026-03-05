@@ -1,7 +1,7 @@
 {
   "name": "cozy-intent",
   "description": "Event-based library allowing interactions between React-Native and React applications",
-  "version": "2.30.2",
+  "version": "2.30.3",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
@@ -18,7 +18,7 @@
     "@babel/core": "7.16.12",
     "@testing-library/react": "12.1.5",
     "@testing-library/react-hooks": "8.0.1",
-    "babel-preset-cozy-app": "^2.8.3",
+    "babel-preset-cozy-app": "^2.8.4",
     "cozy-minilog": "^3.3.1",
     "jest": "27.5.1",
     "mutationobserver-shim": "0.3.7",

@@ -1,6 +1,6 @@
 {
   "name": "cozy-devtools",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Cozy-Devtools exposes a devtool that can be injected in an app for debug and better developer experience.",
   "main": "dist/index.js",
   "license": "MIT",
@@ -20,10 +20,10 @@
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-devtools"
   },
   "devDependencies": {
-    "babel-preset-cozy-app": "^2.8.3",
+    "babel-preset-cozy-app": "^2.8.4",
     "cozy-client": "^50.0.0",
-    "cozy-flags": "^4.8.2",
-    "cozy-intent": "^2.30.2",
+    "cozy-flags": "^4.8.3",
+    "cozy-intent": "^2.30.3",
     "cozy-pouch-link": "^50.0.0",
     "cozy-ui": "^111.19.0",
     "jest": "27.5.1",

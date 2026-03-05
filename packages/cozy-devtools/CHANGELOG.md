@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.5](https://github.com/cozy/cozy-libs/compare/cozy-devtools@1.4.4...cozy-devtools@1.4.5) (2026-03-05)
+
+**Note:** Version bump only for package cozy-devtools
+
 ## [1.4.4](https://github.com/cozy/cozy-libs/compare/cozy-devtools@1.4.3...cozy-devtools@1.4.4) (2026-01-29)
 
 **Note:** Version bump only for package cozy-devtools
