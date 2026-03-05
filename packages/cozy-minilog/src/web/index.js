@@ -14,7 +14,7 @@ Minilog.defaultBackend = isChrome || isReactNative ? console.minilog : console
 if (typeof window != 'undefined') {
   try {
     Minilog.enable(JSON.parse(window.localStorage['minilogSettings']))
-  } catch (e) {
+  } catch (_e) {
     // ignore
   }
   if (window.location && window.location.search) {
@@ -28,7 +28,7 @@ Minilog.enable = function () {
   oldEnable.call(Minilog, true)
   try {
     window.localStorage['minilogSettings'] = JSON.stringify(true)
-  } catch (e) {
+  } catch (_e) {
     // ignore
   }
   return this
@@ -38,7 +38,7 @@ Minilog.disable = function () {
   oldDisable.call(Minilog)
   try {
     delete window.localStorage.minilogSettings
-  } catch (e) {
+  } catch (_e) {
     // ignore
   }
   return this

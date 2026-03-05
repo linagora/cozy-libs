@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import manifest from 'helpers/manifest'
 
 describe('manifest', () => {

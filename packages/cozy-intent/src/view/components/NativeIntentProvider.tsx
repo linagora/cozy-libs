@@ -36,6 +36,7 @@ export const NativeIntentProvider = ({
 
   if (serviceRef.current === null) {
     serviceRef.current = new NativeService(localMethods)
+    // eslint-disable-next-line react-hooks/refs
     setNativeIntentService(serviceRef.current)
   }
 
@@ -46,6 +47,7 @@ export const NativeIntentProvider = ({
   }, [localMethods])
 
   return (
+    // eslint-disable-next-line react-hooks/refs
     <NativeContext.Provider value={serviceRef.current}>
       {children}
     </NativeContext.Provider>

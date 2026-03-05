@@ -128,12 +128,18 @@ const getSearchResultSubTitle = (
       matchingValue = doc[matchingField as keyof IOCozyContact]
     }
 
-    return matchingValue?.toString() ?? null
+    if (matchingValue === null || matchingValue === undefined) return null
+    if (
+      typeof matchingValue !== 'string' &&
+      typeof matchingValue !== 'number' &&
+      typeof matchingValue !== 'boolean'
+    )
+      return null
+    return matchingValue.toString()
   }
 
   if (doc._type === APPS_DOCTYPE) {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const locale: string = client.getInstanceOptions().locale || 'en'
       if (doc.locales[locale]) {
         return doc.locales[locale].short_description

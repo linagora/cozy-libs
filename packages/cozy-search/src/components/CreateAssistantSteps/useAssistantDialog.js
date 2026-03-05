@@ -86,7 +86,7 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
       } else {
         setStep(prev => prev + 1)
       }
-    } catch (error) {
+    } catch (_error) {
       showAlert({ message: t('assistant.default_error'), severity: 'error' })
     }
   }

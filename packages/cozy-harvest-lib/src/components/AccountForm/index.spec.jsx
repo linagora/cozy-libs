@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { fireEvent, render, act } from '@testing-library/react'
 import { AccountForm } from 'components/AccountForm'
 import enLocale from 'locales/en.json'

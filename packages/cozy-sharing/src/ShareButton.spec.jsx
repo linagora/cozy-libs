@@ -16,13 +16,11 @@ jest.mock('twake-i18n', () => ({
   useI18n: jest.fn().mockReturnValue({ t: jest.fn() })
 }))
 
-jest.mock('./hoc/withLocales', () =>
-  // eslint-disable-next-line react/display-name
-  Component => props => <>{Component(props)}</>
-)
+jest.mock('./hoc/withLocales', () => Component => props => (
+  <>{Component(props)}</>
+))
 
 jest.mock('./context', () => ({
-  // eslint-disable-next-line react/display-name
   Consumer: props => {
     const Component = () => props.children({ byDocId: { docId: false } })
     return <Component />

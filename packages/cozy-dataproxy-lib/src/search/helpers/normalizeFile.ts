@@ -20,7 +20,7 @@ export const normalizeFileWithFolders = (
   file: IOCozyFile
 ): CozyDoc => {
   const isDir = file.type === TYPE_DIRECTORY
-  let path = ''
+  let path
   if (isDir) {
     path = file.path ?? ''
   } else {

@@ -22,7 +22,6 @@ export const useIsAvailable = (methodName: string): UseIsAvailableResult => {
         const result = await webviewIntent.call('isAvailable', methodName)
 
         if (typeof result !== 'boolean') {
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           throw new Error(`Invalid result from isAvailable method: ${result}`)
         }
 

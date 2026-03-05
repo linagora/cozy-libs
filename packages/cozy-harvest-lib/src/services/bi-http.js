@@ -14,7 +14,7 @@ import logger from '../logger'
 const softJSONParse = maybeJSONData => {
   try {
     return JSON.parse(maybeJSONData)
-  } catch (e) {
+  } catch (_e) {
     return maybeJSONData
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-env jest */
 const Account = require('./Account')
 const { cozyClient } = require('./testUtils')
 

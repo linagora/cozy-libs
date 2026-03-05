@@ -14,8 +14,9 @@ export const interpolate = (
   const makeInterpolate = new Function(...names, `return \`${str}\`;`)
 
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     return makeInterpolate(...vals) as string
-  } catch (error) {
+  } catch (_error) {
     // String template and params did not match
     return str
   }

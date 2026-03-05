@@ -47,7 +47,7 @@ module.exports = async ({
     try {
       const body = await response.json()
       errorMsg = body.error
-    } catch (e) {
+    } catch (_e) {
       errorMsg = await resp2.text()
     }
     throw new Error(`${response.status} ${response.statusText}: ${errorMsg}`)
