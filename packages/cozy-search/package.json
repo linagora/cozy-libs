@@ -11,11 +11,8 @@
   },
   "dependencies": {
     "@assistant-ui/react": "^0.12.5",
-    "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
-    "clsx": "^2.1.1",
     "lodash": "^4.17.21",
-    "lucide-react": "^0.563.0",
     "mime-types": "2.1.35",
     "react-type-animation": "3.2.0",
     "rooks": "7.14.1"
