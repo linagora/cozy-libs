@@ -64,7 +64,7 @@ const createArchive = async (folderName, archiveFileName) => {
     console.error(
       `↳ ❌ Unable to generate app archive. Is tar installed as a dependency ? Error : ${error.message}`
     )
-    throw new Error('Unable to generate archive')
+    throw new Error('Unable to generate archive', { cause: error })
   }
 }
 
@@ -84,7 +84,8 @@ const pushArtifact = async (fileName, parentFolder, options) => {
     ])
   } catch (e) {
     throw new Error(
-      `Unable to create target directory ${folder} on downcloud server : ${e.message}`
+      `Unable to create target directory ${folder} on downcloud server : ${e.message}`,
+      { cause: e }
     )
   }
 

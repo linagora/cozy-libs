@@ -29,8 +29,6 @@ function isWebviewWindow(window: Window): window is WebviewWindow {
   return (window as WebviewWindow).ReactNativeWebView !== undefined
 }
 
-/* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
   try {
     if (cozy!.bar && cozy!.bar.setWebviewContext === undefined) {
@@ -38,12 +36,10 @@ const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
     }
 
     return cozy!.bar!.setWebviewContext
-  } catch (err) {
+  } catch (_err) {
     return undefined
   }
 }
-/* eslint-enable @typescript-eslint/no-non-null-assertion */
-/* eslint-enable no-console */
 
 const sendSyncMessage = (message: string): void => {
   return (window as unknown as WebviewWindow).ReactNativeWebView.postMessage(
@@ -97,18 +93,18 @@ export const WebviewIntentProvider = ({
   const setBarWebviewContext = setBarContext || getBarInitAPI()
 
   useEffect(() => {
-    !connection &&
-      !webviewService &&
-      isValidEnv() &&
+    if (!connection && !webviewService && isValidEnv()) {
       getConnection(setConnection, methods).catch(log)
+    }
   }, [connection, webviewService, methods])
 
   useEffect(() => {
-    !service && connection && setService(new WebviewService(connection))
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (!service && connection) setService(new WebviewService(connection))
   }, [service, connection])
 
   useEffect(() => {
-    setBarWebviewContext && service && setBarWebviewContext(service)
+    if (setBarWebviewContext && service) setBarWebviewContext(service)
   }, [setBarWebviewContext, service])
 
   return (

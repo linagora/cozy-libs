@@ -7,7 +7,7 @@ for (const lang of langs) {
   try {
     locales = require(`./${lang}.json`)
     // eslint-disable-next-line no-empty
-  } catch (e) {}
+  } catch (_e) {}
   const polyglot = new Polyglot()
   polyglot.extend(locales)
   polyglots[lang] = polyglot

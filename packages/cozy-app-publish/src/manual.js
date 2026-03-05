@@ -45,7 +45,9 @@ const manualPublish = publisher({
 
 const manualPublishCLI = function () {
   return manualPublish.apply(this, arguments).catch(e => {
+    // eslint-disable-next-line no-console
     console.error(e)
+    // eslint-disable-next-line no-console
     console.error(e.message)
     process.exit(1)
   })

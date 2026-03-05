@@ -272,7 +272,7 @@ const sharedPaths = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_PATHS:
       // !TODO Remove after we solved the sharedPaths bugs
-      // eslint-disable-next-line
+
       return action.paths
     case ADD_SHARING:
       // !TODO Remove after we solved the sharedPaths bugs

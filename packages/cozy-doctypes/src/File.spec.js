@@ -335,7 +335,7 @@ describe('File model', () => {
       })
       try {
         await CozyFile.uploadFileWithConflictStrategy('test', {}, 'a', 'erase')
-      } catch (e) {
+      } catch (_e) {
         expect(createFileSpy).toHaveBeenCalled()
       }
     })

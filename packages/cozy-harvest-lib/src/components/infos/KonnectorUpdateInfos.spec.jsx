@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { render } from '@testing-library/react'
 import KonnectorUpdateInfos from 'components/infos/KonnectorUpdateInfos'
 import React from 'react'
@@ -8,15 +7,14 @@ import AppLike from '../../../test/AppLike'
 jest.mock(
   '../KonnectorUpdateLinker',
   () =>
-    ({ konnector, label, isBlocking }) =>
-      (
-        <div
-          data-testtid="KonnectorUpdateLinker"
-          data-label={label}
-          data-konnector={konnector}
-          data-is-blocking={isBlocking}
-        />
-      )
+    ({ konnector, label, isBlocking }) => (
+      <div
+        data-testtid="KonnectorUpdateLinker"
+        data-label={label}
+        data-konnector={konnector}
+        data-is-blocking={isBlocking}
+      />
+    )
 )
 
 // Default props

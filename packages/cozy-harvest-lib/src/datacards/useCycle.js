@@ -29,6 +29,7 @@ const useCycle = (initialState, min, max) => {
   // when it becomes defined, index will be set to the defined initialState value
   useEffect(() => {
     if (curIndex === undefined && initialState !== undefined) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIndex(initialState)
     }
   }, [curIndex, initialState])

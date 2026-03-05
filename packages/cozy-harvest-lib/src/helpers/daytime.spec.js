@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { randomDayTime } from 'helpers/daytime'
 
 describe('daytime library', () => {

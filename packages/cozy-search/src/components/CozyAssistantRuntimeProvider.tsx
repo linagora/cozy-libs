@@ -15,6 +15,7 @@ import type { ThreadMessageLike } from '@assistant-ui/react'
 import React, {
   useMemo,
   useRef,
+  useState,
   useEffect,
   ReactNode,
   useCallback
@@ -72,7 +73,7 @@ const convertMessagesToThreadMessages = (
 
   return messages.map((msg, idx) => ({
     id: msg.id || `msg-${idx}`,
-    role: msg.role as 'user' | 'assistant',
+    role: msg.role,
     content: sanitizeChatContent(msg.content),
     metadata:
       msg.role === 'assistant' && msg.sources
@@ -139,7 +140,7 @@ const CozyAssistantRuntimeProviderInner = ({
 }): JSX.Element => {
   const { t } = useI18n()
   const client = useClient()
-  const streamBridgeRef = useRef(new StreamBridge())
+  const [streamBridge] = useState(() => new StreamBridge())
   const messagesIdRef = useRef<string[]>([])
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set())
   const currentStreamingMessageIdRef = useRef<string | null>(null)
@@ -152,7 +153,7 @@ const CozyAssistantRuntimeProviderInner = ({
   }, [initialMessages])
 
   useEffect(() => {
-    streamBridgeRef.current.setCleanupCallback(() => {
+    streamBridge.setCleanupCallback(() => {
       try {
         if (currentStreamingMessageIdRef.current) {
           cancelledMessageIdsRef.current.add(
@@ -164,7 +165,7 @@ const CozyAssistantRuntimeProviderInner = ({
         log.error('Error during StreamBridge cleanup callback:', error)
       }
     })
-  }, [])
+  }, [streamBridge])
 
   const handleConversationChange = useCallback(
     (res: Conversation) => {
@@ -241,11 +242,11 @@ const CozyAssistantRuntimeProviderInner = ({
 
           try {
             if (res.object === 'delta' && res.content !== undefined) {
-              streamBridgeRef.current.onDelta(conversationId, res.content)
+              streamBridge.onDelta(conversationId, res.content)
             }
 
             if (res.object === 'done') {
-              streamBridgeRef.current.onDone(conversationId)
+              streamBridge.onDone(conversationId)
               currentStreamingMessageIdRef.current = null
             }
           } catch (error) {
@@ -265,12 +266,12 @@ const CozyAssistantRuntimeProviderInner = ({
             typeof createCozyRealtimeChatAdapter
           >[0]['client'],
           conversationId,
-          streamBridge: streamBridgeRef.current,
+          streamBridge: streamBridge,
           assistantId: selectedAssistantId
         },
         t
       ),
-    [client, conversationId, selectedAssistantId, t]
+    [client, conversationId, selectedAssistantId, streamBridge, t]
   )
 
   const runtime = useLocalRuntime(adapter, {
@@ -278,15 +279,14 @@ const CozyAssistantRuntimeProviderInner = ({
   })
 
   useEffect(() => {
-    const streamBridge = streamBridgeRef.current
-    return () => {
+    return (): void => {
       try {
         streamBridge.cleanup(conversationId)
       } catch (error) {
         log.error('Error cleaning up StreamBridge on unmount:', error)
       }
     }
-  }, [conversationId])
+  }, [conversationId, streamBridge])
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>

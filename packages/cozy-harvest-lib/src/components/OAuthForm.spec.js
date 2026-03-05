@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { act, render } from '@testing-library/react'
 import { OAuthForm } from 'components/OAuthForm'
 import React from 'react'

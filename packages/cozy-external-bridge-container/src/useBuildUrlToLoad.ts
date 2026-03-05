@@ -25,9 +25,11 @@ export const useBuildUrlToLoad = (url: string): UseBuildUrlToLoadReturnType => {
       destUrl.search = location.search
 
       log.debug('Setting iframe to', destUrl.toString(), 'after modification')
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUrlToLoad(destUrl.toString())
     } else {
       log.debug('Setting iframe to', url)
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUrlToLoad(url)
     }
   }, [])

@@ -9,6 +9,7 @@ export function usePrevious(value) {
     ref.current = value
   }, [value])
 
+  // eslint-disable-next-line react-hooks/refs
   return ref.current
 }
 
@@ -19,6 +20,7 @@ function useIsMounted() {
   const mountedRef = useRef(false)
   const isMounted = useCallback(() => mountedRef.current, [])
 
+  // eslint-disable-next-line react-hooks/refs
   React[isServer ? 'useEffect' : 'useLayoutEffect'](() => {
     mountedRef.current = true
     return () => {

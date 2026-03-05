@@ -8,6 +8,7 @@ export const roundCurrencyAmount = (amount, currency) => {
   let precision = currencyToRoundingPrecision[currency]
 
   if (precision === undefined) {
+    // eslint-disable-next-line no-console
     console.warn('Default currency rounding precision has been used')
     precision = 2
   }

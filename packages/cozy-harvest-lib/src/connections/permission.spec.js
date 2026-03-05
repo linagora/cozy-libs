@@ -1,5 +1,3 @@
-/* eslint-env jest */
-
 import { addPermission } from 'connections/permissions'
 
 import client from 'cozy-client'

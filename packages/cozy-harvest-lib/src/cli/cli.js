@@ -209,7 +209,7 @@ main()
     logger.error(e)
     process.exit(1)
   })
-  // eslint-disable-next-line promise/always-return
+
   .then(() => {
     process.exit(0)
   })

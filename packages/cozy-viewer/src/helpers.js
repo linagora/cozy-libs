@@ -59,7 +59,7 @@ export const makeWebLink = ({ client, slug, path }) => {
       hash: path,
       subDomainType
     })
-  } catch (e) {
+  } catch (_e) {
     return null
   }
 }

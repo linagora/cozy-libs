@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { waitFor } from '@testing-library/dom'
 import MicroEE from 'microee'
 import { Server } from 'mock-socket'

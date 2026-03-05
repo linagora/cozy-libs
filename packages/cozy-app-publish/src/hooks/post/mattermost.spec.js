@@ -51,6 +51,7 @@ describe('sendMattermost Post', () => {
   })
 
   afterEach(() => {
+    // eslint-disable-next-line no-console
     console.log.mockRestore()
   })
 

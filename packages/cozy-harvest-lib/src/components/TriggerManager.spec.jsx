@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { render, fireEvent, cleanup, screen } from '@testing-library/react'
 import { DumbTriggerManager as TriggerManager } from 'components/DumbTriggerManager'
 import omit from 'lodash/omit'

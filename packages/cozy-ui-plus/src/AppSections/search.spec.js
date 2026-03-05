@@ -1,7 +1,5 @@
 'use strict'
 
-/* eslint-env jest */
-
 import mockApps from './_testApps'
 import { makeMatcherFromSearch } from './search'
 

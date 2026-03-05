@@ -1,7 +1,5 @@
 'use strict'
 
-/* eslint-env jest */
-
 import mapValues from 'lodash/mapValues'
 
 import mockApps from './_testApps'

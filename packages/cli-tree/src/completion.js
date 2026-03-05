@@ -12,7 +12,7 @@ module.exports = {
 }
 
 function getCommandCompletion(command) {
-  let completion = []
+  let completion
   if (command.arguments) {
     completion = _(command.arguments)
       .flatMap(a => a.argument)
