@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import { createTrigger, launchTrigger } from 'connections/triggers'
 
 import CozyClient from 'cozy-client'

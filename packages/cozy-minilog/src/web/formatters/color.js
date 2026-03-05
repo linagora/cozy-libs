@@ -11,7 +11,7 @@ var colors = {
   logger = new Transform()
 
 logger.write = function (name, level, args) {
-  var fn = console.log
+  var fn
   if (console[level] && console[level].apply) {
     fn = console[level]
     fn.apply(

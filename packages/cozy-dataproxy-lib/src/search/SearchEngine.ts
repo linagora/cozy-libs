@@ -9,7 +9,6 @@ import CozyRealtime from 'cozy-realtime'
 
 import { SHARED_DRIVE_FILES_DOCTYPE } from './consts'
 import {
-  SEARCH_SCHEMA,
   APPS_DOCTYPE,
   FILES_DOCTYPE,
   CONTACTS_DOCTYPE,
@@ -260,7 +259,7 @@ export class SearchEngine {
     realtime?: CozyRealtime,
     sharedDriveId?: string
   ): void {
-    /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
     const realtimeInstance = realtime ? realtime : client.plugins.realtime
     realtimeInstance.subscribe('created', doctype, (doc: CozyDoc) =>
       this.handleUpdatedOrCreatedDoc(doc, sharedDriveId)
@@ -271,7 +270,7 @@ export class SearchEngine {
     realtimeInstance.subscribe('deleted', doctype, (doc: CozyDoc) =>
       this.handleDeletedDoc(doc, sharedDriveId)
     )
-    /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/unbound-method */
+    /* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
   }
 
   handleUpdatedOrCreatedDoc(doc: CozyDoc, sharedDriveId?: string): void {
@@ -340,9 +339,7 @@ export class SearchEngine {
       const searchIndex = this.searchIndexes[doctype]
       if (!searchIndex) {
         // The index import probably have failed: let's rebuild it
-        const newSearchIndex = await this.indexDocsForSearch(
-          doctype as keyof typeof SEARCH_SCHEMA
-        )
+        const newSearchIndex = await this.indexDocsForSearch(doctype)
         if (newSearchIndex) {
           this.searchIndexes[doctype] = newSearchIndex
         }

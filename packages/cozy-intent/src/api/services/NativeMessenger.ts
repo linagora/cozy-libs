@@ -36,7 +36,7 @@ export class NativeMessenger implements Messenger {
     try {
       const script = `window.postMessage(${JSON.stringify(message)})`
       this.injectJavaScript?.(script)
-    } catch (error) {
+    } catch (_error) {
       log(strings.noWebviewFound)
     }
   }
@@ -61,7 +61,7 @@ export const DebugNativeMessenger = (
 ): NativeMessenger => {
   return {
     postMessage: (message: Record<string, unknown>): void => {
-      message.action !== 'response' && log('- OUT', message)
+      if (message.action !== 'response') log('- OUT', message)
       messenger.postMessage(message)
     },
     addMessageListener: (listener: MessageListener): ListenerRemover =>

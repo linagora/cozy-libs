@@ -19,7 +19,7 @@ logger.write = function (name, level, args) {
     }
     cache.push([new Date().toString(), name, level, args])
     window.localStorage.minilog = JSON.stringify(cache)
-  } catch (e) {
+  } catch (_e) {
     // ignore
   }
 }

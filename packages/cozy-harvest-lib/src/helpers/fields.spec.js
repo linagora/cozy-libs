@@ -1,4 +1,3 @@
-/* eslint-env jest */
 import fieldHelpers, {
   getEncryptedFieldName,
   getFieldPlaceholder,

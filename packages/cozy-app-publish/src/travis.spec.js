@@ -1,4 +1,3 @@
-/* eslint-env jest */
 const path = require('path')
 
 const postpublish = require('./postpublish')

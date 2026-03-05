@@ -488,8 +488,8 @@ describe('ConnectionFlow', () => {
       try {
         await setupSubmit(flow)
         expect(mockVaultClient.isLocked).toHaveBeenCalledTimes(1)
-      } catch (e) {
-        // eslint-disable-next-line no-empty
+      } catch (_e) {
+        /* expected */
       }
       expect(isSubmitting(flow)).toBe(false)
     })

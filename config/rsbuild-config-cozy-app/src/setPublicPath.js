@@ -21,6 +21,6 @@ This is a dirty fix that allows to change only in development and only for HMR h
 // Set the rsbuild public path dynamically for HMR
 // This tells rsbuild where to fetch hot-update files from
 if (process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line camelcase, no-undef
+  // eslint-disable-next-line no-undef
   __webpack_public_path__ = 'http://localhost:3000/'
 }

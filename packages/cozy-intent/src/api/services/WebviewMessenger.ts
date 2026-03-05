@@ -31,7 +31,7 @@ export const DebugWebviewMessenger = (
 
   return {
     postMessage: (message: Record<string, unknown>): void => {
-      message.action !== 'response' && log('- OUT', message)
+      if (message.action !== 'response') log('- OUT', message)
       messenger.postMessage(message)
     },
     addMessageListener: (listener: MessageListener): ListenerRemover =>

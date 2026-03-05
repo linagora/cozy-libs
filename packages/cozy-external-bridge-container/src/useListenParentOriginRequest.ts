@@ -28,9 +28,10 @@ export const useListenParentOriginRequest = (
 
     log.debug('Listening to parent origin request')
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsReady(true)
 
-    return () => {
+    return (): void => {
       window.removeEventListener('message', parentOriginRequestHandler)
     }
   }, [client, url])

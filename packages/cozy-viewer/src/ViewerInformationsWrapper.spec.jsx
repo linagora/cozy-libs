@@ -7,7 +7,6 @@ import DemoProvider from 'cozy-ui/transpiled/react/providers/DemoProvider'
 import ViewerInformationsWrapper from './ViewerInformationsWrapper'
 import ViewerProvider from './providers/ViewerProvider'
 
-/* eslint-disable react/display-name */
 jest.mock('./components/Footer', () => ({ children }) => (
   <div data-testid="Footer">{children}</div>
 ))
@@ -20,7 +19,6 @@ jest.mock('./Panel/PanelContent', () => () => (
 jest.mock('./Footer/FooterContent', () => () => (
   <div data-testid="FooterContent" />
 ))
-/* eslint-enable react/display-name */
 
 const setup = ({ validForPanel, disableFooter } = {}) => {
   return render(

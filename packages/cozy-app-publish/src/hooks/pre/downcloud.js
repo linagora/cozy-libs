@@ -31,7 +31,7 @@ module.exports = async options => {
     downcloudOptions = await pushArchive(archiveFileName, downcloudOptions)
   } catch (error) {
     logger.error(`↳ ❌  Error while uploading: ${error.message}`)
-    throw new Error('Downcloud publishing error')
+    throw new Error('Downcloud publishing error', { cause: error })
   }
 
   return downcloudOptions

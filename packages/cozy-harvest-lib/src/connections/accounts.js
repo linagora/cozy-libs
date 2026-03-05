@@ -75,7 +75,8 @@ const createChildAccount = async (client, konnector, attributes) => {
     parentAccount = await fetchAccount(client, parentAccountId)
   } catch (error) {
     throw new Error(
-      `An error occurred when finding parent account ${parentAccountId} (${error.message})`
+      `An error occurred when finding parent account ${parentAccountId} (${error.message})`,
+      { cause: error }
     )
   }
 
@@ -86,7 +87,8 @@ const createChildAccount = async (client, konnector, attributes) => {
       })
     } catch (error) {
       throw new Error(
-        `Cannot create parent account ${parentAccountId} (${error.message})`
+        `Cannot create parent account ${parentAccountId} (${error.message})`,
+        { cause: error }
       )
     }
   }
@@ -102,7 +104,8 @@ const createChildAccount = async (client, konnector, attributes) => {
   } catch (error) {
     logger.warn(error)
     throw new Error(
-      `Cannot set permission for account ${parentAccountId} (${error.message})`
+      `Cannot set permission for account ${parentAccountId} (${error.message})`,
+      { cause: error }
     )
   }
 

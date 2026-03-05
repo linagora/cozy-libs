@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/immutability */
+/* eslint-disable react-hooks/globals */
 import { render, act } from '@testing-library/react'
 import React from 'react'
 

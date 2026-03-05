@@ -79,7 +79,7 @@ export const copyToClipboard =
         severity: 'success',
         message: t(`ListItem.snackbar.copyToClipboard.success`)
       })
-    } catch (error) {
+    } catch (_error) {
       setAlertProps({
         open: true,
         severity: 'error',

@@ -17,7 +17,7 @@ Stringify.prototype.write = function (name, level, args) {
       } else {
         try {
           result[i] = JSON.stringify(result[i])
-        } catch (stringifyError) {
+        } catch (_stringifyError) {
           // happens when an object has a circular structure
           // do not throw an error, when printing, the toString() method of the object will be used
         }

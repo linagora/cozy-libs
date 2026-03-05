@@ -1,2 +1,1 @@
-let id = 0
-module.exports = { id: `icon-${id++}` }
+module.exports = { id: 'icon-0' }

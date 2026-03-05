@@ -1,5 +1,3 @@
-/* eslint-env jest */
-
 import { KonnectorJobError } from 'helpers/konnectors'
 import { getKonnectorJobError, isKonnectorRunning } from 'helpers/triggers'
 

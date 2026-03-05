@@ -21,7 +21,7 @@ logger.write = function (name, level, args) {
       for (i = 0; i < args.length; i++) {
         args[i] = JSON.stringify(args[i])
       }
-    } catch (e) {
+    } catch (_e) {
       // ignore
     }
     console.log(args.join(' '))

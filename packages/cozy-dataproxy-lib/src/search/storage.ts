@@ -3,7 +3,6 @@ import Minilog from 'cozy-minilog'
 import {
   DATAPROXY_STORAGE_PREFIX,
   MIN_DELAY_BEFORE_EXPORT,
-  SEARCH_SCHEMA,
   SEARCHABLE_DOCTYPES,
   SearchedDoctype
 } from './consts'
@@ -102,7 +101,7 @@ export const importSearchIndexes = async (
   }
 
   for (const doctype of SEARCHABLE_DOCTYPES) {
-    const index = initSearchIndex(doctype as keyof typeof SEARCH_SCHEMA)
+    const index = initSearchIndex(doctype)
     const startImportDoctype = performance.now()
 
     const keys = await storage.getData<string[]>(

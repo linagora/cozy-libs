@@ -38,7 +38,7 @@ interface ExternalLinkButtonProps {
   url: string
   primaryText: string
   secondaryText: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   icon: any
 }
 

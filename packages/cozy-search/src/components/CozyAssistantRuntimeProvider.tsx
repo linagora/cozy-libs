@@ -72,7 +72,7 @@ const convertMessagesToThreadMessages = (
 
   return messages.map((msg, idx) => ({
     id: msg.id || `msg-${idx}`,
-    role: msg.role as 'user' | 'assistant',
+    role: msg.role,
     content: sanitizeChatContent(msg.content),
     metadata:
       msg.role === 'assistant' && msg.sources
@@ -265,6 +265,7 @@ const CozyAssistantRuntimeProviderInner = ({
             typeof createCozyRealtimeChatAdapter
           >[0]['client'],
           conversationId,
+          // eslint-disable-next-line react-hooks/refs
           streamBridge: streamBridgeRef.current,
           assistantId: selectedAssistantId
         },
@@ -279,7 +280,7 @@ const CozyAssistantRuntimeProviderInner = ({
 
   useEffect(() => {
     const streamBridge = streamBridgeRef.current
-    return () => {
+    return (): void => {
       try {
         streamBridge.cleanup(conversationId)
       } catch (error) {

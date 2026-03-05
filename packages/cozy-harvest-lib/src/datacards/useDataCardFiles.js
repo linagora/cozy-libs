@@ -51,7 +51,7 @@ const useSourceAccountIdentifierFiles = (sourceAccountIdentifier, slug) =>
 const getResponse = (folderToSaveFiles, sourceAccountIdentifierFiles) => {
   const loaded = Boolean(
     hasQueryBeenLoaded(folderToSaveFiles) &&
-      hasQueryBeenLoaded(sourceAccountIdentifierFiles)
+    hasQueryBeenLoaded(sourceAccountIdentifierFiles)
   )
 
   if (
