@@ -60,7 +60,7 @@ export default [
           ],
           pathGroups: [
             {
-              pattern: '{cozy-*,cozy-*/**}',
+              pattern: '{cozy-*,cozy-*/**,twake-*,twake-*/**}',
               group: 'external',
               position: 'after'
             },
@@ -71,7 +71,9 @@ export default [
             }
           ],
           distinctGroup: true,
-          pathGroupsExcludedImportTypes: ['{cozy-*,cozy-*/**}'],
+          pathGroupsExcludedImportTypes: [
+            '{cozy-*,cozy-*/**,twake-*,twake-*/**}'
+          ],
           'newlines-between': 'always',
           warnOnUnassignedImports: true
         }

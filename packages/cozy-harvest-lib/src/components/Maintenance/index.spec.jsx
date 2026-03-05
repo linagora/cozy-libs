@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react'
 import KonnectorMaintenance from 'components/Maintenance'
 import enLocale from 'locales/en.json'
 import React from 'react'
+
 import I18n from 'twake-i18n'
 
 describe('KonnectorMaintenance', () => {

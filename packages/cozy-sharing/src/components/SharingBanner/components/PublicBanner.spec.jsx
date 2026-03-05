@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
+import { useI18n } from 'twake-i18n'
 
 import { SharingBannerCozyToCozy } from './PublicBanner'
 
