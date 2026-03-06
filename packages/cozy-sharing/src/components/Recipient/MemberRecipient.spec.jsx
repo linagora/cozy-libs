@@ -6,6 +6,17 @@ import { createMockClient } from 'cozy-client'
 import MemberRecipient from './MemberRecipient'
 import AppLike from '../../../test/AppLike'
 
+const mockUpdateDocumentPermissions = jest.fn()
+const mockUpdateSharingMemberType = jest.fn()
+
+jest.mock('../../hooks/useSharingContext', () => ({
+  // eslint-disable-next-line react/display-name
+  useSharingContext: () => ({
+    updateDocumentPermissions: mockUpdateDocumentPermissions,
+    updateSharingMemberType: mockUpdateSharingMemberType
+  })
+}))
+
 describe('MemberRecipient component', () => {
   const client = createMockClient({})
   client.options = {

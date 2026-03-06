@@ -34,7 +34,10 @@
     "members": {
       "count": "%{smart_count} membre |||| %{smart_count} membres",
       "others": "et 1 autre… |||| et %{smart_count} autres…",
-      "otherContacts": "autre contact |||| autres contacts"
+      "otherContacts": "autre contact |||| autres contacts",
+      "error": {
+        "changePermission": "Une erreur s'est produite lors du changement des permissions. Veuillez réessayer."
+      }
     },
     "contacts": {
       "whoHasAccess": "Qui a accès ?",

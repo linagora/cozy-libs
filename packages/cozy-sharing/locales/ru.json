@@ -34,7 +34,10 @@
     "members": {
       "count": "%{smart_count} участник |||| %{smart_count} участника |||| %{smart_count} участников",
       "others": "и 1 другой… |||| и %{smart_count} других…",
-      "otherContacts": "другой контакт |||| других контакта"
+      "otherContacts": "другой контакт |||| других контакта",
+      "error": {
+        "changePermission": "Произошла ошибка при изменении разрешений. Пожалуйста, попробуйте снова."
+      }
     },
     "contacts": {
       "whoHasAccess": "У кого есть доступ?",

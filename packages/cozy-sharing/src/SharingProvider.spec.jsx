@@ -234,6 +234,100 @@ describe('updateDocumentPermissions', () => {
   })
 })
 
+describe('updateSharingMemberType', () => {
+  const mockContact = { _id: 'contact-1', email: [{ address: 'bob@bob.cozy' }] }
+  const mockSharing = {
+    id: 'sharing-123',
+    type: 'io.cozy.sharings',
+    attributes: {
+      members: [
+        { status: 'owner', email: 'owner@cozy.local' },
+        { status: 'ready', email: 'bob@bob.cozy' }
+      ]
+    }
+  }
+
+  let instance
+  let mockContactsCollection
+
+  beforeEach(() => {
+    mockContactsCollection = {
+      find: jest.fn().mockResolvedValue({ data: [mockContact] })
+    }
+
+    const mockClient = {
+      getStackClient: () => ({ uri: 'http://cozy.local' }),
+      collection: jest.fn().mockReturnValue(mockContactsCollection)
+    }
+
+    instance = new SharingProvider({ client: mockClient })
+    instance.state = {
+      ...instance.state,
+      sharings: [mockSharing]
+    }
+    instance.sharingCol = {
+      revokeRecipient: jest.fn().mockResolvedValue({})
+    }
+    jest.spyOn(instance, 'addRecipients').mockResolvedValue({})
+  })
+
+  it('should throw when sharing is not found', async () => {
+    await expect(
+      instance.updateSharingMemberType('unknown-id', 1, 'one-way')
+    ).rejects.toThrow('Sharing not found')
+  })
+
+  it('should throw when member is not found', async () => {
+    await expect(
+      instance.updateSharingMemberType('sharing-123', 99, 'one-way')
+    ).rejects.toThrow('Member not found')
+  })
+
+  it('should throw when contact is not found', async () => {
+    mockContactsCollection.find.mockResolvedValue({ data: [] })
+
+    await expect(
+      instance.updateSharingMemberType('sharing-123', 1, 'one-way')
+    ).rejects.toThrow('Contact not found')
+  })
+
+  it('should revoke and re-add with readOnly when switching to one-way', async () => {
+    await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
+
+    expect(instance.sharingCol.revokeRecipient).toHaveBeenCalledWith(
+      mockSharing,
+      1
+    )
+    expect(instance.addRecipients).toHaveBeenCalledWith({
+      document: mockSharing,
+      recipients: [],
+      readOnlyRecipients: [mockContact]
+    })
+  })
+
+  it('should revoke and re-add as read-write when switching to two-way', async () => {
+    await instance.updateSharingMemberType('sharing-123', 1, 'two-way')
+
+    expect(instance.sharingCol.revokeRecipient).toHaveBeenCalledWith(
+      mockSharing,
+      1
+    )
+    expect(instance.addRecipients).toHaveBeenCalledWith({
+      document: mockSharing,
+      recipients: [mockContact],
+      readOnlyRecipients: []
+    })
+  })
+
+  it('should rethrow error if addRecipients fails after revocation', async () => {
+    instance.addRecipients.mockRejectedValue(new Error('Network error'))
+
+    await expect(
+      instance.updateSharingMemberType('sharing-123', 1, 'one-way')
+    ).rejects.toThrow('Network error')
+  })
+})
+
 // TODO Convert with react-testing-library
 // describe('hasWriteAccess', () => {
 //   it('tells if a doc is writtable', () => {

@@ -34,7 +34,10 @@
     "members": {
       "count": "%{smart_count} thành viên |||| %{smart_count} thành viên",
       "others": "và 1 người khác… |||| và %{smart_count} người khác…",
-      "otherContacts": "người liên hệ khác |||| người liên hệ khác"
+      "otherContacts": "người liên hệ khác |||| người liên hệ khác",
+      "error": {
+        "changePermission": "Đã xảy ra lỗi khi thay đổi quyền. Vui lòng thử lại."
+      }
     },
     "contacts": {
       "whoHasAccess": "Ai có quyền truy cập?",

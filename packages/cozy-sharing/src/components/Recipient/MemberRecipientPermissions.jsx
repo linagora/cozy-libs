@@ -2,6 +2,7 @@ import React, { useState, useRef, useCallback } from 'react'
 import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
+import minilog from 'cozy-minilog'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {
   makeActions,
@@ -10,9 +11,14 @@ import {
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
-import { permission } from './actions/permission'
 import { revokeMember } from './actions/revokeMember'
+import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
+import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
+import { useSharingContext } from '../../hooks/useSharingContext'
+
+const log = minilog('MemberRecipientPermissions')
 
 const MemberRecipientPermissions = ({
   isOwner,
@@ -30,6 +36,8 @@ const MemberRecipientPermissions = ({
   const { t } = useI18n()
   const buttonRef = useRef()
   const client = useClient()
+  const { updateSharingMemberType } = useSharingContext()
+  const { showAlert } = useAlert()
 
   const [revoking, setRevoking] = useState(false)
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
@@ -42,27 +50,72 @@ const MemberRecipientPermissions = ({
     !contactIsOwner &&
     ((instanceMatchesClient && !isOwner) || isOwner)
 
-  const toggleMenu = () => setMenuDisplayed(!isMenuDisplayed)
-  const hideMenu = () => setMenuDisplayed(false)
+  const toggleMenu = useCallback(() => {
+    setMenuDisplayed(displayed => !displayed)
+  }, [])
+  const hideMenu = useCallback(() => {
+    setMenuDisplayed(false)
+  }, [])
 
   const handleRevocation = useCallback(async () => {
     setRevoking(true)
-    if (isOwner) {
-      await onRevoke(document, sharingId, memberIndex)
-    } else {
-      await onRevokeSelf(document)
+    try {
+      if (isOwner) {
+        await onRevoke(document, sharingId, memberIndex)
+      } else {
+        await onRevokeSelf(document)
+      }
+    } finally {
+      setRevoking(false)
     }
-    setRevoking(false)
   }, [isOwner, onRevoke, onRevokeSelf, document, sharingId, memberIndex])
 
-  const actions = makeActions([permission, divider, revokeMember], {
-    client,
-    t,
-    type: type ?? 'one-way',
-    isOwner,
-    isSharedDrive,
-    handleRevocation
-  })
+  const setType = useCallback(
+    async newType => {
+      if (newType === type) {
+        hideMenu()
+        return
+      }
+      try {
+        await updateSharingMemberType(sharingId, memberIndex, newType)
+      } catch (error) {
+        log.error('Failed to change member permission type', error)
+        showAlert({
+          message: t('Share.members.error.changePermission'),
+          severity: 'error',
+          variant: 'filled'
+        })
+      }
+      hideMenu()
+    },
+    [
+      hideMenu,
+      memberIndex,
+      sharingId,
+      showAlert,
+      t,
+      type,
+      updateSharingMemberType
+    ]
+  )
+
+  const actions = makeActions(
+    [
+      setReadOnlySharedPermission,
+      setReadWriteSharedPermission,
+      divider,
+      revokeMember
+    ],
+    {
+      client,
+      t,
+      type: type ?? 'one-way',
+      isOwner,
+      isSharedDrive,
+      setType,
+      handleRevocation
+    }
+  )
 
   return (
     <div className={className}>
