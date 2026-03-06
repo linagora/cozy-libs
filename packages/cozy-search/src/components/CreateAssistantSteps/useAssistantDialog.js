@@ -1,9 +1,13 @@
 import { useMemo, useState } from 'react'
+
+import Minilog from 'cozy-minilog'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
-import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
-
 import { locales } from '../../locales'
+import { OPENRAG_MODEL } from '../constants'
+
+const log = Minilog('[AssistantDialog]')
 
 export const STEPS = {
   BASIC_INFO: 0,
@@ -34,14 +38,14 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
     model: '',
     baseUrl: '',
     apiKey: '',
-    isCustomModel: false,
     ...initialData
   })
 
   const canSubmit = useMemo(
     () =>
       step === STEPS.API_KEY ||
-      (step === STEPS.MODEL_SELECTION && selectedProvider?.id === 'openrag'),
+      (step === STEPS.MODEL_SELECTION &&
+        selectedProvider?.id === OPENRAG_MODEL),
     [step, selectedProvider?.id]
   )
 
@@ -62,11 +66,14 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
   }
 
   const handleProviderSelection = provider => {
+    const isOpenrag = provider.id === OPENRAG_MODEL
     setFormData(prev => ({
       ...prev,
-      baseUrl: provider.baseUrl,
-      isCustomModel: provider.id === 'custom',
-      model: provider.id === 'openrag' ? provider.models[0] : prev.model
+      baseUrl: provider.baseUrl ?? '',
+      model: isOpenrag ? provider.models[0] : '',
+      apiKey: '',
+      encryptedApiKey: '',
+      providerId: provider.id
     }))
     setSelectedProvider({
       ...provider,
@@ -94,7 +101,8 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
       } else {
         setStep(prev => prev + 1)
       }
-    } catch (_error) {
+    } catch (error) {
+      log.error('Error in handleNext:', error)
       showAlert({ message: t('assistant.default_error'), severity: 'error' })
     }
   }

@@ -28,11 +28,15 @@
     text-align left
     background inherit
 
-    &.selected
+    &--selected
       border 1px solid var(--primaryColor)
 
-    &.openrag
-      background linear-gradient(90deg, #EFF6FF 0%, #FAF5FF 100%)
+    &--openrag
+      &--light
+        background linear-gradient(90deg, #EFF6FF 0%, #FAF5FF 100%)
+
+      &--dark
+        background linear-gradient(90deg, #3A2899 0%, #0C091B 100%)
 
   & .icon-container
     width 53px

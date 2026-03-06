@@ -4,3 +4,5 @@ export const DEFAULT_ASSISTANT = {
 }
 
 export const FETCH_CONVERSATIONS_LIMIT = 50
+
+export const OPENRAG_MODEL = 'openrag'

@@ -135,7 +135,8 @@
         "description": "Enter provider URL, model and your API key to configure the new assistant. Your key will be stored securely.",
         "custom_provider_description": "Configure your custom AI provider settings",
         "model": {
-          "label": "Model"
+          "label": "Model",
+          "placeholder": "Enter the model name of the provider"
         },
         "provider": {
           "label": "Provider name",
