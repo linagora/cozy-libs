@@ -135,7 +135,8 @@
         "description": "Nhập URL nhà cung cấp, mô hình và khóa API của bạn để định cấu hình trợ lý mới. Khóa của bạn sẽ được lưu trữ an toàn.",
         "custom_provider_description": "Cấu hình cài đặt nhà cung cấp AI tùy chỉnh",
         "model": {
-          "label": "Mô hình"
+          "label": "Mô hình",
+          "placeholder": "Nhập tên mô hình của nhà cung cấp"
         },
         "provider": {
           "label": "Tên nhà cung cấp",
