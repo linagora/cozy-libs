@@ -14,6 +14,12 @@ jest.mock('cozy-client', () => ({
   useClient: () => ({ options: { uri: mockRecipientAlice.instance } })
 }))
 
+jest.mock('../hooks/useSharingContext', () => ({
+  useSharingContext: () => ({
+    updateSharingMemberType: jest.fn()
+  })
+}))
+
 describe('ShareDialogCozyToCozy', () => {
   const client = createMockClient({})
   client.options = {

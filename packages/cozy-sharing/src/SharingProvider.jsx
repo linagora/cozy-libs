@@ -94,7 +94,8 @@ export class SharingProvider extends Component {
       revokeAllRecipients: this.revokeAllRecipients,
       refresh: this.fetchAllSharings,
       hasWriteAccess: this.hasWriteAccess,
-      renameSharedDrive: this.renameSharedDrive
+      renameSharedDrive: this.renameSharedDrive,
+      updateSharingMemberType: this.updateSharingMemberType
     }
     this.isPublic = props.isPublic ?? false
     this.realtime = null
@@ -337,6 +338,55 @@ export class SharingProvider extends Component {
     const sharing = getSharingForSelf(this.state, document.id)
     await this.sharingCol.revokeSelf(sharing)
     this.dispatch(revokeSelf(sharing))
+  }
+
+  /**
+   * Update a sharing member's read_only field to change permission type
+   * @param {string} sharingId - The ID of the sharing
+   * @param {number} memberIndex - The index of the member in the sharing members array
+   * @param {string} newType - 'one-way' for read-only, 'two-way' for read-write
+   */
+  updateSharingMemberType = async (sharingId, memberIndex, newType) => {
+    const sharing = getSharingById(this.state, sharingId)
+    if (!sharing) throw new Error('Sharing not found')
+
+    const member = sharing.attributes.members[memberIndex]
+    if (!member) throw new Error('Member not found')
+
+    // Find the contact by email (same pattern as helpers/contacts.js)
+    const matchedContacts = await this.props.client
+      .collection('io.cozy.contacts')
+      .find(
+        {
+          email: { $elemMatch: { address: member.email } },
+          _id: { $gt: null }
+        },
+        { indexedFields: ['_id'] }
+      )
+
+    if (!matchedContacts.data.length) {
+      throw new Error(`Contact not found for member ${member.email}`)
+    }
+    const contact = matchedContacts.data[0]
+
+    // Revoke (API call only, no state dispatch to avoid UI flickering)
+    await this.sharingCol.revokeRecipient(sharing, memberIndex)
+
+    // Re-add with the new permission type
+    const readOnly = newType === 'one-way'
+    try {
+      await this.addRecipients({
+        document: sharing,
+        recipients: readOnly ? [] : [contact],
+        readOnlyRecipients: readOnly ? [contact] : []
+      })
+    } catch (error) {
+      log.error(
+        `Failed to re-add member ${member.email} after revocation. The member has been revoked but could not be re-added with the new permission type.`,
+        error
+      )
+      throw error
+    }
   }
 
   shareByLink = async (document, options) => {

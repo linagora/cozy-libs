@@ -8,7 +8,7 @@ import Radios from 'cozy-ui/transpiled/react/Radios'
 const makeComponent = ({ label, type, onClick }) => {
   const Component = forwardRef((props, ref) => {
     return (
-      <ActionsMenuItem {...props} ref={ref} button={false} onClick={onClick}>
+      <ActionsMenuItem {...props} ref={ref} onClick={onClick}>
         <ListItemIcon>
           <Radios checked={type === 'two-way'} />
         </ListItemIcon>
