@@ -465,8 +465,11 @@ export class SearchEngine {
     }
 
     const pouchLink = getPouchLink(this.client)
-    const currentDoctypes = pouchLink?.doctypes || []
-    this.cleanIndexes(currentDoctypes)
+    if (pouchLink?.doctypes?.length) {
+      // FIXME: doing this at search time is probably not the right place
+      // FIXME: we do not handle index cleanup for non-pouch search
+      this.cleanIndexes(pouchLink.doctypes)
+    }
 
     const optionsDoctypes = options?.doctypes || []
     if (
