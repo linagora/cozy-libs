@@ -127,7 +127,8 @@
         "description": "Saisissez l'URL du fournisseur, le modèle et votre clé API pour configurer le nouvel assistant. Votre clé sera stockée de manière sécurisée.",
         "custom_provider_description": "Configurez les paramètres de votre fournisseur d'IA personnalisé",
         "model": {
-          "label": "Modèle"
+          "label": "Modèle",
+          "placeholder": "Entrez le nom du modèle du fournisseur"
         },
         "provider": {
           "label": "Nom du fournisseur",
