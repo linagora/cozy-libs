@@ -134,9 +134,23 @@ export const hasExtendedAddress = addressField => {
   )
 }
 
+/**
+ * Items matching the given predicate function `shouldBeHead`
+ * are moved to the start of the array, preserving the order of the others.
+ *
+ * @param {Function} shouldBeHead - A predicate function that takes an item and returns true if it should be moved to the head of the array.
+ * @returns {Function} A function that takes an array of items and returns a new array with the matching item(s) moved to the front.
+ */
 export const moveToHead = shouldBeHead => items =>
   items.reduce((arr, v) => (shouldBeHead(v) ? [v, ...arr] : [...arr, v]), [])
 
+/**
+ * Moves items with the `primary` property set to true to the head of the array.
+ *
+ * @function
+ * @param {Array<Object>} items - The input array of items, each item optionally having a `primary` property.
+ * @returns {Array<Object>} The reordered array with 'primary' items at the front.
+ */
 export const movePrimaryToHead = moveToHead(v => v?.primary)
 
 export const createAddress = ({ address, oldContact, t }) => {
