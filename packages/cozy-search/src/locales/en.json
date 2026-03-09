@@ -100,7 +100,7 @@
         "description": "Choose the AI model that best matches your requirements.",
         "by": "by",
         "openrag": {
-          "description": "Work with drive files, chat, email from your Twake Workplace"
+          "description": "The AI assistant integrated into Twake, letting you work on your data without ever letting it leave your Workplace"
         },
         "google": {
           "description": "Google's most capable model for text and multimodal tasks"

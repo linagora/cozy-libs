@@ -100,7 +100,7 @@
         "description": "Chọn mô hình AI phù hợp nhất với yêu cầu của bạn.",
         "by": "bởi",
         "openrag": {
-          "description": "Làm việc với tệp trên Drive, chat, email từ Twake Workplace của bạn"
+          "description": "Trợ lý AI được tích hợp vào Twake, cho phép bạn xử lý dữ liệu của mình mà không bao giờ phải đưa dữ liệu ra khỏi Không gian làm việc của bạn"
         },
         "google": {
           "description": "Mô hình mạnh nhất của Google cho tác vụ văn bản và đa phương thức"
