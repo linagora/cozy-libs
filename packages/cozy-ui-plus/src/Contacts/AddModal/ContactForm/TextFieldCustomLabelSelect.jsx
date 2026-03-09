@@ -11,6 +11,8 @@ const TextFieldCustomLabelSelect = ({
   name,
   value,
   options,
+  disabled,
+  isDisabled,
   contact,
   customLabelOptions,
   onChange,
@@ -45,6 +47,7 @@ const TextFieldCustomLabelSelect = ({
         }
       ]
   const _options = options.concat(customOption)
+  const _disabled = disabled || isDisabled?.(name, contact)
 
   return (
     <>
@@ -53,6 +56,7 @@ const TextFieldCustomLabelSelect = ({
         name={name}
         value={value}
         options={_options}
+        disabled={_disabled}
         onChange={ev => {
           if (ev.target.value === 'skip') {
             return

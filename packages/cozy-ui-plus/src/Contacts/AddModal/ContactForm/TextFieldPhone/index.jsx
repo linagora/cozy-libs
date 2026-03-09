@@ -6,9 +6,18 @@ import TextField from 'cozy-ui/transpiled/react/TextField'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import FlagBottomSheet from './FlagBottomSheet'
+import FlagImage from './FlagImage'
 import FlagMenu from './FlagMenu'
 
-const TextFieldPhone = ({ name, value, contact, onChange, ...props }) => {
+const TextFieldPhone = ({
+  name,
+  value,
+  disabled,
+  isDisabled,
+  contact,
+  onChange,
+  ...props
+}) => {
   const { isMobile } = useBreakpoints()
 
   const { inputValue, handlePhoneValueChange, inputRef, country, setCountry } =
@@ -22,16 +31,25 @@ const TextFieldPhone = ({ name, value, contact, onChange, ...props }) => {
     })
 
   const ResponsiveFlagMenu = isMobile ? FlagBottomSheet : FlagMenu
+  const _disabled = disabled || isDisabled?.(name, contact)
 
   return (
     <TextField
       name={name}
       value={inputValue}
       inputRef={inputRef}
+      disabled={_disabled}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <ResponsiveFlagMenu value={country.iso2} setCountry={setCountry} />
+            {_disabled ? (
+              <FlagImage className="u-ml-half" iso2={country.iso2} />
+            ) : (
+              <ResponsiveFlagMenu
+                value={country.iso2}
+                setCountry={setCountry}
+              />
+            )}
           </InputAdornment>
         )
       }}

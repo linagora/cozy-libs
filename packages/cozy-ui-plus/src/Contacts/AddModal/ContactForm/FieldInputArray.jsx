@@ -23,6 +23,7 @@ const FieldInputArray = ({
   useExtendI18n(locales)
   const { t } = useI18n()
   const { errors } = formProps
+  const { disabled, isDisabled } = restAttributes
 
   return (
     <FieldArray name={name}>
@@ -33,7 +34,8 @@ const FieldInputArray = ({
               const field = fields.value[index]
               const key = field?.fieldId || nameWithIndex
               const inputName = `${nameWithIndex}.${name}`
-              const showRemove = field?.[name]
+              const _disabled = disabled || isDisabled?.(inputName, contact)
+              const showRemove = field?.[name] && !_disabled
               const isError = makeIsRequiredError(
                 restAttributes.required,
                 formProps
