@@ -44,7 +44,7 @@ const LinkRecipient = props => {
     ? t('Share.recipients.expires', {
         date: dateFormatted
       })
-    : link
+    : ''
 
   const RightPart = recipientConfirmationData ? (
     <RecipientConfirm
