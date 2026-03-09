@@ -11,6 +11,7 @@ const TextFieldCustomLabelSelect = ({
   name,
   value,
   options,
+  contact,
   customLabelOptions,
   onChange,
   ...props
