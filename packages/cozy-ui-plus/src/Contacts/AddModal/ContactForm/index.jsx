@@ -37,6 +37,7 @@ export function getSubmitContactForm() {
  *
  * @param {object} params
  * @param {{ data: Array<object> }} params.contacts
+ * @param {object} params.contact
  * @param {import('cozy-client/types/types').IOCozyContact} params.contact
  * @param {Object} params.customFieldsProps
  * @param {func} params.onSubmit
@@ -94,6 +95,7 @@ const ContactForm = ({ contacts, contact, customFieldsProps, onSubmit }) => {
                 key={index}
                 attributes={attributes}
                 contacts={contacts}
+                contact={contact}
                 showSecondaryFields={showSecondaryFields}
                 formProps={{
                   valid,

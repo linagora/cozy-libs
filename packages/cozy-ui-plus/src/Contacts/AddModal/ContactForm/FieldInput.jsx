@@ -19,6 +19,7 @@ const FieldInput = ({
   className,
   attributes: { subFields, ...restAttributes },
   contacts,
+  contact,
   error,
   helperText,
   label,
@@ -62,6 +63,7 @@ const FieldInput = ({
         id={id}
         attributes={restAttributes}
         name={name}
+        contact={contact}
         component={FieldInputWrapper}
         onFocus={onFocus}
         onClick={handleClick}
@@ -87,6 +89,7 @@ const FieldInput = ({
               attributes={labelProps}
               name={`${name}Label`}
               label={t('Contacts.AddModal.ContactForm.fields.label')}
+              contact={contact}
               component={FieldInputWrapper}
               onFocus={onFocus}
             />
@@ -107,6 +110,7 @@ FieldInput.propTypes = {
   contacts: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.object)
   }),
+  contact: PropTypes.object,
   // Destructuring props
   id: PropTypes.string,
   label: PropTypes.string

@@ -14,6 +14,7 @@ import { locales } from './locales'
 const FieldInputLayout = ({
   attributes,
   contacts,
+  contact,
   showSecondaryFields,
   formProps
 }) => {
@@ -42,12 +43,14 @@ const FieldInputLayout = ({
           <FieldInputArray
             attributes={attributes}
             contacts={contacts}
+            contact={contact}
             formProps={formProps}
           />
         ) : layout === 'accordion' ? (
           <FieldInputAccordion
             attributes={attributes}
             contacts={contacts}
+            contact={contact}
             error={isError}
             helperText={isError ? errors[name] : null}
           />
@@ -55,6 +58,7 @@ const FieldInputLayout = ({
           <FieldInput
             attributes={restAttributes}
             contacts={contacts}
+            contact={contact}
             error={isError}
             helperText={isError ? errors[name] : null}
             name={name}
@@ -72,6 +76,7 @@ FieldInputLayout.propTypes = {
   contacts: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.object)
   }),
+  contact: PropTypes.object,
   formProps: PropTypes.object
 }
 

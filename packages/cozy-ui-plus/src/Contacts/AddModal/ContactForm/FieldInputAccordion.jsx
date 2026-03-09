@@ -12,6 +12,7 @@ import { locales } from './locales'
 const FieldInputAccordion = ({
   attributes: { name, label, subFields, ...restAttributes },
   contacts,
+  contact,
   error,
   helperText
 }) => {
@@ -25,6 +26,7 @@ const FieldInputAccordion = ({
         <FieldInput
           attributes={restAttributes}
           contacts={contacts}
+          contact={contact}
           error={error}
           helperText={helperText}
           name={name}

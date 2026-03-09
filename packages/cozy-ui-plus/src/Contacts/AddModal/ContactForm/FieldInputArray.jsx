@@ -17,6 +17,7 @@ import { locales } from './locales'
 const FieldInputArray = ({
   attributes: { name, label, ...restAttributes },
   contacts,
+  contact,
   formProps
 }) => {
   useExtendI18n(locales)
@@ -29,9 +30,10 @@ const FieldInputArray = ({
         return (
           <>
             {fields.map((nameWithIndex, index) => {
-              const key = fields.value[index]?.fieldId || nameWithIndex
-              const showRemove = fields.value[index]?.[name]
+              const field = fields.value[index]
+              const key = field?.fieldId || nameWithIndex
               const inputName = `${nameWithIndex}.${name}`
+              const showRemove = field?.[name]
               const isError = makeIsRequiredError(
                 restAttributes.required,
                 formProps
@@ -47,6 +49,7 @@ const FieldInputArray = ({
                   <FieldInput
                     attributes={restAttributes}
                     contacts={contacts}
+                    contact={contact}
                     error={isError}
                     helperText={isError ? errors[inputName] : null}
                     name={inputName}

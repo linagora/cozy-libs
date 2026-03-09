@@ -8,8 +8,9 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import FlagBottomSheet from './FlagBottomSheet'
 import FlagMenu from './FlagMenu'
 
-const TextFieldPhone = ({ value, onChange, ...props }) => {
+const TextFieldPhone = ({ name, value, contact, onChange, ...props }) => {
   const { isMobile } = useBreakpoints()
+
   const { inputValue, handlePhoneValueChange, inputRef, country, setCountry } =
     usePhoneInput({
       defaultCountry: 'fr',
@@ -24,6 +25,7 @@ const TextFieldPhone = ({ value, onChange, ...props }) => {
 
   return (
     <TextField
+      name={name}
       value={inputValue}
       inputRef={inputRef}
       InputProps={{
