@@ -12,9 +12,19 @@ import {
   getFirstValueIfArray,
   validateFields
 } from './helpers'
+import { excludedCountryCode } from './helpers'
 import { locales } from './locales'
 
 const t = x => get(locales.en, x, x)
+
+jest.mock('react-international-phone', () => ({
+  ...jest.requireActual('react-international-phone'),
+  defaultCountries: [
+    ['France', 'fr', '33'],
+    ['United States', 'us', '1'],
+    ['Germany', 'de', '49']
+  ]
+}))
 
 describe('makeCustomLabel', () => {
   it('should return custom type and supported label', () => {
@@ -739,5 +749,35 @@ describe('validateFields', () => {
     const res = validateFields(values, fields, t)
 
     expect(res).toEqual({ mail: 'Some fields are not filled correctly' })
+  })
+})
+
+describe('excludedCountryCode', () => {
+  it('returns undefined for country code only (+33)', () => {
+    expect(excludedCountryCode({ phone: '+33' })).toBeUndefined()
+  })
+
+  it('preserves full number for Germany (+4930123456)', () => {
+    expect(excludedCountryCode({ phone: '+4930123456' })).toBe('+4930123456')
+  })
+
+  it('returns undefined for country code only (+1)', () => {
+    expect(excludedCountryCode({ phone: '+1' })).toBeUndefined()
+  })
+
+  it('preserves full French mobile (+33612345678)', () => {
+    expect(excludedCountryCode({ phone: '+33612345678' })).toBe('+33612345678')
+  })
+
+  it('preserves value not matching country code (+490)', () => {
+    expect(excludedCountryCode({ phone: '+490' })).toBe('+490')
+  })
+
+  it('preserves numbers with no country code (12345)', () => {
+    expect(excludedCountryCode({ phone: '12345' })).toBe('12345')
+  })
+
+  it('returns undefined for country code only (+49)', () => {
+    expect(excludedCountryCode({ phone: '+49' })).toBeUndefined()
   })
 })

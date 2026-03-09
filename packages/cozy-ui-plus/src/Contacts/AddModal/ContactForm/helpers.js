@@ -2,6 +2,7 @@ import get from 'lodash/get'
 import isEqual from 'lodash/isEqual'
 import merge from 'lodash/merge'
 import uniqueId from 'lodash/uniqueId'
+import { defaultCountries, parseCountry } from 'react-international-phone'
 
 import { Association } from 'cozy-client'
 import { makeDisplayName } from 'cozy-client/dist/models/contact'
@@ -479,4 +480,26 @@ export const makeFields = (customFields, defaultFields) => {
   })
 
   return fields
+}
+
+/**
+ * Excludes phone numbers that consist only of a country code.
+ * If the provided phone value matches only a country code (e.g., "+33"),
+ * returns undefined. Otherwise, returns the phone value.
+ *
+ * @param {Object} val - An object containing the phone number.
+ * @param {string} val.phone - The phone number string, possibly starting with "+" and a country code.
+ * @returns {string|undefined} The phone number if it is not just a country code, otherwise undefined.
+ */
+export const excludedCountryCode = val => {
+  const phoneWithoutPrefix = val.phone.split('+')[1]
+
+  const isOnlyCountryCode = defaultCountries.some(country => {
+    const { dialCode } = parseCountry(country)
+    return phoneWithoutPrefix === dialCode
+  })
+
+  if (isOnlyCountryCode) return undefined
+
+  return val.phone
 }

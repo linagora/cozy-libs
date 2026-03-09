@@ -6,6 +6,7 @@ import {
   createAddress,
   getRelatedContactRelationships,
   makeImppValues,
+  excludedCountryCode,
   makeTypeAndLabel
 } from './helpers'
 
@@ -76,7 +77,7 @@ const formValuesToContact = ({
     address: createAddress({ address, oldContact: oldContactCleaned, t }),
     phone: phone
       ? phone
-          .filter(val => val && val.phone)
+          .filter(val => (val?.phone ? excludedCountryCode(val) : undefined))
           .map(({ phone, phoneLabel }, index) => ({
             number: phone,
             ...makeTypeAndLabel(phoneLabel),
