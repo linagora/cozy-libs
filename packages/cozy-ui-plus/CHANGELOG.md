@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.2.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@5.2.0...cozy-ui-plus@5.2.1) (2026-03-09)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Only country code phone number is now ignored ([d7aedf8](https://github.com/cozy/cozy-libs/commit/d7aedf8a4f0c21e9b433c94fd2f4c93745d2ca22))
+
 # [5.2.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@5.1.1...cozy-ui-plus@5.2.0) (2026-03-09)
 
 ### Bug Fixes
