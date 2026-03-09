@@ -12,8 +12,7 @@ import { makeIsRequiredError } from './helpers'
 import { locales } from './locales'
 
 const FieldInputLayout = ({
-  // eslint-disable-next-line no-unused-vars
-  attributes: { layout, icon, isSecondary, validate, ...attributes }, // ⚠️ `layout` `icon` `isSecondary` `validate` here are removed from attributes to avoid DOM propagration
+  attributes,
   contacts,
   showSecondaryFields,
   formProps
@@ -21,7 +20,8 @@ const FieldInputLayout = ({
   useExtendI18n(locales)
   const { t } = useI18n()
   const { errors } = formProps
-  const { name, label, ...restAttributes } = attributes
+  const { name, label, layout, icon, isSecondary, ...restAttributes } =
+    attributes
 
   const isError = makeIsRequiredError(restAttributes.required, formProps)
 
