@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@5.1.1...cozy-ui-plus@5.2.0) (2026-03-09)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Remove useless name on label field in ContactForm ([6769cf4](https://github.com/cozy/cozy-libs/commit/6769cf451d4388ea4db07ef34dce5ee9e4168253))
+
+### Features
+
+- **cozy-ui-plus:** Add disable on ContactForm field ([56a0000](https://github.com/cozy/cozy-libs/commit/56a0000f0b457aa12c5d3725e67197c61e774e7b))
+- **cozy-ui-plus:** Spread Contact in ContactForm ([e0f5279](https://github.com/cozy/cozy-libs/commit/e0f52797e922daffbd1264af454d093b75f6baf0))
+
 ## [5.1.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@5.1.0...cozy-ui-plus@5.1.1) (2026-03-05)
 
 **Note:** Version bump only for package cozy-ui-plus
