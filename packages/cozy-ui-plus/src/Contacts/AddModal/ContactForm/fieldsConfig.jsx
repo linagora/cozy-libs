@@ -78,7 +78,6 @@ export const fields = [
     layout: 'array',
     component: TextFieldPhone,
     label: {
-      name: 'phoneLabel',
       select: true,
       customLabelOptions: {
         defaultType: '',
@@ -122,7 +121,6 @@ export const fields = [
     type: 'email',
     layout: 'array',
     label: {
-      name: 'emailLabel',
       select: true,
       customLabelOptions: {
         defaultType: '',
@@ -220,7 +218,6 @@ export const fields = [
       }
     ],
     label: {
-      name: 'addressLabel',
       select: true,
       customLabelOptions: {
         defaultType: '',
@@ -254,7 +251,6 @@ export const fields = [
     type: 'url',
     isSecondary: true,
     label: {
-      name: 'cozyLabel',
       select: true,
       customLabelOptions: {
         defaultType: '',
@@ -303,7 +299,6 @@ export const fields = [
       )
     },
     label: {
-      name: 'relatedContactLabel',
       select: true,
       options: [
         {
