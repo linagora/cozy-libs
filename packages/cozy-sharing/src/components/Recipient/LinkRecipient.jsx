@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 import { useI18n } from 'twake-i18n'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import Fade from 'cozy-ui/transpiled/react/Fade'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import LinkRecipientPermissions from './LinkRecipientPermissions'
@@ -20,6 +20,7 @@ import {
 } from '../../helpers/permissions'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { ShareRestrictionModal } from '../ShareRestrictionModal/ShareRestrictionModal'
 
 const LinkRecipient = props => {
   const { t, f, lang } = useI18n()
@@ -27,6 +28,9 @@ const LinkRecipient = props => {
   const { getDocumentPermissions } = useSharingContext()
 
   const { recipientConfirmationData, verifyRecipient, fadeIn, document } = props
+
+  const [openShareRestrictionModal, setOpenShareRestrictionModal] =
+    useState(false)
 
   const permissions = getDocumentPermissions(document?._id)
   const hasPassword = checkIsPermissionHasPassword(permissions)
@@ -63,10 +67,23 @@ const LinkRecipient = props => {
           </Avatar>
         </ListItemIcon>
         <ListItemText
-          primary={<Typography variant="body1">{textPrimary}</Typography>}
+          primary={
+            <DropdownButton
+              textVariant="body1"
+              onClick={() => setOpenShareRestrictionModal(true)}
+            >
+              {textPrimary}
+            </DropdownButton>
+          }
           secondary={textSecondary}
         />
         {RightPart}
+        {openShareRestrictionModal && (
+          <ShareRestrictionModal
+            file={document}
+            onClose={() => setOpenShareRestrictionModal(false)}
+          />
+        )}
       </ListItem>
     </Fade>
   )
