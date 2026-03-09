@@ -10,7 +10,14 @@ import { FieldInputWrapperPropTypes } from '../types'
 // between Field from react-final-form and TextField from Mui
 const FieldInputWrapper = ({
   input,
-  attributes: { component, ...restAttributes },
+  attributes: {
+    component,
+    layout, // eslint-disable-line no-unused-vars
+    icon, // eslint-disable-line no-unused-vars
+    isSecondary, // eslint-disable-line no-unused-vars
+    validate, // eslint-disable-line no-unused-vars
+    ...restAttributes
+  }, // ⚠️ `layout` `icon` `isSecondary` `validate` are removed from attributes to avoid DOM propagration, only used for business rules
   variant,
   fullWidth,
   ...props
