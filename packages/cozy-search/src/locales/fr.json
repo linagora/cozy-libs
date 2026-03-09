@@ -108,7 +108,7 @@
         "description": "Choisissez le modèle d'IA qui correspond le mieux à vos besoins.",
         "by": "par",
         "openrag": {
-          "description": "Travaillez avec des fichiers Drive, le chat et les emails depuis votre Twake Workplace"
+          "description": "L'assistant IA intégré à Twake, pour travailler sur vos données sans jamais les faire sortir de votre Workplace"
         },
         "google": {
           "description": "Le modèle le plus performant de Google pour les tâches textuelles et multimodales"

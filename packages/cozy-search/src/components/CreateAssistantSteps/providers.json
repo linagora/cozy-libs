@@ -1,7 +1,7 @@
 [
   {
     "id": "openrag",
-    "name": "OPENRAG",
+    "name": "Twake",
     "models": ["openrag"],
     "description": "assistant_create.steps.provider_selection.openrag.description",
     "icon": "OpenRagLogo",
