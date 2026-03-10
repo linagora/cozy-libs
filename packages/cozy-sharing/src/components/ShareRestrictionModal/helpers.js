@@ -2,6 +2,7 @@ import { generateWebLink } from 'cozy-client'
 import minilog from 'cozy-minilog'
 
 import { getAppSlugFromDocumentType } from '../../helpers/link'
+import { getShortcode } from '../../helpers/shortcodes'
 
 const log = minilog('ShareRestrictionModal/helpers')
 
@@ -28,6 +29,8 @@ export const createSharingLink = async ({
   file,
   documentType,
   shareByLink,
+  getOwner,
+  getSharingById,
   t,
   ttl,
   editingRights = 'readOnly',
@@ -44,13 +47,48 @@ export const createSharingLink = async ({
     shareByLink,
     showAlert
   })
-  if (!permsResult?.data?.attributes?.shortcodes?.code) {
+  const code = getShortcode(permsResult?.data)
+  if (!code) {
     return null
   }
-  const { data: perms } = permsResult
+  return generateShareLinkFromFile({
+    client,
+    file,
+    sharecode: code,
+    getOwner,
+    getSharingById,
+    documentType
+  })
+}
+
+/**
+ * Generate a sharing link from a file and sharecode
+ * @param {object} options
+ * @param {object} options.client - CozyClient instance
+ * @param {object} options.file - File to share
+ * @param {string} options.sharecode - Share code
+ * @param {Function} options.getOwner - Function to get the owner of a sharing
+ * @param {Function} options.getSharingById - Function to get a sharing by ID
+ * @param {string} options.documentType - Type of the document
+ * @returns {string} - The generated web link
+ */
+export const generateShareLinkFromFile = ({
+  client,
+  file,
+  sharecode,
+  getOwner,
+  getSharingById,
+  documentType
+}) => {
+  let cozyUrl = client.getStackClient().uri
+  if (file.driveId) {
+    const sharing = getSharingById(file.driveId)
+    const owner = getOwner(sharing?.rules?.[0]?.values?.[0])
+    cozyUrl = owner?.instance || client.getStackClient().uri
+  }
   return generateWebLink({
-    cozyUrl: client.getStackClient().uri,
-    searchParams: [['sharecode', perms.attributes.shortcodes.code]],
+    cozyUrl,
+    searchParams: [['sharecode', sharecode]],
     pathname: '/public',
     slug: getAppSlugFromDocumentType({ documentType }),
     subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'

@@ -37,7 +37,8 @@ export const DumbBatchSharedFolderModal = withLocales(
     createLabel,
     shareLabel,
     saveLabel,
-    sharingDesc
+    sharingDesc,
+    showShareByEmail = true
   }) => {
     const hasRecipients = Boolean(recipients?.length)
 
@@ -49,6 +50,16 @@ export const DumbBatchSharedFolderModal = withLocales(
             <Button variant="secondary" label={cancelLabel} onClick={onClose} />
             <Button variant="primary" label={createLabel} onClick={onCreate} />
           </>
+        )
+      }
+
+      if (!showShareByEmail) {
+        return (
+          <ShareByLink
+            link={sharingLink}
+            document={document}
+            documentType="Files"
+          />
         )
       }
 
@@ -111,19 +122,21 @@ export const DumbBatchSharedFolderModal = withLocales(
               <Typography variant="h6" className="u-mt-1-half u-mb-half">
                 {addPeopleLabel}
               </Typography>
-              <DumbShareByEmail
-                createContact={createContact}
-                currentRecipients={currentRecipients}
-                document={document}
-                documentType="Files"
-                sharedDrive
-                sharingDesc={sharingDesc}
-                onShare={params => {
-                  onShare(params)
-                }}
-                submitLabel={addButtonLabel}
-                showNotifications={false}
-              />
+              {showShareByEmail && (
+                <DumbShareByEmail
+                  createContact={createContact}
+                  currentRecipients={currentRecipients}
+                  document={document}
+                  documentType="Files"
+                  sharedDrive
+                  sharingDesc={sharingDesc}
+                  onShare={params => {
+                    onShare(params)
+                  }}
+                  submitLabel={addButtonLabel}
+                  showNotifications={false}
+                />
+              )}
             </div>
             <WhoHasAccess
               isOwner
@@ -168,7 +181,8 @@ DumbBatchSharedFolderModal.propTypes = {
   createLabel: PropTypes.string,
   shareLabel: PropTypes.string,
   saveLabel: PropTypes.string,
-  sharingDesc: PropTypes.string.isRequired
+  sharingDesc: PropTypes.string.isRequired,
+  showShareByEmail: PropTypes.bool
 }
 
 export default DumbBatchSharedFolderModal

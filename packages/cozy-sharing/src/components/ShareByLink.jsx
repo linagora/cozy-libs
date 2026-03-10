@@ -23,7 +23,7 @@ const ShareByLink = ({ link, document, documentType }) => {
   const { isMobile } = useBreakpoints()
   const { showAlert } = useAlert()
   const client = useClient()
-  const { shareByLink } = useSharingContext()
+  const { shareByLink, getOwner, getSharingById } = useSharingContext()
   const [isGenerating, setIsGenerating] = useState(false)
 
   const canShare = typeof navigator?.share === 'function'
@@ -44,6 +44,8 @@ const ShareByLink = ({ link, document, documentType }) => {
         file: document,
         documentType,
         shareByLink,
+        getOwner,
+        getSharingById,
         t,
         showAlert,
         password: '',
