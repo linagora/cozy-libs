@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.4.4...cozy-sharing@28.5.0) (2026-03-10)
+
+### Bug Fixes
+
+- Make sharingDesc prop optional with default empty string ([538eaa6](https://github.com/cozy/cozy-libs/commit/538eaa61988405be4225a6147fad17805b218e30))
+
+### Features
+
+- Allow to share a shared drive file by link ([a78e796](https://github.com/cozy/cozy-libs/commit/a78e7963af05b6815856246a722542acee2d900f))
+
 ## [28.4.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.4.3...cozy-sharing@28.4.4) (2026-03-09)
 
 **Note:** Version bump only for package cozy-sharing
