@@ -18,7 +18,8 @@ export const DumbFederatedFolderModal = withLocales(
     onSend,
     onClose,
     onShare,
-    sharingLink
+    sharingLink,
+    showShareByEmail
   }) => {
     const { t } = useI18n()
     return (
@@ -39,6 +40,7 @@ export const DumbFederatedFolderModal = withLocales(
         addPeopleLabel={t('FederatedFolder.addPeople')}
         addButtonLabel={t('FederatedFolder.add')}
         shareLabel={t('FederatedFolder.share')}
+        showShareByEmail={showShareByEmail}
       />
     )
   }
@@ -56,7 +58,8 @@ DumbFederatedFolderModal.propTypes = {
   onSend: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
-  sharingLink: PropTypes.string
+  sharingLink: PropTypes.string,
+  showShareByEmail: PropTypes.bool
 }
 
 export default DumbFederatedFolderModal

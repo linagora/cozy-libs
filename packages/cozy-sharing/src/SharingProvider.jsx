@@ -67,6 +67,7 @@ export class SharingProvider extends Component {
       canReshare: docId => canReshare(this.state, docId, instanceUri),
       getOwner: docId => getOwner(this.state, docId),
       getSharingType: docId => getSharingType(this.state, docId, instanceUri),
+      getSharingById: docId => getSharingById(this.state, docId),
       getSharingForSelf: docId => getSharingForSelf(this.state, docId),
       getRecipients: docId => getRecipients(this.state, docId),
       getSharedParentPath: documentPath =>
@@ -336,8 +337,63 @@ export class SharingProvider extends Component {
   }
 
   shareByLink = async (document, options) => {
-    const resp = await this.permissionCol.createSharingLink(document, options)
+    const resp = document.driveId
+      ? await this.createSharedDriveSharingLink(document, options)
+      : await this.permissionCol.createSharingLink(document, options)
     this.dispatch(addSharingLink(resp.data))
+    return resp
+  }
+
+  getFederatedShareLink = document => {
+    if (!document.driveId) return null
+
+    const permissions = getDocumentPermissions(this.state, document._id)
+    const perm = permissions.find(p => getShortcode(p))
+    if (!perm) return null
+
+    const code = getShortcode(perm)
+    if (!code) return null
+
+    const { client } = this.props
+    return generateShareLinkFromFile({
+      client,
+      file: document,
+      sharecode: code,
+      getOwner: this.state.getOwner,
+      getSharingById: this.state.getSharingById,
+      documentType: this.state.documentType
+    })
+  }
+
+  createSharedDriveSharingLink = async (document, options) => {
+    const { client } = this.props
+    const drivePermissionCollection = client.collection('io.cozy.permissions', {
+      driveId: document.driveId
+    })
+    const resp = await drivePermissionCollection.createSharingLink(
+      document,
+      options
+    )
+    return resp
+  }
+
+  updateSharedDrivePermissions = async (
+    document,
+    permissionDocument,
+    updatedPermissions,
+    options
+  ) => {
+    const { client } = this.props
+    const { expiresAt, password } = options
+    const drivePermissionCollection = client.collection('io.cozy.permissions', {
+      driveId: document.driveId
+    })
+    const resp = await drivePermissionCollection.add(
+      permissionDocument,
+      updatedPermissions,
+      { expiresAt, password }
+    )
+    this.dispatch(updateSharingLink(resp.data))
     return resp
   }
 
@@ -356,19 +412,29 @@ export class SharingProvider extends Component {
     const { verbs, expiresAt, password } = options
     const permissions = getDocumentPermissions(this.state, document.id)
 
+    if (!permissions || permissions.length === 0) {
+      return []
+    }
+
     const responses = await Promise.all(
       permissions.map(async permissionDocument => {
         const updatedPermissions = permissionDocument.attributes.permissions
-        Object.keys(updatedPermissions).map(permType => {
+        Object.keys(updatedPermissions).forEach(permType => {
           updatedPermissions[permType].verbs = verbs
         })
 
-        const resp = await this.permissionCol.add(
-          permissionDocument,
-          updatedPermissions,
-          { expiresAt, password }
-        )
-        this.dispatch(updateSharingLink(resp.data))
+        const resp = document.driveId
+          ? await this.updateSharedDrivePermissions(
+              document,
+              permissionDocument,
+              updatedPermissions,
+              options
+            )
+          : await this.permissionCol.add(
+              permissionDocument,
+              updatedPermissions,
+              { expiresAt, password }
+            )
         return resp
       })
     )

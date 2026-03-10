@@ -6,8 +6,10 @@ import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
 import { DumbFederatedFolderModal } from './DumbFederatedFolderModal'
+import { getShortcode } from '../../helpers/shortcodes'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { generateShareLinkFromFile } from '../ShareRestrictionModal/helpers'
 import {
   formatRecipients,
   moveRecipientToReadWrite,
@@ -19,13 +21,43 @@ export const FederatedFolderModal = withLocales(
   ({ onClose, document: existingDocument }) => {
     const client = useClient()
     const { t } = useI18n()
-    const { share, getSharingLink } = useSharingContext()
+    const {
+      share,
+      getSharingLink,
+      getOwner,
+      getSharingById,
+      getDocumentPermissions,
+      documentType
+    } = useSharingContext()
     const { showAlert } = useAlert()
 
     // Get sharing link
-    const sharingLink = existingDocument
-      ? getSharingLink(existingDocument._id)
-      : null
+    const getSharingLinkMemo = () => {
+      if (!existingDocument) return null
+
+      if (existingDocument.driveId) {
+        const permissions = getDocumentPermissions(existingDocument._id)
+        const perm = permissions[0]
+        if (!perm) return null
+
+        const code = getShortcode(perm)
+
+        if (!code) return null
+
+        return generateShareLinkFromFile({
+          client,
+          file: existingDocument,
+          sharecode: code,
+          getOwner,
+          getSharingById,
+          documentType
+        })
+      }
+
+      return getSharingLink(existingDocument._id)
+    }
+
+    const sharingLink = getSharingLinkMemo()
 
     const [federatedRecipients, setFederatedRecipients] = useState({
       recipients: [],
@@ -92,6 +124,8 @@ export const FederatedFolderModal = withLocales(
 
     const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
 
+    const isSharedDrive = Boolean(existingDocument?.driveId)
+
     return (
       <DumbFederatedFolderModal
         title={modalTitle}
@@ -106,6 +140,7 @@ export const FederatedFolderModal = withLocales(
         onClose={onClose}
         onShare={onShare}
         sharingLink={sharingLink}
+        showShareByEmail={!isSharedDrive}
       />
     )
   }
