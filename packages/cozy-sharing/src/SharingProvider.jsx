@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { withClient } from 'cozy-client'
 import minilog from 'cozy-minilog'
 
+import { generateShareLinkFromFile } from './components/ShareRestrictionModal/helpers'
 import SharingContext from './context'
 import { fetchNextPermissions } from './fetchNextPermissions'
 import { fetchFilesPaths } from './helpers/files'
@@ -11,6 +12,7 @@ import {
   createSharingInStore,
   updateSharingInStore
 } from './helpers/sharings'
+import { getShortcode } from './helpers/shortcodes'
 import { SynchronousJobQueue } from './helpers/synchronousJobQueue'
 import { fetchApps } from './queries/queries'
 import reducer, {
@@ -84,6 +86,7 @@ export class SharingProvider extends Component {
       revokeGroup: this.revokeGroup,
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
+      getFederatedShareLink: this.getFederatedShareLink,
       updateDocumentPermissions: this.updateDocumentPermissions,
       revokeSharingLink: this.revokeSharingLink,
       hasLoadedAtLeastOnePage: false,
