@@ -181,8 +181,10 @@ DumbBatchSharedFolderModal.propTypes = {
   createLabel: PropTypes.string,
   shareLabel: PropTypes.string,
   saveLabel: PropTypes.string,
-  sharingDesc: PropTypes.string.isRequired,
+  sharingDesc: PropTypes.string,
   showShareByEmail: PropTypes.bool
 }
 
-export default DumbBatchSharedFolderModal
+DumbBatchSharedFolderModal.defaultProps = {
+  sharingDesc: ''
+}
