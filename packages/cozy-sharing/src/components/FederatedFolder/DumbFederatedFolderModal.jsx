@@ -3,7 +3,7 @@ import React from 'react'
 import { useI18n } from 'twake-i18n'
 
 import withLocales from '../../hoc/withLocales'
-import DumbBatchSharedFolderModal from '../SharedFolder/DumbBatchSharedFolderModal'
+import { DumbBatchSharedFolderModal } from '../SharedFolder/DumbBatchSharedFolderModal'
 
 export const DumbFederatedFolderModal = withLocales(
   ({

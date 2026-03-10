@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
 import { DumbFederatedFolderModal } from './DumbFederatedFolderModal'
-import { getShortcode } from '../../helpers/shortcodes'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
-import { generateShareLinkFromFile } from '../ShareRestrictionModal/helpers'
 import {
   formatRecipients,
   moveRecipientToReadWrite,
@@ -24,40 +22,40 @@ export const FederatedFolderModal = withLocales(
     const {
       share,
       getSharingLink,
-      getOwner,
-      getSharingById,
+      getFederatedShareLink,
       getDocumentPermissions,
-      documentType
+      getOwner,
+      getSharingById
     } = useSharingContext()
     const { showAlert } = useAlert()
 
-    // Get sharing link
-    const getSharingLinkMemo = () => {
-      if (!existingDocument) return null
+    const [sharingLink, setSharingLink] = useState(null)
 
-      if (existingDocument.driveId) {
-        const permissions = getDocumentPermissions(existingDocument._id)
-        const perm = permissions[0]
-        if (!perm) return null
+    const documentPermissions = existingDocument
+      ? getDocumentPermissions(existingDocument._id)
+      : []
 
-        const code = getShortcode(perm)
+    useEffect(() => {
+      const fetchSharingLink = async () => {
+        if (!existingDocument) return
 
-        if (!code) return null
-
-        return generateShareLinkFromFile({
-          client,
-          file: existingDocument,
-          sharecode: code,
-          getOwner,
-          getSharingById,
-          documentType
-        })
+        if (existingDocument.driveId) {
+          const link = await getFederatedShareLink(existingDocument)
+          setSharingLink(link)
+        } else {
+          setSharingLink(getSharingLink(existingDocument._id))
+        }
       }
 
-      return getSharingLink(existingDocument._id)
-    }
-
-    const sharingLink = getSharingLinkMemo()
+      fetchSharingLink()
+    }, [
+      existingDocument,
+      documentPermissions,
+      getFederatedShareLink,
+      getSharingLink,
+      getOwner,
+      getSharingById
+    ]) // eslint-disable-line react-hooks/exhaustive-deps
 
     const [federatedRecipients, setFederatedRecipients] = useState({
       recipients: [],
