@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [27.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.6.13...cozy-viewer@27.0.0) (2026-03-10)
+
+### Bug Fixes
+
+- **cozy-viewer:** Add missing cozy-flags peer dependency ([9cdc360](https://github.com/cozy/cozy-libs/commit/9cdc3601506ab7848790128b20f48fbc209fa46f))
+
+### BREAKING CHANGES
+
+- **cozy-viewer:** You must have `cozy-flags >= 4.8.1`
+
 ## [26.6.13](https://github.com/cozy/cozy-libs/compare/cozy-viewer@26.6.12...cozy-viewer@26.6.13) (2026-03-09)
 
 **Note:** Version bump only for package cozy-viewer

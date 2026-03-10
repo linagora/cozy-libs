@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.13.3](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.13.2...cozy-dataproxy-lib@4.13.3) (2026-03-10)
+
+### Bug Fixes
+
+- Do not cleanup indexes in not using pouch ([d68d8e2](https://github.com/cozy/cozy-libs/commit/d68d8e24868771ecfe6513bcf2ad64d9a49fb588))
+
 ## [4.13.2](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.13.1...cozy-dataproxy-lib@4.13.2) (2026-03-05)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
