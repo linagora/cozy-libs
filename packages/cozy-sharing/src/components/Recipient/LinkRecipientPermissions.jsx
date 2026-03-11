@@ -2,18 +2,58 @@ import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 import { useI18n } from 'twake-i18n'
 
+import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
+import {
+  makeActions,
+  divider
+} from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 
+import { revokeLink } from './actions/revokeLink'
+import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
+import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
+import { isOnlyReadOnlyLinkAllowed } from '../../helpers/link'
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
-import { ShareRestrictionModal } from '../ShareRestrictionModal/ShareRestrictionModal'
+import { useSharingContext } from '../../hooks/useSharingContext'
+import { WRITE_PERMS, READ_ONLY_PERMS } from '../ShareRestrictionModal/helpers'
 
-const LinkRecipientPermissions = ({ className, document, permissions }) => {
+const LinkRecipientPermissions = ({ className, document }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
-  const [openShareRestrictionModal, setOpenShareRestrictionModal] =
-    useState(false)
+  const [isMenuDisplayed, setMenuDisplayed] = useState(false)
+  const {
+    updateDocumentPermissions,
+    revokeSharingLink,
+    documentType,
+    getDocumentPermissions
+  } = useSharingContext()
 
+  const permissions = getDocumentPermissions(document._id)
   const isReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
+  const type = isReadOnlyPermissions ? 'one-way' : 'two-way'
+
+  const toggleMenu = () => setMenuDisplayed(!isMenuDisplayed)
+  const hideMenu = () => setMenuDisplayed(false)
+
+  const handleSetType = newType => {
+    const verbs = newType === 'one-way' ? READ_ONLY_PERMS : WRITE_PERMS
+    updateDocumentPermissions(document, { verbs })
+  }
+
+  const handleRevocation = () => revokeSharingLink(document)
+
+  const actionsToShow = [setReadOnlySharedPermission]
+  if (!isOnlyReadOnlyLinkAllowed({ documentType })) {
+    actionsToShow.push(setReadWriteSharedPermission)
+  }
+  actionsToShow.push(divider, revokeLink)
+
+  const actions = makeActions(actionsToShow, {
+    t,
+    type,
+    setType: handleSetType,
+    handleRevocation
+  })
 
   return (
     <div className={className}>
@@ -21,18 +61,17 @@ const LinkRecipientPermissions = ({ className, document, permissions }) => {
         <DropdownButton
           ref={buttonRef}
           textVariant="body2"
-          onClick={() => setOpenShareRestrictionModal(true)}
+          onClick={toggleMenu}
         >
-          {t(
-            `Share.type.${isReadOnlyPermissions ? 'one-way' : 'two-way'}`
-          ).toLowerCase()}
+          {t(`Share.type.${type}`).toLowerCase()}
         </DropdownButton>
-        {openShareRestrictionModal && (
-          <ShareRestrictionModal
-            file={document}
-            onClose={() => setOpenShareRestrictionModal(false)}
-          />
-        )}
+        <ActionsMenu
+          ref={buttonRef}
+          open={isMenuDisplayed}
+          actions={actions}
+          autoClose
+          onClose={hideMenu}
+        />
       </>
     </div>
   )
@@ -40,8 +79,7 @@ const LinkRecipientPermissions = ({ className, document, permissions }) => {
 
 LinkRecipientPermissions.propTypes = {
   className: PropTypes.string,
-  document: PropTypes.object.isRequired,
-  permissions: PropTypes.arrayOf(PropTypes.object).isRequired
+  document: PropTypes.object.isRequired
 }
 
 export default LinkRecipientPermissions

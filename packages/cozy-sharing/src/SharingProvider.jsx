@@ -488,6 +488,7 @@ export class SharingProvider extends Component {
               updatedPermissions,
               { expiresAt, password }
             )
+        this.dispatch(updateSharingLink(resp.data))
         return resp
       })
     )
