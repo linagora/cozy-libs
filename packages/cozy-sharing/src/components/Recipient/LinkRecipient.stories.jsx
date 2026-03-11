@@ -5,7 +5,6 @@ const meta = {
   args: {
     recipientConfirmationData: false,
     verifyRecipient: () => true,
-    link: 'test',
     fadeIn: false
   }
 }

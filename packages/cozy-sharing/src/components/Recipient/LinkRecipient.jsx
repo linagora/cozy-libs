@@ -26,8 +26,7 @@ const LinkRecipient = props => {
   const { isMobile } = useBreakpoints()
   const { getDocumentPermissions } = useSharingContext()
 
-  const { recipientConfirmationData, verifyRecipient, link, fadeIn, document } =
-    props
+  const { recipientConfirmationData, verifyRecipient, fadeIn, document } = props
 
   const permissions = getDocumentPermissions(document?._id)
   const hasPassword = checkIsPermissionHasPassword(permissions)
@@ -74,7 +73,14 @@ const LinkRecipient = props => {
 }
 
 LinkRecipient.propTypes = {
-  link: PropTypes.string.isRequired
+  recipientConfirmationData: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.object
+  ]),
+  verifyRecipient: PropTypes.func,
+  fadeIn: PropTypes.bool,
+  document: PropTypes.object,
+  permissions: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default LinkRecipient
