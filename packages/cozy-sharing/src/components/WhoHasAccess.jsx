@@ -56,7 +56,6 @@ const WhoHasAccess = ({
             documentType={documentType}
             onRevoke={onRevoke}
             onRevokeSelf={onRevokeSelf}
-            link={link}
             permissions={permissions}
             fadeIn={linkHasBeenJustCreated}
           />
