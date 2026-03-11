@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.5.0...cozy-sharing@28.6.0) (2026-03-11)
+
+### Features
+
+- Add ability to change member permission type in sharing ([76d0dce](https://github.com/cozy/cozy-libs/commit/76d0dce150d8ea7ac7cb12c6e00b340756b6512a))
+- Hide link text in link recipient ([209857f](https://github.com/cozy/cozy-libs/commit/209857fcf01b71e584e49ef8ab3da4a897d408ed))
+- Remove link prop from LinkRecipient component ([7bbf831](https://github.com/cozy/cozy-libs/commit/7bbf831594d7c33357ade79665f4308fd35e2b8e))
+
 # [28.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.4.4...cozy-sharing@28.5.0) (2026-03-10)
 
 ### Bug Fixes
