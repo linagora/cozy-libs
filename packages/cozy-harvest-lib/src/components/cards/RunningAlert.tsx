@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { isFlagshipApp } from 'cozy-device-helper'
 import Alert from 'cozy-ui/transpiled/react/Alert'
@@ -7,6 +6,7 @@ import AlertTitle from 'cozy-ui/transpiled/react/AlertTitle'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ArrowUp from 'cozy-ui/transpiled/react/Icons/ArrowUp'
+import { useI18n } from 'twake-i18n'
 
 export const RunningAlert = (): JSX.Element | null => {
   const { t } = useI18n()

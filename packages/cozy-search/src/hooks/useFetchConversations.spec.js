@@ -1,5 +1,4 @@
-import { render, act } from '@testing-library/react'
-import React from 'react'
+import { renderHook, act } from '@testing-library/react'
 
 import { useClient } from 'cozy-client'
 
@@ -43,18 +42,11 @@ describe('useFetchConversations', () => {
   })
 
   it('initializes with empty conversations and not loading', () => {
-    let hookResult = {}
-    const TestComponent = () => {
-      hookResult.current = useFetchConversations()
-      return null
-    }
-    act(() => {
-      render(<TestComponent />)
-    })
+    const { result } = renderHook(() => useFetchConversations())
 
-    expect(hookResult.current.conversations).toEqual([])
-    expect(hookResult.current.hasMore).toBe(false)
-    expect(hookResult.current.isLoading).toBe(true) // Starts loading immediately due to useEffect
+    expect(result.current.conversations).toEqual([])
+    expect(result.current.hasMore).toBe(false)
+    expect(result.current.isLoading).toBe(true) // Starts loading immediately due to useEffect
   })
 
   it('fetches conversations on mount and resolves relationships', async () => {
@@ -73,35 +65,26 @@ describe('useFetchConversations', () => {
 
     mockClient.query.mockResolvedValueOnce(mockResponse)
 
-    let hookResult = {}
-    const TestComponent = () => {
-      hookResult.current = useFetchConversations()
-      return null
-    }
-    act(() => {
-      render(<TestComponent />)
-    })
+    const { result } = renderHook(() => useFetchConversations())
 
-    expect(hookResult.current.isLoading).toBe(true)
+    expect(result.current.isLoading).toBe(true)
 
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 10))
     })
 
     expect(mockClient.query).toHaveBeenCalledTimes(1)
-    expect(hookResult.current.isLoading).toBe(false)
-    expect(hookResult.current.hasMore).toBe(true)
-    expect(hookResult.current.bookmark).toBe('bmk123')
+    expect(result.current.isLoading).toBe(false)
+    expect(result.current.hasMore).toBe(true)
+    expect(result.current.bookmark).toBe('bmk123')
 
     // Check relationship mapping
-    expect(hookResult.current.conversations).toHaveLength(2)
-    expect(hookResult.current.conversations[0].assistant.name).toBe(
+    expect(result.current.conversations).toHaveLength(2)
+    expect(result.current.conversations[0].assistant.name).toBe(
       'Mock Assistant'
     )
     // Fallback DEFAULT_ASSISTANT
-    expect(hookResult.current.conversations[1].assistant.id).toBe(
-      'ai_assistant'
-    )
+    expect(result.current.conversations[1].assistant.id).toBe('ai_assistant')
   })
 
   it('fetchMore loads next bookmark and concatenates results', async () => {
@@ -120,37 +103,30 @@ describe('useFetchConversations', () => {
       .mockResolvedValueOnce(firstPage)
       .mockResolvedValueOnce(secondPage)
 
-    let hookResult = {}
-    const TestComponent = () => {
-      hookResult.current = useFetchConversations()
-      return null
-    }
-    act(() => {
-      render(<TestComponent />)
-    })
+    const { result } = renderHook(() => useFetchConversations())
 
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 10))
     }) // wait for initial load
 
-    expect(hookResult.current.conversations).toHaveLength(1)
-    expect(hookResult.current.bookmark).toBe('bmk1')
-    expect(hookResult.current.hasMore).toBe(true)
+    expect(result.current.conversations).toHaveLength(1)
+    expect(result.current.bookmark).toBe('bmk1')
+    expect(result.current.hasMore).toBe(true)
 
     // Trigger fetchMore
     act(() => {
-      hookResult.current.fetchMore()
+      result.current.fetchMore()
     })
 
-    expect(hookResult.current.isLoading).toBe(true)
+    expect(result.current.isLoading).toBe(true)
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 10))
     })
 
-    expect(hookResult.current.conversations).toHaveLength(2)
-    expect(hookResult.current.conversations[1]._id).toBe('c2')
-    expect(hookResult.current.hasMore).toBe(false)
-    expect(hookResult.current.bookmark).toBe(null)
+    expect(result.current.conversations).toHaveLength(2)
+    expect(result.current.conversations[1]._id).toBe('c2')
+    expect(result.current.hasMore).toBe(false)
+    expect(result.current.bookmark).toBe(null)
   })
 
   it('handles query parameter changes gracefully by resetting state', async () => {
@@ -163,22 +139,15 @@ describe('useFetchConversations', () => {
       bookmark: 'bmk1'
     })
 
-    let hookResult
-    const TestComponent = ({ query }) => {
-      hookResult = useFetchConversations({ query })
-      return null
-    }
-
-    let rerender
-    act(() => {
-      const utils = render(<TestComponent query={initialQuery} />)
-      rerender = utils.rerender
-    })
+    const { result, rerender } = renderHook(
+      ({ query }) => useFetchConversations({ query }),
+      { initialProps: { query: initialQuery } }
+    )
 
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 10))
     })
-    expect(hookResult.conversations).toHaveLength(1)
+    expect(result.current.conversations).toHaveLength(1)
 
     // Render with new query
     mockClient.query.mockResolvedValueOnce({
@@ -188,18 +157,18 @@ describe('useFetchConversations', () => {
     })
 
     act(() => {
-      rerender(<TestComponent query={newQuery} />)
+      rerender({ query: newQuery })
     })
 
     // It should immediately be loading and wipe state
-    expect(hookResult.isLoading).toBe(true)
+    expect(result.current.isLoading).toBe(true)
 
     await act(async () => {
       await new Promise(resolve => setTimeout(resolve, 10))
     })
 
     // Now populated with new query results
-    expect(hookResult.conversations[0]._id).toBe('c2')
+    expect(result.current.conversations[0]._id).toBe('c2')
     expect(mockClient.query).toHaveBeenCalledTimes(2)
   })
 
@@ -220,21 +189,14 @@ describe('useFetchConversations', () => {
       .mockReturnValueOnce(slowResponsePromise)
       .mockReturnValueOnce(fastResponsePromise)
 
-    let hookResult
-    const TestComponent = ({ query }) => {
-      hookResult = useFetchConversations({ query })
-      return null
-    }
-
-    let rerender
-    act(() => {
-      const utils = render(<TestComponent query="query1" />)
-      rerender = utils.rerender
-    })
+    const { result, rerender } = renderHook(
+      ({ query }) => useFetchConversations({ query }),
+      { initialProps: { query: 'query1' } }
+    )
 
     // Immediately trigger a new query
     act(() => {
-      rerender(<TestComponent query="query2" />)
+      rerender({ query: 'query2' })
     })
 
     // Wait for the fast response to resolve
@@ -243,7 +205,7 @@ describe('useFetchConversations', () => {
     })
 
     // Ensure it's the fresh data
-    expect(hookResult.conversations[0]._id).toBe('fresh')
+    expect(result.current.conversations[0]._id).toBe('fresh')
 
     // Wait a bit longer for the slow response to resolve
     await act(async () => {
@@ -251,6 +213,6 @@ describe('useFetchConversations', () => {
     })
 
     // Data should not have been overwritten by the stale response
-    expect(hookResult.conversations[0]._id).toBe('fresh')
+    expect(result.current.conversations[0]._id).toBe('fresh')
   })
 })

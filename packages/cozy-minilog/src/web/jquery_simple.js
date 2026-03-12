@@ -36,7 +36,7 @@ AjaxLogger.prototype.init = function () {
       try {
         JSON.stringify(self.cache[i])
         logs.push(self.cache[i])
-      } catch (e) {
+      } catch (_e) {
         // ignore
       }
     }

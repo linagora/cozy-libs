@@ -4,7 +4,7 @@ import { CozyBridge } from './index'
 // Backward compatibility: attach to window._cozyBridge
 const legacyBridge = new CozyBridge()
 
-// @ts-expect-error No type
+// @ts-expect-error window._cozyBridge is not typed
 window._cozyBridge = {
   requestParentOrigin: legacyBridge.requestParentOrigin,
   isInIframe: legacyBridge.isInIframe,
@@ -12,9 +12,9 @@ window._cozyBridge = {
   setupBridge: (targetOrigin: string): boolean => {
     const success = legacyBridge.setupBridge(targetOrigin)
     if (success) {
-      // @ts-expect-error No type
+      // @ts-expect-error window._cozyBridge is not typed
       window._cozyBridge = {
-        // @ts-expect-error No type
+        // @ts-expect-error window._cozyBridge is not typed
         ...window._cozyBridge,
         startHistorySyncing: legacyBridge.startHistorySyncing,
         stopHistorySyncing: legacyBridge.stopHistorySyncing,

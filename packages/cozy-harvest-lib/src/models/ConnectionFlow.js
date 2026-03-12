@@ -438,7 +438,6 @@ export class ConnectionFlow {
       logger.debug(`ConnectionFlow: Sending two fa code ${code}`)
       await this.saveAccount(accounts.updateTwoFaCode(this.account, code))
     } catch (error) {
-      // eslint-disable-next-line no-console
       // @ts-ignore
       logger.error(error)
       this.setState({ status: ERRORED, error })

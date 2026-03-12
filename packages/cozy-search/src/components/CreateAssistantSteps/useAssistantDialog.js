@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
 
@@ -86,7 +86,7 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
       } else {
         setStep(prev => prev + 1)
       }
-    } catch (error) {
+    } catch (_error) {
       showAlert({ message: t('assistant.default_error'), severity: 'error' })
     }
   }

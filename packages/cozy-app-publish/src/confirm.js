@@ -18,6 +18,7 @@ const promptConfirm = question =>
     ]
 
     return prompt.get(promptProperties, function (err, received) {
+      // eslint-disable-next-line no-console
       console.log()
       if (err) {
         reject(new Error(colorize.red(`prompt: ${err}`)))

@@ -23,7 +23,7 @@ export const AccountSelectorHeader = ({
   accountsAndTriggers,
   showAccountSelection
 }: AccountSelectorHeaderProps): JSX.Element => {
-  // @ts-expect-error IDK
+  // @ts-expect-error useDialogContext return type is not fully typed
   const { dialogTitleProps } = useDialogContext()
   const navigate = useNavigate()
 

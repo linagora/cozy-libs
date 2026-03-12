@@ -26,7 +26,7 @@ const autoDetectRepository = async () => {
     } else {
       return null
     }
-  } catch (e) {
+  } catch (_e) {
     return null
   }
 }

@@ -99,7 +99,6 @@ const main = async () => {
   )
 
   for (const repositoryInfo of repositoryInfos) {
-    // eslint-disable-next-line no-console
     reporter.write({ message: `Repository: ${repositoryInfo.slug}` })
     for await (const message of runRules(repositoryInfo, rules)) {
       reporter.write(message)

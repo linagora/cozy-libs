@@ -61,7 +61,7 @@ const findUserQuery = (
  */
 export const createCozyRealtimeChatAdapter = (
   options: CozyRealtimeChatAdapterOptions,
-  t: (key: string, options?: Record<string, unknown> | undefined) => string
+  t: (key: string, options?: Record<string, unknown>) => string
 ): ChatModelAdapter => ({
   async *run({
     messages,

@@ -152,8 +152,8 @@ function openIntentsApiInAppBrowser({
 
       const isReady = Boolean(
         intentsApi?.fetchSessionCode &&
-          intentsApi?.showInAppBrowser &&
-          intentsApi?.closeInAppBrowser
+        intentsApi?.showInAppBrowser &&
+        intentsApi?.closeInAppBrowser
       )
 
       if (!isReady) {

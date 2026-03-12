@@ -119,6 +119,7 @@ export function fetchBankAccountsStats(client) {
       const response = await client.query(query)
       dispatch(fetchBankAccountsStatsSuccess(response.data))
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn('Bank accounts stats failed to fetch', error)
     }
 
