@@ -33,6 +33,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
     step,
     formData,
     selectedProvider,
+    canSubmit,
     handleBack,
     handleNext,
     handleChange,
@@ -40,7 +41,10 @@ const CreateAssistantDialog = ({ open, onClose }) => {
     handleAvatarChange,
     isNextDisabled,
     handleChangeModel
-  } = useAssistantDialog({ onClose })
+  } = useAssistantDialog({
+    onClose,
+    initialData: { selectedProvider: { id: 'openrag' } }
+  })
 
   const getTitle = () => {
     if (step === STEPS.API_KEY) {
@@ -57,7 +61,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
       model: formData.model,
       apiKey: formData.apiKey,
       baseUrl: formData.baseUrl,
-      isCustomModel: formData.isCustomModel
+      providerId: selectedProvider.id
     })
     showAlert({ message: t('assistant_create.success'), severity: 'success' })
   }
@@ -99,7 +103,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
           onClick={() => handleNext(onSubmit)}
           disabled={isNextDisabled()}
           label={
-            step === STEPS.API_KEY
+            canSubmit
               ? t('assistant_create.buttons.create')
               : t('assistant_create.buttons.next')
           }

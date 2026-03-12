@@ -18,7 +18,7 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { locales } from '../../locales'
 import { useAssistant } from '../AssistantProvider'
 import AssistantDialogContent from '../CreateAssistantSteps/AssistantDialogContent'
-import { getSelectedProviderByModel } from '../CreateAssistantSteps/helpers'
+import { getSelectedProviderById } from '../CreateAssistantSteps/helpers'
 import styles from '../CreateAssistantSteps/styles.styl'
 import {
   useAssistantDialog,
@@ -36,6 +36,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
     step,
     formData,
     selectedProvider,
+    canSubmit,
     setFormData,
     setSelectedProvider,
     handleBack,
@@ -62,19 +63,25 @@ const EditAssistantDialog = ({ open, onClose }) => {
         name: assistant.name || '',
         description: assistant.prompt || '',
         icon: assistant.icon || '',
-        isCustomModel: assistant.isCustomModel || false,
         model: provider?.auth?.login || '',
         baseUrl: provider?.data?.baseUrl || '',
-        apiKey: provider?.auth?.apiKey || ''
+        apiKey: provider?.auth?.apiKey || '',
+        encryptedApiKey: provider?.auth?.credentials_encrypted || '',
+        providerId:
+          assistant?.relationships?.provider?.data?.metadata?.providerId
       })
 
-      const selectProviderDefault = getSelectedProviderByModel(
-        provider?.auth?.login
+      const selectProviderDefault = getSelectedProviderById(
+        assistant?.relationships?.provider?.data?.metadata?.providerId
       )
       setSelectedProvider({
         ...selectProviderDefault,
         model: provider?.auth?.login,
-        baseUrl: provider?.data?.baseUrl
+        baseUrl: provider?.data?.baseUrl,
+        name:
+          selectProviderDefault.id === 'custom'
+            ? provider?.auth?.login
+            : selectProviderDefault.name
       })
     }
     fetchAssistant()
@@ -95,7 +102,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
       model: formData.model,
       apiKey: formData.apiKey,
       baseUrl: formData.baseUrl,
-      isCustomModel: formData.isCustomModel
+      providerId: selectedProvider.id
     })
     showAlert({ message: t('assistant_edit.success'), severity: 'success' })
   }
@@ -135,9 +142,9 @@ const EditAssistantDialog = ({ open, onClose }) => {
         <Button
           variant="primary"
           onClick={() => handleNext(onSubmit)}
-          disabled={isNextDisabled(true)}
+          disabled={isNextDisabled(!!formData.encryptedApiKey)}
           label={
-            step === STEPS.API_KEY
+            canSubmit
               ? t('assistant_edit.buttons.edit')
               : t('assistant_edit.buttons.next')
           }

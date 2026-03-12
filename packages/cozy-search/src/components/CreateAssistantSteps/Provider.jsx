@@ -6,6 +6,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
 import PlusSmallIcon from 'cozy-ui/transpiled/react/Icons/PlusSmall'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import styles from './styles.styl'
 import AnthropicLogo from '../../assets/anthropic.svg'
@@ -27,17 +28,21 @@ const ICONS = {
 
 const Provider = ({ selectedProvider, provider, onSelect }) => {
   const { t } = useI18n()
+  const { type: theme } = useCozyTheme()
   const isSelected = selectedProvider?.id === provider.id
   const isOpenRag = provider.id === 'openrag'
 
   return (
     <button
       type="button"
-      className={`u-p-1 u-c-pointer u-flex u-flex-row u-flex-items-center ${
-        styles['model-card']
-      } ${isSelected ? styles.selected : ''} ${
-        isOpenRag ? styles.openrag : ''
-      }`}
+      className={cx(
+        'u-p-1 u-c-pointer u-flex u-flex-row u-flex-items-center',
+        styles['model-card'],
+        {
+          [styles['model-card--selected']]: isSelected,
+          [styles[`model-card--openrag--${theme}`]]: isOpenRag
+        }
+      )}
       onClick={() => onSelect(provider)}
     >
       <div

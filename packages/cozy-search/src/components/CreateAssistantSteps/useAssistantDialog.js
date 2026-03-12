@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
+import Minilog from 'cozy-minilog'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
 import { locales } from '../../locales'
+
+const log = Minilog('[AssistantDialog]')
 
 export const STEPS = {
   BASIC_INFO: 0,
@@ -34,9 +37,15 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
     model: '',
     baseUrl: '',
     apiKey: '',
-    isCustomModel: false,
     ...initialData
   })
+
+  const canSubmit = useMemo(
+    () =>
+      step === STEPS.API_KEY ||
+      (step === STEPS.MODEL_SELECTION && selectedProvider?.id === 'openrag'),
+    [step, selectedProvider?.id]
+  )
 
   const handleChange = field => event => {
     const value = event.target?.value !== undefined ? event.target.value : event
@@ -58,7 +67,8 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
     setFormData(prev => ({
       ...prev,
       baseUrl: provider.baseUrl,
-      isCustomModel: provider.id === 'custom'
+      model: provider.id === 'openrag' ? provider.models[0] : prev.model,
+      providerId: provider.id
     }))
     setSelectedProvider({
       ...provider,
@@ -80,13 +90,14 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
    */
   const handleNext = async onSubmit => {
     try {
-      if (step === STEPS.API_KEY) {
+      if (canSubmit) {
         await onSubmit(formData)
         onClose()
       } else {
         setStep(prev => prev + 1)
       }
     } catch (error) {
+      log.error('Error in handleNext:', error)
       showAlert({ message: t('assistant.default_error'), severity: 'error' })
     }
   }
@@ -117,6 +128,7 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
     handleBack,
     handleNext,
     isNextDisabled,
-    handleChangeModel
+    handleChangeModel,
+    canSubmit
   }
 }
