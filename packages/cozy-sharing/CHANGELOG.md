@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.6.0...cozy-sharing@28.7.0) (2026-03-12)
+
+### Features
+
+- Allow to change link editing rights directly from the share modal ([57c3e61](https://github.com/cozy/cozy-libs/commit/57c3e6144649d3102c37961b4953219bdfe553a3))
+- Display the Share restriction modal on click on the sharing link ([a875c36](https://github.com/cozy/cozy-libs/commit/a875c36e7b6ea592b25cbc8386a305b1c1dac516))
+
 # [28.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.5.0...cozy-sharing@28.6.0) (2026-03-11)
 
 ### Features
