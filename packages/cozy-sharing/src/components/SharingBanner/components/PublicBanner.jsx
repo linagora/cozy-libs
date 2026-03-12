@@ -113,6 +113,13 @@ const SharingBannerByLink = ({ onClose }) => {
   const { t } = useI18n()
 
   const HOME_LINK_HREF = flag('signup.url')
+  const canNotCreateTwakeFromPublicSharingLink = flag(
+    'drive.twake-creation-from-public-sharing.disabled'
+  )
+
+  if (canNotCreateTwakeFromPublicSharingLink) {
+    return null
+  }
 
   return (
     <Banner
