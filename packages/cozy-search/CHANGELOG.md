@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.17.3...cozy-search@0.18.0) (2026-03-12)
+
+### Bug Fixes
+
+- Adjust UI of assistant :bug: ([6c53497](https://github.com/cozy/cozy-libs/commit/6c534970b0570bd0363234783967689161b8fee9))
+- Apply pagination to fetch conversations :bug: ([87701c7](https://github.com/cozy/cozy-libs/commit/87701c78d89f9949ec7279237e6ed315c880d26b))
+- Avoid cancelled message ids data set from growing unbounded :bug: ([4dc33fb](https://github.com/cozy/cozy-libs/commit/4dc33fbdcc1399971822345f61a84f116bfc57a3))
+- Hide running status when assistant generate answer :bug: ([eab7c37](https://github.com/cozy/cozy-libs/commit/eab7c37445f80ecb73413679503064498de521d2))
+- Make mobile UI friendly :bug: ([7b21e55](https://github.com/cozy/cozy-libs/commit/7b21e557e06890ef2a7158808fcce33500b402eb))
+
+### Features
+
+- Display selected assistant of conversation :sparkles: ([67a9f2a](https://github.com/cozy/cozy-libs/commit/67a9f2ad9fbefc18635516ef5f920a8dc96c5477))
+- Implement unit test :white_check_mark: ([42e592e](https://github.com/cozy/cozy-libs/commit/42e592e3a8d94b64c4b1be9109396a7b55021f1b))
+
 ## [0.17.3](https://github.com/cozy/cozy-libs/compare/cozy-search@0.17.2...cozy-search@0.17.3) (2026-03-09)
 
 **Note:** Version bump only for package cozy-search
