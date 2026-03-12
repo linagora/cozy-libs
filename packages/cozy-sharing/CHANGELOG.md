@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.8.0...cozy-sharing@28.9.0) (2026-03-12)
+
+### Features
+
+- Disable Twake Creation from public sharing link ([e8e6fcf](https://github.com/cozy/cozy-libs/commit/e8e6fcfc5e659796f06378818044debb09c7c4e2))
+
 # [28.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.7.0...cozy-sharing@28.8.0) (2026-03-12)
 
 ### Features
