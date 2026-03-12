@@ -25,7 +25,9 @@ export const FederatedFolderModal = withLocales(
       getFederatedShareLink,
       getDocumentPermissions,
       getOwner,
-      getSharingById
+      getSharingById,
+      getRecipients,
+      revoke
     } = useSharingContext()
     const { showAlert } = useAlert()
 
@@ -107,18 +109,29 @@ export const FederatedFolderModal = withLocales(
       }
     }
 
-    const onRevoke = index => {
-      const _id = index.split(RECIPIENT_INDEX_PREFIX)[1]
-
-      setFederatedRecipients(prev => {
-        return {
+    const onRevoke = async (documentOrIndex, sharingId, memberIndex) => {
+      if (
+        typeof documentOrIndex === 'string' &&
+        documentOrIndex.startsWith(RECIPIENT_INDEX_PREFIX)
+      ) {
+        const _id = documentOrIndex.split(RECIPIENT_INDEX_PREFIX)[1]
+        setFederatedRecipients(prev => ({
           recipients: prev.recipients.filter(r => r._id !== _id),
           readOnlyRecipients: prev.readOnlyRecipients.filter(r => r._id !== _id)
-        }
-      })
+        }))
+      } else {
+        await revoke(documentOrIndex, sharingId, memberIndex)
+      }
     }
 
-    const recipients = formatRecipients(federatedRecipients)
+    const existingRecipients = existingDocument
+      ? getRecipients(existingDocument._id)
+      : []
+
+    const recipients = [
+      ...existingRecipients,
+      ...formatRecipients(federatedRecipients)
+    ]
 
     const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
 
@@ -131,7 +144,7 @@ export const FederatedFolderModal = withLocales(
         createContact={contact => client.create('io.cozy.contacts', contact)}
         recipients={recipients}
         readOnlyRecipients={federatedRecipients.readOnlyRecipients}
-        currentRecipients={[]}
+        currentRecipients={existingRecipients}
         onRevoke={onRevoke}
         onSetType={onSetType}
         onSend={onSend}

@@ -7,15 +7,19 @@ import { FederatedFolderModal } from './FederatedFolderModal'
 import AppLike from '../SharingBanner/test/AppLike'
 
 const mockShare = jest.fn()
+const mockRevoke = jest.fn()
 const mockGetSharingLink = jest.fn()
+const mockGetRecipients = jest.fn().mockReturnValue([])
 const mockShowAlert = jest.fn()
 const mockOnClose = jest.fn()
 
 jest.mock('../../hooks/useSharingContext', () => ({
   useSharingContext: () => ({
     share: mockShare,
+    revoke: mockRevoke,
     getSharingLink: mockGetSharingLink,
-    getDocumentPermissions: jest.fn().mockReturnValue([])
+    getDocumentPermissions: jest.fn().mockReturnValue([]),
+    getRecipients: mockGetRecipients
   })
 }))
 
@@ -79,6 +83,12 @@ jest.mock('./DumbFederatedFolderModal', () => ({
       >
         Revoke
       </button>
+      <button
+        data-testid="btn-revoke-existing"
+        onClick={() => onRevoke({ _id: 'folder-123' }, 'abc', 1)}
+      >
+        Revoke Existing
+      </button>
       <button data-testid="btn-close" onClick={onClose}>
         Close
       </button>
@@ -135,6 +145,7 @@ describe('FederatedFolderModal', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
+    mockGetRecipients.mockReturnValue([])
     client = createTestClient()
     sharingContextValue = createSharingContextValue()
   })
@@ -353,6 +364,64 @@ describe('FederatedFolderModal', () => {
       fireEvent.click(getByTestId('btn-close'))
 
       expect(mockOnClose).toHaveBeenCalled()
+    })
+  })
+
+  describe('existing recipients', () => {
+    const existingRecipients = [
+      {
+        index: 'sharing-abc-member-0',
+        name: 'Charlie',
+        email: 'charlie@example.com',
+        status: 'owner',
+        type: 'two-way',
+        sharingId: 'abc',
+        memberIndex: 0
+      },
+      {
+        index: 'sharing-abc-member-1',
+        name: 'Diana',
+        email: 'diana@example.com',
+        status: 'ready',
+        type: 'one-way',
+        sharingId: 'abc',
+        memberIndex: 1
+      }
+    ]
+
+    it('should display existing recipients from getRecipients', async () => {
+      mockGetRecipients.mockReturnValue(existingRecipients)
+      const { getByTestId } = setup()
+
+      await waitFor(() => {
+        expect(getByTestId('recipients-count').textContent).toBe('2')
+      })
+    })
+
+    it('should pass existing recipients as currentRecipients', async () => {
+      mockGetRecipients.mockReturnValue(existingRecipients)
+      const { getByTestId } = setup()
+
+      await waitFor(() => {
+        expect(getByTestId('recipients-count').textContent).toBe('2')
+      })
+    })
+
+    it('should call revoke for existing member', async () => {
+      mockGetRecipients.mockReturnValue(existingRecipients)
+      mockRevoke.mockResolvedValueOnce({})
+      const { getByTestId } = setup()
+
+      await waitFor(() => {
+        expect(getByTestId('dumb-modal')).toBeTruthy()
+      })
+
+      // Simulate revoke of an existing member (non-virtual-shared-drive index)
+      fireEvent.click(getByTestId('btn-revoke-existing'))
+
+      await waitFor(() => {
+        expect(mockRevoke).toHaveBeenCalledWith({ _id: 'folder-123' }, 'abc', 1)
+      })
     })
   })
 
