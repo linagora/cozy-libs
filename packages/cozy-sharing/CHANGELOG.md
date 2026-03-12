@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.7.0...cozy-sharing@28.8.0) (2026-03-12)
+
+### Features
+
+- **cozy-sharing:** Use FederatedFolderModal on existing sharings ([541de13](https://github.com/cozy/cozy-libs/commit/541de1310631170b5567694ff1366bc997fb3ea3))
+
 # [28.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.6.0...cozy-sharing@28.7.0) (2026-03-12)
 
 ### Features
