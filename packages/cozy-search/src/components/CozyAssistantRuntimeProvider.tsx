@@ -215,7 +215,7 @@ const CozyAssistantRuntimeProviderInner = ({
         created: (res: {
           _id: string
           object: 'delta' | 'done' | 'generated' | 'sources'
-          position?: number[]
+          position?: number
           content?: string
         }) => {
           if (cancelledMessageIdsRef.current.has(res._id)) {
@@ -241,7 +241,11 @@ const CozyAssistantRuntimeProviderInner = ({
 
           try {
             if (res.object === 'delta' && res.content !== undefined) {
-              streamBridgeRef.current.onDelta(conversationId, res.content)
+              streamBridgeRef.current.onDelta(
+                conversationId,
+                res.content,
+                res.position
+              )
             }
 
             if (res.object === 'done') {
