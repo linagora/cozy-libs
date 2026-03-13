@@ -16,6 +16,8 @@ type StreamController = {
 export class StreamBridge {
   private streams = new Map<string, StreamController>()
   private cleanupCallback: (() => void) | null = null
+  private positionBuffers = new Map<string, Map<number, string>>()
+  private nextPositions = new Map<string, number>()
 
   /**
    * Sets a callback to be invoked when cleanup is called.
@@ -108,13 +110,46 @@ export class StreamBridge {
 
   /**
    * Called when a delta event is received from WebSocket.
-   * Pushes the content chunk to the appropriate stream.
+   * When a position is provided, chunks are buffered and flushed in order.
+   * Without a position, chunks are pushed directly in arrival order.
    */
-  onDelta(conversationId: string, content: string): void {
+  onDelta(conversationId: string, content: string, position?: number): void {
     const stream = this.streams.get(conversationId)
-    if (stream) {
+    if (!stream) return
+
+    if (position === undefined) {
       stream.push(content)
+      return
     }
+
+    // Fast path: chunk arrived in order, no buffering needed
+    const nextExpected = this.nextPositions.get(conversationId) ?? 0
+    if (position === nextExpected) {
+      stream.push(content)
+      let next = nextExpected + 1
+      // Flush any previously buffered chunks that are now contiguous
+      const buffer = this.positionBuffers.get(conversationId)
+      if (buffer && buffer.size > 0) {
+        while (buffer.has(next)) {
+          stream.push(buffer.get(next)!)
+          buffer.delete(next)
+          next++
+        }
+        if (buffer.size === 0) {
+          this.positionBuffers.delete(conversationId)
+        }
+      }
+      this.nextPositions.set(conversationId, next)
+      return
+    }
+
+    // Out-of-order: buffer until the gap is filled
+    let buffer = this.positionBuffers.get(conversationId)
+    if (!buffer) {
+      buffer = new Map()
+      this.positionBuffers.set(conversationId, buffer)
+    }
+    buffer.set(position, content)
   }
 
   /**
@@ -125,6 +160,8 @@ export class StreamBridge {
     const stream = this.streams.get(conversationId)
     if (stream) {
       stream.complete()
+      this.positionBuffers.delete(conversationId)
+      this.nextPositions.delete(conversationId)
     }
   }
 
@@ -136,6 +173,8 @@ export class StreamBridge {
     const stream = this.streams.get(conversationId)
     if (stream) {
       stream.error(error)
+      this.positionBuffers.delete(conversationId)
+      this.nextPositions.delete(conversationId)
     }
   }
 
@@ -151,6 +190,8 @@ export class StreamBridge {
       }
       stream.complete()
       this.streams.delete(conversationId)
+      this.positionBuffers.delete(conversationId)
+      this.nextPositions.delete(conversationId)
     }
   }
 
