@@ -63,6 +63,54 @@ describe('StreamBridge', () => {
     expect(result.done).toBe(true)
   })
 
+  it('should reorder out-of-order deltas when position is provided', async () => {
+    const iterator = bridge.createStream('convo_1')
+
+    // Arrive out of order: position 1 before position 0
+    bridge.onDelta('convo_1', 'world!', 1)
+    bridge.onDelta('convo_1', 'Hello ', 0)
+
+    const first = await iterator.next()
+    expect(first).toEqual({ value: 'Hello ', done: false })
+
+    const second = await iterator.next()
+    expect(second).toEqual({ value: 'world!', done: false })
+  })
+
+  it('should flush buffered positions in order when gap is filled', async () => {
+    const iterator = bridge.createStream('convo_1')
+
+    // Positions 2 and 1 arrive before 0
+    bridge.onDelta('convo_1', 'c', 2)
+    bridge.onDelta('convo_1', 'b', 1)
+    // Nothing yielded yet since position 0 is missing
+
+    bridge.onDelta('convo_1', 'a', 0)
+    // Now all three should flush in order
+
+    const first = await iterator.next()
+    expect(first).toEqual({ value: 'a', done: false })
+
+    const second = await iterator.next()
+    expect(second).toEqual({ value: 'b', done: false })
+
+    const third = await iterator.next()
+    expect(third).toEqual({ value: 'c', done: false })
+  })
+
+  it('should push directly when no position is provided', async () => {
+    const iterator = bridge.createStream('convo_1')
+
+    bridge.onDelta('convo_1', 'Hello ')
+    bridge.onDelta('convo_1', 'world!')
+
+    const first = await iterator.next()
+    expect(first).toEqual({ value: 'Hello ', done: false })
+
+    const second = await iterator.next()
+    expect(second).toEqual({ value: 'world!', done: false })
+  })
+
   it('multiple unresolved next calls should reject to prevent concurrency issues', async () => {
     const iterator = bridge.createStream('convo_1')
 
