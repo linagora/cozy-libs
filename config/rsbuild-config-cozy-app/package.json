@@ -1,6 +1,6 @@
 {
   "name": "rsbuild-config-cozy-app",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Rsbuild config for Cozy Application (Cozy Cloud)",
   "author": "Cozy Cloud",
   "repository": {

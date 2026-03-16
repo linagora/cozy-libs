@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.98.5](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.98.4...cozy-doctypes@1.98.5) (2026-03-16)
+
+**Note:** Version bump only for package cozy-doctypes
+
 ## [1.98.4](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.98.3...cozy-doctypes@1.98.4) (2026-03-05)
 
 **Note:** Version bump only for package cozy-doctypes

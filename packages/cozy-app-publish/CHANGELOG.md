@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.42.2...cozy-app-publish@0.43.0) (2026-03-16)
+
+### Features
+
+- Update cozy-app-publish engines.node ([33e9fd6](https://github.com/cozy/cozy-libs/commit/33e9fd62cb6874d8c0a10b4c4877a4d6215679ec))
+
 ## [0.42.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.42.1...cozy-app-publish@0.42.2) (2026-03-05)
 
 **Note:** Version bump only for package cozy-app-publish

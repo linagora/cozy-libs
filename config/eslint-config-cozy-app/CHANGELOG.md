@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@6.7.2...eslint-config-cozy-app@7.0.0) (2026-03-16)
+
+### Features
+
+- Upgrade eslint packages ([f40540a](https://github.com/cozy/cozy-libs/commit/f40540a6e556a93a550f94a882b31e9241c82099))
+
+### BREAKING CHANGES
+
+- The following packages are not peer dependencies anymore:
+
+* @babel/eslint-parser
+* @typescript-eslint/eslint-plugin
+* @typescript-eslint/parser
+* eslint-config-prettier
+* eslint-plugin-import
+* eslint-plugin-jest
+* eslint-plugin-prettier
+* eslint-plugin-promise
+* eslint-plugin-react
+* eslint-plugin-react-hooks
+* prettier
+
+eslint now required version is >=10.0.0
+
 ## [6.7.2](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@6.7.1...eslint-config-cozy-app@6.7.2) (2026-01-29)
 
 **Note:** Version bump only for package eslint-config-cozy-app
