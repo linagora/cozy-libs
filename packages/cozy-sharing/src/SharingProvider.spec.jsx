@@ -192,6 +192,63 @@ describe('shareByLink', () => {
   })
 })
 
+describe('revokeSharingLink', () => {
+  const PERM = {
+    type: 'io.cozy.permissions',
+    id: 'perm_1',
+    attributes: {
+      type: 'share',
+      permissions: {
+        rule0: { type: 'io.cozy.files', verbs: ['GET'], values: ['file_id'] }
+      }
+    }
+  }
+
+  let provider
+  let mockDestroy
+
+  beforeEach(() => {
+    mockDestroy = jest.fn().mockResolvedValue({})
+    const mockClient = createMockClient({})
+    mockClient.getStackClient = () => ({ uri: 'http://cozy.local' })
+    mockClient.collection = jest.fn().mockReturnValue({ destroy: mockDestroy })
+    provider = new SharingProvider({ client: mockClient })
+    provider.state = reducer(undefined, addSharingLink(PERM))
+    provider.dispatch = jest.fn(action => {
+      provider.state = reducer(provider.state, action)
+    })
+  })
+
+  it('uses permissionCol.destroy for a regular file', async () => {
+    const regularFile = { _id: 'file_id', id: 'file_id' }
+    provider.permissionCol = { destroy: mockDestroy }
+
+    await provider.revokeSharingLink(regularFile)
+
+    expect(mockDestroy).toHaveBeenCalledTimes(1)
+    expect(mockDestroy).toHaveBeenCalledWith(PERM)
+    expect(provider.dispatch).toHaveBeenCalledTimes(1)
+  })
+
+  it('uses drivePermissionCollection.destroy for a shared drive file', async () => {
+    const driveFile = { _id: 'file_id', id: 'file_id', driveId: 'drive_123' }
+    const mockDriveCollection = { destroy: mockDestroy }
+    provider.props.client.collection = jest
+      .fn()
+      .mockReturnValue(mockDriveCollection)
+
+    await provider.revokeSharingLink(driveFile)
+
+    expect(provider.props.client.collection).toHaveBeenCalledWith(
+      'io.cozy.permissions',
+      { driveId: 'drive_123' }
+    )
+    expect(mockDestroy).toHaveBeenCalledTimes(1)
+    expect(mockDestroy).toHaveBeenCalledWith(PERM)
+    expect(provider.dispatch).toHaveBeenCalledTimes(1)
+  })
+})
+
 describe('updateDocumentPermissions', () => {
   const PERM_DRIVE_FILE = {
     type: 'io.cozy.permissions',
