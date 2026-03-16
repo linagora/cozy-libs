@@ -12,7 +12,9 @@ module.exports = {
   ],
   roots: ['<rootDir>/src'],
   testEnvironment: 'jsdom',
-  testURL: 'http://localhost/',
+  testEnvironmentOptions: {
+    url: 'http://localhost/'
+  },
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
