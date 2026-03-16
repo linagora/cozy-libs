@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useInstanceInfo } from 'cozy-client'
 import { buildPremiumLink } from 'cozy-client/dist/models/instance'
@@ -13,6 +12,7 @@ import CozyUpgradeIcon from 'cozy-ui/transpiled/react/Icons/CozyUpgrade'
 import Markdown from 'cozy-ui/transpiled/react/Markdown'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 import { makeType } from './helpers'
 import withPaywallLocales from './locales/withPaywallLocales'
@@ -90,8 +90,8 @@ const Paywall = ({
             isFlagshipAppIapAvailable === null
               ? t(`action.loading`)
               : canOpenPremiumLink
-              ? t(`${variant}Paywall.${type}.action`)
-              : t(`action.withoutIAP`)
+                ? t(`${variant}Paywall.${type}.action`)
+                : t(`action.withoutIAP`)
           }
           busy={isFlagshipAppIapAvailable === null}
         />

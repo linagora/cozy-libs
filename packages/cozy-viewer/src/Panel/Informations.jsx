@@ -1,7 +1,6 @@
 import has from 'lodash/has'
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
@@ -24,6 +23,7 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import { useI18n } from 'twake-i18n'
 
 import { makeFormat, makeSize, makeDate, makePath } from './helpers'
 import { withViewerLocales } from '../hoc/withViewerLocales'

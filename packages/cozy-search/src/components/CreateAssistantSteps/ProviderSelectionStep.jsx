@@ -1,10 +1,10 @@
 import cx from 'classnames'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import Provider from './Provider'
 import providers from './providers.json'

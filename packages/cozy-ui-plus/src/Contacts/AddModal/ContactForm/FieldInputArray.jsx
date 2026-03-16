@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import React from 'react'
 import { FieldArray } from 'react-final-form-arrays'
-import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -9,6 +8,7 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CrossCircleIcon from 'cozy-ui/transpiled/react/Icons/CrossCircle'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import FieldInput from './FieldInput'
 import { addField, removeField, makeIsRequiredError } from './helpers'

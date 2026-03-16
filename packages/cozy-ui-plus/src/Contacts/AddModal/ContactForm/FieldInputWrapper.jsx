@@ -12,10 +12,10 @@ const FieldInputWrapper = ({
   input,
   attributes: {
     component,
-    layout, // eslint-disable-line no-unused-vars
-    icon, // eslint-disable-line no-unused-vars
-    isSecondary, // eslint-disable-line no-unused-vars
-    validate, // eslint-disable-line no-unused-vars
+    layout,
+    icon,
+    isSecondary,
+    validate,
     ...restAttributes
   }, // ⚠️ `layout` `icon` `isSecondary` `validate` are removed from attributes to avoid DOM propagration, only used for business rules
   variant,
@@ -27,8 +27,8 @@ const FieldInputWrapper = ({
     (restAttributes.customLabelOptions
       ? TextFieldCustomLabelSelect
       : restAttributes?.select
-      ? TextFieldSelect
-      : TextField)
+        ? TextFieldSelect
+        : TextField)
 
   return (
     <Component

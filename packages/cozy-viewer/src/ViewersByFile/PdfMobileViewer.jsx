@@ -39,7 +39,7 @@ export const PdfMobileViewer = ({ file, url, t, gestures }) => {
         async file => {
           try {
             await downloadFile({ client, file, webviewIntent })
-          } catch (error) {
+          } catch (_error) {
             showAlert({
               message: t('Viewer.error.generic'),
               severity: 'error',

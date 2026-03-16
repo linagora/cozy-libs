@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import { CONTACTS_DOCTYPE } from 'cozy-client/dist/models/contact'
@@ -11,6 +10,7 @@ import Link from 'cozy-ui/transpiled/react/Link'
 import ActionMenu, {
   ActionMenuItem
 } from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from './locales'
 import AppIcon from '../../AppIcon'

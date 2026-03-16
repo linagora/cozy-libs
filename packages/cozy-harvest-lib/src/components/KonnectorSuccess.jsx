@@ -1,11 +1,11 @@
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { translate } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { translate } from 'twake-i18n'
 
 import BanksLink from './KonnectorConfiguration/Success/BanksLink'
 import DriveLink from './KonnectorConfiguration/Success/DriveLink'
@@ -82,13 +82,12 @@ export class KonnectorSuccess extends Component {
 
 KonnectorSuccess.apps = {
   drive: {
-    // eslint-disable-next-line react/display-name
     successLink: (state, props, context, i) => {
       return (
         <DriveLink key={i} folderId={state.trigger.message.folder_to_save} />
       )
     },
-    // eslint-disable-next-line react/display-name
+
     footerLink: (state, props) => {
       const { t, successButtonLabel } = props
       return (
@@ -103,7 +102,6 @@ KonnectorSuccess.apps = {
     }
   },
   banks: {
-    // eslint-disable-next-line react/display-name
     successLink: (state, props, context, i) => {
       return <BanksLink key={i} />
     },

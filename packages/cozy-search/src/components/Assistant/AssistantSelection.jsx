@@ -1,6 +1,5 @@
 import cx from 'classnames'
 import React, { useState, useRef, useEffect } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useQuery } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
@@ -11,6 +10,7 @@ import DropdownIcon from 'cozy-ui/transpiled/react/Icons/Dropdown'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 import { useAssistant } from '../AssistantProvider'
@@ -35,6 +35,7 @@ const AssistantSelection = ({ className, disabled }) => {
 
   useEffect(() => {
     if (disabled) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOpen(false)
     }
   }, [disabled])

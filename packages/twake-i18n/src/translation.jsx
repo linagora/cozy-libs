@@ -21,7 +21,7 @@ export const initTranslation = (
       const dict = dictRequire(lang)
       _polyglot.extend(dict)
       _polyglot.locale(lang)
-    } catch (e) {
+    } catch (_e) {
       // eslint-disable-next-line no-console
       console.warn(`The dict phrases for "${lang}" can't be loaded`)
     }
@@ -32,7 +32,7 @@ export const initTranslation = (
     try {
       const dict = dictRequire(lang, context)
       _polyglot.extend(dict)
-    } catch (e) {
+    } catch (_e) {
       // eslint-disable-next-line no-console
       console.warn(`The context ${context} cannot be loaded for lang ${lang}`)
     }

@@ -1,6 +1,5 @@
 import cx from 'classnames'
 import React, { useState, useEffect } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
@@ -11,6 +10,7 @@ import Paper from 'cozy-ui/transpiled/react/Paper'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from '../AssistantProvider'
 import ChatKnowledge from './ChatKnowledge'
@@ -71,6 +71,7 @@ const TwakeKnowledgePanel = ({ onClose }) => {
   const [selectedItems, setSelectedItems] = useState([])
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedItems(selectedTwakeKnowledge[openedKnowledgePanel] || [])
   }, [openedKnowledgePanel, selectedTwakeKnowledge])
 

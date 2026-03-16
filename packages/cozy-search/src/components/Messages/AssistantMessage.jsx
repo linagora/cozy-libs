@@ -1,10 +1,10 @@
 import { MessagePrimitive, useMessage } from '@assistant-ui/react'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 import MarkdownText from './MarkdownText'
 import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'

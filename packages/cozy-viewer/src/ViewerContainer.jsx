@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { createRef, useState, useEffect } from 'react'
-import { useExtendI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { isDocumentReadOnly } from 'cozy-client/dist/models/permission'
@@ -12,6 +11,7 @@ import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import EncryptedProvider from 'cozy-ui/transpiled/react/providers/Encrypted'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
+import { useExtendI18n } from 'twake-i18n'
 
 import Viewer from './Viewer'
 import ViewerInformationsWrapper from './ViewerInformationsWrapper'
@@ -64,12 +64,12 @@ const ViewerContainer = props => {
             client
           })
         : allLoaded
-        ? !hasWriteAccess(
-            hasSharedParent(currentFile.path)
-              ? currentFile.dir_id
-              : currentFile._id
-          )
-        : true
+          ? !hasWriteAccess(
+              hasSharedParent(currentFile.path)
+                ? currentFile.dir_id
+                : currentFile._id
+            )
+          : true
 
       setIsReadOnly(res)
     }

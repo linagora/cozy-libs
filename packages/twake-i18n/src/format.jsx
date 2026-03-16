@@ -31,7 +31,7 @@ export const provideDateFnsLocale = (userLang, defaultLang = DEFAULT_LANG) => {
     const userLocale = getDateFnsLocale(userLang)
     currentLocale = userLocale
     return userLocale
-  } catch (e) {
+  } catch (_e) {
     // eslint-disable-next-line no-console
     console.warn(getWarningMessage(userLang))
   }
@@ -40,7 +40,7 @@ export const provideDateFnsLocale = (userLang, defaultLang = DEFAULT_LANG) => {
     const defaultLocale = getDateFnsLocale(defaultLang)
     currentLocale = defaultLocale
     return defaultLocale
-  } catch (err) {
+  } catch (_err) {
     // eslint-disable-next-line no-console
     console.warn(getWarningMessage(defaultLang))
   }

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useExtendI18n } from 'twake-i18n'
 
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
+import { useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
 import AssistantProvider from '../AssistantProvider'

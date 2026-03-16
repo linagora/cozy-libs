@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -8,6 +7,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DownloadIcon from 'cozy-ui/transpiled/react/Icons/Download'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import { useI18n } from 'twake-i18n'
 
 const DownloadButton = ({ file, variant }) => {
   const client = useClient()
@@ -19,7 +19,7 @@ const DownloadButton = ({ file, variant }) => {
   const handleClick = async () => {
     try {
       await client.collection('io.cozy.files').download(file)
-    } catch (error) {
+    } catch (_error) {
       Alerter.info('Viewer.error.generic')
     }
   }

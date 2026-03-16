@@ -1,5 +1,4 @@
 import React from 'react'
-import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useInstanceInfo } from 'cozy-client'
 import { makeDiskInfos } from 'cozy-client/dist/models/instance'
@@ -7,6 +6,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import CloudIcon from 'cozy-ui/transpiled/react/Icons/Cloud'
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from './locales'
 

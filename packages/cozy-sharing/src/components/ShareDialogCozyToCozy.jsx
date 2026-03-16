@@ -1,9 +1,9 @@
 import cx from 'classnames'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import AntivirusAlert from './AntivirusAlert'
 import { default as DumbShareByEmail } from './ShareByEmail'

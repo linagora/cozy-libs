@@ -57,7 +57,7 @@ const withFileUrl = BaseComponent =>
         const downloadUrl = await this.getDownloadLink(file)
         this.clearTimeout()
         this.setState({ downloadUrl, status: LOADED })
-      } catch (err) {
+      } catch (_err) {
         this.clearTimeout()
         this.setState(state => ({ ...state, status: FAILED }))
       }

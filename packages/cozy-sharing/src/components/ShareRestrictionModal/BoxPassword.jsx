@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -15,6 +14,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Switch from 'cozy-ui/transpiled/react/Switch'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n } from 'twake-i18n'
 
 import { copyToClipboard } from './helpers'
 import { checkIsPermissionHasPassword } from '../../helpers/permissions'

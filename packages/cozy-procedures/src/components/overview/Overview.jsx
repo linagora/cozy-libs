@@ -69,6 +69,7 @@ class Overview extends React.Component {
           .collection('io.cozy.files')
           .deleteFilePermanently(jsonFile.id)
           .catch(err => {
+            // eslint-disable-next-line no-console
             console.error('Error while trying to delete the json file: ', err)
           })
       })
@@ -92,6 +93,7 @@ class Overview extends React.Component {
           .collection('io.cozy.files')
           .deleteFilePermanently(zipFile.id)
           .catch(err => {
+            // eslint-disable-next-line no-console
             console.error('Error while trying to delete the zip file: ', err)
           })
       })
@@ -101,6 +103,7 @@ class Overview extends React.Component {
           .collection('io.cozy.files')
           .deleteFilePermanently(jsonFile)
           .catch(err => {
+            // eslint-disable-next-line no-console
             console.error('Error while trying to delete the json file: ', err)
           })
       })
@@ -207,6 +210,7 @@ class Overview extends React.Component {
         this.handleZipChanged([procedureJsonFile, historyJsonFile])
       )
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e)
       this.setState({
         processing: false,

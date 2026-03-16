@@ -135,6 +135,7 @@ export default function useClientErrors({ handleExceptions = true } = {}) {
     [errorStack, setErrorStack]
   )
   // @ts-ignore
+  // eslint-disable-next-line react-hooks/immutability
   ClientErrors.displayName = 'ClientErrors'
   return { ClientErrors }
 }

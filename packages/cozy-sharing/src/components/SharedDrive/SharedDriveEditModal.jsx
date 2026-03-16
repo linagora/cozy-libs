@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n } from 'twake-i18n'
 
 import { DumbSharedDriveModal } from './DumbSharedDriveModal'
 import withLocales from '../../hoc/withLocales'
@@ -31,7 +31,7 @@ export const SharedDriveEditModal = withLocales(
           severity: 'success'
         })
         onClose()
-      } catch (error) {
+      } catch (_error) {
         showAlert({
           message: t('SharedDrive.sharedDriveModal.errorNotificationUpdate'),
           severity: 'error'

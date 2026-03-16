@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { generateWebLink, useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -8,6 +7,7 @@ import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
+import { useI18n } from 'twake-i18n'
 
 import DataTypes from './DataTypes'
 import Illustration from './Illustration'

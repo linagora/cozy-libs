@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
-import { translate } from 'twake-i18n'
 
 import { withClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 import AppLinker from 'cozy-ui-plus/dist/AppLinker'
+import { translate } from 'twake-i18n'
 
 import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
 

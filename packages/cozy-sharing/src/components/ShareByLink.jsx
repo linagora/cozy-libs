@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useReducer, useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
@@ -10,6 +9,7 @@ import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import { ShareRestrictionModal } from './ShareRestrictionModal/ShareRestrictionModal'
 import {
@@ -52,7 +52,7 @@ const ShareByLink = ({ link, document, documentType }) => {
         ttl: undefined,
         editingRights: 'readOnly'
       })
-    } catch (error) {
+    } catch (_error) {
       return null
     } finally {
       setIsGenerating(false)

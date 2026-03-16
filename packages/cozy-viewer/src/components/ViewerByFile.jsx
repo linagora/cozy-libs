@@ -38,14 +38,14 @@ export const getViewerComponentName = ({
       return isBlankPaper(file)
         ? BlankPaperViewer
         : isDesktop
-        ? PdfJsViewer
-        : PdfMobileViewer
+          ? PdfJsViewer
+          : PdfMobileViewer
     case 'text':
       return isPlainText(file.mime, file.name)
         ? TextViewer
         : isOnlyOfficeEnabled
-        ? OnlyOfficeViewer
-        : NoViewer
+          ? OnlyOfficeViewer
+          : NoViewer
     case 'slide':
       return isOnlyOfficeEnabled ? OnlyOfficeViewer : NoViewer
     case 'spreadsheet':
@@ -55,46 +55,44 @@ export const getViewerComponentName = ({
   }
 }
 
-const ViewerByFile = withBreakpoints()(
-  ({
-    onClose,
-    renderFallbackExtraContent,
-    gestures,
-    gesturesRef,
-    onSwipe,
-    breakpoints: { isDesktop },
-    componentsProps
-  }) => {
-    const { file } = useViewer()
-    const isOnlyOfficeEnabled = componentsProps?.OnlyOfficeViewer?.isEnabled
-    const onlyOfficeOpener = componentsProps?.OnlyOfficeViewer?.opener
+const ViewerByFile = withBreakpoints()(({
+  onClose,
+  renderFallbackExtraContent,
+  gestures,
+  gesturesRef,
+  onSwipe,
+  breakpoints: { isDesktop },
+  componentsProps
+}) => {
+  const { file } = useViewer()
+  const isOnlyOfficeEnabled = componentsProps?.OnlyOfficeViewer?.isEnabled
+  const onlyOfficeOpener = componentsProps?.OnlyOfficeViewer?.opener
 
-    const { url } = useEncrypted()
+  const { url } = useEncrypted()
 
-    const ComponentName = useMemo(
-      () =>
-        getViewerComponentName({
-          file,
-          isDesktop,
-          isOnlyOfficeEnabled
-        }),
-      [file, isDesktop, isOnlyOfficeEnabled]
-    )
+  const ComponentName = useMemo(
+    () =>
+      getViewerComponentName({
+        file,
+        isDesktop,
+        isOnlyOfficeEnabled
+      }),
+    [file, isDesktop, isOnlyOfficeEnabled]
+  )
 
-    return (
-      <ComponentName
-        file={file}
-        url={url}
-        renderFallbackExtraContent={renderFallbackExtraContent}
-        gestures={gestures}
-        gesturesRef={gesturesRef}
-        onlyOfficeOpener={onlyOfficeOpener}
-        onSwipe={onSwipe}
-        onClose={onClose}
-      />
-    )
-  }
-)
+  return (
+    <ComponentName
+      file={file}
+      url={url}
+      renderFallbackExtraContent={renderFallbackExtraContent}
+      gestures={gestures}
+      gesturesRef={gesturesRef}
+      onlyOfficeOpener={onlyOfficeOpener}
+      onSwipe={onSwipe}
+      onClose={onClose}
+    />
+  )
+})
 
 ViewerByFile.propTypes = {
   onClose: PropTypes.func.isRequired,

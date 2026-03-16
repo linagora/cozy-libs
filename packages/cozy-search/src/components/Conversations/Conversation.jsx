@@ -1,6 +1,7 @@
 import { ThreadPrimitive, useThread } from '@assistant-ui/react'
 import cx from 'classnames'
 import React from 'react'
+
 import { useI18n } from 'twake-i18n'
 
 import ConversationComposer from './ConversationComposer'

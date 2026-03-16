@@ -2,7 +2,6 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useCallback, useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { extractText, chatCompletion } from 'cozy-client/dist/models/ai'
@@ -20,6 +19,7 @@ import Paper from 'cozy-ui/transpiled/react/Paper'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n } from 'twake-i18n'
 
 import {
   SUMMARY_SYSTEM_PROMPT,

@@ -94,6 +94,7 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
         fetch(searchValue, searchOptions)
       }
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setState({ isLoading: true, results: null, searchValue: null })
     }
   }, [dataProxy, searchValue, state.searchValue, setState])

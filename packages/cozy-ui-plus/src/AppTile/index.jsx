@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { createUseI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
@@ -12,6 +11,7 @@ import Tile, {
   TileIcon,
   TileDescription
 } from 'cozy-ui/transpiled/react/Tile'
+import { createUseI18n } from 'twake-i18n'
 
 import { APP_STATUS, getCurrentStatusLabel } from './helpers'
 import en from './locales/en.json'
@@ -64,8 +64,8 @@ export const AppTile = ({
     isShortcutFile(app) && statusLabel === APP_STATUS.installed
       ? 'favorite'
       : isStatusArray
-      ? showStatus.indexOf(statusLabel) > -1 && statusLabel
-      : showStatus && statusLabel
+        ? showStatus.indexOf(statusLabel) > -1 && statusLabel
+        : showStatus && statusLabel
 
   const IconComponent = IconComponentProp || AppIcon
 

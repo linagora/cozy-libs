@@ -1,5 +1,4 @@
 import React from 'react'
-import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { createAssistant } from 'cozy-client/dist/models/assistant'
@@ -15,6 +14,7 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
 import AssistantDialogContent from '../CreateAssistantSteps/AssistantDialogContent'

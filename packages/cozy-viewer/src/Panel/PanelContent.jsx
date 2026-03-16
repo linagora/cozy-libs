@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useI18n } from 'twake-i18n'
 
 import flag from 'cozy-flags'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -10,6 +9,7 @@ import CrossMediumIcon from 'cozy-ui/transpiled/react/Icons/CrossMedium'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 import getPanelBlocks, { getPanelBlocksSpecs } from './getPanelBlocks'
 import { withViewerLocales } from '../hoc/withViewerLocales'

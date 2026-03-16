@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n } from 'twake-i18n'
 
 import { DumbFederatedFolderModal } from './DumbFederatedFolderModal'
 import withLocales from '../../hoc/withLocales'
@@ -57,7 +57,7 @@ export const FederatedFolderModal = withLocales(
       getSharingLink,
       getOwner,
       getSharingById
-    ]) // eslint-disable-line react-hooks/exhaustive-deps
+    ])
 
     const [federatedRecipients, setFederatedRecipients] = useState({
       recipients: [],
@@ -90,7 +90,7 @@ export const FederatedFolderModal = withLocales(
         })
 
         onClose()
-      } catch (err) {
+      } catch (_err) {
         showAlert({
           message: t('FederatedFolder.errorNotification'),
           severity: 'error',

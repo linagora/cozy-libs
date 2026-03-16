@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { getCreatedByApp } from 'cozy-client/dist/models/utils'
 import Card from 'cozy-ui/transpiled/react/Card'
@@ -13,6 +12,7 @@ import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
 import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'
@@ -45,6 +45,7 @@ const DisconnectedModal = ({
   // We keep the konnector in a ref so that when we remove all accounts,
   // we still have a konnector to show the icon
   const konnectorRef = useRef()
+  // eslint-disable-next-line react-hooks/refs
   if (!konnectorRef.current) {
     konnectorRef.current = createDummyKonnectorFromAccount(accounts[0])
   }
@@ -54,6 +55,7 @@ const DisconnectedModal = ({
 
   const { dialogProps } = useCozyDialog({ onClose, open: true })
 
+  // eslint-disable-next-line react-hooks/refs
   if (!konnectorRef.current) {
     return null
   }
@@ -61,6 +63,7 @@ const DisconnectedModal = ({
   return (
     <Dialog aria-label={t('modal.aria-label')} {...dialogProps}>
       <DialogCloseButton onClick={onClose} />
+      {/* eslint-disable-next-line react-hooks/refs */}
       <KonnectorModalHeader konnector={konnectorRef.current} />
       <Tabs onChange={setActiveTab} value={activeTab}>
         <Tab label={t('modal.tabs.data')} onClick={() => setActiveTab(0)} />
@@ -80,11 +83,13 @@ const DisconnectedModal = ({
         <>
           {accounts.length ? (
             <DialogContent className={isMobile ? 'u-ph-0' : 'u-pt-1-half'}>
+              {/* eslint-disable react-hooks/refs */}
               <Contracts
                 contracts={accounts}
                 konnector={konnectorRef.current}
                 intentsApi={intentsApi}
               />
+              {/* eslint-enable react-hooks/refs */}
             </DialogContent>
           ) : (
             <DialogContent className="u-pb-1-half">

@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n } from 'twake-i18n'
 
 import ShareRecipientsInput from './ShareRecipientsInput'
 import { ShareRecipientsLimitModal } from './ShareRecipientsLimitModal'
@@ -71,7 +71,7 @@ export const ShareByEmail = ({
           openSharing: false,
           sharedDrive: true
         })
-      } catch (err) {
+      } catch (_err) {
         if (showNotifications) {
           showAlert({
             message: t('Share.shareByEmail.error.addingRecipient'),

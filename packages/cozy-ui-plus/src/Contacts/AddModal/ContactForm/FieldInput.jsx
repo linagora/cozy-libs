@@ -3,6 +3,7 @@ import uniqueId from 'lodash/uniqueId'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Field } from 'react-final-form'
+
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import FieldInputWrapper from './FieldInputWrapper'

@@ -1,8 +1,8 @@
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { models } from 'cozy-client'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 const {
   computeExpirationDate,

@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
+import { useI18n } from 'twake-i18n'
 
 import { remove } from '../../actions/delete'
 import { rename } from '../../actions/rename'

@@ -10,7 +10,6 @@ const mockUpdateDocumentPermissions = jest.fn()
 const mockUpdateSharingMemberType = jest.fn()
 
 jest.mock('../../hooks/useSharingContext', () => ({
-  // eslint-disable-next-line react/display-name
   useSharingContext: () => ({
     updateDocumentPermissions: mockUpdateDocumentPermissions,
     updateSharingMemberType: mockUpdateSharingMemberType

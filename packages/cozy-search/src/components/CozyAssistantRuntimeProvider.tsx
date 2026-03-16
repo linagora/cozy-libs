@@ -29,16 +29,16 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
+import { useAssistant } from './AssistantProvider'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
+import { DEFAULT_ASSISTANT } from './constants'
 import { sanitizeChatContent } from './helpers'
 import {
   CHAT_EVENTS_DOCTYPE,
   CHAT_CONVERSATIONS_DOCTYPE,
   buildChatConversationQueryById
 } from './queries'
-import { useAssistant } from './AssistantProvider'
-import { DEFAULT_ASSISTANT } from './constants'
 
 const log = Minilog('🔍 [CozyAssistantRuntimeProvider]')
 

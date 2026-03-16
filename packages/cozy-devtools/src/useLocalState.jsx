@@ -5,7 +5,7 @@ export const useLocalState = (key, initialState) => {
     const item = localStorage.getItem(key)
     try {
       return item !== null ? JSON.parse(item) : initialState
-    } catch (e) {
+    } catch (_e) {
       return initialState
     }
   })
