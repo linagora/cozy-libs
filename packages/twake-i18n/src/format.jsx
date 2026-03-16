@@ -3,7 +3,9 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import {
   enGB as enLocale,
   fr as frLocale,
-  es as esLocale
+  es as esLocale,
+  ru as ruLocale,
+  vi as viLocale
 } from 'date-fns/locale'
 
 import { DEFAULT_LANG } from '.'
@@ -18,6 +20,10 @@ const getDateFnsLocale = lang => {
       return frLocale
     case 'es':
       return esLocale
+    case 'ru':
+      return ruLocale
+    case 'vi':
+      return viLocale
     default:
       throw new Error('Locale not found')
   }
