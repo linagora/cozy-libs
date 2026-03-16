@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import BottomSheet, {
   BottomSheetItem
@@ -12,6 +11,7 @@ import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import { useI18n } from 'twake-i18n'
 
 import IntentOpener from '../components/IntentOpener'
 

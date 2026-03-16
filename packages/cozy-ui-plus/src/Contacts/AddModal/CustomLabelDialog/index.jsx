@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -9,6 +8,7 @@ import RadioGroup from 'cozy-ui/transpiled/react/RadioGroup'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from './locales'
 

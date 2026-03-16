@@ -209,7 +209,7 @@ export class SharingProvider extends Component {
       })
     )
     this.setState({ hasLoadedAtLeastOnePage: true })
-    // eslint-disable-next-line promise/catch-or-return
+
     await fetchNextPermissions(permissions, this.dispatch, this.permissionCol)
 
     if (doctype === 'io.cozy.files') {

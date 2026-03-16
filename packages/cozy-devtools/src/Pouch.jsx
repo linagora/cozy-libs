@@ -81,7 +81,7 @@ const PouchDevTool = () => {
       if (window.confirm('Pouches have been destroyed, reload the page ?')) {
         window.location.reload()
       }
-    } catch (e) {
+    } catch (_e) {
       setResetting(false)
     }
   }, [setResetting, pouchLink])

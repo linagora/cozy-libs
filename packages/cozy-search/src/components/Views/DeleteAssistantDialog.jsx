@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { useClient, useQuery } from 'cozy-client'
 import { deleteAssistant } from 'cozy-client/dist/models/assistant'
@@ -14,6 +13,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
 import { useAssistant } from '../AssistantProvider'
@@ -43,7 +43,7 @@ const DeleteAssistantDialog = ({ open, onClose }) => {
       await deleteAssistant(client, assistantIdInAction)
       setAssistantIdInAction(null)
       onClose()
-    } catch (error) {
+    } catch (_error) {
       showAlert({ message: t('assistant.default_error'), severity: 'error' })
     } finally {
       setIsDeleting(false)

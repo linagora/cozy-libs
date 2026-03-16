@@ -147,6 +147,7 @@ export const DataProxyProvider = React.memo(
         log.log(
           'Dataproxy features will be disabled due to missing feature flags'
         )
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setDataProxyServicesAvailable(false)
         return
       }
@@ -239,6 +240,7 @@ export const DataProxyProvider = React.memo(
       }
     }, [dataProxyCom, client, dataProxyServicesAvailable, options])
 
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization
     const reloadIframe = useCallback(() => {
       setIframeVersion(v => v + 1)
       log.log('Reload iframe with new version ', iframeVersion)

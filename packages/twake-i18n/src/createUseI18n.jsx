@@ -17,7 +17,7 @@ const createUseI18n = locales => () => {
       try {
         polyglot.locale(lang)
         polyglot.extend(locales[lang])
-      } catch (e) {
+      } catch (_e) {
         // eslint-disable-next-line no-console
         console.warn(`The dict phrases for "${lang}" can't be loaded`)
       }

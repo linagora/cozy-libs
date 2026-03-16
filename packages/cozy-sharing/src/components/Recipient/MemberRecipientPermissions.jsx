@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import minilog from 'cozy-minilog'
@@ -12,6 +11,7 @@ import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n } from 'twake-i18n'
 
 import { revokeMember } from './actions/revokeMember'
 import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'

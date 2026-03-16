@@ -1,11 +1,11 @@
 import cx from 'classnames'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
 import PlusSmallIcon from 'cozy-ui/transpiled/react/Icons/PlusSmall'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 import AnthropicLogo from '../../assets/anthropic.svg'

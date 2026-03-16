@@ -2,7 +2,6 @@
 import compose from 'lodash/flowRight'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import CozyClient, { Q, queryConnect, RealTimeQueries } from 'cozy-client'
 import NavigationList, {
@@ -10,6 +9,7 @@ import NavigationList, {
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
+import { useI18n } from 'twake-i18n'
 
 import BIContractActivationWindow from './BiContractActivationWindow'
 import ContractItem from './ContractItem'

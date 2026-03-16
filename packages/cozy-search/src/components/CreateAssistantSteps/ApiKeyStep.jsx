@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useI18n } from 'twake-i18n'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -9,6 +8,7 @@ import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import SelectBox from 'cozy-ui/transpiled/react/SelectBox'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 const ApiKeyStep = ({ apiKey, selectedProvider, onChange, onModelSelect }) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -30,6 +30,7 @@ const ApiKeyStep = ({ apiKey, selectedProvider, onChange, onModelSelect }) => {
         label: model,
         value: model
       })),
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization
     [models]
   )
 

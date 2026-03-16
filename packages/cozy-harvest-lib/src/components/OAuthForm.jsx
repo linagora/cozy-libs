@@ -100,6 +100,7 @@ export const OAuthForm = props => {
 
   useEffect(() => {
     if (reconnect && extraParams) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       handleConnect()
     }
     flow.on(LOGIN_SUCCESS_EVENT, handleLoginSuccess)
@@ -118,8 +119,8 @@ export const OAuthForm = props => {
       ? 'oauth.banking.reconnect.label'
       : 'oauth.reconnect.label'
     : isBankingKonnector
-    ? 'oauth.banking.connect.label'
-    : 'oauth.connect.submit'
+      ? 'oauth.banking.connect.label'
+      : 'oauth.connect.submit'
 
   return (
     <>

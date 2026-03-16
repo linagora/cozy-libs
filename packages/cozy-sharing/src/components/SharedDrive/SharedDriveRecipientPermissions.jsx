@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
@@ -8,6 +7,7 @@ import {
   divider
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import { useI18n } from 'twake-i18n'
 
 import { revokeSharedDriveMember } from '../Recipient/actions/revokeSharedDriveMember'
 import { setReadOnlySharedPermission } from '../Recipient/actions/setReadOnlySharedPermission'

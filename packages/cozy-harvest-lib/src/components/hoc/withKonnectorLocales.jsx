@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+
 import { extend } from 'twake-i18n'
 
 import { getDisplayName } from './utils'

@@ -38,6 +38,7 @@ export const LaunchTriggerAlert = ({
 
   useEffect(() => {
     if (status === SUCCESS) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowSuccessSnackbar(true)
     }
   }, [status])

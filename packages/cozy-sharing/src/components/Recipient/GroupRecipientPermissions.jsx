@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
@@ -12,6 +11,7 @@ import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { useI18n } from 'twake-i18n'
 
 import { permission } from './actions/permission'
 import { revokeGroup as revokeGroupAction } from './actions/revokeGroup'

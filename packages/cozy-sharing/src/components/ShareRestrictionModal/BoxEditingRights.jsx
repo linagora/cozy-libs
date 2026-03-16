@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useReducer, useRef } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { isDirectory as isDir } from 'cozy-client/dist/models/file'
@@ -14,6 +13,7 @@ import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import { useI18n } from 'twake-i18n'
 
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { editPermissionLink } from '../Recipient/actions/editPermissionLink'

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import {
@@ -12,6 +11,7 @@ import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Link from 'cozy-ui/transpiled/react/Link'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 import { withViewerLocales } from '../hoc/withViewerLocales'
 import { useViewer } from '../providers/ViewerProvider'

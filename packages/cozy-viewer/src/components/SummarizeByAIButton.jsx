@@ -1,12 +1,12 @@
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ArticleIcon from 'cozy-ui/transpiled/react/Icons/Article'
+import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 import { isFileSummaryCompatible } from '../helpers'

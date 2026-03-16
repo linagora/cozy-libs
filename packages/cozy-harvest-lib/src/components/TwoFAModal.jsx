@@ -1,13 +1,13 @@
 import compose from 'lodash/flowRight'
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
-import { translate } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import Field from 'cozy-ui-plus/dist/Field'
+import { translate } from 'twake-i18n'
 
 import KonnectorIcon from './KonnectorIcon'
 import withLocales from './hoc/withLocales'

@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useState, forwardRef } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import {
   useClient,
@@ -30,6 +29,7 @@ import { withStyles } from 'cozy-ui/transpiled/react/styles'
 import CollectionField from 'cozy-ui-plus/dist/CollectionField'
 import BaseContactPicker from 'cozy-ui-plus/dist/ContactPicker'
 import Field from 'cozy-ui-plus/dist/Field'
+import { useI18n } from 'twake-i18n'
 
 import {
   getAccountLabel,

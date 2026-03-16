@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useI18n } from 'twake-i18n'
 
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -15,6 +14,7 @@ import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import LoadMore from 'cozy-ui/transpiled/react/LoadMore'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'

@@ -2,7 +2,6 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
@@ -24,6 +23,7 @@ import NavigationList, {
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 // @ts-ignore peerDep
 
 import { ContractsForAccount } from './Contracts'

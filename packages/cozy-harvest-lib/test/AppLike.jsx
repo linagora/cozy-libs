@@ -1,6 +1,5 @@
 import React from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
-import I18n from 'twake-i18n'
 
 import {
   CozyProvider as CozyClientProvider,
@@ -10,6 +9,7 @@ import { useCozyDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
+import I18n from 'twake-i18n'
 
 import DialogContext from '../src/components/DialogContext'
 import enLocale from '../src/locales/en.json'

@@ -1,9 +1,9 @@
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import AssistantIcon from 'cozy-ui/transpiled/react/Icons/Assistant'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 const NotFoundConversation = () => {
   const { t } = useI18n()

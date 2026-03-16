@@ -61,10 +61,10 @@ const FetchStatus = props => {
         fetchStatus === 'loaded'
           ? 'u-valid'
           : fetchStatus === 'pending'
-          ? 'u-warn'
-          : fetchStatus === 'failed'
-          ? 'u-error'
-          : ''
+            ? 'u-warn'
+            : fetchStatus === 'failed'
+              ? 'u-error'
+              : ''
       }
     >
       {fetchStatus}
@@ -192,6 +192,7 @@ const QueryStateView = ({ name }) => {
       lastFetch: new Date(queryState.lastFetch),
       lastUpdate: new Date(queryState.lastUpdate)
     }
+    // eslint-disable-next-line react-hooks/preserve-manual-memoization
   }, [queryState])
 
   return (

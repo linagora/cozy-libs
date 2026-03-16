@@ -88,8 +88,8 @@ const QualificationIcon = ({ theme, qualification, ...props }) => {
   const _Icon = qualification
     ? IconByLabel[getIconByLabel(qualification)]
     : theme
-    ? IconByLabel[themeIconByLabel[theme]]
-    : null
+      ? IconByLabel[themeIconByLabel[theme]]
+      : null
 
   return <Icon icon={_Icon} color="#E049BF" size={16} {...props} />
 }

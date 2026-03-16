@@ -68,8 +68,8 @@ const InAppBrowserWithIntentsApi = ({ url, onClose, intentsApi = {} }) => {
 
   const isReady = Boolean(
     intentsApi?.fetchSessionCode &&
-      intentsApi?.showInAppBrowser &&
-      intentsApi?.closeInAppBrowser
+    intentsApi?.showInAppBrowser &&
+    intentsApi?.closeInAppBrowser
   )
 
   useEffect(() => {

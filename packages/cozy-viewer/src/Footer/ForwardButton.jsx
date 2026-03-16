@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import { useClient } from 'cozy-client'
 import { makeSharingLink } from 'cozy-client/dist/models/sharing'
@@ -11,6 +10,7 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ReplyIcon from 'cozy-ui/transpiled/react/Icons/Reply'
 import ShareIosIcon from 'cozy-ui/transpiled/react/Icons/ShareIos'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
+import { useI18n } from 'twake-i18n'
 
 const ForwardIcon = isIOS() ? ShareIosIcon : ReplyIcon
 

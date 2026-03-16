@@ -1,7 +1,6 @@
 import { ComposerPrimitive } from '@assistant-ui/react'
 import cx from 'classnames'
 import React, { useRef } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -11,6 +10,7 @@ import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 
@@ -28,6 +28,7 @@ const ConversationBar = ({
   const inputRef = useRef()
 
   // to adjust input height for multiline when typing in it
+  // eslint-disable-next-line react-hooks/refs
   useEventListener(inputRef.current, 'input', () => {
     if (inputRef.current) {
       inputRef.current.style.height = 'auto'

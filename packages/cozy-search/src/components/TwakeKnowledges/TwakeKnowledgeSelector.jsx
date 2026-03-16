@@ -1,11 +1,11 @@
 import cx from 'classnames'
 import React from 'react'
-import { useI18n } from 'twake-i18n'
 
 import flag from 'cozy-flags'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 import TChat from '../../assets/tchat.png'

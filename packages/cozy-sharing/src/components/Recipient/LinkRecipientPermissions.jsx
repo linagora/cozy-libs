@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
-import { useI18n } from 'twake-i18n'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {
@@ -8,6 +7,7 @@ import {
   divider
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import { useI18n } from 'twake-i18n'
 
 import { revokeLink } from './actions/revokeLink'
 import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'

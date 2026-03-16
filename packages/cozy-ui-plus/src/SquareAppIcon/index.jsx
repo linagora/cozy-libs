@@ -120,9 +120,11 @@ export const SquareAppIcon = ({
   useEffect(() => {
     const curr = prevVariant.current
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (curr === 'loading' && variant === 'error') setAnimationState('failed')
 
     if (curr === 'loading' && (variant === 'default' || variant === undefined))
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAnimationState('success')
 
     prevVariant.current = variant
