@@ -13,6 +13,10 @@ const config = {
     './src/search/helpers/getSearchEncoder.ts'
   ],
   transformIgnorePatterns: ['node_modules/(?!(flexsearch)/)'],
+  moduleNameMapper: {
+    '^uuid$': require.resolve('uuid'),
+    '^nanoid$': require.resolve('nanoid')
+  },
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   rootDir: '../',
   testMatch: ['./**/*.spec.{ts,tsx,js}'],

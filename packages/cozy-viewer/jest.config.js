@@ -1,7 +1,9 @@
 module.exports = {
   testPathIgnorePatterns: ['node_modules', 'dist'],
   testEnvironment: 'jest-environment-jsdom',
-  testURL: 'http://localhost/',
+  testEnvironmentOptions: {
+    url: 'http://localhost/'
+  },
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl', 'ts', 'tsx'],
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
