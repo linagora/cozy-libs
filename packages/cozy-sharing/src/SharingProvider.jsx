@@ -496,11 +496,23 @@ export class SharingProvider extends Component {
     return responses
   }
 
+  revokeSharedDriveSharingLink = async (document, perms) => {
+    const { client } = this.props
+    const drivePermissionCollection = client.collection('io.cozy.permissions', {
+      driveId: document.driveId
+    })
+    await Promise.all(perms.map(p => drivePermissionCollection.destroy(p)))
+  }
+
   revokeSharingLink = async document => {
     // Because some duplicate links have been created in the past, we must ensure
     // we revoke all of them
     const perms = getDocumentPermissions(this.state, document.id)
-    await Promise.all(perms.map(p => this.permissionCol.destroy(p)))
+    if (document.driveId) {
+      await this.revokeSharedDriveSharingLink(document, perms)
+    } else {
+      await Promise.all(perms.map(p => this.permissionCol.destroy(p)))
+    }
     this.dispatch(revokeSharingLink(perms))
   }
 
