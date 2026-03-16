@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.3.3...twake-i18n@0.3.4) (2026-03-16)
+
+### Bug Fixes
+
+- Add ru and vi in twake-i18n formatting helpers ([66bcc84](https://github.com/cozy/cozy-libs/commit/66bcc84b56eae4f65a302775790b6095179f7fe7))
+
 ## [0.3.3](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.3.2...twake-i18n@0.3.3) (2026-03-16)
 
 **Note:** Version bump only for package twake-i18n

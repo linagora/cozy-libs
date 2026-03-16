@@ -17594,7 +17594,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-harvest-lib@npm:^36.1.11, cozy-harvest-lib@workspace:packages/cozy-harvest-lib":
+"cozy-harvest-lib@npm:^36.1.12, cozy-harvest-lib@workspace:packages/cozy-harvest-lib":
   version: 0.0.0-use.local
   resolution: "cozy-harvest-lib@workspace:packages/cozy-harvest-lib"
   dependencies:
@@ -17630,8 +17630,8 @@ __metadata:
     cozy-realtime: "npm:^5.8.4"
     cozy-tsconfig: "npm:^1.8.1"
     cozy-ui: "npm:^135.0.0"
-    cozy-ui-plus: "npm:^5.2.2"
-    cozy-viewer: "npm:^27.0.6"
+    cozy-ui-plus: "npm:^5.2.3"
+    cozy-viewer: "npm:^27.0.7"
     date-fns: "npm:2.30.0"
     final-form: "npm:^4.18.5"
     form-data: "npm:4.0.0"
@@ -17657,7 +17657,7 @@ __metadata:
     react-swipeable-views: "npm:0.13.9"
     storybook: "npm:^7.0.23"
     storybook-addon-remix-react-router: "npm:^3.0.1"
-    twake-i18n: "npm:^0.3.3"
+    twake-i18n: "npm:^0.3.4"
     use-deep-compare-effect: "npm:^1.8.1"
     uuid: "npm:^3.3.2"
   peerDependencies:
@@ -17846,7 +17846,7 @@ __metadata:
     cozy-device-helper: "npm:^4.0.3"
     cozy-doctypes: "npm:^1.98.5"
     cozy-realtime: "npm:^5.8.4"
-    cozy-sharing: "npm:^28.9.1"
+    cozy-sharing: "npm:^28.9.2"
     cozy-ui: "npm:40.9.1"
     date-fns: "npm:1.30.1"
     lodash: "npm:^4.17.21"
@@ -17916,7 +17916,7 @@ __metadata:
     babel-preset-cozy-app: "npm:^2.8.4"
     cozy-client: "npm:16.19.0"
     cozy-ui: "npm:40.9.1"
-    cozy-ui-plus: "npm:^5.2.2"
+    cozy-ui-plus: "npm:^5.2.3"
     date-fns: "npm:^1.30.1"
     jest: "npm:27.5.1"
     lodash: "npm:^4.17.21"
@@ -17992,7 +17992,7 @@ __metadata:
     cozy-pouch-link: "npm:^54.0.0"
     cozy-realtime: "npm:^5.8.4"
     cozy-ui: "npm:^135.6.0"
-    cozy-ui-plus: "npm:^5.2.2"
+    cozy-ui-plus: "npm:^5.2.3"
     cross-fetch: "npm:^4.0.0"
     jest: "npm:27.5.1"
     lodash: "npm:^4.17.21"
@@ -18003,7 +18003,7 @@ __metadata:
     react-type-animation: "npm:3.2.0"
     rooks: "npm:7.14.1"
     stylus: "npm:^0.64.0"
-    twake-i18n: "npm:^0.3.3"
+    twake-i18n: "npm:^0.3.4"
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-bar: ">=29.0.0"
@@ -18024,7 +18024,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-sharing@npm:^28.9.1, cozy-sharing@workspace:packages/cozy-sharing":
+"cozy-sharing@npm:^28.9.2, cozy-sharing@workspace:packages/cozy-sharing":
   version: 0.0.0-use.local
   resolution: "cozy-sharing@workspace:packages/cozy-sharing"
   dependencies:
@@ -18051,7 +18051,7 @@ __metadata:
     cozy-intent: "npm:^2.30.4"
     cozy-minilog: "npm:^3.10.1"
     cozy-ui: "npm:^135.0.0"
-    cozy-ui-plus: "npm:^5.2.2"
+    cozy-ui-plus: "npm:^5.2.3"
     date-fns: "npm:2.30.0"
     jest: "npm:27.5.1"
     jest-environment-jsdom: "npm:27.5.1"
@@ -18063,7 +18063,7 @@ __metadata:
     react-tooltip: "npm:^3.11.1"
     snarkdown: "npm:^2.0.0"
     storybook: "npm:7.6.0"
-    twake-i18n: "npm:^0.3.3"
+    twake-i18n: "npm:^0.3.4"
   peerDependencies:
     cozy-client: ">=60.22.0"
     cozy-device-helper: ">=3.7.1"
@@ -18268,7 +18268,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-ui-plus@npm:^5.2.2, cozy-ui-plus@workspace:packages/cozy-ui-plus":
+"cozy-ui-plus@npm:^5.2.3, cozy-ui-plus@workspace:packages/cozy-ui-plus":
   version: 0.0.0-use.local
   resolution: "cozy-ui-plus@workspace:packages/cozy-ui-plus"
   dependencies:
@@ -18308,7 +18308,7 @@ __metadata:
     react-test-renderer: "npm:16.12.0"
     rooks: "npm:7.14.1"
     stylus: "npm:0.64.0"
-    twake-i18n: "npm:^0.3.3"
+    twake-i18n: "npm:^0.3.4"
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-client: ">=60.21.3"
@@ -18558,7 +18558,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-viewer@npm:^27.0.6, cozy-viewer@workspace:packages/cozy-viewer":
+"cozy-viewer@npm:^27.0.7, cozy-viewer@workspace:packages/cozy-viewer":
   version: 0.0.0-use.local
   resolution: "cozy-viewer@workspace:packages/cozy-viewer"
   dependencies:
@@ -18572,12 +18572,12 @@ __metadata:
     classnames: "npm:^2.5.1"
     cozy-client: "npm:^60.20.0"
     cozy-device-helper: "npm:2.0.0"
-    cozy-harvest-lib: "npm:^36.1.11"
+    cozy-harvest-lib: "npm:^36.1.12"
     cozy-intent: "npm:^2.30.4"
     cozy-logger: "npm:^1.17.1"
-    cozy-sharing: "npm:^28.9.1"
+    cozy-sharing: "npm:^28.9.2"
     cozy-ui: "npm:^135.6.0"
-    cozy-ui-plus: "npm:^5.2.2"
+    cozy-ui-plus: "npm:^5.2.3"
     hammerjs: "npm:^2.0.8"
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:27.5.1"
@@ -18591,7 +18591,7 @@ __metadata:
     react-router-dom: "npm:^6.14.2"
     react-test-renderer: "npm:16.12.0"
     stylus: "npm:0.63.0"
-    twake-i18n: "npm:^0.3.3"
+    twake-i18n: "npm:^0.3.4"
     typescript: "npm:5.5.2"
   peerDependencies:
     cozy-client: ">=57.0.0"
@@ -41204,7 +41204,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"twake-i18n@npm:^0.3.3, twake-i18n@workspace:packages/twake-i18n":
+"twake-i18n@npm:^0.3.4, twake-i18n@workspace:packages/twake-i18n":
   version: 0.0.0-use.local
   resolution: "twake-i18n@workspace:packages/twake-i18n"
   dependencies:
