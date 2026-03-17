@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.4.0...twake-i18n@0.4.1) (2026-03-17)
+
+**Note:** Version bump only for package twake-i18n
+
 # [0.4.0](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.3.4...twake-i18n@0.4.0) (2026-03-17)
 
 ### Features

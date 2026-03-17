@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.44.0...cozy-app-publish@0.44.1) (2026-03-17)
+
+**Note:** Version bump only for package cozy-app-publish
+
 # [0.44.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.43.0...cozy-app-publish@0.44.0) (2026-03-17)
 
 ### Features
