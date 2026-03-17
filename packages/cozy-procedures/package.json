@@ -40,7 +40,7 @@
     "cozy-client": "16.19.0",
     "cozy-ui": "40.9.1",
     "cozy-ui-plus": "^5.3.0",
-    "jest": "29.7.0",
+    "jest": "30.3.0",
     "react": "16.12.0"
   },
   "peerDependencies": {

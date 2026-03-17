@@ -17,7 +17,7 @@ describe('WebviewMessenger', () => {
 
     webviewMessenger.postMessage({ foo: 'bar' })
 
-    expect(mockWindow.ReactNativeWebView.postMessage).toBeCalledWith(
+    expect(mockWindow.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
       '{"foo":"bar"}'
     )
   })

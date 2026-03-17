@@ -37,11 +37,11 @@ describe('NativeMessenger', () => {
 
     nativeMessenger.postMessage({ foo: 'bar' })
 
-    expect(mockWebviewRef.injectJavaScript).toBeCalledWith(
+    expect(mockWebviewRef.injectJavaScript).toHaveBeenCalledWith(
       'window.postMessage({"foo":"bar"})'
     )
 
-    expect(mockWarn).not.toBeCalledWith()
+    expect(mockWarn).not.toHaveBeenCalled()
   })
 
   it('Should handle postMessage with error', () => {
@@ -49,11 +49,11 @@ describe('NativeMessenger', () => {
 
     nativeMessenger.postMessage({ foo: 'bar', error: 'error' })
 
-    expect(mockWebviewRef.injectJavaScript).toBeCalledWith(
+    expect(mockWebviewRef.injectJavaScript).toHaveBeenCalledWith(
       'window.postMessage({"foo":"bar","error":"error"})'
     )
 
-    expect(mockWarn).toBeCalledWith()
+    expect(mockWarn).toHaveBeenCalled()
   })
 
   it('Should handle onMessage', () => {
@@ -74,7 +74,7 @@ describe('NativeMessenger', () => {
       uri: 'string'
     })
 
-    expect(mockWebviewRef.injectJavaScript).toBeCalledWith(
+    expect(mockWebviewRef.injectJavaScript).toHaveBeenCalledWith(
       'window.postMessage({"action":"string","args":"string","message":"string","methodName":"string","requestId":0,"sessionId":0,"type":"string","uri":"string"})'
     )
   })

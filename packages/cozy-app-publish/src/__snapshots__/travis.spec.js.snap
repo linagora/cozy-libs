@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Travis publishing script should fail on postPublish error 1`] = `[VError: Postpublish hooks failed: Postpublish test error]`;
 

@@ -101,7 +101,7 @@ describe('WebviewIntentProvider', () => {
 
     expect(await findByText('Hello')).toBeTruthy()
     expect(mockSetWebviewContext).toHaveBeenCalledWith(mockWebviewService)
-    expect(mockSetWebviewContext).toBeCalledTimes(1)
+    expect(mockSetWebviewContext).toHaveBeenCalledTimes(1)
   })
 
   it('sets cozy-bar context if cozy-bar does exist when not provided with a context', async () => {
@@ -112,8 +112,10 @@ describe('WebviewIntentProvider', () => {
     )
 
     expect(await findByText('Hello')).toBeTruthy()
-    expect(mockSetWebviewContext).toBeCalledWith(expect.any(WebviewService))
-    expect(mockSetWebviewContext).toBeCalledTimes(1)
+    expect(mockSetWebviewContext).toHaveBeenCalledWith(
+      expect.any(WebviewService)
+    )
+    expect(mockSetWebviewContext).toHaveBeenCalledTimes(1)
   })
 
   it('does not throw if cozy-bar api is outdated', async () => {
@@ -135,8 +137,8 @@ describe('WebviewIntentProvider', () => {
     )
 
     expect(await findByText('Hello')).toBeTruthy()
-    expect(mockSetBarContext).toBeCalledWith(expect.any(WebviewService))
-    expect(mockSetBarContext).toBeCalledTimes(1)
+    expect(mockSetBarContext).toHaveBeenCalledWith(expect.any(WebviewService))
+    expect(mockSetBarContext).toHaveBeenCalledTimes(1)
   })
 
   it('does not throw in a flagship app context that has no RN API available', async () => {

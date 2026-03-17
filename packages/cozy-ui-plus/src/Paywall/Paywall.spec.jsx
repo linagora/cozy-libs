@@ -80,7 +80,7 @@ describe('Paywall', () => {
       name: 'I understand'
     })
     fireEvent.click(actionButton)
-    expect(onCloseSpy).toBeCalledTimes(1)
+    expect(onCloseSpy).toHaveBeenCalledTimes(1)
   })
 
   it('should display the default case when there is a premium link but it is not enabled', async () => {
@@ -94,7 +94,7 @@ describe('Paywall', () => {
       name: 'I understand'
     })
     fireEvent.click(actionButton)
-    expect(onCloseSpy).toBeCalledTimes(1)
+    expect(onCloseSpy).toHaveBeenCalledTimes(1)
   })
 
   it('should display the premium case when the premium link is enabled and available', async () => {
@@ -109,7 +109,7 @@ describe('Paywall', () => {
       name: 'Check our plans'
     })
     fireEvent.click(actionButton)
-    expect(openSpy).toBeCalledWith(
+    expect(openSpy).toHaveBeenCalledWith(
       'http://mycozy.cloud/cozy/instances/123/premium?lang=en',
       '_self'
     )
@@ -132,7 +132,7 @@ describe('Paywall', () => {
       name: 'I understand'
     })
     fireEvent.click(actionButton)
-    expect(onCloseSpy).toBeCalledTimes(1)
+    expect(onCloseSpy).toHaveBeenCalledTimes(1)
   })
 
   it('should display the default case when the premium link is not available in public context', async () => {
@@ -148,7 +148,7 @@ describe('Paywall', () => {
       name: 'I understand'
     })
     fireEvent.click(actionButton)
-    expect(onCloseSpy).toBeCalledTimes(1)
+    expect(onCloseSpy).toHaveBeenCalledTimes(1)
   })
 
   describe('on flagship', () => {
@@ -165,7 +165,7 @@ describe('Paywall', () => {
         name: 'I understand'
       })
       fireEvent.click(actionButton)
-      expect(onCloseSpy).toBeCalledTimes(1)
+      expect(onCloseSpy).toHaveBeenCalledTimes(1)
     })
 
     it('should display the premium case without an action button to access the premium link when flag flagship.iap.enabled is false', async () => {
@@ -182,7 +182,7 @@ describe('Paywall', () => {
         name: 'I understand'
       })
       fireEvent.click(actionButton)
-      expect(onCloseSpy).toBeCalledTimes(1)
+      expect(onCloseSpy).toHaveBeenCalledTimes(1)
     })
 
     it('should display the premium case without an action button to access the premium link when flag flagship.iap.enabled is false and iap is unavailable', async () => {
@@ -201,7 +201,7 @@ describe('Paywall', () => {
       })
 
       fireEvent.click(actionButton)
-      expect(onCloseSpy).toBeCalledTimes(1)
+      expect(onCloseSpy).toHaveBeenCalledTimes(1)
     })
 
     it('should display the premium case with an action button to access the premium link when flag flagship.iap.enabled is true and iap is available', async () => {
@@ -219,7 +219,7 @@ describe('Paywall', () => {
         name: 'Check our plans'
       })
       fireEvent.click(actionButton)
-      expect(openSpy).toBeCalledWith(
+      expect(openSpy).toHaveBeenCalledWith(
         'http://mycozy.cloud/cozy/instances/123/premium?lang=en',
         '_self'
       )

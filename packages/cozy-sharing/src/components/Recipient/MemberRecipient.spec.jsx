@@ -84,8 +84,8 @@ describe('MemberRecipient component', () => {
 
     fireEvent.click(getByText('can change'))
     fireEvent.click(getByText('Remove me from sharing'))
-    expect(onRevoke).not.toBeCalled()
-    expect(onRevokeSelf).toBeCalled()
+    expect(onRevoke).not.toHaveBeenCalled()
+    expect(onRevokeSelf).toHaveBeenCalled()
   })
 
   it('should call revoke if I am the owner of the sharing', async () => {
@@ -104,8 +104,8 @@ describe('MemberRecipient component', () => {
 
     fireEvent.click(getByText('can change'))
     fireEvent.click(getByText('Remove from sharing'))
-    expect(onRevoke).toBeCalled()
-    expect(onRevokeSelf).not.toBeCalled()
+    expect(onRevoke).toHaveBeenCalled()
+    expect(onRevokeSelf).not.toHaveBeenCalled()
   })
 
   it('should render confirmation actions if recipient is waiting for confirmation', () => {
@@ -163,7 +163,7 @@ describe('MemberRecipient component', () => {
 
     fireEvent.click(getByText('Verify'))
 
-    expect(verifyRecipient).toBeCalledWith({
+    expect(verifyRecipient).toHaveBeenCalledWith({
       email: 'me@bob.cozy.localhost'
     })
   })

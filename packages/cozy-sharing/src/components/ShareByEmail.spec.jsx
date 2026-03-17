@@ -156,7 +156,7 @@ describe('ShareByEmailComponent', () => {
     })
 
     await waitFor(() => {
-      expect(onShare).not.toBeCalled()
+      expect(onShare).not.toHaveBeenCalled()
     })
   })
 

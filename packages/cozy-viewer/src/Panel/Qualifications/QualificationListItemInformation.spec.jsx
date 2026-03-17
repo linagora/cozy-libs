@@ -69,7 +69,7 @@ describe('QualificationListItemInformation', () => {
       const toggleActionsMenuBtn = getByTestId('toggleActionsMenuBtn')
       fireEvent.click(toggleActionsMenuBtn)
 
-      expect(toggleActionsMenu).toBeCalledWith('Italie')
+      expect(toggleActionsMenu).toHaveBeenCalledWith('Italie')
     })
   })
 })

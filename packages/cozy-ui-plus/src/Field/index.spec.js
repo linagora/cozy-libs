@@ -26,7 +26,7 @@ describe('Field component', () => {
           onChange={() => {}}
         />
       )
-    ).not.toThrowError()
+    ).not.toThrow()
     expect(() =>
       render(
         <Field
@@ -36,7 +36,7 @@ describe('Field component', () => {
           onChange={() => {}}
         />
       )
-    ).toThrowError()
+    ).toThrow()
   })
 
   it('should expect string type value for all types but select', () => {
@@ -49,11 +49,11 @@ describe('Field component', () => {
           onChange={() => {}}
         />
       )
-    ).not.toThrowError()
+    ).not.toThrow()
     expect(() =>
       render(
         <Field label="mock field" type="text" value={{}} onChange={() => {}} />
       )
-    ).toThrowError()
+    ).toThrow()
   })
 })

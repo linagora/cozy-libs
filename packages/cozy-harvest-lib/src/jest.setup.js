@@ -31,6 +31,7 @@ const shouldIgnoreWarning = (message, component) => {
 
 // Allow to ignore error logs from some cozy-ui components not up to date
 const shouldIgnoreError = message => {
+  if (typeof message !== 'string') return false
   return message.includes('Invalid value for prop')
 }
 

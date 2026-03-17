@@ -19,9 +19,9 @@
   "devDependencies": {
     "@babel/core": "7.16.12",
     "@commitlint/lint": "16.2.4",
-    "babel-jest": "29.7.0",
+    "babel-jest": "30.3.0",
     "babel-preset-cozy-app": "^2.8.4",
-    "jest": "29.7.0"
+    "jest": "30.3.0"
   },
   "dependencies": {
     "@commitlint/cli": "16.2.4"

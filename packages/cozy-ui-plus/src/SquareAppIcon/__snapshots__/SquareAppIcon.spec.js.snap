@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`SquareAppIcon component should render an app correctly with the app name 1`] = `
 <div
@@ -389,6 +389,7 @@ exports[`SquareAppIcon component should render correctly an app in shortcut stat
     >
       <span
         class="MuiBadge-root-226 styles__SquareAppIcon-wrapper___3aoSx styles__SquareAppIcon-wrapper--light___AqjR- undefined"
+        style="background: linear-gradient(135deg, #E2FA17 0%, #75D8CB 100%);"
       >
         <h2
           class="MuiTypography-root-249 makeStyles-letter-221 MuiTypography-h2-255 MuiTypography-colorTextPrimary-274 MuiTypography-alignCenter-265"
