@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.3.4...twake-i18n@0.4.0) (2026-03-17)
+
+### Features
+
+- Upgrade Jest to 28 ([b92c56c](https://github.com/cozy/cozy-libs/commit/b92c56ce2fdd65b3dd8e9c5170dc5eb86cc369a7))
+
 ## [0.3.4](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.3.3...twake-i18n@0.3.4) (2026-03-16)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.18.2...cozy-search@0.19.0) (2026-03-17)
+
+### Features
+
+- Upgrade Jest to 28 ([b92c56c](https://github.com/cozy/cozy-libs/commit/b92c56ce2fdd65b3dd8e9c5170dc5eb86cc369a7))
+
 ## [0.18.2](https://github.com/cozy/cozy-libs/compare/cozy-search@0.18.1...cozy-search@0.18.2) (2026-03-16)
 
 **Note:** Version bump only for package cozy-search

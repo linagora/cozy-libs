@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.44.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.43.0...cozy-app-publish@0.44.0) (2026-03-17)
+
+### Features
+
+- Upgrade Jest to 28 ([b92c56c](https://github.com/cozy/cozy-libs/commit/b92c56ce2fdd65b3dd8e9c5170dc5eb86cc369a7))
+
 # [0.43.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.42.2...cozy-app-publish@0.43.0) (2026-03-16)
 
 ### Features

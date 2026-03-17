@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/cozy/cozy-libs/compare/cozy-logger@1.17.1...cozy-logger@1.18.0) (2026-03-17)
+
+### Features
+
+- Upgrade Jest to 28 ([b92c56c](https://github.com/cozy/cozy-libs/commit/b92c56ce2fdd65b3dd8e9c5170dc5eb86cc369a7))
+
 ## [1.17.1](https://github.com/cozy/cozy-libs/compare/cozy-logger@1.17.0...cozy-logger@1.17.1) (2026-03-05)
 
 **Note:** Version bump only for package cozy-logger
