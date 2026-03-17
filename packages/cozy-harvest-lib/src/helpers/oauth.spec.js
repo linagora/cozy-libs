@@ -108,24 +108,20 @@ describe('Oauth helper', () => {
     })
   })
   describe('handleOAuthResponse', () => {
-    let originalLocation
     const realtime = {
       sendNotification: jest.fn()
     }
 
     beforeEach(() => {
-      originalLocation = window.location
-
-      // As seen at https://gist.github.com/remarkablemark/5cb571a13a6635ab89cf2bb47dc004a3#gistcomment-2905726
-      delete window.location
-      window.location = {
-        search:
-          'account=bc2aca6566cf4a72afe6c615aa1e3d31&state=70720eb0-6204-484d'
-      }
+      window.history.pushState(
+        {},
+        '',
+        '?account=bc2aca6566cf4a72afe6c615aa1e3d31&state=70720eb0-6204-484d'
+      )
     })
 
     afterEach(() => {
-      window.location = originalLocation
+      window.history.pushState({}, '', '/')
       jest.resetAllMocks()
     })
 
@@ -147,9 +143,11 @@ describe('Oauth helper', () => {
     })
 
     it('should send message with error if any', () => {
-      window.location = {
-        search: 'error=dismissed&state=70720eb0-6204-484d'
-      }
+      window.history.pushState(
+        {},
+        '',
+        '?error=dismissed&state=70720eb0-6204-484d'
+      )
       const expectedOAuthData = {
         error: 'dismissed',
         key: null,
@@ -171,9 +169,11 @@ describe('Oauth helper', () => {
     })
 
     it('should return false when no state is present in query string', () => {
-      window.location = {
-        search: 'account=bc2aca6566cf4a72afe6c615aa1e3d31'
-      }
+      window.history.pushState(
+        {},
+        '',
+        '?account=bc2aca6566cf4a72afe6c615aa1e3d31'
+      )
 
       const result = handleOAuthResponse({ realtime })
       expect(result).toBe(false)

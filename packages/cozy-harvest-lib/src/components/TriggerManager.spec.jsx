@@ -479,7 +479,7 @@ describe('TriggerManager', () => {
         </AppLike>
       )
 
-      expect(checkMaxAccounts).not.toBeCalled()
+      expect(checkMaxAccounts).not.toHaveBeenCalled()
     })
   })
 })

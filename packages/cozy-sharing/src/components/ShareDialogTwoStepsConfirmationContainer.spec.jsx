@@ -229,7 +229,7 @@ describe('ShareDialogTwoStepsConfirmationContainer', () => {
     const confirmRejectButton = getByText('Reject')
     await act(async () => fireEvent.click(confirmRejectButton))
 
-    expect(rejectRecipient).toBeCalled()
+    expect(rejectRecipient).toHaveBeenCalled()
   })
 })
 

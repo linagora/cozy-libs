@@ -7,8 +7,6 @@ import { useSharingInfos } from './useSharingInfos'
 import AppLike from '../test/AppLike'
 
 describe('useSharingInfos', () => {
-  const { location } = window
-
   const mockClient = createMockClient({})
   const fetchOwnPermissionsMock = jest.fn()
   const getDiscoveryLinkMock = jest.fn()
@@ -70,14 +68,10 @@ describe('useSharingInfos', () => {
     ]
   }
   beforeAll(() => {
-    delete window.location
-    window.location = {
-      pathname: '/preview',
-      search: '?sharecode=5FAZbBB4Iy0k'
-    }
+    window.history.pushState({}, '', '/preview?sharecode=5FAZbBB4Iy0k')
   })
   afterAll(() => {
-    window.location = location
+    window.history.pushState({}, '', '/')
   })
 
   it('returns the right infos when using useSharingInfo', async () => {
@@ -113,11 +107,7 @@ describe('useSharingInfos', () => {
   })
 
   it('returns loading false if there is nothing to do aka sharing by link', () => {
-    delete window.location
-    window.location = {
-      pathname: '/public',
-      search: '?sharecode=5FAZbBB4Iy0k'
-    }
+    window.history.pushState({}, '', '/public?sharecode=5FAZbBB4Iy0k')
     const { result } = setup()
     expect(result.current.loading).toEqual(false)
   })

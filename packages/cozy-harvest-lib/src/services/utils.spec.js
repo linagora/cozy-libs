@@ -77,7 +77,7 @@ describe('decryptString', () => {
   it('should throw if the encrypted string is empty', async () => {
     await expect(
       decryptString('|', mockVaultClient, new SymmetricCryptoKey('123', 2))
-    ).rejects.toThrowError()
+    ).rejects.toThrow()
   })
 })
 

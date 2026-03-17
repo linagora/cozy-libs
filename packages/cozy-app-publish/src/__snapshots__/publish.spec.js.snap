@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Publish script (helper) should handle error message if the publishing failed with 404 1`] = `"{"error":"Application slug not found"}"`;
 

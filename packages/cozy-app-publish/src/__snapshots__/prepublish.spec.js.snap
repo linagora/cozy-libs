@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Prepublish script check for bad values in options 1`] = `"appType should be one of the following values: webapp, konnector"`;
 
