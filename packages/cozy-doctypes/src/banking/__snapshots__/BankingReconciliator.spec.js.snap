@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`banking reconciliator should correctly reconciliate when accounts exist 1`] = `
-Array [
+[
   "Bank account 1",
   "Bank account 1 - Titres",
   "Debit 200",
@@ -10,7 +10,7 @@ Array [
 `;
 
 exports[`banking reconciliator should pass stack transactions belonging to reconciliated accounts to BankTransaction::reconciliate 1`] = `
-Array [
+[
   "Bank account 1",
   "Debit 100",
   "Debit 400",

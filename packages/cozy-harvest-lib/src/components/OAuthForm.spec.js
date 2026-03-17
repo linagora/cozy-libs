@@ -53,19 +53,22 @@ describe('OAuthForm', () => {
     const flow = new ConnectionFlow(client, null, konnector)
     flow.getState = jest.fn().mockReturnValue(flowState)
 
-    const root = await render(
-      <AppLike client={client}>
-        <OAuthForm
-          account={account}
-          flow={flow}
-          konnector={fixtures.konnector}
-          reconnect={reconnect}
-          t={t}
-        />
-      </AppLike>
-    )
-    // Wait for next tick so the effects of useOAuthExtraParams are done
-    await act(() => new Promise(jest.requireActual('timers').setImmediate))
+    let root
+    await act(async () => {
+      root = render(
+        <AppLike client={client}>
+          <OAuthForm
+            account={account}
+            flow={flow}
+            konnector={fixtures.konnector}
+            reconnect={reconnect}
+            t={t}
+          />
+        </AppLike>
+      )
+      // Wait for next tick so the effects of useOAuthExtraParams are done
+      await new Promise(jest.requireActual('timers').setImmediate)
+    })
 
     return { root, client }
   }
