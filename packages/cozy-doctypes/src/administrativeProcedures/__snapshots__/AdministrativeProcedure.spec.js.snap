@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AdministrativeProcedure model createJson should return the json for this procedure 1`] = `
-Object {
-  "documents": Array [],
-  "personalData": Object {
+{
+  "documents": [],
+  "personalData": {
     "email": "john.doe@me.com",
     "firstname": "John",
     "lastname": "Doe",
   },
-  "procedureData": Object {
+  "procedureData": {
     "amount": 5000,
     "duration": 36,
   },

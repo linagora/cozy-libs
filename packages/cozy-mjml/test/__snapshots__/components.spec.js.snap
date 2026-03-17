@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`The example works 1`] = `
-Object {
-  "errors": Array [],
+{
+  "errors": [],
   "html": "
     <!doctype html>
-    <html xmlns=\\"http://www.w3.org/1999/xhtml\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\">
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
       <head>
         <title>
           
         </title>
         <!--[if !mso]><!-- -->
-        <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--<![endif]-->
-        <meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=UTF-8\\">
-        <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
-        <style type=\\"text/css\\">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style type="text/css">
           #outlook a { padding:0; }
           .ReadMsgBody { width:100%; }
           .ExternalClass { width:100%; }
@@ -26,7 +26,7 @@ Object {
           p { display:block;margin:13px 0; }
         </style>
         <!--[if !mso]><!-->
-        <style type=\\"text/css\\">
+        <style type="text/css">
           @media only screen and (max-width:480px) {
             @-ms-viewport { width:320px; }
             @viewport { width:320px; }
@@ -42,21 +42,21 @@ Object {
         </xml>
         <![endif]-->
         <!--[if lte mso 11]>
-        <style type=\\"text/css\\">
+        <style type="text/css">
           .outlook-group-fix { width:100% !important; }
         </style>
         <![endif]-->
         
       <!--[if !mso]><!-->
-        <link href=\\"https://fonts.googleapis.com/css?family=Inter\\" rel=\\"stylesheet\\" type=\\"text/css\\">
-        <style type=\\"text/css\\">
+        <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet" type="text/css">
+        <style type="text/css">
           @import url(https://fonts.googleapis.com/css?family=Inter);
         </style>
       <!--<![endif]-->
 
     
         
-    <style type=\\"text/css\\">
+    <style type="text/css">
       @media only screen and (min-width:480px) {
         .mj-column-per-100 { width:100% !important; max-width: 100%; }
 .mj-column-per-49 { width:49.5% !important; max-width: 49.5%; }
@@ -66,7 +66,7 @@ Object {
     </style>
     
   
-        <style type=\\"text/css\\">
+        <style type="text/css">
         
         
 
@@ -76,70 +76,70 @@ Object {
     }
   
         </style>
-        <style type=\\"text/css\\">.primary-link{color:#0a84ff;text-decoration:none;font-weight:bold;}
+        <style type="text/css">.primary-link{color:#0a84ff;text-decoration:none;font-weight:bold;}
 .highlight{color:#0a84ff;font-weight:bold;}
 </style>
         
       </head>
-      <body style=\\"background-color:#f5f6f7;\\">
+      <body style="background-color:#f5f6f7;">
         
         
       <div
-         style=\\"background-color:#f5f6f7;\\"
+         style="background-color:#f5f6f7;"
       >
         
       
       <!--[if mso | IE]>
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"vertical-align:top;width:600px;\\"
+               class="" style="vertical-align:top;width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:16px 0;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:16px 0;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
       >
         <tbody>
           <tr>
-            <td  style=\\"width:370px;\\">
+            <td  style="width:370px;">
               
       <img
-         alt=\\"Twake Workplace\\" height=\\"48\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twakeworkplacelogo.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:48px;width:100%;\\" width=\\"370\\"
+         alt="Twake Workplace" height="48" src="https://files.cozycloud.cc/cozy-mjml/twakeworkplacelogo.png" style="border:0;display:block;outline:none;text-decoration:none;height:48px;width:100%;" width="370"
       />
     
             </td>
@@ -175,74 +175,74 @@ Object {
       </table>
       
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"background:#ffffff;background-color:#ffffff;Margin:0px auto;border-radius:8px;max-width:600px;\\">
+      <div  style="background:#ffffff;background-color:#ffffff;Margin:0px auto;border-radius:8px;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"background:#ffffff;background-color:#ffffff;width:100%;border-radius:8px;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#ffffff;background-color:#ffffff;width:100%;border-radius:8px;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"vertical-align:top;width:600px;\\"
+               class="" style="vertical-align:top;width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:0 24px 8px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:0 24px 8px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.5;text-align:left;color:#95999d;\\"
+         style="font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.5;text-align:left;color:#95999d;"
       >
         ✉️ Main title
       </div>
@@ -252,11 +252,11 @@ Object {
           
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:0 24px 8px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:0 24px 8px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:18px;font-weight:bold;line-height:1.5;text-align:left;color:#32363f;\\"
+         style="font-family:inter,Arial;font-size:18px;font-weight:bold;line-height:1.5;text-align:left;color:#32363f;"
       >
         Level 2 title
       </div>
@@ -266,11 +266,11 @@ Object {
           
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:0 24px 8px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:0 24px 8px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
+         style="font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;"
       >
         Content with a small bottom space (8px)
       </div>
@@ -280,11 +280,11 @@ Object {
           
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:0 24px 16px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:0 24px 16px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
+         style="font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;"
       >
         Content with a medium bottom space (16px)
       </div>
@@ -294,11 +294,11 @@ Object {
           
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:0 24px 24px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:0 24px 24px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
+         style="font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;"
       >
         Content with a large bottom space (24px)
       </div>
@@ -308,11 +308,11 @@ Object {
           
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:0 24px 32px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:0 24px 32px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;\\"
+         style="font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:left;color:#32363f;"
       >
         Content with a extra large bottom space (32px)
       </div>
@@ -322,11 +322,11 @@ Object {
           
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:left;color:#0a84ff;\\"
+         style="font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:left;color:#0a84ff;"
       >
         Highlighted text
       </div>
@@ -336,18 +336,18 @@ Object {
           
             <tr>
               <td
-                 align=\\"center\\" vertical-align=\\"middle\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\"
+                 align="center" vertical-align="middle" style="font-size:0px;padding:10px 25px;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:separate;line-height:100%;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"#297ef2\\" role=\\"presentation\\" style=\\"border:none;border-radius:32px;cursor:auto;padding:10px 16px;background:#297ef2;\\" valign=\\"middle\\"
+             align="center" bgcolor="#297ef2" role="presentation" style="border:none;border-radius:32px;cursor:auto;padding:10px 16px;background:#297ef2;" valign="middle"
           >
             <a
-               href=\\"https://cozy.io\\" style=\\"background:#297ef2;color:#ffffff;font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.43;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href="https://cozy.io" style="background:#297ef2;color:#ffffff;font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.43;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
             >
               Primary button
             </a>
@@ -360,18 +360,18 @@ Object {
           
             <tr>
               <td
-                 align=\\"center\\" vertical-align=\\"middle\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="center" vertical-align="middle" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:separate;line-height:100%;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
+             align="center" bgcolor="transparent" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;" valign="middle"
           >
             <a
-               href=\\"https://cozy.io\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href="https://cozy.io" style="background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
             >
               Primary link
             </a>
@@ -384,18 +384,18 @@ Object {
           
             <tr>
               <td
-                 align=\\"center\\" vertical-align=\\"middle\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="center" vertical-align="middle" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:separate;line-height:100%;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
+             align="center" bgcolor="transparent" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;" valign="middle"
           >
             <a
-               href=\\"https://cozy.io\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href="https://cozy.io" style="background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
             >
               Smaller primary link for long links for example
             </a>
@@ -449,74 +449,74 @@ Object {
       </table>
       
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"vertical-align:top;width:600px;\\"
+               class="" style="vertical-align:top;width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:center;color:#0a84ff;\\"
+         style="font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:center;color:#0a84ff;"
       >
         Twake Workplace hosts your personal cloud
       </div>
@@ -526,11 +526,11 @@ Object {
           
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:14px;line-height:1.5;text-align:center;color:#95999d;\\"
+         style="font-family:inter,Arial;font-size:14px;line-height:1.5;text-align:center;color:#95999d;"
       >
         Hosted in France • Respectful of your privacy • Secure
       </div>
@@ -567,78 +567,78 @@ Object {
           
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"width:600px;\\"
+               class="" style="width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;"
       >
         <!--[if mso | IE]>
-        <table  role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+        <table  role="presentation" border="0" cellpadding="0" cellspacing="0">
           <tr>
         
               <td
-                 style=\\"vertical-align:top;width:297px;\\"
+                 style="vertical-align:top;width:297px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-49 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:49.5%;\\"
+         class="mj-column-per-49 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:49.5%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
       >
         <tbody>
           <tr>
-            <td  style=\\"vertical-align:top;padding:0;\\">
+            <td  style="vertical-align:top;padding:0;">
               
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"right\\" vertical-align=\\"middle\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="right" vertical-align="middle" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:separate;line-height:100%;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
+             align="center" bgcolor="transparent" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;" valign="middle"
           >
             <a
-               href=\\"https://blog.cozy.io/en/\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href="https://blog.cozy.io/en/" style="background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
             >
               Twake Workplace's blog
             </a>
@@ -662,32 +662,32 @@ Object {
               </td>
               
               <td
-                 style=\\"vertical-align:top;width:6px;\\"
+                 style="vertical-align:top;width:6px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-1 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:1%;\\"
+         class="mj-column-per-1 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:1%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
       >
         <tbody>
           <tr>
-            <td  style=\\"vertical-align:top;padding:0;\\">
+            <td  style="vertical-align:top;padding:0;">
               
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:5px 0;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:5px 0;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:center;color:#95999d;\\"
+         style="font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:center;color:#95999d;"
       >
         |
       </div>
@@ -708,39 +708,39 @@ Object {
               </td>
               
               <td
-                 style=\\"vertical-align:top;width:297px;\\"
+                 style="vertical-align:top;width:297px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-49 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:49.5%;\\"
+         class="mj-column-per-49 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:49.5%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
       >
         <tbody>
           <tr>
-            <td  style=\\"vertical-align:top;padding:0;\\">
+            <td  style="vertical-align:top;padding:0;">
               
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"left\\" vertical-align=\\"middle\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="left" vertical-align="middle" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:separate;line-height:100%;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
+             align="center" bgcolor="transparent" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;" valign="middle"
           >
             <a
-               href=\\"https://help.cozy.io/\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href="https://help.cozy.io/" style="background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
             >
               Help &amp; support
             </a>
@@ -793,75 +793,75 @@ Object {
           
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:20px 0;padding-bottom:5px;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:20px 0;padding-bottom:5px;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"width:600px;\\"
+               class="" style="width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;"
       >
         <!--[if mso | IE]>
-        <table  role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+        <table  role="presentation" border="0" cellpadding="0" cellspacing="0">
           <tr>
         
               <td
-                 style=\\"vertical-align:top;width:300px;\\"
+                 style="vertical-align:top;width:300px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-50 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:50%;\\"
+         class="mj-column-per-50 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:50%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"right\\" style=\\"font-size:0px;padding:4px;word-break:break-word;\\"
+                 align="right" style="font-size:0px;padding:4px;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
       >
         <tbody>
           <tr>
-            <td  style=\\"width:130px;\\">
+            <td  style="width:130px;">
               
         <a
-           href=\\"https://itunes.apple.com/us/developer/cozy-cloud/id1131616091?mt=8\\" target=\\"_blank\\"
+           href="https://itunes.apple.com/us/developer/cozy-cloud/id1131616091?mt=8" target="_blank"
         >
           
       <img
-         alt=\\"Appstore\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-appstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt="Appstore" height="auto" src="https://files.cozycloud.cc/cozy-mjml/twake-appstore-en.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="130"
       />
     
         </a>
@@ -882,36 +882,36 @@ Object {
               </td>
               
               <td
-                 style=\\"vertical-align:top;width:300px;\\"
+                 style="vertical-align:top;width:300px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-50 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:50%;\\"
+         class="mj-column-per-50 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:50%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:4px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:4px;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
       >
         <tbody>
           <tr>
-            <td  style=\\"width:130px;\\">
+            <td  style="width:130px;">
               
         <a
-           href=\\"https://play.google.com/store/apps/developer?id=Cozy+Cloud\\" target=\\"_blank\\"
+           href="https://play.google.com/store/apps/developer?id=Cozy+Cloud" target="_blank"
         >
           
       <img
-         alt=\\"Play Store\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-playstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt="Play Store" height="auto" src="https://files.cozycloud.cc/cozy-mjml/twake-playstore-en.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="130"
       />
     
         </a>
@@ -932,36 +932,36 @@ Object {
               </td>
               
               <td
-                 style=\\"vertical-align:top;width:600px;\\"
+                 style="vertical-align:top;width:600px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:4px;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:4px;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
       >
         <tbody>
           <tr>
-            <td  style=\\"width:130px;\\">
+            <td  style="width:130px;">
               
         <a
-           href=\\"https://cozy.io/en/download/#desktop\\" target=\\"_blank\\"
+           href="https://cozy.io/en/download/#desktop" target="_blank"
         >
           
       <img
-         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-desktop-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt="Cozy Desktop" height="auto" src="https://files.cozycloud.cc/cozy-mjml/twake-desktop-en.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="130"
       />
     
         </a>
@@ -1011,54 +1011,54 @@ Object {
           
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"vertical-align:top;width:600px;\\"
+               class="" style="vertical-align:top;width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:12px;line-height:1.5;text-align:center;color:#32363f;\\"
+         style="font-family:inter,Arial;font-size:12px;line-height:1.5;text-align:center;color:#32363f;"
       >
-        <a href=\\"https://cozy.io/en/legal/\\" style=\\"color:#5d6165;\\">Legal</a>
+        <a href="https://cozy.io/en/legal/" style="color:#5d6165;">Legal</a>
       </div>
     
               </td>
@@ -1107,83 +1107,83 @@ Object {
       </table>
       
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:16px 0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:16px 0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"vertical-align:middle;width:600px;\\"
+               class="" style="vertical-align:middle;width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:middle;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:middle;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:middle;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" vertical-align=\\"middle\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="center" vertical-align="middle" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:separate;line-height:100%;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"#ffffff\\" role=\\"presentation\\" style=\\"border:none;border-radius:16px;cursor:auto;padding:4px 16px;background:#ffffff;\\" valign=\\"middle\\"
+             align="center" bgcolor="#ffffff" role="presentation" style="border:none;border-radius:16px;cursor:auto;padding:4px 16px;background:#ffffff;" valign="middle"
           >
             <a
-               href=\\"https://isabelledurand.mycozy.cloud\\" style=\\"background:#ffffff;color:#0a84ff;font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href="https://isabelledurand.mycozy.cloud" style="background:#ffffff;color:#0a84ff;font-family:inter,Arial;font-size:14px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
             >
-              <img width=\\"24\\" height=\\"24\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twakelogo.png\\" style=\\"vertical-align:middle;\\" />&nbsp;
+              <img width="24" height="24" src="https://files.cozycloud.cc/cozy-mjml/twakelogo.png" style="vertical-align:middle;" />&nbsp;
               isabelledurand.mycozy.cloud
             </a>
           </td>
@@ -1222,52 +1222,52 @@ Object {
           
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"vertical-align:top;width:600px;\\"
+               class="" style="vertical-align:top;width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:center;color:#0a84ff;\\"
+         style="font-family:inter,Arial;font-size:16px;font-weight:bold;line-height:1.5;text-align:center;color:#0a84ff;"
       >
         Twake Workplace héberge votre domicile numérique
       </div>
@@ -1277,11 +1277,11 @@ Object {
           
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:14px;line-height:1.5;text-align:center;color:#95999d;\\"
+         style="font-family:inter,Arial;font-size:14px;line-height:1.5;text-align:center;color:#95999d;"
       >
         Hébergé en France • Respectueux de votre vie privée • Sécurisé
       </div>
@@ -1318,78 +1318,78 @@ Object {
           
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"width:600px;\\"
+               class="" style="width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;"
       >
         <!--[if mso | IE]>
-        <table  role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+        <table  role="presentation" border="0" cellpadding="0" cellspacing="0">
           <tr>
         
               <td
-                 style=\\"vertical-align:top;width:297px;\\"
+                 style="vertical-align:top;width:297px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-49 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:49.5%;\\"
+         class="mj-column-per-49 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:49.5%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
       >
         <tbody>
           <tr>
-            <td  style=\\"vertical-align:top;padding:0;\\">
+            <td  style="vertical-align:top;padding:0;">
               
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"right\\" vertical-align=\\"middle\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="right" vertical-align="middle" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:separate;line-height:100%;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
+             align="center" bgcolor="transparent" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;" valign="middle"
           >
             <a
-               href=\\"https://blog.cozy.io/fr/\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href="https://blog.cozy.io/fr/" style="background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
             >
               Blog de Twake Workplace
             </a>
@@ -1413,32 +1413,32 @@ Object {
               </td>
               
               <td
-                 style=\\"vertical-align:top;width:6px;\\"
+                 style="vertical-align:top;width:6px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-1 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:1%;\\"
+         class="mj-column-per-1 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:1%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
       >
         <tbody>
           <tr>
-            <td  style=\\"vertical-align:top;padding:0;\\">
+            <td  style="vertical-align:top;padding:0;">
               
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:5px 0;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:5px 0;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:center;color:#95999d;\\"
+         style="font-family:inter,Arial;font-size:16px;line-height:1.5;text-align:center;color:#95999d;"
       >
         |
       </div>
@@ -1459,39 +1459,39 @@ Object {
               </td>
               
               <td
-                 style=\\"vertical-align:top;width:297px;\\"
+                 style="vertical-align:top;width:297px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-49 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:49.5%;\\"
+         class="mj-column-per-49 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:49.5%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%"
       >
         <tbody>
           <tr>
-            <td  style=\\"vertical-align:top;padding:0;\\">
+            <td  style="vertical-align:top;padding:0;">
               
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"left\\" vertical-align=\\"middle\\" style=\\"font-size:0px;padding:0;word-break:break-word;\\"
+                 align="left" vertical-align="middle" style="font-size:0px;padding:0;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:separate;line-height:100%;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;"
       >
         <tr>
           <td
-             align=\\"center\\" bgcolor=\\"transparent\\" role=\\"presentation\\" style=\\"border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;\\" valign=\\"middle\\"
+             align="center" bgcolor="transparent" role="presentation" style="border:none;border-radius:3px;cursor:auto;padding:10px 8px;background:transparent;" valign="middle"
           >
             <a
-               href=\\"https://support.cozy.io/\\" style=\\"background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
+               href="https://support.cozy.io/" style="background:transparent;color:#0a84ff;font-family:inter,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;" target="_blank"
             >
               Aide et support
             </a>
@@ -1544,75 +1544,75 @@ Object {
           
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:20px 0;padding-bottom:5px;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:20px 0;padding-bottom:5px;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"width:600px;\\"
+               class="" style="width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:0;line-height:0;text-align:left;display:inline-block;width:100%;direction:ltr;"
       >
         <!--[if mso | IE]>
-        <table  role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+        <table  role="presentation" border="0" cellpadding="0" cellspacing="0">
           <tr>
         
               <td
-                 style=\\"vertical-align:top;width:300px;\\"
+                 style="vertical-align:top;width:300px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-50 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:50%;\\"
+         class="mj-column-per-50 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:50%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"right\\" style=\\"font-size:0px;padding:4px;word-break:break-word;\\"
+                 align="right" style="font-size:0px;padding:4px;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
       >
         <tbody>
           <tr>
-            <td  style=\\"width:130px;\\">
+            <td  style="width:130px;">
               
         <a
-           href=\\"https://itunes.apple.com/fr/developer/cozy-cloud/id1131616091?mt=8\\" target=\\"_blank\\"
+           href="https://itunes.apple.com/fr/developer/cozy-cloud/id1131616091?mt=8" target="_blank"
         >
           
       <img
-         alt=\\"Appstore\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-appstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt="Appstore" height="auto" src="https://files.cozycloud.cc/cozy-mjml/twake-appstore-fr.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="130"
       />
     
         </a>
@@ -1633,36 +1633,36 @@ Object {
               </td>
               
               <td
-                 style=\\"vertical-align:top;width:300px;\\"
+                 style="vertical-align:top;width:300px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-50 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:50%;\\"
+         class="mj-column-per-50 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:50%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"left\\" style=\\"font-size:0px;padding:4px;word-break:break-word;\\"
+                 align="left" style="font-size:0px;padding:4px;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
       >
         <tbody>
           <tr>
-            <td  style=\\"width:130px;\\">
+            <td  style="width:130px;">
               
         <a
-           href=\\"https://play.google.com/store/apps/developer?id=Cozy+Cloud&hl=fr\\" target=\\"_blank\\"
+           href="https://play.google.com/store/apps/developer?id=Cozy+Cloud&hl=fr" target="_blank"
         >
           
       <img
-         alt=\\"Play Store\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-playstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt="Play Store" height="auto" src="https://files.cozycloud.cc/cozy-mjml/twake-playstore-fr.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="130"
       />
     
         </a>
@@ -1683,36 +1683,36 @@ Object {
               </td>
               
               <td
-                 style=\\"vertical-align:top;width:600px;\\"
+                 style="vertical-align:top;width:600px;"
               >
               <![endif]-->
                 
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:4px;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:4px;word-break:break-word;"
               >
                 
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-collapse:collapse;border-spacing:0px;\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;"
       >
         <tbody>
           <tr>
-            <td  style=\\"width:130px;\\">
+            <td  style="width:130px;">
               
         <a
-           href=\\"https://cozy.io/fr/download/#desktop\\" target=\\"_blank\\"
+           href="https://cozy.io/fr/download/#desktop" target="_blank"
         >
           
       <img
-         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/twake-desktop-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt="Cozy Desktop" height="auto" src="https://files.cozycloud.cc/cozy-mjml/twake-desktop-fr.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;" width="130"
       />
     
         </a>
@@ -1762,54 +1762,54 @@ Object {
           
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class="" width="600px"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:600px;\\" width=\\"600\\"
+         align="center" border="0" cellpadding="0" cellspacing="0" class="" style="width:600px;" width="600"
       >
         <tr>
-          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
       <![endif]-->
     
       
-      <div  style=\\"Margin:0px auto;max-width:600px;\\">
+      <div  style="Margin:0px auto;max-width:600px;">
         
         <table
-           align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"width:100%;\\"
+           align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%;"
         >
           <tbody>
             <tr>
               <td
-                 style=\\"direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;\\"
+                 style="direction:ltr;font-size:0px;padding:0;text-align:center;vertical-align:top;"
               >
                 <!--[if mso | IE]>
-                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 
         <tr>
       
             <td
-               class=\\"\\" style=\\"vertical-align:top;width:600px;\\"
+               class="" style="vertical-align:top;width:600px;"
             >
           <![endif]-->
             
       <div
-         class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\"
+         class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;"
       >
         
       <table
-         border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"vertical-align:top;\\" width=\\"100%\\"
+         border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%"
       >
         
             <tr>
               <td
-                 align=\\"center\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\"
+                 align="center" style="font-size:0px;padding:10px 25px;word-break:break-word;"
               >
                 
       <div
-         style=\\"font-family:inter,Arial;font-size:12px;line-height:1.5;text-align:center;color:#32363f;\\"
+         style="font-family:inter,Arial;font-size:12px;line-height:1.5;text-align:center;color:#32363f;"
       >
-        <a href=\\"https://cozy.io/fr/legal/\\" style=\\"color:#5d6165;\\">Mentions légales</a>
+        <a href="https://cozy.io/fr/legal/" style="color:#5d6165;">Mentions légales</a>
       </div>
     
               </td>
