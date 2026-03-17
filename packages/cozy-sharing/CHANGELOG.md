@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.9.2...cozy-sharing@28.10.0) (2026-03-17)
+
+### Features
+
+- Allow to revoke shared drive file sharing link ([7cff1da](https://github.com/cozy/cozy-libs/commit/7cff1da36a8b048a25efd302a5e3e0efb114e327))
+
 ## [28.9.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.9.1...cozy-sharing@28.9.2) (2026-03-16)
 
 **Note:** Version bump only for package cozy-sharing
