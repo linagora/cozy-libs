@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.19.2...cozy-search@0.20.0) (2026-03-18)
+
+### Bug Fixes
+
+- Init default provider data for openrag assistant :bug: ([4fee703](https://github.com/cozy/cozy-libs/commit/4fee7034c4bb2e0431f9ba1d57db0e08197028f6))
+- Remove API key step when creating openrag assistant :bug: ([b2a0dbb](https://github.com/cozy/cozy-libs/commit/b2a0dbb2eb32eee3e984f672dc3666c4ae44a9c6))
+
+### Features
+
+- Change flow select provider and model :sparkles: ([3ef24b0](https://github.com/cozy/cozy-libs/commit/3ef24b0e3ee45eeb27e29d6f744b9ba2188776fa))
+- Change wording of openrag :speech_balloon: ([a87e200](https://github.com/cozy/cozy-libs/commit/a87e200c967acec5fdda02f838a228cbf23a62be))
+- Upgrade cozy-client for latest assistant improvements ([c91984e](https://github.com/cozy/cozy-libs/commit/c91984e1b4859a13a78ae74b2348ea2f9c1b9ae1))
+
 ## [0.19.2](https://github.com/cozy/cozy-libs/compare/cozy-search@0.19.1...cozy-search@0.19.2) (2026-03-18)
 
 ### Bug Fixes
