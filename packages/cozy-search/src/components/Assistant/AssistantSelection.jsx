@@ -59,7 +59,7 @@ const AssistantSelection = ({ className, disabled }) => {
   }
 
   const selectedAssistant =
-    assistants.find(assistant => assistant.id === selectedAssistantId) ||
+    assistants.find(assistant => assistant._id === selectedAssistantId) ||
     DEFAULT_ASSISTANT
 
   return (
@@ -98,10 +98,10 @@ const AssistantSelection = ({ className, disabled }) => {
         >
           {assistants.map(assistant => (
             <AssistantSelectionItem
-              key={assistant.id}
+              key={assistant._id}
               assistant={assistant}
               onClose={handleClose}
-              onSelect={() => setSelectedAssistantId(assistant.id)}
+              onSelect={() => setSelectedAssistantId(assistant._id)}
               selectedAssistant={selectedAssistant}
               setIsOpenDeleteAssistant={setIsOpenDeleteAssistant}
               setAssistantIdInAction={setAssistantIdInAction}

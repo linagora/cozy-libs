@@ -86,7 +86,7 @@ export const createCozyRealtimeChatAdapter = (
       await client.stackClient.fetchJSON(
         'POST',
         `/ai/chat/conversations/${conversationId}`,
-        { q: userQuery, assistantId }
+        { q: userQuery, assistantID: assistantId }
       )
 
       let fullText = ''

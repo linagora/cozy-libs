@@ -31,23 +31,25 @@ const AssistantSelectionItem = ({
     onClose()
   }
 
+  const assistantId = assistant._id || assistant.id
+
   const handleDelete = e => {
-    setAssistantIdInAction(assistant.id)
+    setAssistantIdInAction(assistantId)
     setIsOpenDeleteAssistant(true)
     onClose()
     e.stopPropagation()
   }
 
   const handleEdit = e => {
-    setAssistantIdInAction(assistant.id)
+    setAssistantIdInAction(assistantId)
     setIsOpenEditAssistant(true)
     onClose()
     e.stopPropagation()
   }
 
   const isSelected = useMemo(
-    () => selectedAssistant?.id === assistant.id,
-    [selectedAssistant?.id, assistant.id]
+    () => selectedAssistant?._id === assistantId,
+    [selectedAssistant?._id, assistantId]
   )
 
   return (
