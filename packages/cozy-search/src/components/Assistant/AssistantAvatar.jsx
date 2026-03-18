@@ -11,7 +11,7 @@ import { DEFAULT_ASSISTANT } from '../constants'
 const AssistantAvatar = ({ assistant, isSmall, className }) => {
   if (!assistant) return null
 
-  if (assistant.id !== DEFAULT_ASSISTANT.id && !assistant.icon) {
+  if (assistant._id !== DEFAULT_ASSISTANT._id && !assistant.icon) {
     return (
       <Icon
         icon={AssistantIcon}

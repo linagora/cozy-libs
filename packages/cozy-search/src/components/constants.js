@@ -1,5 +1,5 @@
 export const DEFAULT_ASSISTANT = {
-  id: 'ai_assistant',
+  _id: 'default_ai_assistant',
   name: 'AI Assistant'
 }
 
