@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import React from 'react'
 
-import flag from 'cozy-flags'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -55,9 +54,10 @@ const ConversationListItemWider = ({
             <Typography variant="h6" className="u-ellipsis u-mb-half">
               {getNameOfConversation(conversation)}
             </Typography>
-            {!disableAction && flag('cozy.conversation-actions.enabled') && (
+            {!disableAction && (
               <ConversationActions
                 buttonClassName={cx(styles['conversation-list-item-action'])}
+                conversation={conversation}
               />
             )}
           </div>

@@ -89,7 +89,10 @@ export const formatConversationDate = (dateString, t, lang) => {
  * So temporary we get the last question from user as name of the conversation
  */
 export const getNameOfConversation = conversation => {
-  return conversation.messages?.[conversation.messages?.length - 2]?.content
+  return (
+    conversation.name ||
+    conversation.messages?.[conversation.messages?.length - 2]?.content
+  )
 }
 
 /**
