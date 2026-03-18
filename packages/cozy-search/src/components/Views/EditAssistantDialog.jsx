@@ -61,6 +61,8 @@ const EditAssistantDialog = ({ open, onClose }) => {
       )
       const assistant = response.data
       const provider = response.included[0]
+      const providerId =
+        assistant?.relationships?.provider?.data?.metadata?.providerId
       setFormData({
         name: assistant.name || '',
         description: assistant.prompt || '',
@@ -69,13 +71,10 @@ const EditAssistantDialog = ({ open, onClose }) => {
         baseUrl: provider?.data?.baseUrl || '',
         apiKey: provider?.auth?.apiKey || '',
         encryptedApiKey: provider?.auth?.credentials_encrypted || '',
-        providerId:
-          assistant?.relationships?.provider?.data?.metadata?.providerId
+        providerId
       })
 
-      const selectProviderDefault = getSelectedProviderById(
-        assistant?.relationships?.provider?.data?.metadata?.providerId
-      )
+      const selectProviderDefault = getSelectedProviderById(providerId)
       setSelectedProvider({
         ...selectProviderDefault,
         model: provider?.auth?.login,

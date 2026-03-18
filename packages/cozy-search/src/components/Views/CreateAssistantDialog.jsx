@@ -18,11 +18,14 @@ import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
 import AssistantDialogContent from '../CreateAssistantSteps/AssistantDialogContent'
+import { getSelectedProviderById } from '../CreateAssistantSteps/helpers'
 import styles from '../CreateAssistantSteps/styles.styl'
 import {
   useAssistantDialog,
   STEPS
 } from '../CreateAssistantSteps/useAssistantDialog'
+
+const defaultProvider = getSelectedProviderById('openrag')
 
 const CreateAssistantDialog = ({ open, onClose }) => {
   useExtendI18n(locales)
@@ -45,7 +48,10 @@ const CreateAssistantDialog = ({ open, onClose }) => {
     handleChangeModel
   } = useAssistantDialog({
     onClose,
-    initialData: { selectedProvider: { id: 'openrag' } }
+    initialData: {
+      selectedProvider: defaultProvider,
+      model: defaultProvider.models[0]
+    }
   })
 
   const getTitle = () => {
