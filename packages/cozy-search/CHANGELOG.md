@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.2](https://github.com/cozy/cozy-libs/compare/cozy-search@0.19.1...cozy-search@0.19.2) (2026-03-18)
+
+### Bug Fixes
+
+- AI messages displayed in wrong order ([9665dc3](https://github.com/cozy/cozy-libs/commit/9665dc3c198f1cfda447bf99d49234ca34a13c87))
+
 ## [0.19.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.19.0...cozy-search@0.19.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-search
