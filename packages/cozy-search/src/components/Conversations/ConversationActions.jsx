@@ -71,11 +71,9 @@ const ConversationActions = ({ buttonClassName, conversation }) => {
   }
 
   const actions = makeActions(
-    [
-      rename,
-      flag('cozy.conversation-sharing.enabled') && share,
-      remove
-    ].filter(Boolean),
+    [rename, flag('cozy.conversation-sharing.enabled') && share, remove].filter(
+      Boolean
+    ),
     { t, onRename: handleOpenRename, onDelete: () => setShowDeleteDialog(true) }
   )
 

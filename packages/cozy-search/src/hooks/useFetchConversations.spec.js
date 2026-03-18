@@ -33,6 +33,8 @@ jest.mock(
   { virtual: true }
 )
 
+jest.mock('cozy-realtime/dist/useRealtime', () => jest.fn())
+
 const mockClient = {
   query: jest.fn()
 }
