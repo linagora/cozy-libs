@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.11.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.11.1...cozy-sharing@28.11.2) (2026-03-18)
+
+### Bug Fixes
+
+- **cozy-sharing:** Force text primary color on autosuggest text ([0a20cda](https://github.com/cozy/cozy-libs/commit/0a20cda336d1aa5c3b25ffcd9423ecf6c2cddd9c))
+
 ## [28.11.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.11.0...cozy-sharing@28.11.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-sharing
