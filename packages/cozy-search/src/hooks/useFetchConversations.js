@@ -3,9 +3,13 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import Minilog from 'cozy-minilog'
+import useRealtime from 'cozy-realtime/dist/useRealtime'
 
 import { DEFAULT_ASSISTANT } from '../components/constants'
-import { buildChatConversationsQuery } from '../components/queries'
+import {
+  buildChatConversationsQuery,
+  CHAT_CONVERSATIONS_DOCTYPE
+} from '../components/queries'
 
 const log = Minilog('[useFetchConversations]')
 
@@ -99,6 +103,22 @@ const useFetchConversations = ({ query = {} } = {}) => {
       fetchConversations(null, query)
     }
   }, [query, fetchConversations])
+
+  const refreshConversations = useCallback(() => {
+    fetchConversations(null, previousQueryRef.current)
+  }, [fetchConversations])
+
+  useRealtime(
+    client,
+    {
+      [CHAT_CONVERSATIONS_DOCTYPE]: {
+        created: refreshConversations,
+        updated: refreshConversations,
+        deleted: refreshConversations
+      }
+    },
+    [refreshConversations]
+  )
 
   const fetchMore = useCallback(async () => {
     if (hasMore) {
