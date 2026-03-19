@@ -8,11 +8,14 @@ import { useI18n } from 'twake-i18n'
 
 import MarkdownText from './MarkdownText'
 import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
+import Sources from '../Conversations/Sources/Sources'
 
 const AssistantMessage = () => {
   const { t } = useI18n()
 
   const isThinking = useMessage(s => s.status?.type === 'requires-action')
+  const messageId = useMessage(s => s.id)
+  const sources = useMessage(s => s.metadata?.custom?.sources)
 
   return (
     <MessagePrimitive.Root className="u-mt-1-half u-mr-3">
@@ -34,6 +37,9 @@ const AssistantMessage = () => {
           Text: MarkdownText
         }}
       />
+      {sources?.length > 0 && (
+        <Sources messageId={messageId} sources={sources} />
+      )}
     </MessagePrimitive.Root>
   )
 }
