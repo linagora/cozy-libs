@@ -10,6 +10,7 @@ import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import {
   formatRecipients,
+  mergeAndDeduplicateRecipients,
   moveRecipientToReadWrite,
   moveRecipientToReadOnly,
   RECIPIENT_INDEX_PREFIX
@@ -66,10 +67,16 @@ export const FederatedFolderModal = withLocales(
     const [folderName] = useState(existingDocument?.name || '')
 
     const onShare = params => {
-      setFederatedRecipients({
-        recipients: params.recipients || [],
-        readOnlyRecipients: params.readOnlyRecipients || []
-      })
+      setFederatedRecipients(prev => ({
+        recipients: mergeAndDeduplicateRecipients([
+          prev.recipients,
+          params.recipients || []
+        ]),
+        readOnlyRecipients: mergeAndDeduplicateRecipients([
+          prev.readOnlyRecipients,
+          params.readOnlyRecipients || []
+        ])
+      }))
     }
 
     const onSend = async () => {

@@ -55,12 +55,26 @@ jest.mock('./DumbFederatedFolderModal', () => ({
         data-testid="btn-share"
         onClick={() =>
           onShare({
-            recipients: [{ _id: 'r1', displayName: 'Alice' }],
-            readOnlyRecipients: [{ _id: 'r2', displayName: 'Bob' }]
+            recipients: [{ _id: 'r1', id: 'r1', displayName: 'Alice' }],
+            readOnlyRecipients: [{ _id: 'r2', id: 'r2', displayName: 'Bob' }]
           })
         }
       >
         Share
+      </button>
+      <button
+        data-testid="btn-share-other"
+        onClick={() =>
+          onShare({
+            recipients: [
+              { _id: 'r1', id: 'r1', displayName: 'Alice' },
+              { _id: 'r3', id: 'r3', displayName: 'Charlie' }
+            ],
+            readOnlyRecipients: []
+          })
+        }
+      >
+        Share Other
       </button>
       <button data-testid="btn-send" onClick={onSend}>
         Send
@@ -213,6 +227,26 @@ describe('FederatedFolderModal', () => {
         expect(getByTestId('recipients-count').textContent).toBe('2')
       })
     })
+
+    it('should accumulate recipients when onShare is called multiple times', async () => {
+      const { getByTestId } = setup()
+
+      await waitFor(() => {
+        expect(getByTestId('recipients-count').textContent).toBe('0')
+      })
+
+      fireEvent.click(getByTestId('btn-share'))
+
+      await waitFor(() => {
+        expect(getByTestId('recipients-count').textContent).toBe('2')
+      })
+
+      fireEvent.click(getByTestId('btn-share-other'))
+
+      await waitFor(() => {
+        expect(getByTestId('recipients-count').textContent).toBe('3')
+      })
+    })
   })
 
   describe('onSend callback', () => {
@@ -231,8 +265,8 @@ describe('FederatedFolderModal', () => {
         expect(mockShare).toHaveBeenCalledWith({
           description: 'My Test Folder',
           document: mockDocument,
-          recipients: [{ _id: 'r1', displayName: 'Alice' }],
-          readOnlyRecipients: [{ _id: 'r2', displayName: 'Bob' }],
+          recipients: [{ _id: 'r1', id: 'r1', displayName: 'Alice' }],
+          readOnlyRecipients: [{ _id: 'r2', id: 'r2', displayName: 'Bob' }],
           sharedDrive: true,
           openSharing: false
         })
