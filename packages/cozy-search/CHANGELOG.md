@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.20.0...cozy-search@0.21.0) (2026-03-20)
+
+### Bug Fixes
+
+- **cozy-search:** Display sources in assistant-ui messages :bug: ([60a81f1](https://github.com/cozy/cozy-libs/commit/60a81f1859ccf95b7963f9ee69e381b877c441d3))
+
+### Features
+
+- Add realtime updates for conversation list :sparkles: ([37ac570](https://github.com/cozy/cozy-libs/commit/37ac5700422d40a122350cf77cdbc1fbac249968))
+- Add rename and delete conversation actions :sparkles: ([383e179](https://github.com/cozy/cozy-libs/commit/383e179d2d94056c485a5d53588300e4fd2a4bae))
+
 # [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.19.2...cozy-search@0.20.0) (2026-03-18)
 
 ### Bug Fixes
