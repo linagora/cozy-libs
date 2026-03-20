@@ -71,6 +71,7 @@
   "peerDependencies": {
     "cozy-client": ">=60.22.0",
     "cozy-device-helper": ">=3.7.1",
+    "cozy-flags": ">=4.8.1",
     "cozy-intent": ">=2.29.1",
     "cozy-minilog": ">=3.9.1",
     "cozy-ui": ">=135.0.0",
