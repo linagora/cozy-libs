@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.21.0...cozy-search@0.21.1) (2026-03-20)
+
+### Bug Fixes
+
+- Use \_id for assistant selection and actions :bug: ([fc2de5b](https://github.com/cozy/cozy-libs/commit/fc2de5bc8b86d5380765f957dd1e02fcb24e1780))
+
 # [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.20.0...cozy-search@0.21.0) (2026-03-20)
 
 ### Bug Fixes
