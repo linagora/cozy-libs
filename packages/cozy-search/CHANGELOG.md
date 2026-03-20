@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.21.1...cozy-search@0.22.0) (2026-03-20)
+
+### Bug Fixes
+
+- Override color of assistant icon in assistant selector :bug: ([8a430ee](https://github.com/cozy/cozy-libs/commit/8a430eee06b30a1f064da900b1c939ecc34f5827))
+
+### chore
+
+- Upgrade cozy-ui to 137.0.1 :arrow_up: ([0118431](https://github.com/cozy/cozy-libs/commit/0118431b7eae9fc5554a0faa9790a0e7b1bf470a))
+
+### BREAKING CHANGES
+
+- You need to add cozy-ui >= 137.0.1 as dep in your app :heavy_plus_sign:
+
 ## [0.21.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.21.0...cozy-search@0.21.1) (2026-03-20)
 
 ### Bug Fixes
