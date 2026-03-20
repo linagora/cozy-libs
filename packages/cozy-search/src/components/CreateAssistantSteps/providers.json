@@ -4,7 +4,7 @@
     "name": "Twake",
     "models": ["openrag"],
     "description": "assistant_create.steps.provider_selection.openrag.description",
-    "icon": "OpenRagLogo",
+    "icon": "TwakeLogo",
     "external": false
   },
   {
