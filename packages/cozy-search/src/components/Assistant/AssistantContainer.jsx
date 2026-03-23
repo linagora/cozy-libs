@@ -32,7 +32,7 @@ const AssistantContainer = () => {
 
       <PrettyScrollbar className="u-flex-auto u-flex u-flex-column u-pb-0-t u-pb-1 u-ov-hidden">
         {isOpenSearchConversation &&
-        flag('cozy.search-conversation.enabled') ? (
+        flag('cozy.assistant.search-conversation.enabled') ? (
           <SearchConversation />
         ) : (
           <CozyAssistantRuntimeProviderWithErrorBoundary>
@@ -41,18 +41,19 @@ const AssistantContainer = () => {
         )}
       </PrettyScrollbar>
 
-      {openedKnowledgePanel && flag('cozy.source-knowledge.enabled') && (
-        <div
-          className={cx(
-            'u-h-100 u-maw-7 u-pl-half',
-            styles[`knowledge-panel--${theme}`]
-          )}
-        >
-          <TwakeKnowledgePanel
-            onClose={() => setOpenedKnowledgePanel(undefined)}
-          />
-        </div>
-      )}
+      {openedKnowledgePanel &&
+        flag('cozy.assistant.source-knowledge.enabled') && (
+          <div
+            className={cx(
+              'u-h-100 u-maw-7 u-pl-half',
+              styles[`knowledge-panel--${theme}`]
+            )}
+          >
+            <TwakeKnowledgePanel
+              onClose={() => setOpenedKnowledgePanel(undefined)}
+            />
+          </div>
+        )}
     </div>
   )
 }

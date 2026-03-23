@@ -70,16 +70,17 @@ const Sidebar = ({ className }) => {
             />
           </IconButton>
           <div>
-            {sidebarOpen && flag('cozy.search-conversation.enabled') && (
-              <IconButton
-                size="medium"
-                className="u-bdrs-6"
-                onClick={onToggleSearch}
-                aria-label={t('assistant.sidebar.toggle_search')}
-              >
-                <Icon icon={SearchIcon} aria-hidden="true" />
-              </IconButton>
-            )}
+            {sidebarOpen &&
+              flag('cozy.assistant.search-conversation.enabled') && (
+                <IconButton
+                  size="medium"
+                  className="u-bdrs-6"
+                  onClick={onToggleSearch}
+                  aria-label={t('assistant.sidebar.toggle_search')}
+                >
+                  <Icon icon={SearchIcon} aria-hidden="true" />
+                </IconButton>
+              )}
             {sidebarOpen && isMobile && (
               <IconButton
                 size="medium"
