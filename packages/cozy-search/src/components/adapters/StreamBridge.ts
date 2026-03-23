@@ -18,6 +18,10 @@ export class StreamBridge {
   private cleanupCallback: (() => void) | null = null
   private positionBuffers = new Map<string, Map<number, string>>()
   private nextPositions = new Map<string, number>()
+  private sourcesMap = new Map<
+    string,
+    Array<{ id: string; doctype?: string }>
+  >()
 
   /**
    * Sets a callback to be invoked when cleanup is called.
@@ -166,6 +170,27 @@ export class StreamBridge {
   }
 
   /**
+   * Called when a 'sources' event is received from WebSocket.
+   * Stores sources for the conversation to be retrieved by the adapter.
+   */
+  onSources(
+    conversationId: string,
+    sources: Array<{ id: string; doctype?: string }>
+  ): void {
+    if (!this.streams.has(conversationId)) return
+    this.sourcesMap.set(conversationId, sources)
+  }
+
+  /**
+   * Returns stored sources for a conversation.
+   */
+  getSources(
+    conversationId: string
+  ): Array<{ id: string; doctype?: string }> | undefined {
+    return this.sourcesMap.get(conversationId)
+  }
+
+  /**
    * Called when an error occurs.
    * Errors the stream for the conversation.
    */
@@ -173,9 +198,10 @@ export class StreamBridge {
     const stream = this.streams.get(conversationId)
     if (stream) {
       stream.error(error)
-      this.positionBuffers.delete(conversationId)
-      this.nextPositions.delete(conversationId)
     }
+    this.positionBuffers.delete(conversationId)
+    this.nextPositions.delete(conversationId)
+    this.sourcesMap.delete(conversationId)
   }
 
   /**
@@ -190,9 +216,10 @@ export class StreamBridge {
       }
       stream.complete()
       this.streams.delete(conversationId)
-      this.positionBuffers.delete(conversationId)
-      this.nextPositions.delete(conversationId)
     }
+    this.positionBuffers.delete(conversationId)
+    this.nextPositions.delete(conversationId)
+    this.sourcesMap.delete(conversationId)
   }
 
   /**

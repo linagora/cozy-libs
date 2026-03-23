@@ -29,9 +29,12 @@ const Sources = ({ messageId, files, emails }) => {
 
   useEffect(() => {
     if (showSources) {
+      const innerContainer = ref.current?.closest('.cozyDialogContent')
+      if (!innerContainer) {
+        ref.current?.scrollIntoView(false)
+        return
+      }
       const sourcesBottom = ref.current.getBoundingClientRect().bottom
-      const innerContainer =
-        document.getElementsByClassName('cozyDialogContent')[0]
       const innerContainerBottom = innerContainer.getBoundingClientRect().bottom
       if (sourcesBottom > innerContainerBottom) {
         ref.current.scrollIntoView(false)
