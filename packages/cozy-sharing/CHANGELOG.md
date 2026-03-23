@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.11.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.11.2...cozy-sharing@28.11.3) (2026-03-23)
+
+### Bug Fixes
+
+- **cozy-sharing:** Accumulate recipients in federated folder sharing ([a626ee4](https://github.com/cozy/cozy-libs/commit/a626ee4793486d1dcdb5e419a59f39caee6f09f7))
+- **cozy-sharing:** Normalize recipient id in dedup helper ([6bd9292](https://github.com/cozy/cozy-libs/commit/6bd9292ef50f01307f6bfb335812dfc4ecce5c25))
+- Remove warning on cozy-flags missing dependency ([25f9864](https://github.com/cozy/cozy-libs/commit/25f98641a5f9c1f22fa759abe7382d422d4567ef))
+
 ## [28.11.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.11.1...cozy-sharing@28.11.2) (2026-03-18)
 
 ### Bug Fixes
