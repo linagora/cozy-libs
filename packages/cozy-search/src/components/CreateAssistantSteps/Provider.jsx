@@ -57,7 +57,7 @@ const Provider = ({ selectedProvider, provider, onSelect }) => {
           isOpenRag ? (
             <TwakeLogo width={40} height={40} />
           ) : (
-            <Icon icon={ICONS[provider.icon]} size={40} />
+            <Icon icon={ICONS[provider.icon]} size={40} preserveColor />
           )
         }
       </div>
