@@ -124,7 +124,8 @@ export const createCozyRealtimeChatAdapter = (
 
       yield {
         content: [{ type: 'text', text: t('assistant.default_error') }],
-        status: { type: 'incomplete', reason: 'error' }
+        status: { type: 'incomplete', reason: 'error' },
+        metadata: { custom: { isError: true } }
       }
     }
   }

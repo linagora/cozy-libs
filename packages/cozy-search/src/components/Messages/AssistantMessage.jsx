@@ -12,10 +12,7 @@ import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
 import Sources from '../Conversations/Sources/Sources'
 
 const useIsErrorMessage = () => {
-  const { t } = useI18n()
-  const content = useMessage(s => s.content)
-  const firstText = content?.find(part => part.type === 'text')
-  return firstText?.type === 'text' && firstText.text === t('assistant.default_error')
+  return useMessage(s => s.metadata?.custom?.isError === true)
 }
 
 const AssistantMessage = () => {
