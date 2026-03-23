@@ -1,13 +1,6 @@
-import set from 'lodash/set'
-import React, { useMemo, useContext, useState, useCallback } from 'react'
-import { useParams } from 'react-router-dom'
-
-import { useClient } from 'cozy-client'
-import useRealtime from 'cozy-realtime/dist/useRealtime'
+import React, { useMemo, useContext, useState } from 'react'
 
 import { DEFAULT_ASSISTANT } from './constants'
-import { pushMessagesIdInState, isMessageForThisConversation } from './helpers'
-import { CHAT_EVENTS_DOCTYPE, CHAT_CONVERSATIONS_DOCTYPE } from './queries'
 
 export const AssistantContext = React.createContext()
 
@@ -24,13 +17,6 @@ export const useAssistant = () => {
 }
 
 const AssistantProvider = ({ children }) => {
-  const { conversationId } = useParams()
-  const client = useClient()
-  const [assistantState, setAssistantState] = useState({
-    message: {},
-    status: 'idle',
-    messagesId: []
-  })
   const [isOpenCreateAssistant, setIsOpenCreateAssistant] = useState(false)
   const [isOpenDeleteAssistant, setIsOpenDeleteAssistant] = useState(false)
   const [isOpenEditAssistant, setIsOpenEditAssistant] = useState(false)
@@ -47,95 +33,8 @@ const AssistantProvider = ({ children }) => {
   })
   const [openedKnowledgePanel, setOpenedKnowledgePanel] = useState(null)
 
-  useRealtime(
-    client,
-    {
-      [CHAT_CONVERSATIONS_DOCTYPE]: {
-        created: res => {
-          pushMessagesIdInState(conversationId, res, setAssistantState)
-        },
-        updated: res => {
-          pushMessagesIdInState(conversationId, res, setAssistantState)
-        }
-      }
-    },
-    []
-  )
-
-  useRealtime(
-    client,
-    {
-      [CHAT_EVENTS_DOCTYPE]: {
-        created: res => {
-          setAssistantState(prevState => {
-            // to exclude realtime messages if not relevant to the actual conversation
-            if (!isMessageForThisConversation(res, prevState.messagesId)) {
-              return prevState
-            }
-
-            if (res.object === 'done') {
-              if (prevState.status !== 'idle') {
-                return {
-                  ...prevState,
-                  status: 'idle'
-                }
-              }
-            }
-
-            if (res.object === 'delta') {
-              const message = set(prevState.message, res.position, res.content)
-              return {
-                ...prevState,
-                message,
-                status: 'writing'
-              }
-            }
-
-            return prevState
-          })
-        }
-      }
-    },
-    []
-  )
-
-  const clearAssistant = useCallback(
-    () =>
-      setAssistantState({
-        message: {},
-        status: 'pending',
-        messagesId: []
-      }),
-    []
-  )
-
-  const onAssistantExecute = useCallback(
-    async ({ value, conversationId }, callback) => {
-      if (!value) return
-
-      callback?.()
-
-      clearAssistant()
-
-      await client.stackClient.fetchJSON(
-        'POST',
-        `/ai/chat/conversations/${conversationId}`,
-        {
-          q: value
-        }
-      )
-
-      setAssistantState(v => ({
-        ...v,
-        status: 'pending'
-      }))
-    },
-    [client, clearAssistant]
-  )
-
   const value = useMemo(
     () => ({
-      assistantState,
       isOpenCreateAssistant,
       isOpenDeleteAssistant,
       isOpenEditAssistant,
@@ -146,9 +45,6 @@ const AssistantProvider = ({ children }) => {
       selectedTwakeKnowledge,
       setAssistantIdInAction,
       setIsOpenDeleteAssistant,
-      setAssistantState,
-      clearAssistant,
-      onAssistantExecute,
       setIsOpenCreateAssistant,
       setIsOpenEditAssistant,
       setSelectedAssistantId,
@@ -157,7 +53,6 @@ const AssistantProvider = ({ children }) => {
       setSelectedTwakeKnowledge
     }),
     [
-      assistantState,
       isOpenCreateAssistant,
       isOpenDeleteAssistant,
       isOpenEditAssistant,
@@ -165,9 +60,7 @@ const AssistantProvider = ({ children }) => {
       selectedAssistantId,
       isOpenSearchConversation,
       openedKnowledgePanel,
-      selectedTwakeKnowledge,
-      clearAssistant,
-      onAssistantExecute
+      selectedTwakeKnowledge
     ]
   )
 
