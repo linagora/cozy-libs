@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.22.0...cozy-search@0.23.0) (2026-03-23)
+
+### Bug Fixes
+
+- Icon color was not correct for Custom provider ([3d34a0a](https://github.com/cozy/cozy-libs/commit/3d34a0a693c6b5f61737785e8c9906a05b2abb8a))
+
+### Features
+
+- Use Twake icon for default AI ([f3ba096](https://github.com/cozy/cozy-libs/commit/f3ba09663f29ddacd17c576de2168af654f96fc7))
+
 # [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.21.1...cozy-search@0.22.0) (2026-03-20)
 
 ### Bug Fixes
