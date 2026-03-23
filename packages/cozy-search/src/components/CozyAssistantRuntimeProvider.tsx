@@ -227,9 +227,10 @@ const CozyAssistantRuntimeProviderInner = ({
                 object: 'sources'
                 content: Array<{ id: string; doctype?: string }>
               }
+            | { _id: string; object: 'error'; message: string }
         ) => {
           if (cancelledMessageIdsRef.current.has(res._id)) {
-            if (res.object === 'done') {
+            if (res.object === 'done' || res.object === 'error') {
               cancelledMessageIdsRef.current.delete(res._id)
             }
             return
@@ -264,6 +265,14 @@ const CozyAssistantRuntimeProviderInner = ({
 
             if (res.object === 'done') {
               streamBridgeRef.current.onDone(conversationId)
+              currentStreamingMessageIdRef.current = null
+            }
+
+            if (res.object === 'error') {
+              streamBridgeRef.current.onError(
+                conversationId,
+                new Error(res.message)
+              )
               currentStreamingMessageIdRef.current = null
             }
           } catch (error) {

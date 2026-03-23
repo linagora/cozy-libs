@@ -48,6 +48,18 @@ describe('StreamBridge', () => {
     await expect(iterator.next()).rejects.toThrow('Socket disconnected')
   })
 
+  it('should reject the iterator when an error occurs mid-stream', async () => {
+    const iterator = bridge.createStream('convo_1')
+
+    bridge.onDelta('convo_1', 'partial ')
+    const first = await iterator.next()
+    expect(first).toEqual({ value: 'partial ', done: false })
+
+    bridge.onError('convo_1', new Error('LLM unavailable'))
+
+    await expect(iterator.next()).rejects.toThrow('LLM unavailable')
+  })
+
   it('should call the cleanup callback and mark the stream complete on cleanup', async () => {
     const cleanupSpy = jest.fn()
     bridge.setCleanupCallback(cleanupSpy)
