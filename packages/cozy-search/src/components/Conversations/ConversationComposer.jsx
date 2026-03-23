@@ -67,10 +67,10 @@ const ConversationComposer = () => {
       />
 
       <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">
-        {flag('cozy.create-assistant.enabled') && (
+        {flag('cozy.assistant.create-assistant.enabled') && (
           <AssistantSelection disabled={!isThreadEmpty} />
         )}
-        {flag('cozy.source-knowledge.enabled') && (
+        {flag('cozy.assistant.source-knowledge.enabled') && (
           <TwakeKnowledgeSelector
             onSelectTwakeKnowledge={setOpenedKnowledgePanel}
           />
