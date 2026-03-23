@@ -46,7 +46,7 @@ interface ConversationMessage {
   id: string
   role: 'user' | 'assistant'
   content: string
-  sources?: Array<{ id: string }>
+  sources?: Array<{ id: string; doctype?: string }>
 }
 
 interface Conversation {
@@ -212,12 +212,22 @@ const CozyAssistantRuntimeProviderInner = ({
     client,
     {
       [CHAT_EVENTS_DOCTYPE]: {
-        created: (res: {
-          _id: string
-          object: 'delta' | 'done' | 'generated' | 'sources'
-          position?: number
-          content?: string
-        }) => {
+        created: (
+          res:
+            | {
+                _id: string
+                object: 'delta'
+                position?: number
+                content: string
+              }
+            | { _id: string; object: 'done' }
+            | { _id: string; object: 'generated' }
+            | {
+                _id: string
+                object: 'sources'
+                content: Array<{ id: string; doctype?: string }>
+              }
+        ) => {
           if (cancelledMessageIdsRef.current.has(res._id)) {
             if (res.object === 'done') {
               cancelledMessageIdsRef.current.delete(res._id)
@@ -246,6 +256,10 @@ const CozyAssistantRuntimeProviderInner = ({
                 res.content,
                 res.position
               )
+            }
+
+            if (res.object === 'sources') {
+              streamBridgeRef.current.onSources(conversationId, res.content)
             }
 
             if (res.object === 'done') {

@@ -110,9 +110,11 @@ export const createCozyRealtimeChatAdapter = (
 
       if (!wasAborted) {
         const finalText = sanitizeChatContent(fullText)
+        const sources = streamBridge.getSources(conversationId)
         yield {
           content: [{ type: 'text', text: finalText }],
-          status: { type: 'complete', reason: 'stop' }
+          status: { type: 'complete', reason: 'stop' },
+          ...(sources ? { metadata: { custom: { sources } } } : {})
         }
         streamBridge.cleanup(conversationId)
       }
