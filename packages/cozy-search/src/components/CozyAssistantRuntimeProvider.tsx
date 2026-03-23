@@ -269,9 +269,10 @@ const CozyAssistantRuntimeProviderInner = ({
             }
 
             if (res.object === 'error') {
+              log.error('LLM error:', res.message)
               streamBridgeRef.current.onError(
                 conversationId,
-                new Error(res.message)
+                new Error('LLM error')
               )
               currentStreamingMessageIdRef.current = null
             }
