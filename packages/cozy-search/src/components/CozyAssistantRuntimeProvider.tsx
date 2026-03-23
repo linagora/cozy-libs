@@ -103,7 +103,7 @@ const ConversationLoader = ({
 
   useEffect(() => {
     setSelectedAssistantId(
-      conversation?.relationships?.assistant?.data?._id || DEFAULT_ASSISTANT.id
+      conversation?.relationships?.assistant?.data?._id || DEFAULT_ASSISTANT._id
     )
   }, [
     conversation?.relationships?.assistant?.data?._id,

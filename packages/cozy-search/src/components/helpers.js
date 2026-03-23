@@ -1,11 +1,5 @@
 import flag from 'cozy-flags'
 
-export const getInstantMessage = assistantState =>
-  Object.keys(assistantState.message)
-    .sort((a, b) => a - b)
-    .map(key => assistantState.message[key])
-    .join('')
-
 export const makeConversationId = () =>
   `${Date.now()}-${Math.floor(Math.random() * 90000) + 10000}`
 
@@ -89,7 +83,10 @@ export const formatConversationDate = (dateString, t, lang) => {
  * So temporary we get the last question from user as name of the conversation
  */
 export const getNameOfConversation = conversation => {
-  return conversation.messages?.[conversation.messages?.length - 2]?.content
+  return (
+    conversation.name ||
+    conversation.messages?.[conversation.messages?.length - 2]?.content
+  )
 }
 
 /**

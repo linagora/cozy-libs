@@ -181,6 +181,14 @@
     "configure_api_key_title": "Cấu hình trợ lý của bạn",
     "success": "Chỉnh sửa trợ lý thành công"
   },
+  "conversation_delete": {
+    "title": "Xóa cuộc trò chuyện",
+    "content": "Bạn có chắc chắn muốn xóa cuộc trò chuyện này? Hành động này không thể hoàn tác.",
+    "buttons": {
+      "cancel": "Hủy",
+      "confirm": "Xóa"
+    }
+  },
   "assistant_delete": {
     "title": "Xóa trợ lý",
     "content": "Bạn có chắc chắn muốn xóa %{name}? Hành động này không thể hoàn tác và sẽ xóa vĩnh viễn trợ lý này khỏi Twake của bạn.",

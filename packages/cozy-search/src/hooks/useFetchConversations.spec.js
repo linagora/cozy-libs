@@ -33,6 +33,8 @@ jest.mock(
   { virtual: true }
 )
 
+jest.mock('cozy-realtime/dist/useRealtime', () => jest.fn())
+
 const mockClient = {
   query: jest.fn()
 }
@@ -101,8 +103,8 @@ describe('useFetchConversations', () => {
       'Mock Assistant'
     )
     // Fallback DEFAULT_ASSISTANT
-    expect(hookResult.current.conversations[1].assistant.id).toBe(
-      'ai_assistant'
+    expect(hookResult.current.conversations[1].assistant._id).toBe(
+      'default_ai_assistant'
     )
   })
 

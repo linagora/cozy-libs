@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.21.1...cozy-search@0.22.0) (2026-03-20)
+
+### Bug Fixes
+
+- Override color of assistant icon in assistant selector :bug: ([8a430ee](https://github.com/cozy/cozy-libs/commit/8a430eee06b30a1f064da900b1c939ecc34f5827))
+
+### chore
+
+- Upgrade cozy-ui to 137.0.1 :arrow_up: ([0118431](https://github.com/cozy/cozy-libs/commit/0118431b7eae9fc5554a0faa9790a0e7b1bf470a))
+
+### BREAKING CHANGES
+
+- You need to add cozy-ui >= 137.0.1 as dep in your app :heavy_plus_sign:
+
+## [0.21.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.21.0...cozy-search@0.21.1) (2026-03-20)
+
+### Bug Fixes
+
+- Use \_id for assistant selection and actions :bug: ([fc2de5b](https://github.com/cozy/cozy-libs/commit/fc2de5bc8b86d5380765f957dd1e02fcb24e1780))
+
+# [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.20.0...cozy-search@0.21.0) (2026-03-20)
+
+### Bug Fixes
+
+- **cozy-search:** Display sources in assistant-ui messages :bug: ([60a81f1](https://github.com/cozy/cozy-libs/commit/60a81f1859ccf95b7963f9ee69e381b877c441d3))
+
+### Features
+
+- Add realtime updates for conversation list :sparkles: ([37ac570](https://github.com/cozy/cozy-libs/commit/37ac5700422d40a122350cf77cdbc1fbac249968))
+- Add rename and delete conversation actions :sparkles: ([383e179](https://github.com/cozy/cozy-libs/commit/383e179d2d94056c485a5d53588300e4fd2a4bae))
+
 # [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.19.2...cozy-search@0.20.0) (2026-03-18)
 
 ### Bug Fixes

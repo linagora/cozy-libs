@@ -36,7 +36,7 @@ const AssistantProvider = ({ children }) => {
   const [isOpenEditAssistant, setIsOpenEditAssistant] = useState(false)
   const [assistantIdInAction, setAssistantIdInAction] = useState(null)
   const [selectedAssistantId, setSelectedAssistantId] = useState(
-    DEFAULT_ASSISTANT.id
+    DEFAULT_ASSISTANT._id
   )
   const [isOpenSearchConversation, setIsOpenSearchConversation] =
     useState(false)

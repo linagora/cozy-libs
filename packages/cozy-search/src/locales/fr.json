@@ -181,6 +181,14 @@
     "configure_api_key_title": "Configurer votre assistant",
     "success": "Assistant modifié avec succès"
   },
+  "conversation_delete": {
+    "title": "Supprimer la conversation",
+    "content": "Êtes-vous sûr de vouloir supprimer cette conversation\u00A0? Cette action ne peut pas être annulée.",
+    "buttons": {
+      "cancel": "Annuler",
+      "confirm": "Supprimer"
+    }
+  },
   "assistant_delete": {
     "title": "Supprimer l'assistant",
     "content": "Êtes-vous sûr de vouloir supprimer %{name}\u00A0? Cette action ne peut pas être annulée et supprimera définitivement cet assistant de votre Twake.",
