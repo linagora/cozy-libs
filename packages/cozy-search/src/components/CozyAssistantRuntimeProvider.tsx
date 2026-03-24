@@ -143,7 +143,11 @@ const CozyAssistantRuntimeProviderInner = ({
   const messagesIdRef = useRef<string[]>([])
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set())
   const currentStreamingMessageIdRef = useRef<string | null>(null)
-  const { selectedAssistantId } = useAssistant()
+  const { selectedAssistantId, websearchEnabled } = useAssistant()
+  const websearchEnabledRef = useRef(websearchEnabled)
+  useEffect(() => {
+    websearchEnabledRef.current = websearchEnabled
+  }, [websearchEnabled])
 
   useEffect(() => {
     messagesIdRef.current = initialMessages
@@ -285,6 +289,7 @@ const CozyAssistantRuntimeProviderInner = ({
     [conversationId]
   )
 
+  /* eslint-disable react-hooks/refs */
   const adapter = useMemo(
     () =>
       createCozyRealtimeChatAdapter(
@@ -293,14 +298,15 @@ const CozyAssistantRuntimeProviderInner = ({
             typeof createCozyRealtimeChatAdapter
           >[0]['client'],
           conversationId,
-          // eslint-disable-next-line react-hooks/refs
           streamBridge: streamBridgeRef.current,
-          assistantId: selectedAssistantId
+          assistantId: selectedAssistantId,
+          websearchEnabledRef
         },
         t
       ),
     [client, conversationId, selectedAssistantId, t]
   )
+  /* eslint-enable react-hooks/refs */
 
   const runtime = useLocalRuntime(adapter, {
     initialMessages
