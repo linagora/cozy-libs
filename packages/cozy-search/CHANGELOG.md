@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.23.4...cozy-search@0.24.0) (2026-03-24)
+
+### Features
+
+- Upgrade cozy-ui and cozy-ui-plus in cozy-search and cozy-sharing ([f5fd252](https://github.com/cozy/cozy-libs/commit/f5fd2520150e276c8b55feeb1b994ba33d0a114b))
+
+### BREAKING CHANGES
+
+- You must have `cozy-ui >= 138.1.0 and cozy-ui-plus >= 6.0.0`
+
 ## [0.23.4](https://github.com/cozy/cozy-libs/compare/cozy-search@0.23.3...cozy-search@0.23.4) (2026-03-24)
 
 **Note:** Version bump only for package cozy-search
