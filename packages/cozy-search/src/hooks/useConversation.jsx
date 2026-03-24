@@ -11,7 +11,7 @@ const useConversation = () => {
   const goToConversation = conversationId => {
     // Extract base path safely by identifying the start of '/assistant' if it exists.
     const match = location.pathname.match(/^(.*?)(\/assistant(\/|$).*|$)/)
-    const basePath = (match?.[1] || location.pathname).replace(/\/$/, '')
+    const basePath = (match?.[1] ?? location.pathname).replace(/\/$/, '')
     const newPathname = `${basePath}/assistant/${conversationId}`
 
     setIsOpenSearchConversation(false)
