@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.24.0...cozy-search@0.24.1) (2026-03-24)
+
+### Bug Fixes
+
+- Handle root-level assistant route navigation ([a82a9e6](https://github.com/cozy/cozy-libs/commit/a82a9e66c38d399f63128b42c571c8da9fee955c))
+
 # [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.23.4...cozy-search@0.24.0) (2026-03-24)
 
 ### Features
