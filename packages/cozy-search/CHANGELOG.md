@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.3](https://github.com/cozy/cozy-libs/compare/cozy-search@0.23.2...cozy-search@0.23.3) (2026-03-24)
+
+### Bug Fixes
+
+- Handle errors when LLM cannot respond ([d659673](https://github.com/cozy/cozy-libs/commit/d65967396109f4947d93e3deb00215acdc07cadd))
+- Use metadata for error detection, hide raw error ([6b0bfcf](https://github.com/cozy/cozy-libs/commit/6b0bfcfb5dca8b12a92d5ceafe84d8df9ab7c636))
+
 ## [0.23.2](https://github.com/cozy/cozy-libs/compare/cozy-search@0.23.1...cozy-search@0.23.2) (2026-03-23)
 
 ### Bug Fixes
