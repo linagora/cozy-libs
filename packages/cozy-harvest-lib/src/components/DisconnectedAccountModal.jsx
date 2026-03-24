@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 
 import { getCreatedByApp } from 'cozy-client/dist/models/utils'
-import Card from 'cozy-ui/transpiled/react/Card'
+import Box from 'cozy-ui/transpiled/react/Box'
 import {
   useCozyDialog,
   DialogCloseButton
@@ -76,7 +76,15 @@ const DisconnectedModal = ({
 
       {activeTab === 0 ? (
         <DialogContent className="u-pb-1-half">
-          <Card>{t('disconnectedAccountModal.disconnected-help')}</Card>
+          <Box
+            display="block"
+            border={1}
+            borderColor="var(--dividerColor)"
+            borderRadius={8}
+            padding={2}
+          >
+            {t('disconnectedAccountModal.disconnected-help')}
+          </Box>
         </DialogContent>
       ) : null}
       {activeTab === 1 ? (

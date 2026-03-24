@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Card from 'cozy-ui/transpiled/react/Card'
 import { translate } from 'twake-i18n'
 
 import LaunchTriggerAlert from './LaunchTriggerAlert'
@@ -38,8 +37,6 @@ const LaunchTriggerCard = props => {
 }
 
 LaunchTriggerCard.propTypes = {
-  ...Card.propTypes,
-
   /** @type {Object} A ConnectionFlow instance */
   flow: PropTypes.object,
 

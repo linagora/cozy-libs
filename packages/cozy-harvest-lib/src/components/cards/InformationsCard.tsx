@@ -4,7 +4,7 @@ import cx from 'classnames'
 import React from 'react'
 
 import { useClient, generateWebLink } from 'cozy-client'
-import Card from 'cozy-ui/transpiled/react/Card'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
@@ -137,7 +137,14 @@ export const InformationsCard = ({
   const { t } = useI18n()
 
   return (
-    <Card className={cx('u-p-0', className)}>
+    <Box
+      display="block"
+      border={1}
+      borderColor="var(--dividerColor)"
+      borderRadius={8}
+      padding={2}
+      className={cx('u-p-0', className)}
+    >
       <div
         className="u-ph-1 u-flex u-flex-items-center"
         style={{ minHeight: '64px' }}
@@ -151,6 +158,6 @@ export const InformationsCard = ({
         <StoreButton appSlug={konnector.slug} />
         <VendorLinkButton vendorLink={konnector.vendor_link} />
       </List>
-    </Card>
+    </Box>
   )
 }

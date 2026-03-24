@@ -6,8 +6,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { RealTimeQueries } from 'cozy-client'
-import Card from 'cozy-ui/transpiled/react/Card'
-import Circle from 'cozy-ui/transpiled/react/Circle'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
 import List from 'cozy-ui/transpiled/react/List'
@@ -84,17 +84,20 @@ const FileCard = ({ files, loading, konnector, trigger, accountId }) => {
   const [initialFilesById] = useState(() => keyBy(files, x => x._id))
 
   return (
-    <Card className="u-ph-0 u-pb-0 u-ov-hidden">
+    <Box
+      display="block"
+      border={1}
+      borderColor="var(--dividerColor)"
+      borderRadius={8}
+      padding={2}
+      className="u-ph-0 u-pb-0 u-ov-hidden"
+    >
       <div className="u-ph-1 u-mb-half">
         <Media align="top">
           <Img>
-            <Circle
-              size="small"
-              backgroundColor={palette['puertoRico']}
-              className="u-mr-1"
-            >
+            <Avatar size="sm" color={palette['puertoRico']} className="u-mr-1">
               <Icon icon={FileIcon} color={palette['white']} />
-            </Circle>
+            </Avatar>
           </Img>
           <Bd>
             <Typography variant="h5">{t('datacards.files.title')}</Typography>
@@ -144,7 +147,7 @@ const FileCard = ({ files, loading, konnector, trigger, accountId }) => {
           path={`#/files/${get(trigger, 'message.folder_to_save')}`}
         />
       </div>
-    </Card>
+    </Box>
   )
 }
 
