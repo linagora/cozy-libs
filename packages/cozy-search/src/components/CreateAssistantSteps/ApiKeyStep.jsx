@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import React, { useState } from 'react'
 
-import Card from 'cozy-ui/transpiled/react/Card'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
@@ -111,8 +111,13 @@ const ApiKeyStep = ({ apiKey, selectedProvider, onChange }) => {
         />
       </div>
 
-      <Card
-        className={cx(' u-p-1 u-bdw-0', {
+      <Box
+        display="block"
+        border={1}
+        borderColor="var(--dividerColor)"
+        borderRadius={8}
+        padding={2}
+        className={cx({
           'u-bg-primaryBackgroundLight': theme === 'light',
           'u-bg-coolGrey': theme === 'dark'
         })}
@@ -129,7 +134,7 @@ const ApiKeyStep = ({ apiKey, selectedProvider, onChange }) => {
             })}
           </span>
         </Typography>
-      </Card>
+      </Box>
     </div>
   )
 }

@@ -4,8 +4,10 @@ import snarkdown from 'snarkdown'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
-import Banner from 'cozy-ui/transpiled/react/Banner'
+import Alert from 'cozy-ui/transpiled/react/Alert'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
 import CozyHomeLinkIcon from './CozyHomeLinkIcon'
@@ -32,11 +34,11 @@ const PublicBannerCozyToCozyContent = ({ sharing }) => {
     .split('</strong>')
 
   return (
-    <span className={styles['bannermarkdown']}>
+    <Avatar className={styles['bannermarkdown']}>
       {beginning[0]}
       <img src={avatarURL} alt="avatar" /> <strong>{userBoldName}</strong>
       {ending}
-    </span>
+    </Avatar>
   )
 }
 PublicBannerCozyToCozyContent.propTypes = {
@@ -52,6 +54,7 @@ const SharingBannerCozyToCozy = ({
   onClose
 }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
 
   const action = () => openExternalLink(addSharingLink)
   const buttonOne = isSharingShortcutCreated
@@ -66,26 +69,28 @@ const SharingBannerCozyToCozy = ({
         action
       }
   return (
-    <Banner
-      bgcolor="var(--defaultBackgroundColor)"
-      text={<PublicBannerCozyToCozyContent sharing={sharing} />}
-      buttonOne={
-        <Button
-          variant="text"
-          label={buttonOne.label}
-          icon={buttonOne.icon}
-          onClick={buttonOne.action}
-        />
+    <Alert
+      color="var(--defaultBackgroundColor)"
+      square
+      block={isMobile}
+      action={
+        <>
+          <Button
+            variant="text"
+            label={buttonOne.label}
+            icon={buttonOne.icon}
+            onClick={buttonOne.action}
+          />
+          <Button
+            variant="text"
+            label={t('Share.banner.close')}
+            onClick={onClose}
+          />
+        </>
       }
-      buttonTwo={
-        <Button
-          variant="text"
-          label={t('Share.banner.close')}
-          onClick={onClose}
-        />
-      }
-      inline
-    />
+    >
+      <PublicBannerCozyToCozyContent sharing={sharing} />
+    </Alert>
   )
 }
 
@@ -111,6 +116,7 @@ const SharingBannerByLinkText = () => {
 
 const SharingBannerByLink = ({ onClose }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
 
   const HOME_LINK_HREF = flag('signup.url')
   const canNotCreateTwakeFromPublicSharingLink = flag(
@@ -122,27 +128,29 @@ const SharingBannerByLink = ({ onClose }) => {
   }
 
   return (
-    <Banner
-      bgcolor="var(--defaultBackgroundColor)"
-      text={<SharingBannerByLinkText />}
-      buttonOne={
-        <Button
-          component="a"
-          variant="text"
-          label={t('Share.create-cozy', { smart_count: 2 })}
-          icon={CozyHomeLinkIcon}
-          href={HOME_LINK_HREF}
-        />
+    <Alert
+      color="var(--defaultBackgroundColor)"
+      square
+      block={isMobile}
+      action={
+        <>
+          <Button
+            component="a"
+            variant="text"
+            label={t('Share.create-cozy', { smart_count: 2 })}
+            icon={CozyHomeLinkIcon}
+            href={HOME_LINK_HREF}
+          />
+          <Button
+            variant="text"
+            label={t('Share.banner.close')}
+            onClick={onClose}
+          />
+        </>
       }
-      buttonTwo={
-        <Button
-          variant="text"
-          label={t('Share.banner.close')}
-          onClick={onClose}
-        />
-      }
-      inline
-    />
+    >
+      <SharingBannerByLinkText />
+    </Alert>
   )
 }
 SharingBannerCozyToCozy.propTypes = {

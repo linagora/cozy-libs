@@ -2,6 +2,7 @@ import { render } from '@testing-library/react'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
 import { SharingBannerCozyToCozy } from './PublicBanner'
@@ -31,12 +32,14 @@ describe('PublicBanner', () => {
 
     // When
     const { container } = render(
-      <SharingBannerCozyToCozy
-        sharing={sharing}
-        isSharingShortcutCreated={true}
-        addSharingLink="discoveryLink"
-        onClose={() => {}}
-      />
+      <BreakpointsProvider>
+        <SharingBannerCozyToCozy
+          sharing={sharing}
+          isSharingShortcutCreated={true}
+          addSharingLink="discoveryLink"
+          onClose={() => {}}
+        />
+      </BreakpointsProvider>
     )
 
     // Then
