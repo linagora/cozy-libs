@@ -6,6 +6,9 @@
       "noItem": "Aucun résultat",
       "notEnough": "Votre recherche doit contenir au moins 3 caractères"
     },
+    "websearch": {
+      "label": "Recherche web"
+    },
     "dialog": {
       "close": "Fermer"
     },

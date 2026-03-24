@@ -12,6 +12,7 @@ import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import WebsearchButton from './WebsearchButton'
 import styles from './styles.styl'
 
 const ConversationBar = ({
@@ -21,6 +22,8 @@ const ConversationBar = ({
   onKeyDown,
   onSend,
   onCancel,
+  websearchEnabled,
+  onToggleWebsearch,
   ...props
 }) => {
   const { t } = useI18n()
@@ -74,29 +77,39 @@ const ConversationBar = ({
             },
             autoFocus: !isMobile,
             inputComponent: ComposerPrimitive.Input,
-            endAdornment: isRunning ? (
-              <IconButton className="u-p-0 u-mr-half">
-                <Button
-                  size="small"
-                  component="div"
-                  className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
-                  classes={{ label: 'u-flex u-w-auto' }}
-                  label={<Icon icon={StopIcon} size={12} />}
-                  onClick={onCancel}
+            endAdornment: (
+              <>
+                <WebsearchButton
+                  websearchEnabled={websearchEnabled}
+                  onToggleWebsearch={onToggleWebsearch}
                 />
-              </IconButton>
-            ) : (
-              <IconButton className="u-p-0 u-mr-half">
-                <Button
-                  size="small"
-                  component="div"
-                  className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
-                  classes={{ label: 'u-flex u-w-auto' }}
-                  label={<Icon icon={PaperplaneIcon} size={12} rotate={-45} />}
-                  disabled={isEmpty}
-                  onClick={handleSend}
-                />
-              </IconButton>
+                {isRunning ? (
+                  <IconButton className="u-p-0 u-mr-half">
+                    <Button
+                      size="small"
+                      component="div"
+                      className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
+                      classes={{ label: 'u-flex u-w-auto' }}
+                      label={<Icon icon={StopIcon} size={12} />}
+                      onClick={onCancel}
+                    />
+                  </IconButton>
+                ) : (
+                  <IconButton className="u-p-0 u-mr-half">
+                    <Button
+                      size="small"
+                      component="div"
+                      className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle"
+                      classes={{ label: 'u-flex u-w-auto' }}
+                      label={
+                        <Icon icon={PaperplaneIcon} size={12} rotate={-45} />
+                      }
+                      disabled={isEmpty}
+                      onClick={handleSend}
+                    />
+                  </IconButton>
+                )}
+              </>
             ),
             onKeyDown: handleKeyDown
           }
