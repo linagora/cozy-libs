@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@5.3.1...cozy-ui-plus@6.0.0) (2026-03-24)
+
+### Features
+
+- **cozy-ui-plus:** Upgrade cozy-ui ([b01d192](https://github.com/cozy/cozy-libs/commit/b01d1926f00a81ff2eb2c0b03378ea06fefd5fcc))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** You must have `cozy-ui >= 138.1.0`
+
 ## [5.3.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@5.3.0...cozy-ui-plus@5.3.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-ui-plus

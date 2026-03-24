@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [29.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.11.3...cozy-sharing@29.0.0) (2026-03-24)
+
+### Features
+
+- **cozy-ui-plus:** Upgrade cozy-ui ([b01d192](https://github.com/cozy/cozy-libs/commit/b01d1926f00a81ff2eb2c0b03378ea06fefd5fcc))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** You must have `cozy-ui >= 138.1.0`
+
 ## [28.11.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@28.11.2...cozy-sharing@28.11.3) (2026-03-23)
 
 ### Bug Fixes

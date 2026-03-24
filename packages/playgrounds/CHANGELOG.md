@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.65](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.10.64...cozy-playgrounds@2.10.65) (2026-03-24)
+
+**Note:** Version bump only for package cozy-playgrounds
+
 ## [2.10.64](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@2.10.63...cozy-playgrounds@2.10.64) (2026-03-23)
 
 **Note:** Version bump only for package cozy-playgrounds

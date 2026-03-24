@@ -1,6 +1,6 @@
 {
   "name": "cozy-procedures",
-  "version": "0.62.1",
+  "version": "0.62.2",
   "main": "dist/index.js",
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-procedures/README.md",
   "repository": {
@@ -39,7 +39,7 @@
     "babel-preset-cozy-app": "^2.8.4",
     "cozy-client": "16.19.0",
     "cozy-ui": "40.9.1",
-    "cozy-ui-plus": "^5.3.1",
+    "cozy-ui-plus": "^6.0.0",
     "jest": "30.3.0",
     "react": "16.12.0"
   },
