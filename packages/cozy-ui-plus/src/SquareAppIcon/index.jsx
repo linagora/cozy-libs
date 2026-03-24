@@ -3,6 +3,7 @@ import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 
+import { nameToColor } from 'cozy-ui/transpiled/react/Avatar/helpers'
 import Badge from 'cozy-ui/transpiled/react/Badge'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconCheckAnimated from 'cozy-ui/transpiled/react/Icons/IconCheckAnimated'
@@ -10,16 +11,14 @@ import SvgIconCrossAnimated from 'cozy-ui/transpiled/react/Icons/IconCrossAnimat
 import iconOut from 'cozy-ui/transpiled/react/Icons/LinkOut'
 import iconPlus from 'cozy-ui/transpiled/react/Icons/Plus'
 import iconWarning from 'cozy-ui/transpiled/react/Icons/WarningCircle'
-import InfosBadge from 'cozy-ui/transpiled/react/InfosBadge'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { nameToColor } from 'cozy-ui/transpiled/react/legacy/Avatar/helpers'
 import { alpha, makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import styles from './styles.styl'
 import AppIcon from '../AppIcon'
-import CozyTheme, { useCozyTheme } from '../providers/CozyTheme'
+import { useCozyTheme } from '../providers/CozyTheme'
 
 const makeTwakeColor = theme =>
   theme.variant === 'inverted' || theme.type === 'dark'
@@ -45,9 +44,6 @@ const useStyles = makeStyles(theme => ({
       margin: '0.25rem 0.25rem 0 0.25rem',
       height: '2rem'
     }
-  },
-  nameInverted: {
-    textShadow: theme.textShadows[1]
   },
   squareAppIconGhost: {
     backgroundColor: alpha(
@@ -105,7 +101,7 @@ export const SquareAppIcon = ({
   hideShortcutBadge = false,
   ...appIconProps
 }) => {
-  const { variant: themeVariant, type } = useCozyTheme()
+  const { type } = useCozyTheme()
   const classes = useStyles()
   const appName =
     name || get(appIconProps, 'app.name') || get(appIconProps, 'app') || ''
@@ -124,17 +120,12 @@ export const SquareAppIcon = ({
     if (curr === 'loading' && variant === 'error') setAnimationState('failed')
 
     if (curr === 'loading' && (variant === 'default' || variant === undefined))
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAnimationState('success')
 
     prevVariant.current = variant
   }, [variant])
 
   const exceptionVariant = ['ghost']
-
-  const squareTheme = exceptionVariant.includes(variant)
-    ? themeVariant
-    : 'normal'
 
   return (
     <div
@@ -143,113 +134,111 @@ export const SquareAppIcon = ({
         [classes.detailedTileWrapper]: display === 'detailed'
       })}
     >
-      <CozyTheme variant={squareTheme}>
-        <InfosBadge
-          badgeContent={
-            variant === 'shortcut' && !hideShortcutBadge ? (
+      <Badge
+        badgeContent={
+          variant === 'shortcut' && !hideShortcutBadge ? (
+            <div
+              className="u-h-1-half u-miw-1-half u-bdrs-circle u-flex u-flex-items-center u-flex-justify-center"
+              style={{
+                backgroundColor: 'var(--paperBackgroundColor)',
+                color: 'var(--iconTextColor)',
+                boxShadow: 'var(--shadow3)'
+              }}
+            >
               <Icon size="10" icon={iconOut} />
-            ) : null
-          }
-          className={cx({ ['u-mr-1']: display === 'detailed' })}
-          overlap="rectangular"
-          invisible={variant !== 'shortcut' || hideShortcutBadge}
-        >
-          <SquareAppIconSpinner
-            variant={variant}
-            animationState={animationState}
-          />
-          <Badge
-            className={cx(
-              styles[`SquareAppIcon-wrapper`],
-              styles[`SquareAppIcon-wrapper-${variant}`],
-              styles[`SquareAppIcon-wrapper--${type}`],
-              {
-                [classes.squareAppIconGhost]:
-                  exceptionVariant.includes(variant),
-                [classes.shadow]: !exceptionVariant.includes(variant)
-              }
-            )}
-            badgeContent={
-              variant === 'error' ? (
-                <Icon
-                  size={16}
-                  className={cx(classes.errorIcon)}
-                  icon={iconWarning}
-                />
-              ) : (
-                ''
-              )
+            </div>
+          ) : null
+        }
+        className={cx({ ['u-mr-1']: display === 'detailed' })}
+        overlap="rectangular"
+        invisible={variant !== 'shortcut' || hideShortcutBadge}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <SquareAppIconSpinner
+          variant={variant}
+          animationState={animationState}
+        />
+        <Badge
+          className={cx(
+            styles[`SquareAppIcon-wrapper`],
+            styles[`SquareAppIcon-wrapper-${variant}`],
+            styles[`SquareAppIcon-wrapper--${type}`],
+            {
+              [classes.squareAppIconGhost]: exceptionVariant.includes(variant),
+              [classes.shadow]: !exceptionVariant.includes(variant)
             }
-            color={variant === 'error' ? 'error' : undefined}
-            withBorder={false}
-            size="large"
-            overlap="rectangular"
-            style={
-              variant === 'shortcut' && !IconContent
-                ? {
-                    ['background']: nameToColor(name)
-                  }
-                : null
-            }
-          >
-            {variant === 'shortcut' && !IconContent ? (
-              <Typography
-                className={classes.letter}
-                variant="h2"
-                align="center"
-              >
-                {letter.toUpperCase()}
-              </Typography>
+          )}
+          badgeContent={
+            variant === 'error' ? (
+              <Icon
+                size={16}
+                className={cx(classes.errorIcon)}
+                icon={iconWarning}
+              />
             ) : (
+              ''
+            )
+          }
+          color={variant === 'error' ? 'error' : undefined}
+          withBorder={false}
+          size="large"
+          overlap="rectangular"
+          style={
+            variant === 'shortcut' && !IconContent
+              ? {
+                  ['background']: nameToColor(name)
+                }
+              : null
+          }
+        >
+          {variant === 'shortcut' && !IconContent ? (
+            <Typography className={classes.letter} variant="h2" align="center">
+              {letter.toUpperCase()}
+            </Typography>
+          ) : (
+            <div
+              className={cx(styles['SquareAppIcon-icon-container'], [
+                styles['SquareAppIcon-icon-container-normal']
+              ])}
+            >
               <div
-                className={cx(styles['SquareAppIcon-icon-container'], {
-                  [styles['SquareAppIcon-icon-container-normal']]:
-                    themeVariant === 'normal'
-                })}
+                className={cx(
+                  styles['onEnd'],
+                  { [styles['isSuccess']]: animationState === 'success' },
+                  { [styles['isFailed']]: animationState === 'failed' }
+                )}
+                onAnimationEnd={handleAnimationEnd}
               >
-                <div
-                  className={cx(
-                    styles['onEnd'],
-                    { [styles['isSuccess']]: animationState === 'success' },
-                    { [styles['isFailed']]: animationState === 'failed' }
-                  )}
-                  onAnimationEnd={handleAnimationEnd}
-                >
-                  {animationState && (
-                    <Icon
-                      size={32}
-                      icon={
-                        animationState === 'success'
-                          ? IconCheckAnimated
-                          : SvgIconCrossAnimated
-                      }
-                    />
-                  )}
-                </div>
-
-                {variant === 'add' ? (
-                  <Icon icon={iconPlus} color="var(--primaryColor)" />
-                ) : IconContent ? (
-                  IconContent
-                ) : (
-                  <div className="u-w-2 u-h-2">
-                    <AppIcon {...appIconProps} />
-                  </div>
+                {animationState && (
+                  <Icon
+                    size={32}
+                    icon={
+                      animationState === 'success'
+                        ? IconCheckAnimated
+                        : SvgIconCrossAnimated
+                    }
+                  />
                 )}
               </div>
-            )}
-          </Badge>
-        </InfosBadge>
-      </CozyTheme>
+
+              {variant === 'add' ? (
+                <Icon icon={iconPlus} color="var(--primaryColor)" />
+              ) : IconContent ? (
+                IconContent
+              ) : (
+                <div className="u-w-2 u-h-2">
+                  <AppIcon {...appIconProps} />
+                </div>
+              )}
+            </div>
+          )}
+        </Badge>
+      </Badge>
       {display === 'detailed' ? (
         <ListItemText primary={appName} secondary={description} />
       ) : (
         <Typography
-          className={cx(
-            classes.name,
-            { [classes.nameInverted]: themeVariant === 'inverted' },
-            'u-spacellipsis'
-          )}
+          className={cx(classes.name, 'u-spacellipsis')}
           variant="h6"
           align="center"
         >

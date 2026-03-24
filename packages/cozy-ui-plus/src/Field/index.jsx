@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import labelStyles from 'cozy-ui/react/Label/styles.styl'
-import Label from 'cozy-ui/transpiled/react/Label'
+import InputLabel from 'cozy-ui/transpiled/react/InputLabel'
 import SelectBox from 'cozy-ui/transpiled/react/SelectBox'
-import Textarea from 'cozy-ui/transpiled/react/Textarea'
+import TextField from 'cozy-ui/transpiled/react/TextField'
 import Input from 'cozy-ui/transpiled/react/legacy/Input'
 
 import styles from './styles.styl'
@@ -141,7 +141,8 @@ const Field = props => {
         )
       case 'textarea':
         return (
-          <Textarea
+          <TextField
+            multiline
             autoCapitalize={autoCapitalize}
             disabled={disabled}
             id={id}
@@ -151,7 +152,7 @@ const Field = props => {
             onKeyUp={onKeyUp}
             onFocus={onFocus}
             onBlur={onBlur}
-            readOnly={readOnly}
+            inputProps={{ readOnly }}
             {...controlledProps}
           />
         )
@@ -224,9 +225,9 @@ const Field = props => {
 
   return (
     <FieldContainer className={className} variant={variant}>
-      <Label htmlFor={id} {...labelProps}>
+      <InputLabel htmlFor={id} {...labelProps}>
         {label}
-      </Label>
+      </InputLabel>
       {side && (
         <div
           className={cx(styles['o-side'], labelStyles['c-label'], {
