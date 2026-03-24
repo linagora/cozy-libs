@@ -2,7 +2,7 @@ import { MessagePrimitive } from '@assistant-ui/react'
 import cx from 'classnames'
 import React from 'react'
 
-import Card from 'cozy-ui/transpiled/react/Card'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 
@@ -13,9 +13,13 @@ const UserMessage = () => {
 
   return (
     <MessagePrimitive.Root className="u-mt-1">
-      <Card
+      <Box
+        display="block"
+        border={0}
+        borderRadius={10}
+        padding={0.5}
         className={cx(
-          'u-bdrs-5 u-bdw-0 u-ml-auto u-p-half',
+          'u-ml-auto',
           styles['cozyThread-user-messages'],
           styles[`cozyThread-user-messages--${theme}`]
         )}
@@ -25,7 +29,7 @@ const UserMessage = () => {
             Text: ({ text }) => <Typography>{text}</Typography>
           }}
         />
-      </Card>
+      </Box>
     </MessagePrimitive.Root>
   )
 }

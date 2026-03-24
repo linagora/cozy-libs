@@ -17170,38 +17170,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-bar@npm:^29.0.0":
-  version: 29.2.0
-  resolution: "cozy-bar@npm:29.2.0"
-  dependencies:
-    lodash.set: "npm:^4.3.2"
-    lodash.unionwith: "npm:4.6.0"
-    prop-types: "npm:15.7.2"
-    react-redux: "npm:5.1.1"
-    redux: "npm:4.1.2"
-    redux-logger: "npm:3.0.6"
-    redux-persist: "npm:5.10.0"
-    redux-thunk: "npm:2.3.0"
-  peerDependencies:
-    "@cozy/minilog": ">=1.0.0"
-    cozy-client: ">=60.14.0"
-    cozy-dataproxy-lib: ">=4.1.0"
-    cozy-device-helper: ">=2.6.0"
-    cozy-flags: ">=4.6.1"
-    cozy-intent: ">=2.29.1"
-    cozy-interapp: ">=0.4.9"
-    cozy-realtime: ">=4.0.5"
-    cozy-search: ">=0.14.0"
-    cozy-ui: ">=135.0.0"
-    cozy-ui-plus: ">=4.0.0"
-    react: ">=16.10.1"
-    react-dom: ">=16.10.1"
-    react-router-dom: ">=6.14.2"
-    twake-i18n: ">=0.3.0"
-  checksum: 10c0/d61965bf57992f721b6ee4fca329c36921b168fbf11756a7097d99f0f748063b6c4bef5f9f4ec56b9098ab12d0bd875d9dfbf8ef2a218313545d4de0286de038
-  languageName: node
-  linkType: hard
-
 "cozy-ci@workspace:packages/cozy-ci":
   version: 0.0.0-use.local
   resolution: "cozy-ci@workspace:packages/cozy-ci"
@@ -18365,7 +18333,6 @@ __metadata:
     babel-plugin-tsconfig-paths: "npm:^1.0.3"
     babel-preset-cozy-app: "npm:^2.8.4"
     classnames: "npm:^2.5.1"
-    cozy-bar: "npm:^29.0.0"
     cozy-client: "npm:60.23.0"
     cozy-device-helper: "npm:^4.0.3"
     cozy-flags: "npm:^4.9.1"
@@ -18374,7 +18341,7 @@ __metadata:
     cozy-minilog: "npm:^3.10.1"
     cozy-pouch-link: "npm:^54.0.0"
     cozy-realtime: "npm:^5.9.1"
-    cozy-ui: "npm:^137.0.1"
+    cozy-ui: "npm:^138.1.0"
     cozy-ui-plus: "npm:^6.0.0"
     cross-fetch: "npm:^4.0.0"
     jest: "npm:30.3.0"
@@ -18389,7 +18356,6 @@ __metadata:
     twake-i18n: "npm:^0.4.1"
     typescript: "npm:5.5.2"
   peerDependencies:
-    cozy-bar: ">=29.0.0"
     cozy-client: ">=60.21.0"
     cozy-device-helper: ">=3.7.1"
     cozy-flags: ">=4.6.1"
@@ -18398,8 +18364,8 @@ __metadata:
     cozy-minilog: ">=3.3.1"
     cozy-pouch-link: 54.0.0
     cozy-realtime: ">=5.6.4"
-    cozy-ui: ">=137.0.1"
-    cozy-ui-plus: ">=1.2.0"
+    cozy-ui: ">=138.1.0"
+    cozy-ui-plus: ">=6.0.0"
     react: ">=18.0.0"
     react-dom: ">=18.0.0"
     react-router-dom: ^6.28.0
@@ -18433,7 +18399,7 @@ __metadata:
     cozy-doctypes: "npm:^1.99.1"
     cozy-intent: "npm:^2.31.1"
     cozy-minilog: "npm:^3.10.1"
-    cozy-ui: "npm:^135.0.0"
+    cozy-ui: "npm:^138.1.0"
     cozy-ui-plus: "npm:^6.0.0"
     date-fns: "npm:2.30.0"
     jest: "npm:30.3.0"
@@ -18453,8 +18419,8 @@ __metadata:
     cozy-flags: ">=4.8.1"
     cozy-intent: ">=2.29.1"
     cozy-minilog: ">=3.9.1"
-    cozy-ui: ">=135.0.0"
-    cozy-ui-plus: ">=1.2.0"
+    cozy-ui: ">=138.1.0"
+    cozy-ui-plus: ">=6.0.0"
     prop-types: ">=15.7.2"
     react: ">=16.12.0"
     react-router: ">=5.0.1"
@@ -18905,48 +18871,6 @@ __metadata:
   bin:
     rsg-screenshots: scripts/screenshots.js
   checksum: 10c0/673b3ac40dcc2b176ed02c01dfbb562c48a302c68a2eed9f083a06700615b2b97d819c4391878c1449038fd74178f13902cd28b3a8b1e40f3560682bb2f879a2
-  languageName: node
-  linkType: hard
-
-"cozy-ui@npm:^137.0.1":
-  version: 137.0.1
-  resolution: "cozy-ui@npm:137.0.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.4"
-    "@date-io/date-fns": "npm:1"
-    "@material-ui/core": "npm:4.12.3"
-    "@material-ui/lab": "npm:^4.0.0-alpha.61"
-    "@material-ui/pickers": "npm:3.3.11"
-    "@popperjs/core": "npm:^2.4.4"
-    chart.js: "npm:3.7.1"
-    classnames: "npm:^2.2.5"
-    date-fns: "npm:2.30.0"
-    hammerjs: "npm:^2.0.8"
-    intersection-observer: "npm:0.11.0"
-    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot: "npm:^2.5.0"
-    normalize.css: "npm:^8.0.0"
-    patch-package: "npm:^8.0.0"
-    pdf-lib: "npm:1.17.1"
-    react-chartjs-2: "npm:4.1.0"
-    react-markdown: "npm:^4.0.8"
-    react-popper: "npm:^2.2.3"
-    react-remove-scroll: "npm:^2.4.0"
-    react-select: "npm:^4.3.0"
-    react-swipeable-views: "npm:^0.13.3"
-    react-virtuoso: "npm:^4.13.0"
-    rooks: "npm:7.14.1"
-  peerDependencies:
-    cozy-device-helper: ">=2.0.0"
-    cozy-intent: ">=2.29.1"
-    react: ^16 || ^17 || ^18
-    react-dnd: ^16.0.1
-    react-dnd-html5-backend: ^16.0.1
-    react-dom: ^16 || ^17 || ^18
-    twake-i18n: ">=0.3.0"
-  bin:
-    rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/8ad215491481f2b258ad70075caa2d868feb604c43aebe486f6b6ae8dd4637c3f0fd7f6f20053b43a08e17cf4f34552fbb007ec30775651d58cb3f96b53d8506
   languageName: node
   linkType: hard
 
@@ -29677,13 +29601,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.set@npm:^4.3.2":
-  version: 4.3.2
-  resolution: "lodash.set@npm:4.3.2"
-  checksum: 10c0/c641d31905e51df43170dce8a1d11a1cff11356e2e2e75fe2615995408e9687d58c3e1d64c3c284c2df2bc519f79a98af737d2944d382ff82ffd244ff6075c29
-  languageName: node
-  linkType: hard
-
 "lodash.some@npm:^4.4.0":
   version: 4.6.0
   resolution: "lodash.some@npm:4.6.0"
@@ -29709,13 +29626,6 @@ __metadata:
   version: 4.8.0
   resolution: "lodash.unionby@npm:4.8.0"
   checksum: 10c0/7928be21cffcbd3ce5c89c6a0725c991693d415dcf887b104b37e443c3c95d3dab3f6f78d59de8cdce70650319eb17fcf4e8b580ead30439ec1e5a9e8df005b1
-  languageName: node
-  linkType: hard
-
-"lodash.unionwith@npm:4.6.0":
-  version: 4.6.0
-  resolution: "lodash.unionwith@npm:4.6.0"
-  checksum: 10c0/e12bf292a1e6d6f098a5b8887278b30992eef94d63061d8d17b6927221b4e361cb3061ce896d41803c14270ecc8225a71ac7e9dec6bf6880bc6d2fb77983d8f3
   languageName: node
   linkType: hard
 
@@ -35215,7 +35125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.8.1, prop-types@npm:^15.0.0, prop-types@npm:^15.5.4, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
+"prop-types@npm:15.8.1, prop-types@npm:^15.0.0, prop-types@npm:^15.5.4, prop-types@npm:^15.5.8, prop-types@npm:^15.6.0, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -35902,7 +35812,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-lifecycles-compat@npm:^3.0.0, react-lifecycles-compat@npm:^3.0.2, react-lifecycles-compat@npm:^3.0.4":
+"react-lifecycles-compat@npm:^3.0.2, react-lifecycles-compat@npm:^3.0.4":
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
   checksum: 10c0/1d0df3c85af79df720524780f00c064d53a9dd1899d785eddb7264b378026979acbddb58a4b7e06e7d0d12aa1494fd5754562ee55d32907b15601068dae82c27
@@ -35975,24 +35885,6 @@ __metadata:
     "@popperjs/core": ^2.0.0
     react: ^16.8.0
   checksum: 10c0/840a94a2a8e7be95838b5755dea52f85b334ac69ad811b2f4aee078991a43e8fb54592a37118ef1d5b1774b78baa33f1edf4fe50b5e3e4ec7319f4545caae393
-  languageName: node
-  linkType: hard
-
-"react-redux@npm:5.1.1":
-  version: 5.1.1
-  resolution: "react-redux@npm:5.1.1"
-  dependencies:
-    "@babel/runtime": "npm:^7.1.2"
-    hoist-non-react-statics: "npm:^3.1.0"
-    invariant: "npm:^2.2.4"
-    loose-envify: "npm:^1.1.0"
-    prop-types: "npm:^15.6.1"
-    react-is: "npm:^16.6.0"
-    react-lifecycles-compat: "npm:^3.0.0"
-  peerDependencies:
-    react: ^0.14.0 || ^15.0.0-0 || ^16.0.0-0
-    redux: ^2.0.0 || ^3.0.0 || ^4.0.0-0
-  checksum: 10c0/9e716ac45e00c97d8b2f10f341db46c3dd7869f26e5dc0679db918afa68fc72ac1e8349d9bf77f8737173c8787f9df9115fb6ef790abec472ca9dfa3d33d2984
   languageName: node
   linkType: hard
 
@@ -36963,21 +36855,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux-logger@npm:3.0.6, redux-logger@npm:^3.0.6":
+"redux-logger@npm:^3.0.6":
   version: 3.0.6
   resolution: "redux-logger@npm:3.0.6"
   dependencies:
     deep-diff: "npm:^0.3.5"
   checksum: 10c0/65eb71a1c72d9636368672a684bde62c746e64c19c8b92e3f00bdf5cf240ea1695eccb95a0fa3d5044f6a86cbf11fd35dc5150fd3351fa53c72721c336e9098f
-  languageName: node
-  linkType: hard
-
-"redux-persist@npm:5.10.0":
-  version: 5.10.0
-  resolution: "redux-persist@npm:5.10.0"
-  peerDependencies:
-    redux: ">3.0.0"
-  checksum: 10c0/20cd4d1c372474abad9e1fb12b33e82010bd6778df192fefd49ec57879b3dc752f9cdc58654ab996090daf8d82fc2aa256594d339fbf19ee9a5a1014fe7a09b8
   languageName: node
   linkType: hard
 
@@ -36995,7 +36878,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"redux-thunk@npm:2.3.0, redux-thunk@npm:^2.2.0, redux-thunk@npm:^2.3.0":
+"redux-thunk@npm:^2.2.0, redux-thunk@npm:^2.3.0":
   version: 2.3.0
   resolution: "redux-thunk@npm:2.3.0"
   checksum: 10c0/fbf342e56809240af5f41257eee0dbba1b8165b611a1dd96d6d2831f84046e30f037a7e90cbff5636cd6e053d53237c4ed3287403f2c6d28fa1ad26543d7a016
@@ -37021,15 +36904,6 @@ __metadata:
     loose-envify: "npm:^1.1.0"
     symbol-observable: "npm:^1.0.3"
   checksum: 10c0/544456f95734de33326637b370894addb57d9de2524edf36a20e4a326d0a36a0e223979d027545c5aa8a8d7a2859363981f63d1146401b72df0d16f373dd09cb
-  languageName: node
-  linkType: hard
-
-"redux@npm:4.1.2":
-  version: 4.1.2
-  resolution: "redux@npm:4.1.2"
-  dependencies:
-    "@babel/runtime": "npm:^7.9.2"
-  checksum: 10c0/3c6af9724bb39ead9d6a7e2bd422f898136d44e0ff3abe8ccafd6be8a6e219ae4f8bea0b154173e42da829979394944ec47a91eea961997eb95d31af60597ebe
   languageName: node
   linkType: hard
 
