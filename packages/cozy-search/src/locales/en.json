@@ -6,6 +6,9 @@
       "noItem": "No results",
       "notEnough": "Your query must contain at least 3 characters"
     },
+    "websearch": {
+      "label": "Web search"
+    },
     "dialog": {
       "close": "Close"
     },
