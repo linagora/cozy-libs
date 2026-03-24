@@ -82,6 +82,21 @@ describe('useConversation', () => {
       })
     })
 
+    it('navigates correctly when assistant route is at the root', () => {
+      mockLocation.pathname = '/assistant/old-convo-123'
+      const { result } = renderHook(() => useConversation())
+
+      act(() => {
+        result.current.goToConversation('new-convo-456')
+      })
+
+      expect(mockNavigate).toHaveBeenCalledWith({
+        pathname: '/assistant/new-convo-456',
+        search: '',
+        hash: ''
+      })
+    })
+
     it('preserves search query and hash fragments', () => {
       mockLocation = {
         pathname: '/base',
