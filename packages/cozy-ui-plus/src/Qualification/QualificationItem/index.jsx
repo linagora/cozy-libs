@@ -3,7 +3,6 @@ import React from 'react'
 
 import ButtonBase from 'cozy-ui/transpiled/react/ButtonBase'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
-import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import FileDuotoneIcon from 'cozy-ui/transpiled/react/Icons/FileDuotone'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
@@ -27,19 +26,15 @@ const QualificationItem = ({ icon, label, isSelected, onClick, ...props }) => {
 
   return (
     <ButtonBase {...props} className={styles.item} onClick={onClick}>
-      <IconStack
-        className="u-mb-half"
-        foreground={
-          icon && (
-            <Icon
-              icon={icon}
-              color={
-                isSelected ? 'var(--primaryColor)' : 'var(--secondaryTextColor)'
-              }
-            />
-          )
-        }
-        background={
+      <div className="u-mb-half">
+        {icon ? (
+          <Icon
+            icon={icon}
+            color={
+              isSelected ? 'var(--primaryColor)' : 'var(--secondaryTextColor)'
+            }
+          />
+        ) : (
           <Icon
             icon={FileDuotoneIcon}
             size="32"
@@ -47,8 +42,8 @@ const QualificationItem = ({ icon, label, isSelected, onClick, ...props }) => {
               isSelected ? 'var(--primaryColor)' : 'var(--secondaryTextColor)'
             }
           />
-        }
-      />
+        )}
+      </div>
       <Typography variant="caption">{label}</Typography>
     </ButtonBase>
   )

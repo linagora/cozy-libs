@@ -18673,7 +18673,7 @@ __metadata:
     cozy-interapp: "npm:^0.5.4"
     cozy-logger: "npm:^1.18.1"
     cozy-stack-client: "npm:^60.21.1"
-    cozy-ui: "npm:^135.0.0"
+    cozy-ui: "npm:^138.1.0"
     filesize: "npm:8.0.7"
     final-form: "npm:4.20.9"
     final-form-arrays: "npm:3.1.0"
@@ -18699,7 +18699,7 @@ __metadata:
     cozy-device-helper: ">=2.0.0"
     cozy-intent: ">=2.30.0"
     cozy-logger: ">=1.17.0"
-    cozy-ui: ">=135.0.0"
+    cozy-ui: ">=138.1.0"
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18
     twake-i18n: ">=0.3.0"
@@ -18947,6 +18947,46 @@ __metadata:
   bin:
     rsg-screenshots: scripts/screenshots.js
   checksum: 10c0/8ad215491481f2b258ad70075caa2d868feb604c43aebe486f6b6ae8dd4637c3f0fd7f6f20053b43a08e17cf4f34552fbb007ec30775651d58cb3f96b53d8506
+  languageName: node
+  linkType: hard
+
+"cozy-ui@npm:^138.1.0":
+  version: 138.1.0
+  resolution: "cozy-ui@npm:138.1.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.3.4"
+    "@date-io/date-fns": "npm:1"
+    "@material-ui/core": "npm:4.12.3"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@material-ui/pickers": "npm:3.3.11"
+    "@popperjs/core": "npm:^2.4.4"
+    classnames: "npm:^2.2.5"
+    date-fns: "npm:2.30.0"
+    hammerjs: "npm:^2.0.8"
+    intersection-observer: "npm:0.11.0"
+    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
+    node-polyglot: "npm:^2.5.0"
+    normalize.css: "npm:^8.0.0"
+    patch-package: "npm:^8.0.0"
+    pdf-lib: "npm:1.17.1"
+    react-markdown: "npm:^4.0.8"
+    react-popper: "npm:^2.2.3"
+    react-remove-scroll: "npm:^2.4.0"
+    react-select: "npm:^4.3.0"
+    react-swipeable-views: "npm:^0.13.3"
+    react-virtuoso: "npm:^4.13.0"
+    rooks: "npm:7.14.1"
+  peerDependencies:
+    cozy-device-helper: ">=2.0.0"
+    cozy-intent: ">=2.29.1"
+    react: ^16 || ^17 || ^18
+    react-dnd: ^16.0.1
+    react-dnd-html5-backend: ^16.0.1
+    react-dom: ^16 || ^17 || ^18
+    twake-i18n: ">=0.3.0"
+  bin:
+    rsg-screenshots: scripts/screenshots.js
+  checksum: 10c0/60d93d11bcf58dc04e40d7f4a36611c423b06b8da831ef24bbd989a594bab4e835309474675c36aada90c9fa7e7ccca6c3f7c9674700cb55a444f7dbb1627204
   languageName: node
   linkType: hard
 

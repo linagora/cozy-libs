@@ -37,7 +37,7 @@
     "cozy-intent": "^2.31.1",
     "cozy-logger": "^1.18.1",
     "cozy-stack-client": "^60.21.1",
-    "cozy-ui": "^135.0.0",
+    "cozy-ui": "^138.1.0",
     "jest": "30.3.0",
     "jest-canvas-mock": "2.3.1",
     "jest-environment-jsdom": "30.3.0",
@@ -68,7 +68,7 @@
     "cozy-device-helper": ">=2.0.0",
     "cozy-intent": ">=2.30.0",
     "cozy-logger": ">=1.17.0",
-    "cozy-ui": ">=135.0.0",
+    "cozy-ui": ">=138.1.0",
     "react": "^16 || ^17 || ^18",
     "react-dom": "^16 || ^17 || ^18",
     "twake-i18n": ">=0.3.0"

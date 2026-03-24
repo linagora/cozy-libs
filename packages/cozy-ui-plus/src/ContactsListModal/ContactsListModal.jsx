@@ -22,7 +22,6 @@ import AddContactDialog from './AddContact/AddContactDialog'
 import ContactsListContent from './ContactsListContent'
 import MobileHeader from './MobileHeader'
 import styles from './styles.styl'
-import CozyTheme from '../providers/CozyTheme'
 
 const ContactsListModal = ({
   onItemClick,
@@ -64,9 +63,7 @@ const ContactsListModal = ({
 
   return (
     <TopAnchoredDialog {...dialogProps}>
-      <CozyTheme variant={isMobile ? 'inverted' : 'normal'}>
-        <DialogCloseButton onClick={dismissAction} />
-      </CozyTheme>
+      <DialogCloseButton onClick={dismissAction} />
       <DialogTitle
         {...dialogTitleProps}
         className={cx(dialogTitleProps.className, {

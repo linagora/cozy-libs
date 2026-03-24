@@ -4,7 +4,7 @@ import React, { useRef } from 'react'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CrossSmallIcon from 'cozy-ui/transpiled/react/Icons/CrossSmall'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
-import Label from 'cozy-ui/transpiled/react/Label'
+import InputLabel from 'cozy-ui/transpiled/react/InputLabel'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 
@@ -70,7 +70,7 @@ const CollectionField = props => {
 
   return (
     <FieldContainer {...rest}>
-      <Label>{label}</Label>
+      <InputLabel>{label}</InputLabel>
       <Stack>
         {values.length > 0 ? (
           <Stack spacing="s">

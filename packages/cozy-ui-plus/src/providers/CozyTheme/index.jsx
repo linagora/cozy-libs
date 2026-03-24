@@ -17,7 +17,6 @@ const CozyTheme = ({ ignoreCozySettings, ...props }) => {
 }
 
 CozyTheme.propTypes = {
-  variant: PropTypes.oneOf(['normal', 'inverted']),
   /** Causes this element's children to appear as if they were direct children of the element's parent, ignoring the element itself. */
   ignoreItself: PropTypes.bool,
   /** Bypasses the request that retrieves the app's settings in order to define the theme type */
@@ -27,7 +26,6 @@ CozyTheme.propTypes = {
 }
 
 CozyTheme.defaultProps = {
-  variant: 'normal',
   ignoreCozySettings: false,
   ignoreItself: true
 }
