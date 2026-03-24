@@ -2,7 +2,7 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Card from 'cozy-ui/transpiled/react/Card'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import BottomSelectIcon from 'cozy-ui/transpiled/react/Icons/BottomSelect'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
@@ -13,7 +13,12 @@ const ReadOnlyIdentifier = props => {
   const { className, onClick, konnector, identifier, ...rest } = props
 
   return (
-    <Card
+    <Box
+      display="block"
+      border={1}
+      borderColor="var(--dividerColor)"
+      borderRadius={8}
+      padding={2}
       className={cx({ 'u-c-pointer': onClick }, className)}
       onClick={onClick}
       {...rest}
@@ -27,7 +32,7 @@ const ReadOnlyIdentifier = props => {
           <Icon icon={BottomSelectIcon} />
         </Img>
       </Media>
-    </Card>
+    </Box>
   )
 }
 

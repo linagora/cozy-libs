@@ -17977,7 +17977,7 @@ __metadata:
     cozy-logger: "npm:^1.18.1"
     cozy-realtime: "npm:^5.9.1"
     cozy-tsconfig: "npm:^1.8.1"
-    cozy-ui: "npm:^135.0.0"
+    cozy-ui: "npm:^138.1.0"
     cozy-ui-plus: "npm:^6.0.0"
     cozy-viewer: "npm:^28.0.0"
     date-fns: "npm:2.30.0"
@@ -18018,9 +18018,9 @@ __metadata:
     cozy-interapp: ">=0.9.0"
     cozy-keys-lib: ">=6.1.1"
     cozy-realtime: ">=4.2.8"
-    cozy-ui: ">=135.0.0"
-    cozy-ui-plus: ">=1.2.0"
-    cozy-viewer: ">=11.3.1"
+    cozy-ui: ">=138.1.0"
+    cozy-ui-plus: ">=6.0.0"
+    cozy-viewer: ">=28.0.0"
     leaflet: ^1.7.1
     react-router-dom: ">=6.14.2"
     twake-i18n: ">=0.3.0"
@@ -18787,48 +18787,6 @@ __metadata:
   bin:
     rsg-screenshots: scripts/screenshots.js
   checksum: 10c0/031e3cc556666a012b926c06db0c0e5ec8579f1cbe09328a28134d875655d9e1f995ad906d33f582ef1c98c10d07d9ca519c4d565a0ed655024b1f465c579da3
-  languageName: node
-  linkType: hard
-
-"cozy-ui@npm:^135.0.0":
-  version: 135.0.0
-  resolution: "cozy-ui@npm:135.0.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.4"
-    "@date-io/date-fns": "npm:1"
-    "@material-ui/core": "npm:4.12.3"
-    "@material-ui/lab": "npm:^4.0.0-alpha.61"
-    "@material-ui/pickers": "npm:3.3.11"
-    "@popperjs/core": "npm:^2.4.4"
-    chart.js: "npm:3.7.1"
-    classnames: "npm:^2.2.5"
-    date-fns: "npm:2.30.0"
-    hammerjs: "npm:^2.0.8"
-    intersection-observer: "npm:0.11.0"
-    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot: "npm:^2.5.0"
-    normalize.css: "npm:^8.0.0"
-    patch-package: "npm:^8.0.0"
-    pdf-lib: "npm:1.17.1"
-    react-chartjs-2: "npm:4.1.0"
-    react-markdown: "npm:^4.0.8"
-    react-popper: "npm:^2.2.3"
-    react-remove-scroll: "npm:^2.4.0"
-    react-select: "npm:^4.3.0"
-    react-swipeable-views: "npm:^0.13.3"
-    react-virtuoso: "npm:^4.13.0"
-    rooks: "npm:7.14.1"
-  peerDependencies:
-    cozy-device-helper: ">=2.0.0"
-    cozy-intent: ">=2.29.1"
-    react: ^16 || ^17 || ^18
-    react-dnd: ^16.0.1
-    react-dnd-html5-backend: ^16.0.1
-    react-dom: ^16 || ^17 || ^18
-    twake-i18n: ">=0.3.0"
-  bin:
-    rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/551c460fbd67a49a81bc55527781b0325ae9c685c481ab938d3e46010e4821a68db2399145d6055db6b426e6835671a5e56ac6571b60a59cf3741368d2047424
   languageName: node
   linkType: hard
 

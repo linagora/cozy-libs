@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Card from 'cozy-ui/transpiled/react/Card'
-import Circle from 'cozy-ui/transpiled/react/Circle'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -65,17 +65,19 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
   const { t } = useI18n()
 
   return (
-    <Card>
+    <Box
+      display="block"
+      border={1}
+      borderColor="var(--dividerColor)"
+      borderRadius={8}
+      padding={2}
+    >
       <Stack>
         <Typography variant="h6" gutterBottom>
           {icon ? (
-            <Circle
-              size="small"
-              backgroundColor={palette[iconColor]}
-              className="u-mr-half"
-            >
+            <Avatar size="sm" color={palette[iconColor]} className="u-mr-half">
               <Icon icon={icon} color={palette['white']} />
-            </Circle>
+            </Avatar>
           ) : null}
           {t(`card.appLink.${slug}.title`)}
         </Typography>
@@ -84,7 +86,7 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
         </Typography>
         <AppLinkButton path={path} slug={slug} />
       </Stack>
-    </Card>
+    </Box>
   )
 }
 

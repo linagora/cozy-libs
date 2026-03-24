@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Card from 'cozy-ui/transpiled/react/Card'
 import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
@@ -28,7 +28,13 @@ export class AccountsList extends React.PureComponent {
             </li>
           ))}
           <li className="u-mb-half">
-            <Card className="u-p-0">
+            <Box
+              display="block"
+              border={1}
+              borderColor="var(--dividerColor)"
+              borderRadius={8}
+              padding={0}
+            >
               <Button
                 label={t('modal.addAccount.button')}
                 variant="text"
@@ -37,7 +43,7 @@ export class AccountsList extends React.PureComponent {
                 className="u-bdrs-4"
                 onClick={addAccount}
               />
-            </Card>
+            </Box>
           </li>
         </ul>
       </DialogContent>

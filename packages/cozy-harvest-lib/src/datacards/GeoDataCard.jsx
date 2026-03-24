@@ -16,7 +16,6 @@ import CozyClient, {
 } from 'cozy-client'
 import flag from 'cozy-flags'
 import Box from 'cozy-ui/transpiled/react/Box'
-import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ClockIcon from 'cozy-ui/transpiled/react/Icons/Clock'
@@ -208,7 +207,14 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
     loading || !trips ? undefined : trips.length - 1
   )
   return (
-    <Card className="u-ph-0 u-pb-0 u-ov-hidden">
+    <Box
+      display="block"
+      border={1}
+      borderColor="var(--dividerColor)"
+      borderRadius={8}
+      padding={2}
+      className="u-ph-0 u-pb-0 u-ov-hidden"
+    >
       <div className="u-ph-1 u-mb-half">
         <Typography variant="h6">{t('datacards.trips.title')}</Typography>
         <Typography variant="caption">
@@ -257,7 +263,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
       ) : (
         <TripsMap trips={trips} index={index} />
       )}
-    </Card>
+    </Box>
   )
 }
 

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { Account } from 'cozy-doctypes'
-import Card from 'cozy-ui/transpiled/react/Card'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import Status from './Status'
@@ -17,7 +17,12 @@ export class AccountsListItem extends React.PureComponent {
     // So we have to check if accountLogin is not undefined before doing the check
     const shouldShowAccountLogin = accountLogin && accountName !== accountLogin
     return (
-      <Card
+      <Box
+        display="block"
+        border={1}
+        borderColor="var(--dividerColor)"
+        borderRadius={8}
+        padding={2}
         className="u-flex u-flex-justify-between u-flex-items-center u-c-pointer u-maw-100"
         onClick={onClick}
       >
@@ -40,7 +45,7 @@ export class AccountsListItem extends React.PureComponent {
           )}
         </div>
         <Status konnector={konnector} trigger={trigger} />
-      </Card>
+      </Box>
     )
   }
 }

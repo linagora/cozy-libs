@@ -8,8 +8,8 @@ import CozyClient, {
   hasQueryBeenLoaded,
   RealTimeQueries
 } from 'cozy-client'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Card from 'cozy-ui/transpiled/react/Card'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
@@ -57,7 +57,13 @@ const DoctypeDebugCard = ({ sourceAccountIdentifier, konnector, doctype }) => {
 
   const clipBoardAvailable = navigator.clipboard?.writeText
   return !failed && loaded ? (
-    <Card>
+    <Box
+      display="block"
+      border={1}
+      borderColor="var(--dividerColor)"
+      borderRadius={8}
+      padding={2}
+    >
       <RealTimeQueries doctype={doctype} />
       <Typography variant="button">{doctype}</Typography>
       {clipBoardAvailable ? (
@@ -78,7 +84,7 @@ const DoctypeDebugCard = ({ sourceAccountIdentifier, konnector, doctype }) => {
       ) : null}
       <Divider className="u-ml-0 u-maw-100 u-mb-half" />
       <ReactJsonPrint dataObject={savedDocuments.data} />
-    </Card>
+    </Box>
   ) : null
 }
 
