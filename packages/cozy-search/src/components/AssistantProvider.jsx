@@ -32,6 +32,7 @@ const AssistantProvider = ({ children }) => {
     chat: []
   })
   const [openedKnowledgePanel, setOpenedKnowledgePanel] = useState(null)
+  const [websearchEnabled, setWebsearchEnabled] = useState(false)
 
   const value = useMemo(
     () => ({
@@ -50,7 +51,9 @@ const AssistantProvider = ({ children }) => {
       setSelectedAssistantId,
       setIsOpenSearchConversation,
       setOpenedKnowledgePanel,
-      setSelectedTwakeKnowledge
+      setSelectedTwakeKnowledge,
+      websearchEnabled,
+      setWebsearchEnabled
     }),
     [
       isOpenCreateAssistant,
@@ -60,7 +63,8 @@ const AssistantProvider = ({ children }) => {
       selectedAssistantId,
       isOpenSearchConversation,
       openedKnowledgePanel,
-      selectedTwakeKnowledge
+      selectedTwakeKnowledge,
+      websearchEnabled
     ]
   )
 
