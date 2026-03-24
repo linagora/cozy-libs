@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@27.1.5...cozy-viewer@28.0.0) (2026-03-24)
+
+### Features
+
+- **cozy-viewer:** Upgrade packages ([9a6d724](https://github.com/cozy/cozy-libs/commit/9a6d7241d3ee3df4e2751b94df7a92b50be4d08c))
+
+### BREAKING CHANGES
+
+- **cozy-viewer:** You must have `cozy-ui >= 138.1.0, cozy-ui-plus >= 6.0.0 and cozy-sharing >= 30.0.0`
+
 ## [27.1.5](https://github.com/cozy/cozy-libs/compare/cozy-viewer@27.1.4...cozy-viewer@27.1.5) (2026-03-24)
 
 **Note:** Version bump only for package cozy-viewer
