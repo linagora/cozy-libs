@@ -129,7 +129,7 @@
       },
       "shareByEmail": {
         "subtitle": "By email",
-        "emailPlaceholder": "Add contacts or groups",
+        "emailPlaceholder": "Add contacts",
         "send": "Send",
         "singleContactSuccess": "You sent an invite to %{email}.",
         "contactSuccess": "You sent an invite to %{smart_count} contact. |||| You sent an invite to %{smart_count} contacts.",
@@ -469,7 +469,7 @@
     "shareTitle": "Share \"%{name}\"",
     "successNotification": "Folder has been shared",
     "errorNotification": "Error while sharing folder",
-    "addPeople": "Add people to the shared folder :",
+    "addPeople": "Add people to the shared folder",
     "add": "Add"
   },
   "SharedDrive": {
@@ -480,7 +480,7 @@
       "cancel": "Cancel",
       "create": "Create",
       "save": "Save",
-      "addPeople": "Add people to the shared drive :",
+      "addPeople": "Add people to the shared drive",
       "successNotification": "Shared drive has been added",
       "errorNotification": "Error during shared drive creation",
       "successNotificationUpdate": "Your shared drive has been modified",

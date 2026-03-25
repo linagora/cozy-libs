@@ -72,20 +72,17 @@ describe('ShareByEmailComponent', () => {
     setup({ sharingDesc })
 
     act(() => {
-      fireEvent.change(screen.getByPlaceholderText('Add contacts or groups'), {
+      fireEvent.change(screen.getByPlaceholderText('Add contacts'), {
         target: { value: 'quentin@cozycloud.cc' }
       })
     })
 
     act(() => {
-      fireEvent.keyPress(
-        screen.getByPlaceholderText('Add contacts or groups'),
-        {
-          key: 'Enter',
-          code: 'Enter',
-          charCode: 13
-        }
-      )
+      fireEvent.keyPress(screen.getByPlaceholderText('Add contacts'), {
+        key: 'Enter',
+        code: 'Enter',
+        charCode: 13
+      })
     })
 
     act(() => {
@@ -131,20 +128,17 @@ describe('ShareByEmailComponent', () => {
     })
 
     act(() => {
-      fireEvent.change(screen.getByPlaceholderText('Add contacts or groups'), {
+      fireEvent.change(screen.getByPlaceholderText('Add contacts'), {
         target: { value: 'john@gmail.com' }
       })
     })
 
     act(() => {
-      fireEvent.keyPress(
-        screen.getByPlaceholderText('Add contacts or groups'),
-        {
-          key: 'Enter',
-          code: 'Enter',
-          charCode: 13
-        }
-      )
+      fireEvent.keyPress(screen.getByPlaceholderText('Add contacts'), {
+        key: 'Enter',
+        code: 'Enter',
+        charCode: 13
+      })
     })
 
     act(() => {
@@ -180,23 +174,17 @@ describe('ShareByEmailComponent', () => {
       setup({ sharingDesc, createContact })
 
       act(() => {
-        fireEvent.change(
-          screen.getByPlaceholderText('Add contacts or groups'),
-          {
-            target: { value: 'quentin@cozycloud.cc' }
-          }
-        )
+        fireEvent.change(screen.getByPlaceholderText('Add contacts'), {
+          target: { value: 'quentin@cozycloud.cc' }
+        })
       })
 
       act(() => {
-        fireEvent.keyPress(
-          screen.getByPlaceholderText('Add contacts or groups'),
-          {
-            key: 'Enter',
-            code: 'Enter',
-            charCode: 13
-          }
-        )
+        fireEvent.keyPress(screen.getByPlaceholderText('Add contacts'), {
+          key: 'Enter',
+          code: 'Enter',
+          charCode: 13
+        })
       })
 
       await waitFor(() => {
