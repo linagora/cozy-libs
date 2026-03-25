@@ -1,6 +1,6 @@
 import { ComposerPrimitive } from '@assistant-ui/react'
 import cx from 'classnames'
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -12,6 +12,8 @@ import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import { useFileMention } from './FileMentionContext'
+import FileMentionMenu from './FileMentionMenu'
 import styles from './styles.styl'
 
 const ConversationBar = ({
@@ -21,11 +23,34 @@ const ConversationBar = ({
   onKeyDown,
   onSend,
   onCancel,
+  onChange,
   ...props
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const inputRef = useRef()
+  const { handleInputChange } = useFileMention()
+  const [anchorEl, setAnchorEl] = useState(null)
+
+  const mentionMatch = value?.match(/@(\w*)$/)
+  const hasMentionLocal = mentionMatch !== null
+  const mentionSearchTermLocal = mentionMatch ? mentionMatch[1] : ''
+
+  useEffect(() => {
+    if (hasMentionLocal && inputRef.current) {
+      setAnchorEl(inputRef.current)
+    } else {
+      setAnchorEl(null)
+    }
+  }, [hasMentionLocal])
+
+  const handleChange = e => {
+    const newValue = e.target.value
+    handleInputChange(newValue)
+    if (onChange) {
+      onChange(e)
+    }
+  }
 
   // to adjust input height for multiline when typing in it
   // eslint-disable-next-line react-hooks/refs
@@ -62,6 +87,7 @@ const ConversationBar = ({
         size="auto"
         placeholder={t('assistant.search.placeholder')}
         value={value}
+        onChange={handleChange}
         disabledClear
         componentsProps={{
           inputBase: {
@@ -102,6 +128,12 @@ const ConversationBar = ({
           }
         }}
       />
+      {hasMentionLocal && (
+        <FileMentionMenu
+          anchorEl={anchorEl}
+          searchTerm={mentionSearchTermLocal}
+        />
+      )}
     </div>
   )
 }
