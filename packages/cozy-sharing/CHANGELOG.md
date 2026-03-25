@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [30.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.0.0...cozy-sharing@30.0.1) (2026-03-25)
+
+### Bug Fixes
+
+- Small locales adjustments ([c743965](https://github.com/cozy/cozy-libs/commit/c7439654ddc291e452168f6635e82cf28c388d7c))
+
 # [30.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@29.0.0...cozy-sharing@30.0.0) (2026-03-24)
 
 ### Features
