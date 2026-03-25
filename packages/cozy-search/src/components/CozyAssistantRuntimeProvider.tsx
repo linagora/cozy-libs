@@ -50,9 +50,16 @@ const log = Minilog("🔍 [CozyAssistantRuntimeProvider]");
 
 interface ConversationMessage {
   id: string;
-  role: "user" | "assistant";
-  content: string;
+  role: "user" | "assistant" | "tool";
+  content?: string;
   sources?: Array<{ id: string; doctype?: string }>;
+  tool_calls?: Array<{
+    id: string;
+    name: string;
+    arguments: Record<string, unknown>;
+  }>;
+  tool_call_id?: string;
+  status?: "success" | "error" | "cancelled";
 }
 
 interface Conversation {
@@ -76,15 +83,24 @@ const convertMessagesToThreadMessages = (
 ): ThreadMessageLike[] => {
   if (!messages) return [];
 
-  return messages.map((msg, idx) => ({
-    id: msg.id || `msg-${idx}`,
-    role: msg.role,
-    content: sanitizeChatContent(msg.content),
-    metadata:
-      msg.role === "assistant" && msg.sources
-        ? { custom: { sources: msg.sources } }
-        : undefined,
-  }));
+  return messages
+    .filter((msg) => msg.role !== "tool")
+    .map((msg, idx) => ({
+      id: msg.id || `msg-${idx}`,
+      role: msg.role === "tool" ? "assistant" : msg.role,
+      content: msg.content ? sanitizeChatContent(msg.content) : "",
+      metadata:
+        msg.role === "assistant"
+          ? {
+              custom: {
+                ...(msg.sources ? { sources: msg.sources } : {}),
+                ...(msg.tool_calls
+                  ? { toolCalls: msg.tool_calls, toolCallsCompleted: true }
+                  : {}),
+              },
+            }
+          : undefined,
+    }));
 };
 
 const ConversationLoader = ({
