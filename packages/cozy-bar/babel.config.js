@@ -1,5 +1,3 @@
-const pkg = require('./package.json')
-
 module.exports = {
   presets: ['cozy-app'],
   plugins: [
@@ -7,13 +5,6 @@ module.exports = {
       'module-resolver',
       {
         root: ['./src']
-      }
-    ],
-    [
-      'transform-define',
-      {
-        __VERSION__: JSON.stringify(pkg.version),
-        'typeof window': 'object'
       }
     ],
     [
