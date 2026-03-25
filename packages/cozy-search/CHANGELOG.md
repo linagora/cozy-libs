@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.24.1...cozy-search@0.25.0) (2026-03-25)
+
+### Features
+
+- Expose AiText in cozy-search ([5ed860f](https://github.com/cozy/cozy-libs/commit/5ed860fe6978c854f28b14cb6638425c2b2ef60a))
+
 ## [0.24.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.24.0...cozy-search@0.24.1) (2026-03-24)
 
 ### Bug Fixes
