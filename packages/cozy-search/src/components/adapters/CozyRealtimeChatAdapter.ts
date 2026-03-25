@@ -11,28 +11,36 @@
 import type {
   ChatModelAdapter,
   ChatModelRunOptions,
-  ChatModelRunResult
-} from '@assistant-ui/react'
+  ChatModelRunResult,
+} from "@assistant-ui/react";
 
-import Minilog from 'cozy-minilog'
+import Minilog from "cozy-minilog";
 
-import { StreamBridge } from './StreamBridge'
-import { sanitizeChatContent } from '../helpers'
+import { StreamBridge } from "./StreamBridge";
+import { sanitizeChatContent } from "../helpers";
+import type { AssistantTool } from "../../tools/types";
+import { parseSlashCommand, toToolSchemas } from "../../tools/helpers";
 
-const log = Minilog('🔍 [CozyRealtimeChatAdapter]')
+const log = Minilog("🔍 [CozyRealtimeChatAdapter]");
 
 type CozyClient = {
   stackClient: {
-    fetchJSON: (method: string, path: string, body?: object) => Promise<unknown>
-  }
-}
+    fetchJSON: (
+      method: string,
+      path: string,
+      body?: object
+    ) => Promise<unknown>;
+  };
+};
 
 export interface CozyRealtimeChatAdapterOptions {
-  client: CozyClient
-  conversationId: string
-  streamBridge: StreamBridge
-  assistantId?: string
-  getFileIDs?: () => string[]
+  client: CozyClient;
+  conversationId: string;
+  streamBridge: StreamBridge;
+  assistantId?: string;
+  getFileIDs?: () => string[];
+  allTools?: AssistantTool[];
+  toolsEnabled?: boolean;
 }
 
 /**
@@ -41,19 +49,19 @@ export interface CozyRealtimeChatAdapterOptions {
  * For reload: finds the last user message (may need to skip assistant messages)
  */
 const findUserQuery = (
-  messages: ChatModelRunOptions['messages']
+  messages: ChatModelRunOptions["messages"]
 ): string | null => {
   for (let i = messages.length - 1; i >= 0; i--) {
-    const msg = messages[i]
-    if (msg.role === 'user') {
-      const textContent = msg.content.find(part => part.type === 'text')
-      if (textContent && textContent.type === 'text') {
-        return textContent.text
+    const msg = messages[i];
+    if (msg.role === "user") {
+      const textContent = msg.content.find((part) => part.type === "text");
+      if (textContent && textContent.type === "text") {
+        return textContent.text;
       }
     }
   }
-  return null
-}
+  return null;
+};
 
 /**
  * Creates a ChatModelAdapter that integrates with Cozy's backend.
@@ -66,74 +74,110 @@ export const createCozyRealtimeChatAdapter = (
 ): ChatModelAdapter => ({
   async *run({
     messages,
-    abortSignal
+    abortSignal,
   }: ChatModelRunOptions): AsyncGenerator<ChatModelRunResult> {
-    const { client, conversationId, streamBridge, assistantId, getFileIDs } =
-      options
+    const {
+      client,
+      conversationId,
+      streamBridge,
+      assistantId,
+      getFileIDs,
+      allTools,
+      toolsEnabled,
+    } = options;
 
-    const userQuery = findUserQuery(messages)
-    const fileIDs = getFileIDs?.() || []
+    const fileIDs = getFileIDs?.() || [];
+    let userQuery = findUserQuery(messages);
     if (!userQuery) {
-      log.error('No user message found in:', messages)
-      return
+      log.error("No user message found in:", messages);
+      return;
     }
 
-    const stream = streamBridge.createStream(conversationId)
+    let toolSchemas: ReturnType<typeof toToolSchemas> | undefined;
+    const parsed = parseSlashCommand(userQuery);
+    if (parsed) {
+      const tool = allTools?.find(
+        (t) => t.category === parsed.category && t.name === parsed.toolName
+      );
+      if (tool) {
+        toolSchemas = toToolSchemas([tool]);
+      }
+      userQuery = parsed.text;
+    } else if (toolsEnabled && allTools?.length) {
+      toolSchemas = toToolSchemas(allTools);
+    }
+
+    const stream = streamBridge.createStream(conversationId);
 
     try {
       // Note: For reload, this sends the same query again to regenerate
       yield {
-        content: [{ type: 'text', text: '' }],
-        status: { type: 'requires-action', reason: 'tool-calls' }
-      }
+        content: [{ type: "text", text: "" }],
+        status: { type: "requires-action", reason: "tool-calls" },
+      };
       await client.stackClient.fetchJSON(
-        'POST',
+        "POST",
         `/ai/chat/conversations/${conversationId}`,
         {
           q: userQuery,
           assistantID: assistantId,
-          ...(fileIDs.length > 0 && { fileIDs })
+          ...(toolSchemas && toolSchemas.length > 0
+            ? { tools: toolSchemas }
+            : {}),
+          ...(fileIDs.length > 0 && { fileIDs }),
         }
-      )
+      );
 
-      let fullText = ''
-      let wasAborted = false
+      let fullText = "";
+      let wasAborted = false;
 
       for await (const chunk of stream) {
         if (abortSignal?.aborted) {
-          wasAborted = true
-          streamBridge.cleanup(conversationId)
-          break
+          wasAborted = true;
+          streamBridge.cleanup(conversationId);
+          break;
         }
 
-        fullText += chunk
-        const sanitizedText = sanitizeChatContent(fullText)
+        fullText += chunk;
+        const sanitizedText = sanitizeChatContent(fullText);
 
         yield {
-          content: [{ type: 'text', text: sanitizedText }],
-          status: { type: 'running' }
-        }
+          content: [{ type: "text", text: sanitizedText }],
+          status: { type: "running" },
+        };
       }
 
       if (!wasAborted) {
-        const finalText = sanitizeChatContent(fullText)
-        const sources = streamBridge.getSources(conversationId)
-        yield {
-          content: [{ type: 'text', text: finalText }],
-          status: { type: 'complete', reason: 'stop' },
-          ...(sources ? { metadata: { custom: { sources } } } : {})
+        const toolCalls = streamBridge.getToolCalls(conversationId);
+
+        if (toolCalls && toolCalls.length > 0) {
+          yield {
+            content: [{ type: "text", text: "" }],
+            status: { type: "requires-action", reason: "tool-calls" },
+            metadata: { custom: { toolCalls } },
+          };
+          streamBridge.cleanup(conversationId);
+          return;
         }
-        streamBridge.cleanup(conversationId)
+
+        const finalText = sanitizeChatContent(fullText);
+        const sources = streamBridge.getSources(conversationId);
+        yield {
+          content: [{ type: "text", text: finalText }],
+          status: { type: "complete", reason: "stop" },
+          ...(sources ? { metadata: { custom: { sources } } } : {}),
+        };
+        streamBridge.cleanup(conversationId);
       }
     } catch (error) {
-      log.error('Error:', error)
-      streamBridge.cleanup(conversationId)
+      log.error("Error:", error);
+      streamBridge.cleanup(conversationId);
 
       yield {
-        content: [{ type: 'text', text: t('assistant.default_error') }],
-        status: { type: 'incomplete', reason: 'error' },
-        metadata: { custom: { isError: true } }
-      }
+        content: [{ type: "text", text: t("assistant.default_error") }],
+        status: { type: "incomplete", reason: "error" },
+        metadata: { custom: { isError: true } },
+      };
     }
-  }
-})
+  },
+});
