@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="42px" viewBox="0 0 48 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>folder 02</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="3402-app-Drive---menu-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-104.000000, -175.000000)">
+        <g id="nav-apps">
+            <g id="cozy-drive" transform="translate(88.000000, 164.000000)">
+                <g id="folder-02" transform="translate(16.000000, 11.000000)">
+                    <rect id="Rectangle-6" fill="#B2D3FF" x="0" y="3" width="48" height="39" rx="4"></rect>
+                    <path d="M0,1.9973917 C0,0.894262725 0.90234375,0 1.99456145,0 L19.0054385,0 C20.1070044,0 21.6362228,0.636222839 22.4121541,1.41215408 L22.5878459,1.58784592 C23.3677571,2.36775708 24.8970262,3 26.0049466,3 L45.0089096,3 C46.6608432,3 48,4.34205759 48,6 L48,6 L26.0049466,6 C24.8976452,6 23.3637772,6.63622284 22.5878459,7.41215408 L22.4121541,7.58784592 C21.6322429,8.36775708 20.0976563,9 19.0054385,9 L1.99456145,9 C0.892995579,9 0,8.10414219 0,7.0026083 L0,1.9973917 Z" id="Rectangle-7" fill="#197BFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

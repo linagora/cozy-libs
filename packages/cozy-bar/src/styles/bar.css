@@ -1,0 +1,99 @@
+[role=banner] {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--zIndex-bar);
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 3em;
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+}
+
+@media (min-width: 64rem) {
+  [role=banner] {
+    position: relative;
+  }
+}
+
+[role=banner] .coz-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+[role=banner] .coz-bar-container {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  width: 100%;
+  padding: 0 1.25em 0 1em;
+  box-sizing: border-box;
+}
+
+@media (max-width: 48em) {
+  [role=banner] .coz-bar-container {
+    padding: 0 1em 0 0;
+  }
+}
+
+[role=banner] .coz-bar-title {
+  display: flex;
+  margin: 0;
+  align-items: center;
+  min-width: 8em;
+  font-size: 1.5em;
+  font-weight: normal;
+  color: var(--primaryTextColor);
+}
+
+@media (max-width: 48em) {
+  [role=banner] .coz-bar-title {
+    font-size: 1.25em
+  }
+}
+
+[role=banner] .coz-bar-title img {
+  margin-right: .45em;
+}
+
+[role=banner] .coz-bar-title span {
+  margin-right: .25em;
+}
+
+[role=banner] .coz-bar-title strong {
+  font-weight: bold;
+}
+
+@media (max-width: 30em) {
+  [role=banner] .coz-bar-hide-sm {
+    display: none;
+  }
+
+  [role=banner] .coz-bar-title strong {
+    padding: 0;
+    text-transform: capitalize;
+  }
+}
+
+[role=banner] .coz-bar-btn {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  background-position: center;
+  flex: 0 0 2.5rem;
+  cursor: pointer;
+}
+
+[role=banner] .coz-bar-burger {
+  margin-right: 0.25em;
+}
+
+@media (max-width: 48em) {
+  [role=banner] .coz-bar-hide-sm {
+    display: none;
+  }
+}

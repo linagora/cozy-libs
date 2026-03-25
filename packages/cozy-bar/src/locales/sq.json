@@ -1,0 +1,45 @@
+{
+  "drawer": "Show menu drawer",
+  "profile": "Profil",
+  "connectedDevices": "Pajisje të lidhura",
+  "storage": "Depozitim",
+  "storage_phrase": "%{diskUsage} GB të përdorur nga %{diskQuota} GB gjithsej",
+  "view_offers": "View offers",
+  "view_my_offer": "My offer",
+  "help": "Ndihmë",
+  "logout": "Dilni",
+  "soon": "së shpejti",
+  "error_UnavailableStack": "The stack is unreachable (connection timed-out).",
+  "error_UnauthorizedStack": "Some permissions are missing, the application can't access the requested resource on the stack.",
+  "no_apps": "S’u gjetën aplikacione te Cozy",
+  "menu": {
+    "apps": "Aplikacione",
+    "settings": "Rregullime",
+    "home_mobile": "Back to home...",
+    "home": "Back to home",
+    "home_title": "Home"
+  },
+  "Categories": {
+    "cozy": "Aplikacione Cozy",
+    "partners": "Aplikacione partnerësh",
+    "ptnb": "expPTNB",
+    "others": "Aplikacione të tjerë"
+  },
+  "permsModal": {
+    "title": "Hyni në krejt Cozy-n nga aplikacioni juaj",
+    "description": "Autorizojeni %{app} të shfaqë në këtë pajisje aplikacionet tuaja Cozy",
+    "button": "Autorizo hyrjen"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "Aplikacioni Store do të jetë gati së shpejti në Cozy.",
+      "description": "Falë Cozy Store-it do të jeni në gjendje të instaloni aplikacionet që doni në Cozy-n tuaj."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "To comply with the GDPR, Cozy Cloud has updated its Terms of Services that have taken effect on May 25, 2018",
+      "CTA": "Read now"
+    }
+  }
+}

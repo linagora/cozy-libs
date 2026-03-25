@@ -1,0 +1,45 @@
+{
+  "drawer": "显示菜单抽屉",
+  "profile": "资料",
+  "connectedDevices": "已连接的设备",
+  "storage": "储存",
+  "storage_phrase": "%{diskQuota} GB 中的 %{diskUsage} GB已被使用",
+  "view_offers": "View offers",
+  "view_my_offer": "My offer",
+  "help": "帮助",
+  "logout": "登出",
+  "soon": "很快",
+  "error_UnavailableStack": "此堆栈无法连接 (连接超时)",
+  "error_UnauthorizedStack": "缺少某些权限，应用程序无法访问堆栈上请求的资源。",
+  "no_apps": "在Cozy中没有找到任何应用程序。",
+  "menu": {
+    "apps": "应用程序",
+    "settings": "设置",
+    "home_mobile": "回到首页...",
+    "home": "回到首页",
+    "home_title": "Home"
+  },
+  "Categories": {
+    "cozy": "Cozy应用程序",
+    "partners": "合作伙伴应用程序",
+    "ptnb": "expPTNB",
+    "others": "其他应用"
+  },
+  "permsModal": {
+    "title": "从您的应用程序访问整个Cozy",
+    "description": "授权%{app}在此设备上显示您的Cozy应用程序",
+    "button": "授权访问"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "商店应用程序将很快在您的Cozy中可用。",
+      "description": "感谢Cozy商店，您将能够在您的Cozy中安装您想要的应用程序。"
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "为了遵守GDPR，Cozy Cloud更新了其于2018年5月25日生效的服务条款",
+      "CTA": "立即阅读"
+    }
+  }
+}

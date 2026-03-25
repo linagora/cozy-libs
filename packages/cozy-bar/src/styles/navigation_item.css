@@ -1,0 +1,34 @@
+/* Force pointer on clickable elements*/
+[role=banner] a[role=menuitem],
+[role=banner] button[role=menuitem] {
+  cursor: pointer;
+  border-left: 4px solid transparent;
+}
+
+[role=banner] a[role=menuitem]:hover,
+[role=banner] a[role=menuitem]:focus,
+[role=banner] button[role=menuitem]:hover,
+[role=banner] button[role=menuitem]:focus {
+  background-color: var(--defaultBackgroundColor);
+}
+
+[role=banner] [role=menuitem][aria-busy=true]::after {
+  right: 1.5em;
+  top: .5em;
+}
+
+[role=banner] .coz-drawer-wrapper [role=menuitem][aria-busy=true]::after {
+  top: .8em;
+}
+
+/* nav group */
+
+[role=banner] .coz-nav-group.coz-nav--error {
+  padding: 0.75em;
+  min-width: 20em;
+}
+
+[role=banner] div[role=menuitem]:not([data-icon]) {
+  margin: 0;
+  padding-left: 1.5em;
+}

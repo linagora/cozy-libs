@@ -1,0 +1,45 @@
+{
+  "drawer": "メニュードロワーを表示",
+  "profile": "プロフィール",
+  "connectedDevices": "接続されたデバイス",
+  "storage": "ストレージ",
+  "storage_phrase": "%{diskUsage} GB / %{diskQuota} GB 使用",
+  "view_offers": "オファーを表示",
+  "view_my_offer": "マイオファー",
+  "help": "ヘルプ",
+  "logout": "サインアウト",
+  "soon": "間もなく",
+  "error_UnavailableStack": "スタックに到達できません (接続タイムアウト)。",
+  "error_UnauthorizedStack": "一部のアクセス許可が不足しているため、アプリケーションはスタック上の要求されたリソースにアクセスできません。",
+  "no_apps": "Cozy にアプリケーションはありません。",
+  "menu": {
+    "apps": "アプリ",
+    "settings": "設定",
+    "home_mobile": "ホームに戻る...",
+    "home": "ホームに戻る",
+    "home_title": "ホーム"
+  },
+  "Categories": {
+    "cozy": "Cozy アプリ",
+    "partners": "パートナーアプリ",
+    "ptnb": "expPTNB",
+    "others": "他のアプリ"
+  },
+  "permsModal": {
+    "title": "お使いのアプリケーションから Cozy 全体にアクセス",
+    "description": "%{app} を承認して、このデバイスにお使いの Cozy アプリケーションを表示します",
+    "button": "アクセスを承認"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "ストアアプリケーションはお使いの Cozy でまもなくご利用いただけます。",
+      "description": "Cozy ストアのおかげで Cozy で欲しいアプリケーションをインストールすることができます。"
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "GDPRを遵守するため、Cozyクラウドは利用規約を更新して2018年5月25日に施行されました",
+      "CTA": "今すぐお読みください"
+    }
+  }
+}

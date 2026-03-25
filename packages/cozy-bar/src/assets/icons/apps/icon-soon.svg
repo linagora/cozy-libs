@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="16px" viewBox="0 0 48 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>a venir</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="3402-app-Drive---menu-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-280.000000, -207.000000)">
+        <g id="nav-apps">
+            <g id="cozy-store" transform="translate(248.000000, 164.000000)">
+                <g id="Group-3" transform="translate(16.000000, 8.000000)">
+                    <g id="a-venir" transform="translate(16.000000, 35.000000)">
+                        <rect id="Rectangle-8" fill="#297EF1" x="0" y="0" width="48" height="16" rx="2"></rect>
+                        <text id="À-VENIR" font-family="Lato-Bold, Lato" font-size="10" font-weight="bold" fill="#FFFFFF">
+                            <tspan x="3.9475" y="12">À VENIR</tspan>
+                        </text>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

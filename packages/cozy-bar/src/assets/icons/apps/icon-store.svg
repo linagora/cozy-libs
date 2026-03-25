@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="44px" viewBox="0 0 48 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>store</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="3402-app-Drive---menu-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-264.000000, -172.000000)">
+        <g id="nav-apps" fill="#F52D2D">
+            <g id="cozy-store" transform="translate(248.000000, 164.000000)">
+                <g id="Group-3" transform="translate(16.000000, 8.000000)">
+                    <g id="store">
+                        <path d="M3,42.5066023 L3,25.5 L9,25.5 L9,37.5 L24,37.5 L24,25.5 L45,25.5 L45,42.5066023 C45,43.0550537 44.5528686,43.5 44.0013041,43.5 L41.4986959,43.5 C40.9479289,43.5 40.5,43.0490115 40.5,42.4926891 L40.5,27 L30,27 L30,42.4926891 C30,43.0586649 29.5554342,43.5 29.0070346,43.5 L3.99296544,43.5 C3.44610862,43.5 3,43.0552407 3,42.5066023 Z M3,0.997544646 C3,0.446615951 3.44326177,0 3.99678245,0 L44.0032175,0 C44.5537253,0 45,0.446311399 45,0.997544646 L45,9 L3,9 L3,0.997544646 Z" id="Path-15" fill-opacity="0.2"></path>
+                        <path d="M0,25.0020869 C0,26.1055038 0.894938439,27 2.00138927,27 L45.9986107,27 C47.1039475,27 48,26.1017394 48,25.0020869 L48,21.990778 C48,21.4435864 47.9035824,20.5661208 47.7842474,20.0291133 L45,7.5 L3,7.5 L0.215752602,20.0291133 C0.09659573,20.5653192 0,21.4509752 0,21.990778 L0,25.0020869 Z" id="Path"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
