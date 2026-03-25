@@ -1,4 +1,4 @@
-/* Force pointer on clickable elements*/
+/* Force pointer on clickable elements */
 [role=banner] a[role=menuitem],
 [role=banner] button[role=menuitem] {
   cursor: pointer;

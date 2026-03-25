@@ -1,14 +1,12 @@
+import cx from 'classnames'
 import React from 'react'
+import styles from 'styles/apps-menu.styl'
 
 import { useClient, useFetchShortcut } from 'cozy-client'
 import { splitFilename, getShortcutImgSrc } from 'cozy-client/dist/models/file'
-
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import cx from 'classnames'
-
-import styles from 'styles/apps-menu.styl'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles(() => {
   return {

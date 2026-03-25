@@ -12,6 +12,7 @@ function BarLeft({ children }) {
         barContext.setBarLeft(null)
       }
     } else {
+      // eslint-disable-next-line no-console
       console.warn('You should not use BarLeft outside of a BarProvider')
     }
   }, [barContext, children])

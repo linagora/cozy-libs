@@ -1,23 +1,23 @@
-import React, { useMemo } from 'react'
+import cx from 'classnames'
+import AppsMenu from 'components/AppsMenu'
+import Banner from 'components/Banner'
+import UserMenu from 'components/UserMenu'
+import { getAppsData } from 'components/helpers'
+import ButtonCozyHome from 'components/utils/ButtonCozyHome'
+import HelpLink from 'components/utils/HelpLink'
+import SearchButton from 'components/utils/SearchButton'
 import PropTypes from 'prop-types'
+import { buildAppsQuery } from 'queries'
+import React, { useMemo } from 'react'
 
-import Grid from 'cozy-ui/transpiled/react/Grid'
-import Divider from 'cozy-ui/transpiled/react/Divider'
-import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import AppTitle from 'cozy-ui/transpiled/react/AppTitle'
+import { useFetchHomeShortcuts, useQuery, RealTimeQueries } from 'cozy-client'
 import { isFlagshipApp } from 'cozy-device-helper'
 import flag from 'cozy-flags'
-import Banner from 'components/Banner'
-import AppsMenu from 'components/AppsMenu'
-import UserMenu from 'components/UserMenu'
-import ButtonCozyHome from 'components/utils/ButtonCozyHome'
-import SearchButton from 'components/utils/SearchButton'
-import HelpLink from 'components/utils/HelpLink'
-import { useFetchHomeShortcuts, useQuery, RealTimeQueries } from 'cozy-client'
 import { AssistantDesktop } from 'cozy-search'
-import cx from 'classnames'
-import { buildAppsQuery } from 'queries'
-import { getAppsData } from 'components/helpers'
+import AppTitle from 'cozy-ui/transpiled/react/AppTitle'
+import Divider from 'cozy-ui/transpiled/react/Divider'
+import Grid from 'cozy-ui/transpiled/react/Grid'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 export const Bar = ({
   isPublic,
@@ -43,6 +43,7 @@ export const Bar = ({
     enabled: !isPublic
   })
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const rawApps = appsResult.data || []
   const isFetchingApps = appsResult.fetchStatus === 'loading'
 

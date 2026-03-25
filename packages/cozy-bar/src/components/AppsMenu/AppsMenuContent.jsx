@@ -1,17 +1,16 @@
-import React from 'react'
+import AppItem from 'components/AppsMenu/components/AppItem'
+import AppItemPlaceholder from 'components/AppsMenu/components/AppItemPlaceholder'
+import EntrypointItem from 'components/AppsMenu/components/EntrypointItem'
+import ShortcutItem from 'components/AppsMenu/components/ShortcutItem'
+import { getEntrypoints } from 'components/AppsMenu/helper'
+import useI18n from 'components/useI18n'
 import PropTypes from 'prop-types'
+import React from 'react'
+import styles from 'styles/apps-menu.styl'
 
+import { sortApplicationsList } from 'cozy-client/dist/models/applications'
 import flag from 'cozy-flags'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { sortApplicationsList } from 'cozy-client/dist/models/applications'
-
-import AppItem from 'components/AppsMenu/components/AppItem'
-import ShortcutItem from 'components/AppsMenu/components/ShortcutItem'
-import EntrypointItem from 'components/AppsMenu/components/EntrypointItem'
-import AppItemPlaceholder from 'components/AppsMenu/components/AppItemPlaceholder'
-import useI18n from 'components/useI18n'
-import styles from 'styles/apps-menu.styl'
-import { getEntrypoints } from 'components/AppsMenu/helper'
 
 const AppsMenuContent = ({
   isFetchingApps,

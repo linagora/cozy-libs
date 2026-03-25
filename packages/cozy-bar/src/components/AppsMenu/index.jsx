@@ -1,13 +1,12 @@
+import AppsMenuContent from 'components/AppsMenu/AppsMenuContent'
 import React, { useRef, useState } from 'react'
 
-import AppsMenuContent from 'components/AppsMenu/AppsMenuContent'
-
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import Menu from 'cozy-ui/transpiled/react/Menu'
-import MosaicIcon from 'cozy-ui/transpiled/react/Icons/Mosaic'
-import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import MosaicIcon from 'cozy-ui/transpiled/react/Icons/Mosaic'
+import Menu from 'cozy-ui/transpiled/react/Menu'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles({
@@ -63,7 +62,9 @@ const AppsMenu = ({ shortcuts, apps, homeApp, isFetchingApps }) => {
       ) : (
         <Menu
           open={isOpen}
+          // eslint-disable-next-line react-hooks/refs
           anchorEl={buttonRef.current}
+          // eslint-disable-next-line react-hooks/refs
           container={containerRef.current}
           getContentAnchorEl={null}
           onClose={toggleMenu}

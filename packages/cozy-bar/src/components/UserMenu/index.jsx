@@ -1,13 +1,13 @@
+import UserMenuContent from 'components/UserMenu/UserMenuContent'
 import React, { useRef, useState } from 'react'
 
+import { useInstanceInfo } from 'cozy-client'
+import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Menu from 'cozy-ui/transpiled/react/Menu'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
-import { useInstanceInfo } from 'cozy-client'
 
-import UserMenuContent from 'components/UserMenu/UserMenuContent'
 import AvatarMyself from './components/AvatarMyself'
 
 const useStyles = makeStyles({
@@ -70,7 +70,9 @@ const UserMenu = ({ onLogOut, isSettingsAppInstalled }) => {
       ) : (
         <Menu
           open={isOpen}
+          // eslint-disable-next-line react-hooks/refs
           anchorEl={buttonRef.current}
+          // eslint-disable-next-line react-hooks/refs
           container={containerRef.current}
           getContentAnchorEl={null}
           onClose={toggleMenu}
