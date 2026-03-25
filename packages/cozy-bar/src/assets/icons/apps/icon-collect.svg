@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="48px" viewBox="0 0 44 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>cozy data connect</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="3402-app-Drive---menu-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-186.000000, -68.000000)">
+        <g id="nav-apps">
+            <g id="cozy-collect" transform="translate(168.000000, 60.000000)">
+                <g id="cozy-data-connect" transform="translate(18.000000, 8.000000)">
+                    <path d="M21.75,13.0364061 C26.6091006,13.0364061 30.548291,17.0538035 30.548291,22.0091966 C30.548291,26.9645896 26.6091006,30.981987 21.75,30.981987 C16.8908994,30.981987 12.951709,26.9645896 12.951709,22.0091966 C12.951709,17.0538035 16.8908994,13.0364061 21.75,13.0364061 Z M21.75,44.2087512 C16.4803125,44.2087512 11.703818,42.0590354 8.25,38.5910424 C11.1309515,35.7926971 16.1005196,33.9440784 21.75,33.9440784 C27.3994804,33.9440784 32.3690485,35.7926971 35.25,38.5910424 C31.796182,42.0590354 27.0196875,44.2087512 21.75,44.2087512 Z" id="Shape" fill="#855CEA" fill-rule="nonzero"></path>
+                    <g id="Group">
+                        <circle id="Oval" stroke="#C2ADF4" stroke-width="2" cx="21.75" cy="24" r="20.75"></circle>
+                        <circle id="Oval-2" fill="#C2ADF4" cx="21.75" cy="4.5" r="4.5"></circle>
+                        <circle id="Oval-2-Copy" fill="#C2ADF4" cx="21.75" cy="43.5" r="4.5"></circle>
+                        <circle id="Oval-2-Copy-2" fill="#C2ADF4" cx="39" cy="35.25" r="4.5"></circle>
+                        <circle id="Oval-2-Copy-4" fill="#C2ADF4" cx="4.5" cy="35.25" r="4.5"></circle>
+                        <circle id="Oval-2-Copy-3" fill="#C2ADF4" cx="39" cy="13.5" r="4.5"></circle>
+                        <circle id="Oval-2-Copy-5" fill="#C2ADF4" cx="4.5" cy="13.5" r="4.5"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

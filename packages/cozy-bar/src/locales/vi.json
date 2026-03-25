@@ -1,0 +1,63 @@
+{
+  "drawer": "Hiển thị ngăn kéo menu",
+  "profile": "Hồ sơ",
+  "appearance": "Giao diện",
+  "plans": "Gói dịch vụ",
+  "permissions": "Quyền",
+  "connectedDevices": "Thiết bị đã kết nối",
+  "connections": "Kết nối",
+  "storage": "Lưu trữ",
+  "storage_phrase": "Đã sử dụng %{diskUsage} GB trên tổng số %{diskQuota} GB",
+  "help": "Câu hỏi thường gặp",
+  "contact": "Liên hệ với chúng tôi",
+  "logout": "Đăng xuất",
+  "soon": "sắp ra mắt",
+  "termsOfService": "Điều khoản dịch vụ",
+  "legalNotice": "Thông báo pháp lý",
+  "error_UnavailableStack": "Ngăn xếp không thể truy cập (hết thời gian chờ kết nối).",
+  "error_UnauthorizedStack": "Thiếu một số quyền, ứng dụng không thể truy cập tài nguyên được yêu cầu trên ngăn xếp.",
+  "no_apps": "Không tìm thấy ứng dụng nào trên Cozy.",
+  "menu": {
+    "apps": "Ứng dụng",
+    "settings": "Cài đặt",
+    "home_mobile": "Quay lại trang tổng quan...",
+    "home": "Quay lại trang tổng quan",
+    "home_title": "Trang chủ"
+  },
+  "Categories": {
+    "cozy": "Ứng dụng Cozy",
+    "partners": "Ứng dụng của đối tác",
+    "ptnb": "expPTNB",
+    "others": "Ứng dụng khác"
+  },
+  "permsModal": {
+    "title": "Truy cập toàn bộ Cozy của bạn từ ứng dụng",
+    "description": "Cho phép %{app} hiển thị các ứng dụng Cozy của bạn trên thiết bị này",
+    "button": "Cho phép truy cập"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "Ứng dụng Cửa hàng sẽ sớm có trên Cozy của bạn.",
+      "description": "Nhờ Cozy Store, bạn sẽ có thể cài đặt các ứng dụng mà bạn muốn trong Cozy của mình."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "Để tuân thủ GDPR, Cozy Cloud đã cập nhật Điều khoản dịch vụ có hiệu lực từ ngày 25 tháng 5 năm 2018",
+      "CTA": "Đọc ngay"
+    },
+    "moved": {
+      "description": "Cozy đã được chuyển đến một địa chỉ mới"
+    }
+  },
+  "userMenu": {
+    "manageProfile": "Quản lý hồ sơ",
+    "createBusinessAccount": "Tạo tài khoản doanh nghiệp",
+    "storage": "Lưu trữ",
+    "storageAvailable": "Còn trống %{smart_count} GB",
+    "logOut": "Đăng xuất"
+  }
+}
+
+
+

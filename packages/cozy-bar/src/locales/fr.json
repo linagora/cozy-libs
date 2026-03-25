@@ -1,0 +1,60 @@
+{
+  "drawer": "Afficher le menu latéral",
+  "profile": "Profil",
+  "appearance": "Apparence",
+  "plans": "Offres et options",
+  "permissions": "Permissions",
+  "connectedDevices": "Appareils connectés",
+  "connections": "Connexions",
+  "storage": "Stockage",
+  "storage_phrase": "%{diskUsage} Go sur %{diskQuota} Go",
+  "help": "Manuel d'utilisation",
+  "contact": "Nous contacter",
+  "logout": "Déconnexion",
+  "soon": "à venir",
+  "termsOfService": "Conditions générales d’utilisation",
+  "legalNotice": "Mentions légales",
+  "error_UnavailableStack": "Connexion à la stack impossible (connection timed-out)",
+  "error_UnauthorizedStack": "Des permissions sont manquante, l'application ne peut accéder aux ressources demandées.",
+  "no_apps": "Pas d'applications Cozy trouvées.",
+  "menu": {
+    "apps": "Applications",
+    "settings": "Paramètres",
+    "home_mobile": "Retour vers le tableau de bord...",
+    "home": "Retour vers le tableau de bord",
+    "home_title": "Accueil "
+  },
+  "Categories": {
+    "cozy": "Apps Cozy",
+    "partners": "Expérimentation MesInfos",
+    "ptnb": "Expérimentation Carnet du logement",
+    "others": "Autres apps"
+  },
+  "permsModal": {
+    "title": "Accéder à ton Cozy à partir de ton application",
+    "description": "Autoriser %{app} à afficher les applications de ton Cozy sur cet appareil",
+    "button": "Autoriser l'accès"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "L'application Store sera bientôt disponible dans votre Cozy",
+      "description": "Grâce à cozy Store vous pourrez installer les applications que vous souhaitez sur votre Cozy."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "Dans le cadre du RGPD, Cozy Cloud met à jour ses Conditions Générales d'Utilisation qui ont pris effet le 25 Mai 2018",
+      "CTA": "Lire maintenant"
+    },
+    "moved": {
+      "description": "Ce Cozy a été déplacé vers une nouvelle adresse"
+    }
+  },
+  "userMenu": {
+    "manageProfile": "Gérer mon profil",
+    "createBusinessAccount": "Créer un compte entreprise",
+    "storage": "Stockage",
+    "storageAvailable": "%{smart_count} Go disponible",
+    "logOut": "Se déconnecter"
+  }
+}

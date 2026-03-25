@@ -1,0 +1,45 @@
+{
+  "drawer": "Navigatiemenu tonen",
+  "profile": "Profiel",
+  "connectedDevices": "Verbonden apparaten",
+  "storage": "Opslag",
+  "storage_phrase": "%{diskUsage} GB van %{diskQuota} GB gebruikt",
+  "view_offers": "Aanbiedingen bekijken",
+  "view_my_offer": "Mijn aanbieding",
+  "help": "Hulp",
+  "logout": "Uitloggen",
+  "soon": "binnenkort",
+  "error_UnavailableStack": "De stack is onbereikbaar (verbindingstime-out).",
+  "error_UnauthorizedStack": "Sommige machtigingen ontbreken. De app kan hierdoor de opgevraagde bron niet benaderen.",
+  "no_apps": "Geen apps aangetroffen op de Cozy.",
+  "menu": {
+    "apps": "Apps",
+    "settings": "Instellingen",
+    "home_mobile": "Terug naar startpagina...",
+    "home": "Terug naar startpagina",
+    "home_title": "Startpagina"
+  },
+  "Categories": {
+    "cozy": "Cozy-apps",
+    "partners": "Partner-apps",
+    "ptnb": "expPTNB",
+    "others": "Overige apps"
+  },
+  "permsModal": {
+    "title": "Toegang tot je gehele Cozy vanuit je app",
+    "description": "%{app} machtigen om je Cozy-apps te tonen op dit apparaat",
+    "button": "Machtigen"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "De Winkel-app is binnenkort beschikbaar op je Cozy.",
+      "description": "Dankzij de Cozy Winkel kun je je favoriete apps installeren op je Cozy."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "In overeenstemming met de GPDR heeft Cozy Cloud de Algemene voorwaarden bijgewerkt. Deze zijn ingegaan op 25 mei 2018.",
+      "CTA": "Nu lezen"
+    }
+  }
+}

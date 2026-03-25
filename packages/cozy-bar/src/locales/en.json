@@ -1,0 +1,60 @@
+{
+  "drawer": "Show menu drawer",
+  "profile": "Profile",
+  "appearance": "Appearance",
+  "plans": "Plans",
+  "permissions": "Permissions",
+  "connectedDevices": "Connected devices",
+  "connections": "Connections",
+  "storage": "Storage",
+  "storage_phrase": "%{diskUsage} GB of %{diskQuota} GB used",
+  "help": "FAQ",
+  "contact": "Contact us",
+  "logout": "Log out",
+  "soon": "soon",
+  "termsOfService": "Terms of Service",
+  "legalNotice": "Legal notice",
+  "error_UnavailableStack": "The stack is unreachable (connection timed-out).",
+  "error_UnauthorizedStack": "Some permissions are missing, the application can't access the requested resource on the stack.",
+  "no_apps": "No applications found on the Cozy.",
+  "menu": {
+    "apps": "Apps",
+    "settings": "Settings",
+    "home_mobile": "Back to dashboard...",
+    "home": "Back to dashboard",
+    "home_title": "Home"
+  },
+  "Categories": {
+    "cozy": "Cozy apps",
+    "partners": "Partners apps",
+    "ptnb": "expPTNB",
+    "others": "Other apps"
+  },
+  "permsModal": {
+    "title": "Access your whole Cozy from your application",
+    "description": "Authorize %{app} to display your Cozy applications on this device",
+    "button": "Authorize access"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "The Store application will be available soon in your Cozy.",
+      "description": "Thanks to Cozy Store you will be able to install the applications that you want in your Cozy."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "To comply with the GDPR, Cozy Cloud has updated its Terms of Services that have taken effect on May 25, 2018",
+      "CTA": "Read now"
+    },
+    "moved": {
+      "description": "The Cozy has been moved to a new address"
+    }
+  },
+  "userMenu": {
+    "manageProfile": "Manage profile",
+    "createBusinessAccount": "Create business account",
+    "storage": "Storage",
+    "storageAvailable": "%{smart_count} GB available",
+    "logOut": "Log out"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "drawer": "Wysuń menu",
+  "profile": "Profil",
+  "connectedDevices": "Połączone urządzenia",
+  "storage": "Magazyn",
+  "storage_phrase": "%{diskUsage} GB z %{diskQuota} GB użyte",
+  "view_offers": "View offers",
+  "view_my_offer": "My offer",
+  "help": "Pomoc",
+  "logout": "Wyloguj",
+  "soon": "niebawem",
+  "error_UnavailableStack": "Stos jest niedostępny (przekroczono limit czasu połączenia).",
+  "error_UnauthorizedStack": "Brakuje uprawnień, aplikacja nie może korzystać z wymaganych zasobów stosu.",
+  "no_apps": "Nie znaleziono żadnych aplikacji na Cozy.",
+  "menu": {
+    "apps": "Aplikacje",
+    "settings": "Ustawienia",
+    "home_mobile": "Back to home...",
+    "home": "Back to home",
+    "home_title": "Home"
+  },
+  "Categories": {
+    "cozy": "Aplikacje Cozy",
+    "partners": "Aplikacje Partnerskie",
+    "ptnb": "expPTNB",
+    "others": "Aplikacje inne"
+  },
+  "permsModal": {
+    "title": "Uzyskaj dostęp do swojego Cozy z dowolnej aplikacji.",
+    "description": "Autoryzuj %{app} aby korzystać z aplikacji Cozy na tym urządzeniu",
+    "button": "Autoryzuj dostęp"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "Market Aplikacji będzie wkrótce dostępny w Twoim Cozy.",
+      "description": "Dzięki Marketowi Cozy będziesz mógł instalować aplikacje, które będą Ci potrzebne."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "To comply with the GDPR, Cozy Cloud has updated its Terms of Services that have taken effect on May 25, 2018",
+      "CTA": "Read now"
+    }
+  }
+}

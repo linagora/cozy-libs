@@ -1,0 +1,260 @@
+[role=banner] .coz-nav-apps-btns {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+  line-height: 1rem;
+}
+
+[role=banner] .coz-nav-apps-btns-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3rem;
+  margin: 0 .75rem;
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  color: var(--primaryTextColor);
+  font-size: 1rem;
+}
+
+[role=banner] .coz-nav-apps-btns-main:hover,
+[role=banner] .coz-nav-apps-btns-main:focus,
+[role=banner] .coz-nav-apps-btns-main:active {
+  cursor: pointer;
+  color: var(--primaryTextColor);
+}
+
+[role=banner] .coz-nav-apps-btns-main[disabled]:hover,
+[role=banner] .coz-nav-apps-btns-main[disabled]:focus,
+[role=banner] .coz-nav-apps-btns-main[disabled]:active {
+  cursor: default;
+}
+
+[role=banner] .coz-nav-app-name {
+  margin: 0 .4rem;
+  font-weight: bold;
+}
+
+[role=banner] .coz-nav-apps-btns-sep {
+  height: 1.75rem;
+  background-color: var(--dividerColor);
+  width: 1px;
+}
+
+[role=banner] .coz-nav-apps-btns-home {
+  height: 2rem;
+  margin-right: .75rem;
+}
+
+[role=banner] .coz-nav-apps-btns-home--is-flagship {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  height: 100%;
+  justify-content: center;
+  margin-right: .25rem;
+  width: 3rem;
+}
+
+
+[role=banner] .coz-nav-apps-btns-home-svg {
+  max-width: 2rem;
+  max-height: 2rem;
+}
+
+[role=banner] .coz-nav-apps-btns-home,
+[role=banner] .coz-nav-apps-btns-home[href]:visited {
+  color: var(--actionColorFocus);
+}
+
+[role=banner] .coz-nav-apps-btns-home[href]:hover,
+[role=banner] .coz-nav-apps-btns-home[href]:active,
+[role=banner] .coz-nav-apps-btns-home[href]:focus {
+  color: var(--actionColorHover);
+}
+
+[role=banner] .coz-nav-apps-btns--currentHome .coz-nav-apps-btns-main {
+  margin-left: 0;
+}
+
+[role=banner] .coz-nav-apps-btns--currentHome .coz-nav-apps-btns-home {
+  margin-right: 0;
+}
+
+/* POP */
+[role=banner] .coz-nav-pop--apps {
+  width: 20rem;
+  max-height: 29.5rem;
+  left: 3.5rem;
+  transform-origin: 10% 0%;
+}
+
+[role=banner] .coz-nav .coz-nav-apps-btns--currentHome+.coz-nav-pop--apps {
+  left: 0;
+}
+
+/* POP CONTENT */
+
+[role=banner] .coz-nav-pop--apps .coz-nav-pop-content {
+  display: flex;
+  flex-direction: column;
+  /* pop size less pop border size*/
+  max-height: calc(29.5rem - 2px);
+  width: 100%;
+}
+
+@media (max-height: 21rem) {
+  [role=banner] .coz-nav-pop--apps {
+    max-height: calc(100vh - 4rem)
+  }
+
+  [role=banner] .coz-nav-pop--apps .coz-nav-pop-content {
+    max-height: calc(100vh - 4rem - 2px);
+  }
+}
+
+
+[role=banner] .coz-nav-pop--apps .coz-nav-pop-content .coz-nav-group {
+  flex-grow: 1;
+  flex-shrink: 1;
+  overflow-y: auto;
+}
+
+[role=banner] .coz-nav-apps-item {
+  display: flex;
+}
+
+/* current app item */
+[role=banner] .coz-nav-apps-item--current a[role=menuitem] {
+  font-weight: bold;
+  background-color: var(--defaultBackgroundColor);
+  border-left: 4px solid var(--primaryColor)
+}
+
+[role=banner] .coz-nav-apps-item [role=menuitem],
+[role=banner] [role=menuitem].coz-apps-home-btn {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  /* we remove the left border from the padding */
+  padding: .5rem 1rem .5rem calc(1rem - 4px);
+  color: var(--primaryTextColor);
+  text-decoration: none;
+  outline: none;
+}
+
+[role=banner] .coz-nav-apps-item:first-of-type [role=menuitem] {
+  margin-top: .5rem;
+}
+
+[role=banner] .coz-nav-apps-item:last-of-type [role=menuitem] {
+  margin-bottom: .5rem;
+}
+
+[role=banner] .coz-nav-apps-item-icon {
+  margin-right: .5rem;
+  height: 2rem;
+  width: 2rem;
+  /* force svg inline to be 2rem */
+  min-width: 2rem;
+}
+
+[role=banner] .coz-nav-apps-item [role=menuitem] .coz-label {
+  padding-right: .5rem;
+  width: 100%;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[role=banner] [role=menuitem].coz-apps-home-btn {
+  display: flex;
+  margin-top: 0;
+  color: var(--primaryTextColor);
+  font-weight: bold;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
+}
+
+[role=banner] [role=menuitem].coz-apps-home-btn svg {
+  width: 1rem;
+  height: 1rem;
+  margin-right: .5rem;
+}
+
+@keyframes barPlaceHolderShimmer {
+  0% {
+    background-position: -20rem 0;
+  }
+
+  80% {
+    background-position: 20rem 0;
+  }
+
+  80.1% {
+    background-position: -20rem 0;
+  }
+
+  100% {
+    background-position: -20rem 0;
+  }
+}
+
+[role=banner] .coz-loading-placeholder {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  min-height: 1em;
+  animation: barPlaceHolderShimmer 1s linear infinite;
+  animation-delay: .1s;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  background-position: -20rem 0;
+  background-image: linear-gradient(to right, var(--contrastBackgroundColor) 0, var(--defaultBackgroundColor) 50%, var(--contrastBackgroundColor) 100%);
+  background-size: 20rem 10rem;
+  background-repeat: no-repeat;
+  background-color: var(--defaultBackgroundColor);
+  border-radius: .15rem;
+  margin: .1rem 0;
+}
+
+
+[role=banner] .coz-nav-apps-item-icon.coz-loading-placeholder {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 1rem;
+  display: block;
+}
+
+[role=banner] .coz-nav-apps-item [role=menuitem] .coz-label.coz-loading-placeholder {
+  height: 1em;
+  width: 7rem;
+}
+
+[role=banner] .coz-nav-apps-btns--loading {
+  width: 12rem;
+}
+
+[role=banner] .coz-nav-apps-btns-home.coz-loading-placeholder {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 2rem;
+  background-color: var(--defaultBackgroundColor);
+  flex-shrink: 0;
+}
+
+[role=banner] .coz-nav-apps-btns-main.coz-loading-placeholder {
+  height: 1.5rem;
+  margin: 0;
+  background-color: var(--defaultBackgroundColor);
+}

@@ -1,0 +1,81 @@
+[role=banner] .coz-nav {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  position: relative;
+}
+
+@media (max-width: 48em) {
+  [role=banner] .coz-nav {
+    display: none;
+  }
+}
+
+[role=banner] [aria-controls][aria-busy]::after {
+  position: relative;
+  top: .12em;
+  margin: 0 .355em;
+  font-size: .875em;
+}
+
+[role=banner] [aria-controls][aria-busy=true] {
+  padding-right: 0;
+}
+
+[role=banner] .coz-nav [aria-controls][data-icon] {
+  padding-left: calc(1.25em + 16px + .5em);
+  background-position: 1em calc(50% - 1px);
+}
+
+/* POP */
+[role=banner] .coz-nav-pop[aria-hidden=true] {
+  display: flex;
+  transform: scale(0);
+  opacity: 0;
+  transition: .2s transform ease-in, .1s opacity ease-in;
+}
+
+[role=banner] .coz-nav-pop {
+  position: absolute;
+  top: calc(100% - .25em);
+  box-sizing: border-box;
+  min-width: 100%;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  background-color: var(--paperBackgroundColor);
+  border-radius: 8px;
+  border: solid 1px var(--borderMainColor);
+  box-shadow: var(--shadow5);
+  opacity: 1;
+  transform: scale(1);
+  transform-origin: 80% 0%;
+  transition: .2s transform cubic-bezier(0.2, 0.75, 0.3, 1.15);
+  /* hide scrollbars */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+[role=banner] .coz-nav-pop::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+[role=banner] .coz-nav-pop-content .coz-nav-group {
+  padding: 8px 0 8px 0;;
+  margin: 0;
+}
+
+[role=banner] .coz-nav-pop-content .coz-nav-group:last-of-type {
+  border-radius: 0 0 8px 8px;
+}
+
+[role=banner] .coz-nav-pop-content .coz-nav-group:first-of-type {
+  border-radius: 8px 8px 0 0;
+}
+
+[role=banner] .coz-nav-pop .coz-nav-group {
+  border-bottom: solid 1px var(--borderMainColor);
+}
+
+[role=banner] .coz-nav-pop .coz-nav-group:last-child {
+  border: 0;
+}

@@ -1,0 +1,45 @@
+{
+  "drawer": "Menü anzeigen",
+  "profile": "Profile",
+  "connectedDevices": "Verbundene Geräte",
+  "storage": "Speicher",
+  "storage_phrase": "%{diskUsage} GB von %{diskQuota} GB benutzt",
+  "view_offers": "View offers",
+  "view_my_offer": "My offer",
+  "help": "Hilfe",
+  "logout": "Ausloggen",
+  "soon": "Später",
+  "error_UnavailableStack": "Der Stapel ist nicht erreichbar (Verbindung Zeitüberschreitung).",
+  "error_UnauthorizedStack": "Einige Berechtigungen fehlen, die Anwendung kann nicht auf die angeforderte Ressource auf dem Stapel zugreifen.",
+  "no_apps": "Keine Anwendungen für Cozy gefunden.",
+  "menu": {
+    "apps": "Anwendungen",
+    "settings": "Einstellungen",
+    "home_mobile": "Back to home...",
+    "home": "Back to home",
+    "home_title": "Home"
+  },
+  "Categories": {
+    "cozy": "Cozy Anwendungen",
+    "partners": "Partner Anwendungen",
+    "ptnb": "expPTNB",
+    "others": "Andere Anwendungen"
+  },
+  "permsModal": {
+    "title": "Greife von deiner Anwendung aus auf dein komplettes Cozy zu",
+    "description": "Erlaube %{app} den Zugriff auf deine Cozy Anwendungen auf diesem Gerät",
+    "button": "Erlaube Zugriff"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "Die Store Anwendung wird in deinem Cozy bald verfügbar sein.",
+      "description": "Dank Cozy Store wird es bald möglich sein gewünschte Anwendungen in dein Cozy zu installieren."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "To comply with the GDPR, Cozy Cloud has updated its Terms of Services that have taken effect on May 25, 2018",
+      "CTA": "Jetzt lesen"
+    }
+  }
+}

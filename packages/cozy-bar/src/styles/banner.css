@@ -1,0 +1,64 @@
+@media (max-width: 63.9375rem) {
+  .has-banner [role=application] .o-layout-2panes:before {
+    height: 6rem;
+  }
+
+  [role=banner] .coz-bar-banner {
+    font-size: 14px;
+    transition: none;
+    transition-delay: none;
+  }
+
+  [role=banner] .coz-bar-banner-button {
+    max-width: 7rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .has-banner [role=application] .o-layout-2panes:before {
+    height: 7rem;
+  }
+
+  [role=banner] .coz-bar-banner {
+    height: auto;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 18rem) {
+  .has-banner [role=application] .o-layout-2panes:before {
+    height: 8rem;
+  }
+}
+
+[role=banner] .coz-bar-banner.unmounted {
+  height: 0;
+}
+
+[role=banner] .coz-bar-banner {
+  display: flex;
+  background: var(--primaryColor);
+  box-sizing: border-box;
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem 0 1rem;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--primaryContrastTextColor);
+  overflow: hidden;
+  box-shadow: var(--shadow2);
+  transition: height 1s;
+  transition-delay: 1s;
+}
+
+[role=banner] .coz-bar-banner-button,
+[role=banner] .coz-bar-banner-button:hover,
+[role=banner] .coz-bar-banner-button:visited
+[role=banner] .coz-bar-banner-button:active
+[role=banner] .coz-bar-banner-button:focus {
+  border-color: var(--primaryContrastTextColor) !important;
+  min-height: 2rem;
+  height: 2rem;
+  flex-shrink: 0;
+  max-width: 10rem;
+}

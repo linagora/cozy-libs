@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="39px" viewBox="0 0 48 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>images 02</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="3402-app-Drive---menu-default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(-184.000000, -177.000000)">
+        <g id="nav-apps">
+            <g id="cozy-photos" transform="translate(168.000000, 164.000000)">
+                <g id="images-02" transform="translate(16.000000, 13.000000)">
+                    <rect id="Rectangle-5" fill="#1EC737" x="0" y="0" width="48" height="39" rx="4"></rect>
+                    <path d="M0,29.9768414 L9.08392328,20.8929181 C9.86600086,20.1108405 11.1307648,20.1076062 11.9143185,20.8911599 L16.5,25.4768414 L28.5807792,13.3960622 C29.3645932,12.6122482 30.6300752,12.6069166 31.4124298,13.3892712 L48,29.9768414 L48,34.9768981 C48,37.1860057 46.2059475,38.9768414 43.9901068,38.9768414 L4.00989318,38.9768414 C1.79529033,38.9768414 0,37.1771879 0,34.9768981 L0,29.9768414 Z" id="Path-8" fill="#23A636"></path>
+                    <circle id="Oval-1" fill="#FFFFFF" cx="12" cy="10.5" r="4.5"></circle>
+                    <path d="M16.8,24.3 L8.4,32.7 L16.8,24.3 Z" id="Path-3" stroke="#1EC737" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

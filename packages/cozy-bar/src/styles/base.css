@@ -1,0 +1,21 @@
+[role=banner] .coz-sep-flex {
+  margin: 0;
+  border: none;
+  flex: 1 0;
+}
+
+[role=banner] .blurry {
+  opacity: .5;
+  filter: blur(5px);
+}
+
+[role=banner] [data-icon] {
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  padding-left: calc(16px + .5em);
+}
+
+[role=banner] .u-flex-grow {
+  display: flex;
+  flex-grow: 1;
+}

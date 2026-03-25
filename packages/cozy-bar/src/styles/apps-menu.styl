@@ -1,0 +1,34 @@
+@require 'settings/breakpoints'
+
+.apps-menu-grid
+    display flex
+    flex-wrap wrap
+    width 100%
+
+    +desktop()
+        width 15rem
+        margin 6px 10px
+  
+.apps-menu-grid-item-wrapper
+    width 33%
+    aspect-ratio 1 // @stylint ignore Property is valid but unknown by stylint which is old and should be replaced
+
+    +desktop()
+        width 5rem
+        height 5rem
+
+.apps-menu-grid-item
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    text-decoration none
+    gap 4px // @stylint ignore Property is valid but unknown by stylint which is old and should be replaced
+    width 100%
+
+.apps-menu-grid-item-icon
+    width 60%
+
+    +desktop()
+        width 2.625rem
+        height 2.625rem
