@@ -11,9 +11,12 @@ import { useI18n } from 'twake-i18n'
 
 import EmailSourceItem from './EmailSourceItem'
 import FileSourcesItem from './FileSourcesItem'
+import WebSourceItem from './WebSourceItem'
 import { EMAIL_DOCTYPE, buildFilesByIds } from '../../queries'
 
-const Sources = ({ messageId, files, emails }) => {
+const URL_DOCTYPE = 'io.cozy.url'
+
+const Sources = ({ messageId, files, emails, urls }) => {
   const [showSources, setShowSources] = useState(false)
   const { t } = useI18n()
   const ref = useRef()
@@ -47,7 +50,10 @@ const Sources = ({ messageId, files, emails }) => {
       <Chip
         className="u-mb-1"
         icon={<Icon icon={MultiFilesIcon} className="u-ml-half" />}
-        label={t('assistant.sources', files.length + emails.length)}
+        label={t(
+          'assistant.sources',
+          files.length + emails.length + urls.length
+        )}
         deleteIcon={
           <Icon
             className="u-h-1"
@@ -72,6 +78,12 @@ const Sources = ({ messageId, files, emails }) => {
           {emails.map(email => (
             <EmailSourceItem key={`${messageId}-${email.id}`} email={email} />
           ))}
+          {urls?.map(url => (
+            <WebSourceItem
+              key={`${messageId}-${url.FileURL || url.fileUrl}`}
+              source={url}
+            />
+          ))}
         </div>
       </Grow>
     </Box>
@@ -81,11 +93,16 @@ const Sources = ({ messageId, files, emails }) => {
 const SourcesWithFilesQuery = ({ messageId, sources }) => {
   const fileIds = []
   const emails = []
+  const urls = []
   let files
   sources.map(source => {
-    source.doctype === EMAIL_DOCTYPE
-      ? emails.push(source)
-      : fileIds.push(source.id)
+    if (source.doctype === EMAIL_DOCTYPE) {
+      emails.push(source)
+    } else if (source.doctype === URL_DOCTYPE) {
+      urls.push(source)
+    } else {
+      fileIds.push(source.id)
+    }
   })
   const enabled = fileIds && fileIds.length > 0
   const filesByIds = buildFilesByIds(fileIds, enabled)
@@ -97,10 +114,15 @@ const SourcesWithFilesQuery = ({ messageId, sources }) => {
   const isLoading = isQueryLoading(queryResult)
   files = fetchedFiles || []
 
-  if ((isLoading && enabled) || (files.length === 0 && emails.length === 0))
+  if (
+    (isLoading && enabled) ||
+    (files.length === 0 && emails.length === 0 && urls.length === 0)
+  )
     return null
 
-  return <Sources messageId={messageId} files={files} emails={emails} />
+  return (
+    <Sources messageId={messageId} files={files} emails={emails} urls={urls} />
+  )
 }
 
 export default SourcesWithFilesQuery
