@@ -1,10 +1,9 @@
 import React from 'react'
 
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import HelpOutlinedIcon from 'cozy-ui/transpiled/react/Icons/HelpOutlined'
-
 import { useInstanceInfo } from 'cozy-client'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import HelpOutlinedIcon from 'cozy-ui/transpiled/react/Icons/HelpOutlined'
 
 const HelpLink = () => {
   const { context } = useInstanceInfo()

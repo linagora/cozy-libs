@@ -1,6 +1,9 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
+import { useClient } from 'cozy-client'
+import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
+
 import {
   getAppName,
   getAppNamePrefix,
@@ -9,11 +12,7 @@ import {
   getUserActionRequired,
   APP_SELECTOR
 } from '../dom'
-
 import Bar from './Bar'
-import { useClient } from 'cozy-client'
-import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
-
 import { useBarContext } from './BarProvider'
 
 const createBarElement = () => {
@@ -114,6 +113,7 @@ const BarComponent = ({
     searchOptions,
     componentsProps,
     onDrawer: visible => {
+      // eslint-disable-next-line react-hooks/immutability
       wrapperElement.dataset.visible = visible
     }
   }

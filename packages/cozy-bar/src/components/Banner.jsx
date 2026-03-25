@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import useI18n from 'components/useI18n'
+import React, { useCallback, useEffect, useState } from 'react'
+
+import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 
 const Banner = ({ code, links }) => {
   const { t } = useI18n()

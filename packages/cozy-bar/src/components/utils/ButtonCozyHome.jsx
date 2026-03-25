@@ -1,11 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-import flag from 'cozy-flags'
-import { isFlagshipApp } from 'cozy-device-helper'
-import { useWebviewIntent } from 'cozy-intent'
-
 import IconCozyHome from 'components/utils/IconCozyHome'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+import { isFlagshipApp } from 'cozy-device-helper'
+import flag from 'cozy-flags'
+import { useWebviewIntent } from 'cozy-intent'
 
 const ButtonCozyHome = ({ homeHref, isInvertedTheme }) => {
   const webviewIntent = useWebviewIntent()

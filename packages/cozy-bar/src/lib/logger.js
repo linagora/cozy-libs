@@ -1,6 +1,7 @@
-import flag from 'cozy-flags'
 import _minilog from '@cozy/minilog'
 import set from 'lodash.set'
+
+import flag from 'cozy-flags'
 
 set(window, `cozy.debug.flagship`, () => flag('flagship.debug', true))
 

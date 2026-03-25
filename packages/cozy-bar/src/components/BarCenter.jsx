@@ -12,6 +12,7 @@ function BarCenter({ children }) {
         barContext.setBarCenter(null)
       }
     } else {
+      // eslint-disable-next-line no-console
       console.warn('You should not use BarCenter outside of a BarProvider')
     }
   }, [barContext, children])

@@ -1,11 +1,10 @@
+import enLocale from 'locales/en.json'
 import React from 'react'
 
-import I18n from 'twake-i18n'
 import { CozyProvider, createMockClient } from 'cozy-client'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
-
-import enLocale from 'locales/en.json'
+import I18n from 'twake-i18n'
 
 const TestI18n = ({ children }) => {
   return (

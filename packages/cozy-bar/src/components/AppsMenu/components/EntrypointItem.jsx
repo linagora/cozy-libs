@@ -1,14 +1,12 @@
+import cx from 'classnames'
+import useI18n from 'components/useI18n'
 import React from 'react'
+import styles from 'styles/apps-menu.styl'
 
 import { useClient, generateWebLink } from 'cozy-client'
-
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import cx from 'classnames'
-
-import styles from 'styles/apps-menu.styl'
-import useI18n from 'components/useI18n'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles(() => {
   return {

@@ -1,34 +1,34 @@
+import { render } from '@testing-library/react'
 import React from 'react'
-import { isFlagshipApp } from 'cozy-device-helper'
 import { BarLike } from 'test/lib/BarLike'
 
-import { Bar } from './Bar'
-import { render } from '@testing-library/react'
 import { createMockClient } from 'cozy-client'
-import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-
 import { useInstanceInfo, useQuery } from 'cozy-client'
 import { shouldDisplayOffers } from 'cozy-client/dist/models/instance'
+import { isFlagshipApp } from 'cozy-device-helper'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+
+import { Bar } from './Bar'
 
 jest.mock('cozy-device-helper', () => ({
-  ...require.requireActual('cozy-device-helper'),
+  ...jest.requireActual('cozy-device-helper'),
   isFlagshipApp: jest.fn()
 }))
 
 jest.mock('cozy-client', () => ({
-  ...require.requireActual('cozy-client'),
+  ...jest.requireActual('cozy-client'),
   useInstanceInfo: jest.fn(),
   useQuery: jest.fn(),
   RealTimeQueries: () => null
 }))
 
 jest.mock('cozy-client/dist/models/instance', () => ({
-  ...require.requireActual('cozy-client/dist/models/instance'),
+  ...jest.requireActual('cozy-client/dist/models/instance'),
   shouldDisplayOffers: jest.fn()
 }))
 
 jest.mock('cozy-ui/transpiled/react/providers/Breakpoints', () => ({
-  ...require.requireActual('cozy-ui/transpiled/react/providers/Breakpoints'),
+  ...jest.requireActual('cozy-ui/transpiled/react/providers/Breakpoints'),
   __esModule: true,
   useBreakpoints: jest.fn()
 }))

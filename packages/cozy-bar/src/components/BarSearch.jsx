@@ -12,6 +12,7 @@ function BarSearch({ children }) {
         barContext.setBarSearch(null)
       }
     } else {
+      // eslint-disable-next-line no-console
       console.warn('You should not use BarSearch outside of a BarProvider')
     }
   }, [barContext, children])

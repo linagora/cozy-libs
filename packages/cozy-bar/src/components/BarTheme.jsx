@@ -12,6 +12,7 @@ function BarTheme({ variant }) {
         barContext.setThemeVariant('normal')
       }
     } else {
+      // eslint-disable-next-line no-console
       console.warn('You should not use BarTheme outside of a BarProvider')
     }
   }, [barContext, variant])

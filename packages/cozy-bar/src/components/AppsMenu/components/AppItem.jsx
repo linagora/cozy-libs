@@ -1,17 +1,15 @@
+import cx from 'classnames'
+import { appShape } from 'proptypes/index'
 import React from 'react'
+import styles from 'styles/apps-menu.styl'
 
-import { getAppDisplayName } from 'cozy-client/dist/models/applications'
 import { useClient } from 'cozy-client'
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
+import { getAppDisplayName } from 'cozy-client/dist/models/applications'
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import AppIcon from 'cozy-ui-plus/dist/AppIcon'
 import AppLinker from 'cozy-ui-plus/dist/AppLinker'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import cx from 'classnames'
-
-import { appShape } from 'proptypes/index'
-
-import styles from 'styles/apps-menu.styl'
 
 const useStyles = makeStyles(() => {
   return {

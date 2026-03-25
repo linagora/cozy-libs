@@ -1,9 +1,11 @@
-import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import ButtonCozyHome from './ButtonCozyHome'
+import React from 'react'
+import { BarLike } from 'test/lib/BarLike'
+
 import { isFlagshipApp } from 'cozy-device-helper'
 import { useWebviewIntent } from 'cozy-intent'
-import { BarLike } from 'test/lib/BarLike'
+
+import ButtonCozyHome from './ButtonCozyHome'
 
 jest.mock('cozy-device-helper')
 jest.mock('cozy-intent', () => ({
