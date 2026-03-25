@@ -32,6 +32,8 @@ import { useI18n } from "twake-i18n";
 import { useAssistant } from "./AssistantProvider";
 import { createCozyRealtimeChatAdapter } from "./adapters/CozyRealtimeChatAdapter";
 import { StreamBridge } from "./adapters/StreamBridge";
+import { getPlatformTools } from "../tools/registry";
+import { useAppTools } from "./AppToolsProvider";
 import {
   FileMentionProvider,
   useFileMention,
@@ -148,6 +150,8 @@ const CozyAssistantRuntimeProviderInner = ({
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set());
   const currentStreamingMessageIdRef = useRef<string | null>(null);
   const { selectedAssistantId } = useAssistant();
+  const { toolsEnabled } = useAssistant();
+  const appTools = useAppTools();
 
   useEffect(() => {
     messagesIdRef.current = initialMessages
@@ -232,6 +236,15 @@ const CozyAssistantRuntimeProviderInner = ({
                 content: Array<{ id: string; doctype?: string }>;
               }
             | { _id: string; object: "error"; message: string }
+            | {
+                _id: string;
+                object: "tool_call";
+                content: {
+                  id: string;
+                  name: string;
+                  arguments: Record<string, unknown>;
+                };
+              }
         ) => {
           if (cancelledMessageIdsRef.current.has(res._id)) {
             if (res.object === "done" || res.object === "error") {
@@ -280,6 +293,10 @@ const CozyAssistantRuntimeProviderInner = ({
               );
               currentStreamingMessageIdRef.current = null;
             }
+
+            if (res.object === "tool_call") {
+              streamBridgeRef.current.onToolCall(conversationId, res.content);
+            }
           } catch (error) {
             log.error("Error handling chat real-time event:", error);
           }
@@ -291,23 +308,31 @@ const CozyAssistantRuntimeProviderInner = ({
 
   const { getFileIDs } = useFileMention();
 
-  const adapter = useMemo(
-    () =>
-      createCozyRealtimeChatAdapter(
-        {
-          client: client as Parameters<
-            typeof createCozyRealtimeChatAdapter
-          >[0]["client"],
-          conversationId,
-          // eslint-disable-next-line react-hooks/refs
-          streamBridge: streamBridgeRef.current,
-          assistantId: selectedAssistantId,
-          getFileIDs,
-        },
-        t
-      ),
-    [client, conversationId, selectedAssistantId, t, getFileIDs]
-  );
+  const adapter = useMemo(() => {
+    const allTools = [...getPlatformTools(), ...appTools];
+    return createCozyRealtimeChatAdapter(
+      {
+        client: client as Parameters<
+          typeof createCozyRealtimeChatAdapter
+        >[0]["client"],
+        conversationId,
+        streamBridge: streamBridgeRef.current,
+        assistantId: selectedAssistantId,
+        getFileIDs,
+        allTools,
+        toolsEnabled,
+      },
+      t
+    );
+  }, [
+    client,
+    conversationId,
+    selectedAssistantId,
+    t,
+    getFileIDs,
+    toolsEnabled,
+    appTools,
+  ]);
 
   const runtime = useLocalRuntime(adapter, {
     initialMessages,
