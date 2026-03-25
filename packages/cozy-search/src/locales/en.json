@@ -169,7 +169,46 @@
         "add": "Add"
       }
     },
-    "success": "Assistant created successfully"
+    "success": "Assistant created successfully",
+    "tools": {
+      "toggle_label": "Tools",
+      "confirm": "Confirm",
+      "confirm_all": "Confirm all",
+      "cancel": "Cancel",
+      "cancel_all": "Cancel all",
+      "retry": "Retry",
+      "cancelled": "Action cancelled",
+      "unknown_tool": "Unknown tool: %{name}",
+      "invalid_params": "The assistant generated invalid parameters for this action",
+      "createFolder": {
+        "confirm_title": "Create folder",
+        "name": "Name",
+        "location": "Location",
+        "success": "Created folder \"%{name}\"",
+        "error": "Failed to create folder \"%{name}\": %{error}"
+      },
+      "share": {
+        "confirm_title": "Share",
+        "path": "Path",
+        "recipient": "Recipient",
+        "success": "Shared \"%{path}\" with %{email}",
+        "error": "Failed to share \"%{path}\": %{error}"
+      },
+      "move": {
+        "confirm_title": "Move",
+        "from": "From",
+        "to": "To",
+        "success": "Moved \"%{source}\" to \"%{dest}\"",
+        "error": "Failed to move \"%{source}\": %{error}"
+      },
+      "rename": {
+        "confirm_title": "Rename",
+        "path": "File",
+        "new_name": "New name",
+        "success": "Renamed \"%{path}\" to \"%{newName}\"",
+        "error": "Failed to rename \"%{path}\": %{error}"
+      }
+    }
   },
   "assistant_edit": {
     "title": "Edit Assistant",
