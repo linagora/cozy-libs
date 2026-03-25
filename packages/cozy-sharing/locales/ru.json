@@ -129,7 +129,7 @@
       },
       "shareByEmail": {
         "subtitle": "По электронной почте",
-        "emailPlaceholder": "Добавить контакты или группы",
+        "emailPlaceholder": "Добавить контакты",
         "send": "Отправить",
         "singleContactSuccess": "Вы отправили приглашение на %{email}.",
         "contactSuccess": "Вы отправили приглашение %{smart_count} контакту. |||| Вы отправили приглашение %{smart_count} контактам.",
@@ -469,7 +469,7 @@
     "shareTitle": "Поделиться \"%{name}\"",
     "successNotification": "Папка была расшарена",
     "errorNotification": "Ошибка при расшаривании папки",
-    "addPeople": "Добавить людей в общую папку:",
+    "addPeople": "Добавить людей в общую папку",
     "add": "Добавить"
   },
   "SharedDrive": {
@@ -480,7 +480,7 @@
       "cancel": "Отмена",
       "create": "Создать",
       "save": "Сохранить",
-      "addPeople": "Добавить людей в общий диск:",
+      "addPeople": "Добавить людей в общий диск",
       "successNotification": "Общий диск добавлен",
       "errorNotification": "Ошибка при создании общего диска",
       "successNotificationUpdate": "Ваш общий диск был изменён",
