@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import List from 'cozy-ui/transpiled/react/List'
@@ -19,12 +19,17 @@ const FileMentionMenu = ({ anchorRef, searchTerm, onClose }) => {
     doctype: 'io.cozy.files'
   })
 
-  const fileResults =
-    results?.filter(r => r.slug === 'drive' || r.id) || []
+  const fileResults = useMemo(
+    () => results?.filter(r => r.slug === 'drive' || r.id) || [],
+    [results]
+  )
 
-  useEffect(() => {
+  // Reset selection when search term changes
+  const [prevSearchTerm, setPrevSearchTerm] = useState(searchTerm)
+  if (searchTerm !== prevSearchTerm) {
+    setPrevSearchTerm(searchTerm)
     setSelectedIndex(0)
-  }, [searchTerm])
+  }
 
   const handleSelect = useCallback(
     file => {

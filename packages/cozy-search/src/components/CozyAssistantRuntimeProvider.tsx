@@ -287,6 +287,7 @@ const CozyAssistantRuntimeProviderInner = ({
     [conversationId]
   )
 
+  /* eslint-disable react-hooks/refs */
   const adapter = useMemo(
     () =>
       createCozyRealtimeChatAdapter(
@@ -295,16 +296,15 @@ const CozyAssistantRuntimeProviderInner = ({
             typeof createCozyRealtimeChatAdapter
           >[0]['client'],
           conversationId,
-          // eslint-disable-next-line react-hooks/refs
           streamBridge: streamBridgeRef.current,
           assistantId: selectedAssistantId,
-          // eslint-disable-next-line react-hooks/refs
           getFileIDs: () => fileIDsRef.current
         },
         t
       ),
     [client, conversationId, selectedAssistantId, t]
   )
+  /* eslint-enable react-hooks/refs */
 
   const runtime = useLocalRuntime(adapter, {
     initialMessages

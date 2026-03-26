@@ -1,5 +1,7 @@
 import React from 'react'
+
 import Chip from 'cozy-ui/transpiled/react/Chips'
+
 import { useFileMention } from './FileMentionContext'
 
 const FileChipsList = () => {
