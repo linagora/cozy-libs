@@ -56,6 +56,7 @@ export const isInSharedDrivesDir = (doc: IOCozyFile): boolean => {
 
 export interface SearchOptions {
   doctypes: string[] // Specify which doctypes should be searched, and their order
+  excludeFilters?: Record<string, unknown> // Exclude results matching doc attribute values, e.g. { type: 'directory' }
 }
 
 export interface RawSearchResult {
