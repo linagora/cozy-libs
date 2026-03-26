@@ -12,7 +12,6 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
 import FileChipsList from './FileChipsList'
-import { FileMentionProvider } from './FileMentionContext'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
 import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
@@ -52,36 +51,34 @@ const ConversationComposer = () => {
   )
 
   return (
-    <FileMentionProvider>
-      <ComposerPrimitive.Root
-        className={cx('u-w-100 u-maw-7 u-mh-auto', {
-          'u-card u-bxz u-elevation-1': isMobile
-        })}
-      >
-        <ConversationBar
-          elevation={isMobile ? 0 : 1}
-          disabledHover={!!isMobile}
-          value={value}
-          isEmpty={isEmpty}
-          isRunning={isRunning}
-          onKeyDown={handleKeyDown}
-          onCancel={handleCancel}
-          onSend={handleSend}
-        />
-        <FileChipsList />
+    <ComposerPrimitive.Root
+      className={cx('u-w-100 u-maw-7 u-mh-auto', {
+        'u-card u-bxz u-elevation-1': isMobile
+      })}
+    >
+      <ConversationBar
+        elevation={isMobile ? 0 : 1}
+        disabledHover={!!isMobile}
+        value={value}
+        isEmpty={isEmpty}
+        isRunning={isRunning}
+        onKeyDown={handleKeyDown}
+        onCancel={handleCancel}
+        onSend={handleSend}
+      />
+      <FileChipsList />
 
-        <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">
-          {flag('cozy.assistant.create-assistant.enabled') && (
-            <AssistantSelection disabled={!isThreadEmpty} />
-          )}
-          {flag('cozy.assistant.source-knowledge.enabled') && (
-            <TwakeKnowledgeSelector
-              onSelectTwakeKnowledge={setOpenedKnowledgePanel}
-            />
-          )}
-        </div>
-      </ComposerPrimitive.Root>
-    </FileMentionProvider>
+      <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">
+        {flag('cozy.assistant.create-assistant.enabled') && (
+          <AssistantSelection disabled={!isThreadEmpty} />
+        )}
+        {flag('cozy.assistant.source-knowledge.enabled') && (
+          <TwakeKnowledgeSelector
+            onSelectTwakeKnowledge={setOpenedKnowledgePanel}
+          />
+        )}
+      </div>
+    </ComposerPrimitive.Root>
   )
 }
 

@@ -30,6 +30,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from './AssistantProvider'
+import { FileMentionProvider } from './Conversations/FileMentionContext'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
 import { DEFAULT_ASSISTANT } from './constants'
@@ -140,6 +141,7 @@ const CozyAssistantRuntimeProviderInner = ({
   const { t } = useI18n()
   const client = useClient()
   const streamBridgeRef = useRef(new StreamBridge())
+  const fileIDsRef = useRef<string[]>([])
   const messagesIdRef = useRef<string[]>([])
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set())
   const currentStreamingMessageIdRef = useRef<string | null>(null)
@@ -295,7 +297,9 @@ const CozyAssistantRuntimeProviderInner = ({
           conversationId,
           // eslint-disable-next-line react-hooks/refs
           streamBridge: streamBridgeRef.current,
-          assistantId: selectedAssistantId
+          assistantId: selectedAssistantId,
+          // eslint-disable-next-line react-hooks/refs
+          getFileIDs: () => fileIDsRef.current
         },
         t
       ),
@@ -318,9 +322,11 @@ const CozyAssistantRuntimeProviderInner = ({
   }, [conversationId])
 
   return (
-    <AssistantRuntimeProvider runtime={runtime}>
-      {children}
-    </AssistantRuntimeProvider>
+    <FileMentionProvider externalFileIDsRef={fileIDsRef}>
+      <AssistantRuntimeProvider runtime={runtime}>
+        {children}
+      </AssistantRuntimeProvider>
+    </FileMentionProvider>
   )
 }
 
