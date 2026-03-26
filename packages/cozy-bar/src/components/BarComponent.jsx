@@ -88,8 +88,7 @@ const BarComponent = ({
   componentsProps = {}
 }) => {
   const barContext = useBarContext()
-  const { barSearch, barLeft, barCenter, barRight, themeVariant } =
-    barContext || {}
+  const { barSearch, barLeft, barCenter, barRight } = barContext || {}
 
   const [wrapperElement, setWrapperElement] = useState(null)
 
@@ -123,7 +122,7 @@ const BarComponent = ({
       wrapperElement={wrapperElement}
       setWrapperElement={setWrapperElement}
     >
-      <CozyTheme variant={themeVariant} ignoreCozySettings={options.isPublic}>
+      <CozyTheme ignoreCozySettings={options.isPublic}>
         <Bar
           {...options}
           barSearch={barSearch}

@@ -16,7 +16,6 @@ const BarProvider = ({ children }) => {
   const [barRight, setBarRight] = useState(null)
   const [barLeft, setBarLeft] = useState(null)
   const [barSearch, setBarSearch] = useState(null)
-  const [themeVariant, setThemeVariant] = useState('normal')
 
   const value = useMemo(
     () => ({
@@ -27,11 +26,9 @@ const BarProvider = ({ children }) => {
       barLeft,
       setBarLeft,
       barSearch,
-      setBarSearch,
-      themeVariant,
-      setThemeVariant
+      setBarSearch
     }),
-    [barCenter, barLeft, barRight, barSearch, themeVariant]
+    [barCenter, barLeft, barRight, barSearch]
   )
 
   return <BarContext.Provider value={value}>{children}</BarContext.Provider>
