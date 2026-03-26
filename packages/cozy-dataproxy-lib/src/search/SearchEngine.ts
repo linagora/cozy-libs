@@ -487,8 +487,16 @@ export class SearchEngine {
       this.client,
       dedupResults
     )
+    const filteredByAttributes = options?.excludeFilters
+      ? enrichedResults.filter(result =>
+          Object.entries(options.excludeFilters!).every(
+            ([key, value]) =>
+              (result.doc as Record<string, unknown>)[key] !== value
+          )
+        )
+      : enrichedResults
     const sortedResults = this.sortSearchResults(
-      enrichedResults,
+      filteredByAttributes,
       optionsDoctypes
     )
     const results = this.limitSearchResults(sortedResults)
