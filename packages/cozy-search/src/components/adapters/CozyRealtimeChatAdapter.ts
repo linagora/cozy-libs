@@ -32,6 +32,7 @@ export interface CozyRealtimeChatAdapterOptions {
   conversationId: string
   streamBridge: StreamBridge
   assistantId?: string
+  getFileIDs?: () => string[]
 }
 
 /**
@@ -67,7 +68,8 @@ export const createCozyRealtimeChatAdapter = (
     messages,
     abortSignal
   }: ChatModelRunOptions): AsyncGenerator<ChatModelRunResult> {
-    const { client, conversationId, streamBridge, assistantId } = options
+    const { client, conversationId, streamBridge, assistantId, getFileIDs } =
+      options
 
     const userQuery = findUserQuery(messages)
     if (!userQuery) {
@@ -75,6 +77,7 @@ export const createCozyRealtimeChatAdapter = (
       return
     }
 
+    const fileIDs = getFileIDs?.() || []
     const stream = streamBridge.createStream(conversationId)
 
     try {
@@ -86,7 +89,11 @@ export const createCozyRealtimeChatAdapter = (
       await client.stackClient.fetchJSON(
         'POST',
         `/ai/chat/conversations/${conversationId}`,
-        { q: userQuery, assistantID: assistantId }
+        {
+          q: userQuery,
+          assistantID: assistantId,
+          ...(fileIDs.length > 0 && { fileIDs })
+        }
       )
 
       let fullText = ''
