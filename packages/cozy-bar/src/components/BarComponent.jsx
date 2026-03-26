@@ -15,16 +15,16 @@ import {
 import Bar from './Bar'
 import { useBarContext } from './BarProvider'
 
-const createBarElement = () => {
+const createBarElement = wrapperId => {
   const barNode = document.createElement('div')
-  barNode.setAttribute('id', 'coz-bar')
+  barNode.setAttribute('id', wrapperId)
   barNode.setAttribute('role', 'banner')
   barNode.classList.add(`coz-target--browser`)
   return barNode
 }
 
-const createWrapperAndAppendToBody = () => {
-  const barNode = createBarElement()
+const createWrapperAndAppendToBody = wrapperId => {
+  const barNode = createBarElement(wrapperId)
   const appNode = document.querySelector(APP_SELECTOR)
   if (!appNode) {
     // eslint-disable-next-line no-console
