@@ -20,7 +20,7 @@ const FileMentionMenu = ({ anchorRef, searchTerm, onClose }) => {
   })
 
   const fileResults = useMemo(
-    () => results?.filter(r => r.slug === 'drive' || r.id) || [],
+    () => results?.filter(r => r.slug === 'drive') || [],
     [results]
   )
 

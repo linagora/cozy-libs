@@ -15,6 +15,7 @@ export const FileMentionProvider = ({ children, externalFileIDsRef }) => {
 
   const addFile = file => {
     setSelectedFiles(prev => {
+      if (prev.some(f => f.id === file.id)) return prev
       const updated = [...prev, file]
       updateFileIDs(updated.map(f => f.id))
       return updated
@@ -29,12 +30,18 @@ export const FileMentionProvider = ({ children, externalFileIDsRef }) => {
     })
   }
 
+  const clearFiles = () => {
+    setSelectedFiles([])
+    updateFileIDs([])
+  }
+
   const getFileIDs = () => fileIDsRef.current
 
   const value = {
     selectedFiles,
     addFile,
     removeFile,
+    clearFiles,
     getFileIDs
   }
 

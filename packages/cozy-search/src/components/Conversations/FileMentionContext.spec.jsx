@@ -5,7 +5,8 @@ import { FileMentionProvider, useFileMention } from './FileMentionContext'
 
 describe('FileMentionContext', () => {
   const TestComponent = () => {
-    const { selectedFiles, addFile, removeFile, getFileIDs } = useFileMention()
+    const { selectedFiles, addFile, removeFile, clearFiles, getFileIDs } =
+      useFileMention()
     return (
       <div>
         <span data-testid="files">{JSON.stringify(selectedFiles)}</span>
@@ -13,7 +14,11 @@ describe('FileMentionContext', () => {
         <button onClick={() => addFile({ id: '1', name: 'File1' })}>
           Add
         </button>
+        <button onClick={() => addFile({ id: '2', name: 'File2' })}>
+          Add2
+        </button>
         <button onClick={() => removeFile('1')}>Remove</button>
+        <button onClick={() => clearFiles()}>Clear</button>
       </div>
     )
   }
@@ -48,6 +53,31 @@ describe('FileMentionContext', () => {
     fireEvent.click(getByText('Add'))
     fireEvent.click(getByText('Remove'))
     expect(getByTestId('files').textContent).toBe('[]')
+  })
+
+  it('should not add duplicate files', () => {
+    const { getByTestId, getByText } = render(
+      <FileMentionProvider>
+        <TestComponent />
+      </FileMentionProvider>
+    )
+    fireEvent.click(getByText('Add'))
+    fireEvent.click(getByText('Add'))
+    expect(getByTestId('ids').textContent).toBe('["1"]')
+  })
+
+  it('should clear all files', () => {
+    const { getByTestId, getByText } = render(
+      <FileMentionProvider>
+        <TestComponent />
+      </FileMentionProvider>
+    )
+    fireEvent.click(getByText('Add'))
+    fireEvent.click(getByText('Add2'))
+    expect(getByTestId('ids').textContent).toBe('["1","2"]')
+    fireEvent.click(getByText('Clear'))
+    expect(getByTestId('files').textContent).toBe('[]')
+    expect(getByTestId('ids').textContent).toBe('[]')
   })
 
   it('should throw error when used outside provider', () => {

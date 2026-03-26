@@ -12,6 +12,7 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
 import FileChipsList from './FileChipsList'
+import { useFileMention } from './FileMentionContext'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
 import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
@@ -22,13 +23,15 @@ const ConversationComposer = () => {
   const isRunning = useThread(state => state.isRunning)
   const isThreadEmpty = useThread(state => state.messages.length === 0)
   const { setOpenedKnowledgePanel } = useAssistant()
+  const { clearFiles } = useFileMention()
 
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
 
   const handleSend = useCallback(() => {
     composerRuntime.send()
-  }, [composerRuntime])
+    clearFiles()
+  }, [composerRuntime, clearFiles])
 
   const handleCancel = useCallback(() => {
     composerRuntime.cancel()

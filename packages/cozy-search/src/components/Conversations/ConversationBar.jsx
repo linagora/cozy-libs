@@ -31,7 +31,7 @@ const ConversationBar = ({
   const [mentionSearchTerm, setMentionSearchTerm] = useState('')
 
   useEffect(() => {
-    const mentionMatch = value?.match(/@(\w*)$/)
+    const mentionMatch = value?.match(/@([^\s]*)$/)
     if (mentionMatch) {
       setShowMentionMenu(true)
       setMentionSearchTerm(mentionMatch[1])
@@ -64,6 +64,7 @@ const ConversationBar = ({
   }
 
   const handleKeyDown = e => {
+    if (showMentionMenu) return
     if (isEmpty) return
 
     onKeyDown(e)
