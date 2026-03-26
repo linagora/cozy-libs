@@ -33,6 +33,7 @@ export const ShortcutItem = ({ shortcut }) => {
       height="auto"
       component="a"
       target="_blank"
+      rel="noopener noreferrer"
       variant="text"
       href={url}
       title={filename}

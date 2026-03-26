@@ -41,6 +41,7 @@ export const EntrypointItem = ({ entrypoint }) => {
       height="auto"
       component="a"
       target="_blank"
+      rel="noopener noreferrer"
       variant="text"
       href={entrypointUrl}
       title={title}
