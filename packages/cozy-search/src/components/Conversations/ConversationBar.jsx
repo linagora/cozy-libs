@@ -1,6 +1,6 @@
 import { ComposerPrimitive } from '@assistant-ui/react'
 import cx from 'classnames'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -12,6 +12,7 @@ import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import FileMentionMenu from './FileMentionMenu'
 import styles from './styles.styl'
 
 const ConversationBar = ({
@@ -26,6 +27,23 @@ const ConversationBar = ({
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const inputRef = useRef()
+  const [showMentionMenu, setShowMentionMenu] = useState(false)
+  const [mentionSearchTerm, setMentionSearchTerm] = useState('')
+
+  useEffect(() => {
+    const mentionMatch = value?.match(/@(\w*)$/)
+    if (mentionMatch) {
+      setShowMentionMenu(true)
+      setMentionSearchTerm(mentionMatch[1])
+    } else {
+      setShowMentionMenu(false)
+      setMentionSearchTerm('')
+    }
+  }, [value])
+
+  const handleMentionClose = () => {
+    setShowMentionMenu(false)
+  }
 
   // to adjust input height for multiline when typing in it
   // eslint-disable-next-line react-hooks/refs
@@ -52,7 +70,7 @@ const ConversationBar = ({
   }
 
   return (
-    <div className="u-w-100 u-maw-7 u-mh-auto">
+    <div className="u-w-100 u-maw-7 u-mh-auto" style={{ position: 'relative' }}>
       <SearchBar
         {...props}
         className={cx(styles['conversationBar'], {
@@ -102,6 +120,13 @@ const ConversationBar = ({
           }
         }}
       />
+      {showMentionMenu && (
+        <FileMentionMenu
+          anchorRef={inputRef}
+          searchTerm={mentionSearchTerm}
+          onClose={handleMentionClose}
+        />
+      )}
     </div>
   )
 }
