@@ -1,69 +1,70 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { useClient } from 'cozy-client'
-import { useDataProxy } from 'cozy-dataproxy-lib'
-import Minilog from 'cozy-minilog'
+import { useClient } from "cozy-client";
+import { useDataProxy } from "cozy-dataproxy-lib";
+import Minilog from "cozy-minilog";
 
-import { getIconForSearchResult } from './getIconForSearchResult'
+import { getIconForSearchResult } from "./getIconForSearchResult";
 
-const log = Minilog('🔍 [useFetchResult]')
+const log = Minilog("🔍 [useFetchResult]");
 
 const searchWithRetry = async (dataProxy, searchValue, options = {}) => {
-  const { maxRetries = 5, delay = 500, ...searchOptions } = options
-  let currentDelay = delay
+  const { maxRetries = 5, delay = 500, ...searchOptions } = options;
+  let currentDelay = delay;
   // Make several search attemps in case it is not ready yet
   for (let attempt = 0; attempt < maxRetries; attempt++) {
-    const searchResults = await dataProxy.search(searchValue, searchOptions)
+    const searchResults = await dataProxy.search(searchValue, searchOptions);
 
     if (searchResults) {
       // A successful search will return an array, and null otherwise
-      return searchResults
+      return searchResults;
     }
     log.info(
       `Search attempt ${attempt + 1} failed, retrying in ${currentDelay} ms...`
-    )
-    await new Promise(resolve => setTimeout(resolve, currentDelay))
-    currentDelay *= 2 // Exponential backoff
+    );
+    await new Promise((resolve) => setTimeout(resolve, currentDelay));
+    currentDelay *= 2; // Exponential backoff
   }
 
-  log.error(`Search failed after ${maxRetries} attempts`)
-  return []
-}
+  log.error(`Search failed after ${maxRetries} attempts`);
+  return [];
+};
 
 export const useFetchResult = (searchValue, searchOptions = {}) => {
-  const client = useClient()
-  const navigate = useNavigate()
+  const client = useClient();
+  const navigate = useNavigate();
   const [state, setState] = useState({
     isLoading: true,
     results: null,
-    searchValue: null
-  })
-  const dataProxy = useDataProxy()
+    searchValue: null,
+  });
+  const dataProxy = useDataProxy();
 
   useEffect(() => {
     const fetch = async (searchValue, searchOptions) => {
       if (!dataProxy.dataProxyServicesAvailable) {
-        log.log('DataProxy services are not available. Skipping search...')
-        return
+        log.log("DataProxy services are not available. Skipping search...");
+        return;
       }
 
-      setState({ isLoading: true, results: null, searchValue })
+      setState({ isLoading: true, results: null, searchValue });
 
       const searchResults = await searchWithRetry(
         dataProxy,
         searchValue,
         searchOptions
-      )
+      );
 
-      const results = searchResults.map(r => {
+      const results = searchResults.map((r) => {
         // Begin Retrocompatibility code, to be removed when following PR is merged: https://github.com/cozy/cozy-web-data-proxy/pull/10
-        r.slug = r.slug || r.type
-        r.subTitle = r.subTitle || r.name
+        r.slug = r.slug || r.type;
+        r.subTitle = r.subTitle || r.name;
         // End Retrocompatibility code
-        const icon = getIconForSearchResult(r)
+        const icon = getIconForSearchResult(r);
         return {
           id: r.doc._id,
+          type: r.type,
           icon: icon,
           slug: r.slug,
           url: r.url,
@@ -73,34 +74,34 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
           onClick: () => {
             if (r.slug === client.appMetadata.slug) {
               try {
-                const url = new URL(r.url)
-                const hash = url.hash.replace('#', '')
-                navigate(hash)
+                const url = new URL(r.url);
+                const hash = url.hash.replace("#", "");
+                navigate(hash);
               } catch {
-                window.open(r.url)
+                window.open(r.url);
               }
             } else {
-              window.open(r.url)
+              window.open(r.url);
             }
-          }
-        }
-      })
+          },
+        };
+      });
 
-      setState({ isLoading: false, results, searchValue })
-    }
+      setState({ isLoading: false, results, searchValue });
+    };
 
     if (searchValue) {
       if (searchValue !== state.searchValue) {
-        fetch(searchValue, searchOptions)
+        fetch(searchValue, searchOptions);
       }
     } else {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setState({ isLoading: true, results: null, searchValue: null })
+      setState({ isLoading: true, results: null, searchValue: null });
     }
-  }, [dataProxy, searchValue, state.searchValue, setState])
+  }, [dataProxy, searchValue, state.searchValue, setState]);
 
   return {
     isLoading: state.isLoading,
-    results: state.results
-  }
-}
+    results: state.results,
+  };
+};
