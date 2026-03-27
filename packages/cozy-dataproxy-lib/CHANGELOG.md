@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.15.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.14.1...cozy-dataproxy-lib@4.15.0) (2026-03-27)
+
+### Features
+
+- Add exclude filters to search options ([931f72a](https://github.com/cozy/cozy-libs/commit/931f72a0a38a49f2bc6bfbead43a0d8fa0a624d0))
+
 ## [4.14.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.14.0...cozy-dataproxy-lib@4.14.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
