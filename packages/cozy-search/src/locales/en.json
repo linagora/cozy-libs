@@ -59,6 +59,11 @@
       "welcome": "How can I help you today?",
       "running": "Assistant is running..."
     },
+    "fileMention": {
+      "typeToSearch": "Type to search files",
+      "loading": "Searching...",
+      "noResults": "No files found"
+    },
     "twake_knowledges": {
       "chat": "Chat",
       "drive": "Drive",

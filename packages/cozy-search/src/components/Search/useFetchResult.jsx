@@ -66,6 +66,7 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
           id: r.doc._id,
           icon: icon,
           slug: r.slug,
+          type: r.type,
           url: r.url,
           secondaryUrl: r.secondaryUrl,
           primary: r.title,

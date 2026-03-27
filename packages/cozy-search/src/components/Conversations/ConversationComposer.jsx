@@ -11,6 +11,7 @@ import flag from 'cozy-flags'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
+import FileChipsList from './FileChipsList'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
 import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
@@ -64,7 +65,10 @@ const ConversationComposer = () => {
         onKeyDown={handleKeyDown}
         onCancel={handleCancel}
         onSend={handleSend}
+        composerRuntime={composerRuntime}
       />
+
+      <FileChipsList />
 
       <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">
         {flag('cozy.assistant.create-assistant.enabled') && (

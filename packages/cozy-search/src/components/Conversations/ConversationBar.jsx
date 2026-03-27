@@ -12,6 +12,8 @@ import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import FileMentionMenu from './FileMentionMenu'
+import { useFileMention } from './FileMentionContext'
 import styles from './styles.styl'
 
 const ConversationBar = ({
@@ -21,11 +23,15 @@ const ConversationBar = ({
   onKeyDown,
   onSend,
   onCancel,
+  composerRuntime,
   ...props
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const inputRef = useRef()
+  const wrapperRef = useRef()
+  const menuKeyDownHandlerRef = useRef(null)
+  const { hasMention, mentionSearchTerm, handleInputChange } = useFileMention()
 
   // to adjust input height for multiline when typing in it
   // eslint-disable-next-line react-hooks/refs
@@ -46,13 +52,21 @@ const ConversationBar = ({
   }
 
   const handleKeyDown = e => {
-    if (isEmpty) return
+    if (hasMention && menuKeyDownHandlerRef.current) {
+      menuKeyDownHandlerRef.current(e)
+      if (e.defaultPrevented) return
+    }
 
+    if (isEmpty) return
     onKeyDown(e)
   }
 
+  const handleChange = e => {
+    handleInputChange(e.target.value)
+  }
+
   return (
-    <div className="u-w-100 u-maw-7 u-mh-auto">
+    <div ref={wrapperRef} className="u-w-100 u-maw-7 u-mh-auto">
       <SearchBar
         {...props}
         className={cx(styles['conversationBar'], {
@@ -63,6 +77,7 @@ const ConversationBar = ({
         placeholder={t('assistant.search.placeholder')}
         value={value}
         disabledClear
+        onChange={handleChange}
         componentsProps={{
           inputBase: {
             inputRef: inputRef,
@@ -102,6 +117,14 @@ const ConversationBar = ({
           }
         }}
       />
+      {hasMention && (
+        <FileMentionMenu
+          anchorEl={wrapperRef.current}
+          searchTerm={mentionSearchTerm}
+          composerRuntime={composerRuntime}
+          keyDownHandlerRef={menuKeyDownHandlerRef}
+        />
+      )}
     </div>
   )
 }

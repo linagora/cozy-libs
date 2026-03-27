@@ -8,7 +8,7 @@ const config = {
   coverageDirectory: './tests/coverage',
   coveragePathIgnorePatterns: ['./tests'],
   rootDir: '../',
-  testMatch: ['./**/*.spec.{ts,tsx,js}'],
+  testMatch: ['./**/*.spec.{ts,tsx,js,jsx}'],
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   coverageThreshold: {
     global: {

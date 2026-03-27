@@ -59,6 +59,11 @@
       "welcome": "Comment puis-je vous aider aujourd'hui ?",
       "running": "Assistant en cours..."
     },
+    "fileMention": {
+      "typeToSearch": "Tapez pour rechercher des fichiers",
+      "loading": "Recherche en cours...",
+      "noResults": "Aucun fichier trouvé"
+    },
     "twake_knowledges": {
       "chat": "Chat",
       "drive": "Drive",

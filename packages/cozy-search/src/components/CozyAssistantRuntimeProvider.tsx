@@ -30,6 +30,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from './AssistantProvider'
+import { FileMentionProvider, useFileMention } from './Conversations/FileMentionContext'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
 import { DEFAULT_ASSISTANT } from './constants'
@@ -129,7 +130,7 @@ const ConversationLoader = ({
   )
 }
 
-const CozyAssistantRuntimeProviderInner = ({
+const FileMentionAwareRuntimeProvider = ({
   children,
   conversationId,
   initialMessages
@@ -144,6 +145,7 @@ const CozyAssistantRuntimeProviderInner = ({
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set())
   const currentStreamingMessageIdRef = useRef<string | null>(null)
   const { selectedAssistantId } = useAssistant()
+  const { getAttachmentsIDs } = useFileMention()
 
   useEffect(() => {
     messagesIdRef.current = initialMessages
@@ -295,11 +297,12 @@ const CozyAssistantRuntimeProviderInner = ({
           conversationId,
           // eslint-disable-next-line react-hooks/refs
           streamBridge: streamBridgeRef.current,
-          assistantId: selectedAssistantId
+          assistantId: selectedAssistantId,
+          getAttachmentsIDs
         },
         t
       ),
-    [client, conversationId, selectedAssistantId, t]
+    [client, conversationId, selectedAssistantId, t, getAttachmentsIDs]
   )
 
   const runtime = useLocalRuntime(adapter, {
@@ -321,6 +324,26 @@ const CozyAssistantRuntimeProviderInner = ({
     <AssistantRuntimeProvider runtime={runtime}>
       {children}
     </AssistantRuntimeProvider>
+  )
+}
+
+const CozyAssistantRuntimeProviderInner = ({
+  children,
+  conversationId,
+  initialMessages
+}: CozyAssistantRuntimeProviderProps & {
+  conversationId: string
+  initialMessages: ThreadMessageLike[]
+}): JSX.Element => {
+  return (
+    <FileMentionProvider>
+      <FileMentionAwareRuntimeProvider
+        conversationId={conversationId}
+        initialMessages={initialMessages}
+      >
+        {children}
+      </FileMentionAwareRuntimeProvider>
+    </FileMentionProvider>
   )
 }
 
