@@ -1,7 +1,6 @@
 import React from "react";
 
 import Chip from "cozy-ui/transpiled/react/Chips";
-import Icon from "cozy-ui/transpiled/react/Icon";
 import { useBreakpoints } from "cozy-ui/transpiled/react/providers/Breakpoints";
 
 import { useFileMention } from "./FileMentionContext";

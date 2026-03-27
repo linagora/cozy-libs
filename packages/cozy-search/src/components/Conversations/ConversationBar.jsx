@@ -16,8 +16,6 @@ import styles from "./styles.styl";
 import FileMentionMenu from "./FileMentionMenu";
 import { useFileMention } from "./FileMentionContext";
 
-const MENTION_REGEX = /(^|\s)@([\w. ]*)$/;
-
 const ConversationBar = ({
   value,
   isEmpty,
@@ -30,6 +28,7 @@ const ConversationBar = ({
   const { t } = useI18n();
   const { isMobile } = useBreakpoints();
   const inputRef = useRef();
+  const menuRef = useRef();
   const composerRuntime = useComposerRuntime();
   const { handleInputChange, hasMention } = useFileMention();
 
@@ -61,6 +60,12 @@ const ConversationBar = ({
   const handleKeyDown = (e) => {
     if (isEmpty) return;
 
+    // If mention menu is open, let it handle keyboard navigation first
+    if (hasMention && menuRef.current?.handleKeyDown) {
+      const handled = menuRef.current.handleKeyDown(e);
+      if (handled) return;
+    }
+
     onKeyDown(e);
   };
 
@@ -68,7 +73,7 @@ const ConversationBar = ({
     <div className="u-w-100 u-maw-7 u-mh-auto">
       <SearchBar
         {...props}
-        className={cx(styles["conversationBar"], {
+        className={cx(styles.conversationBar, {
           [styles["conversationBar--mobile"]]: isMobile,
         })}
         icon={null}
@@ -116,12 +121,11 @@ const ConversationBar = ({
           },
         }}
       />
-      {hasMention && (
-        <FileMentionMenu
-          anchorEl={inputRef.current}
-          composerRuntime={composerRuntime}
-        />
-      )}
+      <FileMentionMenu
+        ref={menuRef}
+        anchorEl={inputRef.current}
+        composerRuntime={composerRuntime}
+      />
     </div>
   );
 };

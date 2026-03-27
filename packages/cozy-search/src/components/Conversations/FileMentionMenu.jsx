@@ -1,5 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
-import debounce from "lodash/debounce";
+import React, {
+  useEffect,
+  useMemo,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 
 import Popper from "cozy-ui/transpiled/react/Popper";
 import Paper from "cozy-ui/transpiled/react/Paper";
@@ -17,9 +22,9 @@ const FILE_SEARCH_OPTIONS = {
   excludeFilters: { type: "directory" },
 };
 
-const MENTION_REGEX = /(^|\s)@([\w. ]*)$/;
+const MENTION_REGEX = /(^|\s)@([\w. ]*)/;
 
-const FileMentionMenu = ({ anchorEl, composerRuntime }) => {
+const FileMentionMenu = forwardRef(({ anchorEl, composerRuntime }, ref) => {
   const {
     mentionSearchTerm,
     handleInputChange,
@@ -58,7 +63,9 @@ const FileMentionMenu = ({ anchorEl, composerRuntime }) => {
   };
 
   const handleKeyDown = (e) => {
-    if (!hasMention) return;
+    if (!hasMention || filteredResults.length === 0) {
+      return false;
+    }
 
     switch (e.key) {
       case "ArrowDown":
@@ -66,42 +73,35 @@ const FileMentionMenu = ({ anchorEl, composerRuntime }) => {
         setHighlightedIndex((prev) =>
           prev < filteredResults.length - 1 ? prev + 1 : prev
         );
-        break;
+        return true;
       case "ArrowUp":
         e.preventDefault();
         setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : prev));
-        break;
+        return true;
       case "Enter":
       case "Tab":
-        if (filteredResults.length > 0) {
-          e.preventDefault();
-          handleSelectFile(filteredResults[highlightedIndex]);
-        }
-        break;
+        e.preventDefault();
+        handleSelectFile(filteredResults[highlightedIndex]);
+        return true;
       case "Escape":
         e.preventDefault();
         const currentText = composerRuntime.getState().text;
         const newText = currentText.replace(MENTION_REGEX, "");
         composerRuntime.setText(newText);
         handleInputChange(newText);
-        break;
+        return true;
       default:
-        break;
+        return false;
     }
   };
 
-  useEffect(() => {
-    const handleGlobalKeyDown = (e) => {
-      if (hasMention) {
-        handleKeyDown(e);
-      }
-    };
-
-    document.addEventListener("keydown", handleGlobalKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleGlobalKeyDown);
-    };
-  }, [hasMention, highlightedIndex, filteredResults]);
+  useImperativeHandle(
+    ref,
+    () => ({
+      handleKeyDown,
+    }),
+    [handleKeyDown, hasMention, filteredResults, highlightedIndex]
+  );
 
   if (!hasMention) {
     return null;
@@ -152,6 +152,6 @@ const FileMentionMenu = ({ anchorEl, composerRuntime }) => {
       </Paper>
     </Popper>
   );
-};
+});
 
 export default FileMentionMenu;

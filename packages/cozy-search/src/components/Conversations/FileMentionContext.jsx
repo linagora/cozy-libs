@@ -8,7 +8,7 @@ import React, {
 
 const FileMentionContext = createContext(null);
 
-const MENTION_REGEX = /(^|\s)@([\w. ]*)$/;
+const MENTION_REGEX = /(^|\s)@([\w. ]*)/;
 
 export const FileMentionProvider = ({ children }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
