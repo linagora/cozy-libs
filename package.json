@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "eslint",
     "lint:md": "remark . -o",
-    "test": "lerna run --concurrency 1 --ignore cozy-procedures test",
+    "test": "lerna run --concurrency 1 test",
     "build": "DISABLE_V8_COMPILE_CACHE=1 lerna run --scope cozy-device-helper build && lerna run --scope cozy-minilog build && lerna run --ignore cozy-device-helper --ignore cozy-minilog build",
     "check-constraints": "node scripts/check-packages-constraints.js"
   },

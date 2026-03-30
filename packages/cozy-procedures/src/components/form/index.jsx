@@ -1,6 +1,0 @@
-export { default as FieldTemplate } from './FieldTemplate'
-export { default as InputAdapter } from './InputAdapter'
-export { default as InputWithUnit } from './InputWithUnit'
-export { default as ObjectFieldTemplate } from './ObjectFieldTemplate'
-export { default as SelectBoxAdapter } from './SelectBoxAdapter'
-export { default as TextareaAdapter } from './TextareaAdapter'
