@@ -37,3 +37,5 @@
 - cozy-authentication : lib was used for our Cordova apps that have been replaced by the flagship app in React Native. Last commit where it exists in this repo: `de46949c3e4f85e262786f71ec9e4a5699ec319b`. [Removal PR](https://github.com/cozy/cozy-libs/pull/2650).
 - webpack-expose-package-info-plugin : lib was unused. Last commit where it exists in this repo: `af2b4b48c01544820dd385be5914f6fd42ae72e5`. [Removal PR](https://github.com/cozy/cozy-libs/pull/2654).
 - repo-doctor : tool was unused. Last commit where it exists in this repo: `66bcc84b56eae4f65a302775790b6095179f7fe7`. [Removal PR](https://github.com/cozy/cozy-libs/pull/2952).
+- playgrounds : unused. Last commit where it exists in this repo: `903c7bf0d6a3bc1dac8e94f707eadbd2f3672026`. [Removal PR](https://github.com/cozy/cozy-libs/pull/2978).
+- cozy-procedures : unused. Last commit where it exists in this repo: `777482ef292f014fe535f9654d18677557266682`. [Removal PR](https://github.com/cozy/cozy-libs/pull/2978).
