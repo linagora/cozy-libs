@@ -7,7 +7,6 @@
       "createRelease": "github"
     },
     "publish": {
-      "ignoreChanges": ["packages/playgrounds/**/*"],
       "conventionalCommits": true
     }
   },
