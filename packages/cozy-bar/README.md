@@ -53,7 +53,6 @@ There is also other parameter to adapt the bar to your app:
 
 - `isPublic`: To show the public version of the Bar
 - `onLogout`: A callback to react to the logout of the user
-- `disableInternalStore`: Allow to disable the internal store of the Bar
 
 ## Customizing the content of the bar
 
@@ -72,28 +71,6 @@ import { BarLeft, BarCenter, BarRight, BarSearch } from 'cozy-bar'
 <BarLeft>
   <div>Hello!</div>
 </BarLeft>
-```
-
-### Access your application store in custom components
-
-By default, the Bar has its own redux store to fetch data and manage ui state. If you are using a Redux store into your application and you need to access it into your Bar customization you need to integrate the cozy-bar store into your own.
-
-```js
-import { barReducers } from 'cozy-bar'
-
-const reducers = {
-  ...baseReducers,
-  ...barReducers,
-  cozy: client.reducer()
-}
-
-const appReducer = combineReducers(reducers)
-```
-
-You also need to disable the internal store onto the `BarComponent` with the property `disableInternalStore`
-
-```jsx
-<BarComponent disableInternalStore />
 ```
 
 ## Search and AI assistant
