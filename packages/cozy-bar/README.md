@@ -51,7 +51,6 @@ The `BarComponent` will get default params into `data-cozy` attribute of the ele
 
 There is also other parameter to adapt the bar to your app:
 
-- `isInvertedTheme`: To make the icon of Cozy(`icon-cozy-home.svg`) compatible with an inverted theme
 - `isPublic`: To show the public version of the Bar
 - `onLogout`: A callback to react to the logout of the user
 - `disableInternalStore`: Allow to disable the internal store of the Bar

@@ -79,7 +79,6 @@ const BarComponent = ({
   appNamePrefix = getAppNamePrefix(),
   appSlug = getAppSlug(),
   iconPath = getDefaultIcon(),
-  isInvertedTheme,
   isPublic = false,
   onLogOut,
   appIcon,
@@ -99,7 +98,6 @@ const BarComponent = ({
 
   const options = {
     appName,
-    isInvertedTheme,
     appNamePrefix,
     appSlug,
     cozyClient,

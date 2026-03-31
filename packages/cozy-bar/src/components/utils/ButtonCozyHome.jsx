@@ -6,7 +6,7 @@ import { isFlagshipApp } from 'cozy-device-helper'
 import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
 
-const ButtonCozyHome = ({ homeHref, isInvertedTheme }) => {
+const ButtonCozyHome = ({ homeHref }) => {
   const webviewIntent = useWebviewIntent()
 
   if (isFlagshipApp() || flag('flagship.debug'))
@@ -18,10 +18,7 @@ const ButtonCozyHome = ({ homeHref, isInvertedTheme }) => {
         className="coz-nav-apps-btns-home coz-nav-apps-btns-home--is-flagship"
         data-testid="buttonCozyHome"
       >
-        <IconCozyHome
-          className="coz-nav-apps-btns-home-svg"
-          isInvertedTheme={isInvertedTheme}
-        />
+        <IconCozyHome className="coz-nav-apps-btns-home-svg" />
       </a>
     )
 
@@ -32,27 +29,20 @@ const ButtonCozyHome = ({ homeHref, isInvertedTheme }) => {
         className="coz-nav-apps-btns-home"
         data-testid="buttonCozyHome"
       >
-        <IconCozyHome
-          className="coz-nav-apps-btns-home-svg"
-          isInvertedTheme={isInvertedTheme}
-        />
+        <IconCozyHome className="coz-nav-apps-btns-home-svg" />
       </a>
     )
   }
 
   return (
     <span className="coz-nav-apps-btns-home" data-testid="buttonCozyHome">
-      <IconCozyHome
-        className="coz-nav-apps-btns-home-svg"
-        isInvertedTheme={isInvertedTheme}
-      />
+      <IconCozyHome className="coz-nav-apps-btns-home-svg" />
     </span>
   )
 }
 
 ButtonCozyHome.propTypes = {
-  homeHref: PropTypes.string,
-  isInvertedTheme: PropTypes.bool
+  homeHref: PropTypes.string
 }
 
 export default ButtonCozyHome
