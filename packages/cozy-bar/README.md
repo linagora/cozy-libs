@@ -53,6 +53,9 @@ There is also other parameter to adapt the bar to your app:
 
 - `isPublic`: To show the public version of the Bar
 - `onLogout`: A callback to react to the logout of the user
+- `appIcon`: To change the app icon
+- `appTextIcon`: To change the app text next to the app icon
+- `searchOptions`: To pass some props to the search engine
 
 ## Customizing the content of the bar
 
