@@ -1,5 +1,8 @@
 import cx from 'classnames'
 import Banner from 'components/Banner'
+import BarLeft from 'components/Elements/BarLeft'
+import BarSearch from 'components/Elements/BarSearch'
+import TwakeRight from 'components/Elements/TwakeRight'
 import { getAppsData } from 'components/helpers'
 import SearchButton from 'components/utils/SearchButton'
 import PropTypes from 'prop-types'
@@ -8,10 +11,6 @@ import React, { useMemo } from 'react'
 
 import { useQuery, RealTimeQueries } from 'cozy-client'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-
-import BarLeft from './Elements/BarLeft'
-import BarSearch from './Elements/BarSearch'
-import TwakeRight from './Elements/TwakeRight'
 
 export const Bar = ({
   isPublic,
