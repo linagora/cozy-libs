@@ -8,7 +8,14 @@ import Divider from 'cozy-ui/transpiled/react/Divider'
 import Grid from 'cozy-ui/transpiled/react/Grid'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-const BarLeft = ({ isPublic, homeApp, appSlug, appIcon, appTextIcon }) => {
+const BarLeft = ({
+  isPublic,
+  homeApp,
+  appSlug,
+  appIcon,
+  appTextIcon,
+  noCozyHome
+}) => {
   const { isMobile } = useBreakpoints()
 
   if (isFlagshipApp() || flag('flagship.debug')) {
@@ -18,6 +25,16 @@ const BarLeft = ({ isPublic, homeApp, appSlug, appIcon, appTextIcon }) => {
   const homeHref = !isPublic && homeApp && homeApp.href
 
   if (isMobile) {
+    if (noCozyHome) {
+      if (homeHref) {
+        return (
+          <a className="coz-nav-apps-btns-home u-ml-half" href={homeHref}>
+            <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+          </a>
+        )
+      }
+      return <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+    }
     return <ButtonCozyHome homeHref={homeHref} />
   }
 
@@ -25,13 +42,19 @@ const BarLeft = ({ isPublic, homeApp, appSlug, appIcon, appTextIcon }) => {
 
   return (
     <Grid container alignItems="center" className="u-w-auto">
-      {!isHome && (
+      {!isHome && !noCozyHome && (
         <>
           <ButtonCozyHome homeHref={homeHref} />
           <Divider orientation="vertical" className="u-mr-half" flexItem />
         </>
       )}
-      <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+      {noCozyHome && homeHref ? (
+        <a className="coz-nav-apps-btns-home u-ml-half" href={homeHref}>
+          <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+        </a>
+      ) : (
+        <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+      )}
     </Grid>
   )
 }
