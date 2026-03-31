@@ -30,7 +30,6 @@ export const Bar = ({
   appIcon,
   appTextIcon,
   searchOptions,
-  isInvertedTheme,
   appSlug,
   componentsProps
 }) => {
@@ -60,7 +59,7 @@ export const Bar = ({
 
   const renderLeft = () => {
     if (isFlagshipApp() || flag('flagship.debug')) {
-      return <ButtonCozyHome isInvertedTheme={isInvertedTheme} />
+      return <ButtonCozyHome />
     }
 
     const homeHref = !isPublic && homeApp && homeApp.href
@@ -146,7 +145,6 @@ export const Bar = ({
 Bar.propTypes = {
   appSlug: PropTypes.string,
   isPublic: PropTypes.bool,
-  isInvertedTheme: PropTypes.bool,
   onLogOut: PropTypes.func,
   userActionRequired: PropTypes.object,
   componentsProps: PropTypes.shape({
