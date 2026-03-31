@@ -56,6 +56,7 @@ export const Bar = ({
       <div className="coz-bar-container">
         {barLeft || (
           <BarLeft
+            {...componentsProps?.BarLeft}
             isPublic={isPublic}
             homeApp={homeApp}
             appSlug={appSlug}
