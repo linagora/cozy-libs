@@ -460,17 +460,26 @@ export const makeFields = (customFields, defaultFields) => {
     return defaultFields
   }
 
-  const fields = [...defaultFields]
+  let fields = [...defaultFields]
 
   customFields.forEach(customField => {
     const defaultField = fields.find(field => field.name === customField.name)
+
+    // If isRemoved is true, remove the field from the result
+    if (customField.isRemoved) {
+      if (defaultField) {
+        fields = fields.filter(field => field.name !== customField.name)
+      }
+      return
+    }
+
     const _field = defaultField || customField
 
     if (defaultField) {
       Object.assign(_field, customField)
     }
 
-    if (_field.position) {
+    if (_field.position !== undefined) {
       if (defaultField) {
         const fieldIndex = fields.indexOf(defaultField)
         fields.splice(fieldIndex, 1)
