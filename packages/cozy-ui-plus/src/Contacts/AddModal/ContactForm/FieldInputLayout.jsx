@@ -35,9 +35,11 @@ const FieldInputLayout = ({
         'u-dn': isSecondary && !showSecondaryFields
       })}
     >
-      <div className="u-w-2-half">
-        {icon && <Icon icon={icon} color="var(--iconTextColor)" />}
-      </div>
+      {icon && (
+        <div className="u-w-2-half">
+          <Icon icon={icon} color="var(--iconTextColor)" />
+        </div>
+      )}
       <div className="u-w-100">
         {layout === 'array' ? (
           <FieldInputArray
