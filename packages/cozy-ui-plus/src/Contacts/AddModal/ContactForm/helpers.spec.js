@@ -441,6 +441,68 @@ describe('makeFields', () => {
       }
     ])
   })
+
+  it('should remove default field when custom field has isRemoved set to true', () => {
+    const defaultFields = [
+      { name: 'firstname' },
+      { name: 'lastname' },
+      { name: 'email' }
+    ]
+    const customFields = [{ name: 'lastname', isRemoved: true }]
+
+    const res = makeFields(customFields, defaultFields)
+
+    expect(res).toStrictEqual([{ name: 'firstname' }, { name: 'email' }])
+  })
+
+  it('should remove multiple default fields when multiple custom fields have isRemoved set to true', () => {
+    const defaultFields = [
+      { name: 'firstname' },
+      { name: 'lastname' },
+      { name: 'email' },
+      { name: 'phone' }
+    ]
+    const customFields = [
+      { name: 'lastname', isRemoved: true },
+      { name: 'phone', isRemoved: true }
+    ]
+
+    const res = makeFields(customFields, defaultFields)
+
+    expect(res).toStrictEqual([{ name: 'firstname' }, { name: 'email' }])
+  })
+
+  it('should ignore custom fields with isRemoved but no matching default field', () => {
+    const defaultFields = [{ name: 'firstname' }, { name: 'lastname' }]
+    const customFields = [{ name: 'nonexistent', isRemoved: true }]
+
+    const res = makeFields(customFields, defaultFields)
+
+    expect(res).toStrictEqual(defaultFields)
+  })
+
+  it('should handle mixed custom fields with isRemoved, position, and property overrides', () => {
+    const defaultFields = [
+      { name: 'firstname', type: 'text' },
+      { name: 'lastname', type: 'text' },
+      { name: 'email', type: 'email' },
+      { name: 'phone', type: 'tel' }
+    ]
+    const customFields = [
+      { name: 'lastname', isRemoved: true },
+      { name: 'email', isSecondary: true, position: 0 },
+      { name: 'middlename', position: 1 }
+    ]
+
+    const res = makeFields(customFields, defaultFields)
+
+    expect(res).toStrictEqual([
+      { name: 'email', type: 'email', isSecondary: true, position: 0 },
+      { name: 'middlename', position: 1 },
+      { name: 'firstname', type: 'text' },
+      { name: 'phone', type: 'tel' }
+    ])
+  })
 })
 
 describe('hasNoValues', () => {
