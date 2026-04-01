@@ -37,6 +37,7 @@ const FieldInputWrapper = ({
       {...props}
       variant={variant}
       fullWidth={fullWidth}
+      size="small"
       minRows="2"
     />
   )
