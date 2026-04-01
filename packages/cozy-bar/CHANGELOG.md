@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.1.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.0.1...cozy-bar@33.1.0) (2026-04-01)
+
+### Features
+
+- **cozy-bar:** Add `noCozyHome` prop on BarLeft element ([4bc15d5](https://github.com/cozy/cozy-libs/commit/4bc15d5a05afd91cbb6dfbc7106da94baa0a3b48))
+- **cozy-bar:** Remove `isInvertedTheme` prop ([a27dd2f](https://github.com/cozy/cozy-libs/commit/a27dd2f057bb59756d754d5efacb5c21199b8d9a))
+
 ## [33.0.1](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.0.0...cozy-bar@33.0.1) (2026-03-27)
 
 **Note:** Version bump only for package cozy-bar
