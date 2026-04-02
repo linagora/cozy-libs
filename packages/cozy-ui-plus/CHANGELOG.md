@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@6.0.0...cozy-ui-plus@6.1.0) (2026-04-02)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Remove icon wrapper on contact modal if no icon ([8b0ffa9](https://github.com/cozy/cozy-libs/commit/8b0ffa9a55dcc964c558625515e191316f03072a))
+
+### Features
+
+- **cozy-ui-plus:** Add `isHalfWidth` prop on fields ([a69e7b7](https://github.com/cozy/cozy-libs/commit/a69e7b7af6e0e7021d8ab5bb68894829b9a75c97))
+- **cozy-ui-plus:** Add prop on Contacts modal to remove field ([d9637ff](https://github.com/cozy/cozy-libs/commit/d9637ff248e3ddc39fe8664af645e96e4e551f2f))
+- **cozy-ui-plus:** Change size of contacts modal fields ([27fdb9a](https://github.com/cozy/cozy-libs/commit/27fdb9a344a0803ca1442b93c9213aedb93ad8a2))
+- **cozy-ui-plus:** Move field remove button next to the input ([0a7c409](https://github.com/cozy/cozy-libs/commit/0a7c409a84dbb5f235586069feaa45454df0fbee))
+
 # [6.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@5.3.1...cozy-ui-plus@6.0.0) (2026-03-24)
 
 ### Features
