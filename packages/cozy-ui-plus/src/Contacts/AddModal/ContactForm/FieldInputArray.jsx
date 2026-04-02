@@ -4,10 +4,7 @@ import { FieldArray } from 'react-final-form-arrays'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossCircleIcon from 'cozy-ui/transpiled/react/Icons/CrossCircle'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
-import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import FieldInput from './FieldInput'
@@ -53,22 +50,14 @@ const FieldInputArray = ({
                     contacts={contacts}
                     contact={contact}
                     error={isError}
+                    index={index}
+                    showRemove={showRemove}
                     helperText={isError ? errors[inputName] : null}
                     name={inputName}
                     label={t(`Contacts.AddModal.ContactForm.fields.${name}`)}
                     labelProps={label}
+                    onRemove={() => removeField(fields, index)}
                   />
-                  {showRemove && (
-                    <ListItemIcon className="u-ml-half">
-                      <IconButton
-                        aria-label="delete"
-                        size="medium"
-                        onClick={() => removeField(fields, index)}
-                      >
-                        <Icon icon={CrossCircleIcon} />
-                      </IconButton>
-                    </ListItemIcon>
-                  )}
                 </div>
               )
             })}

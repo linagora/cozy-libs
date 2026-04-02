@@ -4,15 +4,31 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { Field } from 'react-final-form'
 
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import FieldInputWrapper from './FieldInputWrapper'
 import HasValueCondition from './HasValueCondition'
 import { RelatedContactList } from './RelatedContactList'
+import RemoveButton from './RemoveButton'
 import { locales } from './locales'
-import styles from './styles.styl'
 import ContactAddressDialog from '../ContactAddressDialog'
 import { fieldInputAttributesTypes, labelPropTypes } from '../types'
+
+const FieldAndRemove = ({ showRemove, onRemove, ...props }) => {
+  const { isMobile } = useBreakpoints()
+
+  if (isMobile) {
+    return (
+      <div className="u-flex u-flex-items-center u-w-100">
+        <Field {...props} />
+        {showRemove && <RemoveButton onRemove={onRemove} />}
+      </div>
+    )
+  }
+
+  return <Field {...props} />
+}
 
 const FieldInput = ({
   name,
@@ -22,6 +38,8 @@ const FieldInput = ({
   contacts,
   contact,
   error,
+  onRemove,
+  showRemove,
   helperText,
   label,
   isInvisible
@@ -33,6 +51,7 @@ const FieldInput = ({
     useState(false)
   useExtendI18n(locales)
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
 
   const handleClick = () => {
     if (name.includes('address')) {
@@ -50,14 +69,12 @@ const FieldInput = ({
 
   return (
     <div
-      className={cx(
-        className,
-        styles['contact-form-field__wrapper'],
-        'u-flex-column-s',
-        { 'u-flex': !isInvisible, 'u-dn': isInvisible }
-      )}
+      className={cx(className, 'u-flex-column-s u-flex-items-center u-w-100', {
+        'u-flex': !isInvisible,
+        'u-dn': isInvisible
+      })}
     >
-      <Field
+      <FieldAndRemove
         error={error}
         helperText={helperText}
         label={label}
@@ -66,6 +83,8 @@ const FieldInput = ({
         name={name}
         contact={contact}
         component={FieldInputWrapper}
+        showRemove={showRemove}
+        onRemove={onRemove}
         onFocus={onFocus}
         onClick={handleClick}
       />
@@ -85,7 +104,7 @@ const FieldInput = ({
       )}
       {labelProps && (
         <HasValueCondition name={name} otherCondition={hasBeenFocused}>
-          <div className="u-mt-half-s u-ml-half u-ml-0-s u-flex-shrink-0 u-w-auto u-miw-4">
+          <div className="u-mt-half-s u-ml-half u-ml-0-s u-flex-shrink-0 u-w-100-s u-w-auto u-miw-4">
             <Field
               attributes={labelProps}
               name={`${name}Label`}
@@ -97,6 +116,7 @@ const FieldInput = ({
           </div>
         </HasValueCondition>
       )}
+      {showRemove && !isMobile && <RemoveButton onRemove={onRemove} />}
     </div>
   )
 }
