@@ -3,6 +3,7 @@ import React, { useReducer, useRef } from 'react'
 
 import { useClient } from 'cozy-client'
 import { isDirectory as isDir } from 'cozy-client/dist/models/file'
+import flag from 'cozy-flags'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Box from 'cozy-ui/transpiled/react/Box'
@@ -52,28 +53,30 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
 
   return (
     <>
-      <Box
-        borderRadius="0.5rem"
-        border="1px solid var(--borderMainColor)"
-        ref={buttonRef}
-      >
-        <List className="u-p-0">
-          <ListItem
-            button
-            size="large"
-            ellipsis={false}
-            onClick={toggleMenuDisplayed}
-          >
-            <ListItemIcon>
-              <Icon icon={PeopleIcon} />
-            </ListItemIcon>
-            <ListItemText primary={textPrimary} secondary={textSecondary} />
-            <ListItemIcon className="u-mr-half">
-              <Icon icon={BottomIcon} />
-            </ListItemIcon>
-          </ListItem>
-        </List>
-      </Box>
+      {!flag('drive.federated-shared-folder.enabled') && (
+        <Box
+          borderRadius="0.5rem"
+          border="1px solid var(--borderMainColor)"
+          ref={buttonRef}
+        >
+          <List className="u-p-0">
+            <ListItem
+              button
+              size="large"
+              ellipsis={false}
+              onClick={toggleMenuDisplayed}
+            >
+              <ListItemIcon>
+                <Icon icon={PeopleIcon} />
+              </ListItemIcon>
+              <ListItemText primary={textPrimary} secondary={textSecondary} />
+              <ListItemIcon className="u-mr-half">
+                <Icon icon={BottomIcon} />
+              </ListItemIcon>
+            </ListItem>
+          </List>
+        </Box>
+      )}
 
       <ActionsMenu
         ref={buttonRef}
