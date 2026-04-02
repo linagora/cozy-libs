@@ -13,11 +13,12 @@ const FieldInputWrapper = ({
   attributes: {
     component,
     layout,
+    isHalfWidth,
     icon,
     isSecondary,
     validate,
     ...restAttributes
-  }, // ⚠️ `layout` `icon` `isSecondary` `validate` are removed from attributes to avoid DOM propagration, only used for business rules
+  }, // ⚠️ `layout` `isHalfWidth` `icon` `isSecondary` `validate` are removed from attributes to avoid DOM propagration, only used for business rules
   variant,
   fullWidth,
   ...props
