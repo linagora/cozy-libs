@@ -210,6 +210,8 @@ export const createAddress = ({ address, oldContact, t }) => {
  * @returns {Record<string, { data: { _id: string, _type: string }[] }>} - The related contacts relationships
  */
 export const getRelatedContactRelationships = relatedContact => {
+  if (!relatedContact) return {}
+
   // Tips filter Boolean to remove undefined value from array when relatedContact is empty (see contactToFormValues)
   const data = relatedContact.filter(Boolean).reduce((acc, curr) => {
     const relationType = curr.relatedContactLabel
