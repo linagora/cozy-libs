@@ -40,6 +40,7 @@ export const fields = [
     icon: null,
     type: 'text',
     layout: 'accordion',
+    isHalfWidth: true,
     subFields: [
       {
         name: 'additionalName',
@@ -56,7 +57,8 @@ export const fields = [
   {
     name: 'familyName',
     icon: null,
-    type: 'text'
+    type: 'text',
+    isHalfWidth: true
   },
   {
     name: 'company',

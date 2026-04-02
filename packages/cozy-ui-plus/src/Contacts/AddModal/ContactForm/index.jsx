@@ -3,7 +3,9 @@ import React, { useState } from 'react'
 import { Form } from 'react-final-form'
 
 import { getHasManyItems } from 'cozy-client/dist/associations/HasMany'
+import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import FieldInputLayout from './FieldInputLayout'
@@ -49,6 +51,7 @@ const ContactForm = ({ contacts, contact, customFieldsProps, onSubmit }) => {
   const { t } = useI18n()
   const { fields, makeCustomFieldsFormValues, makeCustomContactValues } =
     customFieldsProps
+  const { isMobile } = useBreakpoints()
 
   const _fields = makeFields(fields, defaultFields)
   const hasSecondaryFields = _fields.some(el => el.isSecondary)
@@ -90,20 +93,30 @@ const ContactForm = ({ contacts, contact, customFieldsProps, onSubmit }) => {
             onSubmit={handleSubmit}
             className="u-flex u-flex-column"
           >
-            {_fields.map((attributes, index) => (
-              <FieldInputLayout
-                key={index}
-                attributes={attributes}
-                contacts={contacts}
-                contact={contact}
-                showSecondaryFields={showSecondaryFields}
-                formProps={{
-                  valid,
-                  submitFailed,
-                  errors
-                }}
-              />
-            ))}
+            <div className="u-flex u-flex-wrap u-flex-justify-between">
+              {_fields.map((attributes, index) => (
+                <Box
+                  key={index}
+                  width={
+                    attributes.isHalfWidth && !isMobile
+                      ? 'calc(50% - 0.5rem)'
+                      : '100%'
+                  }
+                >
+                  <FieldInputLayout
+                    attributes={attributes}
+                    contacts={contacts}
+                    contact={contact}
+                    showSecondaryFields={showSecondaryFields}
+                    formProps={{
+                      valid,
+                      submitFailed,
+                      errors
+                    }}
+                  />
+                </Box>
+              ))}
+            </div>
             {hasSecondaryFields && !showSecondaryFields && (
               <div>
                 <Button
