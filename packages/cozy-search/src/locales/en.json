@@ -55,6 +55,10 @@
       "not_found_desc": "Click \"New Chat\" to begin a conversation or select from your recent chats",
       "close": "Close"
     },
+    "mention": {
+      "loading": "Loading...",
+      "no_files": "No files found"
+    },
     "message": {
       "welcome": "How can I help you today?",
       "running": "Assistant is running..."

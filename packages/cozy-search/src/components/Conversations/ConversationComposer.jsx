@@ -2,6 +2,7 @@ import {
   ComposerPrimitive,
   useComposerRuntime,
   useThread,
+  useThreadRuntime,
   useComposer
 } from '@assistant-ui/react'
 import cx from 'classnames'
@@ -11,6 +12,8 @@ import flag from 'cozy-flags'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
+import FileChipsList from './FileChipsList'
+import { useFileMention } from './FileMentionContext'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
 import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
@@ -18,16 +21,41 @@ import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
 const ConversationComposer = () => {
   const { isMobile } = useBreakpoints()
   const composerRuntime = useComposerRuntime()
+  const threadRuntime = useThreadRuntime()
   const isRunning = useThread(state => state.isRunning)
   const isThreadEmpty = useThread(state => state.messages.length === 0)
   const { setOpenedKnowledgePanel } = useAssistant()
+  const {
+    selectedFiles,
+    reset: resetFileMention,
+    snapshotAttachmentsIDs
+  } = useFileMention()
 
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
 
   const handleSend = useCallback(() => {
-    composerRuntime.send()
-  }, [composerRuntime])
+    if (isEmpty || isRunning) return
+    const text = composerRuntime.getState().text
+    const attachmentIDs = selectedFiles.map(f => f.id)
+    snapshotAttachmentsIDs()
+    const metadata =
+      attachmentIDs.length > 0 ? { custom: { attachmentIDs } } : undefined
+    threadRuntime.append({
+      content: [{ type: 'text', text }],
+      metadata
+    })
+    composerRuntime.setText('')
+    resetFileMention()
+  }, [
+    composerRuntime,
+    threadRuntime,
+    selectedFiles,
+    resetFileMention,
+    snapshotAttachmentsIDs,
+    isEmpty,
+    isRunning
+  ])
 
   const handleCancel = useCallback(() => {
     composerRuntime.cancel()
@@ -64,7 +92,10 @@ const ConversationComposer = () => {
         onKeyDown={handleKeyDown}
         onCancel={handleCancel}
         onSend={handleSend}
+        composerRuntime={composerRuntime}
       />
+
+      <FileChipsList />
 
       <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">
         {flag('cozy.assistant.create-assistant.enabled') && (

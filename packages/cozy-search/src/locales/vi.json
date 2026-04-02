@@ -46,6 +46,10 @@
     "default_error": "Đã xảy ra lỗi, vui lòng thử lại",
     "hide": "Ẩn",
     "show": "Hiện",
+    "mention": {
+      "loading": "Đang tải...",
+      "no_files": "Không tìm thấy tệp"
+    },
     "message": {
       "welcome": "Tôi có thể giúp gì cho bạn hôm nay?",
       "running": "Trợ lý đang chạy..."

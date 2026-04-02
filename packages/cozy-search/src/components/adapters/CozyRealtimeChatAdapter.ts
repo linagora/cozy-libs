@@ -32,6 +32,7 @@ export interface CozyRealtimeChatAdapterOptions {
   conversationId: string
   streamBridge: StreamBridge
   assistantId?: string
+  getAttachmentsIDs?: () => string[]
 }
 
 /**
@@ -67,9 +68,16 @@ export const createCozyRealtimeChatAdapter = (
     messages,
     abortSignal
   }: ChatModelRunOptions): AsyncGenerator<ChatModelRunResult> {
-    const { client, conversationId, streamBridge, assistantId } = options
+    const {
+      client,
+      conversationId,
+      streamBridge,
+      assistantId,
+      getAttachmentsIDs
+    } = options
 
     const userQuery = findUserQuery(messages)
+    const attachmentIDs = getAttachmentsIDs?.() || []
     if (!userQuery) {
       log.error('No user message found in:', messages)
       return
@@ -86,7 +94,11 @@ export const createCozyRealtimeChatAdapter = (
       await client.stackClient.fetchJSON(
         'POST',
         `/ai/chat/conversations/${conversationId}`,
-        { q: userQuery, assistantID: assistantId }
+        {
+          q: userQuery,
+          assistantID: assistantId,
+          ...(attachmentIDs.length > 0 && { attachmentIDs })
+        }
       )
 
       let fullText = ''
