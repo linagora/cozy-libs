@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.1.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@6.1.0...cozy-ui-plus@6.1.1) (2026-04-02)
+
+### Bug Fixes
+
+- Now getRelatedContactRelationships handle null arg ([d3677ba](https://github.com/cozy/cozy-libs/commit/d3677ba6cfd496db48ebe00fac401746fb6680c9))
+
 # [6.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@6.0.0...cozy-ui-plus@6.1.0) (2026-04-02)
 
 ### Bug Fixes
