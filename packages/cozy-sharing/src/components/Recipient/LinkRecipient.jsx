@@ -2,9 +2,10 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import Button from 'cozy-ui/transpiled/react/Button'
 import Fade from 'cozy-ui/transpiled/react/Fade'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Gear from 'cozy-ui/transpiled/react/Icons/Gear'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -68,12 +69,14 @@ const LinkRecipient = props => {
         </ListItemIcon>
         <ListItemText
           primary={
-            <DropdownButton
-              textVariant="body1"
+            <Button
+              variant="ghost"
               onClick={() => setOpenShareRestrictionModal(true)}
+              endIcon={<Icon icon={Gear} />}
+              className="u-p-0"
             >
               {textPrimary}
-            </DropdownButton>
+            </Button>
           }
           secondary={textSecondary}
         />
