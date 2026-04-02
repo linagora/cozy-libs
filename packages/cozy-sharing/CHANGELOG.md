@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [30.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.0.3...cozy-sharing@30.1.0) (2026-04-02)
+
+### Features
+
+- Hide read write modification in link edition modal ([cc29e55](https://github.com/cozy/cozy-libs/commit/cc29e55f9950c2ed6afae751ff8c87592c44f2c6))
+- Update link sharing french translation ([05bb544](https://github.com/cozy/cozy-libs/commit/05bb544dab03c900030738a9cf589bb4c2868575))
+- Update link sharing look ([f6e66d0](https://github.com/cozy/cozy-libs/commit/f6e66d0ae4d426b8be19ca4dafb2a39c3e1f2df0))
+
 ## [30.0.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.0.2...cozy-sharing@30.0.3) (2026-04-02)
 
 **Note:** Version bump only for package cozy-sharing
