@@ -1,6 +1,6 @@
 {
   "name": "cozy-bar",
-  "version": "33.1.2",
+  "version": "33.1.3",
   "description": "cozy-bar.js library, a small lib provided by cozy-stack to inject the Cozy-bar component into each app",
   "main": "dist/index.js",
   "author": "Cozy Cloud <contact@cozycloud.cc> (https://cozy.io/)",
@@ -43,7 +43,7 @@
     "cozy-realtime": "^4.0.5",
     "cozy-search": "^0.24.0",
     "cozy-ui": "^138.1.0",
-    "cozy-ui-plus": "^6.1.1",
+    "cozy-ui-plus": "^7.0.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "30.3.0",
     "react": "18.0.0",

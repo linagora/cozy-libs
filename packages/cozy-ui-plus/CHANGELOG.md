@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@6.1.1...cozy-ui-plus@7.0.0) (2026-04-07)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Wrong import for FilePicker ([6c20b4a](https://github.com/cozy/cozy-libs/commit/6c20b4a117e8b08b604f3318b7f00f43f0137fdc))
+
+### Features
+
+- **cozy-ui-plus:** Set cozy-interapp in peerDep ([27bd85c](https://github.com/cozy/cozy-libs/commit/27bd85c09a08f3632be2391e6964e74c9518bcbd))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** You need cozy-interapp >= 0.17.1
+
 ## [6.1.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@6.1.0...cozy-ui-plus@6.1.1) (2026-04-02)
 
 ### Bug Fixes
