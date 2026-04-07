@@ -8,7 +8,7 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import FilePickerBody from './FilePickerBody'
 import FilePickerFooter from './FilePickerFooter'
 import FilePickerHeader from './FilePickerHeader'
-import { getCompliantTypes } from '../helpers'
+import { getCompliantTypes } from './helpers'
 
 const useStyles = makeStyles(() => ({
   paper: {

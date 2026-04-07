@@ -3,11 +3,11 @@ import React, { useCallback } from 'react'
 
 import { models, useQuery } from 'cozy-client'
 import List from 'cozy-ui/transpiled/react/List'
+import LoadMore from 'cozy-ui/transpiled/react/LoadMore'
 
 import FilePickerBodyItem from './FilePickerBodyItem'
-import { buildContentFolderQuery } from './queries'
-import LoadMore from '../LoadMore'
 import { isValidFile } from './helpers'
+import { buildContentFolderQuery } from './queries'
 
 const {
   file: { isDirectory }
