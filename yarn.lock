@@ -18241,7 +18241,7 @@ __metadata:
     cozy-client: "npm:^60.21.3"
     cozy-device-helper: "npm:2.0.0"
     cozy-intent: "npm:^2.31.1"
-    cozy-interapp: "npm:^0.5.4"
+    cozy-interapp: "npm:^0.17.1"
     cozy-logger: "npm:^1.18.1"
     cozy-stack-client: "npm:^60.21.1"
     cozy-ui: "npm:^138.1.0"
@@ -18269,6 +18269,7 @@ __metadata:
     cozy-client: ">=60.21.3"
     cozy-device-helper: ">=2.0.0"
     cozy-intent: ">=2.30.0"
+    cozy-interapp: ">=0.17.1"
     cozy-logger: ">=1.17.0"
     cozy-ui: ">=138.1.0"
     react: ^16 || ^17 || ^18
