@@ -30,7 +30,6 @@ type CozyClient = {
 export interface CozyRealtimeChatAdapterOptions {
   client: CozyClient
   conversationId: string
-  streamBridge: StreamBridge
   assistantId?: string
   websearchEnabled?: boolean
 }
@@ -62,19 +61,15 @@ const findUserQuery = (
  */
 export const createCozyRealtimeChatAdapter = (
   options: CozyRealtimeChatAdapterOptions,
-  t: (key: string, options?: Record<string, unknown>) => string
+  t: (key: string, options?: Record<string, unknown>) => string,
+  streamBridgeRef: { current: StreamBridge }
 ): ChatModelAdapter => ({
   async *run({
     messages,
     abortSignal
   }: ChatModelRunOptions): AsyncGenerator<ChatModelRunResult> {
-    const {
-      client,
-      conversationId,
-      streamBridge,
-      assistantId,
-      websearchEnabled
-    } = options
+    const { client, conversationId, assistantId, websearchEnabled } = options
+    const streamBridge = streamBridgeRef.current
 
     const userQuery = findUserQuery(messages)
     if (!userQuery) {
@@ -83,6 +78,11 @@ export const createCozyRealtimeChatAdapter = (
     }
 
     const stream = streamBridge.createStream(conversationId)
+
+    if (abortSignal?.aborted) {
+      streamBridge.cleanup(conversationId)
+      return
+    }
 
     try {
       // Note: For reload, this sends the same query again to regenerate

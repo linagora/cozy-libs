@@ -20,7 +20,14 @@ export class StreamBridge {
   private nextPositions = new Map<string, number>()
   private sourcesMap = new Map<
     string,
-    Array<{ id: string; doctype?: string }>
+    Array<{
+      id?: string
+      doctype?: string
+      sourceType?: string
+      url?: string
+      title?: string
+      snippet?: string
+    }>
   >()
 
   /**
@@ -175,7 +182,14 @@ export class StreamBridge {
    */
   onSources(
     conversationId: string,
-    sources: Array<{ id: string; doctype?: string }>
+    sources: Array<{
+      id?: string
+      doctype?: string
+      sourceType?: string
+      url?: string
+      title?: string
+      snippet?: string
+    }>
   ): void {
     if (!this.streams.has(conversationId)) return
     this.sourcesMap.set(conversationId, sources)
@@ -184,9 +198,16 @@ export class StreamBridge {
   /**
    * Returns stored sources for a conversation.
    */
-  getSources(
-    conversationId: string
-  ): Array<{ id: string; doctype?: string }> | undefined {
+  getSources(conversationId: string):
+    | Array<{
+        id?: string
+        doctype?: string
+        sourceType?: string
+        url?: string
+        title?: string
+        snippet?: string
+      }>
+    | undefined {
     return this.sourcesMap.get(conversationId)
   }
 
