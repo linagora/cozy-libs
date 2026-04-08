@@ -55,6 +55,10 @@
       "not_found_desc": "Cliquez sur \"Nouvelle conversation\" pour commencer une conversation ou sélectionnez parmi vos discussions récentes",
       "close": "Fermer"
     },
+    "mention": {
+      "loading": "Chargement...",
+      "no_files": "Aucun fichier trouvé"
+    },
     "message": {
       "welcome": "Comment puis-je vous aider aujourd'hui ?",
       "running": "Assistant en cours..."

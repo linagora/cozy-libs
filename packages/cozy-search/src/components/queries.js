@@ -14,7 +14,7 @@ export const buildFilesByIds = (ids, enabled) => {
   return {
     definition: Q(FILES_DOCTYPE).getByIds(ids),
     options: {
-      as: `${FILES_DOCTYPE}/${ids.join('')}`,
+      as: `${FILES_DOCTYPE}/${[...ids].sort().join(',')}`,
       fetchPolicy: defaultFetchPolicy,
       enabled
     }

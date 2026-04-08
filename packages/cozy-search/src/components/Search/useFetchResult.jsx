@@ -57,7 +57,7 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
       )
 
       const results = searchResults.map(r => {
-        // Begin Retrocompatibility code, to be removed when following PR is merged: https://github.com/cozy/cozy-web-data-proxy/pull/10
+        // Begin Retrocompatibility code, to be removed when following PR is merged: https://github.com/cozy/cozy-web-dataproxy/pull/10
         r.slug = r.slug || r.type
         r.subTitle = r.subTitle || r.name
         // End Retrocompatibility code
@@ -70,6 +70,7 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
           secondaryUrl: r.secondaryUrl,
           primary: r.title,
           secondary: r.subTitle,
+          type: r.type, // Preserve the type property (file/directory)
           onClick: () => {
             if (r.slug === client.appMetadata.slug) {
               try {
@@ -94,10 +95,12 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
         fetch(searchValue, searchOptions)
       }
     } else {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setState({ isLoading: true, results: null, searchValue: null })
     }
-  }, [dataProxy, searchValue, state.searchValue, setState])
+    // client.appMetadata.slug and navigate are stable refs used only in onClick callbacks
+    // searchOptions is intentionally excluded to avoid re-fetches from inline objects
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataProxy, searchValue, state.searchValue])
 
   return {
     isLoading: state.isLoading,

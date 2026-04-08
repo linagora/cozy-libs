@@ -30,6 +30,10 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from './AssistantProvider'
+import {
+  FileMentionProvider,
+  useFileMention
+} from './Conversations/FileMentionContext'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
 import { DEFAULT_ASSISTANT } from './constants'
@@ -47,6 +51,7 @@ interface ConversationMessage {
   role: 'user' | 'assistant'
   content: string
   sources?: Array<{ id: string; doctype?: string }>
+  attachmentIDs?: string[]
 }
 
 interface Conversation {
@@ -70,15 +75,21 @@ const convertMessagesToThreadMessages = (
 ): ThreadMessageLike[] => {
   if (!messages) return []
 
-  return messages.map((msg, idx) => ({
-    id: msg.id || `msg-${idx}`,
-    role: msg.role,
-    content: sanitizeChatContent(msg.content),
-    metadata:
-      msg.role === 'assistant' && msg.sources
-        ? { custom: { sources: msg.sources } }
-        : undefined
-  }))
+  return messages.map((msg, idx) => {
+    const custom: Record<string, unknown> = {}
+    if (msg.role === 'assistant' && msg.sources) {
+      custom.sources = msg.sources
+    }
+    if (msg.role === 'user' && msg.attachmentIDs?.length) {
+      custom.attachmentIDs = msg.attachmentIDs
+    }
+    return {
+      id: msg.id || `msg-${idx}`,
+      role: msg.role,
+      content: sanitizeChatContent(msg.content),
+      metadata: Object.keys(custom).length > 0 ? { custom } : undefined
+    }
+  })
 }
 
 const ConversationLoader = ({
@@ -129,7 +140,7 @@ const ConversationLoader = ({
   )
 }
 
-const CozyAssistantRuntimeProviderInner = ({
+const FileMentionAwareRuntimeProvider = ({
   children,
   conversationId,
   initialMessages
@@ -144,6 +155,7 @@ const CozyAssistantRuntimeProviderInner = ({
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set())
   const currentStreamingMessageIdRef = useRef<string | null>(null)
   const { selectedAssistantId } = useAssistant()
+  const { getAttachmentsIDs } = useFileMention()
 
   useEffect(() => {
     messagesIdRef.current = initialMessages
@@ -236,8 +248,6 @@ const CozyAssistantRuntimeProviderInner = ({
             return
           }
 
-          // Track which message is currently streaming
-          // When a different message starts, mark the old one as cancelled
           if (res.object === 'delta') {
             if (
               currentStreamingMessageIdRef.current &&
@@ -295,11 +305,12 @@ const CozyAssistantRuntimeProviderInner = ({
           conversationId,
           // eslint-disable-next-line react-hooks/refs
           streamBridge: streamBridgeRef.current,
-          assistantId: selectedAssistantId
+          assistantId: selectedAssistantId,
+          getAttachmentsIDs
         },
         t
       ),
-    [client, conversationId, selectedAssistantId, t]
+    [client, conversationId, selectedAssistantId, t, getAttachmentsIDs]
   )
 
   const runtime = useLocalRuntime(adapter, {
@@ -321,6 +332,26 @@ const CozyAssistantRuntimeProviderInner = ({
     <AssistantRuntimeProvider runtime={runtime}>
       {children}
     </AssistantRuntimeProvider>
+  )
+}
+
+const CozyAssistantRuntimeProviderInner = ({
+  children,
+  conversationId,
+  initialMessages
+}: CozyAssistantRuntimeProviderProps & {
+  conversationId: string
+  initialMessages: ThreadMessageLike[]
+}): JSX.Element => {
+  return (
+    <FileMentionProvider>
+      <FileMentionAwareRuntimeProvider
+        conversationId={conversationId}
+        initialMessages={initialMessages}
+      >
+        {children}
+      </FileMentionAwareRuntimeProvider>
+    </FileMentionProvider>
   )
 }
 
