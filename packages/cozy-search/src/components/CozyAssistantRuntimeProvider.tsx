@@ -46,7 +46,14 @@ interface ConversationMessage {
   id: string
   role: 'user' | 'assistant'
   content: string
-  sources?: Array<{ id: string; doctype?: string }>
+  sources?: Array<{
+    id?: string
+    doctype?: string
+    sourceType?: string
+    url?: string
+    title?: string
+    snippet?: string
+  }>
 }
 
 interface Conversation {
@@ -225,7 +232,14 @@ const CozyAssistantRuntimeProviderInner = ({
             | {
                 _id: string
                 object: 'sources'
-                content: Array<{ id: string; doctype?: string }>
+                content: Array<{
+                  id?: string
+                  doctype?: string
+                  sourceType?: string
+                  url?: string
+                  title?: string
+                  snippet?: string
+                }>
               }
             | { _id: string; object: 'error'; message: string }
         ) => {
@@ -293,11 +307,12 @@ const CozyAssistantRuntimeProviderInner = ({
             typeof createCozyRealtimeChatAdapter
           >[0]['client'],
           conversationId,
-          streamBridge: streamBridgeRef.current,
           assistantId: selectedAssistantId,
           websearchEnabled
         },
-        t
+        t,
+        // eslint-disable-next-line react-hooks/refs -- streamBridgeRef is stable and only read inside adapter.run(), not during render
+        streamBridgeRef
       ),
     [client, conversationId, selectedAssistantId, websearchEnabled, t]
   )

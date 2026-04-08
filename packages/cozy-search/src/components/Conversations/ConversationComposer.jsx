@@ -51,8 +51,9 @@ const ConversationComposer = () => {
   )
 
   const handleToggleWebsearch = useCallback(() => {
+    if (isRunning) return
     setWebsearchEnabled(prev => !prev)
-  }, [setWebsearchEnabled])
+  }, [isRunning, setWebsearchEnabled])
 
   return (
     <ComposerPrimitive.Root

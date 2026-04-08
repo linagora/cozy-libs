@@ -46,7 +46,7 @@
       "today": "Today",
       "yesterday": "Yesterday"
     },
-    "default_error": "There was an error, please try again",
+    "default_error": "An error occurred during response generation. Please try again",
     "hide": "Hide",
     "show": "Show",
     "search_conversation": {
