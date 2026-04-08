@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.0.7](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.0.6...cozy-viewer@28.0.7) (2026-04-08)
+
+### Bug Fixes
+
+- **cozy-viewer:** Remove obsolete require of deleted selectionbar.styl ([a73ae21](https://github.com/cozy/cozy-libs/commit/a73ae21a4db7e24376934e2df39a733d3fff12d5))
+
 ## [28.0.6](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.0.5...cozy-viewer@28.0.6) (2026-04-07)
 
 **Note:** Version bump only for package cozy-viewer
