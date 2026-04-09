@@ -12,7 +12,9 @@
     "allowJs": true, // Disable if you don't have any .js files or if you have too many errors
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "declarationDir": "dist", // Included by default but won't emit anything as long as `tsc` is not run, can be overwritten
+    // "declarationDir": "./dist" is intentionally omitted - when extending this config,
+    // TypeScript resolves relative paths from the config file location, not the project root.
+    // Define "declarationDir" in your project's tsconfig.json instead.
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -26,7 +28,9 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
-    "outDir": "dist", // Best to include it by default to avoid errors like "Cannot write file 'src/foobar.d.ts' because it would overwrite input file."
+    // "outDir": "./dist" is intentionally omitted - when extending this config,
+    // TypeScript resolves relative paths from the config file location, not the project root.
+    // Define "outDir" in your project's tsconfig.json instead.
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true, // Disable if you have too many errors
