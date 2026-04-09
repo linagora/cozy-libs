@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-tsconfig@1.9.0...cozy-tsconfig@2.0.0) (2026-04-09)
+
+### Features
+
+- **cozy-tsconfig:** Remove declarationDir and outDir ([84c7ffc](https://github.com/cozy/cozy-libs/commit/84c7ffcba2ae30a7e705319f1f2ba8fbd0179d00))
+
+### BREAKING CHANGES
+
+- **cozy-tsconfig:** You must define `declarationDir` and `outDir` in `compilerOptions` manually
+
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-tsconfig@1.8.1...cozy-tsconfig@1.9.0) (2026-04-09)
 
 ### Features
