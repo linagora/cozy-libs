@@ -24,12 +24,12 @@
       "esnext"
     ],
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noFallthroughCasesInSwitch": true,
     "outDir": "dist", // Best to include it by default to avoid errors like "Cannot write file 'src/foobar.d.ts' because it would overwrite input file."
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true, // Disable if you have too many errors
-    "target": "es5"
+    "target": "ES2020"
   }
 }
