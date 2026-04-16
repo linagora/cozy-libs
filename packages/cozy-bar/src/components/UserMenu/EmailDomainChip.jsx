@@ -1,10 +1,10 @@
+import useI18n from 'components/useI18n'
 import { buildAppsQuery } from 'queries'
 import React from 'react'
 
 import { useInstanceInfo } from 'cozy-client'
 import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import Chip from 'cozy-ui/transpiled/react/Chips'
-import { useI18n } from 'twake-i18n'
 
 const EmailDomainChip = () => {
   const { t } = useI18n()
