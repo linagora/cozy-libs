@@ -55,6 +55,7 @@
     "createBusinessAccount": "Créer un compte entreprise",
     "storage": "Stockage",
     "storageAvailable": "%{smart_count} Go disponible",
+    "emailDomainNotActive": "E-mail inactif",
     "logOut": "Se déconnecter"
   }
 }

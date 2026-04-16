@@ -55,6 +55,7 @@
     "createBusinessAccount": "Create business account",
     "storage": "Storage",
     "storageAvailable": "%{smart_count} GB available",
+    "emailDomainNotActive": "Email not active",
     "logOut": "Log out"
   }
 }
