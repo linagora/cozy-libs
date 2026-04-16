@@ -1,6 +1,6 @@
 {
   "name": "cozy-bar",
-  "version": "33.1.3",
+  "version": "33.2.0",
   "description": "cozy-bar.js library, a small lib provided by cozy-stack to inject the Cozy-bar component into each app",
   "main": "dist/index.js",
   "author": "Cozy Cloud <contact@cozycloud.cc> (https://cozy.io/)",

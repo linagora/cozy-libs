@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.2.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.1.3...cozy-bar@33.2.0) (2026-04-16)
+
+### Features
+
+- Add `showEmailDomainChip` prop to show/hide this component ([b8a5c53](https://github.com/cozy/cozy-libs/commit/b8a5c53f78b2ed7d08885724a54aabba659548fc))
+- Add EmailDomainChip component ([3e7a08e](https://github.com/cozy/cozy-libs/commit/3e7a08e0b45338eb7e96a31f20dc842109e02760))
+- Remove unsupported ES locales ([57ac660](https://github.com/cozy/cozy-libs/commit/57ac660b555bc94b45240d9e53c8aa3176c0d573))
+
 ## [33.1.3](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.1.2...cozy-bar@33.1.3) (2026-04-07)
 
 **Note:** Version bump only for package cozy-bar
