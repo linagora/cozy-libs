@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.3.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.2.0...cozy-bar@33.3.0) (2026-04-16)
+
+### Bug Fixes
+
+- **cozy-bar:** Use correct local provider for EmailDomainChip ([24f3d2a](https://github.com/cozy/cozy-libs/commit/24f3d2a7010e215cc1dd5c79b6339eb17deeedb0))
+
+### Features
+
+- **cozy-bar:** Use fetch back again to retrieve Home icon from stack ([ff0e32a](https://github.com/cozy/cozy-libs/commit/ff0e32aab45885b9597cbf30f97e411375a82a86))
+
 # [33.2.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.1.3...cozy-bar@33.2.0) (2026-04-16)
 
 ### Features
