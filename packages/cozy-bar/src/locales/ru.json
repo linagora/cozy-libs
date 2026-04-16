@@ -55,6 +55,7 @@
     "createBusinessAccount": "Создать бизнес-аккаунт",
     "storage": "Хранилище",
     "storageAvailable": "Доступно %{smart_count} ГБ",
+    "emailDomainNotActive": "Электронная почта неактивна",
     "logOut": "Выйти"
   }
 }

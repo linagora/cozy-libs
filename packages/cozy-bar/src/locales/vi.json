@@ -55,6 +55,7 @@
     "createBusinessAccount": "Tạo tài khoản doanh nghiệp",
     "storage": "Lưu trữ",
     "storageAvailable": "Còn trống %{smart_count} GB",
+    "emailDomainNotActive": "Địa chỉ email chưa được kích hoạt",
     "logOut": "Đăng xuất"
   }
 }
