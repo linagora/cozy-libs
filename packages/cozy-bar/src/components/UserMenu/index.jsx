@@ -20,7 +20,11 @@ const useStyles = makeStyles({
   }
 })
 
-const UserMenu = ({ onLogOut, isSettingsAppInstalled }) => {
+const UserMenu = ({
+  onLogOut,
+  isSettingsAppInstalled,
+  showEmailDomainChip
+}) => {
   const [isOpen, setOpen] = useState(false)
   const containerRef = useRef()
   const buttonRef = useRef()
@@ -51,6 +55,7 @@ const UserMenu = ({ onLogOut, isSettingsAppInstalled }) => {
           onClose={toggleMenu}
           content={
             <UserMenuContent
+              showEmailDomainChip={showEmailDomainChip}
               onLogOut={onLogOut}
               instance={instance}
               diskUsage={diskUsage}
@@ -89,6 +94,7 @@ const UserMenu = ({ onLogOut, isSettingsAppInstalled }) => {
           }}
         >
           <UserMenuContent
+            showEmailDomainChip={showEmailDomainChip}
             onLogOut={onLogOut}
             instance={instance}
             diskUsage={diskUsage}

@@ -21,6 +21,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
+import EmailDomainChip from './EmailDomainChip'
 import AvatarMyself from './components/AvatarMyself'
 import { getSettingsLink, logOut } from './helpers'
 
@@ -28,6 +29,7 @@ const UserMenuContent = ({
   onLogOut,
   instance,
   diskUsage,
+  showEmailDomainChip,
   isSettingsAppInstalled,
   closeMenu
 }) => {
@@ -58,6 +60,7 @@ const UserMenuContent = ({
         <Typography variant="h4">{public_name}</Typography>
         <Typography variant="body2">{email}</Typography>
       </div>
+      {showEmailDomainChip && <EmailDomainChip />}
       <List className="u-pb-0">
         {isSettingsAppInstalled && (
           <ListItem
@@ -130,6 +133,10 @@ const UserMenuContent = ({
       </List>
     </div>
   )
+}
+
+UserMenuContent.defaultProps = {
+  showEmailDomainChip: true
 }
 
 export default UserMenuContent

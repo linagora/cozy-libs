@@ -72,6 +72,7 @@ export const Bar = ({
         {barRight}
         {!isPublic && (
           <TwakeRight
+            componentsProps={componentsProps}
             apps={apps}
             appSlug={appSlug}
             homeApp={homeApp}
@@ -95,6 +96,9 @@ Bar.propTypes = {
   componentsProps: PropTypes.shape({
     Wrapper: PropTypes.shape({
       className: PropTypes.string
+    }),
+    UserMenu: PropTypes.shape({
+      showEmailDomainChip: PropTypes.bool
     })
   })
 }
