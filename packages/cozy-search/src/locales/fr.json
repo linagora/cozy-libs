@@ -6,6 +6,9 @@
       "noItem": "Aucun résultat",
       "notEnough": "Votre recherche doit contenir au moins 3 caractères"
     },
+    "websearch": {
+      "label": "Recherche web"
+    },
     "dialog": {
       "close": "Fermer"
     },
@@ -43,7 +46,7 @@
       "today": "Aujourd'hui",
       "yesterday": "Hier"
     },
-    "default_error": "Une erreur s'est produite, veuillez réessayer",
+    "default_error": "Une erreur est survenue lors de la génération de la réponse. Veuillez réessayer",
     "hide": "Masquer",
     "show": "Afficher",
     "search_conversation": {

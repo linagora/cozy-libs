@@ -20,7 +20,8 @@ const ConversationComposer = () => {
   const composerRuntime = useComposerRuntime()
   const isRunning = useThread(state => state.isRunning)
   const isThreadEmpty = useThread(state => state.messages.length === 0)
-  const { setOpenedKnowledgePanel } = useAssistant()
+  const { setOpenedKnowledgePanel, websearchEnabled, setWebsearchEnabled } =
+    useAssistant()
 
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
@@ -49,6 +50,11 @@ const ConversationComposer = () => {
     [isMobile, handleSend]
   )
 
+  const handleToggleWebsearch = useCallback(() => {
+    if (isRunning) return
+    setWebsearchEnabled(prev => !prev)
+  }, [isRunning, setWebsearchEnabled])
+
   return (
     <ComposerPrimitive.Root
       className={cx('u-w-100 u-maw-7 u-mh-auto', {
@@ -64,6 +70,8 @@ const ConversationComposer = () => {
         onKeyDown={handleKeyDown}
         onCancel={handleCancel}
         onSend={handleSend}
+        websearchEnabled={websearchEnabled}
+        onToggleWebsearch={handleToggleWebsearch}
       />
 
       <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">

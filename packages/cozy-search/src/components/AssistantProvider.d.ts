@@ -25,6 +25,8 @@ export interface AssistantContextValue {
   setSelectedTwakeKnowledge: React.Dispatch<
     React.SetStateAction<TwakeKnowledgeState>
   >
+  websearchEnabled: boolean
+  setWebsearchEnabled: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function useAssistant(): AssistantContextValue
