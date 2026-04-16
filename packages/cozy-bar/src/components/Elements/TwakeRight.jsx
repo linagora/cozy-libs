@@ -11,6 +11,7 @@ const TwakeRight = ({
   appSlug,
   homeApp,
   barSearch,
+  componentsProps,
   isFetchingApps,
   isSettingsAppInstalled,
   onLogOut
@@ -38,6 +39,7 @@ const TwakeRight = ({
         shortcuts={shortcuts}
       />
       <UserMenu
+        {...componentsProps?.UserMenu}
         onLogOut={onLogOut}
         isSettingsAppInstalled={isSettingsAppInstalled}
       />
