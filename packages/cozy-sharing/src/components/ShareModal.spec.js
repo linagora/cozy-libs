@@ -6,8 +6,16 @@ import flag from 'cozy-flags'
 import { ShareModal } from './ShareModal'
 import AppLike from '../../test/AppLike'
 
-jest.mock('./ShareDialogCozyToCozy', () => () => <>ShareDialogCozyToCozy</>)
-jest.mock('./ShareDialogOnlyByLink', () => () => <>ShareDialogOnlyByLink</>)
+jest.mock('./ShareDialogCozyToCozy', () => () => (
+  <div>ShareDialogCozyToCozy</div>
+))
+jest.mock('./ShareDialogOnlyByLink', () => () => (
+  <div>ShareDialogOnlyByLink</div>
+))
+jest.mock('./ShareRestrictionModal/AutoOpenShareRestriction', () => ({
+  AutoOpenShareRestriction: ({ link }) =>
+    !link ? <div>AutoOpenShareRestriction</div> : null
+}))
 
 jest.mock('cozy-flags')
 
@@ -43,10 +51,22 @@ describe('ShareModal component', () => {
   })
 
   it('should render ShareDialogOnlyByLink if flag cozy.hide-sharing-cozy-to-cozy is true', () => {
-    flag.mockImplementation(() => true)
+    flag.mockImplementation(name => name === 'cozy.hide-sharing-cozy-to-cozy')
 
     const root = setup({ documentType: 'Document' })
 
     expect(root.getByText('ShareDialogOnlyByLink'))
+  })
+
+  it('should render AutoOpenShareRestriction when no link exists', () => {
+    const root = setup({ documentType: 'Document' })
+
+    expect(root.getByText('AutoOpenShareRestriction'))
+  })
+
+  it('should not render AutoOpenShareRestriction when a link exists', () => {
+    const root = setup({ documentType: 'Document', link: 'https://x' })
+
+    expect(root.queryByText('AutoOpenShareRestriction')).toBeNull()
   })
 })

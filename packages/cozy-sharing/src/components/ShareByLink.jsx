@@ -27,14 +27,24 @@ const ShareByLink = ({ link, document, documentType }) => {
   const [isGenerating, setIsGenerating] = useState(false)
 
   const canShare = typeof navigator?.share === 'function'
-  const showCopyAndSendButtons = isMobile && canShare
-  const showOnlyCopyButton = !isMobile || !canShare
+  const showGenerateButton =
+    flag('sharing.generate-link-button.enabled') && !link
+  const showCopyAndSendButtons = !showGenerateButton && isMobile && canShare
+  const showOnlyCopyButton = !showGenerateButton && (!isMobile || !canShare)
   const isFederated = flag('drive.federated-shared-folder.enabled')
 
   const [isEditDialogOpen, toggleEditDialogOpen] = useReducer(
     state => !state,
     false
   )
+
+  const showGenericError = () => {
+    showAlert({
+      message: t(`${documentType}.share.error.generic`),
+      severity: 'error',
+      variant: 'filled'
+    })
+  }
 
   const handleGenerateLink = async () => {
     setIsGenerating(true)
@@ -67,11 +77,14 @@ const ShareByLink = ({ link, document, documentType }) => {
     if (linkToCopy) {
       await copyToClipboard(linkToCopy, { t, showAlert })
     } else {
-      showAlert({
-        message: t(`${documentType}.share.error.generic`),
-        severity: 'error',
-        variant: 'filled'
-      })
+      showGenericError()
+    }
+  }
+
+  const generateLinkSilently = async () => {
+    const generated = await handleGenerateLink()
+    if (!generated) {
+      showGenericError()
     }
   }
 
@@ -81,11 +94,7 @@ const ShareByLink = ({ link, document, documentType }) => {
       linkToShare = await handleGenerateLink()
     }
     if (!linkToShare) {
-      showAlert({
-        message: t(`${documentType}.share.error.generic`),
-        severity: 'error',
-        variant: 'filled'
-      })
+      showGenericError()
       return
     }
 
@@ -100,11 +109,7 @@ const ShareByLink = ({ link, document, documentType }) => {
     } catch (error) {
       // Don't show error when user cancels the share dialog
       if (error.name !== 'AbortError') {
-        showAlert({
-          message: t(`${documentType}.share.error.generic`),
-          severity: 'error',
-          variant: 'filled'
-        })
+        showGenericError()
       }
     }
   }
@@ -141,6 +146,16 @@ const ShareByLink = ({ link, document, documentType }) => {
           size="medium"
           startIcon={<Icon icon={LinkIcon} />}
           onClick={generateLinkAndCopyLinkToClipboard}
+          busy={isGenerating}
+        />
+      )}
+      {showGenerateButton && (
+        <Button
+          label={t(`${documentType}.share.shareByLink.create`)}
+          variant="secondary"
+          size="medium"
+          startIcon={<Icon icon={LinkIcon} />}
+          onClick={generateLinkSilently}
           busy={isGenerating}
         />
       )}

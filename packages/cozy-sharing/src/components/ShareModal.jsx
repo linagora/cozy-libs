@@ -5,6 +5,7 @@ import flag from 'cozy-flags'
 
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
+import { AutoOpenShareRestriction } from './ShareRestrictionModal/AutoOpenShareRestriction'
 import { SharedDriveEditModal } from './SharedDrive/SharedDriveEditModal'
 
 export const ShareModal = ({
@@ -47,7 +48,7 @@ export const ShareModal = ({
   const showShareOnlyByLink = hasSharedParent || hasSharedChild
   const showWhoHasAccess = documentType !== 'Albums'
 
-  return shareDialogOnlyByLink ? (
+  const dialog = shareDialogOnlyByLink ? (
     <ShareDialogOnlyByLink
       isOwner={isOwner}
       onRevoke={onRevoke}
@@ -81,6 +82,13 @@ export const ShareModal = ({
       showWhoHasAccess={showWhoHasAccess}
       twoStepsConfirmationMethods={twoStepsConfirmationMethods}
     />
+  )
+
+  return (
+    <>
+      {dialog}
+      <AutoOpenShareRestriction file={document} link={link} />
+    </>
   )
 }
 
