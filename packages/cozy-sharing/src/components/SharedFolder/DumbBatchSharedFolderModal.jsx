@@ -155,7 +155,9 @@ export const DumbBatchSharedFolderModal = withLocales(
           }
           actions={actionButtons}
         />
-        <AutoOpenShareRestriction file={document} link={sharingLink} />
+        {document && (
+          <AutoOpenShareRestriction file={document} link={sharingLink} />
+        )}
       </>
     )
   }
