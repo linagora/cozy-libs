@@ -10,6 +10,7 @@ import withLocales from '../../hoc/withLocales'
 import AntivirusAlert from '../AntivirusAlert'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import ShareByLink from '../ShareByLink'
+import { AutoOpenShareRestriction } from '../ShareRestrictionModal/AutoOpenShareRestriction'
 import WhoHasAccess from '../WhoHasAccess'
 
 export const DumbBatchSharedFolderModal = withLocales(
@@ -95,64 +96,67 @@ export const DumbBatchSharedFolderModal = withLocales(
     })()
 
     return (
-      <FixedDialog
-        open
-        disableGutters
-        onClose={onClose}
-        title={title}
-        classes={{ paper: 'u-ov-visible' }}
-        componentsProps={{
-          dialogContent: { className: 'u-ov-visible' }
-        }}
-        content={
-          <div>
-            <div className="u-ph-2">
-              <AntivirusAlert document={document} />
-              {showNameField && handleFolderNameChange && (
-                <TextField
-                  required
-                  label={nameLabel}
-                  variant="outlined"
-                  size="small"
-                  className="u-w-100 u-mt-1-half"
-                  value={folderName ?? ''}
-                  onChange={handleFolderNameChange}
-                />
-              )}
-              <Typography variant="h6" className="u-mt-1-half u-mb-half">
-                {addPeopleLabel}
-              </Typography>
-              {showShareByEmail && (
-                <DumbShareByEmail
-                  createContact={createContact}
-                  currentRecipients={currentRecipients}
-                  document={document}
-                  documentType="Files"
-                  sharedDrive
-                  sharingDesc={sharingDesc}
-                  onShare={params => {
-                    onShare(params)
-                  }}
-                  submitLabel={addButtonLabel}
-                  showNotifications={false}
-                />
-              )}
+      <>
+        <FixedDialog
+          open
+          disableGutters
+          onClose={onClose}
+          title={title}
+          classes={{ paper: 'u-ov-visible' }}
+          componentsProps={{
+            dialogContent: { className: 'u-ov-visible' }
+          }}
+          content={
+            <div>
+              <div className="u-ph-2">
+                <AntivirusAlert document={document} />
+                {showNameField && handleFolderNameChange && (
+                  <TextField
+                    required
+                    label={nameLabel}
+                    variant="outlined"
+                    size="small"
+                    className="u-w-100 u-mt-1-half"
+                    value={folderName ?? ''}
+                    onChange={handleFolderNameChange}
+                  />
+                )}
+                <Typography variant="h6" className="u-mt-1-half u-mb-half">
+                  {addPeopleLabel}
+                </Typography>
+                {showShareByEmail && (
+                  <DumbShareByEmail
+                    createContact={createContact}
+                    currentRecipients={currentRecipients}
+                    document={document}
+                    documentType="Files"
+                    sharedDrive
+                    sharingDesc={sharingDesc}
+                    onShare={params => {
+                      onShare(params)
+                    }}
+                    submitLabel={addButtonLabel}
+                    showNotifications={false}
+                  />
+                )}
+              </div>
+              <WhoHasAccess
+                isOwner
+                isSharedDrive
+                recipients={recipients}
+                document={document}
+                documentType="Files"
+                className="u-w-100"
+                onRevoke={onRevoke}
+                onSetType={onSetType}
+                link={sharingLink}
+              />
             </div>
-            <WhoHasAccess
-              isOwner
-              isSharedDrive
-              recipients={recipients}
-              document={document}
-              documentType="Files"
-              className="u-w-100"
-              onRevoke={onRevoke}
-              onSetType={onSetType}
-              link={sharingLink}
-            />
-          </div>
-        }
-        actions={actionButtons}
-      />
+          }
+          actions={actionButtons}
+        />
+        <AutoOpenShareRestriction file={document} link={sharingLink} />
+      </>
     )
   }
 )
