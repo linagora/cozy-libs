@@ -77,51 +77,55 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
 
   const handleClick = async () => {
     setLoading(true)
-    // If the file is not shared, we create a new sharing link
-    if (!hasSharingLink) {
-      const ttl = makeTTL(dateToggle && selectedDate)
-      const { data: perms } = await createPermissions({
-        file,
-        t,
-        ttl,
-        password,
-        editingRights,
-        documentType,
-        shareByLink,
-        showAlert
-      })
-      const url = generateWebLink({
+    // The clipboard write must be initiated synchronously within the click
+    // handler for Safari to honor the user gesture; we pass a pending blob
+    // whose content resolves after the permission round-trip.
+    const permsPromise = hasSharingLink
+      ? updatePermissions({
+          file,
+          t,
+          dateToggle,
+          selectedDate,
+          passwordToggle,
+          password,
+          editingRights,
+          documentType,
+          updateDocumentPermissions,
+          showAlert
+        }).then(([{ data: perms }]) => perms)
+      : createPermissions({
+          file,
+          t,
+          ttl: makeTTL(dateToggle && selectedDate),
+          password,
+          editingRights,
+          documentType,
+          shareByLink,
+          showAlert
+        }).then(({ data: perms }) => perms)
+
+    const urlPromise = permsPromise.then(perms =>
+      generateWebLink({
         cozyUrl: client.getStackClient().uri,
         searchParams: [['sharecode', perms.attributes.shortcodes.code]],
         pathname: '/public',
         slug: getAppSlugFromDocumentType({ documentType }),
         subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'
       })
-      await copyToClipboard(url, { t, showAlert })
-      onClose()
-    } else {
-      const [{ data: perms }] = await updatePermissions({
-        file,
-        t,
-        dateToggle,
-        selectedDate,
-        passwordToggle,
-        password,
-        editingRights,
-        documentType,
-        updateDocumentPermissions,
-        showAlert
-      })
-      const url = generateWebLink({
-        cozyUrl: client.getStackClient().uri,
-        searchParams: [['sharecode', perms.attributes.shortcodes.code]],
-        pathname: '/public',
-        slug: getAppSlugFromDocumentType({ documentType }),
-        subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'
-      })
-      await copyToClipboard(url, { t, showAlert })
-      onClose()
+    )
+
+    await copyToClipboard(urlPromise, { t, showAlert })
+    try {
+      // Observe the permission result so we can keep the modal open (and
+      // preserve the user's date / password / editing-rights inputs) if
+      // the permission round-trip failed. copyToClipboard swallows its
+      // own errors so the await above always resolves.
+      await permsPromise
+    } catch {
+      setLoading(false)
+      return
     }
+    onClose()
   }
 
   const handleRevokeLink = async () => {

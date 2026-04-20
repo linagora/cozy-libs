@@ -96,17 +96,36 @@ export const generateShareLinkFromFile = ({
 }
 
 /**
- * Copy a string to the clipboard
+ * Copy a value to the clipboard.
  *
- * @param {string} value - The string saved to the clipboard
+ * Accepts a resolved string or a `Promise<string>`. The promise form is
+ * required when the value depends on a prior async step (e.g. creating a
+ * sharing link) from within a click handler: Safari drops the user-gesture
+ * context across any `await`, so `navigator.clipboard.writeText` called after
+ * an awaited call throws `NotAllowedError`. Passing a pending blob to
+ * `ClipboardItem` lets the clipboard API be invoked synchronously while the
+ * content is resolved later.
+ *
+ * @param {string | Promise<string>} value - Value to copy
  * @param {object} [options]
- * @param {number} options.t - Translation function
+ * @param {Function} options.t - Translation function
  * @param {Function} options.showAlert - Function to display an alert
  */
 export const copyToClipboard = async (value, { t, showAlert } = {}) => {
   if (!value) return false
   try {
-    await navigator.clipboard.writeText(value)
+    if (typeof value === 'string') {
+      await navigator.clipboard.writeText(value)
+    } else if (typeof ClipboardItem !== 'undefined') {
+      const blobPromise = Promise.resolve(value).then(
+        text => new Blob([text], { type: 'text/plain' })
+      )
+      await navigator.clipboard.write([
+        new ClipboardItem({ 'text/plain': blobPromise })
+      ])
+    } else {
+      await navigator.clipboard.writeText(await value)
+    }
     showAlert({
       message: t('copyReminderContent.success'),
       severity: 'success',

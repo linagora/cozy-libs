@@ -75,18 +75,29 @@ const ShareByLink = ({
   }
 
   const generateLinkAndCopyLinkToClipboard = async () => {
-    let linkToCopy = link
-    const wasNewlyGenerated = !linkToCopy
-    if (!linkToCopy) {
-      linkToCopy = await handleGenerateLink()
+    if (link) {
+      await copyToClipboard(link, { t, showAlert })
+      return
     }
-    if (linkToCopy) {
-      await copyToClipboard(linkToCopy, { t, showAlert })
-      if (wasNewlyGenerated && autoOpenShareRestriction) {
-        toggleEditDialogOpen()
-      }
-    } else {
+    // Safari: the clipboard API must be invoked synchronously within the
+    // click handler, so we pass the pending link to `copyToClipboard`.
+    // The resolved URL is captured here so we can branch on success after
+    // the copy has completed, without re-awaiting the promise.
+    let generatedLink = null
+    await copyToClipboard(
+      handleGenerateLink().then(generated => {
+        generatedLink = generated
+        if (!generated) throw new Error('link-generation-failed')
+        return generated
+      }),
+      { t, showAlert }
+    )
+    if (!generatedLink) {
       showGenericError()
+      return
+    }
+    if (autoOpenShareRestriction) {
+      toggleEditDialogOpen()
     }
   }
 
