@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.25.3...cozy-search@0.26.0) (2026-04-20)
+
+### Features
+
+- Add websearch toggle to AI chat input ([a4c6bc6](https://github.com/cozy/cozy-libs/commit/a4c6bc6a16193dd78463e79ba9f22df57e0f84b6))
+- Display websearch URL sources in assistant chat ([c27bf81](https://github.com/cozy/cozy-libs/commit/c27bf8159652259b617f78aa8ae6bcf1760deb86))
+
 ## [0.25.3](https://github.com/cozy/cozy-libs/compare/cozy-search@0.25.2...cozy-search@0.25.3) (2026-04-07)
 
 **Note:** Version bump only for package cozy-search
