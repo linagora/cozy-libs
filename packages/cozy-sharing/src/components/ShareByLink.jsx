@@ -18,7 +18,13 @@ import {
 } from './ShareRestrictionModal/helpers'
 import { useSharingContext } from '../hooks/useSharingContext'
 
-const ShareByLink = ({ link, document, documentType }) => {
+const ShareByLink = ({
+  link,
+  document,
+  documentType,
+  showGenerateLinkButton = false,
+  autoOpenShareRestriction = false
+}) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const { showAlert } = useAlert()
@@ -27,14 +33,23 @@ const ShareByLink = ({ link, document, documentType }) => {
   const [isGenerating, setIsGenerating] = useState(false)
 
   const canShare = typeof navigator?.share === 'function'
-  const showCopyAndSendButtons = isMobile && canShare
-  const showOnlyCopyButton = !isMobile || !canShare
+  const showGenerateButton = showGenerateLinkButton && !link
+  const showCopyAndSendButtons = !showGenerateButton && isMobile && canShare
+  const showOnlyCopyButton = !showGenerateButton && (!isMobile || !canShare)
   const isFederated = flag('drive.federated-shared-folder.enabled')
 
   const [isEditDialogOpen, toggleEditDialogOpen] = useReducer(
     state => !state,
     false
   )
+
+  const showGenericError = () => {
+    showAlert({
+      message: t(`${documentType}.share.error.generic`),
+      severity: 'error',
+      variant: 'filled'
+    })
+  }
 
   const handleGenerateLink = async () => {
     setIsGenerating(true)
@@ -61,17 +76,28 @@ const ShareByLink = ({ link, document, documentType }) => {
 
   const generateLinkAndCopyLinkToClipboard = async () => {
     let linkToCopy = link
+    const wasNewlyGenerated = !linkToCopy
     if (!linkToCopy) {
       linkToCopy = await handleGenerateLink()
     }
     if (linkToCopy) {
       await copyToClipboard(linkToCopy, { t, showAlert })
+      if (wasNewlyGenerated && autoOpenShareRestriction) {
+        toggleEditDialogOpen()
+      }
     } else {
-      showAlert({
-        message: t(`${documentType}.share.error.generic`),
-        severity: 'error',
-        variant: 'filled'
-      })
+      showGenericError()
+    }
+  }
+
+  const generateLinkSilently = async () => {
+    const generated = await handleGenerateLink()
+    if (!generated) {
+      showGenericError()
+      return
+    }
+    if (autoOpenShareRestriction) {
+      toggleEditDialogOpen()
     }
   }
 
@@ -81,11 +107,7 @@ const ShareByLink = ({ link, document, documentType }) => {
       linkToShare = await handleGenerateLink()
     }
     if (!linkToShare) {
-      showAlert({
-        message: t(`${documentType}.share.error.generic`),
-        severity: 'error',
-        variant: 'filled'
-      })
+      showGenericError()
       return
     }
 
@@ -100,11 +122,7 @@ const ShareByLink = ({ link, document, documentType }) => {
     } catch (error) {
       // Don't show error when user cancels the share dialog
       if (error.name !== 'AbortError') {
-        showAlert({
-          message: t(`${documentType}.share.error.generic`),
-          severity: 'error',
-          variant: 'filled'
-        })
+        showGenericError()
       }
     }
   }
@@ -144,6 +162,16 @@ const ShareByLink = ({ link, document, documentType }) => {
           busy={isGenerating}
         />
       )}
+      {showGenerateButton && (
+        <Button
+          label={t(`${documentType}.share.shareByLink.create`)}
+          variant="secondary"
+          size="medium"
+          startIcon={<Icon icon={LinkIcon} />}
+          onClick={generateLinkSilently}
+          busy={isGenerating}
+        />
+      )}
       {isEditDialogOpen && (
         <ShareRestrictionModal file={document} onClose={toggleEditDialogOpen} />
       )}
@@ -154,7 +182,9 @@ const ShareByLink = ({ link, document, documentType }) => {
 ShareByLink.propTypes = {
   link: PropTypes.string,
   document: PropTypes.object.isRequired,
-  documentType: PropTypes.string.isRequired
+  documentType: PropTypes.string.isRequired,
+  showGenerateLinkButton: PropTypes.bool,
+  autoOpenShareRestriction: PropTypes.bool
 }
 
 export default ShareByLink

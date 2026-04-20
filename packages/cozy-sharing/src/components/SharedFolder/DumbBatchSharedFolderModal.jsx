@@ -38,7 +38,9 @@ export const DumbBatchSharedFolderModal = withLocales(
     shareLabel,
     saveLabel,
     sharingDesc,
-    showShareByEmail = true
+    showShareByEmail = true,
+    autoOpenShareRestriction,
+    showGenerateLinkButton
   }) => {
     const hasRecipients = Boolean(recipients?.length)
 
@@ -59,6 +61,8 @@ export const DumbBatchSharedFolderModal = withLocales(
             link={sharingLink}
             document={document}
             documentType="Files"
+            showGenerateLinkButton={showGenerateLinkButton}
+            autoOpenShareRestriction={autoOpenShareRestriction}
           />
         )
       }
@@ -70,6 +74,8 @@ export const DumbBatchSharedFolderModal = withLocales(
               link={sharingLink}
               document={document}
               documentType="Files"
+              showGenerateLinkButton={showGenerateLinkButton}
+              autoOpenShareRestriction={autoOpenShareRestriction}
             />
             <Button
               variant="primary"
@@ -182,7 +188,9 @@ DumbBatchSharedFolderModal.propTypes = {
   shareLabel: PropTypes.string,
   saveLabel: PropTypes.string,
   sharingDesc: PropTypes.string,
-  showShareByEmail: PropTypes.bool
+  showShareByEmail: PropTypes.bool,
+  autoOpenShareRestriction: PropTypes.bool,
+  showGenerateLinkButton: PropTypes.bool
 }
 
 DumbBatchSharedFolderModal.defaultProps = {

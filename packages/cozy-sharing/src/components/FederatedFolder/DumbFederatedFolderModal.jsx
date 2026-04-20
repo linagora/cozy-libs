@@ -20,7 +20,9 @@ export const DumbFederatedFolderModal = withLocales(
     onClose,
     onShare,
     sharingLink,
-    showShareByEmail
+    showShareByEmail,
+    autoOpenShareRestriction,
+    showGenerateLinkButton
   }) => {
     const { t } = useI18n()
     return (
@@ -42,6 +44,8 @@ export const DumbFederatedFolderModal = withLocales(
         addButtonLabel={t('FederatedFolder.add')}
         shareLabel={t('FederatedFolder.share')}
         showShareByEmail={showShareByEmail}
+        autoOpenShareRestriction={autoOpenShareRestriction}
+        showGenerateLinkButton={showGenerateLinkButton}
       />
     )
   }
@@ -60,7 +64,9 @@ DumbFederatedFolderModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   onShare: PropTypes.func.isRequired,
   sharingLink: PropTypes.string,
-  showShareByEmail: PropTypes.bool
+  showShareByEmail: PropTypes.bool,
+  autoOpenShareRestriction: PropTypes.bool,
+  showGenerateLinkButton: PropTypes.bool
 }
 
 export default DumbFederatedFolderModal

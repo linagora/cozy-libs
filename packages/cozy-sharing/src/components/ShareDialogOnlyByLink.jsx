@@ -19,7 +19,9 @@ const ShareDialogOnlyByLink = ({
   documentType,
   link,
   onClose,
-  permissions
+  permissions,
+  showGenerateLinkButton,
+  autoOpenShareRestriction
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -62,6 +64,8 @@ const ShareDialogOnlyByLink = ({
               link={link}
               document={document}
               documentType={documentType}
+              showGenerateLinkButton={showGenerateLinkButton}
+              autoOpenShareRestriction={autoOpenShareRestriction}
             />
           </div>
         </>

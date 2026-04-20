@@ -6,8 +6,12 @@ import flag from 'cozy-flags'
 import { ShareModal } from './ShareModal'
 import AppLike from '../../test/AppLike'
 
-jest.mock('./ShareDialogCozyToCozy', () => () => <>ShareDialogCozyToCozy</>)
-jest.mock('./ShareDialogOnlyByLink', () => () => <>ShareDialogOnlyByLink</>)
+jest.mock('./ShareDialogCozyToCozy', () => () => (
+  <div>ShareDialogCozyToCozy</div>
+))
+jest.mock('./ShareDialogOnlyByLink', () => () => (
+  <div>ShareDialogOnlyByLink</div>
+))
 
 jest.mock('cozy-flags')
 
@@ -43,7 +47,7 @@ describe('ShareModal component', () => {
   })
 
   it('should render ShareDialogOnlyByLink if flag cozy.hide-sharing-cozy-to-cozy is true', () => {
-    flag.mockImplementation(() => true)
+    flag.mockImplementation(name => name === 'cozy.hide-sharing-cozy-to-cozy')
 
     const root = setup({ documentType: 'Document' })
 
