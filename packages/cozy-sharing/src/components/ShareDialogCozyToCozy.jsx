@@ -1,5 +1,5 @@
 import cx from 'classnames'
-import React from 'react'
+import React, { useMemo } from 'react'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -111,17 +111,32 @@ const SharingTitleFunction = ({ documentType, document }) =>
  */
 const ShareDialogCozyToCozy = ({
   showShareByLink,
+  showGenerateLinkButton,
+  autoOpenShareRestriction,
   documentType,
   document,
   ...props
 }) => {
+  const dialogActionsOnShare = useMemo(() => {
+    if (!showShareByLink) return null
+    const BoundShareByLink = dialogActionProps => (
+      <DumbShareByLink
+        {...dialogActionProps}
+        showGenerateLinkButton={showGenerateLinkButton}
+        autoOpenShareRestriction={autoOpenShareRestriction}
+      />
+    )
+    BoundShareByLink.displayName = 'BoundShareByLink'
+    return BoundShareByLink
+  }, [showShareByLink, showGenerateLinkButton, autoOpenShareRestriction])
+
   return (
     <ShareDialogTwoStepsConfirmationContainer
       {...props}
       documentType={documentType}
       document={document}
       dialogContentOnShare={SharingContent}
-      dialogActionsOnShare={showShareByLink ? DumbShareByLink : null}
+      dialogActionsOnShare={dialogActionsOnShare}
       dialogTitleOnShare={SharingTitleFunction({ documentType, document })}
       disableGutters
     />

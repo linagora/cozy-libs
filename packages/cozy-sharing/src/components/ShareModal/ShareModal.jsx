@@ -36,7 +36,7 @@ export const ShareModal = withLocales(props => {
 
   const isFederatedMode = flag('drive.federated-shared-folder.enabled')
   if (isFederatedMode && allLoaded) {
-    return <FederatedFolderModal document={document} onClose={rest.onClose} />
+    return <FederatedFolderModal document={document} {...rest} />
   }
 
   const isEditable =
@@ -61,6 +61,8 @@ export const ShareModal = withLocales(props => {
 })
 
 ShareModal.propTypes = {
+  autoOpenShareRestriction: PropTypes.bool,
   document: PropTypes.object.isRequired,
-  onRevokeSuccess: PropTypes.func
+  onRevokeSuccess: PropTypes.func,
+  showGenerateLinkButton: PropTypes.bool
 }

@@ -8,6 +8,7 @@ import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
 import { SharedDriveEditModal } from './SharedDrive/SharedDriveEditModal'
 
 export const ShareModal = ({
+  autoOpenShareRestriction,
   createContact,
   document,
   documentType = 'Document',
@@ -24,6 +25,7 @@ export const ShareModal = ({
   recipients,
   sharing,
   sharingDesc,
+  showGenerateLinkButton,
   twoStepsConfirmationMethods
 }) => {
   if (isSharedDrive && !flag('drive.federated-shared-folder.enabled')) {
@@ -35,6 +37,8 @@ export const ShareModal = ({
         onShare={onShare}
         onRevoke={onRevoke}
         onClose={onClose}
+        autoOpenShareRestriction={autoOpenShareRestriction}
+        showGenerateLinkButton={showGenerateLinkButton}
       />
     )
   }
@@ -58,6 +62,8 @@ export const ShareModal = ({
       link={link}
       onClose={onClose}
       permissions={permissions}
+      showGenerateLinkButton={showGenerateLinkButton}
+      autoOpenShareRestriction={autoOpenShareRestriction}
     />
   ) : (
     <ShareDialogCozyToCozy
@@ -79,6 +85,8 @@ export const ShareModal = ({
       showShareByLink={showShareByLink}
       showShareOnlyByLink={showShareOnlyByLink}
       showWhoHasAccess={showWhoHasAccess}
+      showGenerateLinkButton={showGenerateLinkButton}
+      autoOpenShareRestriction={autoOpenShareRestriction}
       twoStepsConfirmationMethods={twoStepsConfirmationMethods}
     />
   )
@@ -87,6 +95,7 @@ export const ShareModal = ({
 export default ShareModal
 
 ShareModal.propTypes = {
+  autoOpenShareRestriction: PropTypes.bool,
   createContact: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,
   documentType: PropTypes.string,
@@ -100,6 +109,7 @@ ShareModal.propTypes = {
   permissions: PropTypes.array.isRequired,
   recipients: PropTypes.array.isRequired,
   sharingDesc: PropTypes.string,
+  showGenerateLinkButton: PropTypes.bool,
   twoStepsConfirmationMethods: PropTypes.shape({
     getRecipientsToBeConfirmed: PropTypes.func,
     confirmRecipient: PropTypes.func,

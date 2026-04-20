@@ -17,7 +17,12 @@ import {
 } from '../SharedDrive/helpers'
 
 export const FederatedFolderModal = withLocales(
-  ({ onClose, document: existingDocument }) => {
+  ({
+    onClose,
+    document: existingDocument,
+    autoOpenShareRestriction,
+    showGenerateLinkButton
+  }) => {
     const client = useClient()
     const { t } = useI18n()
     const {
@@ -159,6 +164,8 @@ export const FederatedFolderModal = withLocales(
         onShare={onShare}
         sharingLink={sharingLink}
         showShareByEmail={!isSharedDrive}
+        autoOpenShareRestriction={autoOpenShareRestriction}
+        showGenerateLinkButton={showGenerateLinkButton}
       />
     )
   }
@@ -166,7 +173,9 @@ export const FederatedFolderModal = withLocales(
 
 FederatedFolderModal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  document: PropTypes.object.isRequired
+  document: PropTypes.object.isRequired,
+  autoOpenShareRestriction: PropTypes.bool,
+  showGenerateLinkButton: PropTypes.bool
 }
 
 export default FederatedFolderModal

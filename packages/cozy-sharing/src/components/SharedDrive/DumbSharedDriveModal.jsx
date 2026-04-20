@@ -23,7 +23,9 @@ export const DumbSharedDriveModal = withLocales(
     onShare,
     onRename,
     showNameField = true,
-    sharingLink
+    sharingLink,
+    autoOpenShareRestriction,
+    showGenerateLinkButton
   }) => {
     const { t } = useI18n()
     return (
@@ -51,6 +53,8 @@ export const DumbSharedDriveModal = withLocales(
         createLabel={t('SharedDrive.sharedDriveModal.create')}
         shareLabel={t('FederatedFolder.share')}
         saveLabel={t('SharedDrive.sharedDriveModal.save')}
+        autoOpenShareRestriction={autoOpenShareRestriction}
+        showGenerateLinkButton={showGenerateLinkButton}
       />
     )
   }
@@ -72,7 +76,9 @@ DumbSharedDriveModal.propTypes = {
   onShare: PropTypes.func.isRequired,
   onRename: PropTypes.func,
   showNameField: PropTypes.bool,
-  sharingLink: PropTypes.string
+  sharingLink: PropTypes.string,
+  autoOpenShareRestriction: PropTypes.bool,
+  showGenerateLinkButton: PropTypes.bool
 }
 
 export default DumbSharedDriveModal

@@ -11,7 +11,16 @@ import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
 
 export const SharedDriveEditModal = withLocales(
-  ({ document, sharing, recipients, onShare, onRevoke, onClose }) => {
+  ({
+    document,
+    sharing,
+    recipients,
+    onShare,
+    onRevoke,
+    onClose,
+    autoOpenShareRestriction,
+    showGenerateLinkButton
+  }) => {
     const client = useClient()
     const { t } = useI18n()
     const { showAlert } = useAlert()
@@ -51,11 +60,20 @@ export const SharedDriveEditModal = withLocales(
         sharedDriveName={name}
         handleSharedDriveNameChange={handleNameChange}
         onRename={onRename}
+        autoOpenShareRestriction={autoOpenShareRestriction}
+        showGenerateLinkButton={showGenerateLinkButton}
       />
     )
   }
 )
 
 SharedDriveEditModal.propTypes = {
-  onClose: PropTypes.func.isRequired
+  document: PropTypes.object,
+  sharing: PropTypes.object,
+  recipients: PropTypes.array,
+  onShare: PropTypes.func.isRequired,
+  onRevoke: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  autoOpenShareRestriction: PropTypes.bool,
+  showGenerateLinkButton: PropTypes.bool
 }
