@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [30.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.2.0...cozy-sharing@30.2.1) (2026-04-20)
+
+### Bug Fixes
+
+- **cozy-sharing:** Preserve user gesture for Safari clipboard writes ([c3e9069](https://github.com/cozy/cozy-libs/commit/c3e9069e250880b9d6640c8ae7529b987af497dc))
+
 # [30.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.1.1...cozy-sharing@30.2.0) (2026-04-20)
 
 ### Features
