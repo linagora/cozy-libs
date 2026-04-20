@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [30.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.1.1...cozy-sharing@30.2.0) (2026-04-20)
+
+### Features
+
+- **cozy-sharing:** Add props to tune the link sharing flow ([0bfc1b9](https://github.com/cozy/cozy-libs/commit/0bfc1b9d58c3c8ce709c0ab7057e028f012d6924))
+
 ## [30.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.1.0...cozy-sharing@30.1.1) (2026-04-07)
 
 **Note:** Version bump only for package cozy-sharing
