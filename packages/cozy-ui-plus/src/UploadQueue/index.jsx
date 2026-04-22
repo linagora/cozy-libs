@@ -33,8 +33,9 @@ const FAILED = 'failed'
 const CONFLICT = 'conflict'
 const QUOTA = 'quota'
 const NETWORK = 'network'
+const UNREADABLE = 'unreadable'
 const DONE_STATUSES = [CREATED, UPDATED]
-const ERROR_STATUSES = [CONFLICT, NETWORK, QUOTA, FAILED]
+const ERROR_STATUSES = [CONFLICT, NETWORK, QUOTA, FAILED, UNREADABLE]
 
 export const uploadStatus = {
   CANCEL,
@@ -46,6 +47,7 @@ export const uploadStatus = {
   CONFLICT,
   QUOTA,
   NETWORK,
+  UNREADABLE,
   DONE_STATUSES,
   ERROR_STATUSES
 }
