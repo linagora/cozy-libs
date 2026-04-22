@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@7.0.0...cozy-ui-plus@7.1.0) (2026-04-22)
+
+### Features
+
+- **cozy-ui-plus:** Add 'unreadable' UploadQueue error status ([e4c7872](https://github.com/cozy/cozy-libs/commit/e4c7872a088d56882bfb8b5f692d749f73f52d23))
+
 # [7.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@6.1.1...cozy-ui-plus@7.0.0) (2026-04-07)
 
 ### Bug Fixes
