@@ -116,5 +116,33 @@ describe('Suggestion matchers', () => {
       expect(matchers.fullnameMatch('snow', contact)).toBeTruthy()
       expect(matchers.fullnameMatch('MARG', contact)).toBeTruthy()
     })
+
+    it('should match accented fullname with unaccented input', () => {
+      expect(
+        matchers.fullnameMatch('zoe', { fullname: 'Zoé Dupont' })
+      ).toBeTruthy()
+      expect(
+        matchers.fullnameMatch('elodie', { fullname: 'Élodie Martin' })
+      ).toBeTruthy()
+      expect(
+        matchers.fullnameMatch('celine', { fullname: 'Céline' })
+      ).toBeTruthy()
+    })
+
+    it('should match unaccented fullname with accented input', () => {
+      expect(
+        matchers.fullnameMatch('zoé', { fullname: 'Zoe Dupont' })
+      ).toBeTruthy()
+    })
+  })
+
+  describe('groupNameMatch', () => {
+    it('should match accented group name with unaccented input', () => {
+      const group = {
+        _type: 'io.cozy.contacts.groups',
+        name: 'Équipe'
+      }
+      expect(matchers.groupNameMatch('equipe', group)).toBeTruthy()
+    })
   })
 })
