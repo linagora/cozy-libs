@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [30.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.2.2...cozy-sharing@30.3.0) (2026-04-23)
+
+### Features
+
+- **cozy-sharing:** Auto-scroll highlighted suggestion into view ([8a367f7](https://github.com/cozy/cozy-libs/commit/8a367f73e36c9cce98cd492845faaf04ec4d1771))
+
 ## [30.2.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.2.1...cozy-sharing@30.2.2) (2026-04-22)
 
 **Note:** Version bump only for package cozy-sharing
