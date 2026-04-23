@@ -33,6 +33,7 @@ const ShareAutocomplete = ({
   const [isLoadingDisplayed, setLoadingDisplayed] = useState(false)
 
   const autosuggestRef = useRef(null)
+  const containerRef = useRef(null)
 
   const computeSuggestions = value => {
     const inputValue = value.trim().toLowerCase()
@@ -138,6 +139,18 @@ const ShareAutocomplete = ({
     autosuggestRef?.current?.input?.focus()
   }
 
+  const onSuggestionHighlighted = () => {
+    requestAnimationFrame(() => {
+      if (!containerRef.current) return
+      const highlighted = containerRef.current.querySelector(
+        '[aria-selected="true"]'
+      )
+      if (highlighted) {
+        highlighted.scrollIntoView({ block: 'nearest' })
+      }
+    })
+  }
+
   const renderInput = inputProps => (
     <div className={styles['recipientsContainer']}>
       {recipients.map((recipient, idx) => {
@@ -175,28 +188,31 @@ const ShareAutocomplete = ({
   )
 
   return (
-    <Autosuggest
-      ref={autosuggestRef}
-      theme={styles}
-      suggestions={suggestions.slice(0, 20)}
-      getSuggestionValue={contact => contact}
-      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-      onSuggestionsClearRequested={onSuggestionsClearRequested}
-      renderSuggestion={renderSuggestion}
-      renderInputComponent={renderInput}
-      highlightFirstSuggestion
-      inputProps={{
-        onFocus: onAutosuggestFocus,
-        onChange: onAutosuggestChange,
-        onPaste: onAutosuggestPaste,
-        onBlur: onAutosuggestBlur,
-        value: inputValue,
-        type: 'email',
-        placeholder,
-        className: styles['suggestionInput'],
-        disabled
-      }}
-    />
+    <div ref={containerRef}>
+      <Autosuggest
+        ref={autosuggestRef}
+        theme={styles}
+        suggestions={suggestions.slice(0, 20)}
+        getSuggestionValue={contact => contact}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        onSuggestionHighlighted={onSuggestionHighlighted}
+        renderSuggestion={renderSuggestion}
+        renderInputComponent={renderInput}
+        highlightFirstSuggestion
+        inputProps={{
+          onFocus: onAutosuggestFocus,
+          onChange: onAutosuggestChange,
+          onPaste: onAutosuggestPaste,
+          onBlur: onAutosuggestBlur,
+          value: inputValue,
+          type: 'email',
+          placeholder,
+          className: styles['suggestionInput'],
+          disabled
+        }}
+      />
+    </div>
   )
 }
 
