@@ -134,6 +134,17 @@ describe('Suggestion matchers', () => {
         matchers.fullnameMatch('zoé', { fullname: 'Zoe Dupont' })
       ).toBeTruthy()
     })
+
+    it('should treat regex metacharacters as plain text', () => {
+      expect(() =>
+        matchers.fullnameMatch('(', { fullname: 'Jon Snow' })
+      ).not.toThrow()
+      expect(matchers.fullnameMatch('(', { fullname: 'Jon Snow' })).toBeFalsy()
+      expect(matchers.fullnameMatch('.', { fullname: 'Jon Snow' })).toBeFalsy()
+      expect(
+        matchers.fullnameMatch('.', { fullname: 'Dr. House' })
+      ).toBeTruthy()
+    })
   })
 
   describe('groupNameMatch', () => {
