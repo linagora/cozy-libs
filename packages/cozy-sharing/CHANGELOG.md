@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [30.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.3.0...cozy-sharing@30.3.1) (2026-04-24)
+
+### Bug Fixes
+
+- **cozy-sharing:** Flatten contact name object in formatRecipients ([c804f59](https://github.com/cozy/cozy-libs/commit/c804f59d87d40cc8a6bfc5e96e88d88a13cbaadb))
+
 # [30.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.2.2...cozy-sharing@30.3.0) (2026-04-23)
 
 ### Features
