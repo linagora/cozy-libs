@@ -138,6 +138,22 @@ describe('formatRecipients', () => {
     })
   })
 
+  it('should flatten an object-shaped contact name into a string public_name', () => {
+    const input = {
+      recipients: [
+        {
+          _id: '3',
+          name: { givenName: 'Arya', familyName: 'Stark' },
+          email: [{ address: 'arya@example.com', primary: true }]
+        }
+      ],
+      readOnlyRecipients: []
+    }
+    const result = formatRecipients(input)
+    expect(typeof result[0].public_name).toBe('string')
+    expect(result[0].public_name).toBe('Arya Stark')
+  })
+
   it('should sort recipients by public_name', () => {
     const input = {
       recipients: [

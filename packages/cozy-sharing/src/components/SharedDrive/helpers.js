@@ -73,7 +73,7 @@ export const formatRecipients = sharedDriveRecipients => {
     recipients.push({
       index: `${RECIPIENT_INDEX_PREFIX}${r._id}`,
       email: ContactModel.getPrimaryEmail(r),
-      public_name: r.displayName || r.name,
+      public_name: ContactModel.getDisplayName(r),
       memberIndex: r._id,
       type: 'two-way',
       members: r.members
@@ -84,7 +84,7 @@ export const formatRecipients = sharedDriveRecipients => {
     recipients.push({
       index: `${RECIPIENT_INDEX_PREFIX}${r._id}`,
       email: ContactModel.getPrimaryEmail(r),
-      public_name: r.displayName || r.name,
+      public_name: ContactModel.getDisplayName(r),
       memberIndex: r._id,
       type: 'one-way',
       members: r.members
