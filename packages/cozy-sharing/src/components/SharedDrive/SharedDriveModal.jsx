@@ -1,148 +1,25 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React from 'react'
 
-import { useClient } from 'cozy-client'
-import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'twake-i18n'
 
-import {
-  mergeAndDeduplicateRecipients,
-  formatRecipients,
-  RECIPIENT_INDEX_PREFIX
-} from './helpers'
 import withLocales from '../../hoc/withLocales'
-import { useSharingContext } from '../../hooks/useSharingContext'
-import { Contact } from '../../models'
-import { DumbBatchSharedFolderModal } from '../SharedFolder/DumbBatchSharedFolderModal'
+import { SharedDriveForm } from './SharedDriveForm'
 
 export const SharedDriveModal = withLocales(({ onClose }) => {
-  const client = useClient()
   const { t } = useI18n()
-  const { share } = useSharingContext()
-  const { showAlert } = useAlert()
-
-  const [sharedDriveRecipients, setSharedDriveRecipients] = useState({
-    recipients: [],
-    readOnlyRecipients: []
-  })
-  const [sharedDriveName, setSharedDriveName] = useState('')
-
-  const onShare = params => {
-    setSharedDriveRecipients({
-      recipients: mergeAndDeduplicateRecipients([
-        sharedDriveRecipients.recipients,
-        params.recipients
-      ]),
-      readOnlyRecipients: mergeAndDeduplicateRecipients([
-        sharedDriveRecipients.readOnlyRecipients,
-        params.readOnlyRecipients
-      ])
-    })
-  }
-
-  const handleSharedDriveNameChange = event => {
-    setSharedDriveName(event.target.value)
-  }
-
-  const onCreate = async () => {
-    try {
-      await client
-        .collection('io.cozy.files')
-        .getOrCreateSharedDrivesDirectory()
-      const { data: sharedDriveFolder } = await client.create('io.cozy.files', {
-        name: sharedDriveName,
-        dirId: 'io.cozy.files.shared-drives-dir',
-        type: 'directory'
-      })
-
-      await share({
-        description: sharedDriveName,
-        document: sharedDriveFolder,
-        recipients: sharedDriveRecipients.recipients,
-        readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
-        sharedDrive: true,
-        openSharing: false
-      })
-
-      showAlert({
-        message: t('SharedDrive.sharedDriveModal.successNotification'),
-        severity: 'success',
-        variant: 'filled'
-      })
-
-      onClose()
-    } catch (_err) {
-      showAlert({
-        message: t('SharedDrive.sharedDriveModal.errorNotification'),
-        severity: 'error',
-        variant: 'filled'
-      })
-    }
-  }
-
-  const onSetType = (index, newType) => {
-    const _id = index.split(RECIPIENT_INDEX_PREFIX)[1]
-
-    if (newType === 'two-way') {
-      setSharedDriveRecipients(prev => {
-        const recipientToMove = prev.readOnlyRecipients.find(r => r._id === _id)
-
-        return {
-          recipients: [...prev.recipients, recipientToMove],
-          readOnlyRecipients: prev.readOnlyRecipients.filter(r => r._id !== _id)
-        }
-      })
-    } else {
-      setSharedDriveRecipients(prev => {
-        const recipientToMove = prev.recipients.find(r => r._id === _id)
-
-        return {
-          recipients: prev.recipients.filter(r => r._id !== _id),
-          readOnlyRecipients: [...prev.readOnlyRecipients, recipientToMove]
-        }
-      })
-    }
-  }
-
-  const onRevoke = index => {
-    const _id = index.split(RECIPIENT_INDEX_PREFIX)[1]
-
-    setSharedDriveRecipients(prev => {
-      return {
-        recipients: prev.recipients.filter(r => r._id !== _id),
-        readOnlyRecipients: prev.readOnlyRecipients.filter(r => r._id !== _id)
-      }
-    })
-  }
-
-  const createContact = contact => client.create(Contact.doctype, contact)
-
-  const recipients = formatRecipients(sharedDriveRecipients)
-
   return (
-    <DumbBatchSharedFolderModal
-      title={t('SharedDrive.sharedDriveModal.title')}
-      folderName={sharedDriveName}
-      handleFolderNameChange={handleSharedDriveNameChange}
-      createContact={createContact}
-      recipients={recipients}
-      currentRecipients={[]}
-      onRevoke={onRevoke}
-      onSetType={onSetType}
-      onCreate={onCreate}
-      onSend={undefined}
+    <FixedDialog
+      open
+      disableGutters
       onClose={onClose}
-      onShare={onShare}
-      showNameField={true}
-      sharingLink={undefined}
-      document={undefined}
-      nameLabel={t('SharedDrive.sharedDriveModal.nameLabel')}
-      addPeopleLabel={t('SharedDrive.sharedDriveModal.addPeople')}
-      addButtonLabel={t('SharedDrive.sharedDriveModal.add')}
-      cancelLabel={t('SharedDrive.sharedDriveModal.cancel')}
-      createLabel={t('SharedDrive.sharedDriveModal.create')}
-      shareLabel={t('FederatedFolder.share')}
-      saveLabel={t('SharedDrive.sharedDriveModal.save')}
+      title={t('SharedDrive.sharedDriveModal.title')}
+      classes={{ paper: 'u-ov-visible' }}
+      componentsProps={{
+        dialogContent: { className: 'u-ov-visible' }
+      }}
+      content={<SharedDriveForm onSuccess={onClose} onCancel={onClose} />}
     />
   )
 })
