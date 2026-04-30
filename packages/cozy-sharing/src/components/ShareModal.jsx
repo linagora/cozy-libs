@@ -5,7 +5,6 @@ import flag from 'cozy-flags'
 
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
-import { SharedDriveEditModal } from './SharedDrive/SharedDriveEditModal'
 
 export const ShareModal = ({
   autoOpenShareRestriction,
@@ -15,7 +14,6 @@ export const ShareModal = ({
   hasSharedChild,
   hasSharedParent,
   isOwner,
-  isSharedDrive,
   link,
   onClose,
   onRevoke,
@@ -28,21 +26,6 @@ export const ShareModal = ({
   showGenerateLinkButton,
   twoStepsConfirmationMethods
 }) => {
-  if (isSharedDrive && !flag('drive.federated-shared-folder.enabled')) {
-    return (
-      <SharedDriveEditModal
-        document={document}
-        sharing={sharing}
-        recipients={recipients}
-        onShare={onShare}
-        onRevoke={onRevoke}
-        onClose={onClose}
-        autoOpenShareRestriction={autoOpenShareRestriction}
-        showGenerateLinkButton={showGenerateLinkButton}
-      />
-    )
-  }
-
   const shareDialogOnlyByLink =
     flag('cozy.hide-sharing-cozy-to-cozy') || documentType === 'Albums'
 

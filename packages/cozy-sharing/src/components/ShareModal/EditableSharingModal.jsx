@@ -21,7 +21,6 @@ export const EditableSharingModal = ({ document, ...rest }) => {
     hasSharedChild,
     hasSharedParent,
     isOwner,
-    isSharedDrive,
     revoke,
     revokeSelf,
     share
@@ -35,7 +34,6 @@ export const EditableSharingModal = ({ document, ...rest }) => {
       hasSharedChild={documentPath && hasSharedChild(documentPath)}
       hasSharedParent={documentPath && hasSharedParent(documentPath)}
       isOwner={isOwner(document._id)}
-      isSharedDrive={isSharedDrive(document._id)}
       link={getSharingLink(document._id)}
       onRevoke={revoke}
       onRevokeSelf={revokeSelf}
