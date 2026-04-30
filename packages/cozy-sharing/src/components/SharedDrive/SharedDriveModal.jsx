@@ -5,7 +5,6 @@ import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import { DumbSharedDriveModal } from './DumbSharedDriveModal'
 import {
   mergeAndDeduplicateRecipients,
   formatRecipients,
@@ -14,6 +13,7 @@ import {
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
+import { DumbBatchSharedFolderModal } from '../SharedFolder/DumbBatchSharedFolderModal'
 
 export const SharedDriveModal = withLocales(({ onClose }) => {
   const client = useClient()
@@ -120,10 +120,10 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
   const recipients = formatRecipients(sharedDriveRecipients)
 
   return (
-    <DumbSharedDriveModal
+    <DumbBatchSharedFolderModal
       title={t('SharedDrive.sharedDriveModal.title')}
-      sharedDriveName={sharedDriveName}
-      handleSharedDriveNameChange={handleSharedDriveNameChange}
+      folderName={sharedDriveName}
+      handleFolderNameChange={handleSharedDriveNameChange}
       createContact={createContact}
       recipients={recipients}
       currentRecipients={[]}
@@ -136,6 +136,13 @@ export const SharedDriveModal = withLocales(({ onClose }) => {
       showNameField={true}
       sharingLink={undefined}
       document={undefined}
+      nameLabel={t('SharedDrive.sharedDriveModal.nameLabel')}
+      addPeopleLabel={t('SharedDrive.sharedDriveModal.addPeople')}
+      addButtonLabel={t('SharedDrive.sharedDriveModal.add')}
+      cancelLabel={t('SharedDrive.sharedDriveModal.cancel')}
+      createLabel={t('SharedDrive.sharedDriveModal.create')}
+      shareLabel={t('FederatedFolder.share')}
+      saveLabel={t('SharedDrive.sharedDriveModal.save')}
     />
   )
 })
