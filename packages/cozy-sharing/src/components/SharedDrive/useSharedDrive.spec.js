@@ -3,17 +3,15 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { useSharedDrive } from './useSharedDrive'
 
 const mockShowAlert = jest.fn()
-const mockShare = jest.fn()
-const mockCreate = jest.fn()
+const mockCreateSharedDrive = jest.fn()
 const mockCollection = jest.fn(() => ({
-  getOrCreateSharedDrivesDirectory: jest.fn().mockResolvedValue({})
+  createSharedDrive: mockCreateSharedDrive
 }))
 const mockT = jest.fn(key => key)
 
 jest.mock('cozy-client', () => ({
   useClient: jest.fn(() => ({
-    collection: mockCollection,
-    create: mockCreate
+    collection: mockCollection
   })),
   models: {
     contact: {
@@ -31,10 +29,6 @@ jest.mock('cozy-ui/transpiled/react/providers/Alert', () => ({
 
 jest.mock('twake-i18n', () => ({
   useI18n: jest.fn(() => ({ t: mockT }))
-}))
-
-jest.mock('../../hooks/useSharingContext', () => ({
-  useSharingContext: jest.fn(() => ({ share: mockShare }))
 }))
 
 jest.mock('../../models', () => ({
@@ -115,11 +109,9 @@ describe('useSharedDrive', () => {
     expect(result.current.recipients[0].type).toBe('two-way')
   })
 
-  it('onCreate calls share, showAlert with success, and onSuccess', async () => {
+  it('onCreate calls createSharedDrive, showAlert with success, and onSuccess', async () => {
     const onSuccess = jest.fn()
-    const sharedDriveFolder = { _id: 'folder1', type: 'directory' }
-    mockCreate.mockResolvedValue({ data: sharedDriveFolder })
-    mockShare.mockResolvedValue({})
+    mockCreateSharedDrive.mockResolvedValue({})
 
     const { result } = renderHook(() => useSharedDrive({ onSuccess }))
 
@@ -133,12 +125,10 @@ describe('useSharedDrive', () => {
       await result.current.onCreate()
     })
 
-    expect(mockShare).toHaveBeenCalledWith(
+    expect(mockCreateSharedDrive).toHaveBeenCalledWith(
       expect.objectContaining({
-        description: 'My Drive',
-        document: sharedDriveFolder,
-        sharedDrive: true,
-        openSharing: false
+        name: 'My Drive',
+        description: 'My Drive'
       })
     )
     expect(mockShowAlert).toHaveBeenCalledWith(
@@ -149,7 +139,7 @@ describe('useSharedDrive', () => {
 
   it('onCreate shows error alert and does not call onSuccess on failure', async () => {
     const onSuccess = jest.fn()
-    mockCreate.mockRejectedValue(new Error('network error'))
+    mockCreateSharedDrive.mockRejectedValue(new Error('network error'))
 
     const { result } = renderHook(() => useSharedDrive({ onSuccess }))
 
