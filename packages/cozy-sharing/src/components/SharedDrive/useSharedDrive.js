@@ -11,13 +11,11 @@ import {
   moveRecipientToReadOnly,
   moveRecipientToReadWrite
 } from './helpers'
-import { useSharingContext } from '../../hooks/useSharingContext'
 import { Contact } from '../../models'
 
 export const useSharedDrive = ({ onSuccess }) => {
   const client = useClient()
   const { t } = useI18n()
-  const { share } = useSharingContext()
   const { showAlert } = useAlert()
 
   const [sharedDriveRecipients, setSharedDriveRecipients] = useState({
@@ -45,22 +43,11 @@ export const useSharedDrive = ({ onSuccess }) => {
 
   const onCreate = async () => {
     try {
-      await client
-        .collection('io.cozy.files')
-        .getOrCreateSharedDrivesDirectory()
-      const { data: sharedDriveFolder } = await client.create('io.cozy.files', {
+      await client.collection('io.cozy.sharings').createSharedDrive({
         name: sharedDriveName,
-        dirId: 'io.cozy.files.shared-drives-dir',
-        type: 'directory'
-      })
-
-      await share({
         description: sharedDriveName,
-        document: sharedDriveFolder,
         recipients: sharedDriveRecipients.recipients,
-        readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients,
-        sharedDrive: true,
-        openSharing: false
+        readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients
       })
 
       showAlert({
