@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.3.1...cozy-sharing@31.0.0) (2026-05-05)
+
+### Features
+
+- **cozy-sharing:** Split SharedDriveModal ([82b9166](https://github.com/cozy/cozy-libs/commit/82b91662eadf1eb7380aa19484c6dac8c2757b2c))
+- **cozy-sharing:** Update cozy-client ([bb5a3cf](https://github.com/cozy/cozy-libs/commit/bb5a3cf5c3ddb231f62d250508f744410dbfe477))
+- **cozy-sharing:** Use new API to create shared drive ([4296b92](https://github.com/cozy/cozy-libs/commit/4296b92821643c3daa102192b550080b8d34b27f))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** You need to update cozy-client to >=60.24.0
+
 ## [30.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@30.3.0...cozy-sharing@30.3.1) (2026-04-24)
 
 ### Bug Fixes
