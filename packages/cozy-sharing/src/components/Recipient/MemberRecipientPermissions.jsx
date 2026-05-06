@@ -21,7 +21,6 @@ const log = minilog('MemberRecipientPermissions')
 
 const MemberRecipientPermissions = ({
   isOwner,
-  isSharedDrive,
   status,
   instance,
   type,
@@ -101,13 +100,9 @@ const MemberRecipientPermissions = ({
   const actions = makeActions(
     [setReadOnlySharedPermission, setReadWriteSharedPermission],
     {
-      client,
       t,
       type: type ?? 'one-way',
-      isOwner,
-      isSharedDrive,
-      setType,
-      handleRevocation
+      setType
     }
   )
 
