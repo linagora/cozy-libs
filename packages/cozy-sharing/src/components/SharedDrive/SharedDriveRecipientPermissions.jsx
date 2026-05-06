@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 
-import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
@@ -20,7 +19,6 @@ const ShareDriveRecipientPermissions = ({
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
-  const client = useClient()
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
 
   const toggleMenu = () => setMenuDisplayed(!isMenuDisplayed)
@@ -42,10 +40,8 @@ const ShareDriveRecipientPermissions = ({
     [setReadOnlySharedPermission, setReadWriteSharedPermission],
     {
       t,
-      client,
       type,
-      setType,
-      handleRevocation
+      setType
     }
   )
 

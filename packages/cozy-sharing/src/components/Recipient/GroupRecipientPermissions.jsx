@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react'
 
-import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
@@ -29,7 +28,6 @@ const GroupRecipientPermissions = ({
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
-  const client = useClient()
   const { revokeGroup, revokeSelf } = useSharingContext()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
@@ -53,11 +51,8 @@ const GroupRecipientPermissions = ({
   const type = isReadOnly ? 'one-way' : 'two-way'
 
   const actions = makeActions([permission], {
-    client,
     t,
-    type,
-    isOwner,
-    handleRevocation
+    type
   })
 
   return (
