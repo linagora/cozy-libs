@@ -63,7 +63,7 @@ const LinkRecipientPermissions = ({ className, document }) => {
           textVariant="body2"
           onClick={toggleMenu}
         >
-          {t(`Share.type.${type}`).toLowerCase()}
+          {t(`Share.type.${type}`)}
         </DropdownButton>
         <ActionsMenu
           ref={buttonRef}

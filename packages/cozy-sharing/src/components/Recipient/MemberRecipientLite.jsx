@@ -44,8 +44,8 @@ const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
       />
       <Typography className="u-flex-shrink-0" variant="body2">
         {recipientOwner
-          ? t(`Share.status.${recipient.status}`).toLowerCase()
-          : t(`Share.type.${recipient.type ?? 'one-way'}`).toLowerCase()}
+          ? t(`Share.status.${recipient.status}`)
+          : t(`Share.type.${recipient.type ?? 'one-way'}`)}
       </Typography>
     </ListItem>
   )

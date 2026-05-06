@@ -115,9 +115,7 @@ const MemberRecipientPermissions = ({
     <div className={className}>
       {revoking && <Spinner />}
       {!shouldShowMenu && !revoking && (
-        <Typography variant="body2">
-          {t(`Share.status.${status}`).toLowerCase()}
-        </Typography>
+        <Typography variant="body2">{t(`Share.status.${status}`)}</Typography>
       )}
       {shouldShowMenu && (
         <>
@@ -128,7 +126,7 @@ const MemberRecipientPermissions = ({
             onClick={toggleMenu}
             textVariant="body2"
           >
-            {t(`Share.type.${type}`).toLowerCase()}
+            {t(`Share.type.${type}`)}
           </DropdownButton>
           <ActionsMenu
             ref={buttonRef}

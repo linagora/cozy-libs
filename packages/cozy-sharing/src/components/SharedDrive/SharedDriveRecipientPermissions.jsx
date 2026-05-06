@@ -58,7 +58,7 @@ const ShareDriveRecipientPermissions = ({
         onClick={toggleMenu}
         textVariant="body2"
       >
-        {t(`Share.type.${type}`).toLowerCase()}
+        {t(`Share.type.${type}`)}
       </DropdownButton>
       <ActionsMenu
         ref={buttonRef}

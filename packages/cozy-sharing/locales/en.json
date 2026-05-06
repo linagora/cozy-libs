@@ -14,8 +14,8 @@
       "unregistered": "Error"
     },
     "type": {
-      "one-way": "Can view",
-      "two-way": "Can change",
+      "one-way": "Viewer",
+      "two-way": "Editor",
       "desc": {
         "one-way": "Contacts can view, download, and add the content to their Twake. If they add the content to their Twake, they will get updates you make to the content, but they won't be able to update it.",
         "two-way": "Contacts can update, delete and add the content to their Twake. Updates on the content will be seen on other Cozies."
@@ -106,8 +106,8 @@
       "details": {
         "title": "Sharing details",
         "createdAt": "On %{date}",
-        "ro": "Can read",
-        "rw": "Can change",
+        "ro": "Viewer",
+        "rw": "Editor",
         "desc": {
           "ro": "You can view, download, and add this content to your Twake. You will get updates by the owner, but you won't be able to update this content yourself.",
           "rw": "You can view, update, delete and add this content to your Twake. Updates you make will be seen on other Cozies."
@@ -175,8 +175,8 @@
       "details": {
         "title": "Sharing details",
         "createdAt": "On %{date}",
-        "ro": "Can read",
-        "rw": "Can change",
+        "ro": "Viewer",
+        "rw": "Editor",
         "desc": {
           "ro": "You can view, download, and add this content to your Twake. You will get updates by the owner, but you won't be able to update this content yourself.",
           "rw": "You can view, update, delete and add this content to your Twake. Updates you make will be seen on other Cozies."
@@ -307,8 +307,8 @@
       "details": {
         "title": "Sharing details",
         "createdAt": "On %{date}",
-        "ro": "Can read",
-        "rw": "Can change",
+        "ro": "Viewer",
+        "rw": "Editor",
         "desc": {
           "ro": "You can view, download, and add this content to your Twake. You will get updates by the owner, but you won't be able to update this content yourself.",
           "rw": "You can view, update, delete and add this content to your Twake. Updates you make will be seen on other Cozies."

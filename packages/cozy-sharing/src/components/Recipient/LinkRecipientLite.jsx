@@ -32,9 +32,7 @@ const LinkRecipientLite = ({ permissions, link }) => {
         secondary={link}
       />
       <Typography className="u-flex-shrink-0" variant="body2">
-        {t(
-          `Share.type.${isReadOnlyPermissions ? 'one-way' : 'two-way'}`
-        ).toLowerCase()}
+        {t(`Share.type.${isReadOnlyPermissions ? 'one-way' : 'two-way'}`)}
       </Typography>
     </ListItem>
   )
