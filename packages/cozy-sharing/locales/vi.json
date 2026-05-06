@@ -14,8 +14,8 @@
       "unregistered": "Lỗi"
     },
     "type": {
-      "one-way": "Có thể xem",
-      "two-way": "Có thể thay đổi",
+      "one-way": "Người xem",
+      "two-way": "Người chỉnh sửa",
       "desc": {
         "one-way": "Người liên hệ có thể xem, tải xuống và thêm nội dung vào Twake của họ. Nếu họ thêm nội dung vào Twake, họ sẽ nhận được các bản cập nhật mà bạn thực hiện đối với nội dung, nhưng họ sẽ không thể cập nhật nó.",
         "two-way": "Người liên hệ có thể cập nhật, xóa và thêm nội dung vào Twake của họ. Các bản cập nhật trên nội dung sẽ được thấy trên các Cozy khác."
@@ -106,8 +106,8 @@
       "details": {
         "title": "Chi tiết chia sẻ",
         "createdAt": "Vào %{date}",
-        "ro": "Có thể đọc",
-        "rw": "Có thể thay đổi",
+        "ro": "Người xem",
+        "rw": "Người chỉnh sửa",
         "desc": {
           "ro": "Bạn có thể xem, tải xuống và thêm nội dung này vào Twake của mình. Bạn sẽ nhận được các bản cập nhật từ chủ sở hữu, nhưng bạn sẽ không thể tự cập nhật nội dung này.",
           "rw": "Bạn có thể xem, cập nhật, xóa và thêm nội dung này vào Twake của mình. Các bản cập nhật bạn thực hiện sẽ được thấy trên các Cozies khác."
@@ -175,8 +175,8 @@
       "details": {
         "title": "Chi tiết chia sẻ",
         "createdAt": "Vào %{date}",
-        "ro": "Có thể đọc",
-        "rw": "Có thể thay đổi",
+        "ro": "Người xem",
+        "rw": "Người chỉnh sửa",
         "desc": {
           "ro": "Bạn có thể xem, tải xuống và thêm nội dung này vào Twake của mình. Bạn sẽ nhận được các bản cập nhật từ chủ sở hữu, nhưng bạn sẽ không thể tự cập nhật nội dung này.",
           "rw": "Bạn có thể xem, cập nhật, xóa và thêm nội dung này vào Twake của mình. Các bản cập nhật bạn thực hiện sẽ được thấy trên các Cozies khác."
@@ -307,8 +307,8 @@
       "details": {
         "title": "Chi tiết chia sẻ",
         "createdAt": "Vào %{date}",
-        "ro": "Có thể đọc",
-        "rw": "Có thể thay đổi",
+        "ro": "Người xem",
+        "rw": "Người chỉnh sửa",
         "desc": {
           "ro": "Bạn có thể xem, tải xuống và thêm nội dung này vào Twake của mình. Bạn sẽ nhận được các bản cập nhật từ chủ sở hữu, nhưng bạn sẽ không thể tự cập nhật nội dung này.",
           "rw": "Bạn có thể xem, cập nhật, xóa và thêm nội dung này vào Twake của mình. Các bản cập nhật bạn thực hiện sẽ được thấy trên các Cozies khác."

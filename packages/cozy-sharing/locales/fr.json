@@ -14,8 +14,8 @@
       "unregistered": "Erreur"
     },
     "type": {
-      "one-way": "Peut consulter",
-      "two-way": "Peut modifier",
+      "one-way": "Lecteur",
+      "two-way": "Éditeur",
       "desc": {
         "one-way": "Les contacts peuvent consulter, télécharger, et ajouter le contenu à leur Twake. En cas d’ajout à leur Twake, ils recevront vos modifications sur le contenu mais ils ne pourront pas le modifier.",
         "two-way": "Les contacts peuvent modifier, supprimer et ajouter le contenu à leur Twake. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
@@ -104,8 +104,8 @@
       "details": {
         "title": "Détails du partage",
         "createdAt": "Depuis le %{date}",
-        "ro": "Peut consulter",
-        "rw": "Peut modifier",
+        "ro": "Lecteur",
+        "rw": "Éditeur",
         "desc": {
           "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Twake. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
           "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
@@ -172,8 +172,8 @@
       "details": {
         "title": "Détails du partage",
         "createdAt": "Depuis le %{date}",
-        "ro": "Peut consulter",
-        "rw": "Peut modifier",
+        "ro": "Lecteur",
+        "rw": "Éditeur",
         "desc": {
           "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Twake. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
           "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
@@ -306,8 +306,8 @@
       "details": {
         "title": "Détails du partage",
         "createdAt": "Depuis le %{date}",
-        "ro": "Peut consulter",
-        "rw": "Peut modifier",
+        "ro": "Lecteur",
+        "rw": "Éditeur",
         "desc": {
           "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Twake. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
           "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
