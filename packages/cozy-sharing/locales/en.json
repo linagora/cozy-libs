@@ -454,7 +454,7 @@
       "cancel": "Cancel",
       "create": "Create",
       "save": "Save",
-      "addPeople": "Add people to the shared drive",
+      "addPeople": "Add users",
       "successNotification": "Shared drive has been added",
       "errorNotification": "Error during shared drive creation",
       "successNotificationUpdate": "Your shared drive has been modified",
