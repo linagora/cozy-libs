@@ -35,6 +35,7 @@
       "count": "%{smart_count} membre |||| %{smart_count} membres",
       "others": "et 1 autre… |||| et %{smart_count} autres…",
       "otherContacts": "autre contact |||| autres contacts",
+      "revoke": "Arrêter le partage",
       "error": {
         "changePermission": "Une erreur s'est produite lors du changement des permissions. Veuillez réessayer."
       }
@@ -382,36 +383,9 @@
     "content": "Vous ne pouvez pas partager %{documentName} à plus de %{limit} membres.",
     "confirm": "J'ai compris"
   },
-  "RevokeMemberItem": {
-    "revoke": {
-      "title": "Arrêter le partage",
-      "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés.",
-      "sharedDriveDesc": "Votre contact ne pourra plus accéder aux données."
-    },
-    "revokeSelf": {
-      "title": "Arrêter le partage",
-      "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Twake."
-    }
-  },
-  "RevokeSharedDriveMemberItem": {
-    "revoke": {
-      "title": "Supprimer"
-    }
-  },
   "GroupRecipient": {
     "secondary": "%{memberCount} membre |||| %{memberCount} membres",
     "secondary_you": "dont vous"
-  },
-  "RevokeGroupItem": {
-    "revoke": {
-      "title": "Arrêter le partage pour le groupe",
-      "desc": "Les membres du groupe conserveront une copie mais vos changements ne seront plus synchronisés",
-      "sharedDriveDesc": "Les membres du groupe ne pourront plus accéder aux données."
-    },
-    "revokeSelf": {
-      "title": "Quitter le partage",
-      "desc": "Vous conserverez une copie mais vos changements ne seront plus synchronisés."
-    }
   },
   "GroupRecipientDetail": {
     "subtitle": "Géré par %{ownerName}",

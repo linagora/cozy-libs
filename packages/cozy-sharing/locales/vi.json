@@ -35,6 +35,7 @@
       "count": "%{smart_count} thành viên |||| %{smart_count} thành viên",
       "others": "và 1 người khác… |||| và %{smart_count} người khác…",
       "otherContacts": "người liên hệ khác |||| người liên hệ khác",
+      "revoke": "Xóa khỏi chia sẻ",
       "error": {
         "changePermission": "Đã xảy ra lỗi khi thay đổi quyền. Vui lòng thử lại."
       }
@@ -384,34 +385,9 @@
     "content": "Bạn không thể chia sẻ %{documentName} với nhiều hơn %{limit} thành viên.",
     "confirm": "Tôi hiểu rồi"
   },
-  "RevokeMemberItem": {
-    "revoke": {
-      "title": "Xóa khỏi chia sẻ",
-      "desc": "Liên hệ này sẽ giữ lại một bản sao nhưng các thay đổi sẽ không còn được đồng bộ hóa nữa."
-    },
-    "revokeSelf": {
-      "title": "Xóa tôi khỏi chia sẻ",
-      "desc": "Bạn giữ lại nội dung nhưng nó sẽ không được cập nhật giữa các Twake của bạn nữa."
-    }
-  },
-  "RevokeSharedDriveMemberItem": {
-    "revoke": {
-      "title": "Xóa"
-    }
-  },
   "GroupRecipient": {
     "secondary": "%{memberCount} thành viên |||| %{memberCount} thành viên",
     "secondary_you": "bao gồm cả bạn"
-  },
-  "RevokeGroupItem": {
-    "revoke": {
-      "title": "Xóa nhóm khỏi chia sẻ",
-      "desc": "Các thành viên trong nhóm sẽ giữ lại một bản sao nhưng các thay đổi sẽ không còn được đồng bộ hóa nữa."
-    },
-    "revokeSelf": {
-      "title": "Xóa tôi khỏi chia sẻ",
-      "desc": "Bạn giữ lại nội dung nhưng nó sẽ không được cập nhật giữa các Twake của bạn nữa."
-    }
   },
   "GroupRecipientDetail": {
     "subtitle": "Được quản lý bởi %{ownerName}",

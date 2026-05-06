@@ -2,14 +2,13 @@ import React, { useState, useRef } from 'react'
 
 import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
-import {
-  makeActions,
-  divider
-} from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import CrossCircleOutlineIcon from 'cozy-ui/transpiled/react/Icons/CrossCircleOutline'
 import { useI18n } from 'twake-i18n'
 
-import { revokeSharedDriveMember } from '../Recipient/actions/revokeSharedDriveMember'
 import { setReadOnlySharedPermission } from '../Recipient/actions/setReadOnlySharedPermission'
 import { setReadWriteSharedPermission } from '../Recipient/actions/setReadWriteSharedPermission'
 
@@ -40,12 +39,7 @@ const ShareDriveRecipientPermissions = ({
   }
 
   const actions = makeActions(
-    [
-      setReadOnlySharedPermission,
-      setReadWriteSharedPermission,
-      divider,
-      revokeSharedDriveMember
-    ],
+    [setReadOnlySharedPermission, setReadWriteSharedPermission],
     {
       t,
       client,
@@ -73,6 +67,14 @@ const ShareDriveRecipientPermissions = ({
         autoClose
         onClose={hideMenu}
       />
+      <IconButton
+        onClick={handleRevocation}
+        size="small"
+        className="u-ml-half"
+        aria-label={t('Share.members.revoke')}
+      >
+        <Icon icon={CrossCircleOutlineIcon} />
+      </IconButton>
     </div>
   )
 }

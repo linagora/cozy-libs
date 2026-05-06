@@ -35,6 +35,7 @@
       "count": "%{smart_count} member |||| %{smart_count} members",
       "others": "and 1 other… |||| and %{smart_count} others…",
       "otherContacts": "other contact |||| other contacts",
+      "revoke": "Remove from sharing",
       "error": {
         "changePermission": "An error occurred while changing the permissions. Please try again."
       }
@@ -384,36 +385,9 @@
     "content": "You cannot share %{documentName} with more than %{limit} members.",
     "confirm": "I understand"
   },
-  "RevokeMemberItem": {
-    "revoke": {
-      "title": "Remove from sharing",
-      "desc": "This contact will keep a copy but the changes won't be synchrnoized anymore.",
-      "sharedDriveDesc": "Your contact will no longer be able to access the data."
-    },
-    "revokeSelf": {
-      "title": "Remove me from sharing",
-      "desc": "You keep the content but it won't be updated between your Twake anymore."
-    }
-  },
-  "RevokeSharedDriveMemberItem": {
-    "revoke": {
-      "title": "Remove"
-    }
-  },
   "GroupRecipient": {
     "secondary": "%{memberCount} member |||| %{memberCount} members",
     "secondary_you": "including you"
-  },
-  "RevokeGroupItem": {
-    "revoke": {
-      "title": "Remove group from sharing",
-      "desc": "Group members will keep a copy but the changes won't be synchrnoized anymore.",
-      "sharedDriveDesc": "Group members will no longer be able to access the data."
-    },
-    "revokeSelf": {
-      "title": "Remove me from sharing",
-      "desc": "You keep the content but it won't be updated between your Twake anymore."
-    }
   },
   "GroupRecipientDetail": {
     "subtitle": "Managed by %{ownerName}",
