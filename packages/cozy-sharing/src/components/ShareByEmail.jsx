@@ -36,8 +36,6 @@ export const ShareByEmail = ({
   const { t } = useI18n()
   const { showAlert } = useAlert()
 
-  const isFederatedMode = flag('drive.federated-shared-folder.enabled')
-
   const [recipients, setRecipients] = useState([])
   const [loading, setLoading] = useState(false)
   const [selectedOption, setSelectedOption] = useState('readWrite')
@@ -54,38 +52,6 @@ export const ShareByEmail = ({
   }
 
   const onRecipientPick = async recipient => {
-    // In federated mode, directly share with the recipient with readWrite access
-    if (isFederatedMode) {
-      setLoading(true)
-      try {
-        const contacts = await getOrCreateFromArray(
-          client,
-          [recipient],
-          createContact
-        )
-        await onShare({
-          document,
-          recipients: contacts,
-          readOnlyRecipients: [],
-          description: sharingDesc,
-          openSharing: false,
-          sharedDrive: true
-        })
-      } catch (_err) {
-        if (showNotifications) {
-          showAlert({
-            message: t('Share.shareByEmail.error.addingRecipient'),
-            severity: 'error',
-            variant: 'filled'
-          })
-        }
-      } finally {
-        reset()
-      }
-      return
-    }
-
-    // Normal mode: just add to the list
     const mergedRecipients = flag('sharing.show-recipient-groups')
       ? mergeRecipients(recipients, recipient)
       : spreadGroupAndMergeRecipients(recipients, recipient)
@@ -201,7 +167,7 @@ export const ShareByEmail = ({
           disabled={loading}
         />
       </div>
-      {!isFederatedMode && showShareControl && (
+      {showShareControl && (
         <div className={styles['share-type-control']}>
           <ShareTypeSelect
             value={selectedOption}
