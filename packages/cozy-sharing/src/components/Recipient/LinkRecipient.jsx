@@ -2,14 +2,15 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Button from 'cozy-ui/transpiled/react/Button'
 import Fade from 'cozy-ui/transpiled/react/Fade'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Gear from 'cozy-ui/transpiled/react/Icons/Gear'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
@@ -68,15 +69,14 @@ const LinkRecipient = props => {
           </Avatar>
         </ListItemIcon>
         <ListItemText
+          onClick={() => setOpenShareRestrictionModal(true)}
           primary={
-            <Button
-              variant="ghost"
-              onClick={() => setOpenShareRestrictionModal(true)}
-              endIcon={<Icon icon={Gear} />}
-              className="u-p-0"
-            >
-              {textPrimary}
-            </Button>
+            <div className="u-flex u-flex-items-center">
+              <Typography className="u-c-pointer ">{textPrimary}</Typography>
+              <IconButton size="small" className="u-ml-half">
+                <Icon icon={Gear} />
+              </IconButton>
+            </div>
           }
           secondary={textSecondary}
         />
