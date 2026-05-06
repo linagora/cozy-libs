@@ -59,15 +59,19 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
         onRevoke={onRevoke}
         onSetType={onSetType}
       />
-      <div className="u-flex u-flex-justify-end u-ph-2 u-pv-1 u-column-gap-half">
+      <div className="u-flex u-ph-2 u-pv-1">
         <Button
-          variant="secondary"
+          variant="text"
           label={t('SharedDrive.sharedDriveModal.cancel')}
+          className="u-w-100 u-m-1"
+          size="large"
           onClick={onCancel}
         />
         <Button
           variant="primary"
           label={t('SharedDrive.sharedDriveModal.create')}
+          className="u-w-100 u-m-1"
+          size="large"
           onClick={onCreate}
         />
       </div>
