@@ -73,7 +73,7 @@ describe('MemberRecipient component', () => {
     const onRevoke = jest.fn()
     const onRevokeSelf = jest.fn()
 
-    const { getByText } = setup({
+    const { getByLabelText } = setup({
       instance: 'foo.mycozy.cloud',
       status: 'ready',
       type: 'two-way',
@@ -82,8 +82,7 @@ describe('MemberRecipient component', () => {
       onRevokeSelf
     })
 
-    fireEvent.click(getByText('can change'))
-    fireEvent.click(getByText('Remove me from sharing'))
+    fireEvent.click(getByLabelText('Remove from sharing'))
     expect(onRevoke).not.toHaveBeenCalled()
     expect(onRevokeSelf).toHaveBeenCalled()
   })
@@ -92,7 +91,7 @@ describe('MemberRecipient component', () => {
     const onRevoke = jest.fn()
     const onRevokeSelf = jest.fn()
 
-    const { getByText } = setup({
+    const { getByLabelText } = setup({
       instance: 'foo.mycozy.cloud',
       status: 'ready',
       type: 'two-way',
@@ -102,8 +101,7 @@ describe('MemberRecipient component', () => {
       onRevokeSelf
     })
 
-    fireEvent.click(getByText('can change'))
-    fireEvent.click(getByText('Remove from sharing'))
+    fireEvent.click(getByLabelText('Remove from sharing'))
     expect(onRevoke).toHaveBeenCalled()
     expect(onRevokeSelf).not.toHaveBeenCalled()
   })

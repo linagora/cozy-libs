@@ -3,17 +3,16 @@ import React, { useState, useRef, useCallback } from 'react'
 import { useClient } from 'cozy-client'
 import minilog from 'cozy-minilog'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
-import {
-  makeActions,
-  divider
-} from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import CrossCircleOutlineIcon from 'cozy-ui/transpiled/react/Icons/CrossCircleOutline'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import { revokeMember } from './actions/revokeMember'
 import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
 import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
 import { useSharingContext } from '../../hooks/useSharingContext'
@@ -100,12 +99,7 @@ const MemberRecipientPermissions = ({
   )
 
   const actions = makeActions(
-    [
-      setReadOnlySharedPermission,
-      setReadWriteSharedPermission,
-      divider,
-      revokeMember
-    ],
+    [setReadOnlySharedPermission, setReadWriteSharedPermission],
     {
       client,
       t,
@@ -143,6 +137,14 @@ const MemberRecipientPermissions = ({
             autoClose
             onClose={hideMenu}
           />
+          <IconButton
+            onClick={handleRevocation}
+            size="small"
+            className="u-ml-half"
+            aria-label={t('Share.members.revoke')}
+          >
+            <Icon icon={CrossCircleOutlineIcon} />
+          </IconButton>
         </>
       )}
     </div>
