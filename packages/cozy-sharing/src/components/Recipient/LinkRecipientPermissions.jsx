@@ -38,6 +38,7 @@ const LinkRecipientPermissions = ({ className, document }) => {
   const handleSetType = newType => {
     const verbs = newType === 'one-way' ? READ_ONLY_PERMS : WRITE_PERMS
     updateDocumentPermissions(document, { verbs })
+    hideMenu()
   }
 
   const handleRevocation = () => revokeSharingLink(document)
