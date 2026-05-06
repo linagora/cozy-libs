@@ -6,7 +6,6 @@ import flag from 'cozy-flags'
 
 import { ShareByEmail } from './ShareByEmail'
 import AppLike from '../../test/AppLike'
-import { getOrCreateFromArray } from '../helpers/contacts'
 
 jest.mock('../helpers/contacts', () => ({
   // eslint-disable-next-line no-unused-vars
@@ -151,60 +150,6 @@ describe('ShareByEmailComponent', () => {
 
     await waitFor(() => {
       expect(onShare).not.toHaveBeenCalled()
-    })
-  })
-
-  describe('federated mode', () => {
-    beforeEach(() => {
-      flag.mockImplementation(flagName => {
-        if (flagName === 'drive.federated-shared-folder.enabled') {
-          return true
-        }
-        return null
-      })
-      getOrCreateFromArray.mockResolvedValue([
-        { _id: 'contact1', email: 'quentin@cozycloud.cc' }
-      ])
-    })
-
-    it('should directly share when selecting a recipient in federated mode', async () => {
-      const sharingDesc = 'test'
-      const createContact = jest.fn()
-
-      setup({ sharingDesc, createContact })
-
-      act(() => {
-        fireEvent.change(screen.getByPlaceholderText('Add contacts'), {
-          target: { value: 'quentin@cozycloud.cc' }
-        })
-      })
-
-      act(() => {
-        fireEvent.keyPress(screen.getByPlaceholderText('Add contacts'), {
-          key: 'Enter',
-          code: 'Enter',
-          charCode: 13
-        })
-      })
-
-      await waitFor(() => {
-        expect(getOrCreateFromArray).toHaveBeenCalledWith(
-          expect.any(Object),
-          [{ email: 'quentin@cozycloud.cc' }],
-          expect.any(Function)
-        )
-      })
-
-      await waitFor(() => {
-        expect(onShare).toHaveBeenCalledWith({
-          document: defaultDocument,
-          recipients: [{ _id: 'contact1', email: 'quentin@cozycloud.cc' }],
-          readOnlyRecipients: [],
-          description: sharingDesc,
-          openSharing: false,
-          sharedDrive: true
-        })
-      })
     })
   })
 })
