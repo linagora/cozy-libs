@@ -4,9 +4,9 @@ import React from 'react'
 import { createMockClient } from 'cozy-client'
 
 import { FederatedFolderModal } from './FederatedFolderModal'
-import AppLike from '../SharingBanner/test/AppLike'
-import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { getOrCreateFromArray } from '../../helpers/contacts'
+import { usePendingRecipients } from '../../hooks/usePendingRecipients'
+import AppLike from '../SharingBanner/test/AppLike'
 
 const mockShare = jest.fn()
 const mockRevoke = jest.fn()
@@ -56,7 +56,9 @@ jest.mock('./DumbFederatedFolderModal', () => ({
       <span data-testid="title">{title}</span>
       <span data-testid="sharing-link">{sharingLink}</span>
       <span data-testid="recipients-count">{recipients.length}</span>
-      <span data-testid="pending-recipients-count">{pendingRecipients.length}</span>
+      <span data-testid="pending-recipients-count">
+        {pendingRecipients.length}
+      </span>
       <span data-testid="selected-option">{selectedOption}</span>
       <button data-testid="btn-send" onClick={onSend}>
         Send

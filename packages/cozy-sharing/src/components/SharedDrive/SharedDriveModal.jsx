@@ -4,8 +4,8 @@ import React from 'react'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'twake-i18n'
 
-import withLocales from '../../hoc/withLocales'
 import { SharedDriveForm } from './SharedDriveForm'
+import withLocales from '../../hoc/withLocales'
 
 export const SharedDriveModal = withLocales(({ onClose }) => {
   const { t } = useI18n()
