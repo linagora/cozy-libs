@@ -10,42 +10,41 @@ export const DumbFederatedFolderModal = withLocales(
   ({
     title,
     document,
-    createContact,
     recipients,
-    readOnlyRecipients,
     currentRecipients,
     onRevoke,
-    onSetType,
     onSend,
     onClose,
-    onShare,
     sharingLink,
     showShareByEmail,
     autoOpenShareRestriction,
-    showGenerateLinkButton
+    showGenerateLinkButton,
+    pendingRecipients,
+    onPendingRecipientsChange,
+    selectedOption,
+    onSelectedOptionChange
   }) => {
     const { t } = useI18n()
     return (
       <DumbBatchSharedFolderModal
         title={title}
         document={document}
-        createContact={createContact}
         recipients={recipients}
-        readOnlyRecipients={readOnlyRecipients}
         currentRecipients={currentRecipients}
         onRevoke={onRevoke}
-        onSetType={onSetType}
         onSend={onSend}
         onClose={onClose}
-        onShare={onShare}
         sharingLink={sharingLink}
         showNameField={false}
         addPeopleLabel={t('FederatedFolder.addPeople')}
-        addButtonLabel={t('FederatedFolder.add')}
         shareLabel={t('FederatedFolder.share')}
         showShareByEmail={showShareByEmail}
         autoOpenShareRestriction={autoOpenShareRestriction}
         showGenerateLinkButton={showGenerateLinkButton}
+        pendingRecipients={pendingRecipients}
+        onPendingRecipientsChange={onPendingRecipientsChange}
+        selectedOption={selectedOption}
+        onSelectedOptionChange={onSelectedOptionChange}
       />
     )
   }
@@ -54,19 +53,19 @@ export const DumbFederatedFolderModal = withLocales(
 DumbFederatedFolderModal.propTypes = {
   title: PropTypes.string,
   document: PropTypes.object,
-  createContact: PropTypes.func.isRequired,
   recipients: PropTypes.array,
-  readOnlyRecipients: PropTypes.array,
   currentRecipients: PropTypes.array,
   onRevoke: PropTypes.func.isRequired,
-  onSetType: PropTypes.func.isRequired,
   onSend: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  onShare: PropTypes.func.isRequired,
   sharingLink: PropTypes.string,
   showShareByEmail: PropTypes.bool,
   autoOpenShareRestriction: PropTypes.bool,
-  showGenerateLinkButton: PropTypes.bool
+  showGenerateLinkButton: PropTypes.bool,
+  pendingRecipients: PropTypes.array.isRequired,
+  onPendingRecipientsChange: PropTypes.func.isRequired,
+  selectedOption: PropTypes.oneOf(['readWrite', 'readOnly']).isRequired,
+  onSelectedOptionChange: PropTypes.func.isRequired
 }
 
 export default DumbFederatedFolderModal
