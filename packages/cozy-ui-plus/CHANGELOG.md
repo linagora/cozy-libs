@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@7.1.0...cozy-ui-plus@8.0.0) (2026-05-07)
+
+### Features
+
+- Remove UploadQueue from cozy-ui-plus ([70dbc09](https://github.com/cozy/cozy-libs/commit/70dbc095a477705578544bda41b5bdf54a91e6db))
+
+### BREAKING CHANGES
+
+- UploadQueue component has been removed.
+
 # [7.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@7.0.0...cozy-ui-plus@7.1.0) (2026-04-22)
 
 ### Features
