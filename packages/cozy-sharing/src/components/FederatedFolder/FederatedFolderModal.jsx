@@ -6,8 +6,8 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
 import { DumbFederatedFolderModal } from './DumbFederatedFolderModal'
-import withLocales from '../../hoc/withLocales'
 import { getOrCreateFromArray } from '../../helpers/contacts'
+import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
 
@@ -82,8 +82,7 @@ export const FederatedFolderModal = withLocales(
         )
         const readWriteRecipients =
           selectedOption === 'readOnly' ? [] : contacts
-        const readOnlyRecipients =
-          selectedOption === 'readOnly' ? contacts : []
+        const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
 
         await share({
           description: folderName,

@@ -4,9 +4,9 @@ import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import { Contact } from '../../models'
 import { getOrCreateFromArray } from '../../helpers/contacts'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
+import { Contact } from '../../models'
 
 export const useSharedDrive = ({ onSuccess }) => {
   const client = useClient()
@@ -34,10 +34,8 @@ export const useSharedDrive = ({ onSuccess }) => {
         pendingRecipients,
         createContact
       )
-      const readWriteRecipients =
-        selectedOption === 'readOnly' ? [] : contacts
-      const readOnlyRecipients =
-        selectedOption === 'readOnly' ? contacts : []
+      const readWriteRecipients = selectedOption === 'readOnly' ? [] : contacts
+      const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
 
       await client.collection('io.cozy.sharings').createSharedDrive({
         name: sharedDriveName,

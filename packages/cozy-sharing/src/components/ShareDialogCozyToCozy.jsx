@@ -154,10 +154,8 @@ const ShareDialogCozyToCozy = ({
         pendingRecipients,
         createContact
       )
-      const readWriteRecipients =
-        selectedOption === 'readOnly' ? [] : contacts
-      const readOnlyRecipients =
-        selectedOption === 'readOnly' ? contacts : []
+      const readWriteRecipients = selectedOption === 'readOnly' ? [] : contacts
+      const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
 
       await onShare({
         document,
