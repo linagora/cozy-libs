@@ -8,20 +8,18 @@ import { useI18n } from 'twake-i18n'
 
 import withLocales from '../../hoc/withLocales'
 import { default as DumbShareByEmail } from '../ShareByEmail'
-import WhoHasAccess from '../WhoHasAccess'
 import { useSharedDrive } from './useSharedDrive'
 
 export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
   const { t } = useI18n()
   const {
     sharedDriveName,
-    recipients,
     handleSharedDriveNameChange,
-    onShare,
-    onCreate,
-    onSetType,
-    onRevoke,
-    createContact
+    pendingRecipients,
+    setPendingRecipients,
+    selectedOption,
+    setSelectedOption,
+    onCreate
   } = useSharedDrive({ onSuccess })
 
   return (
@@ -40,25 +38,14 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
           {t('SharedDrive.sharedDriveModal.addPeople')}
         </Typography>
         <DumbShareByEmail
-          createContact={createContact}
-          currentRecipients={recipients}
+          currentRecipients={[]}
           documentType="Files"
-          sharedDrive
-          onShare={onShare}
-          submitLabel={t('SharedDrive.sharedDriveModal.add')}
-          showNotifications={false}
-          sharingDesc=""
+          pendingRecipients={pendingRecipients}
+          onPendingRecipientsChange={setPendingRecipients}
+          selectedOption={selectedOption}
+          onSelectedOptionChange={setSelectedOption}
         />
       </div>
-      <WhoHasAccess
-        isOwner
-        isSharedDrive
-        recipients={recipients}
-        documentType="Files"
-        className="u-w-100"
-        onRevoke={onRevoke}
-        onSetType={onSetType}
-      />
       <div className="u-flex u-ph-2 u-pv-1">
         <Button
           variant="text"

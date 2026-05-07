@@ -4,50 +4,46 @@ import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import {
-  RECIPIENT_INDEX_PREFIX,
-  formatRecipients,
-  mergeAndDeduplicateRecipients,
-  moveRecipientToReadOnly,
-  moveRecipientToReadWrite
-} from './helpers'
 import { Contact } from '../../models'
+import { getOrCreateFromArray } from '../../helpers/contacts'
+import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 
 export const useSharedDrive = ({ onSuccess }) => {
   const client = useClient()
   const { t } = useI18n()
   const { showAlert } = useAlert()
 
-  const [sharedDriveRecipients, setSharedDriveRecipients] = useState({
-    recipients: [],
-    readOnlyRecipients: []
-  })
   const [sharedDriveName, setSharedDriveName] = useState('')
+  const {
+    pendingRecipients,
+    setPendingRecipients,
+    selectedOption,
+    setSelectedOption
+  } = usePendingRecipients()
 
   const handleSharedDriveNameChange = event => {
     setSharedDriveName(event.target.value)
   }
 
-  const onShare = params => {
-    setSharedDriveRecipients(prev => ({
-      recipients: mergeAndDeduplicateRecipients([
-        prev.recipients,
-        params.recipients
-      ]),
-      readOnlyRecipients: mergeAndDeduplicateRecipients([
-        prev.readOnlyRecipients,
-        params.readOnlyRecipients
-      ])
-    }))
-  }
+  const createContact = contact => client.create(Contact.doctype, contact)
 
   const onCreate = async () => {
     try {
+      const contacts = await getOrCreateFromArray(
+        client,
+        pendingRecipients,
+        createContact
+      )
+      const readWriteRecipients =
+        selectedOption === 'readOnly' ? [] : contacts
+      const readOnlyRecipients =
+        selectedOption === 'readOnly' ? contacts : []
+
       await client.collection('io.cozy.sharings').createSharedDrive({
         name: sharedDriveName,
         description: sharedDriveName,
-        recipients: sharedDriveRecipients.recipients,
-        readOnlyRecipients: sharedDriveRecipients.readOnlyRecipients
+        recipients: readWriteRecipients,
+        readOnlyRecipients
       })
 
       showAlert({
@@ -66,33 +62,13 @@ export const useSharedDrive = ({ onSuccess }) => {
     }
   }
 
-  const onSetType = (index, newType) => {
-    const _id = index.split(RECIPIENT_INDEX_PREFIX)[1]
-    setSharedDriveRecipients(prev =>
-      newType === 'two-way'
-        ? moveRecipientToReadWrite(prev, _id)
-        : moveRecipientToReadOnly(prev, _id)
-    )
-  }
-
-  const onRevoke = index => {
-    const _id = index.split(RECIPIENT_INDEX_PREFIX)[1]
-    setSharedDriveRecipients(prev => ({
-      recipients: prev.recipients.filter(r => r._id !== _id),
-      readOnlyRecipients: prev.readOnlyRecipients.filter(r => r._id !== _id)
-    }))
-  }
-
-  const createContact = contact => client.create(Contact.doctype, contact)
-
   return {
     sharedDriveName,
-    recipients: formatRecipients(sharedDriveRecipients),
     handleSharedDriveNameChange,
-    onShare,
-    onCreate,
-    onSetType,
-    onRevoke,
-    createContact
+    pendingRecipients,
+    setPendingRecipients,
+    selectedOption,
+    setSelectedOption,
+    onCreate
   }
 }
