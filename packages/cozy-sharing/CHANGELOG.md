@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [31.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.0.1...cozy-sharing@31.0.2) (2026-05-07)
+
+### Bug Fixes
+
+- **cozy-sharing:** Escape user input in suggestion matchers ([d1bce0d](https://github.com/cozy/cozy-libs/commit/d1bce0d4426a04960e8e44d93b301c2f673e584e))
+
 ## [31.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.0.0...cozy-sharing@31.0.1) (2026-05-07)
 
 **Note:** Version bump only for package cozy-sharing
