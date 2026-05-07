@@ -20,6 +20,12 @@ jest.mock('../hooks/useSharingContext', () => ({
   })
 }))
 
+jest.mock('../helpers/contacts', () => ({
+  getOrCreateFromArray: jest.fn((client, recipients) =>
+    Promise.resolve(recipients)
+  )
+}))
+
 describe('ShareDialogCozyToCozy', () => {
   const client = createMockClient({})
   client.options = {
@@ -161,6 +167,65 @@ describe('ShareDialogCozyToCozy', () => {
     expect(
       queryByText(/waiting for your confirmation/i)
     ).not.toBeInTheDocument()
+  })
+
+  it('main Share button calls onClose when there are no pending chips', () => {
+    const onClose = jest.fn()
+    const onShare = jest.fn()
+    const props = { ...getMockProps(), onClose, onShare }
+
+    const { getByRole } = setup(props)
+
+    fireEvent.click(getByRole('button', { name: 'Send' }))
+
+    expect(onShare).not.toHaveBeenCalled()
+    expect(onClose).toHaveBeenCalledTimes(1)
+  })
+
+  it('main Share button calls onShare with chips then closes', async () => {
+    const onClose = jest.fn()
+    const onShare = jest.fn().mockResolvedValue(undefined)
+    const props = { ...getMockProps(), onClose, onShare }
+
+    const { getByPlaceholderText, getByRole } = setup(props)
+
+    act(() => {
+      fireEvent.change(
+        getByPlaceholderText(
+          'Enter the email address or name of the recipient'
+        ),
+        {
+          target: { value: 'new@cozycloud.cc' }
+        }
+      )
+    })
+    act(() => {
+      fireEvent.keyPress(
+        getByPlaceholderText(
+          'Enter the email address or name of the recipient'
+        ),
+        {
+          key: 'Enter',
+          code: 'Enter',
+          charCode: 13
+        }
+      )
+    })
+
+    await act(async () => {
+      fireEvent.click(getByRole('button', { name: 'Send' }))
+    })
+
+    expect(onShare).toHaveBeenCalledWith(
+      expect.objectContaining({
+        document: props.document,
+        recipients: [{ email: 'new@cozycloud.cc' }],
+        readOnlyRecipients: [],
+        description: props.sharingDesc,
+        openSharing: true
+      })
+    )
+    expect(onClose).toHaveBeenCalledTimes(1)
   })
 
   it(`should display confirmation of 'contact rejection' when user click on the 'reject' button`, async () => {
@@ -372,6 +437,7 @@ const getMockProps = () => {
     showWhoHasAccess: true,
     onRevoke: jest.fn(),
     onShare: jest.fn(),
+    onClose: jest.fn(),
     createContact: jest.fn()
   }
 }
