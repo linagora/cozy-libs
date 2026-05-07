@@ -1,4 +1,4 @@
-import { render, fireEvent, waitFor, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
 
@@ -7,75 +7,47 @@ import flag from 'cozy-flags'
 import { ShareByEmail } from './ShareByEmail'
 import AppLike from '../../test/AppLike'
 
-jest.mock('../helpers/contacts', () => ({
-  // eslint-disable-next-line no-unused-vars
-  getOrCreateFromArray: jest.fn((client, recipients, _createContact) => {
-    // Return the recipients as-is by default (simulating contact creation/lookup)
-    return Promise.resolve(recipients)
-  })
-}))
-
 jest.mock('cozy-flags', () =>
   jest.fn(flagName => {
-    if (flagName === 'drive.federated-shared-folder.enabled') {
-      return false
-    }
+    if (flagName === 'drive.federated-shared-folder.enabled') return false
     return null
   })
 )
 
-describe('ShareByEmailComponent', () => {
-  const defaultDocument = {
-    id: 'doc_id',
-    name: 'documentName'
-  }
-
-  const onShare = jest.fn()
-
-  const setup = ({
-    sharingDesc = 'test',
-    document = defaultDocument,
-    currentRecipients = [],
-    sharedDrive = false
-  } = {}) => {
+describe('ShareByEmail (controlled)', () => {
+  const setup = (overrides = {}) => {
+    const onPendingRecipientsChange = jest.fn()
+    const onSelectedOptionChange = jest.fn()
     const props = {
+      document: { id: 'doc_id', name: 'documentName' },
       documentType: 'Files',
-      onShare,
-      document,
-      sharingDesc,
-      currentRecipients,
-      createContact: jest.fn(),
-      sharedDrive
+      currentRecipients: [],
+      pendingRecipients: [],
+      onPendingRecipientsChange,
+      selectedOption: 'readWrite',
+      onSelectedOptionChange,
+      ...overrides
     }
-    return render(
+    const utils = render(
       <AppLike>
         <ShareByEmail {...props} />
       </AppLike>
     )
+    return { ...utils, onPendingRecipientsChange, onSelectedOptionChange }
   }
 
   beforeEach(() => {
     jest.clearAllMocks()
-    // Reset flag mock to default (non-federated mode)
-    flag.mockImplementation(flagName => {
-      if (flagName === 'drive.federated-shared-folder.enabled') {
-        return false
-      }
-      return null
-    })
   })
 
-  it('shoud call share if submited', async () => {
-    const sharingDesc = 'test'
-
-    setup({ sharingDesc })
+  it('calls onPendingRecipientsChange when an email is picked', () => {
+    const { onPendingRecipientsChange } = setup()
 
     act(() => {
       fireEvent.change(screen.getByPlaceholderText('Add contacts'), {
         target: { value: 'quentin@cozycloud.cc' }
       })
     })
-
     act(() => {
       fireEvent.keyPress(screen.getByPlaceholderText('Add contacts'), {
         key: 'Enter',
@@ -84,72 +56,30 @@ describe('ShareByEmailComponent', () => {
       })
     })
 
-    act(() => {
-      fireEvent.click(screen.getByRole('button', { name: 'Send' }))
-    })
-
-    await waitFor(() => {
-      expect(onShare).toHaveBeenCalledWith({
-        description: sharingDesc,
-        document: defaultDocument,
-        openSharing: true,
-        readOnlyRecipients: [],
-        recipients: [{ email: 'quentin@cozycloud.cc' }],
-        sharedDrive: false
-      })
-    })
+    expect(onPendingRecipientsChange).toHaveBeenCalledWith([
+      { email: 'quentin@cozycloud.cc' }
+    ])
   })
 
-  it('should alert user when it has reached the recipients limit for a document', async () => {
-    flag.mockImplementation(flagName => {
-      if (flagName === 'sharing.recipients-limit') {
-        return 2
-      }
-      if (flagName === 'drive.federated-shared-folder.enabled') {
-        return false
-      }
-      return null
-    })
+  it('shows the read/write toggle only when there are pending chips', () => {
+    const { rerender } = setup()
+    // Sharetypeselect is a react-select (combobox), not a radiogroup.
+    // When no pending recipients, the select is hidden.
+    expect(screen.queryByText('Editor')).toBeNull()
 
-    setup({
-      currentRecipients: [
-        {
-          email: 'alice@gmail.com',
-          status: 'pending',
-          type: 'two-way'
-        },
-        {
-          email: 'bob@gmail.com',
-          status: 'pending',
-          type: 'two-way'
-        }
-      ]
-    })
-
-    act(() => {
-      fireEvent.change(screen.getByPlaceholderText('Add contacts'), {
-        target: { value: 'john@gmail.com' }
-      })
-    })
-
-    act(() => {
-      fireEvent.keyPress(screen.getByPlaceholderText('Add contacts'), {
-        key: 'Enter',
-        code: 'Enter',
-        charCode: 13
-      })
-    })
-
-    act(() => {
-      fireEvent.click(screen.getByRole('button', { name: 'Send' }))
-    })
-
-    act(() => {
-      fireEvent.click(screen.getByRole('button', { name: 'I understand' }))
-    })
-
-    await waitFor(() => {
-      expect(onShare).not.toHaveBeenCalled()
-    })
+    rerender(
+      <AppLike>
+        <ShareByEmail
+          document={{}}
+          documentType="Files"
+          currentRecipients={[]}
+          pendingRecipients={[{ email: 'a@b.c' }]}
+          onPendingRecipientsChange={jest.fn()}
+          selectedOption="readWrite"
+          onSelectedOptionChange={jest.fn()}
+        />
+      </AppLike>
+    )
+    expect(screen.queryByText('Editor')).not.toBeNull()
   })
 })
