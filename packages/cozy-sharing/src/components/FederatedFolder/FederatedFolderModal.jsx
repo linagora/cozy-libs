@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
@@ -7,14 +7,9 @@ import { useI18n } from 'twake-i18n'
 
 import { DumbFederatedFolderModal } from './DumbFederatedFolderModal'
 import withLocales from '../../hoc/withLocales'
+import { getOrCreateFromArray } from '../../helpers/contacts'
+import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
-import {
-  formatRecipients,
-  mergeAndDeduplicateRecipients,
-  moveRecipientToReadWrite,
-  moveRecipientToReadOnly,
-  RECIPIENT_INDEX_PREFIX
-} from '../SharedDrive/helpers'
 
 export const FederatedFolderModal = withLocales(
   ({
@@ -38,6 +33,12 @@ export const FederatedFolderModal = withLocales(
     const { showAlert } = useAlert()
 
     const [sharingLink, setSharingLink] = useState(null)
+    const {
+      pendingRecipients,
+      setPendingRecipients,
+      selectedOption,
+      setSelectedOption
+    } = usePendingRecipients()
 
     const documentPermissions = existingDocument
       ? getDocumentPermissions(existingDocument._id)
@@ -65,32 +66,30 @@ export const FederatedFolderModal = withLocales(
       getSharingById
     ])
 
-    const [federatedRecipients, setFederatedRecipients] = useState({
-      recipients: [],
-      readOnlyRecipients: []
-    })
-    const [folderName] = useState(existingDocument?.name || '')
-
-    const onShare = params => {
-      setFederatedRecipients(prev => ({
-        recipients: mergeAndDeduplicateRecipients([
-          prev.recipients,
-          params.recipients || []
-        ]),
-        readOnlyRecipients: mergeAndDeduplicateRecipients([
-          prev.readOnlyRecipients,
-          params.readOnlyRecipients || []
-        ])
-      }))
-    }
+    const folderName = existingDocument?.name || ''
 
     const onSend = async () => {
+      if (pendingRecipients.length === 0) {
+        onClose()
+        return
+      }
+
       try {
+        const contacts = await getOrCreateFromArray(
+          client,
+          pendingRecipients,
+          contact => client.create('io.cozy.contacts', contact)
+        )
+        const readWriteRecipients =
+          selectedOption === 'readOnly' ? [] : contacts
+        const readOnlyRecipients =
+          selectedOption === 'readOnly' ? contacts : []
+
         await share({
           description: folderName,
           document: existingDocument,
-          recipients: federatedRecipients.recipients,
-          readOnlyRecipients: federatedRecipients.readOnlyRecipients,
+          recipients: readWriteRecipients,
+          readOnlyRecipients,
           sharedDrive: true,
           openSharing: false
         })
@@ -111,61 +110,30 @@ export const FederatedFolderModal = withLocales(
       }
     }
 
-    const onSetType = (index, newType) => {
-      const _id = index.split(RECIPIENT_INDEX_PREFIX)[1]
-
-      if (newType === 'two-way') {
-        setFederatedRecipients(prev => moveRecipientToReadWrite(prev, _id))
-      } else {
-        setFederatedRecipients(prev => moveRecipientToReadOnly(prev, _id))
-      }
-    }
-
-    const onRevoke = async (documentOrIndex, sharingId, memberIndex) => {
-      if (
-        typeof documentOrIndex === 'string' &&
-        documentOrIndex.startsWith(RECIPIENT_INDEX_PREFIX)
-      ) {
-        const _id = documentOrIndex.split(RECIPIENT_INDEX_PREFIX)[1]
-        setFederatedRecipients(prev => ({
-          recipients: prev.recipients.filter(r => r._id !== _id),
-          readOnlyRecipients: prev.readOnlyRecipients.filter(r => r._id !== _id)
-        }))
-      } else {
-        await revoke(documentOrIndex, sharingId, memberIndex)
-      }
-    }
-
     const existingRecipients = existingDocument
       ? getRecipients(existingDocument._id)
       : []
 
-    const recipients = [
-      ...existingRecipients,
-      ...formatRecipients(federatedRecipients)
-    ]
-
     const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
-
     const isSharedDrive = Boolean(existingDocument?.driveId)
 
     return (
       <DumbFederatedFolderModal
         title={modalTitle}
         document={existingDocument}
-        createContact={contact => client.create('io.cozy.contacts', contact)}
-        recipients={recipients}
-        readOnlyRecipients={federatedRecipients.readOnlyRecipients}
+        recipients={existingRecipients}
         currentRecipients={existingRecipients}
-        onRevoke={onRevoke}
-        onSetType={onSetType}
+        onRevoke={revoke}
         onSend={onSend}
         onClose={onClose}
-        onShare={onShare}
         sharingLink={sharingLink}
         showShareByEmail={!isSharedDrive}
         autoOpenShareRestriction={autoOpenShareRestriction}
         showGenerateLinkButton={showGenerateLinkButton}
+        pendingRecipients={pendingRecipients}
+        onPendingRecipientsChange={setPendingRecipients}
+        selectedOption={selectedOption}
+        onSelectedOptionChange={setSelectedOption}
       />
     )
   }

@@ -18,33 +18,29 @@ export const DumbBatchSharedFolderModal = withLocales(
     document,
     folderName,
     handleFolderNameChange,
-    createContact,
     recipients,
     currentRecipients,
     onRevoke,
-    onSetType,
     onCreate,
     onSend,
     onClose,
-    onShare,
     onRename,
     showNameField = false,
     sharingLink,
     nameLabel,
     addPeopleLabel,
-    addButtonLabel,
     cancelLabel,
     createLabel,
     shareLabel,
     saveLabel,
-    sharingDesc,
     showShareByEmail = true,
     autoOpenShareRestriction,
-    showGenerateLinkButton
+    showGenerateLinkButton,
+    pendingRecipients,
+    onPendingRecipientsChange,
+    selectedOption,
+    onSelectedOptionChange
   }) => {
-    const hasRecipients = Boolean(recipients?.length)
-
-    // Determine action buttons based on modal mode
     const actionButtons = (() => {
       if (showNameField && onCreate) {
         return (
@@ -80,7 +76,7 @@ export const DumbBatchSharedFolderModal = withLocales(
             <Button
               variant="primary"
               label={shareLabel}
-              disabled={!hasRecipients || !onSend}
+              disabled={!onSend}
               onClick={onSend}
             />
           </>
@@ -130,17 +126,13 @@ export const DumbBatchSharedFolderModal = withLocales(
               </Typography>
               {showShareByEmail && (
                 <DumbShareByEmail
-                  createContact={createContact}
                   currentRecipients={currentRecipients}
                   document={document}
                   documentType="Files"
-                  sharedDrive
-                  sharingDesc={sharingDesc}
-                  onShare={params => {
-                    onShare(params)
-                  }}
-                  submitLabel={addButtonLabel}
-                  showNotifications={false}
+                  pendingRecipients={pendingRecipients}
+                  onPendingRecipientsChange={onPendingRecipientsChange}
+                  selectedOption={selectedOption}
+                  onSelectedOptionChange={onSelectedOptionChange}
                 />
               )}
             </div>
@@ -152,7 +144,6 @@ export const DumbBatchSharedFolderModal = withLocales(
               documentType="Files"
               className="u-w-100"
               onRevoke={onRevoke}
-              onSetType={onSetType}
               link={sharingLink}
             />
           </div>
@@ -168,31 +159,26 @@ DumbBatchSharedFolderModal.propTypes = {
   document: PropTypes.object,
   folderName: PropTypes.string,
   handleFolderNameChange: PropTypes.func,
-  createContact: PropTypes.func.isRequired,
   recipients: PropTypes.array,
   currentRecipients: PropTypes.array,
   onRevoke: PropTypes.func.isRequired,
-  onSetType: PropTypes.func.isRequired,
   onCreate: PropTypes.func,
   onSend: PropTypes.func,
   onClose: PropTypes.func.isRequired,
-  onShare: PropTypes.func.isRequired,
   onRename: PropTypes.func,
   showNameField: PropTypes.bool,
   sharingLink: PropTypes.string,
   nameLabel: PropTypes.string,
   addPeopleLabel: PropTypes.string,
-  addButtonLabel: PropTypes.string,
   cancelLabel: PropTypes.string,
   createLabel: PropTypes.string,
   shareLabel: PropTypes.string,
   saveLabel: PropTypes.string,
-  sharingDesc: PropTypes.string,
   showShareByEmail: PropTypes.bool,
   autoOpenShareRestriction: PropTypes.bool,
-  showGenerateLinkButton: PropTypes.bool
-}
-
-DumbBatchSharedFolderModal.defaultProps = {
-  sharingDesc: ''
+  showGenerateLinkButton: PropTypes.bool,
+  pendingRecipients: PropTypes.array,
+  onPendingRecipientsChange: PropTypes.func,
+  selectedOption: PropTypes.oneOf(['readWrite', 'readOnly']),
+  onSelectedOptionChange: PropTypes.func
 }

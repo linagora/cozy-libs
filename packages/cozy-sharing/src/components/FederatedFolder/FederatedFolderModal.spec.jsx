@@ -5,6 +5,8 @@ import { createMockClient } from 'cozy-client'
 
 import { FederatedFolderModal } from './FederatedFolderModal'
 import AppLike from '../SharingBanner/test/AppLike'
+import { usePendingRecipients } from '../../hooks/usePendingRecipients'
+import { getOrCreateFromArray } from '../../helpers/contacts'
 
 const mockShare = jest.fn()
 const mockRevoke = jest.fn()
@@ -31,86 +33,42 @@ jest.mock('cozy-ui/transpiled/react/providers/Alert', () => ({
 
 jest.mock('../../hoc/withLocales', () => Component => Component)
 
+jest.mock('../../helpers/contacts', () => ({
+  getOrCreateFromArray: jest.fn()
+}))
+
+jest.mock('../../hooks/usePendingRecipients', () => ({
+  usePendingRecipients: jest.fn()
+}))
+
 jest.mock('./DumbFederatedFolderModal', () => ({
   DumbFederatedFolderModal: ({
     title,
-    createContact,
     recipients,
-    readOnlyRecipients,
     onRevoke,
-    onSetType,
     onSend,
     onClose,
-    onShare,
-    sharingLink
+    sharingLink,
+    pendingRecipients,
+    selectedOption
   }) => (
     <div data-testid="dumb-modal">
       <span data-testid="title">{title}</span>
       <span data-testid="sharing-link">{sharingLink}</span>
       <span data-testid="recipients-count">{recipients.length}</span>
-      <span data-testid="readOnly-recipients-count">
-        {readOnlyRecipients ? readOnlyRecipients.length : 0}
-      </span>
-      <button
-        data-testid="btn-share"
-        onClick={() =>
-          onShare({
-            recipients: [{ _id: 'r1', id: 'r1', displayName: 'Alice' }],
-            readOnlyRecipients: [{ _id: 'r2', id: 'r2', displayName: 'Bob' }]
-          })
-        }
-      >
-        Share
-      </button>
-      <button
-        data-testid="btn-share-other"
-        onClick={() =>
-          onShare({
-            recipients: [
-              { _id: 'r1', id: 'r1', displayName: 'Alice' },
-              { _id: 'r3', id: 'r3', displayName: 'Charlie' }
-            ],
-            readOnlyRecipients: []
-          })
-        }
-      >
-        Share Other
-      </button>
+      <span data-testid="pending-recipients-count">{pendingRecipients.length}</span>
+      <span data-testid="selected-option">{selectedOption}</span>
       <button data-testid="btn-send" onClick={onSend}>
         Send
       </button>
       <button
-        data-testid="btn-set-type-two-way"
-        onClick={() => onSetType('virtual-shared-drive-sharing-r2', 'two-way')}
-      >
-        Set Two-Way
-      </button>
-      <button
-        data-testid="btn-set-type-one-way"
-        onClick={() => onSetType('virtual-shared-drive-sharing-r1', 'one-way')}
-      >
-        Set One-Way
-      </button>
-      <button
         data-testid="btn-revoke"
-        onClick={() => onRevoke('virtual-shared-drive-sharing-r1')}
+        onClick={() => onRevoke({ _id: 'folder-123' }, 'abc', 1)}
       >
         Revoke
       </button>
-      <button
-        data-testid="btn-revoke-existing"
-        onClick={() => onRevoke({ _id: 'folder-123' }, 'abc', 1)}
-      >
-        Revoke Existing
-      </button>
       <button data-testid="btn-close" onClick={onClose}>
         Close
-      </button>
-      <button
-        data-testid="btn-create-contact"
-        onClick={() => createContact({ email: 'test@example.com' })}
-      >
-        Create Contact
       </button>
     </div>
   )
@@ -162,6 +120,14 @@ describe('FederatedFolderModal', () => {
     mockGetRecipients.mockReturnValue([])
     client = createTestClient()
     sharingContextValue = createSharingContextValue()
+    usePendingRecipients.mockReturnValue({
+      pendingRecipients: [],
+      setPendingRecipients: jest.fn(),
+      selectedOption: 'readWrite',
+      setSelectedOption: jest.fn(),
+      reset: jest.fn()
+    })
+    getOrCreateFromArray.mockResolvedValue([])
   })
 
   const setup = (props = {}) => {
@@ -211,46 +177,44 @@ describe('FederatedFolderModal', () => {
         expect(getByTestId('sharing-link').textContent).toBe('')
       })
     })
-  })
 
-  describe('onShare callback', () => {
-    it('should update recipients when onShare is called', async () => {
+    it('should pass selectedOption from usePendingRecipients', async () => {
       const { getByTestId } = setup()
 
       await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('0')
-      })
-
-      fireEvent.click(getByTestId('btn-share'))
-
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
-      })
-    })
-
-    it('should accumulate recipients when onShare is called multiple times', async () => {
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('0')
-      })
-
-      fireEvent.click(getByTestId('btn-share'))
-
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
-      })
-
-      fireEvent.click(getByTestId('btn-share-other'))
-
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('3')
+        expect(getByTestId('selected-option').textContent).toBe('readWrite')
       })
     })
   })
 
   describe('onSend callback', () => {
+    const pendingRecipient = { name: 'Alice', email: 'alice@example.com' }
+
+    it('should call onClose and skip share when there are no pending recipients', async () => {
+      // pendingRecipients defaults to [] via beforeEach
+      const { getByTestId } = setup()
+
+      await waitFor(() => {
+        expect(getByTestId('btn-send')).toBeTruthy()
+      })
+
+      fireEvent.click(getByTestId('btn-send'))
+
+      await waitFor(() => {
+        expect(mockOnClose).toHaveBeenCalled()
+        expect(mockShare).not.toHaveBeenCalled()
+      })
+    })
+
     it('should call share with correct parameters', async () => {
+      usePendingRecipients.mockReturnValue({
+        pendingRecipients: [pendingRecipient],
+        setPendingRecipients: jest.fn(),
+        selectedOption: 'readWrite',
+        setSelectedOption: jest.fn(),
+        reset: jest.fn()
+      })
+      getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockResolvedValueOnce({})
       const { getByTestId } = setup()
 
@@ -258,15 +222,14 @@ describe('FederatedFolderModal', () => {
         expect(getByTestId('btn-send')).toBeTruthy()
       })
 
-      fireEvent.click(getByTestId('btn-share'))
       fireEvent.click(getByTestId('btn-send'))
 
       await waitFor(() => {
         expect(mockShare).toHaveBeenCalledWith({
           description: 'My Test Folder',
           document: mockDocument,
-          recipients: [{ _id: 'r1', id: 'r1', displayName: 'Alice' }],
-          readOnlyRecipients: [{ _id: 'r2', id: 'r2', displayName: 'Bob' }],
+          recipients: [pendingRecipient],
+          readOnlyRecipients: [],
           sharedDrive: true,
           openSharing: false
         })
@@ -274,6 +237,14 @@ describe('FederatedFolderModal', () => {
     })
 
     it('should show success alert and close modal on successful share', async () => {
+      usePendingRecipients.mockReturnValue({
+        pendingRecipients: [pendingRecipient],
+        setPendingRecipients: jest.fn(),
+        selectedOption: 'readWrite',
+        setSelectedOption: jest.fn(),
+        reset: jest.fn()
+      })
+      getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockResolvedValueOnce({})
       const { getByTestId } = setup()
 
@@ -294,6 +265,14 @@ describe('FederatedFolderModal', () => {
     })
 
     it('should show error alert when share fails', async () => {
+      usePendingRecipients.mockReturnValue({
+        pendingRecipients: [pendingRecipient],
+        setPendingRecipients: jest.fn(),
+        selectedOption: 'readWrite',
+        setSelectedOption: jest.fn(),
+        reset: jest.fn()
+      })
+      getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockRejectedValueOnce(new Error('Share failed'))
       const { getByTestId } = setup()
 
@@ -314,75 +293,19 @@ describe('FederatedFolderModal', () => {
     })
   })
 
-  describe('onSetType callback', () => {
-    it('should move recipient from readOnlyRecipients to recipients when setting two-way', async () => {
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('btn-share')).toBeTruthy()
-      })
-
-      fireEvent.click(getByTestId('btn-share'))
-
-      // After btn-share: combined recipients = 2 (1 readWrite + 1 readOnly)
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
-        expect(getByTestId('readOnly-recipients-count').textContent).toBe('1')
-      })
-
-      fireEvent.click(getByTestId('btn-set-type-two-way'))
-
-      // After setting two-way: Bob moves from readOnlyRecipients to recipients
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
-        expect(getByTestId('readOnly-recipients-count').textContent).toBe('0')
-      })
-    })
-
-    it('should move recipient from recipients to readOnlyRecipients when setting one-way', async () => {
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('btn-share')).toBeTruthy()
-      })
-
-      fireEvent.click(getByTestId('btn-share'))
-
-      // After btn-share: combined recipients = 2 (1 readWrite + 1 readOnly)
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
-        expect(getByTestId('readOnly-recipients-count').textContent).toBe('1')
-      })
-
-      fireEvent.click(getByTestId('btn-set-type-one-way'))
-
-      // After setting one-way: Alice moves from recipients to readOnlyRecipients
-      // Combined count stays at 2, but readOnlyRecipients increases from 1 to 2
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
-        expect(getByTestId('readOnly-recipients-count').textContent).toBe('2')
-      })
-    })
-  })
-
   describe('onRevoke callback', () => {
-    it('should remove recipient from both lists', async () => {
+    it('should call revoke from sharing context for existing members', async () => {
+      mockRevoke.mockResolvedValueOnce({})
       const { getByTestId } = setup()
 
       await waitFor(() => {
-        expect(getByTestId('btn-share')).toBeTruthy()
-      })
-
-      fireEvent.click(getByTestId('btn-share'))
-
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
+        expect(getByTestId('dumb-modal')).toBeTruthy()
       })
 
       fireEvent.click(getByTestId('btn-revoke'))
 
       await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('1')
+        expect(mockRevoke).toHaveBeenCalledWith({ _id: 'folder-123' }, 'abc', 1)
       })
     })
   })
@@ -429,50 +352,6 @@ describe('FederatedFolderModal', () => {
 
       await waitFor(() => {
         expect(getByTestId('recipients-count').textContent).toBe('2')
-      })
-    })
-
-    it('should pass existing recipients as currentRecipients', async () => {
-      mockGetRecipients.mockReturnValue(existingRecipients)
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
-      })
-    })
-
-    it('should call revoke for existing member', async () => {
-      mockGetRecipients.mockReturnValue(existingRecipients)
-      mockRevoke.mockResolvedValueOnce({})
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('dumb-modal')).toBeTruthy()
-      })
-
-      // Simulate revoke of an existing member (non-virtual-shared-drive index)
-      fireEvent.click(getByTestId('btn-revoke-existing'))
-
-      await waitFor(() => {
-        expect(mockRevoke).toHaveBeenCalledWith({ _id: 'folder-123' }, 'abc', 1)
-      })
-    })
-  })
-
-  describe('createContact callback', () => {
-    it('should call client.create when creating a contact', async () => {
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('btn-create-contact')).toBeTruthy()
-      })
-
-      fireEvent.click(getByTestId('btn-create-contact'))
-
-      await waitFor(() => {
-        expect(client.create).toHaveBeenCalledWith('io.cozy.contacts', {
-          email: 'test@example.com'
-        })
       })
     })
   })
