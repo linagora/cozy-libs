@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.0.2...cozy-sharing@31.1.0) (2026-05-07)
+
+### Bug Fixes
+
+- Autoclose sharing link permission menu ([82f6b62](https://github.com/cozy/cozy-libs/commit/82f6b62c78232805150e8c927955bb7eeb108ad4))
+- Fix hover issue in link recipient text ([dce027c](https://github.com/cozy/cozy-libs/commit/dce027c16eecf8f3309da73a1dd01d537a2cef47))
+
+### Features
+
+- Revoke member or group with button instead of action ([3fa0c4d](https://github.com/cozy/cozy-libs/commit/3fa0c4d3035d57fa65e231fbbddc5b06955b3ecb))
+- Update permission menu UI ([bc0c0ad](https://github.com/cozy/cozy-libs/commit/bc0c0ade86d86e82299397c09cdc5f4c19c1c4ac))
+- Update SharedDriveForm UI ([b3ab3ff](https://github.com/cozy/cozy-libs/commit/b3ab3ffd3881ccae74c1e3486706e7c108ed151b))
+- Update SharedDriveForm wording ([c46750b](https://github.com/cozy/cozy-libs/commit/c46750be56cbc0c99b2c3f46b069d361cadddb82))
+
 ## [31.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.0.1...cozy-sharing@31.0.2) (2026-05-07)
 
 ### Bug Fixes
