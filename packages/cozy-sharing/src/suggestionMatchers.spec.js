@@ -95,6 +95,36 @@ describe('Suggestion matchers', () => {
     })
   })
 
+  describe('with regex special characters in input', () => {
+    const contact = {
+      fullname: 'Jon (the) Snow*',
+      email: [{ address: 'jon+snow@winterfell.westeros' }],
+      cozy: [{ url: 'https://jon.mycozy.cloud' }]
+    }
+    const group = {
+      _type: 'io.cozy.contacts.groups',
+      name: 'House (Stark)'
+    }
+
+    it('should not throw on unbalanced parentheses', () => {
+      expect(() => matchers.emailMatch('foo (bar', contact)).not.toThrow()
+      expect(() => matchers.cozyUrlMatch('foo (bar', contact)).not.toThrow()
+      expect(() => matchers.fullnameMatch('foo (bar', contact)).not.toThrow()
+      expect(() => matchers.groupNameMatch('foo (bar', group)).not.toThrow()
+    })
+
+    it('should match special chars literally instead of as regex', () => {
+      expect(matchers.fullnameMatch('(the)', contact)).toBe(true)
+      expect(matchers.fullnameMatch('Snow*', contact)).toBe(true)
+      expect(matchers.emailMatch('jon+snow', contact)).toBe(true)
+      expect(matchers.groupNameMatch('(Stark)', group)).toBe(true)
+    })
+
+    it('should not let . match any character', () => {
+      expect(matchers.fullnameMatch('J.n', contact)).toBe(false)
+    })
+  })
+
   describe('fullnameMatch', () => {
     it('should return false if no fullname or no match', () => {
       const contact = {}

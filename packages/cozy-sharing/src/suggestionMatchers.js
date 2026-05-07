@@ -1,10 +1,12 @@
+import escapeRegExp from 'lodash/escapeRegExp'
+
 import { Group } from 'cozy-doctypes'
 
 // TODO: sadly we have different versions of contacts' doctype to handle...
 // A migration tool on the stack side is needed here
 const emailMatch = (input, contact) => {
   if (!contact.email) return false
-  const emailInput = new RegExp(input, 'i')
+  const emailInput = new RegExp(escapeRegExp(input), 'i')
   if (Array.isArray(contact.email)) {
     return contact.email.some(email => emailInput.test(email.address))
   }
@@ -13,7 +15,7 @@ const emailMatch = (input, contact) => {
 
 const cozyUrlMatch = (input, contact) => {
   if (!contact.cozy && !contact.url) return false
-  const urlInput = new RegExp(input, 'i')
+  const urlInput = new RegExp(escapeRegExp(input), 'i')
   if (contact.cozy && Array.isArray(contact.cozy)) {
     return contact.cozy.some(cozy => urlInput.test(cozy.url))
   }
@@ -22,13 +24,13 @@ const cozyUrlMatch = (input, contact) => {
 
 const groupNameMatch = (input, contactOrGroup) => {
   if (contactOrGroup._type !== Group.doctype) return false
-  const nameInput = new RegExp(input, 'i')
+  const nameInput = new RegExp(escapeRegExp(input), 'i')
   return nameInput.test(contactOrGroup.name)
 }
 
 const fullnameMatch = (input, contact) => {
   if (!contact.fullname) return false
-  const fullnameInput = new RegExp(input, 'i')
+  const fullnameInput = new RegExp(escapeRegExp(input), 'i')
   return fullnameInput.test(contact.fullname)
 }
 
