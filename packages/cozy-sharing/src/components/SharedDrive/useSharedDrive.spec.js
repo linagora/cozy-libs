@@ -11,16 +11,9 @@ const mockT = jest.fn(key => key)
 
 jest.mock('cozy-client', () => ({
   useClient: jest.fn(() => ({
-    collection: mockCollection
-  })),
-  models: {
-    contact: {
-      getPrimaryEmail: jest.fn(r =>
-        Array.isArray(r.email) && r.email[0] ? r.email[0].address : ''
-      ),
-      getDisplayName: jest.fn(r => r.displayName || r.name || '')
-    }
-  }
+    collection: mockCollection,
+    create: jest.fn()
+  }))
 }))
 
 jest.mock('cozy-ui/transpiled/react/providers/Alert', () => ({
@@ -35,6 +28,12 @@ jest.mock('../../models', () => ({
   Contact: { doctype: 'io.cozy.contacts' }
 }))
 
+jest.mock('../../helpers/contacts', () => ({
+  getOrCreateFromArray: jest.fn((client, recipients) =>
+    Promise.resolve(recipients)
+  )
+}))
+
 describe('useSharedDrive', () => {
   beforeEach(() => {
     jest.clearAllMocks()
@@ -45,7 +44,8 @@ describe('useSharedDrive', () => {
       useSharedDrive({ onSuccess: jest.fn() })
     )
     expect(result.current.sharedDriveName).toBe('')
-    expect(result.current.recipients).toEqual([])
+    expect(result.current.pendingRecipients).toEqual([])
+    expect(result.current.selectedOption).toBe('readWrite')
   })
 
   it('handleSharedDriveNameChange updates the name', () => {
@@ -60,56 +60,7 @@ describe('useSharedDrive', () => {
     expect(result.current.sharedDriveName).toBe('My Drive')
   })
 
-  it('onRevoke removes a recipient from both lists', () => {
-    const { result } = renderHook(() =>
-      useSharedDrive({ onSuccess: jest.fn() })
-    )
-    act(() => {
-      result.current.onShare({
-        recipients: [{ _id: 'abc', displayName: 'Alice', email: [] }],
-        readOnlyRecipients: []
-      })
-    })
-    act(() => {
-      result.current.onRevoke(`virtual-shared-drive-sharing-abc`)
-    })
-    expect(result.current.recipients).toHaveLength(0)
-  })
-
-  it('onSetType moves a recipient to read-only', () => {
-    const { result } = renderHook(() =>
-      useSharedDrive({ onSuccess: jest.fn() })
-    )
-    act(() => {
-      result.current.onShare({
-        recipients: [{ _id: 'abc', displayName: 'Alice', email: [] }],
-        readOnlyRecipients: []
-      })
-    })
-    act(() => {
-      result.current.onSetType(`virtual-shared-drive-sharing-abc`, 'one-way')
-    })
-    expect(result.current.recipients[0].type).toBe('one-way')
-  })
-
-  it('onSetType moves a recipient to read-write', () => {
-    const { result } = renderHook(() =>
-      useSharedDrive({ onSuccess: jest.fn() })
-    )
-    act(() => {
-      result.current.onShare({
-        recipients: [],
-        readOnlyRecipients: [{ _id: 'xyz', displayName: 'Bob', email: [] }]
-      })
-    })
-    act(() => {
-      result.current.onSetType(`virtual-shared-drive-sharing-xyz`, 'two-way')
-    })
-    expect(result.current.recipients).toHaveLength(1)
-    expect(result.current.recipients[0].type).toBe('two-way')
-  })
-
-  it('onCreate calls createSharedDrive, showAlert with success, and onSuccess', async () => {
+  it('onCreate calls createSharedDrive and onSuccess', async () => {
     const onSuccess = jest.fn()
     mockCreateSharedDrive.mockResolvedValue({})
 
@@ -119,18 +70,19 @@ describe('useSharedDrive', () => {
       result.current.handleSharedDriveNameChange({
         target: { value: 'My Drive' }
       })
+      result.current.setPendingRecipients([{ email: 'a@b.c' }])
     })
 
     await act(async () => {
       await result.current.onCreate()
     })
 
-    expect(mockCreateSharedDrive).toHaveBeenCalledWith(
-      expect.objectContaining({
-        name: 'My Drive',
-        description: 'My Drive'
-      })
-    )
+    expect(mockCreateSharedDrive).toHaveBeenCalledWith({
+      name: 'My Drive',
+      description: 'My Drive',
+      recipients: [{ email: 'a@b.c' }],
+      readOnlyRecipients: []
+    })
     expect(mockShowAlert).toHaveBeenCalledWith(
       expect.objectContaining({ severity: 'success' })
     )
