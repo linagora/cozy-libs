@@ -108,7 +108,11 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   twoStepsConfirmationMethods = {},
   dialogContentOnShare: DialogContentOnShare,
   dialogActionsOnShare: DialogActionsOnShare,
-  dialogTitleOnShare: DialogTitleOnShare
+  dialogTitleOnShare: DialogTitleOnShare,
+  pendingRecipients,
+  onPendingRecipientsChange,
+  selectedOption,
+  onSelectedOptionChange
 }) => {
   const { t } = useI18n()
 
@@ -222,6 +226,10 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         permissions={permissions}
         onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
         onRevokeLink={onRevokeLink}
+        pendingRecipients={pendingRecipients}
+        onPendingRecipientsChange={onPendingRecipientsChange}
+        selectedOption={selectedOption}
+        onSelectedOptionChange={onSelectedOptionChange}
       />
     )
 
@@ -230,6 +238,8 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         link={link}
         document={document}
         documentType={documentType}
+        pendingRecipients={pendingRecipients}
+        selectedOption={selectedOption}
       />
     ) : null
   } else if (status === 'confirmingRecipient') {
