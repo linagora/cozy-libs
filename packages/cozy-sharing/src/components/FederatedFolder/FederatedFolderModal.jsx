@@ -40,6 +40,16 @@ export const FederatedFolderModal = withLocales(
       setSelectedOption
     } = usePendingRecipients()
 
+    // share from CozyProvider is wired to callbacks and realtime that
+    // makes existingDocument and existingRecipients reactive to changes.
+    // But we want it to be reactive only when we revoke a member. When we add member
+    // we close the popup and we do not want to see briefly the new contacts added
+    // in members before the modal closes. That's why when clicking on "Share"
+    // we do not use the reactive existingDocument and existingRecipients.
+    const [isSending, setIsSending] = useState(false)
+    const [frozenDoc, setFrozenDoc] = useState(null)
+    const [frozenRecipients, setFrozenRecipients] = useState(null)
+
     const documentPermissions = existingDocument
       ? getDocumentPermissions(existingDocument._id)
       : []
@@ -74,6 +84,10 @@ export const FederatedFolderModal = withLocales(
         return
       }
 
+      setIsSending(true)
+      setFrozenDoc(existingDocument)
+      setFrozenRecipients(existingRecipients)
+
       try {
         const contacts = await getOrCreateFromArray(
           client,
@@ -106,6 +120,8 @@ export const FederatedFolderModal = withLocales(
           severity: 'error',
           variant: 'filled'
         })
+      } finally {
+        setIsSending(false)
       }
     }
 
@@ -119,9 +135,9 @@ export const FederatedFolderModal = withLocales(
     return (
       <DumbFederatedFolderModal
         title={modalTitle}
-        document={existingDocument}
-        recipients={existingRecipients}
-        currentRecipients={existingRecipients}
+        document={isSending ? frozenDoc : existingDocument}
+        recipients={isSending ? frozenRecipients : existingRecipients}
+        currentRecipients={isSending ? frozenRecipients : existingRecipients}
         onRevoke={revoke}
         onSend={onSend}
         onClose={onClose}
