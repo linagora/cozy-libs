@@ -15,11 +15,7 @@
     },
     "type": {
       "one-way": "Người xem",
-      "two-way": "Người chỉnh sửa",
-      "desc": {
-        "one-way": "Người liên hệ có thể xem, tải xuống và thêm nội dung vào Twake của họ. Nếu họ thêm nội dung vào Twake, họ sẽ nhận được các bản cập nhật mà bạn thực hiện đối với nội dung, nhưng họ sẽ không thể cập nhật nó.",
-        "two-way": "Người liên hệ có thể cập nhật, xóa và thêm nội dung vào Twake của họ. Các bản cập nhật trên nội dung sẽ được thấy trên các Cozy khác."
-      }
+      "two-way": "Người chỉnh sửa"
     },
     "locked-type-file": "Sắp ra mắt: bạn sẽ có thể thay đổi quyền mà bạn cấp trên tệp.",
     "locked-type-folder": "Sắp ra mắt: bạn sẽ có thể thay đổi quyền mà bạn cấp trên thư mục.",

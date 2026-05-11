@@ -23,7 +23,8 @@ const ShareRecipientsInput = ({
   placeholder,
   onPick,
   onRemove,
-  disabled
+  disabled,
+  endAdornment
 }) => {
   const reachableContactsQuery = buildReachableContactsQuery()
   const reachableContactsResult = useQueryAll(
@@ -109,6 +110,7 @@ const ShareRecipientsInput = ({
       onPick={onPick}
       onRemove={onRemove}
       placeholder={placeholder}
+      endAdornment={endAdornment}
     />
   )
 }
@@ -119,7 +121,8 @@ ShareRecipientsInput.propTypes = {
   placeholder: PropTypes.string,
   onPick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  endAdornment: PropTypes.node
 }
 
 ShareRecipientsInput.defaultProps = {

@@ -5,13 +5,6 @@ import { act } from 'react-dom/test-utils'
 import { ShareByEmail } from './ShareByEmail'
 import AppLike from '../../test/AppLike'
 
-jest.mock('cozy-flags', () =>
-  jest.fn(flagName => {
-    if (flagName === 'drive.federated-shared-folder.enabled') return false
-    return null
-  })
-)
-
 describe('ShareByEmail (controlled)', () => {
   const setup = (overrides = {}) => {
     const onPendingRecipientsChange = jest.fn()
@@ -59,25 +52,8 @@ describe('ShareByEmail (controlled)', () => {
     ])
   })
 
-  it('shows the read/write toggle only when there are pending chips', () => {
-    const { rerender } = setup()
-    // Sharetypeselect is a react-select (combobox), not a radiogroup.
-    // When no pending recipients, the select is hidden.
-    expect(screen.queryByText('Editor')).toBeNull()
-
-    rerender(
-      <AppLike>
-        <ShareByEmail
-          document={{}}
-          documentType="Files"
-          currentRecipients={[]}
-          pendingRecipients={[{ email: 'a@b.c' }]}
-          onPendingRecipientsChange={jest.fn()}
-          selectedOption="readWrite"
-          onSelectedOptionChange={jest.fn()}
-        />
-      </AppLike>
-    )
-    expect(screen.queryByText('Editor')).not.toBeNull()
+  it('always shows the read/write dropdown trigger inside the input', () => {
+    setup()
+    expect(screen.getByRole('button', { name: 'Editor' })).not.toBeNull()
   })
 })

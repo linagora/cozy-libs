@@ -1,72 +1,89 @@
-import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { forwardRef, useRef, useState } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
-import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
-import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
+import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
+import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
+import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Radios from 'cozy-ui/transpiled/react/Radios'
 
 import logger from '../logger'
-import styles from '../styles/share.styl'
 
-const DropdownIndicator = props => (
-  <components.DropdownIndicator {...props}>
-    <Icon icon={BottomIcon} color="var(--iconTextColor)" />
-  </components.DropdownIndicator>
-)
+const makeShareTypeAction = ({ option, isSelected, onSelect }) => {
+  const Component = forwardRef((props, ref) => (
+    <ActionsMenuItem
+      {...props}
+      ref={ref}
+      onClick={() => onSelect(option.value)}
+      disabled={option.disabled}
+    >
+      <ListItemIcon>
+        <Radios checked={isSelected} />
+      </ListItemIcon>
+      <ListItemText primary={option.label} />
+    </ActionsMenuItem>
+  ))
+  Component.displayName = `ShareTypeAction-${option.value}`
 
-const Option = props => (
-  <components.Option {...props}>
-    <div className={cx(styles['select-option'])}>
-      {props.isSelected && (
-        <Icon icon={CheckIcon} color="var(--primaryColor)" />
-      )}
-      <div>
-        <div className={styles['select-option-label']}>{props.label}</div>
-        <div className={styles['select-option-desc']}>{props.data.desc}</div>
-      </div>
-    </div>
-  </components.Option>
-)
-
-const customStyles = {
-  option: (base, state) => ({
-    ...base,
-    color: 'var(--primaryTextColor)',
-    backgroundColor: state.isFocused ? 'var(--actionColorHover)' : null,
-    padding: 0,
-    borderBottom:
-      state.options.findIndex(o => o.value === state.value) === 0
-        ? '1px solid var(--borderMainColor)'
-        : null
-  }),
-  menu: base => ({
-    ...base,
-    backgroundColor: 'var(--paperBackgroundColor)',
-    width: '204%'
+  return () => ({
+    name: `shareType-${option.value}`,
+    label: option.label,
+    icon: null,
+    action: () => onSelect(option.value),
+    Component
   })
 }
 
-const ShareTypeSelect = ({ options, onChange }) => (
-  <div className={styles['select-wrapper']}>
-    <SelectBox
-      name="select"
-      classNamePrefix="needsclick react-select"
-      components={{ DropdownIndicator, Option }}
-      styles={customStyles}
-      defaultValue={options[0]}
-      isSearchable={false}
-      onChange={option => {
-        onChange(option.value)
-      }}
-      options={options}
-      menuPosition="fixed"
-    />
-  </div>
-)
+const ShareTypeSelect = ({ value, options, onChange }) => {
+  const buttonRef = useRef()
+  const [isOpen, setOpen] = useState(false)
+
+  const open = () => setOpen(true)
+  const close = () => setOpen(false)
+
+  const onSelect = nextValue => {
+    onChange(nextValue)
+    setOpen(false)
+  }
+
+  const selectedOption =
+    options.find(option => option.value === value) ?? options[0]
+
+  const actions = makeActions(
+    options.map(option =>
+      makeShareTypeAction({
+        option,
+        isSelected: option.value === selectedOption.value,
+        onSelect
+      })
+    )
+  )
+
+  return (
+    <>
+      <DropdownButton
+        ref={buttonRef}
+        onClick={open}
+        textVariant="body2"
+        size="small"
+      >
+        {selectedOption.label}
+      </DropdownButton>
+      <ActionsMenu
+        ref={buttonRef}
+        open={isOpen}
+        actions={actions}
+        autoClose
+        onClose={close}
+      />
+    </>
+  )
+}
 
 ShareTypeSelect.propTypes = {
+  value: PropTypes.string,
   onChange: PropTypes.func,
   options: PropTypes.array.isRequired
 }

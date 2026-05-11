@@ -15,11 +15,7 @@
     },
     "type": {
       "one-way": "Viewer",
-      "two-way": "Editor",
-      "desc": {
-        "one-way": "Contacts can view, download, and add the content to their Twake. If they add the content to their Twake, they will get updates you make to the content, but they won't be able to update it.",
-        "two-way": "Contacts can update, delete and add the content to their Twake. Updates on the content will be seen on other Cozies."
-      }
+      "two-way": "Editor"
     },
     "locked-type-file": "Coming soon: you will be able to change permissions you grant on the file.",
     "locked-type-folder": "Coming soon: you will be able to change permissions you grant on the folder.",

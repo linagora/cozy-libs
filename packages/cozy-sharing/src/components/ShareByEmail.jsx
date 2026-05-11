@@ -46,20 +46,14 @@ export const ShareByEmail = ({
       : false
     const readWrite = {
       value: 'readWrite',
-      label: t('Share.type.two-way'),
-      desc: t('Share.type.desc.two-way'),
-      disabled: false
+      label: t('Share.type.two-way')
     }
     const readOnly = {
       value: 'readOnly',
-      label: t('Share.type.one-way'),
-      desc: t('Share.type.desc.one-way'),
-      disabled: false
+      label: t('Share.type.one-way')
     }
     return isSharingReadOnly ? [readOnly] : [readWrite, readOnly]
   }
-
-  const showShareControl = pendingRecipients.length > 0
 
   return (
     <div className={styles['coz-form-group']}>
@@ -74,17 +68,15 @@ export const ShareByEmail = ({
           onRemove={onRecipientRemove}
           currentRecipients={currentRecipients}
           recipients={pendingRecipients}
+          endAdornment={
+            <ShareTypeSelect
+              value={selectedOption}
+              options={getSharingOptions()}
+              onChange={onSelectedOptionChange}
+            />
+          }
         />
       </div>
-      {showShareControl && (
-        <div className={styles['share-type-control']}>
-          <ShareTypeSelect
-            value={selectedOption}
-            options={getSharingOptions()}
-            onChange={onSelectedOptionChange}
-          />
-        </div>
-      )}
     </div>
   )
 }

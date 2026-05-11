@@ -15,11 +15,7 @@
     },
     "type": {
       "one-way": "Lecteur",
-      "two-way": "Éditeur",
-      "desc": {
-        "one-way": "Les contacts peuvent consulter, télécharger, et ajouter le contenu à leur Twake. En cas d’ajout à leur Twake, ils recevront vos modifications sur le contenu mais ils ne pourront pas le modifier.",
-        "two-way": "Les contacts peuvent modifier, supprimer et ajouter le contenu à leur Twake. Les modifications sur le contenu seront répercutées automatiquement entre vos Twake."
-      }
+      "two-way": "Éditeur"
     },
     "locked-type-file": "Bientôt : vous pourrez changer la permission donnée sur le fichier.",
     "locked-type-folder": "Bientôt : vous pourrez changer la permission donnée sur le dossier.",
