@@ -126,8 +126,7 @@ describe('FederatedFolderModal', () => {
       pendingRecipients: [],
       setPendingRecipients: jest.fn(),
       selectedOption: 'readWrite',
-      setSelectedOption: jest.fn(),
-      reset: jest.fn()
+      setSelectedOption: jest.fn()
     })
     getOrCreateFromArray.mockResolvedValue([])
   })
@@ -213,8 +212,7 @@ describe('FederatedFolderModal', () => {
         pendingRecipients: [pendingRecipient],
         setPendingRecipients: jest.fn(),
         selectedOption: 'readWrite',
-        setSelectedOption: jest.fn(),
-        reset: jest.fn()
+        setSelectedOption: jest.fn()
       })
       getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockResolvedValueOnce({})
@@ -243,8 +241,7 @@ describe('FederatedFolderModal', () => {
         pendingRecipients: [pendingRecipient],
         setPendingRecipients: jest.fn(),
         selectedOption: 'readWrite',
-        setSelectedOption: jest.fn(),
-        reset: jest.fn()
+        setSelectedOption: jest.fn()
       })
       getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockResolvedValueOnce({})
@@ -271,8 +268,7 @@ describe('FederatedFolderModal', () => {
         pendingRecipients: [pendingRecipient],
         setPendingRecipients: jest.fn(),
         selectedOption: 'readWrite',
-        setSelectedOption: jest.fn(),
-        reset: jest.fn()
+        setSelectedOption: jest.fn()
       })
       getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockRejectedValueOnce(new Error('Share failed'))
