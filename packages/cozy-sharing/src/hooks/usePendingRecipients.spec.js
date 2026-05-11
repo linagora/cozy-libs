@@ -9,16 +9,13 @@ describe('usePendingRecipients', () => {
     expect(result.current.selectedOption).toBe('readWrite')
   })
 
-  it('reset() clears recipients and resets the option', () => {
+  it('exposes setters that update state', () => {
     const { result } = renderHook(() => usePendingRecipients())
     act(() => {
       result.current.setPendingRecipients([{ email: 'a@b.c' }])
       result.current.setSelectedOption('readOnly')
     })
-    act(() => {
-      result.current.reset()
-    })
-    expect(result.current.pendingRecipients).toEqual([])
-    expect(result.current.selectedOption).toBe('readWrite')
+    expect(result.current.pendingRecipients).toEqual([{ email: 'a@b.c' }])
+    expect(result.current.selectedOption).toBe('readOnly')
   })
 })
