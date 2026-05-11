@@ -25,7 +25,8 @@ const ShareAutocomplete = ({
   recipients,
   onPick,
   onRemove,
-  placeholder
+  placeholder,
+  endAdornment
 }) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
@@ -180,6 +181,9 @@ const ShareAutocomplete = ({
       {loading && isLoadingDisplayed ? (
         <Spinner color="var(--primaryColor)" />
       ) : null}
+      {endAdornment ? (
+        <div className={styles['endAdornment']}>{endAdornment}</div>
+      ) : null}
     </div>
   )
 
@@ -223,7 +227,8 @@ ShareAutocomplete.propTypes = {
   recipients: PropTypes.array.isRequired,
   onPick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  placeholder: PropTypes.string
+  placeholder: PropTypes.string,
+  endAdornment: PropTypes.node
 }
 
 export default ShareAutocomplete

@@ -38,45 +38,6 @@
     .coz-form-desc
         color var(--secondaryTextColor)
 
-.share-type-control
-    display flex
-    flex-direction row
-    justify-content space-between
-    padding .5rem 0 0
-
-    .select-wrapper
-        flex 0 0 49%
-        position relative
-
-        .select-option
-            padding .5rem 1.5rem .5rem 3rem
-            position relative
-
-            svg
-                position absolute
-                left 1rem
-                top 1rem
-
-
-        .select-option-label
-            line-height 2
-
-        .select-option-desc
-            line-height 1.5
-            font-size   .8125rem
-            color var(--secondaryTextColor)
-
-
-
-    button
-        flex 0 0 49%
-        margin 0
-
-:global
-    // dirty hack for react-select: its API doesn't allow to make change to active styles
-    .react-select__option:active
-        background-color var(--defaultBackgroundColor) !important
-
 input[type=text]
     width 100%
 
