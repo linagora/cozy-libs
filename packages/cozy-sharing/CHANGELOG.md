@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.1.0...cozy-sharing@31.2.0) (2026-05-12)
+
+### Bug Fixes
+
+- Avoid blinking recipient in share modals ([8e71bc8](https://github.com/cozy/cozy-libs/commit/8e71bc8e6a924340100247523f75d2c18912739a))
+
+### Features
+
+- Add usePendingRecipients hook ([7f8a96e](https://github.com/cozy/cozy-libs/commit/7f8a96eb35044fb6d001bf7460a84ceda34fa130))
+- Delete special shared folder recipient management ([6691c99](https://github.com/cozy/cozy-libs/commit/6691c99f698b1db6b537f5ac0a0ab69303986501))
+- Implement usePendingRecipients for FederatedFolder modal ([3564cb9](https://github.com/cozy/cozy-libs/commit/3564cb9aba9647fc63870d433cd80cf119e749ae))
+- Implement usePendingRecipients for SharedDriveForm ([129a033](https://github.com/cozy/cozy-libs/commit/129a03369a6be34ec829b74d838245e66edab4de))
+- Implement usePendingRecipients for ShareDialogCozyToCozy modal ([2d5d4c2](https://github.com/cozy/cozy-libs/commit/2d5d4c2c1419e50c9f24f8cbca0cb547d1d6bb0d))
+- Update CozyToCozy dialog to new UI and wording ([e1ec36b](https://github.com/cozy/cozy-libs/commit/e1ec36b363d88e940b42f54b281485a236775263))
+- Update ShareTypeSelect UI ([515aab4](https://github.com/cozy/cozy-libs/commit/515aab437afa502dcacd1debb932794017519845))
+
 # [31.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.0.2...cozy-sharing@31.1.0) (2026-05-07)
 
 ### Bug Fixes
