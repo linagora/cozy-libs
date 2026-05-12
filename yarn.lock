@@ -17424,16 +17424,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-device-helper@npm:^3.7.1":
-  version: 3.8.0
-  resolution: "cozy-device-helper@npm:3.8.0"
-  dependencies:
-    lodash: "npm:^4.17.19"
-  checksum: 10c0/912c7f9bce9e3597a267964c4ebf37d0db7335ce61d8704a1741c33d40d47c757779b2e3d32978fd38e7ee99db7771705738489ae8a491d74965dabc501ba73c
-  languageName: node
-  linkType: hard
-
-"cozy-device-helper@npm:^4.0.3, cozy-device-helper@workspace:packages/cozy-device-helper":
+"cozy-device-helper@npm:^4.0.0, cozy-device-helper@npm:^4.0.3, cozy-device-helper@workspace:packages/cozy-device-helper":
   version: 0.0.0-use.local
   resolution: "cozy-device-helper@workspace:packages/cozy-device-helper"
   dependencies:
@@ -18012,7 +18003,7 @@ __metadata:
     babel-plugin-inline-react-svg: "npm:1.1.2"
     classnames: "npm:^2.5.1"
     cozy-client: "npm:^60.24.0"
-    cozy-device-helper: "npm:^3.7.1"
+    cozy-device-helper: "npm:^4.0.0"
     cozy-doctypes: "npm:^1.99.1"
     cozy-intent: "npm:^2.31.1"
     cozy-minilog: "npm:^3.10.1"
@@ -18032,7 +18023,7 @@ __metadata:
     twake-i18n: "npm:^0.4.1"
   peerDependencies:
     cozy-client: ">=60.24.0"
-    cozy-device-helper: ">=3.7.1"
+    cozy-device-helper: ">=4.0.0"
     cozy-flags: ">=4.8.1"
     cozy-intent: ">=2.29.1"
     cozy-minilog: ">=3.9.1"
