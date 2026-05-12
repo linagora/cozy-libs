@@ -66,8 +66,8 @@ const SharingContent = ({
             </strong>
           </div>
         )}
-        <Typography variant="h6" className="u-mb-1-half">
-          {t('Share.contacts.whoHasAccess')}
+        <Typography variant="h6" className="u-mb-half">
+          {t('Share.contacts.addUsers')}
         </Typography>
         {showShareByEmail && (
           <DumbShareByEmail

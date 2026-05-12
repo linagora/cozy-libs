@@ -30,12 +30,12 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
           label={t('SharedDrive.sharedDriveModal.nameLabel')}
           variant="outlined"
           size="small"
-          className="u-w-100 u-mt-1-half"
+          className="u-w-100 u-mt-1-half u-mb-1-half"
           value={sharedDriveName}
           onChange={handleSharedDriveNameChange}
         />
-        <Typography variant="h6" className="u-mt-1-half u-mb-half">
-          {t('SharedDrive.sharedDriveModal.addPeople')}
+        <Typography variant="h6" className="u-mb-half">
+          {t('Share.contacts.addUsers')}
         </Typography>
         <DumbShareByEmail
           currentRecipients={[]}

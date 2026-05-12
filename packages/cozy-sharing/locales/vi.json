@@ -38,6 +38,7 @@
     },
     "contacts": {
       "whoHasAccess": "Ai có quyền truy cập?",
+      "addUsers": "Thêm người dùng",
       "permissionRequired": {
         "title": "Lưu danh bạ của bạn vào Twake của bạn?",
         "desc": "Cho phép ứng dụng truy cập vào danh bạ Twake của bạn: bạn sẽ có thể chọn họ vào lần sau.",
@@ -439,7 +440,6 @@
     "shareTitle": "Chia sẻ \"%{name}\"",
     "successNotification": "Thư mục đã được chia sẻ",
     "errorNotification": "Lỗi khi chia sẻ thư mục",
-    "addPeople": "Thêm người vào thư mục được chia sẻ",
     "add": "Thêm"
   },
   "SharedDrive": {
@@ -450,7 +450,6 @@
       "cancel": "Hủy",
       "create": "Tạo",
       "save": "Lưu",
-      "addPeople": "Thêm người dùng",
       "successNotification": "Ổ đĩa được chia sẻ đã được thêm",
       "errorNotification": "Lỗi trong quá trình tạo ổ đĩa được chia sẻ",
       "successNotificationUpdate": "Ổ đĩa được chia sẻ của bạn đã được sửa đổi",

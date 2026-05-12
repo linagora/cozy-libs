@@ -38,6 +38,7 @@
     },
     "contacts": {
       "whoHasAccess": "У кого есть доступ?",
+      "addUsers": "Добавить пользователей",
       "permissionRequired": {
         "title": "Сохранить контакты в вашем Twake?",
         "desc": "Разрешите приложению доступ к контактам вашего Twake: в следующий раз вы сможете выбирать их.",
@@ -439,7 +440,6 @@
     "shareTitle": "Поделиться \"%{name}\"",
     "successNotification": "Папка была расшарена",
     "errorNotification": "Ошибка при расшаривании папки",
-    "addPeople": "Добавить людей в общую папку",
     "add": "Добавить"
   },
   "SharedDrive": {
@@ -450,7 +450,6 @@
       "cancel": "Отмена",
       "create": "Создать",
       "save": "Сохранить",
-      "addPeople": "Добавить пользователей",
       "successNotification": "Общий диск добавлен",
       "errorNotification": "Ошибка при создании общего диска",
       "successNotificationUpdate": "Ваш общий диск был изменён",
