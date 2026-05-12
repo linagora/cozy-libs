@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { useReducer, useState } from 'react'
 
 import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
@@ -36,7 +35,6 @@ const ShareByLink = ({
   const showGenerateButton = showGenerateLinkButton && !link
   const showCopyAndSendButtons = !showGenerateButton && isMobile && canShare
   const showOnlyCopyButton = !showGenerateButton && (!isMobile || !canShare)
-  const isFederated = flag('drive.federated-shared-folder.enabled')
 
   const [isEditDialogOpen, toggleEditDialogOpen] = useReducer(
     state => !state,
@@ -139,11 +137,7 @@ const ShareByLink = ({
   }
 
   return (
-    <div
-      className={
-        isFederated ? 'u-w-100' : 'u-w-100 u-flex u-flex-justify-center'
-      }
-    >
+    <div className="u-w-100">
       {showCopyAndSendButtons && (
         <>
           <Button

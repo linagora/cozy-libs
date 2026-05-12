@@ -215,7 +215,6 @@ const ShareDialogCozyToCozy = ({
         )}
         <Button
           variant="primary"
-          size="large"
           label={t(`${documentType}.share.shareByEmail.send`)}
           busy={submitting}
           onClick={handleShare}

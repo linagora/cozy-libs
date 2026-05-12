@@ -124,7 +124,7 @@
       "shareByEmail": {
         "subtitle": "Par email",
         "emailPlaceholder": "Ajouter des contacts",
-        "send": "Envoyer",
+        "send": "Partager",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -192,7 +192,7 @@
         "subtitle": "Par email",
         "email": "À :",
         "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
-        "send": "Envoyer",
+        "send": "Partager",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -262,7 +262,7 @@
         "subtitle": "Par email",
         "email": "e-mail",
         "emailPlaceholder": "Saisissez l'email ou le nom du destinataire.",
-        "send": "Envoyer",
+        "send": "Partager",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -326,7 +326,7 @@
         "subtitle": "Par email",
         "email": "Envoyer à :",
         "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
-        "send": "Envoyer",
+        "send": "Partager",
         "error": {
           "addingRecipient": "Une erreur s'est produite lors de l'ajout du destinataire. Veuillez réessayer."
         },
