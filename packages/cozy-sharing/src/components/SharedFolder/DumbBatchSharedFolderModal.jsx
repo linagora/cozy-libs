@@ -5,6 +5,7 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 import withLocales from '../../hoc/withLocales'
 import AntivirusAlert from '../AntivirusAlert'
@@ -28,7 +29,6 @@ export const DumbBatchSharedFolderModal = withLocales(
     showNameField = false,
     sharingLink,
     nameLabel,
-    addPeopleLabel,
     cancelLabel,
     createLabel,
     shareLabel,
@@ -41,6 +41,7 @@ export const DumbBatchSharedFolderModal = withLocales(
     selectedOption,
     onSelectedOptionChange
   }) => {
+    const { t } = useI18n()
     const actionButtons = (() => {
       if (showNameField && onCreate) {
         return (
@@ -122,7 +123,7 @@ export const DumbBatchSharedFolderModal = withLocales(
                 />
               )}
               <Typography variant="h6" className="u-mt-1-half u-mb-half">
-                {addPeopleLabel}
+                {t('Share.contacts.addUsers')}
               </Typography>
               {showShareByEmail && (
                 <DumbShareByEmail

@@ -36,7 +36,6 @@ export const DumbFederatedFolderModal = withLocales(
         onClose={onClose}
         sharingLink={sharingLink}
         showNameField={false}
-        addPeopleLabel={t('FederatedFolder.addPeople')}
         shareLabel={t('FederatedFolder.share')}
         showShareByEmail={showShareByEmail}
         autoOpenShareRestriction={autoOpenShareRestriction}

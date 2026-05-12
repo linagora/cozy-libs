@@ -38,6 +38,7 @@
     },
     "contacts": {
       "whoHasAccess": "Who has access?",
+      "addUsers": "Add users",
       "permissionRequired": {
         "title": "Save your contacts in your Twake?",
         "desc": "Authorize the application to access to your Twake's contacts: you'll be able to select them next time.",
@@ -439,7 +440,6 @@
     "shareTitle": "Share \"%{name}\"",
     "successNotification": "Folder has been shared",
     "errorNotification": "Error while sharing folder",
-    "addPeople": "Add people to the shared folder",
     "add": "Add"
   },
   "SharedDrive": {
@@ -450,7 +450,6 @@
       "cancel": "Cancel",
       "create": "Create",
       "save": "Save",
-      "addPeople": "Add users",
       "successNotification": "Shared drive has been added",
       "errorNotification": "Error during shared drive creation",
       "successNotificationUpdate": "Your shared drive has been modified",

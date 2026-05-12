@@ -38,6 +38,7 @@
     },
     "contacts": {
       "whoHasAccess": "Qui a accès ?",
+      "addUsers": "Ajouter des utilisateurs",
       "permissionRequired": {
         "title": "Enregistrer vos contacts dans votre Twake ?",
         "desc": "Autorisez l'application à accéder aux contacts de votre Twake : vous pourrez les sélectionner la prochaine fois.",
@@ -437,7 +438,6 @@
     "shareTitle": "Partager \"%{name}\"",
     "successNotification": "Le dossier a été partagé",
     "errorNotification": "Erreur lors du partage du dossier",
-    "addPeople": "Ajouter des utilisateurs au dossier partagé",
     "add": "Ajouter"
   },
   "SharedDrive": {
@@ -448,7 +448,6 @@
       "cancel": "Annuler",
       "create": "Créer",
       "save": "Enregistrer",
-      "addPeople": "Ajouter des utilisateurs",
       "successNotification": "Le drive partagé a été ajouté",
       "errorNotification": "Erreur lors de la création du drive partagé",
       "successNotificationUpdate": "Votre drive partagé a été modifié",
