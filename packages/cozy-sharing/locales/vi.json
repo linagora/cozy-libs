@@ -127,7 +127,7 @@
       "shareByEmail": {
         "subtitle": "Bằng email",
         "emailPlaceholder": "Thêm liên hệ",
-        "send": "Gửi",
+        "send": "Chia sẻ",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -195,7 +195,7 @@
         "subtitle": "Bằng email",
         "email": "Đến:",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Gửi",
+        "send": "Chia sẻ",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -264,7 +264,7 @@
         "subtitle": "Bằng email",
         "email": "email",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Gửi",
+        "send": "Chia sẻ",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -328,7 +328,7 @@
         "subtitle": "Bằng email",
         "email": "Gửi đến:",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Gửi",
+        "send": "Chia sẻ",
         "error": {
           "addingRecipient": "Đã xảy ra lỗi khi thêm người nhận. Vui lòng thử lại."
         },

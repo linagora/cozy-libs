@@ -176,7 +176,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     const { getByRole } = setup(props)
 
-    fireEvent.click(getByRole('button', { name: 'Send' }))
+    fireEvent.click(getByRole('button', { name: 'Share' }))
 
     expect(onShare).not.toHaveBeenCalled()
     expect(onClose).toHaveBeenCalledTimes(1)
@@ -213,7 +213,7 @@ describe('ShareDialogCozyToCozy', () => {
     })
 
     await act(async () => {
-      fireEvent.click(getByRole('button', { name: 'Send' }))
+      fireEvent.click(getByRole('button', { name: 'Share' }))
     })
 
     expect(onShare).toHaveBeenCalledWith(
