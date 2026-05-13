@@ -19,7 +19,9 @@ const CozyThemeWithQuery = props => {
     return null
   }
 
-  return <DumbCozyTheme {...props} type={instance?.colorScheme} />
+  const _type = props.type || instance?.colorScheme
+
+  return <DumbCozyTheme {...props} type={_type} />
 }
 
 export default CozyThemeWithQuery
