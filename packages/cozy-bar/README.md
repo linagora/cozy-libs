@@ -1,22 +1,21 @@
-[![Travis build status shield](https://img.shields.io/travis/com/cozy/cozy-bar)](https://travis-ci.org/cozy/cozy-bar)
 [![NPM release version shield](https://img.shields.io/npm/v/cozy-bar.svg)](https://www.npmjs.com/package/cozy-bar)
-[![NPM Licence shield](https://img.shields.io/npm/l/cozy-bar.svg)](https://github.com/cozy/cozy-bar/blob/master/LICENSE)
+[![NPM Licence shield](https://img.shields.io/npm/l/cozy-bar.svg)](https://github.com/cozy/cozy-libs/blob/main/packages/cozy-bar/LICENSE)
 
-# \[Cozy]\[] Bar Library
+# Cozy Bar
 
 ## What's Cozy?
 
 ![Cozy Logo](https://cdn.rawgit.com/cozy/cozy-guidelines/master/templates/cozy_logo_small.svg)
 
-\[Cozy]\[] is a platform that brings all your web services in the same private space.  With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
+[Cozy](https://cozy.io/) is a platform that brings all your web services in the same private space. With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
 
-## What's CozyBar ?
+## What's Cozy Bar?
 
-The CozyBar is a banner on the top of your application, responsible of cross-apps navigation, user facilities, intents, etc. This is a React component.
+The Cozy Bar is a banner at the top of your application, responsible for cross-apps navigation, user facilities, intents, etc. This is a React component.
 
 ## Getting started
 
-The library requires your markup to contain an element with `role=application`. The DOM of the banner will be added before this element.
+The library requires your markup to contain an element with `role=application`. The bar DOM will be inserted before this element.
 
 ### Installation
 
@@ -32,9 +31,9 @@ yarn add cozy-bar
 import 'cozy-bar/dist/stylesheet.css'
 ```
 
-### How to use
+### Usage
 
-You need to include the `BarComponent` into your react tree :
+Place the `BarComponent` in your React tree:
 
 ```jsx
 import { BarComponent } from 'cozy-bar'
@@ -42,39 +41,38 @@ import { BarComponent } from 'cozy-bar'
 <BarComponent />
 ```
 
-The `BarComponent` will get default params into `data-cozy` attribute of the element `role=application`. You can still customize this parameter through props:
-
-- `appName`: The name of the app.
-- `appNamePrefix`: The prefix of the app. Originally used for apps maintained by Cozy Cloud teams.
-- `appSlug`: The slug of the app.
-- `iconPath`: The path to the app icon. Defaults to a blank GIF
-
-There is also other parameter to adapt the bar to your app:
-
-- `isPublic`: To show the public version of the Bar
-- `onLogout`: A callback to react to the logout of the user
-- `appIcon`: To change the app icon
-- `appTextIcon`: To change the app text next to the app icon
-- `searchOptions`: To pass some props to the search engine
+`BarComponent` reads default configuration from the `data-cozy` attribute on the `[role=application]` element.
 
 ## Customizing the content of the bar
 
-From within your app, you can decide to take over certain areas of the cozy-bar. This might especially be useful on mobile where the area it occupies is prime real estate — we generally don't recommend to use this option on larger screen resolutions.
+From within your app, you can take over certain areas of the cozy-bar. This is especially useful on mobile where the area it occupies is valuable — we generally don't recommend this on larger screen resolutions.
 
-The bar is divided in 4 areas that you can control individually : left, center, search and right:
+The bar is divided in 4 areas that you can control individually: left, center, search and right.
 
 ![cozy-bar-triplet](https://user-images.githubusercontent.com/2261445/33609298-de4d379e-d9c7-11e7-839d-f5ab6155c902.png)
 
-To do this, you need to wrap your `BarComponent` into an `BarProvider` after your can use component to modify component inside :
+First wrap your app in a `BarProvider`, then use the slot components:
 
 ```jsx
-import { BarLeft, BarCenter, BarRight, BarSearch } from 'cozy-bar'
+import { BarProvider, BarLeft, BarCenter, BarRight, BarSearch, BarComponent } from 'cozy-bar'
 
-// then, somewhere in a render function below the BarProvider
-<BarLeft>
-  <div>Hello!</div>
-</BarLeft>
+<BarProvider>
+  <BarLeft>
+    <div>My custom content</div>
+  </BarLeft>
+  <BarRight>
+    <button>Menu</button>
+  </BarRight>
+  <BarComponent />
+</BarProvider>
 ```
+
+Available slots:
+
+- `<BarLeft>` — Replaces the default app title and home button
+- `<BarCenter>` — Inserts content in the center of the bar
+- `<BarSearch>` — Replaces the default search / AI assistant area
+- `<BarRight>` — Replaces the default help link, apps menu and user menu
 
 ## Search and AI assistant
 
@@ -96,49 +94,17 @@ These routes allow to display the search and AI assistant dialogs.
 import { BarRoutes } from 'cozy-bar'
 
 <Routes>
-  // Your routes
-  // ...
-
+  {/* Your app routes */}
   {BarRoutes.map(BarRoute => BarRoute)}
 </Routes>
 ```
 
-3. You can still disabled the search
+To disable search:
 
 ```jsx
 <BarComponent searchOptions={{ enabled: false }} />
 ```
 
-## Change theme bar
+## License
 
-It's possible to update theme on the cozy-bar with `setTheme` function using the bar context
-
-```jsx
-import { useBarContext } from 'cozy-bar'
-
-const { setTheme } = useBarContext()
-
-setTheme('default')
-setTheme('primary')
-```
-
-## Debugging
-
-It is possible to activate the logger from the bar by activating the flag 'bar.debug'.
-Then you have to reload the page.
-
-```
-flag(bar.debug, true)
-```
-
-## Development mode
-
-- Then, follow these steps:
-
-`$ yarn link` // in cozy-bar
-
-`$ rlink cozy-bar` // in the cozy-app
-
-`$ yarn start` // in cozy-bar
-
-`$ yarn start` // in the cozy-app
+Cozy Bar is distributed under the MIT license.
