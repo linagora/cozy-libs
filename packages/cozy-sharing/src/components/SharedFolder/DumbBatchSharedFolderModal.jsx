@@ -22,17 +22,12 @@ export const DumbBatchSharedFolderModal = withLocales(
     recipients,
     currentRecipients,
     onRevoke,
-    onCreate,
     onSend,
     onClose,
-    onRename,
     showNameField = false,
     sharingLink,
     nameLabel,
-    cancelLabel,
-    createLabel,
     shareLabel,
-    saveLabel,
     showShareByEmail = true,
     autoOpenShareRestriction,
     showGenerateLinkButton,
@@ -43,15 +38,6 @@ export const DumbBatchSharedFolderModal = withLocales(
   }) => {
     const { t } = useI18n()
     const actionButtons = (() => {
-      if (showNameField && onCreate) {
-        return (
-          <>
-            <Button variant="secondary" label={cancelLabel} onClick={onClose} />
-            <Button variant="primary" label={createLabel} onClick={onCreate} />
-          </>
-        )
-      }
-
       if (!showShareByEmail) {
         return (
           <ShareByLink
@@ -81,16 +67,6 @@ export const DumbBatchSharedFolderModal = withLocales(
               onClick={onSend}
             />
           </>
-        )
-      }
-
-      if (onRename) {
-        return (
-          <Button
-            variant="primary"
-            label={saveLabel}
-            onClick={() => onRename(folderName)}
-          />
         )
       }
 
