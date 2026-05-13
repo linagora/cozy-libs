@@ -5,11 +5,11 @@ import { useClient } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import { DumbFederatedFolderModal } from './DumbFederatedFolderModal'
 import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { DumbBatchSharedFolderModal } from '../SharedFolder/DumbBatchSharedFolderModal'
 
 export const FederatedFolderModal = withLocales(
   ({
@@ -133,7 +133,7 @@ export const FederatedFolderModal = withLocales(
     const isSharedDrive = Boolean(existingDocument?.driveId)
 
     return (
-      <DumbFederatedFolderModal
+      <DumbBatchSharedFolderModal
         title={modalTitle}
         document={isSending ? frozenDoc : existingDocument}
         recipients={isSending ? frozenRecipients : existingRecipients}
@@ -142,6 +142,7 @@ export const FederatedFolderModal = withLocales(
         onSend={onSend}
         onClose={onClose}
         sharingLink={sharingLink}
+        shareLabel={t('FederatedFolder.share')}
         showShareByEmail={!isSharedDrive}
         autoOpenShareRestriction={autoOpenShareRestriction}
         showGenerateLinkButton={showGenerateLinkButton}

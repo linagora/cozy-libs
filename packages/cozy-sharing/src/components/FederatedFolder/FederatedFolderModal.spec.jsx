@@ -41,8 +41,8 @@ jest.mock('../../hooks/usePendingRecipients', () => ({
   usePendingRecipients: jest.fn()
 }))
 
-jest.mock('./DumbFederatedFolderModal', () => ({
-  DumbFederatedFolderModal: ({
+jest.mock('../SharedFolder/DumbBatchSharedFolderModal', () => ({
+  DumbBatchSharedFolderModal: ({
     title,
     recipients,
     onRevoke,
@@ -161,7 +161,7 @@ describe('FederatedFolderModal', () => {
       })
     })
 
-    it('should pass sharing link to DumbFederatedFolderModal', async () => {
+    it('should pass sharing link to DumbBatchSharedFolderModal', async () => {
       const { getByTestId } = setup()
 
       await waitFor(() => {
