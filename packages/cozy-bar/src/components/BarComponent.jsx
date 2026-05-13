@@ -115,12 +115,14 @@ const BarComponent = ({
     }
   }
 
+  const cozyThemeProps = componentsProps?.CozyTheme || {}
+
   return (
     <ReactPortal
       wrapperElement={wrapperElement}
       setWrapperElement={setWrapperElement}
     >
-      <CozyTheme ignoreCozySettings={options.isPublic}>
+      <CozyTheme {...cozyThemeProps} ignoreCozySettings={options.isPublic}>
         <Bar
           {...options}
           barSearch={barSearch}
