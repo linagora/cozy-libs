@@ -4,44 +4,51 @@ describe('Contact model', () => {
   describe('getInitials method', () => {
     it('should return the first letter of public_name if it is an owner recipient', () => {
       const recipient = {
-        name: 'whatever',
+        name: { givenName: 'Jane', familyName: 'Doe' },
         public_name: 'janedoe'
       }
       const result = getInitials(recipient)
       expect(result).toEqual('J')
     })
 
-    it('should return the first letter of name if it is a recipient', () => {
+    it('should build initials from the structured name object', () => {
       const recipient = {
-        name: 'janedoe'
+        name: { givenName: 'Jane', familyName: 'Doe' }
       }
       const result = getInitials(recipient)
-      expect(result).toEqual('J')
+      expect(result).toEqual('JD')
     })
 
-    it('should return the first letter of email if it is a recipient and name/public_name are not defined', () => {
+    it('should return the first letter of email when name and public_name are absent', () => {
       const recipient = {
-        name: undefined,
-        public_name: undefined,
         email: 'janedoe@example.com'
       }
       const result = getInitials(recipient)
       expect(result).toEqual('J')
     })
 
-    it('should return an empty string if name/public_name are undefined', () => {
+    it('should return the first letter of email when name is an empty object', () => {
+      const recipient = {
+        name: {},
+        email: 'janedoe@example.com'
+      }
+      const result = getInitials(recipient)
+      expect(result).toEqual('J')
+    })
+
+    it('should return an empty string when nothing is resolvable', () => {
       const recipient = {}
       const result = getInitials(recipient)
       expect(result).toEqual('')
     })
 
-    it('should use a default value if name/public_name are undefined', () => {
+    it('should use the default value when nothing is resolvable', () => {
       const recipient = {}
       const result = getInitials(recipient, 'A')
       expect(result).toEqual('A')
     })
 
-    it('should use the original implementation if a contact is given', () => {
+    it('should build initials for a full contact document', () => {
       const contact = {
         _id: '46b5d129-0296-4466-8c02-9a6a0c17c4cb',
         _type: 'io.cozy.contacts',
@@ -56,11 +63,11 @@ describe('Contact model', () => {
   })
 
   describe('getDisplayName method', () => {
-    it('should use the original implementation if a contact is given', () => {
+    it('should use displayName when a contact document is given', () => {
       const contact = {
         _id: '46b5d129-0296-4466-8c02-9a6a0c17c4cb',
         _type: 'io.cozy.contacts',
-        fullname: 'Arya Stark',
+        displayName: 'Arya Stark',
         name: {
           givenName: 'Arya',
           familyName: 'Stark'
@@ -70,25 +77,29 @@ describe('Contact model', () => {
       expect(result).toEqual('Arya Stark')
     })
 
-    it('should use public_name if available', () => {
-      const contact = {
+    it('should use public_name when available', () => {
+      const recipient = {
         email: 'arya@winterfell.westeros',
-        name: 'Arya Stark',
+        name: { givenName: 'Arya', familyName: 'Stark' },
         public_name: 'aryastark'
       }
-      const result = getDisplayName(contact)
+      const result = getDisplayName(recipient)
       expect(result).toEqual('aryastark')
     })
 
-    it('should use name if a recipient is given', () => {
-      const contact = {
-        name: 'Arya Stark'
+    it('should build the fullname from the structured name object', () => {
+      const recipient = {
+        name: {
+          namePrefix: 'Lady',
+          givenName: 'Arya',
+          familyName: 'Stark'
+        }
       }
-      const result = getDisplayName(contact)
-      expect(result).toEqual('Arya Stark')
+      const result = getDisplayName(recipient)
+      expect(result).toEqual('Lady Arya Stark')
     })
 
-    it('should use email if a recipient is given', () => {
+    it('should fall back to email when name is absent', () => {
       const recipient = {
         email: 'arya.stark@winterfell.westeros'
       }
@@ -96,13 +107,22 @@ describe('Contact model', () => {
       expect(result).toEqual('arya.stark@winterfell.westeros')
     })
 
-    it('should use an empty string as default value if nothing is available', () => {
+    it('should fall back to email when name is an empty object', () => {
+      const recipient = {
+        name: {},
+        email: 'arya.stark@winterfell.westeros'
+      }
+      const result = getDisplayName(recipient)
+      expect(result).toEqual('arya.stark@winterfell.westeros')
+    })
+
+    it('should return an empty string when nothing is resolvable', () => {
       const recipient = {}
       const result = getDisplayName(recipient)
       expect(result).toEqual('')
     })
 
-    it('should use a default value if nothing is available', () => {
+    it('should use the default value when nothing is resolvable', () => {
       const recipient = {}
       const result = getDisplayName(recipient, 'Anonymous')
       expect(result).toEqual('Anonymous')
