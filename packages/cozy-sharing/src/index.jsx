@@ -19,6 +19,7 @@ export { default as LinkRecipientLite } from './components/Recipient/LinkRecipie
 export { default as OwnerRecipientDefaultLite } from './components/Recipient/OwnerRecipientDefaultLite'
 export { SharedRecipientsList } from './SharedRecipientsList'
 export { ShareButton } from './ShareButton'
+export { EditSharedDriveModal } from './components/SharedDrive/EditSharedDriveModal'
 export { SharedDriveModal } from './components/SharedDrive/SharedDriveModal'
 export { SharedDriveForm } from './components/SharedDrive/SharedDriveForm'
 export { FederatedFolderModal } from './components/FederatedFolder/FederatedFolderModal'
