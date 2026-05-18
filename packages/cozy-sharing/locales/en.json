@@ -451,9 +451,12 @@
       "create": "Create",
       "save": "Save",
       "successNotification": "Shared drive has been added",
-      "errorNotification": "Error during shared drive creation",
-      "successNotificationUpdate": "Your shared drive has been modified",
-      "errorNotificationUpdate": "Error durring shared drive modification"
+      "errorNotification": "Error during shared drive creation"
+    },
+    "editSharedDriveModal": {
+      "title": "Edit shared drive",
+      "successNotification": "Shared drive has been modified",
+      "errorNotification": "Error during shared drive modification"
     }
   }
 }
