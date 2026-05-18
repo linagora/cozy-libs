@@ -8,6 +8,7 @@ import { useI18n } from 'twake-i18n'
 
 import withLocales from '../../hoc/withLocales'
 import { default as DumbShareByEmail } from '../ShareByEmail'
+import SharedDriveHeader from './SharedDriveHeader'
 import { useSharedDrive } from './useSharedDrive'
 
 export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
@@ -25,6 +26,7 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
   return (
     <div>
       <div className="u-ph-2">
+        <SharedDriveHeader title={t('SharedDrive.sharedDriveModal.title')} />
         <TextField
           required
           label={t('SharedDrive.sharedDriveModal.nameLabel')}

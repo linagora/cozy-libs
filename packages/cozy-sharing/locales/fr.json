@@ -449,9 +449,12 @@
       "create": "Créer",
       "save": "Enregistrer",
       "successNotification": "Le drive partagé a été ajouté",
-      "errorNotification": "Erreur lors de la création du drive partagé",
-      "successNotificationUpdate": "Votre drive partagé a été modifié",
-      "errorNotificationUpdate": "Erreur lors de la modification du drive partagé"
+      "errorNotification": "Erreur lors de la création du drive partagé"
+    },
+    "editSharedDriveModal": {
+      "title": "Modifier le drive partagé",
+      "successNotification": "Le drive partagé a été modifié",
+      "errorNotification": "Erreur lors de la modification du drive partagé"
     }
   }
 }
