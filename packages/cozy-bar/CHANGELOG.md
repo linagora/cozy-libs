@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.3.3](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.3.2...cozy-bar@33.3.3) (2026-05-18)
+
+### Bug Fixes
+
+- **cozy-bar:** Add ability to force bar theme type ([183a243](https://github.com/cozy/cozy-libs/commit/183a243515081bf9123290c2a7ca2406b9b45bc7))
+
 ## [33.3.2](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.3.1...cozy-bar@33.3.2) (2026-05-07)
 
 **Note:** Version bump only for package cozy-bar

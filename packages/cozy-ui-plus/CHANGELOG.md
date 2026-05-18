@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.0.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@8.0.0...cozy-ui-plus@8.0.1) (2026-05-18)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Allow to override instance colorScheme in ([5797a1c](https://github.com/cozy/cozy-libs/commit/5797a1c5f33b661e632f8ae938584b66d926443e))
+
 # [8.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@7.1.0...cozy-ui-plus@8.0.0) (2026-05-07)
 
 ### Features
