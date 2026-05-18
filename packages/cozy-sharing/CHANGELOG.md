@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.0.0...cozy-sharing@32.1.0) (2026-05-18)
+
+### Features
+
+- Add EditSharedDriveModal ([042651b](https://github.com/cozy/cozy-libs/commit/042651b7debad197f57315f2b4c8c6d7a94a8230))
+- Add SharedDriveHeader and use it in ShareDriveForm ([d47d62f](https://github.com/cozy/cozy-libs/commit/d47d62fcaf38c5673d76e1701f31f52ff198ed53))
+- Uniformize "Add users" wording ([82b45f7](https://github.com/cozy/cozy-libs/commit/82b45f7d6f1ce0a6929beb02362e86034b4bd2b1))
+
 # [32.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.2.0...cozy-sharing@32.0.0) (2026-05-18)
 
 ### Features
