@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.2.0...cozy-sharing@32.0.0) (2026-05-18)
+
+### Features
+
+- Remove unused propTypes.js ([299669c](https://github.com/cozy/cozy-libs/commit/299669c168b55bb8fe242b3879288bd79317a0c3))
+- Removed unused SharedStatus ([e7a3b2b](https://github.com/cozy/cozy-libs/commit/e7a3b2b1cfd708a55691cbb54139cbe4458f1332))
+- Update cozy-device-helper ([0ffd6d3](https://github.com/cozy/cozy-libs/commit/0ffd6d330f7760df623237d575175e159525361a))
+
+### BREAKING CHANGES
+
+- You need "cozy-device-helper": ">=4.0.0" for "cozy-sharing"
+
 # [31.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@31.1.0...cozy-sharing@31.2.0) (2026-05-12)
 
 ### Bug Fixes
