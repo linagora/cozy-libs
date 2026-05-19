@@ -5,6 +5,7 @@ const meta = {
   args: {
     recipientConfirmationData: false,
     verifyRecipient: () => true,
+    document: { _id: '123' },
     fadeIn: false
   }
 }

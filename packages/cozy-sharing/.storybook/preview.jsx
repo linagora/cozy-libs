@@ -1,12 +1,13 @@
 import React from "react";
 
-import 'cozy-ui/dist/cozy-ui.min.css'
 import 'cozy-ui/dist/cozy-ui.utils.min.css'
 import 'cozy-ui/transpiled/react/stylesheet.css'
+import 'cozy-ui-plus/dist/stylesheet.css'
 import '../dist/stylesheet.css'
 
 import I18n from "twake-i18n"
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { CozyProvider, createFakeClient } from 'cozy-client'
 
@@ -40,16 +41,20 @@ const preview = {
       })
       return (
       <CozyProvider client={fakeClient}>
-        <CozyTheme>
+        <CozyTheme ignoreCozySettings>
           <BreakpointsProvider>
             <SharingContext.Provider value={{
               revokeGroup: () => {},
-              revokeSelf: () => {}
+              revokeSelf: () => {},
+              getDocumentPermissions: () => [],
+              getSharingLink: () => ''
             }}>
               <I18n lang="en" dictRequire={() => enLocale}>
-                <div style={{position: "relative"}}>
-                  <Story />
-                </div>
+                <AlertProvider>
+                  <div style={{position: "relative"}}>
+                    <Story />
+                  </div>
+                </AlertProvider>
               </I18n>
             </SharingContext.Provider>
           </BreakpointsProvider>

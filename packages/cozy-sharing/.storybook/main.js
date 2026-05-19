@@ -12,7 +12,14 @@ const config = {
   docs: {
     autodocs: true
   },
-  staticDirs: ['./public']
+  staticDirs: ['./public'],
+  webpackFinal: async (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'cozy-client/dist/types': require.resolve('cozy-client/dist/index.js')
+    }
+    return config
+  }
 }
 
 export default config

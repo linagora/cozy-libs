@@ -2,7 +2,9 @@ import LinkRecipientPermissions from './LinkRecipientPermissions'
 
 const meta = {
   component: LinkRecipientPermissions,
-  args: {}
+  args: {
+    document: { _id: '123' }
+  }
 }
 
 export default meta
