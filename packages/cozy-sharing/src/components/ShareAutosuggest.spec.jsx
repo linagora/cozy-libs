@@ -51,17 +51,22 @@ describe('ShareAutosuggest', () => {
     })
   })
 
-  it('should show loading only after user focus input', () => {
+  it('should show loading indicator when loading prop is true (autoFocus triggers onFocus on mount)', () => {
     const onPick = jest.fn()
     const onRemove = jest.fn()
 
     setup({ onPick, onRemove, loading: true })
 
-    const inputNode = screen.getByPlaceholderText('myPlaceHolder')
+    // autoFocus triggers onFocus on mount, which sets isLoadingDisplayed
+    expect(screen.getByText('loading')).toBeInTheDocument()
+  })
+
+  it('should not show loading indicator when loading prop is false', () => {
+    const onPick = jest.fn()
+    const onRemove = jest.fn()
+
+    setup({ onPick, onRemove, loading: false })
 
     expect(screen.queryByText('loading')).toBeNull()
-    fireEvent.focus(inputNode)
-
-    expect(screen.getByText('loading')).toBeInTheDocument()
   })
 })
