@@ -205,6 +205,7 @@ const ShareAutocomplete = ({
         renderInputComponent={renderInput}
         highlightFirstSuggestion
         inputProps={{
+          autoFocus: true,
           onFocus: onAutosuggestFocus,
           onChange: onAutosuggestChange,
           onPaste: onAutosuggestPaste,
