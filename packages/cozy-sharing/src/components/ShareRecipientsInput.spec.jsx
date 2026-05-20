@@ -116,6 +116,65 @@ describe('ShareRecipientsInput component', () => {
     ).toBeInTheDocument()
   })
 
+  it('should exclude current user from suggestions when me is true', async () => {
+    const contacts = [
+      {
+        id: 'df563cc4-6440',
+        _id: 'df563cc4-6440',
+        _type: 'io.cozy.contacts',
+        me: true,
+        name: {
+          givenName: 'My',
+          familyName: 'Self'
+        },
+        relationships: {
+          groups: {
+            data: [
+              {
+                _id: 'group-id',
+                _type: 'io.cozy.contacts.groups'
+              }
+            ]
+          }
+        }
+      },
+      {
+        id: '5a3b4ccf-c257',
+        _id: '5a3b4ccf-c257',
+        _type: 'io.cozy.contacts',
+        name: {
+          givenName: 'Teagan',
+          familyName: 'Wolf'
+        },
+        relationships: {
+          groups: {
+            data: [
+              {
+                _id: 'group-id',
+                _type: 'io.cozy.contacts.groups'
+              }
+            ]
+          }
+        }
+      }
+    ]
+
+    const contactGroups = [
+      {
+        id: 'group-id',
+        name: 'Friends',
+        _id: 'group-id',
+        _type: 'io.cozy.contacts.groups'
+      }
+    ]
+
+    setup({ contacts, contactGroups })
+
+    expect(screen.queryByText('My Self')).not.toBeInTheDocument()
+    expect(screen.getByText('Teagan Wolf')).toBeInTheDocument()
+    expect(screen.getByText('Friends - 1 members')).toBeInTheDocument()
+  })
+
   it('should include unreachable members when flag sharing.show-recipient-groups is activated', async () => {
     flag.mockReturnValue(true)
 
