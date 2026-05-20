@@ -17,6 +17,8 @@ import {
  * We retrieve all the contacts that are reachable and the groups they belong to.
  * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
  */
+const isCurrentUser = contact => contact.me === true
+
 const ShareRecipientsInput = ({
   currentRecipients,
   recipients,
@@ -57,6 +59,12 @@ const ShareRecipientsInput = ({
       (isQueryLoading(unreachableContactsWithGroupsResult) ||
         unreachableContactsWithGroupsResult.hasMore))
 
+  const reachableContacts = (reachableContactsResult.data || []).filter(
+    contact => !isCurrentUser(contact)
+  )
+  const unreachableContactsWithGroups = (
+    unreachableContactsWithGroupsResult.data || []
+  ).filter(contact => !isCurrentUser(contact))
   const currentRecipientGroups = currentRecipients
     .map(({ id }) => id)
     .filter(Boolean)
@@ -68,7 +76,7 @@ const ShareRecipientsInput = ({
     )
     .map(contactGroup => {
       const reachableMembers = getContactsFromGroupId(
-        reachableContactsResult.data,
+        reachableContacts,
         contactGroup.id
       ).map(contact => ({
         ...contact,
@@ -83,7 +91,7 @@ const ShareRecipientsInput = ({
       }
 
       const unreachableMembers = getContactsFromGroupId(
-        unreachableContactsWithGroupsResult.data,
+        unreachableContactsWithGroups,
         contactGroup.id
       ).map(contact => ({
         ...contact,
@@ -96,10 +104,7 @@ const ShareRecipientsInput = ({
       }
     })
 
-  const contactsAndGroups = [
-    ...(reachableContactsResult.data || []),
-    ...contactGroups
-  ]
+  const contactsAndGroups = [...reachableContacts, ...contactGroups]
 
   return (
     <ShareAutosuggest
