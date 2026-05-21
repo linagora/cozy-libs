@@ -128,7 +128,7 @@
       "shareByEmail": {
         "subtitle": "By email",
         "emailPlaceholder": "Add contacts",
-        "send": "Share",
+        "send": "Done",
         "singleContactSuccess": "You sent an invite to %{email}.",
         "contactSuccess": "You sent an invite to %{smart_count} contact. |||| You sent an invite to %{smart_count} contacts.",
         "singleGroupSuccess": "You sent an invite to the members of the %{groupName} group.",
@@ -196,7 +196,7 @@
         "subtitle": "By email",
         "email": "To:",
         "emailPlaceholder": "Enter the email address or name of the recipient",
-        "send": "Share",
+        "send": "Done",
         "singleContactSuccess": "You sent an invite to %{email}.",
         "contactSuccess": "You sent an invite to %{smart_count} contact. |||| You sent an invite to %{smart_count} contacts.",
         "singleGroupSuccess": "You sent an invite to the members of the %{groupName} group.",
@@ -265,7 +265,7 @@
         "subtitle": "By email",
         "email": "email",
         "emailPlaceholder": "Enter the email address or name of the recipient",
-        "send": "Share",
+        "send": "Done",
         "singleContactSuccess": "You sent an invite to %{email}.",
         "contactSuccess": "You sent an invite to %{smart_count} contact. |||| You sent an invite to %{smart_count} contacts.",
         "singleGroupSuccess": "You sent an invite to the members of the %{groupName} group.",
@@ -329,7 +329,7 @@
         "subtitle": "By email",
         "email": "Send to:",
         "emailPlaceholder": "Enter the email address or name of the recipient",
-        "send": "Share",
+        "send": "Done",
         "error": {
           "addingRecipient": "An error occurred while adding the recipient. Please try again."
         },
@@ -381,6 +381,11 @@
     "title": "Problem with your sharing",
     "content": "You cannot share %{documentName} with more than %{limit} members.",
     "confirm": "I understand"
+  },
+  "ShareDiscardChangesModal": {
+    "title": "Discard the changes you haven't saved?",
+    "cancel": "Cancel",
+    "discard": "Discard"
   },
   "GroupRecipient": {
     "secondary": "%{memberCount} member |||| %{memberCount} members",
@@ -436,7 +441,7 @@
   },
   "FederatedFolder": {
     "title": "Shared folder",
-    "share": "Share",
+    "share": "Done",
     "shareTitle": "Share \"%{name}\"",
     "successNotification": "Folder has been shared",
     "errorNotification": "Error while sharing folder",

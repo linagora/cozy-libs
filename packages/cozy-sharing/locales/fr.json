@@ -125,7 +125,7 @@
       "shareByEmail": {
         "subtitle": "Par email",
         "emailPlaceholder": "Ajouter des contacts",
-        "send": "Partager",
+        "send": "Terminé",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -193,7 +193,7 @@
         "subtitle": "Par email",
         "email": "À :",
         "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
-        "send": "Partager",
+        "send": "Terminé",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -263,7 +263,7 @@
         "subtitle": "Par email",
         "email": "e-mail",
         "emailPlaceholder": "Saisissez l'email ou le nom du destinataire.",
-        "send": "Partager",
+        "send": "Terminé",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -327,7 +327,7 @@
         "subtitle": "Par email",
         "email": "Envoyer à :",
         "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
-        "send": "Partager",
+        "send": "Terminé",
         "error": {
           "addingRecipient": "Une erreur s'est produite lors de l'ajout du destinataire. Veuillez réessayer."
         },
@@ -379,6 +379,11 @@
     "title": "Problème au niveau de votre partage",
     "content": "Vous ne pouvez pas partager %{documentName} à plus de %{limit} membres.",
     "confirm": "J'ai compris"
+  },
+  "ShareDiscardChangesModal": {
+    "title": "Abandonner les modifications non enregistrées ?",
+    "cancel": "Annuler",
+    "discard": "Abandonner"
   },
   "GroupRecipient": {
     "secondary": "%{memberCount} membre |||| %{memberCount} membres",
@@ -434,7 +439,7 @@
   },
   "FederatedFolder": {
     "title": "Dossier partagé",
-    "share": "Partager",
+    "share": "Terminé",
     "shareTitle": "Partager \"%{name}\"",
     "successNotification": "Le dossier a été partagé",
     "errorNotification": "Erreur lors du partage du dossier",

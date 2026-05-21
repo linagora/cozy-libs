@@ -128,7 +128,7 @@
       "shareByEmail": {
         "subtitle": "По электронной почте",
         "emailPlaceholder": "Добавить контакты",
-        "send": "Поделиться",
+        "send": "Готово",
         "singleContactSuccess": "Вы отправили приглашение на %{email}.",
         "contactSuccess": "Вы отправили приглашение %{smart_count} контакту. |||| Вы отправили приглашение %{smart_count} контактам.",
         "singleGroupSuccess": "Вы отправили приглашение участникам группы %{groupName}.",
@@ -196,7 +196,7 @@
         "subtitle": "По электронной почте",
         "email": "Кому:",
         "emailPlaceholder": "Введите адрес электронной почты или имя получателя",
-        "send": "Поделиться",
+        "send": "Готово",
         "singleContactSuccess": "Вы отправили приглашение на %{email}.",
         "contactSuccess": "Вы отправили приглашение %{smart_count} контакту. |||| Вы отправили приглашение %{smart_count} контактам.",
         "singleGroupSuccess": "Вы отправили приглашение участникам группы %{groupName}.",
@@ -265,7 +265,7 @@
         "subtitle": "По электронной почте",
         "email": "эл. почта",
         "emailPlaceholder": "Введите адрес электронной почты или имя получателя",
-        "send": "Поделиться",
+        "send": "Готово",
         "singleContactSuccess": "Вы отправили приглашение на %{email}.",
         "contactSuccess": "Вы отправили приглашение %{smart_count} контакту. |||| Вы отправили приглашение %{smart_count} контактам.",
         "singleGroupSuccess": "Вы отправили приглашение участникам группы %{groupName}.",
@@ -329,7 +329,7 @@
         "subtitle": "По электронной почте",
         "email": "Отправить:",
         "emailPlaceholder": "Введите адрес электронной почты или имя получателя",
-        "send": "Поделиться",
+        "send": "Готово",
         "error": {
           "addingRecipient": "Произошла ошибка при добавлении получателя. Пожалуйста, попробуйте еще раз."
         },
@@ -381,6 +381,11 @@
     "title": "Проблема с вашим общим доступом",
     "content": "Вы не можете предоставить общий доступ к %{documentName} более чем %{limit} участникам.",
     "confirm": "Понятно"
+  },
+  "ShareDiscardChangesModal": {
+    "title": "Отменить несохраненные изменения?",
+    "cancel": "Отмена",
+    "discard": "Отменить"
   },
   "GroupRecipient": {
     "secondary": "%{memberCount} участник |||| %{memberCount} участников",
@@ -436,7 +441,7 @@
   },
   "FederatedFolder": {
     "title": "Общая папка",
-    "share": "Поделиться",
+    "share": "Готово",
     "shareTitle": "Поделиться \"%{name}\"",
     "successNotification": "Папка была расшарена",
     "errorNotification": "Ошибка при расшаривании папки",
