@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.2.0...cozy-sharing@32.3.0) (2026-05-21)
+
+### Features
+
+- **sharing:** Update sharing dialog close actions ([0624f97](https://github.com/cozy/cozy-libs/commit/0624f972fa681f199724a0bc10cfffe1f31c9657))
+
 # [32.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.1.2...cozy-sharing@32.2.0) (2026-05-21)
 
 ### Features
