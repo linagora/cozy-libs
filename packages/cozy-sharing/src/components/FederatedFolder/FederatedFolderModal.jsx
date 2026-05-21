@@ -171,7 +171,6 @@ const FederatedFolderModalContent = ({
     : []
 
   const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
-  const isSharedDrive = Boolean(existingDocument?.driveId)
 
   return (
     <DumbBatchSharedFolderModal
@@ -184,7 +183,6 @@ const FederatedFolderModalContent = ({
       onClose={handleCloseRequest}
       sharingLink={sharingLink}
       shareLabel={t('FederatedFolder.share')}
-      showShareByEmail={!isSharedDrive}
       autoOpenShareRestriction={autoOpenShareRestriction}
       showGenerateLinkButton={showGenerateLinkButton}
       pendingRecipients={pendingRecipients}
