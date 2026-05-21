@@ -3,7 +3,6 @@ import React from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
@@ -17,18 +16,13 @@ export const DumbBatchSharedFolderModal = withLocales(
   ({
     title,
     document,
-    folderName,
-    handleFolderNameChange,
     recipients,
     currentRecipients,
     onRevoke,
     onSend,
     onClose,
-    showNameField = false,
     sharingLink,
-    nameLabel,
     shareLabel,
-    showShareByEmail = true,
     autoOpenShareRestriction,
     showGenerateLinkButton,
     pendingRecipients,
@@ -37,41 +31,6 @@ export const DumbBatchSharedFolderModal = withLocales(
     onSelectedOptionChange
   }) => {
     const { t } = useI18n()
-    const actionButtons = (() => {
-      if (!showShareByEmail) {
-        return (
-          <ShareByLink
-            link={sharingLink}
-            document={document}
-            documentType="Files"
-            showGenerateLinkButton={showGenerateLinkButton}
-            autoOpenShareRestriction={autoOpenShareRestriction}
-          />
-        )
-      }
-
-      if (!showNameField) {
-        return (
-          <>
-            <ShareByLink
-              link={sharingLink}
-              document={document}
-              documentType="Files"
-              showGenerateLinkButton={showGenerateLinkButton}
-              autoOpenShareRestriction={autoOpenShareRestriction}
-            />
-            <Button
-              variant="primary"
-              label={shareLabel}
-              disabled={!onSend}
-              onClick={onSend}
-            />
-          </>
-        )
-      }
-
-      return null
-    })()
 
     return (
       <FixedDialog
@@ -87,31 +46,18 @@ export const DumbBatchSharedFolderModal = withLocales(
           <div>
             <div className="u-ph-2">
               <AntivirusAlert document={document} />
-              {showNameField && handleFolderNameChange && (
-                <TextField
-                  required
-                  label={nameLabel}
-                  variant="outlined"
-                  size="small"
-                  className="u-w-100 u-mt-1-half"
-                  value={folderName ?? ''}
-                  onChange={handleFolderNameChange}
-                />
-              )}
               <Typography variant="h6" className="u-mt-1-half u-mb-half">
                 {t('Share.contacts.addUsers')}
               </Typography>
-              {showShareByEmail && (
-                <DumbShareByEmail
-                  currentRecipients={currentRecipients}
-                  document={document}
-                  documentType="Files"
-                  pendingRecipients={pendingRecipients}
-                  onPendingRecipientsChange={onPendingRecipientsChange}
-                  selectedOption={selectedOption}
-                  onSelectedOptionChange={onSelectedOptionChange}
-                />
-              )}
+              <DumbShareByEmail
+                currentRecipients={currentRecipients}
+                document={document}
+                documentType="Files"
+                pendingRecipients={pendingRecipients}
+                onPendingRecipientsChange={onPendingRecipientsChange}
+                selectedOption={selectedOption}
+                onSelectedOptionChange={onSelectedOptionChange}
+              />
             </div>
             <WhoHasAccess
               isOwner
@@ -125,7 +71,23 @@ export const DumbBatchSharedFolderModal = withLocales(
             />
           </div>
         }
-        actions={actionButtons}
+        actions={
+          <>
+            <ShareByLink
+              link={sharingLink}
+              document={document}
+              documentType="Files"
+              showGenerateLinkButton={showGenerateLinkButton}
+              autoOpenShareRestriction={autoOpenShareRestriction}
+            />
+            <Button
+              variant="primary"
+              label={shareLabel}
+              disabled={!onSend}
+              onClick={onSend}
+            />
+          </>
+        }
       />
     )
   }
