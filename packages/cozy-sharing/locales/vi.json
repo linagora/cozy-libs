@@ -128,7 +128,7 @@
       "shareByEmail": {
         "subtitle": "Bằng email",
         "emailPlaceholder": "Thêm liên hệ",
-        "send": "Chia sẻ",
+        "send": "Xong",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -196,7 +196,7 @@
         "subtitle": "Bằng email",
         "email": "Đến:",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Chia sẻ",
+        "send": "Xong",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -265,7 +265,7 @@
         "subtitle": "Bằng email",
         "email": "email",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Chia sẻ",
+        "send": "Xong",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -329,7 +329,7 @@
         "subtitle": "Bằng email",
         "email": "Gửi đến:",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Chia sẻ",
+        "send": "Xong",
         "error": {
           "addingRecipient": "Đã xảy ra lỗi khi thêm người nhận. Vui lòng thử lại."
         },
@@ -381,6 +381,11 @@
     "title": "Sự cố với chia sẻ của bạn",
     "content": "Bạn không thể chia sẻ %{documentName} với nhiều hơn %{limit} thành viên.",
     "confirm": "Tôi hiểu rồi"
+  },
+  "ShareDiscardChangesModal": {
+    "title": "Bạn có muốn bỏ các thay đổi chưa lưu?",
+    "cancel": "Hủy",
+    "discard": "Bỏ"
   },
   "GroupRecipient": {
     "secondary": "%{memberCount} thành viên |||| %{memberCount} thành viên",
@@ -436,7 +441,7 @@
   },
   "FederatedFolder": {
     "title": "Thư mục chia sẻ",
-    "share": "Chia sẻ",
+    "share": "Xong",
     "shareTitle": "Chia sẻ \"%{name}\"",
     "successNotification": "Thư mục đã được chia sẻ",
     "errorNotification": "Lỗi khi chia sẻ thư mục",

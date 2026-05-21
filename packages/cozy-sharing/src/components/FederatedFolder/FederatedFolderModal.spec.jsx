@@ -320,6 +320,53 @@ describe('FederatedFolderModal', () => {
 
       expect(mockOnClose).toHaveBeenCalled()
     })
+
+    it('should ask confirmation when close button is clicked with pending recipients', async () => {
+      usePendingRecipients.mockReturnValue({
+        pendingRecipients: [{ name: 'Alice', email: 'alice@example.com' }],
+        setPendingRecipients: jest.fn(),
+        selectedOption: 'readWrite',
+        setSelectedOption: jest.fn()
+      })
+
+      const { getByRole, getByTestId, getByText } = setup()
+
+      await waitFor(() => {
+        expect(getByTestId('btn-close')).toBeTruthy()
+      })
+
+      fireEvent.click(getByTestId('btn-close'))
+
+      expect(getByText("Discard the changes you haven't saved?")).toBeTruthy()
+      expect(mockOnClose).not.toHaveBeenCalled()
+
+      fireEvent.click(getByRole('button', { name: 'Cancel' }))
+
+      expect(mockOnClose).not.toHaveBeenCalled()
+    })
+
+    it('should close after discard confirmation', async () => {
+      usePendingRecipients.mockReturnValue({
+        pendingRecipients: [{ name: 'Alice', email: 'alice@example.com' }],
+        setPendingRecipients: jest.fn(),
+        selectedOption: 'readWrite',
+        setSelectedOption: jest.fn()
+      })
+
+      const { getByRole, getByTestId, getByText } = setup()
+
+      await waitFor(() => {
+        expect(getByTestId('btn-close')).toBeTruthy()
+      })
+
+      fireEvent.click(getByTestId('btn-close'))
+
+      expect(getByText("Discard the changes you haven't saved?")).toBeTruthy()
+
+      fireEvent.click(getByRole('button', { name: 'Discard' }))
+
+      expect(mockOnClose).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('existing recipients', () => {
