@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [32.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.1.2...cozy-sharing@32.2.0) (2026-05-21)
+
+### Features
+
+- **cozy-sharing:** Add autoFocus to the share recipient input ([0919284](https://github.com/cozy/cozy-libs/commit/09192847eb6659692b5950094095eb07e5be30ad))
+
 ## [32.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.1.1...cozy-sharing@32.1.2) (2026-05-19)
 
 **Note:** Version bump only for package cozy-sharing
