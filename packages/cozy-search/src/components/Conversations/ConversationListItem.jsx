@@ -79,4 +79,8 @@ const ConversationListItem = ({
   )
 }
 
-export default ConversationListItem
+// Memoized so a re-render of the conversation list only re-renders items
+// whose props actually changed (typically just the previously- and
+// newly-selected items). This avoids rebuilding every item's ActionsMenu
+// popover on each conversation switch.
+export default React.memo(ConversationListItem)

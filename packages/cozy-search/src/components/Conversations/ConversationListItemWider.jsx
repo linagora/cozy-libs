@@ -75,4 +75,6 @@ const ConversationListItemWider = ({
   )
 }
 
-export default ConversationListItemWider
+// Memoized for the same reason as ConversationListItem: skip re-rendering
+// list items whose props are unchanged on a conversation switch.
+export default React.memo(ConversationListItemWider)
