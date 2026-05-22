@@ -5,7 +5,6 @@ import React, { useEffect, useMemo, useState } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
-import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
@@ -17,7 +16,7 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
 import NotFoundConversation from './NotFoundConversation'
-import { groupConversationsByDate } from './helpers'
+import { formatDayLabel, groupConversationsByDate } from './helpers'
 import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
@@ -37,7 +36,7 @@ const SearchConversationContainer = ({ children, isMobile }) =>
   )
 
 const SearchConversation = () => {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
   const { isMobile } = useBreakpoints()
   const [query, setQuery] = useState(undefined)
   const [searchStr, setSearchStr] = useState('')
@@ -93,25 +92,27 @@ const SearchConversation = () => {
         className={cx(
           'u-h-100 u-flex u-flex-column u-flex-items-start u-ov-hidden',
           {
-            'u-w-7 u-mh-half': !isMobile
+            'u-w-7 u-mh-half': !isMobile,
+            'u-w-100': isMobile
           }
         )}
       >
         <div
-          className={cx('u-w-100', {
-            'u-mv-2': !isMobile
+          className={cx('u-w-100 u-bxz', {
+            'u-mv-2': !isMobile,
+            'u-p-1': isMobile
           })}
         >
-          <div className="u-flex u-flex-items-center">
+          <div className="u-flex u-flex-items-center u-w-100">
             <SearchBar
-              elevation={isMobile ? 0 : 1}
+              elevation={1}
               disabledHover={!!isMobile}
-              disabledClear={!!isMobile}
-              className={cx('u-w-100', styles['search-bar--mobile'], {
+              className={cx('u-flex-auto u-miw-0', {
+                [styles['search-bar--mobile']]: isMobile,
                 'u-mb-2': !isMobile
               })}
               placeholder={t('assistant.search_conversation.placeholder')}
-              size={isMobile ? 'small' : 'medium'}
+              size="medium"
               value={searchStr}
               onChange={handleSearchChange}
             />
@@ -119,6 +120,7 @@ const SearchConversation = () => {
             {isMobile && (
               <IconButton
                 size="small"
+                className="u-ml-half u-flex-shrink-0"
                 onClick={() => setIsOpenSearchConversation(false)}
                 aria-label={t('assistant.search_conversation.close')}
               >
@@ -127,16 +129,16 @@ const SearchConversation = () => {
             )}
           </div>
 
-          {isMobile && <Divider className="u-mb-half" />}
-
           <Button
             label={t('assistant.search_conversation.new_chat')}
             variant="secondary"
-            color="secondary"
             startIcon={<Icon icon={PlusIcon} />}
             onClick={createNewConversation}
             size="large"
-            className="u-ml-half-t u-bdrs-6"
+            className={cx({
+              'u-ml-half-t u-bdrs-6': !isMobile,
+              'u-mt-1 u-bdrs-7 u-bdw-1': isMobile
+            })}
           />
         </div>
 
@@ -145,54 +147,31 @@ const SearchConversation = () => {
             <div className="u-flex u-flex-items-center u-flex-justify-center u-p-2">
               <Spinner size="xxlarge" />
             </div>
-          ) : searchStr ? (
-            <ConversationList
-              divider={true}
-              disableAction={true}
-              conversations={conversations}
-              onOpenConversation={goToConversation}
-              ItemComponent={ConversationListItemWider}
-            />
           ) : (
-            <>
-              {groupedConversations.today?.length > 0 && (
-                <>
-                  <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                    className="u-mb-half u-ml-half-t"
-                  >
-                    {t('assistant.search_conversation.recent')}
-                  </Typography>
-                  <ConversationList
-                    divider={true}
-                    disableAction={true}
-                    conversations={groupedConversations.today}
-                    onOpenConversation={goToConversation}
-                    ItemComponent={ConversationListItemWider}
-                  />
-                </>
-              )}
-
-              {groupedConversations.older?.length > 0 && (
-                <>
-                  <Typography
-                    variant="subtitle1"
-                    color="textSecondary"
-                    className="u-mt-1 u-mb-half u-ml-half-t"
-                  >
-                    {t('assistant.search_conversation.older')}
-                  </Typography>
-                  <ConversationList
-                    divider={true}
-                    disableAction={true}
-                    conversations={groupedConversations.older}
-                    onOpenConversation={goToConversation}
-                    ItemComponent={ConversationListItemWider}
-                  />
-                </>
-              )}
-            </>
+            groupedConversations.map((group, index) => (
+              <React.Fragment key={group.dayTimestamp}>
+                <Typography
+                  variant="subtitle1"
+                  color="textSecondary"
+                  className={cx('u-mb-half u-ml-1 u-ml-half-t', {
+                    'u-mt-1': index > 0
+                  })}
+                >
+                  {group.key === 'today'
+                    ? t('assistant.search_conversation.recent')
+                    : group.key === 'yesterday'
+                      ? t('assistant.time.yesterday')
+                      : formatDayLabel(group.dayTimestamp, lang)}
+                </Typography>
+                <ConversationList
+                  divider={true}
+                  disableAction={true}
+                  conversations={group.items}
+                  onOpenConversation={goToConversation}
+                  ItemComponent={ConversationListItemWider}
+                />
+              </React.Fragment>
+            ))
           )}
 
           {!isLoading && conversations?.length === 0 && (
