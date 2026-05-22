@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 
 import { useClient, useQuery } from 'cozy-client'
-import { deleteAssistant } from 'cozy-client/dist/models/assistant'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import {
@@ -40,7 +39,14 @@ const DeleteAssistantDialog = ({ open, onClose }) => {
 
     try {
       setIsDeleting(true)
-      await deleteAssistant(client, assistantIdInAction)
+      const { data: assistantDoc, included } = await client.query(
+        assistantQuery.definition()
+      )
+      await client.destroy(assistantDoc)
+      const provider = included?.[0]
+      if (provider) {
+        await client.destroy(provider)
+      }
       setAssistantIdInAction(null)
       onClose()
     } catch (_error) {
