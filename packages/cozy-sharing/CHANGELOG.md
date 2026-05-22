@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [32.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.3.0...cozy-sharing@32.3.1) (2026-05-22)
+
+### Bug Fixes
+
+- **cozy-sharing:** Filter out owner from the list of suggested users ([cb312ee](https://github.com/cozy/cozy-libs/commit/cb312ee6e412d021aff4a44830229404478ba316))
+
 # [32.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.2.0...cozy-sharing@32.3.0) (2026-05-21)
 
 ### Features
