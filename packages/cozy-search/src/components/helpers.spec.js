@@ -39,6 +39,28 @@ describe('sanitizeChatContent', () => {
     expect(sanitizeChatContent(text)).toBe('Here is a doc and some texte')
   })
 
+  it('should remove [Source N] markers', () => {
+    const text = 'A fragment about "suite" [Source 1] and a file [Source 3]'
+    expect(sanitizeChatContent(text)).toBe(
+      'A fragment about "suite" and a file'
+    )
+  })
+
+  it('should remove [Source N, M] markers with multiple ids', () => {
+    const text = 'Mentions of "test" [Source 4, 6] in the text'
+    expect(sanitizeChatContent(text)).toBe('Mentions of "test" in the text')
+  })
+
+  it('should remove [Source N, Source M] markers with repeated word', () => {
+    const text = 'Demonstration sections [Source 4, Source 6]'
+    expect(sanitizeChatContent(text)).toBe('Demonstration sections')
+  })
+
+  it('should not remove [Sources] or other bracketed words', () => {
+    const text = 'See [Sources] below and [Source list]'
+    expect(sanitizeChatContent(text)).toBe(text)
+  })
+
   it('should not remove simple REF or [REF]', () => {
     const text = 'REF not closed [REF]not closed either'
     expect(sanitizeChatContent(text)).toBe(text)

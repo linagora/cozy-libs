@@ -24,6 +24,8 @@ export const sanitizeChatContent = content => {
       .replace(/\s?REF[\s\S]*?\/REF/g, '')
       // remove « [doc_1] »
       .replace(/\s?\[doc_\d+\]/g, '')
+      // remove « [Source 1] », « [Source 4, 6] » or « [Source 4, Source 6] »
+      .replace(/\s?\[Source\s+\d+(?:\s*,\s*(?:Source\s+)?\d+)*\]/g, '')
   )
 }
 
