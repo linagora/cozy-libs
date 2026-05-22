@@ -1,7 +1,7 @@
 {
   "assistant": {
     "search": {
-      "placeholder": "Có câu hỏi nào không?",
+      "placeholder": "Mô tả một nhiệm vụ",
       "send": "Gửi",
       "noItem": "Không có kết quả",
       "notEnough": "Truy vấn của bạn phải chứa ít nhất 3 ký tự"
@@ -25,11 +25,11 @@
       "edited": "Đã lưu tin nhắn"
     },
     "sidebar": {
-      "create_new": "Cuộc trò chuyện mới",
+      "create_new": "Tạo mới",
       "toggle_sidebar": "Bật/tắt thanh bên",
       "toggle_search": "Bật/tắt tìm kiếm",
       "close_sidebar": "Đóng thanh bên",
-      "recent_chats": "Cuộc trò chuyện gần đây",
+      "recent_chats": "Gần đây",
       "conversation": {
         "actions": {
           "delete": "Xóa",

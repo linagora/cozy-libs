@@ -1,7 +1,7 @@
 {
   "assistant": {
     "search": {
-      "placeholder": "Есть вопрос?",
+      "placeholder": "Опишите задачу",
       "send": "Отправить",
       "noItem": "Нет результатов",
       "notEnough": "Ваш запрос должен содержать не менее 3 символов"
@@ -18,11 +18,11 @@
       "reorganise_files": "Реорганизовать мои файлы"
     },
     "sidebar": {
-      "create_new": "Новый чат",
+      "create_new": "Создать",
       "toggle_sidebar": "Переключить боковую панель",
       "toggle_search": "Переключить поиск",
       "close_sidebar": "Закрыть боковую панель",
-      "recent_chats": "Недавние переписки",
+      "recent_chats": "Недавние",
       "conversation": {
         "actions": {
           "delete": "Удалить",
