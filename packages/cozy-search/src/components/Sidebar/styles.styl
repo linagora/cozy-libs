@@ -1,6 +1,15 @@
+@require 'settings/breakpoints.styl'
+
 .sidebar-container
+  width 236px
+  min-width 236px
   background-color var(--paperBackgroundColor)
   z-index calc(var(--zIndex-modal) + 30)
+
+  +mobile()
+    // Nearly full-width with a small peek of the underlying conversation on the right
+    width calc(100vw - 48px)
+    min-width calc(100vw - 48px)
 
 .sidebar-overlay--mobile
   background-color var(--actionColorActive)
@@ -10,3 +19,11 @@
   left 0
   bottom 0
   z-index calc(var(--zIndex-modal) + 20)
+
+.menu-toggle-floating
+  // When the sidebar is closed on mobile, the toggle button sits
+  // absolutely over the scrolling conversation. Give it an opaque
+  // paper background so any message text that scrolls behind it is
+  // not visible through the icon.
+  background-color var(--paperBackgroundColor)
+  border-bottom-right-radius 12px
