@@ -35,6 +35,7 @@ const ConversationListItemWider = ({
       className={cx(
         'u-bdrs-0 u-ov-hidden u-flex u-flex-items-center u-flex-justify-between u-w-100',
         styles['conversation-list-item'],
+        styles['conversation-list-item--wider'],
         {
           [styles[`conversation-list-item--selected--${theme}`]]: selected
         }
@@ -44,11 +45,11 @@ const ConversationListItemWider = ({
       <ListItemIcon>
         <AssistantAvatar
           assistant={conversation.assistant}
-          className="u-mr-half"
-          isSmall
+          className="u-mr-half u-w-1 u-h-1"
         />
       </ListItemIcon>
       <ListItemText
+        className="u-pr-1"
         primary={
           <div className="u-flex u-flex-items-center">
             <Typography variant="h6" className="u-ellipsis u-mb-half">
@@ -68,7 +69,7 @@ const ConversationListItemWider = ({
           </Typography>
         }
       />
-      <Typography className="u-miw-4 u-fz-xsmall u-ta-right">
+      <Typography className="u-miw-4 u-fz-xsmall u-ta-right u-dn-s">
         {formatConversationDate(conversation.cozyMetadata?.updatedAt, t, lang)}
       </Typography>
     </ListItem>
