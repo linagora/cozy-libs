@@ -1,7 +1,7 @@
 {
   "assistant": {
     "search": {
-      "placeholder": "Any question?",
+      "placeholder": "Describe a task",
       "send": "Send",
       "noItem": "No results",
       "notEnough": "Your query must contain at least 3 characters"
@@ -28,11 +28,11 @@
       "edited": "Message saved"
     },
     "sidebar": {
-      "create_new": "New Chat",
+      "create_new": "Create",
       "toggle_sidebar": "Toggle sidebar",
       "toggle_search": "Toggle search",
       "close_sidebar": "Close sidebar",
-      "recent_chats": "Recent Chats",
+      "recent_chats": "Recent",
       "conversation": {
         "actions": {
           "delete": "Delete",
