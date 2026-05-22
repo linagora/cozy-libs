@@ -186,4 +186,72 @@ describe('Suggestion matchers', () => {
       expect(matchers.groupNameMatch('equipe', group)).toBeTruthy()
     })
   })
+
+  describe('Vietnamese diacritics support', () => {
+    const vietnameseContacts = [
+      { fullname: 'Nguyễn Văn Minh', email: 'minh.nguyen@email.com' },
+      { fullname: 'Trần Thị Hương', email: 'huong.tran@email.com' },
+      { fullname: 'Lê Hoàng Nam', email: 'nam.hoang@email.com' },
+      {
+        fullname: 'Phạm Đức Anh',
+        email: 'anh.pham@email.com',
+        cozy: [{ url: 'https://anh.mycozy.cloud' }]
+      }
+    ]
+
+    it('should match Vietnamese accented name with unaccented input', () => {
+      expect(
+        matchers.fullnameMatch('nguyen', vietnameseContacts[0])
+      ).toBeTruthy()
+      expect(matchers.fullnameMatch('van', vietnameseContacts[0])).toBeTruthy()
+      expect(matchers.fullnameMatch('minh', vietnameseContacts[0])).toBeTruthy()
+      expect(matchers.fullnameMatch('tran', vietnameseContacts[1])).toBeTruthy()
+      expect(
+        matchers.fullnameMatch('huong', vietnameseContacts[1])
+      ).toBeTruthy()
+      expect(matchers.fullnameMatch('le', vietnameseContacts[2])).toBeTruthy()
+      expect(matchers.fullnameMatch('nam', vietnameseContacts[2])).toBeTruthy()
+      expect(matchers.fullnameMatch('pham', vietnameseContacts[3])).toBeTruthy()
+      expect(matchers.fullnameMatch('anh', vietnameseContacts[3])).toBeTruthy()
+    })
+
+    it('should match unaccented input with Vietnamese accented name', () => {
+      expect(
+        matchers.fullnameMatch('nguyễn', vietnameseContacts[0])
+      ).toBeTruthy()
+      expect(matchers.fullnameMatch('văn', vietnameseContacts[0])).toBeTruthy()
+      expect(matchers.fullnameMatch('trần', vietnameseContacts[1])).toBeTruthy()
+      expect(
+        matchers.fullnameMatch('hương', vietnameseContacts[1])
+      ).toBeTruthy()
+      expect(matchers.fullnameMatch('lê', vietnameseContacts[2])).toBeTruthy()
+      expect(matchers.fullnameMatch('phạm', vietnameseContacts[3])).toBeTruthy()
+    })
+
+    it('should match Vietnamese email with partial unaccented input', () => {
+      expect(matchers.emailMatch('minh', vietnameseContacts[0])).toBeTruthy()
+      expect(matchers.emailMatch('nguyen', vietnameseContacts[0])).toBeTruthy()
+      expect(matchers.emailMatch('huong', vietnameseContacts[1])).toBeTruthy()
+      expect(matchers.emailMatch('tran', vietnameseContacts[1])).toBeTruthy()
+    })
+
+    it('should match Vietnamese cozy URL with unaccented input', () => {
+      const contact = {
+        fullname: 'Đặng Minh Đức',
+        cozy: [{ url: 'https://duc.mycozy.cloud' }]
+      }
+      expect(matchers.cozyUrlMatch('duc', contact)).toBeTruthy()
+      expect(matchers.cozyUrlMatch('mycozy', contact)).toBeTruthy()
+    })
+
+    it('should match Vietnamese group names with diacritics', () => {
+      const vietGroup = {
+        _type: 'io.cozy.contacts.groups',
+        name: 'Nhóm Việt'
+      }
+      expect(matchers.groupNameMatch('nhom', vietGroup)).toBeTruthy()
+      expect(matchers.groupNameMatch('viet', vietGroup)).toBeTruthy()
+      expect(matchers.groupNameMatch('nhóm', vietGroup)).toBeTruthy()
+    })
+  })
 })
