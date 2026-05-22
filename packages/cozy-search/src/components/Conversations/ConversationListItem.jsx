@@ -1,9 +1,9 @@
 import cx from 'classnames'
 import React from 'react'
 
+import Divider from 'cozy-ui/transpiled/react/Divider'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
@@ -29,7 +29,7 @@ const ConversationListItem = ({
       button
       onClick={() => onOpenConversation(conversation._id)}
       className={cx(
-        'u-bdrs-4 u-ov-hidden u-mb-half',
+        'u-ov-hidden u-flex-column',
         styles['conversation-list-item'],
         {
           [styles[`conversation-list-item--selected--${theme}`]]: selected
@@ -37,44 +37,58 @@ const ConversationListItem = ({
       )}
       selected={selected}
     >
+      <ConversationActions
+        buttonClassName={styles['conversation-list-item-action']}
+        conversation={conversation}
+      />
       <ListItemText
+        className="u-m-0"
+        primaryTypographyProps={{
+          component: 'div',
+          className: styles['conversation-list-item-text']
+        }}
+        secondaryTypographyProps={{
+          component: 'div',
+          className: styles['conversation-list-item-text']
+        }}
         primary={
-          <>
-            <Typography variant="h6" className="u-ellipsis">
-              {getNameOfConversation(conversation)}
-            </Typography>
-            <ConversationActions
-              buttonClassName={cx(styles['conversation-list-item-action'])}
-              conversation={conversation}
-            />
-          </>
+          <span
+            className={cx(
+              'u-ellipsis u-db',
+              styles['conversation-list-item-title']
+            )}
+          >
+            {getNameOfConversation(conversation)}
+          </span>
         }
         secondary={
           <>
-            <Typography
-              variant="h6"
-              className="u-db u-ellipsis u-mb-half u-coolGrey"
+            <span
+              className={cx(
+                'u-db u-ellipsis',
+                styles['conversation-list-item-subtitle']
+              )}
             >
               {getDescriptionOfConversation(conversation)}
-            </Typography>
-            <Typography
-              variant="h6"
-              className="u-flex u-flex-items-center u-coolGrey"
+            </span>
+            <span
+              className={cx(
+                'u-flex u-flex-items-center',
+                styles['conversation-list-item-subtitle'],
+                styles['conversation-list-item-meta']
+              )}
             >
-              <AssistantAvatar
-                assistant={conversation.assistant}
-                className="u-mr-half"
-                isSmall
-              />
+              <AssistantAvatar assistant={conversation.assistant} isSmall />
               {formatConversationDate(
                 conversation.cozyMetadata?.updatedAt,
                 t,
                 lang
               )}
-            </Typography>
+            </span>
           </>
         }
       />
+      <Divider className={styles['conversation-list-item-divider']} />
     </ListItem>
   )
 }

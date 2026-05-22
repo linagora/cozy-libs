@@ -83,22 +83,53 @@
   hyphens auto
 
 .conversation-list-item
-  &:hover
-    .conversation-list-item-action
-      display block !important
-  &:focus-within
-    .conversation-list-item-action
-      display block !important
+  padding 8px !important
+  border-radius 8px !important
+  align-items stretch !important
 
-  .conversation-list-item-action
-    display none !important
-    position absolute
-    top 6px
-    right 12px
+  &:hover .conversation-list-item-action,
+  &:focus-within .conversation-list-item-action
+    opacity 1
+    pointer-events auto
 
   &--selected
     &--light
-      background var(--grey100) !important
-
+      background var(--primaryColorLightest) !important
     &--dark
       background var(--grey900) !important
+
+  &--wider
+    align-items center !important
+
+.conversation-list-item-divider
+  // Counteract the item's 8px padding so the divider spans the full
+  // width and sits flush with the bottom edge of the selected highlight.
+  margin 8px -8px -8px -8px !important
+
+.conversation-list-item-action
+  position absolute !important
+  top 8px
+  right 8px
+  opacity 0
+  pointer-events none
+
+.conversation-list-item-text
+  line-height 16px
+  overflow hidden
+  margin-right 28px !important
+
+.conversation-list-item-title
+  color var(--primaryTextColor)
+  font-size 14px
+  font-weight 500
+  line-height 16px
+  letter-spacing 0.5px
+
+.conversation-list-item-meta
+  gap 4px
+
+.conversation-list-item-subtitle
+  color var(--secondaryTextColor)
+  font-size 11px
+  font-weight 400
+  line-height 16px
