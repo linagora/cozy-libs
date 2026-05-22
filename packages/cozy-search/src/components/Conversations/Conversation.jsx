@@ -5,6 +5,7 @@ import React from 'react'
 import { useI18n } from 'twake-i18n'
 
 import ConversationComposer from './ConversationComposer'
+import styles from './styles.styl'
 import AssistantMessage from '../Messages/AssistantMessage'
 import UserMessage from '../Messages/UserMessage'
 
@@ -24,17 +25,21 @@ const Conversation = ({ className }) => {
         }
       )}
     >
+      <ThreadPrimitive.Empty>
+        <h2 className="u-w-100 u-maw-7 u-mh-auto u-mb-3 u-fw-normal u-ta-center">
+          {t('assistant.message.welcome')}
+        </h2>
+      </ThreadPrimitive.Empty>
       <ThreadPrimitive.Viewport
         autoScroll
-        className={cx('u-w-100 u-ov-auto u-mb-1', {
-          'u-flex-auto': !isThreadEmpty
-        })}
+        className={cx(
+          'u-w-100 u-bxz u-ov-auto u-mb-1',
+          styles.conversationViewport,
+          {
+            'u-flex-auto': !isThreadEmpty
+          }
+        )}
       >
-        <ThreadPrimitive.Empty>
-          <h2 className="u-mb-3 u-fw-normal u-ta-center">
-            {t('assistant.message.welcome')}
-          </h2>
-        </ThreadPrimitive.Empty>
         <div className="u-maw-7 u-mh-auto">
           <ThreadPrimitive.Messages
             components={{

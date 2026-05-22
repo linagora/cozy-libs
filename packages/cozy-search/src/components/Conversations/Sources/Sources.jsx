@@ -46,7 +46,7 @@ const Sources = ({ messageId, files, emails, urls }) => {
   }, [showSources])
 
   return (
-    <Box ref={ref} className="u-mt-1-half" pl="44px">
+    <Box ref={ref} className="u-mt-1-half">
       <Chip
         className="u-mb-1"
         icon={<Icon icon={MultiFilesIcon} className="u-ml-half" />}

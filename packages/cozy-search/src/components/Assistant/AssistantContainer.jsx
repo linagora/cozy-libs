@@ -28,7 +28,7 @@ const AssistantContainer = () => {
         styles['assistant-container']
       )}
     >
-      <Sidebar className="u-w-5 u-pb-0-t u-pb-1" />
+      <Sidebar className="u-pb-0-t u-pb-1" />
 
       <PrettyScrollbar className="u-flex-auto u-flex u-flex-column u-pb-0-t u-pb-1 u-ov-hidden">
         {isOpenSearchConversation &&
