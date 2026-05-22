@@ -7,9 +7,9 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import BurgerIcon from 'cozy-ui/transpiled/react/Icons/Burger'
 import CrossSmallIcon from 'cozy-ui/transpiled/react/Icons/CrossSmall'
 import SearchIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
+import MenuIcon from 'cozy-ui/transpiled/react/Icons/Menu'
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import LoadMore from 'cozy-ui/transpiled/react/LoadMore'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -45,6 +45,13 @@ const Sidebar = ({ className }) => {
     }
   }
 
+  const onCreateNewConversation = () => {
+    createNewConversation()
+    if (isMobile) {
+      setSidebarOpen(false)
+    }
+  }
+
   return (
     <>
       <div
@@ -54,7 +61,12 @@ const Sidebar = ({ className }) => {
           'u-left-0 u-pos-absolute': isMobile
         })}
       >
-        <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1">
+        <div
+          className={cx(
+            'u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1',
+            { [styles['menu-toggle-floating']]: !sidebarOpen && isMobile }
+          )}
+        >
           <IconButton
             size="medium"
             className={cx('u-bdrs-6 u-p-0')}
@@ -66,7 +78,7 @@ const Sidebar = ({ className }) => {
               variant={sidebarOpen ? 'ghost' : 'text'}
               className="u-miw-auto u-w-2-half u-h-2-half u-bdrs-6"
               classes={{ label: 'u-flex u-w-auto' }}
-              label={<Icon icon={BurgerIcon} aria-hidden="true" />}
+              label={<Icon icon={MenuIcon} aria-hidden="true" />}
             />
           </IconButton>
           <div>
@@ -96,18 +108,18 @@ const Sidebar = ({ className }) => {
         <div className="u-ph-half u-pb-half">
           {sidebarOpen ? (
             <Button
-              className="u-w-100 u-bdrs-6"
+              className="u-w-100"
               label={t('assistant.sidebar.create_new')}
               startIcon={<Icon icon={PlusIcon} />}
               fullWidth
               variant="primary"
-              onClick={createNewConversation}
+              onClick={onCreateNewConversation}
             />
           ) : isMobile ? null : (
             <IconButton
               size="medium"
               className="u-bg-primaryColor u-white u-bdrs-6"
-              onClick={createNewConversation}
+              onClick={onCreateNewConversation}
               aria-label={t('assistant.sidebar.create_new')}
             >
               <Icon icon={PlusIcon} aria-hidden="true" />
@@ -117,7 +129,7 @@ const Sidebar = ({ className }) => {
 
         {sidebarOpen && (
           <>
-            <Typography variant="h6" className="u-ml-1 u-p-half">
+            <Typography variant="h6" className="u-ml-half u-p-half">
               {t('assistant.sidebar.recent_chats')}
             </Typography>
             <PrettyScrollbar className="u-flex-auto u-ov-auto u-ph-half u-pb-half">
