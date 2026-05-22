@@ -89,17 +89,19 @@ const ConversationActions = ({ buttonClassName, conversation }) => {
       >
         <Icon icon={DotsIcon} />
       </IconButton>
-      <ActionsMenu
-        ref={anchorRef}
-        open={isMenuOpen}
-        actions={actions}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left'
-        }}
-        autoClose
-        onClose={toggleMenu}
-      />
+      {isMenuOpen && (
+        <ActionsMenu
+          ref={anchorRef}
+          open
+          actions={actions}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          autoClose
+          onClose={toggleMenu}
+        />
+      )}
       {showRenameDialog && (
         <ConfirmDialog
           open
