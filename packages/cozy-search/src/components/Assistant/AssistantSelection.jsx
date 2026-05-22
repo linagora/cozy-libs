@@ -65,25 +65,28 @@ const AssistantSelection = ({ className, disabled }) => {
   return (
     <>
       <div className={className} ref={buttonRef}>
-        <Chips
-          icon={
-            <AssistantAvatar
-              className="u-ml-half"
-              isSmall={true}
-              assistant={selectedAssistant}
-            />
-          }
-          label={
-            isMobile ? (
-              <Icon className={styles['dropdown-icon']} icon={DropdownIcon} />
-            ) : (
-              selectedAssistant.name
-            )
-          }
-          clickable
-          onClick={handleClick}
-          disabled={disabled}
-        />
+        {disabled && isMobile ? (
+          <AssistantAvatar assistant={selectedAssistant} />
+        ) : (
+          <Chips
+            icon={
+              <AssistantAvatar
+                className={styles['assistant-icon--composer']}
+                assistant={selectedAssistant}
+              />
+            }
+            label={
+              isMobile ? (
+                <Icon icon={DropdownIcon} size={16} />
+              ) : (
+                selectedAssistant.name
+              )
+            }
+            {...(disabled
+              ? { className: styles['chip'], 'aria-disabled': true }
+              : { clickable: true, onClick: handleClick })}
+          />
+        )}
       </div>
       {open && (
         <ActionsMenu
@@ -120,7 +123,7 @@ const AssistantSelection = ({ className, disabled }) => {
             className={cx(styles['menu-item'], styles['create-item'])}
           >
             <div className="u-flex u-flex-items-center">
-              <Icon icon={PlusIcon} className={styles['create-icon']} />
+              <Icon icon={PlusIcon} size={16} className="u-mr-half" />
               <Typography variant="body1">
                 {t('assistant_create.title')}
               </Typography>

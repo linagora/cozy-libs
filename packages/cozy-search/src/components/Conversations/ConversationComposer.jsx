@@ -8,9 +8,15 @@ import cx from 'classnames'
 import React, { useCallback } from 'react'
 
 import flag from 'cozy-flags'
+import Button from 'cozy-ui/transpiled/react/Buttons'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
+import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
+import WebsearchButton from './WebsearchButton'
+import styles from './styles.styl'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
 import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
@@ -57,29 +63,52 @@ const ConversationComposer = () => {
 
   return (
     <ComposerPrimitive.Root
-      className={cx('u-w-100 u-maw-7 u-mh-auto', {
-        'u-card u-bxz u-elevation-1': isMobile
-      })}
+      className={cx(
+        'u-w-100 u-maw-7 u-mh-auto u-bxz',
+        styles['composerContainer']
+      )}
     >
-      <ConversationBar
-        elevation={isMobile ? 0 : 1}
-        disabledHover={!!isMobile}
-        value={value}
-        isEmpty={isEmpty}
-        isRunning={isRunning}
-        onKeyDown={handleKeyDown}
-        onCancel={handleCancel}
-        onSend={handleSend}
-        websearchEnabled={websearchEnabled}
-        onToggleWebsearch={handleToggleWebsearch}
-      />
+      <div className="u-flex u-flex-items-start u-flex-justify-between">
+        <ConversationBar
+          value={value}
+          isEmpty={isEmpty}
+          onKeyDown={handleKeyDown}
+        />
+        <div className="u-flex u-flex-items-center u-flex-shrink-0">
+          <WebsearchButton
+            websearchEnabled={websearchEnabled}
+            onToggleWebsearch={handleToggleWebsearch}
+          />
+          <Button
+            size="small"
+            className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle u-flex-shrink-0"
+            classes={{ label: 'u-flex u-w-auto' }}
+            {...(isRunning
+              ? {
+                  label: <Icon icon={StopIcon} size={12} />,
+                  onClick: handleCancel
+                }
+              : {
+                  variant: 'primary',
+                  label: <Icon icon={PaperplaneIcon} size={12} rotate={-45} />,
+                  onClick: handleSend
+                })}
+          />
+        </div>
+      </div>
 
-      <div className="u-flex u-flex-items-center u-flex-justify-between u-mt-1">
+      <div
+        className={cx(
+          'u-flex u-flex-items-center u-flex-justify-between',
+          styles['composerActions']
+        )}
+      >
         {flag('cozy.assistant.create-assistant.enabled') && (
           <AssistantSelection disabled={!isThreadEmpty} />
         )}
         {flag('cozy.assistant.source-knowledge.enabled') && (
           <TwakeKnowledgeSelector
+            className="u-ml-auto"
             onSelectTwakeKnowledge={setOpenedKnowledgePanel}
           />
         )}
