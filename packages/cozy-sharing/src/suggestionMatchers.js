@@ -1,5 +1,3 @@
-import escapeRegExp from 'lodash/escapeRegExp'
-
 import { Group } from 'cozy-doctypes'
 
 let removeDiacritics
