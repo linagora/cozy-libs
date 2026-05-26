@@ -10,6 +10,8 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
+import { checkIfModelUnsupported } from './helpers'
+
 const ApiKeyStep = ({ formData, selectedProvider, onChange }) => {
   const { type: theme } = useCozyTheme()
   const [showPassword, setShowPassword] = useState(false)
@@ -24,6 +26,7 @@ const ApiKeyStep = ({ formData, selectedProvider, onChange }) => {
   } = formData || {}
 
   const isCustomModel = id === 'custom'
+  const isModelUnsupported = checkIfModelUnsupported(selectedProvider, model)
 
   return (
     <div className="u-flex u-flex-column u-gap-1">
@@ -66,6 +69,12 @@ const ApiKeyStep = ({ formData, selectedProvider, onChange }) => {
           onChange={onChange('model')}
           variant="outlined"
           type="text"
+          error={isModelUnsupported}
+          helperText={
+            isModelUnsupported
+              ? t('assistant_create.steps.configuration.model.unsupported')
+              : undefined
+          }
         />
       </div>
 

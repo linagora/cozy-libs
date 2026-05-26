@@ -132,7 +132,8 @@
         "custom_provider_description": "Cấu hình cài đặt nhà cung cấp AI tùy chỉnh",
         "model": {
           "label": "Mô hình",
-          "placeholder": "Nhập tên mô hình của nhà cung cấp"
+          "placeholder": "Nhập tên mô hình của nhà cung cấp",
+          "unsupported": "Mô hình này chưa được hỗ trợ."
         },
         "url": {
           "label": "URL",

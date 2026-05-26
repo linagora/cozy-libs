@@ -6,6 +6,7 @@ import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
 import { OPENRAG_MODEL } from '../constants'
+import { checkIfModelUnsupported } from './helpers'
 
 const log = Minilog('[AssistantDialog]')
 
@@ -117,7 +118,13 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
         const apiKeyMissing = !formData.apiKey?.trim() && !isAllowToSkipApiKey
         const modelMissing = !formData.model?.trim()
         const baseUrlMissing = isCustom && !formData.baseUrl?.trim()
-        return apiKeyMissing || modelMissing || baseUrlMissing
+        const modelUnsupported = checkIfModelUnsupported(
+          selectedProvider,
+          formData.model
+        )
+        return (
+          apiKeyMissing || modelMissing || baseUrlMissing || modelUnsupported
+        )
       }
       default:
         return false

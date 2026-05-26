@@ -13,3 +13,14 @@ export const getSelectedProviderById = providerId => {
     }
   )
 }
+
+/**
+ * Check whether the given model is unsupported by the provider.
+ * @param {object} provider - The provider object.
+ * @param {string} model - The model name.
+ * @returns {boolean} True if the model is unsupported.
+ */
+export const checkIfModelUnsupported = (provider, model) => {
+  const unsupportedModels = provider?.unsupportedModels || []
+  return unsupportedModels.includes(model?.trim())
+}

@@ -136,7 +136,8 @@
         "custom_provider_description": "Configure your custom AI provider settings",
         "model": {
           "label": "Model",
-          "placeholder": "Enter the model name of the provider"
+          "placeholder": "Enter the model name of the provider",
+          "unsupported": "This model is not supported yet."
         },
         "url": {
           "label": "Base URL",
