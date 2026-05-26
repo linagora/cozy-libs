@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.3.4](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.3.3...cozy-bar@33.3.4) (2026-05-26)
+
+### Bug Fixes
+
+- Avoid uncapped home icon size on flagship ([f59dfe5](https://github.com/cozy/cozy-libs/commit/f59dfe5ead6a9175b9adc705884903ba57fbaf80))
+
 ## [33.3.3](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.3.2...cozy-bar@33.3.3) (2026-05-18)
 
 ### Bug Fixes
