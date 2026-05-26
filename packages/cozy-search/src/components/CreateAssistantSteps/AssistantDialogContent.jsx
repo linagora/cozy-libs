@@ -35,7 +35,7 @@ const AssistantDialogContent = ({
     case STEPS.API_KEY:
       return (
         <ApiKeyStep
-          apiKey={formData.apiKey}
+          formData={formData}
           selectedProvider={selectedProvider}
           onChange={onChange}
           onModelSelect={onModelSelect}
