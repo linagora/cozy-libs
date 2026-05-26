@@ -118,9 +118,6 @@
         "mistral_ai": {
           "description": "Mô hình hiệu quả và mạnh mẽ với hiệu năng cao"
         },
-        "anthropic": {
-          "description": "Trợ lý AI hữu ích, an toàn và trung thực với khả năng suy luận mạnh"
-        },
         "meta": {
           "description": "Mô hình ngôn ngữ lớn mã nguồn mở cho nhiều ứng dụng"
         },
@@ -136,10 +133,6 @@
         "model": {
           "label": "Mô hình",
           "placeholder": "Nhập tên mô hình của nhà cung cấp"
-        },
-        "provider": {
-          "label": "Tên nhà cung cấp",
-          "placeholder": "Tuỳ chỉnh OpenAI"
         },
         "url": {
           "label": "URL",

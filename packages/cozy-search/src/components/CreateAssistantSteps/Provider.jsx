@@ -10,7 +10,6 @@ import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
-import AnthropicLogo from '../../assets/anthropic.svg'
 import GeminiLogo from '../../assets/gemini.svg'
 import MetaLogo from '../../assets/meta.svg'
 import MistralLogo from '../../assets/mistral.svg'
@@ -21,7 +20,6 @@ const ICONS = {
   GeminiLogo,
   OpenAILogo,
   MistralLogo,
-  AnthropicLogo,
   MetaLogo,
   PlusSmallIcon
 }
