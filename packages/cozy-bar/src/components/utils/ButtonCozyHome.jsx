@@ -15,10 +15,10 @@ const ButtonCozyHome = ({ homeHref }) => {
         onClick={() => {
           webviewIntent.call('backToHome')
         }}
-        className="coz-nav-apps-btns-home coz-nav-apps-btns-home--is-flagship"
+        className="coz-nav-apps-btns-home"
         data-testid="buttonCozyHome"
       >
-        <IconCozyHome className="coz-nav-apps-btns-home-svg" />
+        <IconCozyHome />
       </a>
     )
 
@@ -29,14 +29,14 @@ const ButtonCozyHome = ({ homeHref }) => {
         className="coz-nav-apps-btns-home"
         data-testid="buttonCozyHome"
       >
-        <IconCozyHome className="coz-nav-apps-btns-home-svg" />
+        <IconCozyHome />
       </a>
     )
   }
 
   return (
     <span className="coz-nav-apps-btns-home" data-testid="buttonCozyHome">
-      <IconCozyHome className="coz-nav-apps-btns-home-svg" />
+      <IconCozyHome />
     </span>
   )
 }
