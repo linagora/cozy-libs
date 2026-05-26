@@ -30,7 +30,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
   useExtendI18n(locales)
   const { t } = useI18n()
   const client = useClient()
-  const { assistantIdInAction } = useAssistant()
+  const { assistantIdInAction, setSelectedAssistantId } = useAssistant()
   const { showAlert } = useAlert()
   const { isMobile } = useBreakpoints()
 
@@ -105,6 +105,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
       baseUrl: formData.baseUrl,
       providerId: selectedProvider.id
     })
+    setSelectedAssistantId(assistantIdInAction)
     showAlert({ message: t('assistant_edit.success'), severity: 'success' })
   }
 
