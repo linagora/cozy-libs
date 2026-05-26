@@ -87,7 +87,7 @@ const AssistantSelectionItem = ({
           <Icon icon={CheckIcon} className="u-success" />
         )}
         {!disableActions && (
-          <>
+          <div className={styles['menu-item-actions']}>
             <IconButton
               aria-label="Edit assistant"
               size="small"
@@ -112,7 +112,7 @@ const AssistantSelectionItem = ({
             >
               <Icon icon={TrashIcon} className="u-error" />
             </IconButton>
-          </>
+          </div>
         )}
       </div>
     </ActionsMenuItem>
