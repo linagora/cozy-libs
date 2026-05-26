@@ -34,15 +34,15 @@ export const ShareModal = withLocales(props => {
     onRevokeSuccess?.(document)
   }
 
-  const isFederatedMode = flag('drive.federated-shared-folder.enabled')
-  if (isFederatedMode && allLoaded) {
-    return <FederatedFolderModal document={document} {...rest} />
-  }
-
   const isEditable =
     !byDocId[document.id] || isOwner(document.id) || canReshare(document.id)
 
   if (isEditable) {
+    const isFederatedMode = flag('drive.federated-shared-folder.enabled')
+    if (isFederatedMode && allLoaded) {
+      return <FederatedFolderModal document={document} {...rest} />
+    }
+
     return <EditableSharingModal document={document} {...rest} />
   }
 
