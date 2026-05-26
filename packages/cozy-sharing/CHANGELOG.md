@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [32.3.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.3.1...cozy-sharing@32.3.2) (2026-05-26)
+
+### Bug Fixes
+
+- Show readonly modal when shared drive is read only ([e935b38](https://github.com/cozy/cozy-libs/commit/e935b38aa443d68b7d17dc8c82e8a9e1e23e2460))
+
 ## [32.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.3.0...cozy-sharing@32.3.1) (2026-05-22)
 
 ### Bug Fixes
