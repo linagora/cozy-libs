@@ -66,11 +66,10 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
   }
 
   const handleProviderSelection = provider => {
-    const isOpenrag = provider.id === OPENRAG_MODEL
     setFormData(prev => ({
       ...prev,
       baseUrl: provider.baseUrl ?? '',
-      model: isOpenrag ? provider.models[0] : '',
+      model: provider.models?.[0] ?? '',
       apiKey: '',
       encryptedApiKey: '',
       providerId: provider.id
@@ -113,8 +112,13 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
         return !formData.name?.trim()
       case STEPS.MODEL_SELECTION:
         return !selectedProvider
-      case STEPS.API_KEY:
-        return !formData.apiKey?.trim() && !isAllowToSkipApiKey
+      case STEPS.API_KEY: {
+        const isCustom = selectedProvider?.id === 'custom'
+        const apiKeyMissing = !formData.apiKey?.trim() && !isAllowToSkipApiKey
+        const modelMissing = !formData.model?.trim()
+        const baseUrlMissing = isCustom && !formData.baseUrl?.trim()
+        return apiKeyMissing || modelMissing || baseUrlMissing
+      }
       default:
         return false
     }

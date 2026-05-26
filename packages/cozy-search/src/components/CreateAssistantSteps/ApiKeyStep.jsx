@@ -10,12 +10,13 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
-const ApiKeyStep = ({ apiKey, selectedProvider, onChange }) => {
+const ApiKeyStep = ({ formData, selectedProvider, onChange }) => {
   const { type: theme } = useCozyTheme()
   const [showPassword, setShowPassword] = useState(false)
 
   const { t } = useI18n()
-  const { id, name: providerName, model, baseUrl } = selectedProvider || {}
+  const { id, name: providerName } = selectedProvider || {}
+  const { model = '', baseUrl = '', apiKey = '' } = formData || {}
 
   const isCustomModel = id === 'custom'
 
@@ -28,24 +29,6 @@ const ApiKeyStep = ({ apiKey, selectedProvider, onChange }) => {
             )
           : t('assistant_create.steps.configuration.description')}
       </Typography>
-
-      {isCustomModel && (
-        <div className="u-mb-1">
-          <Typography variant="h6" className="u-mb-half">
-            {t('assistant_create.steps.configuration.provider.label')}
-          </Typography>
-          <TextField
-            fullWidth
-            placeholder={t(
-              'assistant_create.steps.configuration.provider.placeholder'
-            )}
-            value={providerName}
-            onChange={onChange('model')}
-            variant="outlined"
-            type="text"
-          />
-        </div>
-      )}
 
       {isCustomModel && (
         <div className="u-mb-1">
@@ -65,23 +48,21 @@ const ApiKeyStep = ({ apiKey, selectedProvider, onChange }) => {
         </div>
       )}
 
-      {!isCustomModel && (
-        <div className="u-mb-1">
-          <Typography variant="h6" className="u-mb-half">
-            {t('assistant_create.steps.configuration.model.label')}
-          </Typography>
-          <TextField
-            fullWidth
-            placeholder={t(
-              'assistant_create.steps.configuration.model.placeholder'
-            )}
-            value={model}
-            onChange={onChange('model')}
-            variant="outlined"
-            type="text"
-          />
-        </div>
-      )}
+      <div className="u-mb-1">
+        <Typography variant="h6" className="u-mb-half">
+          {t('assistant_create.steps.configuration.model.label')}
+        </Typography>
+        <TextField
+          fullWidth
+          placeholder={t(
+            'assistant_create.steps.configuration.model.placeholder'
+          )}
+          value={model}
+          onChange={onChange('model')}
+          variant="outlined"
+          type="text"
+        />
+      </div>
 
       <div className="u-mb-1">
         <Typography variant="h6" className="u-mb-half">
