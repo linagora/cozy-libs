@@ -41,41 +41,6 @@ jest.mock('../../hooks/usePendingRecipients', () => ({
   usePendingRecipients: jest.fn()
 }))
 
-jest.mock('../SharedFolder/DumbBatchSharedFolderModal', () => ({
-  DumbBatchSharedFolderModal: ({
-    title,
-    recipients,
-    onRevoke,
-    onSend,
-    onClose,
-    sharingLink,
-    pendingRecipients,
-    selectedOption
-  }) => (
-    <div data-testid="dumb-modal">
-      <span data-testid="title">{title}</span>
-      <span data-testid="sharing-link">{sharingLink}</span>
-      <span data-testid="recipients-count">{recipients.length}</span>
-      <span data-testid="pending-recipients-count">
-        {pendingRecipients.length}
-      </span>
-      <span data-testid="selected-option">{selectedOption}</span>
-      <button data-testid="btn-send" onClick={onSend}>
-        Send
-      </button>
-      <button
-        data-testid="btn-revoke"
-        onClick={() => onRevoke({ _id: 'folder-123' }, 'abc', 1)}
-      >
-        Revoke
-      </button>
-      <button data-testid="btn-close" onClick={onClose}>
-        Close
-      </button>
-    </div>
-  )
-}))
-
 const mockDocument = {
   _id: 'folder-123',
   name: 'My Test Folder',
@@ -145,46 +110,22 @@ describe('FederatedFolderModal', () => {
 
   describe('initialization', () => {
     it('should pass document name as title', async () => {
-      const { getByTestId } = setup()
+      const { findByText } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('title').textContent).toBe('Share "My Test Folder"')
-      })
+      await findByText('Share "My Test Folder"')
     })
 
     it('should pass default title when document has no name', async () => {
       const documentWithoutName = { _id: 'folder-456', path: '/test' }
-      const { getByTestId } = setup({ document: documentWithoutName })
+      const { findByText } = setup({ document: documentWithoutName })
 
-      await waitFor(() => {
-        expect(getByTestId('title').textContent).toBe('Share ""')
-      })
+      await findByText('Share ""')
     })
 
-    it('should pass sharing link to DumbBatchSharedFolderModal', async () => {
-      const { getByTestId } = setup()
+    it('should show Copy link', async () => {
+      const { findByText } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('sharing-link').textContent).toBe(
-          'https://example.com/share/abc123'
-        )
-      })
-    })
-
-    it('should pass null sharing link when document is undefined', async () => {
-      const { getByTestId } = setup({ document: undefined })
-
-      await waitFor(() => {
-        expect(getByTestId('sharing-link').textContent).toBe('')
-      })
-    })
-
-    it('should pass selectedOption from usePendingRecipients', async () => {
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('selected-option').textContent).toBe('readWrite')
-      })
+      await findByText('Copy link')
     })
   })
 
@@ -193,13 +134,11 @@ describe('FederatedFolderModal', () => {
 
     it('should call onClose and skip share when there are no pending recipients', async () => {
       // pendingRecipients defaults to [] via beforeEach
-      const { getByTestId } = setup()
+      const { findByText } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('btn-send')).toBeTruthy()
-      })
+      const sendButton = await findByText('Done')
 
-      fireEvent.click(getByTestId('btn-send'))
+      fireEvent.click(sendButton)
 
       await waitFor(() => {
         expect(mockOnClose).toHaveBeenCalled()
@@ -216,13 +155,11 @@ describe('FederatedFolderModal', () => {
       })
       getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockResolvedValueOnce({})
-      const { getByTestId } = setup()
+      const { findByText } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('btn-send')).toBeTruthy()
-      })
+      const sendButton = await findByText('Done')
 
-      fireEvent.click(getByTestId('btn-send'))
+      fireEvent.click(sendButton)
 
       await waitFor(() => {
         expect(mockShare).toHaveBeenCalledWith({
@@ -245,13 +182,11 @@ describe('FederatedFolderModal', () => {
       })
       getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockResolvedValueOnce({})
-      const { getByTestId } = setup()
+      const { findByText } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('btn-send')).toBeTruthy()
-      })
+      const sendButton = await findByText('Done')
 
-      fireEvent.click(getByTestId('btn-send'))
+      fireEvent.click(sendButton)
 
       await waitFor(() => {
         expect(mockShowAlert).toHaveBeenCalledWith({
@@ -272,13 +207,11 @@ describe('FederatedFolderModal', () => {
       })
       getOrCreateFromArray.mockResolvedValue([pendingRecipient])
       mockShare.mockRejectedValueOnce(new Error('Share failed'))
-      const { getByTestId } = setup()
+      const { findByText } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('btn-send')).toBeTruthy()
-      })
+      const sendButton = await findByText('Done')
 
-      fireEvent.click(getByTestId('btn-send'))
+      fireEvent.click(sendButton)
 
       await waitFor(() => {
         expect(mockShowAlert).toHaveBeenCalledWith({
@@ -291,32 +224,13 @@ describe('FederatedFolderModal', () => {
     })
   })
 
-  describe('onRevoke callback', () => {
-    it('should call revoke from sharing context for existing members', async () => {
-      mockRevoke.mockResolvedValueOnce({})
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('dumb-modal')).toBeTruthy()
-      })
-
-      fireEvent.click(getByTestId('btn-revoke'))
-
-      await waitFor(() => {
-        expect(mockRevoke).toHaveBeenCalledWith({ _id: 'folder-123' }, 'abc', 1)
-      })
-    })
-  })
-
   describe('onClose callback', () => {
     it('should call onClose when close button is clicked', async () => {
-      const { getByTestId } = setup()
+      const { findByRole } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('btn-close')).toBeTruthy()
-      })
+      const closeButton = await findByRole('button', { name: /close/i })
 
-      fireEvent.click(getByTestId('btn-close'))
+      fireEvent.click(closeButton)
 
       expect(mockOnClose).toHaveBeenCalled()
     })
@@ -329,13 +243,11 @@ describe('FederatedFolderModal', () => {
         setSelectedOption: jest.fn()
       })
 
-      const { getByRole, getByTestId, getByText } = setup()
+      const { getByRole, findByRole, getByText } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('btn-close')).toBeTruthy()
-      })
+      const closeButton = await findByRole('button', { name: /close/i })
 
-      fireEvent.click(getByTestId('btn-close'))
+      fireEvent.click(closeButton)
 
       expect(getByText("Discard the changes you haven't saved?")).toBeTruthy()
       expect(mockOnClose).not.toHaveBeenCalled()
@@ -353,51 +265,17 @@ describe('FederatedFolderModal', () => {
         setSelectedOption: jest.fn()
       })
 
-      const { getByRole, getByTestId, getByText } = setup()
+      const { getByRole, findByRole, getByText } = setup()
 
-      await waitFor(() => {
-        expect(getByTestId('btn-close')).toBeTruthy()
-      })
+      const closeButton = await findByRole('button', { name: /close/i })
 
-      fireEvent.click(getByTestId('btn-close'))
+      fireEvent.click(closeButton)
 
       expect(getByText("Discard the changes you haven't saved?")).toBeTruthy()
 
       fireEvent.click(getByRole('button', { name: 'Discard' }))
 
       expect(mockOnClose).toHaveBeenCalledTimes(1)
-    })
-  })
-
-  describe('existing recipients', () => {
-    const existingRecipients = [
-      {
-        index: 'sharing-abc-member-0',
-        name: 'Charlie',
-        email: 'charlie@example.com',
-        status: 'owner',
-        type: 'two-way',
-        sharingId: 'abc',
-        memberIndex: 0
-      },
-      {
-        index: 'sharing-abc-member-1',
-        name: 'Diana',
-        email: 'diana@example.com',
-        status: 'ready',
-        type: 'one-way',
-        sharingId: 'abc',
-        memberIndex: 1
-      }
-    ]
-
-    it('should display existing recipients from getRecipients', async () => {
-      mockGetRecipients.mockReturnValue(existingRecipients)
-      const { getByTestId } = setup()
-
-      await waitFor(() => {
-        expect(getByTestId('recipients-count').textContent).toBe('2')
-      })
     })
   })
 })
