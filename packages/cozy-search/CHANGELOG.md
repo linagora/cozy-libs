@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.26.3...cozy-search@0.27.0) (2026-05-26)
+
+### Bug Fixes
+
+- **cozy-search:** Delete assistants through the cozy-client store ([96cb9a4](https://github.com/cozy/cozy-libs/commit/96cb9a4e7e5ad45fb97efc236e00b070a2ab448b))
+- **cozy-search:** Strip inline [Source N] citation markers ([a8e1cf6](https://github.com/cozy/cozy-libs/commit/a8e1cf69254e5d79d936278b677e2ed7c7c7a53e))
+
+### Features
+
+- **cozy-search:** Group conversation search results by day ([cba9cc5](https://github.com/cozy/cozy-libs/commit/cba9cc50e3df69f13b92c8a0205d8e4d1f0212ce))
+- **cozy-search:** Speed up conversation list switching ([bb73490](https://github.com/cozy/cozy-libs/commit/bb7349074eb764828bbf92bd232c65908a463f47))
+
 ## [0.26.3](https://github.com/cozy/cozy-libs/compare/cozy-search@0.26.2...cozy-search@0.26.3) (2026-05-18)
 
 **Note:** Version bump only for package cozy-search
