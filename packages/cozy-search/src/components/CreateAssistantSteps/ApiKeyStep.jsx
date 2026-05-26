@@ -16,7 +16,12 @@ const ApiKeyStep = ({ formData, selectedProvider, onChange }) => {
 
   const { t } = useI18n()
   const { id, name: providerName } = selectedProvider || {}
-  const { model = '', baseUrl = '', apiKey = '' } = formData || {}
+  const {
+    model = '',
+    baseUrl = '',
+    apiKey = '',
+    encryptedApiKey = ''
+  } = formData || {}
 
   const isCustomModel = id === 'custom'
 
@@ -70,9 +75,11 @@ const ApiKeyStep = ({ formData, selectedProvider, onChange }) => {
         </Typography>
         <TextField
           fullWidth
-          placeholder={t(
-            'assistant_create.steps.configuration.api_key.placeholder'
-          )}
+          placeholder={
+            encryptedApiKey
+              ? '••••••••••••'
+              : t('assistant_create.steps.configuration.api_key.placeholder')
+          }
           value={apiKey}
           onChange={onChange('apiKey')}
           variant="outlined"
