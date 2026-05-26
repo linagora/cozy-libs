@@ -35,12 +35,12 @@
     "external": true
   },
   {
-    "id": "anthropic",
-    "name": "Anthropic",
-    "models": ["claude-4-5-opus-20251124", "claude-4-5-sonnet-20250929", "claude-4-5-haiku-20251015", "claude-3-7-sonnet-20250219"],
-    "description": "assistant_create.steps.provider_selection.anthropic.description",
-    "icon": "AnthropicLogo",
-    "baseUrl": "https://api.anthropic.com/v1",
+    "id": "meta",
+    "name": "Meta",
+    "models": ["meta-llama/Llama-4-Scout-17B-16E-Instruct", "meta-llama/Llama-4-Maverick-402B-Instruct", "meta-llama/Llama-3.3-70B-Instruct", "meta-llama/Llama-3.2-90B-Vision-Instruct"],
+    "description": "assistant_create.steps.provider_selection.meta.description",
+    "icon": "MetaLogo",
+    "baseUrl": "https://api.llama.com/v1",
     "external": true
   },
   {
@@ -48,15 +48,6 @@
     "name": "assistant_create.steps.provider_selection.custom.name",
     "description": "assistant_create.steps.provider_selection.custom.description",
     "icon": "PlusSmallIcon",
-    "external": true
-  },
-  {
-    "id": "meta",
-    "name": "Meta",
-    "models": ["meta-llama/Llama-4-Scout-17B-16E-Instruct", "meta-llama/Llama-4-Maverick-402B-Instruct", "meta-llama/Llama-3.3-70B-Instruct", "meta-llama/Llama-3.2-90B-Vision-Instruct"],
-    "description": "assistant_create.steps.provider_selection.meta.description",
-    "icon": "MetaLogo",
-    "baseUrl": "https://api.llama.com/v1",
     "external": true
   }
 ]

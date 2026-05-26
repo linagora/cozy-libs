@@ -122,9 +122,6 @@
         "mistral_ai": {
           "description": "Modèle efficace et puissant avec de très bonnes performances"
         },
-        "anthropic": {
-          "description": "Assistant IA utile, inoffensif et honnête avec de solides capacités de raisonnement"
-        },
         "meta": {
           "description": "Grand modèle de langage open source pour diverses applications"
         },
@@ -140,10 +137,6 @@
         "model": {
           "label": "Modèle",
           "placeholder": "Entrez le nom du modèle du fournisseur"
-        },
-        "provider": {
-          "label": "Nom du fournisseur",
-          "placeholder": "OpenAI personnalisé"
         },
         "url": {
           "label": "URL de base",
