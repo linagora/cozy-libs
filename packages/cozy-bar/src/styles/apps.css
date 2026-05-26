@@ -50,22 +50,6 @@
   margin-right: .75rem;
 }
 
-[role=banner] .coz-nav-apps-btns-home--is-flagship {
-  align-items: center;
-  display: flex;
-  flex-shrink: 0;
-  height: 100%;
-  justify-content: center;
-  margin-right: .25rem;
-  width: 3rem;
-}
-
-
-[role=banner] .coz-nav-apps-btns-home-svg {
-  max-width: 2rem;
-  max-height: 2rem;
-}
-
 [role=banner] .coz-nav-apps-btns-home,
 [role=banner] .coz-nav-apps-btns-home[href]:visited {
   color: var(--actionColorFocus);
