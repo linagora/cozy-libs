@@ -136,7 +136,8 @@
         "custom_provider_description": "Configurez les paramètres de votre fournisseur d'IA personnalisé",
         "model": {
           "label": "Modèle",
-          "placeholder": "Entrez le nom du modèle du fournisseur"
+          "placeholder": "Entrez le nom du modèle du fournisseur",
+          "unsupported": "Ce modèle n'est pas encore pris en charge."
         },
         "url": {
           "label": "URL de base",
