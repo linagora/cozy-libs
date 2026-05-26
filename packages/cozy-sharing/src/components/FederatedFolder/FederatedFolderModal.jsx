@@ -3,6 +3,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import ConfirmDialogProvider, {
   useConfirmDialog
@@ -13,7 +15,10 @@ import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
-import { DumbBatchSharedFolderModal } from '../SharedFolder/DumbBatchSharedFolderModal'
+import AntivirusAlert from '../AntivirusAlert'
+import { default as DumbShareByEmail } from '../ShareByEmail'
+import ShareByLink from '../ShareByLink'
+import WhoHasAccess from '../WhoHasAccess'
 
 const FederatedFolderModalContent = ({
   onClose,
@@ -121,7 +126,7 @@ const FederatedFolderModalContent = ({
   const folderName = existingDocument?.name || ''
 
   const onSend = async () => {
-    if (pendingRecipients.length === 0) {
+    if (isSending || pendingRecipients.length === 0) {
       onClose()
       return
     }
@@ -173,22 +178,65 @@ const FederatedFolderModalContent = ({
   const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
 
   return (
-    <DumbBatchSharedFolderModal
-      title={modalTitle}
-      document={isSending ? frozenDoc : existingDocument}
-      recipients={isSending ? frozenRecipients : existingRecipients}
-      currentRecipients={isSending ? frozenRecipients : existingRecipients}
-      onRevoke={revoke}
-      onSend={onSend}
+    <FixedDialog
+      open
+      disableGutters
       onClose={handleCloseRequest}
-      sharingLink={sharingLink}
-      shareLabel={t('FederatedFolder.share')}
-      autoOpenShareRestriction={autoOpenShareRestriction}
-      showGenerateLinkButton={showGenerateLinkButton}
-      pendingRecipients={pendingRecipients}
-      onPendingRecipientsChange={setPendingRecipients}
-      selectedOption={selectedOption}
-      onSelectedOptionChange={setSelectedOption}
+      title={modalTitle}
+      classes={{ paper: 'u-ov-visible' }}
+      componentsProps={{
+        dialogContent: { className: 'u-ov-visible' }
+      }}
+      content={
+        <div>
+          <div className="u-ph-2">
+            <AntivirusAlert
+              document={isSending ? frozenDoc : existingDocument}
+            />
+            <Typography variant="h6" className="u-mt-1-half u-mb-half">
+              {t('Share.contacts.addUsers')}
+            </Typography>
+            <DumbShareByEmail
+              currentRecipients={
+                isSending ? frozenRecipients : existingRecipients
+              }
+              document={isSending ? frozenDoc : existingDocument}
+              documentType="Files"
+              pendingRecipients={pendingRecipients}
+              onPendingRecipientsChange={setPendingRecipients}
+              selectedOption={selectedOption}
+              onSelectedOptionChange={setSelectedOption}
+            />
+          </div>
+          <WhoHasAccess
+            isOwner
+            isSharedDrive
+            recipients={isSending ? frozenRecipients : existingRecipients}
+            document={isSending ? frozenDoc : existingDocument}
+            documentType="Files"
+            className="u-w-100"
+            onRevoke={revoke}
+            link={sharingLink}
+          />
+        </div>
+      }
+      actions={
+        <>
+          <ShareByLink
+            link={sharingLink}
+            document={isSending ? frozenDoc : existingDocument}
+            documentType="Files"
+            showGenerateLinkButton={showGenerateLinkButton}
+            autoOpenShareRestriction={autoOpenShareRestriction}
+          />
+          <Button
+            variant="primary"
+            label={t('FederatedFolder.share')}
+            disabled={isSending}
+            onClick={onSend}
+          />
+        </>
+      }
     />
   )
 }
