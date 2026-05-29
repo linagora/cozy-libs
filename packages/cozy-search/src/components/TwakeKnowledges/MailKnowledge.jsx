@@ -25,7 +25,6 @@ const MailSection = ({
   title,
   icon,
   items,
-  count,
   selectedItems,
   onToggleItem,
   onClearSection
@@ -68,14 +67,7 @@ const MailSection = ({
         <ListItemIcon>
           <Icon icon={icon} />
         </ListItemIcon>
-        <ListItemText
-          primary={
-            <div className="u-flex u-flex-items-center">
-              <span>{title}</span>
-              {count > 0 && <span className={styles['badge']}>{count}</span>}
-            </div>
-          }
-        />
+        <ListItemText primary={title} />
         {selectedCount > 0 && (
           <Button
             className={styles['clear-all-button']}
@@ -179,7 +171,6 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
       <MailSection
         title={t('assistant.twake_knowledges.inbox')}
         icon={EmailIcon}
-        count={3}
         items={inboxItems}
         selectedItems={selectedItems}
         onToggleItem={onToggleItems}
