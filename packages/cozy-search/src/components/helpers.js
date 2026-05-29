@@ -26,6 +26,8 @@ export const sanitizeChatContent = content => {
       .replace(/\s?\[doc_\d+\]/g, '')
       // remove « [Source 1] », « [Source 4, 6] » or « [Source 4, Source 6] »
       .replace(/\s?\[Source\s+\d+(?:\s*,\s*(?:Source\s+)?\d+)*\]/g, '')
+      // remove « [Sources: 1, 3, 6] » citations, with optional empty link parens
+      .replace(/\s?\[Sources?:\s*\d+(?:\s*,\s*\d+)*\s*\](?:\([^)]*\))?/g, '')
   )
 }
 
@@ -84,5 +86,7 @@ export const getNameOfConversation = conversation => {
  * So temporary we get the last answer from assistant as description of the conversation
  */
 export const getDescriptionOfConversation = conversation => {
-  return conversation.messages?.[conversation.messages.length - 1]?.content
+  const content =
+    conversation.messages?.[conversation.messages.length - 1]?.content
+  return content && sanitizeChatContent(content)
 }

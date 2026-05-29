@@ -61,6 +61,17 @@ describe('sanitizeChatContent', () => {
     expect(sanitizeChatContent(text)).toBe(text)
   })
 
+  it('should remove [Sources: N, M] citation markers', () => {
+    const text =
+      'See applications [Sources: 1, 3, 6, 7, 8] and details [Sources: 5].'
+    expect(sanitizeChatContent(text)).toBe('See applications and details.')
+  })
+
+  it('should remove [Sources: N]() citations with empty link parens', () => {
+    const text = 'See applications [Sources: 1, 3]() here'
+    expect(sanitizeChatContent(text)).toBe('See applications here')
+  })
+
   it('should not remove simple REF or [REF]', () => {
     const text = 'REF not closed [REF]not closed either'
     expect(sanitizeChatContent(text)).toBe(text)
@@ -154,6 +165,16 @@ describe('getDescriptionOfConversation', () => {
       messages: [
         { role: 'user', content: 'What is the sum?' },
         { role: 'assistant', content: 'It is 4' }
+      ]
+    }
+    expect(getDescriptionOfConversation(convo)).toBe('It is 4')
+  })
+
+  it('strips inline citation markers from the description', () => {
+    const convo = {
+      messages: [
+        { role: 'user', content: 'sum?' },
+        { role: 'assistant', content: 'It is 4 [Sources: 1, 2]' }
       ]
     }
     expect(getDescriptionOfConversation(convo)).toBe('It is 4')
