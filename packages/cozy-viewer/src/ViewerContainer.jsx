@@ -165,6 +165,10 @@ ViewerContainer.propTypes = {
       /** To open the Only Office file */
       opener: PropTypes.func
     }),
+    sharingActions: PropTypes.shape({
+      /** Whether sharing action buttons are disabled */
+      disabled: PropTypes.bool
+    }),
     /** Used to spread props to Panel components */
     panel: PropTypes.shape({
       qualifications: PropTypes.shape({

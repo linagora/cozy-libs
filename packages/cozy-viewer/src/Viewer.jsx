@@ -126,6 +126,10 @@ Viewer.propTypes = {
       /** To open the Only Office file */
       opener: PropTypes.func
     }),
+    sharingActions: PropTypes.shape({
+      /** Whether sharing action buttons are disabled */
+      disabled: PropTypes.bool
+    }),
     toolbarProps: PropTypes.shape(toolbarPropsPropType)
   })
 }
