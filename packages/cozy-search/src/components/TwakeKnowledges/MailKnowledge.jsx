@@ -27,7 +27,8 @@ const MailSection = ({
   items,
   selectedItems,
   onToggleItem,
-  onClearSection
+  onClearSection,
+  showSeeMore
 }) => {
   const { t } = useI18n()
   const [isOpen, setIsOpen] = useState(false)
@@ -100,19 +101,22 @@ const MailSection = ({
               </ListItemIcon>
               <ListItemText
                 primary={item.subject}
+                primaryTypographyProps={{ noWrap: true }}
+                secondaryTypographyProps={{ component: 'div' }}
                 secondary={
-                  <div>
-                    <Typography variant="caption" className="u-db">
+                  <>
+                    <Typography variant="caption" className="u-db" noWrap>
                       {item.from}
                     </Typography>
                     <Typography
                       variant="body2"
                       color="textSecondary"
-                      className="u-text-ellipsis"
+                      className={styles['mail-preview']}
+                      noWrap
                     >
                       {item.preview}
                     </Typography>
-                  </div>
+                  </>
                 }
               />
               <Typography
@@ -124,6 +128,15 @@ const MailSection = ({
               </Typography>
             </ListItem>
           ))}
+          {showSeeMore && (
+            <ListItem className={styles['nested-item']}>
+              <Button
+                variant="text"
+                size="small"
+                label={t('assistant.twake_knowledges.see_more')}
+              />
+            </ListItem>
+          )}
         </List>
       </Collapse>
     </>
@@ -131,28 +144,39 @@ const MailSection = ({
 }
 
 const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
-  const { t } = useI18n()
+  const { t, lang } = useI18n()
+  const today = new Date().toLocaleDateString(lang, {
+    month: 'short',
+    day: 'numeric'
+  })
   const inboxItems = [
     {
-      id: 'mail1',
-      subject: 'Q4 Budget Review Meetings',
-      from: 'finance@twake.app',
-      preview: 'Please review the attached budget',
-      date: 'Jan 15'
-    },
-    {
-      id: 'mail2',
-      subject: 'Project Timeline Update',
+      id: 'inbox-1',
+      subject: 'Project timeline update',
       from: 'pm@twake.app',
-      preview: 'The project timeline has been update',
-      date: 'Jan 14'
+      preview: 'The project timeline have been updated',
+      date: today
     },
     {
-      id: 'mail3',
-      subject: 'Team Meeting Notes',
-      from: 'team@twake.app',
-      preview: "Here are the notes from yesterday's",
-      date: 'Jan 13'
+      id: 'inbox-2',
+      subject: 'Your meeting transcript is ready!',
+      from: 'noreply@linagora.com',
+      preview: 'The transcript and summary of your visio meeting is ready',
+      date: today
+    },
+    {
+      id: 'inbox-3',
+      subject: 'New event from Isabelle Moreau',
+      from: 'imoreau@linagora.com',
+      preview: 'Isabelle Moreau has invited you',
+      date: today
+    },
+    {
+      id: 'inbox-4',
+      subject: 'Recap hebdomadaire OSSA',
+      from: 'ossa@linagora.com',
+      preview: 'Bulletin hebdomadaire OSSA',
+      date: today
     }
   ]
 
@@ -162,7 +186,7 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
       subject: 'Important: Security Update',
       from: 'security@twake.app',
       preview: 'Please update your password',
-      date: 'Jan 12'
+      date: today
     }
   ]
 
@@ -175,6 +199,7 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
         selectedItems={selectedItems}
         onToggleItem={onToggleItems}
         onClearSection={onClearItems}
+        showSeeMore
       />
       <MailSection
         title={t('assistant.twake_knowledges.starred')}
