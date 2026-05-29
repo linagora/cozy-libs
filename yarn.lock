@@ -16845,16 +16845,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-client@npm:60.23.0":
-  version: 60.23.0
-  resolution: "cozy-client@npm:60.23.0"
+"cozy-client@npm:60.26.0":
+  version: 60.26.0
+  resolution: "cozy-client@npm:60.26.0"
   dependencies:
     "@cozy/minilog": "npm:1.0.0"
     "@fastify/deepmerge": "npm:^2.0.2"
     "@types/jest": "npm:^26.0.20"
     "@types/lodash": "npm:^4.14.170"
     btoa: "npm:^1.2.1"
-    cozy-stack-client: "npm:^60.23.0"
+    cozy-stack-client: "npm:^60.24.0"
     date-fns: "npm:^2.30.0"
     fast-deep-equal: "npm:^3.1.3"
     json-stable-stringify: "npm:^1.0.1"
@@ -16880,7 +16880,7 @@ __metadata:
     react-native-google-play-integrity: ^1.1.0
     react-native-inappbrowser-reborn: ^3.5.1
     react-native-ios11-devicecheck: ^0.0.3
-  checksum: 10c0/c27a75f3bca9c42ec89b8ead17acb46af5a93475d5fb73e61e728d87643aa6d34d31b7f75ce7633ee5afd6ed8f573e4b34aa368687bfc11a35c96cc984c97e14
+  checksum: 10c0/8cd919e7ac75274b0f5122552fdff79637325b065d9dadd568951ff44e896c3d243ff268aa70dace177965240105bf2259506b9c937c89db9d3a39cf0ed6b684
   languageName: node
   linkType: hard
 
@@ -17941,7 +17941,7 @@ __metadata:
     babel-plugin-tsconfig-paths: "npm:^1.0.3"
     babel-preset-cozy-app: "npm:^2.8.4"
     classnames: "npm:^2.5.1"
-    cozy-client: "npm:60.23.0"
+    cozy-client: "npm:60.26.0"
     cozy-device-helper: "npm:^4.0.3"
     cozy-flags: "npm:^4.9.1"
     cozy-intent: "npm:^2.31.1"
@@ -17964,7 +17964,7 @@ __metadata:
     twake-i18n: "npm:^0.4.1"
     typescript: "npm:5.5.2"
   peerDependencies:
-    cozy-client: ">=60.21.0"
+    cozy-client: ">=60.26.0"
     cozy-device-helper: ">=3.7.1"
     cozy-flags: ">=4.6.1"
     cozy-intent: ">=2.26.0"
