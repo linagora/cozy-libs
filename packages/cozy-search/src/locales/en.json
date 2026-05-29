@@ -65,7 +65,7 @@
     "twake_knowledges": {
       "chat": "Chat",
       "drive": "Drive",
-      "mail": "Mail",
+      "mail": "Email",
       "title_drive": "Select Drive folders",
       "title_mail": "Select Mail sources",
       "title_chat": "Select Chat sources",

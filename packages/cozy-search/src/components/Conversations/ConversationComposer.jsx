@@ -15,7 +15,6 @@ import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
-import WebsearchButton from './WebsearchButton'
 import styles from './styles.styl'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
@@ -75,10 +74,6 @@ const ConversationComposer = () => {
           onKeyDown={handleKeyDown}
         />
         <div className="u-flex u-flex-items-center u-flex-shrink-0">
-          <WebsearchButton
-            websearchEnabled={websearchEnabled}
-            onToggleWebsearch={handleToggleWebsearch}
-          />
           <Button
             size="small"
             className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle u-flex-shrink-0"
@@ -106,12 +101,12 @@ const ConversationComposer = () => {
         {flag('cozy.assistant.create-assistant.enabled') && (
           <AssistantSelection disabled={!isThreadEmpty} />
         )}
-        {flag('cozy.assistant.source-knowledge.enabled') && (
-          <TwakeKnowledgeSelector
-            className="u-ml-auto"
-            onSelectTwakeKnowledge={setOpenedKnowledgePanel}
-          />
-        )}
+        <TwakeKnowledgeSelector
+          className="u-ml-auto"
+          onSelectTwakeKnowledge={setOpenedKnowledgePanel}
+          websearchEnabled={websearchEnabled}
+          onToggleWebsearch={handleToggleWebsearch}
+        />
       </div>
     </ComposerPrimitive.Root>
   )
