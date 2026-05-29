@@ -74,7 +74,6 @@
       "desc_mail": "Selected emails will be used to answer your questions.",
       "desc_chat": "Selected messages will be used to answer your questions.",
       "search_placeholder": "Search",
-      "items_selected": "%{smart_count} item selected |||| %{smart_count} items selected",
       "clear_all": "Clear all",
       "cancel": "Cancel",
       "select_folders": "Select folders",

@@ -71,7 +71,6 @@
       "desc_mail": "Các email đã chọn sẽ được sử dụng để trả lời câu hỏi của bạn.",
       "desc_chat": "Các tin nhắn đã chọn sẽ được sử dụng để trả lời câu hỏi của bạn.",
       "search_placeholder": "Tìm kiếm",
-      "items_selected": "%{smart_count} mục đã chọn |||| %{smart_count} mục đã chọn",
       "clear_all": "Xóa tất cả",
       "cancel": "Hủy",
       "select_folders": "Chọn thư mục",

@@ -142,13 +142,9 @@ const TwakeKnowledgePanel = ({ onClose }) => {
       </div>
 
       <div className={styles['source-panel-footer']}>
-        <div className="u-flex u-flex-justify-between u-flex-items-end u-flex-gap-half">
-          <Typography variant="caption" className="u-mb-half">
-            {t('assistant.twake_knowledges.items_selected', {
-              smart_count: selectedItems.length
-            })}
-          </Typography>
+        <div className="u-flex u-flex-justify-end u-flex-items-center">
           <Button
+            className="u-mr-half"
             variant="secondary"
             label={
               selectedItems.length > 0
