@@ -110,8 +110,8 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
               {t('Share.contacts.addUsers')}
             </Typography>
             <DumbShareByEmail
-              currentRecipients={[]}
               documentType="Files"
+              currentRecipients={existingRecipients}
               pendingRecipients={pendingRecipients}
               onPendingRecipientsChange={setPendingRecipients}
               selectedOption={selectedOption}
