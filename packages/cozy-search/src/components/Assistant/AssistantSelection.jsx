@@ -123,7 +123,9 @@ const AssistantSelection = ({ className, disabled }) => {
             className={cx(styles['menu-item'], styles['create-item'])}
           >
             <div className="u-flex u-flex-items-center">
-              <Icon icon={PlusIcon} size={16} className="u-mr-half" />
+              <div className="u-flex u-flex-justify-center u-w-1-half u-mr-half">
+                <Icon icon={PlusIcon} size={16} />
+              </div>
               <Typography variant="body1">
                 {t('assistant_create.title')}
               </Typography>
