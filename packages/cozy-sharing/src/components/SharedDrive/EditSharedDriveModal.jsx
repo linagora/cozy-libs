@@ -6,7 +6,7 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useSubmitWithLoader } from 'cozy-ui/transpiled/react/hooks/useSubmitWithLoader'
 import { useI18n } from 'twake-i18n'
 
 import SharedDriveHeader from './SharedDriveHeader'
@@ -21,62 +21,41 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
   const client = useClient()
   const { t } = useI18n()
   const { share, getRecipients, revoke } = useSharingContext()
-  const { showAlert } = useAlert()
   const {
     pendingRecipients,
     setPendingRecipients,
     selectedOption,
     setSelectedOption
   } = usePendingRecipients()
+  const { onSubmit, isLoading } = useSubmitWithLoader()
 
   const [driveName, setDriveName] = useState(document.name)
-  const [isSaving, setIsSaving] = useState(false)
 
   const onSave = async () => {
-    if (isSaving) return
-    setIsSaving(true)
-    try {
-      // We add contacts
-      const contacts = await getOrCreateFromArray(
-        client,
-        pendingRecipients,
-        contact => client.create('io.cozy.contacts', contact)
-      )
-      const readWriteRecipients = selectedOption === 'readOnly' ? [] : contacts
-      const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
+    // We add contacts
+    const contacts = await getOrCreateFromArray(
+      client,
+      pendingRecipients,
+      contact => client.create('io.cozy.contacts', contact)
+    )
+    const readWriteRecipients = selectedOption === 'readOnly' ? [] : contacts
+    const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
 
-      await share({
-        document: document,
-        recipients: readWriteRecipients,
-        readOnlyRecipients,
-        sharedDrive: true,
-        openSharing: false
+    await share({
+      document: document,
+      recipients: readWriteRecipients,
+      readOnlyRecipients,
+      sharedDrive: true,
+      openSharing: false
+    })
+
+    // We rename the shared drive
+    if (document?.name !== driveName) {
+      await client.collection('io.cozy.files').update({
+        ...document,
+        name: driveName,
+        _rev: document._rev || document.meta.rev
       })
-
-      // We rename the shared drive
-      if (document?.name !== driveName) {
-        await client.collection('io.cozy.files').update({
-          ...document,
-          name: driveName,
-          _rev: document._rev || document.meta.rev
-        })
-      }
-
-      showAlert({
-        message: t('SharedDrive.editSharedDriveModal.successNotification'),
-        severity: 'success',
-        variant: 'filled'
-      })
-
-      onClose()
-    } catch (_err) {
-      showAlert({
-        message: t('SharedDrive.editSharedDriveModal.errorNotification'),
-        severity: 'error',
-        variant: 'filled'
-      })
-    } finally {
-      setIsSaving(false)
     }
   }
 
@@ -135,14 +114,29 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
               className="u-w-100 u-m-1"
               size="large"
               onClick={onClose}
+              disabled={isLoading}
             />
             <Button
               variant="primary"
               label={t('SharedDrive.sharedDriveModal.save')}
               className="u-w-100 u-m-1"
               size="large"
-              disabled={isSaving}
-              onClick={onSave}
+              onClick={() =>
+                onSubmit({
+                  submit: onSave,
+                  success: {
+                    action: onClose,
+                    message: t(
+                      'SharedDrive.editSharedDriveModal.successNotification'
+                    )
+                  },
+                  error: {
+                    message: () =>
+                      t('SharedDrive.editSharedDriveModal.errorNotification')
+                  }
+                })
+              }
+              busy={isLoading}
             />
           </div>
         </div>
