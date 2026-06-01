@@ -4,6 +4,7 @@ import React from 'react'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useSubmitWithLoader } from 'cozy-ui/transpiled/react/hooks/useSubmitWithLoader'
 import { useI18n } from 'twake-i18n'
 
 import withLocales from '../../hoc/withLocales'
@@ -21,7 +22,8 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
     selectedOption,
     setSelectedOption,
     onCreate
-  } = useSharedDrive({ onSuccess })
+  } = useSharedDrive()
+  const { onSubmit, isLoading } = useSubmitWithLoader()
 
   return (
     <div>
@@ -55,13 +57,27 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
           className="u-w-100 u-m-1"
           size="large"
           onClick={onCancel}
+          disabled={isLoading}
         />
         <Button
           variant="primary"
           label={t('SharedDrive.sharedDriveModal.create')}
           className="u-w-100 u-m-1"
           size="large"
-          onClick={onCreate}
+          onClick={() =>
+            onSubmit({
+              submit: onCreate,
+              success: {
+                action: onSuccess,
+                message: t('SharedDrive.sharedDriveModal.successNotification')
+              },
+              error: {
+                message: () =>
+                  t('SharedDrive.sharedDriveModal.errorNotification')
+              }
+            })
+          }
+          busy={isLoading}
         />
       </div>
     </div>
