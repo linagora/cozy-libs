@@ -29,6 +29,7 @@ const RecipientWaitingForConfirmationAlert = ({ recipientsToBeConfirmed }) => {
 const WhoHasAccess = ({
   isOwner = false,
   isSharedDrive = false,
+  showOwner = true,
   recipients,
   recipientsToBeConfirmed = [],
   document,
@@ -61,7 +62,7 @@ const WhoHasAccess = ({
           />
         )}
 
-        <OwnerRecipient recipients={recipients} />
+        {showOwner && <OwnerRecipient recipients={recipients} />}
 
         <RecipientList
           recipients={recipients}
@@ -82,6 +83,7 @@ const WhoHasAccess = ({
 
 WhoHasAccess.propTypes = {
   isOwner: PropTypes.bool,
+  showOwner: PropTypes.bool,
   recipients: PropTypes.array.isRequired,
   recipientsToBeConfirmed: PropTypes.arrayOf(
     PropTypes.shape({

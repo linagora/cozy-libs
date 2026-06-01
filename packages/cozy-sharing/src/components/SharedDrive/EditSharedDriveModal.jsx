@@ -121,6 +121,7 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
           <WhoHasAccess
             isOwner
             isSharedDrive
+            showOwner={false}
             recipients={existingRecipients}
             document={document}
             documentType="Files"
