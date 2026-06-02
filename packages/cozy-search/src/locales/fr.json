@@ -114,16 +114,16 @@
           "description": "L'assistant IA intégré à Twake, pour travailler sur vos données sans jamais les faire sortir de votre Workplace"
         },
         "google": {
-          "description": "Le modèle le plus performant de Google pour les tâches textuelles et multimodales"
+          "description": "Modèles Gemini fournis par Google"
         },
         "openai": {
-          "description": "Le modèle GPT le plus performant, idéal pour le raisonnement complexe et les tâches créatives"
+          "description": "Modèles GPT fournis par OpenAI"
         },
         "mistral_ai": {
-          "description": "Modèle efficace et puissant avec de très bonnes performances"
+          "description": "Modèles Mistral fournis par Mistral AI"
         },
         "meta": {
-          "description": "Grand modèle de langage open source pour diverses applications"
+          "description": "Modèles ouverts Llama, fournis par Meta"
         },
         "custom": {
           "name": "Ajouter un fournisseur personnalisé",

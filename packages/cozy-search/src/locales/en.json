@@ -114,16 +114,16 @@
           "description": "The AI assistant integrated into Twake, letting you work on your data without ever letting it leave your Workplace"
         },
         "google": {
-          "description": "Google's most capable model for text and multimodal tasks"
+          "description": "Gemini models provided by Google"
         },
         "openai": {
-          "description": "Most capable GPT model, great for complex reasoning and creative tasks"
+          "description": "GPT models provided by OpenAI"
         },
         "mistral_ai": {
-          "description": "Efficient and powerful model with strong performance"
+          "description": "Mistral models provided by Mistral AI"
         },
         "meta": {
-          "description": "Open-source large language model for various applications"
+          "description": "Llama open models, provided by Meta"
         },
         "custom": {
           "name": "Add custom provider",
