@@ -38,7 +38,10 @@ jest.mock('./ShareAutosuggest', () => ({
 }))
 
 describe('ShareRecipientsInput component', () => {
-  const setup = ({ contacts, contactGroups, unreachableContact }) => {
+  const setup = (
+    { contacts, contactGroups, unreachableContact },
+    { currentRecipients, recipients } = {}
+  ) => {
     const mockClient = createMockClient({
       queries: {
         'io.cozy.contacts/reachable': {
@@ -61,6 +64,8 @@ describe('ShareRecipientsInput component', () => {
           onPick={() => {}}
           onRemove={() => {}}
           placeholder="Enter recipients here"
+          currentRecipients={currentRecipients}
+          recipients={recipients}
         />
       </AppLike>
     )
@@ -173,6 +178,44 @@ describe('ShareRecipientsInput component', () => {
     expect(screen.queryByText('My Self')).not.toBeInTheDocument()
     expect(screen.getByText('Teagan Wolf')).toBeInTheDocument()
     expect(screen.getByText('Friends - 1 members')).toBeInTheDocument()
+  })
+
+  it('should exclude already added recipients from suggestions', async () => {
+    const contacts = [
+      {
+        id: 'df563cc4-6440',
+        _id: 'df563cc4-6440',
+        _type: 'io.cozy.contacts',
+        name: {
+          givenName: 'Michale',
+          familyName: 'Russel'
+        },
+        email: [{ address: 'michale@example.com', primary: true }]
+      },
+      {
+        id: '5a3b4ccf-c257',
+        _id: '5a3b4ccf-c257',
+        _type: 'io.cozy.contacts',
+        name: {
+          givenName: 'Teagan',
+          familyName: 'Wolf'
+        },
+        email: [{ address: 'teagan@example.com', primary: true }]
+      }
+    ]
+
+    const contactGroups = []
+    const currentRecipients = [
+      { id: 'recipient-1', email: 'michale@example.com' }
+    ]
+    const recipients = [{ _id: '5a3b4ccf-c257' }]
+
+    setup({ contacts, contactGroups }, { currentRecipients, recipients })
+
+    // Michale is in currentRecipients by email, should be filtered out
+    expect(screen.queryByText('Michale Russel')).not.toBeInTheDocument()
+    // Teagan is in recipients by _id, should be filtered out
+    expect(screen.queryByText('Teagan Wolf')).not.toBeInTheDocument()
   })
 
   it('should include unreachable members when flag sharing.show-recipient-groups is activated', async () => {

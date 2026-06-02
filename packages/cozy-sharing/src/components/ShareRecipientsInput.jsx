@@ -61,8 +61,14 @@ const ShareRecipientsInput = ({
         unreachableContactsWithGroupsResult.hasMore))
 
   const reachableContacts = (reachableContactsResult.data || []).filter(
-    contact => !isCurrentUser(contact)
+    contact =>
+      !isCurrentUser(contact) &&
+      // We do not want contact already in the sharing
+      !currentRecipients.find(r => r.email === contact?.email?.[0]?.address) &&
+      // We do not want contact currently in pending contacts (in chips)
+      !recipients.find(r => r._id === contact._id)
   )
+
   const unreachableContactsWithGroups = (
     unreachableContactsWithGroupsResult.data || []
   ).filter(contact => !isCurrentUser(contact))
