@@ -24,7 +24,7 @@ const AssistantMessage = () => {
   const sources = useMessage(s => s.metadata?.custom?.sources)
 
   return (
-    <MessagePrimitive.Root className="u-mt-1-half u-mr-3">
+    <MessagePrimitive.Root className="u-mt-1-half">
       {isThinking && (
         <Box display="flex" alignItems="center" gridGap={12}>
           <Icon
