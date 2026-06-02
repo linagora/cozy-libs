@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.27.0...cozy-search@0.28.0) (2026-06-02)
+
+### Bug Fixes
+
+- **cozy-search:** Strip [Sources: N] citation markers from preview ([7155564](https://github.com/cozy/cozy-libs/commit/7155564201742db38021b00765d923937114d92a))
+
+### Features
+
+- **cozy-search:** Refine source selection chips row with web search ([cec649f](https://github.com/cozy/cozy-libs/commit/cec649f90144fe4b0b06ea6ee159e4366140afc5))
+- **cozy-search:** Refresh inbox emails and truncate long previews ([b648f17](https://github.com/cozy/cozy-libs/commit/b648f17dcb21e50067d5df2702e273ea4f378134))
+- **cozy-search:** Restructure Drive sources as collapsible folders ([45dcd52](https://github.com/cozy/cozy-libs/commit/45dcd52106ae472ce169d104b751d8aea48d00d9))
+
 # [0.27.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.26.3...cozy-search@0.27.0) (2026-05-26)
 
 ### Bug Fixes
