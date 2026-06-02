@@ -29,14 +29,11 @@
 
 .conversationViewport
   +mobile()
-    // Indent the message column past the absolutely-positioned
-    // sidebar toggle button (top-left of the screen when the sidebar
-    // is closed) so text never overlaps the icon — even when the
-    // conversation is scrolled. The menu button's right edge sits at
-    // ~48px (8px header padding + 40px button), so we leave a small
-    // buffer beyond that.
-    padding-left 56px
-    padding-right 16px
+    // Small symmetric gutter so the LLM response uses nearly the full
+    // mobile width. The floating sidebar-toggle button sits on an opaque
+    // tile, so text scrolling beneath it stays visually covered.
+    padding-left 8px
+    padding-right 8px
 
 
 .conversationBar-input
