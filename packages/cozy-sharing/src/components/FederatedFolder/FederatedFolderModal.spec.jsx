@@ -11,7 +11,10 @@ import AppLike from '../SharingBanner/test/AppLike'
 const mockShare = jest.fn()
 const mockRevoke = jest.fn()
 const mockGetSharingLink = jest.fn()
+const mockGetFederatedShareLink = jest.fn()
 const mockGetRecipients = jest.fn().mockReturnValue([])
+const mockHasSharedChild = jest.fn()
+const mockHasSharedParent = jest.fn()
 const mockShowAlert = jest.fn()
 const mockOnClose = jest.fn()
 
@@ -20,8 +23,11 @@ jest.mock('../../hooks/useSharingContext', () => ({
     share: mockShare,
     revoke: mockRevoke,
     getSharingLink: mockGetSharingLink,
+    getFederatedShareLink: mockGetFederatedShareLink,
     getDocumentPermissions: jest.fn().mockReturnValue([]),
-    getRecipients: mockGetRecipients
+    getRecipients: mockGetRecipients,
+    hasSharedChild: mockHasSharedChild,
+    hasSharedParent: mockHasSharedParent
   })
 }))
 
@@ -84,7 +90,12 @@ describe('FederatedFolderModal', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
+    mockGetFederatedShareLink.mockResolvedValue(
+      'https://example.com/share/federated-abc123'
+    )
     mockGetRecipients.mockReturnValue([])
+    mockHasSharedChild.mockReturnValue(false)
+    mockHasSharedParent.mockReturnValue(false)
     client = createTestClient()
     sharingContextValue = createSharingContextValue()
     usePendingRecipients.mockReturnValue({
@@ -126,6 +137,30 @@ describe('FederatedFolderModal', () => {
       const { findByText } = setup()
 
       await findByText('Copy link')
+    })
+
+    it('should hide share by email when document is in federated shared folder received by current user', async () => {
+      const { findByText, queryByText } = setup({
+        document: { ...mockDocument, driveId: 'federated-folder-id' }
+      })
+
+      await findByText('Copy link')
+
+      expect(queryByText('Add users')).toBe(null)
+      expect(queryByText('Done')).toBe(null)
+    })
+
+    it('should show only by link message when document is in federated shared folder received by current user', async () => {
+      const { findByText } = setup({
+        document: {
+          ...mockDocument,
+          driveId: 'federated-folder-id',
+          type: 'directory'
+        }
+      })
+
+      await findByText('This folder can only be shared by link, because')
+      await findByText('it has a shared parent')
     })
   })
 

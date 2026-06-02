@@ -15,6 +15,7 @@ import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import styles from '../../styles/share.styl'
 import AntivirusAlert from '../AntivirusAlert'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import ShareByLink from '../ShareByLink'
@@ -36,6 +37,8 @@ const FederatedFolderModalContent = ({
     getOwner,
     getSharingById,
     getRecipients,
+    hasSharedChild,
+    hasSharedParent,
     revoke
   } = useSharingContext()
   const { showAlert } = useAlert()
@@ -124,6 +127,14 @@ const FederatedFolderModalContent = ({
   ])
 
   const folderName = existingDocument?.name || ''
+  const documentPath = existingDocument?.path
+  const hasParentRestriction = Boolean(
+    existingDocument?.driveId || (documentPath && hasSharedParent(documentPath))
+  )
+  const hasChildRestriction = Boolean(
+    documentPath && hasSharedChild(documentPath)
+  )
+  const canShareByEmail = !hasParentRestriction && !hasChildRestriction
 
   const onSend = async () => {
     if (isSending || pendingRecipients.length === 0) {
@@ -193,21 +204,45 @@ const FederatedFolderModalContent = ({
             <AntivirusAlert
               document={isSending ? frozenDoc : existingDocument}
             />
-            <Typography variant="h6" className="u-mt-1-half u-mb-half">
-              {t('Share.contacts.addUsers')}
-            </Typography>
-            <DumbShareByEmail
-              currentRecipients={
-                isSending ? frozenRecipients : existingRecipients
-              }
-              document={isSending ? frozenDoc : existingDocument}
-              documentType="Files"
-              pendingRecipients={pendingRecipients}
-              onPendingRecipientsChange={setPendingRecipients}
-              selectedOption={selectedOption}
-              onSelectedOptionChange={setSelectedOption}
-              enableCreateContact
-            />
+            {!canShareByEmail && (
+              <div className={styles['share-byemail-onlybylink']}>
+                {t('Files.share.shareByEmail.onlyByLink', {
+                  type: t(
+                    `Files.share.shareByEmail.type.${
+                      existingDocument?.type === 'file' ? 'file' : 'folder'
+                    }`
+                  )
+                })}{' '}
+                <strong>
+                  {t(
+                    `Files.share.shareByEmail.${
+                      hasParentRestriction
+                        ? 'hasSharedParent'
+                        : 'hasSharedChild'
+                    }`
+                  )}
+                </strong>
+              </div>
+            )}
+            {canShareByEmail && (
+              <>
+                <Typography variant="h6" className="u-mt-1-half u-mb-half">
+                  {t('Share.contacts.addUsers')}
+                </Typography>
+                <DumbShareByEmail
+                  currentRecipients={
+                    isSending ? frozenRecipients : existingRecipients
+                  }
+                  document={isSending ? frozenDoc : existingDocument}
+                  documentType="Files"
+                  pendingRecipients={pendingRecipients}
+                  onPendingRecipientsChange={setPendingRecipients}
+                  selectedOption={selectedOption}
+                  onSelectedOptionChange={setSelectedOption}
+                  enableCreateContact
+                />
+              </>
+            )}
           </div>
           <WhoHasAccess
             isOwner
@@ -230,12 +265,14 @@ const FederatedFolderModalContent = ({
             showGenerateLinkButton={showGenerateLinkButton}
             autoOpenShareRestriction={autoOpenShareRestriction}
           />
-          <Button
-            variant="primary"
-            label={t('FederatedFolder.share')}
-            disabled={isSending}
-            onClick={onSend}
-          />
+          {canShareByEmail && (
+            <Button
+              variant="primary"
+              label={t('FederatedFolder.share')}
+              disabled={isSending}
+              onClick={onSend}
+            />
+          )}
         </>
       }
     />
