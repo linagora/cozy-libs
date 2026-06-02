@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.28.0...cozy-search@0.29.0) (2026-06-02)
+
+### Bug Fixes
+
+- **cozy-search:** Keep assistant menu width stable on hover ([b059401](https://github.com/cozy/cozy-libs/commit/b0594017d0624954d7a5557709fcfc3291499f15))
+
+### Features
+
+- **cozy-search:** Block o1 models on OpenAI provider ([bf92e4a](https://github.com/cozy/cozy-libs/commit/bf92e4ac75f5a9fe02c54fd9eca26ec4774b4f9e))
+- **cozy-search:** Hint stored token with bullets in edit form ([bf30f87](https://github.com/cozy/cozy-libs/commit/bf30f870b55e864e007916f20f75415546f85f3c))
+- **cozy-search:** Select edited assistant in the chat ([70feae3](https://github.com/cozy/cozy-libs/commit/70feae31ee6db9def2db563f7fef7cffc1ca52cb))
+- **cozy-search:** Use colored AI icon as assistant fallback avatar ([db3bb42](https://github.com/cozy/cozy-libs/commit/db3bb42f82723b695594ed061cf725f0a13c7af6))
+- Upgrade cozy-client to get assistant fix ([7ba2316](https://github.com/cozy/cozy-libs/commit/7ba231606e1ecc3ff33dec90164dd054299321d6))
+
 # [0.28.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.27.0...cozy-search@0.28.0) (2026-06-02)
 
 ### Bug Fixes
