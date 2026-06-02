@@ -102,7 +102,7 @@ const Sidebar = ({ className }) => {
         <div className="u-ph-half u-pb-half">
           {sidebarOpen ? (
             <Button
-              className="u-w-100"
+              className="u-w-100 u-bdrs-6"
               label={t('assistant.sidebar.create_new')}
               startIcon={<Icon icon={PlusIcon} />}
               fullWidth
