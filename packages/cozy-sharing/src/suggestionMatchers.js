@@ -34,4 +34,19 @@ const fullnameMatch = (input, contact) => {
   return fullnameInput.test(contact.fullname)
 }
 
-export { emailMatch, cozyUrlMatch, groupNameMatch, fullnameMatch }
+const contactOrGroupMatch = (input, contact) => {
+  return (
+    groupNameMatch(input, contact) ||
+    fullnameMatch(input, contact) ||
+    emailMatch(input, contact) ||
+    cozyUrlMatch(input, contact)
+  )
+}
+
+export {
+  emailMatch,
+  cozyUrlMatch,
+  groupNameMatch,
+  fullnameMatch,
+  contactOrGroupMatch
+}

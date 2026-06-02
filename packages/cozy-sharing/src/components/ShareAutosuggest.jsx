@@ -12,12 +12,7 @@ import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
 import { getDisplayName, getInitials, Contact, Group } from '../models'
 import styles from '../styles/autosuggest.styl'
-import {
-  cozyUrlMatch,
-  emailMatch,
-  groupNameMatch,
-  fullnameMatch
-} from '../suggestionMatchers'
+import { contactOrGroupMatch } from '../suggestionMatchers'
 
 const ShareAutocomplete = ({
   loading,
@@ -43,12 +38,8 @@ const ShareAutocomplete = ({
 
     return inputValue.length === 0
       ? []
-      : contactsAndGroups.filter(
-          contactOrGroup =>
-            groupNameMatch(inputValue, contactOrGroup) ||
-            fullnameMatch(inputValue, contactOrGroup) ||
-            emailMatch(inputValue, contactOrGroup) ||
-            cozyUrlMatch(inputValue, contactOrGroup)
+      : contactsAndGroups.filter(contactOrGroup =>
+          contactOrGroupMatch(inputValue, contactOrGroup)
         )
   }
 
