@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.3.2...cozy-sharing@33.0.0) (2026-06-02)
+
+### Bug Fixes
+
+- Avoid adding an already added recipients in EditSharedDriveModal ([d24e01c](https://github.com/cozy/cozy-libs/commit/d24e01c999a2c09fe87e59a0c7a26c3555c96557))
+- Hide owner in EditSharedDriveModal ([9c2b060](https://github.com/cozy/cozy-libs/commit/9c2b060fc3f55c44cf35831298879d3fe0a7a403))
+
+### Features
+
+- Add spinner to create shared drive form ([4112e7c](https://github.com/cozy/cozy-libs/commit/4112e7c7f592115ed2689ded3f45d876ee12f9dc))
+- Add spinner to edit shared drive form ([f135ff5](https://github.com/cozy/cozy-libs/commit/f135ff5bae8e9fbe6b510a3114af363159ced7af))
+
+### BREAKING CHANGES
+
+- You need cozy-ui >= 139.0.2
+
 ## [32.3.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@32.3.1...cozy-sharing@32.3.2) (2026-05-26)
 
 ### Bug Fixes
