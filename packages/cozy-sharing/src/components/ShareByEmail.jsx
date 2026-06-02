@@ -21,6 +21,7 @@ export const ShareByEmail = ({
   onPendingRecipientsChange,
   selectedOption,
   onSelectedOptionChange,
+  enableCreateContact,
   sharing
 }) => {
   const { t } = useI18n()
@@ -66,6 +67,7 @@ export const ShareByEmail = ({
           }
           onPick={onRecipientPick}
           onRemove={onRecipientRemove}
+          enableCreateContact={enableCreateContact}
           currentRecipients={currentRecipients}
           recipients={pendingRecipients}
           endAdornment={
@@ -89,6 +91,7 @@ ShareByEmail.propTypes = {
   onPendingRecipientsChange: PropTypes.func.isRequired,
   selectedOption: PropTypes.oneOf(['readWrite', 'readOnly']).isRequired,
   onSelectedOptionChange: PropTypes.func.isRequired,
+  enableCreateContact: PropTypes.bool,
   sharing: PropTypes.object
 }
 

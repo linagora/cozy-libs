@@ -25,6 +25,7 @@ const ShareRecipientsInput = ({
   placeholder,
   onPick,
   onRemove,
+  enableCreateContact,
   disabled,
   endAdornment
 }) => {
@@ -114,6 +115,7 @@ const ShareRecipientsInput = ({
       recipients={recipients}
       onPick={onPick}
       onRemove={onRemove}
+      enableCreateContact={enableCreateContact}
       placeholder={placeholder}
       endAdornment={endAdornment}
     />
@@ -126,6 +128,7 @@ ShareRecipientsInput.propTypes = {
   placeholder: PropTypes.string,
   onPick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  enableCreateContact: PropTypes.bool,
   disabled: PropTypes.bool,
   endAdornment: PropTypes.node
 }

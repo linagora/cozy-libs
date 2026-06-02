@@ -17,6 +17,7 @@ describe('ShareByEmail (controlled)', () => {
       onPendingRecipientsChange,
       selectedOption: 'readWrite',
       onSelectedOptionChange,
+      enableCreateContact: true,
       ...overrides
     }
     const utils = render(

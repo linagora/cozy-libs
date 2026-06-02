@@ -21,6 +21,7 @@ jest.mock('../hooks/useSharingContext', () => ({
 }))
 
 jest.mock('../helpers/contacts', () => ({
+  ...jest.requireActual('../helpers/contacts'),
   getOrCreateFromArray: jest.fn((client, recipients) =>
     Promise.resolve(recipients)
   )

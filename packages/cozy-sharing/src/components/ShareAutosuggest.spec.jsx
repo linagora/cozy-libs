@@ -9,7 +9,12 @@ jest.mock('cozy-ui/transpiled/react/Spinner', () => ({
 }))
 
 describe('ShareAutosuggest', () => {
-  const setup = ({ onPick, onRemove, loading = false }) => {
+  const setup = ({
+    onPick,
+    onRemove,
+    loading = false,
+    enableCreateContact = true
+  }) => {
     render(
       <AppLike>
         <ShareAutosuggest
@@ -19,6 +24,7 @@ describe('ShareAutosuggest', () => {
           onPick={onPick}
           recipients={[]}
           onRemove={onRemove}
+          enableCreateContact={enableCreateContact}
         />
       </AppLike>
     )
@@ -49,6 +55,19 @@ describe('ShareAutosuggest', () => {
     expect(onPick).toHaveBeenCalledWith({
       email: 'quentin.valmori@cozycloud.cc'
     })
+  })
+
+  it('should not call onPick for new contacts when enableCreateContact is false', () => {
+    const onPick = jest.fn()
+    const onRemove = jest.fn()
+
+    setup({ onPick, onRemove, enableCreateContact: false })
+
+    const inputNode = screen.getByPlaceholderText('myPlaceHolder')
+
+    fireEvent.change(inputNode, { target: { value: 'new@cozycloud.cc' } })
+    fireEvent.keyPress(inputNode, { key: 'Enter', keyCode: 13, charCode: 13 })
+    expect(onPick).not.toHaveBeenCalled()
   })
 
   it('should show loading indicator when loading prop is true (autoFocus triggers onFocus on mount)', () => {

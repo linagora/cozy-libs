@@ -206,6 +206,7 @@ const FederatedFolderModalContent = ({
               onPendingRecipientsChange={setPendingRecipients}
               selectedOption={selectedOption}
               onSelectedOptionChange={setSelectedOption}
+              enableCreateContact
             />
           </div>
           <WhoHasAccess
