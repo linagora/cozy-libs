@@ -69,17 +69,11 @@ const Sidebar = ({ className }) => {
         >
           <IconButton
             size="medium"
-            className={cx('u-bdrs-6 u-p-0')}
+            className="u-bdrs-6"
             onClick={onToggleSidebar}
             aria-label={t('assistant.sidebar.toggle_sidebar')}
           >
-            <Button
-              component="div"
-              variant={sidebarOpen ? 'ghost' : 'text'}
-              className="u-miw-auto u-w-2-half u-h-2-half u-bdrs-6"
-              classes={{ label: 'u-flex u-w-auto' }}
-              label={<Icon icon={MenuIcon} aria-hidden="true" />}
-            />
+            <Icon icon={MenuIcon} aria-hidden="true" />
           </IconButton>
           <div>
             {sidebarOpen &&
