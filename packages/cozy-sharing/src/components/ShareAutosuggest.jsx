@@ -14,7 +14,7 @@ import { getDisplayName, getInitials, Contact, Group } from '../models'
 import styles from '../styles/autosuggest.styl'
 import { contactOrGroupMatch } from '../suggestionMatchers'
 
-const ShareAutocomplete = ({
+const ShareAutosuggest = ({
   loading,
   disabled,
   contactsAndGroups,
@@ -217,7 +217,7 @@ const ShareAutocomplete = ({
   )
 }
 
-ShareAutocomplete.propTypes = {
+ShareAutosuggest.propTypes = {
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
   contactsAndGroups: PropTypes.array,
@@ -229,4 +229,4 @@ ShareAutocomplete.propTypes = {
   endAdornment: PropTypes.node
 }
 
-export default ShareAutocomplete
+export default ShareAutosuggest

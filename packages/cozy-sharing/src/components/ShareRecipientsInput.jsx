@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useQueryAll, isQueryLoading } from 'cozy-client'
+import { models } from 'cozy-client'
 import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
@@ -11,6 +12,8 @@ import {
   buildContactGroupsQuery,
   buildUnreachableContactsWithGroupsQuery
 } from '../queries/queries'
+
+const ContactModel = models.contact
 
 /**
  * ShareRecipientsInput is responsible for fetching contacts and groups.
@@ -64,7 +67,9 @@ const ShareRecipientsInput = ({
     contact =>
       !isCurrentUser(contact) &&
       // We do not want contact already in the sharing
-      !currentRecipients.find(r => r.email === contact?.email?.[0]?.address) &&
+      !currentRecipients.find(
+        r => r.email === ContactModel.getPrimaryEmail(contact)
+      ) &&
       // We do not want contact currently in pending contacts (in chips)
       !recipients.find(r => r._id === contact._id)
   )
