@@ -79,6 +79,7 @@ const SharingContent = ({
             onPendingRecipientsChange={onPendingRecipientsChange}
             selectedOption={selectedOption}
             onSelectedOptionChange={onSelectedOptionChange}
+            enableCreateContact
           />
         )}
       </div>

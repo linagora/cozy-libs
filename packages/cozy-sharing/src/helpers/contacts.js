@@ -47,3 +47,15 @@ export const getContactsFromGroupId = (contacts = [], groupId) => {
     )
   })
 }
+
+/**
+ * Returns true when a contact does not exist. A contact without
+ * an `_id` is always a placeholder that must be created before sharing.
+ *
+ * Used to decide whether the autosuggest input should allow creating
+ * a new contact on the fly or should block the pick (depending on the
+ * `enableCreateContact` flag).
+ */
+export const isContactToBeCreated = contact => {
+  return !contact._id
+}

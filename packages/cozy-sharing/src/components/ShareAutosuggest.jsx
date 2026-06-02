@@ -8,6 +8,7 @@ import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import { GroupAvatar } from './Avatar/GroupAvatar'
 import ContactSuggestion from './ContactSuggestion'
+import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
 import { getDisplayName, getInitials, Contact, Group } from '../models'
 import styles from '../styles/autosuggest.styl'
@@ -25,6 +26,7 @@ const ShareAutocomplete = ({
   recipients,
   onPick,
   onRemove,
+  enableCreateContact,
   placeholder,
   endAdornment
 }) => {
@@ -53,17 +55,18 @@ const ShareAutocomplete = ({
   const onSuggestionsFetchRequested = ({ value }) => {
     const computedSuggestions = computeSuggestions(value)
 
-    const newSuggestions =
-      computedSuggestions.length === 0 && validateEmail(value)
-        ? [
-            {
-              email: value,
-              _type: Contact.doctype
-            }
-          ]
-        : computedSuggestions
-
-    setSuggestions(newSuggestions)
+    if (computedSuggestions.length > 0) {
+      setSuggestions(computedSuggestions)
+    } else if (enableCreateContact && validateEmail(value)) {
+      setSuggestions([
+        {
+          email: value,
+          _type: Contact.doctype
+        }
+      ])
+    } else {
+      setSuggestions([])
+    }
   }
 
   const onSuggestionsClearRequested = () => {
@@ -130,6 +133,8 @@ const ShareAutocomplete = ({
   }
 
   const onAutosuggestPick = value => {
+    if (isContactToBeCreated(value) && !enableCreateContact) return
+
     onPick(value)
     setInputValue('')
     autosuggestRef?.current?.input?.focus()
@@ -228,6 +233,7 @@ ShareAutocomplete.propTypes = {
   recipients: PropTypes.array.isRequired,
   onPick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  enableCreateContact: PropTypes.bool,
   placeholder: PropTypes.string,
   endAdornment: PropTypes.node
 }
