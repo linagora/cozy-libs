@@ -110,16 +110,16 @@
           "description": "Trợ lý AI được tích hợp vào Twake, cho phép bạn xử lý dữ liệu của mình mà không bao giờ phải đưa dữ liệu ra khỏi Không gian làm việc của bạn"
         },
         "google": {
-          "description": "Mô hình mạnh nhất của Google cho tác vụ văn bản và đa phương thức"
+          "description": "Các mô hình Gemini do Google cung cấp"
         },
         "openai": {
-          "description": "Mô hình GPT mạnh nhất, phù hợp cho suy luận phức tạp và tác vụ sáng tạo"
+          "description": "Các mô hình GPT do OpenAI cung cấp"
         },
         "mistral_ai": {
-          "description": "Mô hình hiệu quả và mạnh mẽ với hiệu năng cao"
+          "description": "Các mô hình Mistral do Mistral AI cung cấp"
         },
         "meta": {
-          "description": "Mô hình ngôn ngữ lớn mã nguồn mở cho nhiều ứng dụng"
+          "description": "Các mô hình mở Llama do Meta cung cấp"
         },
         "custom": {
           "name": "Thêm nhà cung cấp tùy chỉnh",
