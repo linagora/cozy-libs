@@ -126,7 +126,7 @@ const Sidebar = ({ className }) => {
             <Typography variant="h6" className="u-ml-half u-p-half">
               {t('assistant.sidebar.recent_chats')}
             </Typography>
-            <PrettyScrollbar className="u-flex-auto u-ov-auto u-ph-half u-pb-half">
+            <PrettyScrollbar className="u-flex-auto u-ov-auto u-pb-half">
               <ConversationList
                 conversations={conversations}
                 currentConversationId={currentConversationId}
