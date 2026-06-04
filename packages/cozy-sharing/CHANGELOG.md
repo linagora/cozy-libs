@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.1.0...cozy-sharing@33.1.1) (2026-06-04)
+
+### Bug Fixes
+
+- **cozy-sharing:** Memoize ShareByEmail section in SharedDriveForm ([2ea5eb2](https://github.com/cozy/cozy-libs/commit/2ea5eb2a8d37eec582212b07b8617c36fd107930))
+
 # [33.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.0.2...cozy-sharing@33.1.0) (2026-06-04)
 
 ### Features
