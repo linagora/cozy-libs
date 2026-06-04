@@ -21,9 +21,12 @@
   z-index calc(var(--zIndex-modal) + 20)
 
 .menu-toggle-floating
-  // When the sidebar is closed on mobile, the toggle button sits
-  // absolutely over the scrolling conversation. Give it an opaque
-  // paper background so any message text that scrolls behind it is
-  // not visible through the icon.
-  background-color var(--paperBackgroundColor)
-  border-bottom-right-radius 12px
+  // When the sidebar is closed on mobile, the toggle button floats over the
+  // scrolling conversation. Wrap it in a circular chip with an elevation
+  // shadow (M3 elevation 2) and a 60%-opacity paper background (as in the
+  // design) so the circle is semi-transparent while the icon inside stays
+  // fully opaque. The transparency is on the background color (not the
+  // element's opacity) precisely so it does not fade the icon too.
+  // unquote() keeps Stylus from parsing `in` as an operator.
+  background-color unquote('color-mix(in srgb, var(--paperBackgroundColor) 60%, transparent)')
+  box-shadow 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15)
