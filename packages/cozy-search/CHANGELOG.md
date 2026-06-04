@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.29.0...cozy-search@0.29.1) (2026-06-04)
+
+### Bug Fixes
+
+- **cozy-search:** Remove blue tint from sidebar collapse icon ([82b6605](https://github.com/cozy/cozy-libs/commit/82b660556201e2e329176a76d2de954bb586f13e))
+
 # [0.29.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.28.0...cozy-search@0.29.0) (2026-06-02)
 
 ### Bug Fixes
