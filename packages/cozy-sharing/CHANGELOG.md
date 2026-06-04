@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.0.2...cozy-sharing@33.1.0) (2026-06-04)
+
+### Features
+
+- Remove email sharing in recipient side ([f6a3f19](https://github.com/cozy/cozy-libs/commit/f6a3f19bd32f9c1d1d22284a59349a60e2ca147e))
+
 ## [33.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.0.1...cozy-sharing@33.0.2) (2026-06-02)
 
 ### Bug Fixes
