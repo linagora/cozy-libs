@@ -34,6 +34,11 @@ const Sidebar = ({ className }) => {
 
   const { conversations, hasMore, fetchMore } = useFetchConversations()
 
+  // When the sidebar is closed on mobile, the toggle sits over the scrolling
+  // conversation and must read as a distinct floating button, not blend into
+  // the text behind it.
+  const isFloatingToggle = !sidebarOpen && isMobile
+
   const onToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen)
   }
@@ -61,20 +66,22 @@ const Sidebar = ({ className }) => {
           'u-left-0 u-pos-absolute': isMobile
         })}
       >
-        <div
-          className={cx(
-            'u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1',
-            { [styles['menu-toggle-floating']]: !sidebarOpen && isMobile }
-          )}
-        >
-          <IconButton
-            size="medium"
-            className="u-bdrs-6"
-            onClick={onToggleSidebar}
-            aria-label={t('assistant.sidebar.toggle_sidebar')}
+        <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1">
+          <div
+            className={cx('u-flex', {
+              'u-bdrs-circle': isFloatingToggle,
+              [styles['menu-toggle-floating']]: isFloatingToggle
+            })}
           >
-            <Icon icon={MenuIcon} aria-hidden="true" />
-          </IconButton>
+            <IconButton
+              size="medium"
+              className="u-bdrs-6"
+              onClick={onToggleSidebar}
+              aria-label={t('assistant.sidebar.toggle_sidebar')}
+            >
+              <Icon icon={MenuIcon} aria-hidden="true" />
+            </IconButton>
+          </div>
           <div>
             {sidebarOpen &&
               flag('cozy.assistant.search-conversation.enabled') && (
