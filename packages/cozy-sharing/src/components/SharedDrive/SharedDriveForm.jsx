@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { memo } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import TextField from 'cozy-ui/transpiled/react/TextField'
@@ -11,6 +11,24 @@ import withLocales from '../../hoc/withLocales'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import SharedDriveHeader from './SharedDriveHeader'
 import { useSharedDrive } from './useSharedDrive'
+
+const ShareByEmailSection = memo(function ShareByEmailSection({
+  pendingRecipients,
+  setPendingRecipients,
+  selectedOption,
+  setSelectedOption
+}) {
+  return (
+    <DumbShareByEmail
+      currentRecipients={[]}
+      documentType="Files"
+      pendingRecipients={pendingRecipients}
+      onPendingRecipientsChange={setPendingRecipients}
+      selectedOption={selectedOption}
+      onSelectedOptionChange={setSelectedOption}
+    />
+  )
+})
 
 export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
   const { t } = useI18n()
@@ -41,13 +59,11 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
         <Typography variant="h6" className="u-mb-half">
           {t('Share.contacts.addUsers')}
         </Typography>
-        <DumbShareByEmail
-          currentRecipients={[]}
-          documentType="Files"
+        <ShareByEmailSection
           pendingRecipients={pendingRecipients}
-          onPendingRecipientsChange={setPendingRecipients}
+          setPendingRecipients={setPendingRecipients}
           selectedOption={selectedOption}
-          onSelectedOptionChange={setSelectedOption}
+          setSelectedOption={setSelectedOption}
         />
       </div>
       <div className="u-flex u-ph-2 u-pv-1">
