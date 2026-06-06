@@ -64,9 +64,11 @@ const ViewerByFile = withBreakpoints()(({
   breakpoints: { isDesktop },
   componentsProps
 }) => {
-  const { file } = useViewer()
+  const { file, isReadOnly } = useViewer()
   const isOnlyOfficeEnabled = componentsProps?.OnlyOfficeViewer?.isEnabled
   const onlyOfficeOpener = componentsProps?.OnlyOfficeViewer?.opener
+  const isPdfEditorEnabled = componentsProps?.PdfViewer?.isPdfEditorEnabled
+  const editPdfOpener = componentsProps?.PdfViewer?.opener
 
   const { url } = useEncrypted()
 
@@ -88,6 +90,9 @@ const ViewerByFile = withBreakpoints()(({
       gestures={gestures}
       gesturesRef={gesturesRef}
       onlyOfficeOpener={onlyOfficeOpener}
+      isReadOnly={isReadOnly}
+      isPdfEditorEnabled={isPdfEditorEnabled}
+      editPdfOpener={editPdfOpener}
       onSwipe={onSwipe}
       onClose={onClose}
     />
