@@ -165,6 +165,14 @@ ViewerContainer.propTypes = {
       /** To open the Only Office file */
       opener: PropTypes.func
     }),
+    /** Used to open a PDF in an external editor */
+    PdfViewer: PropTypes.shape({
+      /** Whether PDF editing is enabled by the host app */
+      isPdfEditorEnabled: PropTypes.bool,
+      /** Opens the PDF in the editor; an "Edit" button is shown when editing is
+       * enabled, this is set and the user has write access */
+      opener: PropTypes.func
+    }),
     /** Used to spread props to Panel components */
     panel: PropTypes.shape({
       qualifications: PropTypes.shape({

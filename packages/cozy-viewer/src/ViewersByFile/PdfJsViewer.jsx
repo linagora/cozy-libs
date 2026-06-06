@@ -5,6 +5,10 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Document, Page } from 'react-pdf'
 
+import Button from 'cozy-ui/transpiled/react/Buttons'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
+
 import styles from './styles.styl'
 import NoViewer from '../NoViewer'
 import ToolbarButton from '../components/PdfToolbarButton'
@@ -195,7 +199,15 @@ export class PdfJsViewer extends Component {
   }
 
   render() {
-    const { url, file, renderFallbackExtraContent, t } = this.props
+    const {
+      url,
+      file,
+      renderFallbackExtraContent,
+      t,
+      isReadOnly,
+      isPdfEditorEnabled,
+      editPdfOpener
+    } = this.props
     const {
       loaded,
       errored,
@@ -273,6 +285,17 @@ export class PdfJsViewer extends Component {
               this.setState({ keepToolbarDisplayed: false })
             }
           >
+            {isPdfEditorEnabled && editPdfOpener && !isReadOnly && (
+              <Button
+                variant="text"
+                color="secondary"
+                className="u-p-half u-m-half"
+                startIcon={<Icon icon={PenIcon} size={16} />}
+                label={t('Viewer.editPdf')}
+                onClick={() => editPdfOpener(file)}
+                data-testid="pdf-edit-button"
+              />
+            )}
             {!renderAllPages && (
               <span className="u-mh-half">
                 <ToolbarButton
@@ -329,8 +352,17 @@ export class PdfJsViewer extends Component {
 
 PdfJsViewer.propTypes = {
   url: PropTypes.string.isRequired,
+  file: PropTypes.object,
   gestures: PropTypes.object,
-  renderFallbackExtraContent: PropTypes.func
+  renderFallbackExtraContent: PropTypes.func,
+  /** Whether the user only has read access; hides the "Edit" button. */
+  isReadOnly: PropTypes.bool,
+  /** Whether PDF editing is enabled by the host app. The "Edit" button is only
+   * shown when this is true, an opener is provided and the user has write
+   * access. */
+  isPdfEditorEnabled: PropTypes.bool,
+  /** Opens the file in an external PDF editor. */
+  editPdfOpener: PropTypes.func
 }
 
 export default flow(withFileUrl, withViewerLocales)(PdfJsViewer)
