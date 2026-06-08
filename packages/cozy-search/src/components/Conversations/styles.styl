@@ -105,7 +105,6 @@
   hyphens auto
 
 .conversation-list-item
-  padding 8px !important
   border-radius 8px !important
   align-items stretch !important
   // force 0 gap to override cozy-ui gap 16px on .MuiListItem-root
@@ -126,9 +125,9 @@
     align-items center !important
 
 .conversation-list-item-divider
-  // Counteract the item's 8px padding so the divider spans the full
-  // width and sits flush with the bottom edge of the selected highlight
-  margin 8px -8px -8px -8px !important
+  // Counteract the item's 16px horizontal padding so the divider spans the
+  // full width and sits flush with the bottom edge of the selected highlight
+  margin 8px -16px -8px -16px !important
 
 .conversation-list-item-action
   position absolute !important
