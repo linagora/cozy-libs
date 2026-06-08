@@ -29,7 +29,7 @@ const ConversationListItem = ({
       button
       onClick={() => onOpenConversation(conversation._id)}
       className={cx(
-        'u-ov-hidden u-flex-column',
+        'u-ov-hidden u-flex-column u-pv-half u-ph-1',
         styles['conversation-list-item'],
         {
           [styles[`conversation-list-item--selected--${theme}`]]: selected
@@ -54,7 +54,7 @@ const ConversationListItem = ({
         primary={
           <span
             className={cx(
-              'u-ellipsis u-db',
+              'u-ellipsis u-db u-pb-half',
               styles['conversation-list-item-title']
             )}
           >

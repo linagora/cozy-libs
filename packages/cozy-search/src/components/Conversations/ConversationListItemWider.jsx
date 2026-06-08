@@ -33,7 +33,7 @@ const ConversationListItemWider = ({
       button
       onClick={() => onOpenConversation(conversation._id)}
       className={cx(
-        'u-bdrs-0 u-ov-hidden u-flex u-flex-items-center u-flex-justify-between u-w-100',
+        'u-bdrs-0 u-ov-hidden u-flex u-flex-items-center u-flex-justify-between u-w-100 u-pv-half u-ph-1',
         styles['conversation-list-item'],
         styles['conversation-list-item--wider'],
         {

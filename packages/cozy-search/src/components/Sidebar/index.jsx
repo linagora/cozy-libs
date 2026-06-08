@@ -62,7 +62,7 @@ const Sidebar = ({ className }) => {
           'u-left-0 u-pos-absolute': isMobile
         })}
       >
-        <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-half u-pv-1">
+        <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-1 u-pv-1">
           <div
             className={cx('u-flex', {
               'u-bdrs-circle': isFloatingToggle,
@@ -71,6 +71,7 @@ const Sidebar = ({ className }) => {
           >
             <IconButton
               size="medium"
+              edge="start"
               className="u-bdrs-6"
               onClick={onToggleSidebar}
               aria-label={t('assistant.sidebar.toggle_sidebar')}
@@ -83,6 +84,7 @@ const Sidebar = ({ className }) => {
               flag('cozy.assistant.search-conversation.enabled') && (
                 <IconButton
                   size="medium"
+                  edge="end"
                   className="u-bdrs-6"
                   onClick={onToggleSearch}
                   aria-label={t('assistant.sidebar.toggle_search')}
@@ -102,7 +104,7 @@ const Sidebar = ({ className }) => {
             )}
           </div>
         </div>
-        <div className="u-ph-half u-pb-half">
+        <div className="u-ph-1 u-pb-half">
           {sidebarOpen ? (
             <Button
               className="u-w-100 u-bdrs-6"
@@ -126,7 +128,7 @@ const Sidebar = ({ className }) => {
 
         {sidebarOpen && (
           <>
-            <Typography variant="h6" className="u-ml-half u-p-half">
+            <Typography variant="h6" className="u-ph-1 u-pv-half">
               {t('assistant.sidebar.recent_chats')}
             </Typography>
             <PrettyScrollbar className="u-flex-auto u-ov-auto u-pb-half">
