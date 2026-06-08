@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -33,9 +33,6 @@ const FederatedFolderModalContent = ({
     share,
     getSharingLink,
     getFederatedShareLink,
-    getDocumentPermissions,
-    getOwner,
-    getSharingById,
     getRecipients,
     hasSharedChild,
     hasSharedParent,
@@ -44,7 +41,6 @@ const FederatedFolderModalContent = ({
   const { showAlert } = useAlert()
   const { showConfirmDialog, closeConfirmDialog } = useConfirmDialog()
 
-  const [sharingLink, setSharingLink] = useState(null)
   const {
     pendingRecipients,
     setPendingRecipients,
@@ -96,34 +92,6 @@ const FederatedFolderModalContent = ({
     pendingRecipients.length,
     showConfirmDialog,
     t
-  ])
-
-  const documentPermissions = useMemo(
-    () =>
-      existingDocument ? getDocumentPermissions(existingDocument._id) : [],
-    [existingDocument, getDocumentPermissions]
-  )
-
-  useEffect(() => {
-    const fetchSharingLink = async () => {
-      if (!existingDocument) return
-
-      if (existingDocument.driveId) {
-        const link = await getFederatedShareLink(existingDocument)
-        setSharingLink(link)
-      } else {
-        setSharingLink(getSharingLink(existingDocument._id))
-      }
-    }
-
-    fetchSharingLink()
-  }, [
-    existingDocument,
-    documentPermissions,
-    getFederatedShareLink,
-    getSharingLink,
-    getOwner,
-    getSharingById
   ])
 
   const folderName = existingDocument?.name || ''
@@ -185,6 +153,9 @@ const FederatedFolderModalContent = ({
   const existingRecipients = existingDocument
     ? getRecipients(existingDocument._id)
     : []
+  const displayedLink = existingDocument?.driveId
+    ? getFederatedShareLink(existingDocument)
+    : getSharingLink(existingDocument?._id)
 
   const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
 
@@ -252,14 +223,14 @@ const FederatedFolderModalContent = ({
             documentType="Files"
             className="u-w-100"
             onRevoke={revoke}
-            link={sharingLink}
+            link={displayedLink}
           />
         </div>
       }
       actions={
         <>
           <ShareByLink
-            link={sharingLink}
+            link={displayedLink}
             document={isSending ? frozenDoc : existingDocument}
             documentType="Files"
             showGenerateLinkButton={showGenerateLinkButton}

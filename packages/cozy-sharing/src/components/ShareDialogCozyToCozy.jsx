@@ -19,6 +19,7 @@ import { getOrCreateFromArray } from '../helpers/contacts'
 import { hasReachRecipientsLimit } from '../helpers/recipients'
 import { getErrorMessage, getSuccessMessage } from '../helpers/share'
 import { usePendingRecipients } from '../hooks/usePendingRecipients'
+import { useSharingContext } from '../hooks/useSharingContext'
 import styles from '../styles/share.styl'
 
 const SharingContent = ({
@@ -126,6 +127,7 @@ const ShareDialogCozyToCozy = ({
   const { t } = useI18n()
   const client = useClient()
   const { showAlert } = useAlert()
+  const { getSharingLink } = useSharingContext()
 
   const {
     pendingRecipients,
@@ -136,6 +138,7 @@ const ShareDialogCozyToCozy = ({
 
   const [submitting, setSubmitting] = useState(false)
   const [showRecipientsLimit, setShowRecipientsLimit] = useState(false)
+  const displayedLink = getSharingLink(document._id || document.id)
 
   const handleShare = useCallback(async () => {
     if (pendingRecipients.length === 0) {
@@ -238,6 +241,7 @@ const ShareDialogCozyToCozy = ({
     <>
       <ShareDialogTwoStepsConfirmationContainer
         {...props}
+        link={displayedLink}
         documentType={documentType}
         document={document}
         recipients={recipients}

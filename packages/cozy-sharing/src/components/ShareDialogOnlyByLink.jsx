@@ -9,6 +9,7 @@ import { useI18n } from 'twake-i18n'
 import AntivirusAlert from './AntivirusAlert'
 import { default as DumbShareByLink } from './ShareByLink'
 import WhoHasAccess from './WhoHasAccess'
+import { useSharingContext } from '../hooks/useSharingContext'
 
 const ShareDialogOnlyByLink = ({
   isOwner,
@@ -17,7 +18,6 @@ const ShareDialogOnlyByLink = ({
   recipients,
   document,
   documentType,
-  link,
   onClose,
   permissions,
   showGenerateLinkButton,
@@ -25,6 +25,8 @@ const ShareDialogOnlyByLink = ({
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
+  const { getSharingLink } = useSharingContext()
+  const displayedLink = getSharingLink(document._id || document.id)
 
   return (
     <Dialog
@@ -51,7 +53,7 @@ const ShareDialogOnlyByLink = ({
             onRevoke={onRevoke}
             onRevokeSelf={onRevokeSelf}
             recipients={recipients}
-            link={link}
+            link={displayedLink}
             permissions={permissions}
           />
           <div
@@ -61,7 +63,7 @@ const ShareDialogOnlyByLink = ({
             )}
           >
             <DumbShareByLink
-              link={link}
+              link={displayedLink}
               document={document}
               documentType={documentType}
               showGenerateLinkButton={showGenerateLinkButton}
