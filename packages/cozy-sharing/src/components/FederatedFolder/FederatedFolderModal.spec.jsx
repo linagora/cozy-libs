@@ -9,6 +9,7 @@ import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import AppLike from '../SharingBanner/test/AppLike'
 
 const mockShare = jest.fn()
+const mockShareByLink = jest.fn()
 const mockRevoke = jest.fn()
 const mockGetSharingLink = jest.fn()
 const mockGetFederatedShareLink = jest.fn()
@@ -21,10 +22,13 @@ const mockOnClose = jest.fn()
 jest.mock('../../hooks/useSharingContext', () => ({
   useSharingContext: () => ({
     share: mockShare,
+    shareByLink: mockShareByLink,
     revoke: mockRevoke,
     getSharingLink: mockGetSharingLink,
     getFederatedShareLink: mockGetFederatedShareLink,
     getDocumentPermissions: jest.fn().mockReturnValue([]),
+    getOwner: jest.fn(),
+    getSharingById: jest.fn(),
     getRecipients: mockGetRecipients,
     hasSharedChild: mockHasSharedChild,
     hasSharedParent: mockHasSharedParent
@@ -46,6 +50,8 @@ jest.mock('../../helpers/contacts', () => ({
 jest.mock('../../hooks/usePendingRecipients', () => ({
   usePendingRecipients: jest.fn()
 }))
+
+jest.mock('../ShareByLink', () => () => <button>Copy link</button>)
 
 const mockDocument = {
   _id: 'folder-123',
@@ -90,12 +96,25 @@ describe('FederatedFolderModal', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
-    mockGetFederatedShareLink.mockResolvedValue(
+    mockGetFederatedShareLink.mockReturnValue(
       'https://example.com/share/federated-abc123'
     )
     mockGetRecipients.mockReturnValue([])
     mockHasSharedChild.mockReturnValue(false)
     mockHasSharedParent.mockReturnValue(false)
+    mockShareByLink.mockResolvedValue({
+      data: {
+        _id: 'permission-id',
+        attributes: {
+          shortcodes: { code: 'abc123' }
+        }
+      }
+    })
+    Object.assign(navigator, {
+      clipboard: {
+        writeText: jest.fn()
+      }
+    })
     client = createTestClient()
     sharingContextValue = createSharingContextValue()
     usePendingRecipients.mockReturnValue({
@@ -137,6 +156,22 @@ describe('FederatedFolderModal', () => {
       const { findByText } = setup()
 
       await findByText('Copy link')
+    })
+
+    it('should show link access as soon as a link is generated', async () => {
+      mockGetSharingLink.mockReturnValue(null)
+      const { findByText, queryByText, rerender } = setup()
+
+      expect(queryByText('Anyone with the link')).toBe(null)
+
+      mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
+      rerender(
+        <AppLike client={client} sharingContextValue={sharingContextValue}>
+          <FederatedFolderModal document={mockDocument} onClose={mockOnClose} />
+        </AppLike>
+      )
+
+      await findByText('Anyone with the link')
     })
 
     it('should hide share by email when document is in federated shared folder received by current user', async () => {
