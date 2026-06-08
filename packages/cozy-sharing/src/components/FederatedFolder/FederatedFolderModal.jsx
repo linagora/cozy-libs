@@ -269,7 +269,7 @@ const FederatedFolderModalContent = ({
             <Button
               variant="primary"
               label={t('FederatedFolder.share')}
-              disabled={isSending}
+              busy={isSending}
               onClick={onSend}
             />
           )}

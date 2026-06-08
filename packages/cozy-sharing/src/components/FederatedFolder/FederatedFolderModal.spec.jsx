@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { createMockClient } from 'cozy-client'
@@ -255,6 +255,36 @@ describe('FederatedFolderModal', () => {
           variant: 'filled'
         })
         expect(mockOnClose).not.toHaveBeenCalled()
+      })
+    })
+
+    it('should show progress icon on Done button while share is in progress', async () => {
+      usePendingRecipients.mockReturnValue({
+        pendingRecipients: [pendingRecipient],
+        setPendingRecipients: jest.fn(),
+        selectedOption: 'readWrite',
+        setSelectedOption: jest.fn()
+      })
+      getOrCreateFromArray.mockResolvedValue([pendingRecipient])
+      let resolveShare
+      mockShare.mockReturnValueOnce(
+        new Promise(resolve => {
+          resolveShare = resolve
+        })
+      )
+      const { findByText, getByRole, queryByRole } = setup()
+
+      const sendButton = await findByText('Done')
+
+      fireEvent.click(sendButton)
+
+      await waitFor(() => {
+        expect(getByRole('button', { name: 'Done' })).toBeDisabled()
+        expect(queryByRole('progressbar')).not.toBeNull()
+      })
+
+      await act(async () => {
+        resolveShare({})
       })
     })
   })
