@@ -7,9 +7,13 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
 
 import { useShareModal } from '../providers/ShareModalProvider'
+import { useViewer } from '../providers/ViewerProvider'
 
 const SharingButton = ({ className, file, variant }) => {
+  const { componentsProps } = useViewer()
   const { setShowShareModal } = useShareModal()
+
+  if (componentsProps?.sharingActions?.disabled) return null
 
   if (variant === 'iconButton')
     return (

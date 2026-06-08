@@ -29,6 +29,8 @@ The `Viewer` can display an **information panel** to show additional information
   - **OnlyOfficeViewer** : `<object>` – Used to open an Only Office file
     - **isEnabled** : `<boolean>` – Whether Only Office is enabled on the server
     - **opener** : `<function>` – To open the Only Office file
+  - **sharingActions** : `<object>` – Sharing action controls
+    - **disabled** : `<boolean>` – Whether sharing action buttons are disabled
   - **toolbarProps** : `<object>` – Toolbar properties
     - **toolbarRef** : `<object>` – React reference of the toolbar node
     - **showToolbar** : `<boolean>` – Whether to show the toolbar or not. Note that the built-in close button is in the toolbar

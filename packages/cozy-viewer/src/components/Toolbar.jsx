@@ -45,7 +45,7 @@ const Toolbar = ({
   const client = useClient()
   const { t } = useI18n()
   const webviewIntent = useWebviewIntent()
-  const { file } = useViewer()
+  const { file, componentsProps } = useViewer()
   const { isSharingShortcutCreated, addSharingLink, loading } =
     useSharingInfos()
   const { isOwner } = useSharingContext()
@@ -54,6 +54,7 @@ const Toolbar = ({
 
   const isCozySharing = window.location.pathname === '/preview'
   const isShareNotAdded = !loading && !isSharingShortcutCreated
+  const areSharingActionsDisabled = componentsProps?.sharingActions?.disabled
   const ToolbarButtons = extractChildrenCompByName({
     children,
     file,
@@ -93,15 +94,17 @@ const Toolbar = ({
 
       {isDesktop && (
         <div className="u-flex u-flex-items-center">
-          {!isCozySharing && !isOwner(file._id) && (
-            <ShareButton
-              className="u-white"
-              fullWidth
-              useShortLabel
-              docId={file._id}
-              onClick={() => setShowShareModal(true)}
-            />
-          )}
+          {!areSharingActionsDisabled &&
+            !isCozySharing &&
+            !isOwner(file._id) && (
+              <ShareButton
+                className="u-white"
+                fullWidth
+                useShortLabel
+                docId={file._id}
+                onClick={() => setShowShareModal(true)}
+              />
+            )}
           {isCozySharing && isShareNotAdded && (
             <OpenSharingLinkButton
               link={addSharingLink}
