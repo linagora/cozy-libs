@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.1.1...cozy-sharing@33.1.2) (2026-06-08)
+
+### Bug Fixes
+
+- **cozy-sharing:** Avoid regex parsing in input matchers ([ecab525](https://github.com/cozy/cozy-libs/commit/ecab525b7559710d693787fb50c6c5fe8abd55ac))
+- **cozy-sharing:** Make matching diacritic-insensitive ([e421a5a](https://github.com/cozy/cozy-libs/commit/e421a5ac5f97f64ef27340a3b87f9f15b3efebd9))
+
 ## [33.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.1.0...cozy-sharing@33.1.1) (2026-06-04)
 
 ### Bug Fixes

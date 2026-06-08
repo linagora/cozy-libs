@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [28.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.0.32...cozy-viewer@28.1.0) (2026-06-08)
+
+### Features
+
+- **viewer:** Add an Edit button to the PDF viewer ([e6bc365](https://github.com/cozy/cozy-libs/commit/e6bc36506d7eb3d728028b4e81191e991653b672))
+
 ## [28.0.32](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.0.31...cozy-viewer@28.0.32) (2026-06-04)
 
 **Note:** Version bump only for package cozy-viewer
