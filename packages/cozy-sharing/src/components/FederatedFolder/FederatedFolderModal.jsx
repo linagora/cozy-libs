@@ -96,9 +96,27 @@ const FederatedFolderModalContent = ({
 
   const folderName = existingDocument?.name || ''
   const documentPath = existingDocument?.path
-  const hasParentRestriction = Boolean(
-    existingDocument?.driveId || (documentPath && hasSharedParent(documentPath))
+  const sharedDriveSharing = existingDocument?.driveId
+    ? getSharingById(existingDocument.driveId)
+    : null
+  const sharedDriveRootIds =
+    sharedDriveSharing?.attributes?.rules?.reduce(
+      (ids, rule) => ids.concat(rule.values || []),
+      []
+    ) || []
+  const isSharedDriveRoot = Boolean(
+    existingDocument?.driveId &&
+    sharedDriveRootIds.some(
+      id => id === existingDocument?._id || id === existingDocument?.id
+    )
   )
+  const isInsideSharedDrive = Boolean(
+    existingDocument?.driveId && !isSharedDriveRoot
+  )
+  const hasSharedParentByPath = Boolean(
+    documentPath && hasSharedParent(documentPath)
+  )
+  const hasParentRestriction = isInsideSharedDrive || hasSharedParentByPath
   const hasChildRestriction = Boolean(
     documentPath && hasSharedChild(documentPath)
   )
