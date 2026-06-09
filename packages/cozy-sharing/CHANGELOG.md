@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.1.2...cozy-sharing@33.2.0) (2026-06-09)
+
+### Features
+
+- **cozy-sharing:** Show progress icon on done button during share ([885a715](https://github.com/cozy/cozy-libs/commit/885a71568a96354e3d962296a205efb05881a5d1))
+
 ## [33.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.1.1...cozy-sharing@33.1.2) (2026-06-08)
 
 ### Bug Fixes
