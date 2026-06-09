@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.2.0...cozy-sharing@33.2.1) (2026-06-09)
+
+### Bug Fixes
+
+- **cozy-sharing:** Refresh link state in share modal ([dfb6dd3](https://github.com/cozy/cozy-libs/commit/dfb6dd39e81b13a7da37ab8f5b4480fb645df01e))
+
 # [33.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.1.2...cozy-sharing@33.2.0) (2026-06-09)
 
 ### Features
