@@ -13,6 +13,7 @@ const mockRevoke = jest.fn()
 const mockGetSharingLink = jest.fn()
 const mockGetFederatedShareLink = jest.fn()
 const mockGetRecipients = jest.fn().mockReturnValue([])
+const mockGetSharingById = jest.fn()
 const mockHasSharedChild = jest.fn()
 const mockHasSharedParent = jest.fn()
 const mockShowAlert = jest.fn()
@@ -26,6 +27,7 @@ jest.mock('../../hooks/useSharingContext', () => ({
     getFederatedShareLink: mockGetFederatedShareLink,
     getDocumentPermissions: jest.fn().mockReturnValue([]),
     getRecipients: mockGetRecipients,
+    getSharingById: mockGetSharingById,
     hasSharedChild: mockHasSharedChild,
     hasSharedParent: mockHasSharedParent
   })
@@ -94,6 +96,7 @@ describe('FederatedFolderModal', () => {
       'https://example.com/share/federated-abc123'
     )
     mockGetRecipients.mockReturnValue([])
+    mockGetSharingById.mockReturnValue(null)
     mockHasSharedChild.mockReturnValue(false)
     mockHasSharedParent.mockReturnValue(false)
     client = createTestClient()
@@ -161,6 +164,32 @@ describe('FederatedFolderModal', () => {
 
       await findByText('This folder can only be shared by link, because')
       await findByText('it has a shared parent')
+    })
+
+    it('should allow share by email when document is the federated shared folder root', async () => {
+      mockGetSharingById.mockReturnValue({
+        attributes: {
+          rules: [
+            { values: ['another-folder-id'] },
+            { values: ['yet-another-folder-id', mockDocument._id] }
+          ]
+        }
+      })
+
+      const { findByText, queryByText } = setup({
+        document: {
+          ...mockDocument,
+          driveId: 'federated-folder-id',
+          type: 'directory'
+        }
+      })
+
+      await findByText('Add users')
+
+      expect(
+        queryByText('This folder can only be shared by link, because')
+      ).toBe(null)
+      expect(queryByText('it has a shared parent')).toBe(null)
     })
   })
 
