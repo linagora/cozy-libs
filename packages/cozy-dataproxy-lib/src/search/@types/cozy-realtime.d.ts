@@ -11,7 +11,11 @@ declare module 'cozy-realtime' {
   export const RealtimePlugin: RealtimePluginType
 
   export default class CozyRealtime {
-    constructor(options: { client: CozyClient; sharedDriveId?: string })
+    constructor(options: {
+      client: CozyClient
+      sharedDriveId?: string
+      background?: boolean
+    })
     subscribe(
       event: string,
       doctype: string,
