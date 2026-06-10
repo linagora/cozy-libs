@@ -143,7 +143,7 @@ export class SharingProvider extends Component {
     this.fetchAllSharings()
     if (!client.plugins.realtime) {
       // eslint-disable-next-line
-      console.warn(
+         console.warn(
         `You should register the realtime plugin to your CozyClient instance see https://docs.cozy.io/en/cozy-realtime/#example`
       )
     } else {
@@ -353,36 +353,19 @@ export class SharingProvider extends Component {
     const member = sharing.attributes.members[memberIndex]
     if (!member) throw new Error('Member not found')
 
-    // Find the contact by email (same pattern as helpers/contacts.js)
-    const matchedContacts = await this.props.client
-      .collection('io.cozy.contacts')
-      .find(
-        {
-          email: { $elemMatch: { address: member.email } },
-          _id: { $gt: null }
-        },
-        { indexedFields: ['_id'] }
-      )
-
-    if (!matchedContacts.data.length) {
-      throw new Error(`Contact not found for member ${member.email}`)
+    const makeReadOnly = newType === 'one-way'
+    if (newType !== 'one-way' && newType !== 'two-way') {
+      throw new Error('Unsupported sharing type: ' + newType)
     }
-    const contact = matchedContacts.data[0]
-
-    // Revoke (API call only, no state dispatch to avoid UI flickering)
-    await this.sharingCol.revokeRecipient(sharing, memberIndex)
-
-    // Re-add with the new permission type
-    const readOnly = newType === 'one-way'
     try {
-      await this.addRecipients({
-        document: sharing,
-        recipients: readOnly ? [] : [contact],
-        readOnlyRecipients: readOnly ? [contact] : []
-      })
+      if (makeReadOnly) {
+        await this.sharingCol.setReadOnly(sharing, memberIndex)
+      } else {
+        await this.sharingCol.setReadWrite(sharing, memberIndex)
+      }
     } catch (error) {
       log.error(
-        `Failed to re-add member ${member.email} after revocation. The member has been revoked but could not be re-added with the new permission type.`,
+        `Failed to change member ${member.email} permission type to ${newType}`,
         error
       )
       throw error
