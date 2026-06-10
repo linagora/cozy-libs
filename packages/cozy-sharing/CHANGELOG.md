@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.0...cozy-sharing@33.3.1) (2026-06-10)
+
+### Bug Fixes
+
+- **cozy-sharing:** Expire share links at the end of the selected day ([db81ed9](https://github.com/cozy/cozy-libs/commit/db81ed936a15850f278404511c1b6faec0fc7a54))
+
 # [33.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.2.2...cozy-sharing@33.3.0) (2026-06-10)
 
 ### Features
