@@ -338,6 +338,18 @@ export const getOwner = (state, docId) =>
 
 export const getRecipients = (state, docId) => {
   const sharings = getDocumentSharings(state, docId)
+  return getRecipientsFromSharings(sharings, docId)
+}
+
+export const getRecipientsFromSharing = (sharing, docId) => {
+  if (!sharing) {
+    return []
+  }
+
+  return getRecipientsFromSharings([sharing], docId)
+}
+
+const getRecipientsFromSharings = (sharings, docId) => {
   if (flag('sharing.show-recipient-groups')) {
     return getRecipientsWithGroups(sharings, docId)
   }
