@@ -29,7 +29,6 @@ jest.mock('../../hooks/useSharingContext', () => ({
     getFederatedShareLink: mockGetFederatedShareLink,
     getDocumentPermissions: jest.fn().mockReturnValue([]),
     getOwner: jest.fn(),
-    getSharingById: jest.fn(),
     getRecipients: mockGetRecipients,
     getSharingById: mockGetSharingById,
     hasSharedChild: mockHasSharedChild,
