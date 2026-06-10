@@ -5,6 +5,7 @@ import reducer, {
   updateSharingLink,
   revokeSharingLink,
   getRecipients,
+  getRecipientsFromSharing,
   revokeRecipient,
   revokeSelf,
   updateSharing,
@@ -537,6 +538,63 @@ describe('Sharing state', () => {
           status: 'pending',
           type: 'one-way',
           avatarPath: '/sharings/sharing_5/recipients/1/avatar'
+        }
+      ])
+    })
+
+    it('should list recipients from a shared drive sharing', () => {
+      const sharing = {
+        id: 'shared_drive_id',
+        drive: true,
+        attributes: {
+          members: [
+            {
+              email: 'jane@doe.com',
+              instance: 'http://cozy.tools:8080',
+              name: 'Jane Doe',
+              status: 'owner'
+            },
+            {
+              email: 'john@doe.com',
+              instance: 'http://cozy.local:8080',
+              name: 'John Doe',
+              status: 'ready'
+            }
+          ],
+          rules: [
+            {
+              doctype: 'io.cozy.files',
+              values: ['shared_drive_root'],
+              add: 'sync',
+              update: 'sync',
+              remove: 'sync'
+            }
+          ]
+        }
+      }
+
+      expect(getRecipientsFromSharing(sharing, 'child_file_id')).toEqual([
+        {
+          email: 'jane@doe.com',
+          instance: 'http://cozy.tools:8080',
+          name: 'Jane Doe',
+          sharingId: 'shared_drive_id',
+          index: 'sharing-shared_drive_id-member-0',
+          memberIndex: 0,
+          status: 'owner',
+          type: 'two-way',
+          avatarPath: '/sharings/shared_drive_id/recipients/0/avatar'
+        },
+        {
+          email: 'john@doe.com',
+          instance: 'http://cozy.local:8080',
+          name: 'John Doe',
+          sharingId: 'shared_drive_id',
+          index: 'sharing-shared_drive_id-member-1',
+          memberIndex: 1,
+          status: 'ready',
+          type: 'two-way',
+          avatarPath: '/sharings/shared_drive_id/recipients/1/avatar'
         }
       ])
     })
