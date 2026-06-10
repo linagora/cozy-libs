@@ -1,3 +1,5 @@
+import { endOfDay } from 'date-fns'
+
 import { generateWebLink } from 'cozy-client'
 import minilog from 'cozy-minilog'
 
@@ -8,6 +10,21 @@ const log = minilog('ShareRestrictionModal/helpers')
 
 export const WRITE_PERMS = ['GET', 'POST', 'PUT', 'PATCH']
 export const READ_ONLY_PERMS = ['GET']
+
+/**
+ * A share link expires at the END of the selected day, so picking today keeps
+ * the link reachable for the rest of today and expires it the next day.
+ * Without this, the picked day defaults to its midnight (start of day), which
+ * is already in the past and makes the link unreachable as soon as it is set.
+ * @param {Date|string|null|undefined} date - The picked expiration day
+ * @returns {Date|null|undefined} - The same value normalized to end of day
+ */
+export const toExpirationDate = date => {
+  if (!date) return date
+  const parsed = date instanceof Date ? date : new Date(date)
+  if (parsed.toString() === 'Invalid Date') return date
+  return endOfDay(parsed)
+}
 
 /**
  * Create a sharing link for a file with specified options
@@ -161,9 +178,10 @@ export const makeTTL = selectedDate => {
     }
     if (selectedDateConverted instanceof Date) {
       const now = new Date()
+      const expiration = toExpirationDate(selectedDateConverted)
       const ttl =
-        selectedDateConverted > now
-          ? `${Math.round((selectedDateConverted - now) / 1000)}s`
+        expiration > now
+          ? `${Math.round((expiration - now) / 1000)}s`
           : undefined
       return ttl
     }
@@ -239,7 +257,9 @@ export const updatePermissions = async ({
   showAlert
 }) => {
   try {
-    const expiresAt = dateToggle ? selectedDate?.toISOString() || undefined : ''
+    const expiresAt = dateToggle
+      ? toExpirationDate(selectedDate)?.toISOString() || undefined
+      : ''
     const ensurePassword = passwordToggle ? password || undefined : ''
     const verbs = editingRights === 'readOnly' ? READ_ONLY_PERMS : WRITE_PERMS
     return updateDocumentPermissions(file, {
