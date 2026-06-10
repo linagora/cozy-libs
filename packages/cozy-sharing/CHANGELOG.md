@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.2.2...cozy-sharing@33.3.0) (2026-06-10)
+
+### Features
+
+- **cozy-sharing:** Expose recipients from sharing ([4751522](https://github.com/cozy/cozy-libs/commit/47515222a60ec54b0537b6ca6b5cfab3e6613638))
+
 ## [33.2.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.2.1...cozy-sharing@33.2.2) (2026-06-10)
 
 ### Bug Fixes

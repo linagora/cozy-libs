@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.1.4](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.1.3...cozy-viewer@28.1.4) (2026-06-10)
+
+### Bug Fixes
+
+- **cozy-viewer:** Show shared drive recipients in panel ([f58d29a](https://github.com/cozy/cozy-libs/commit/f58d29ad4a5ed3c7ef98b5cc95a6694f631d86d9))
+
 ## [28.1.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.1.2...cozy-viewer@28.1.3) (2026-06-10)
 
 **Note:** Version bump only for package cozy-viewer
