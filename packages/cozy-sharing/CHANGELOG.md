@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.2.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.2.1...cozy-sharing@33.2.2) (2026-06-10)
+
+### Bug Fixes
+
+- **cozy-sharing:** Allow sharing shared drive folder root by email ([5110b4f](https://github.com/cozy/cozy-libs/commit/5110b4fb306bb664f2c6b62f209ef4af1e25c293))
+- **cozy-sharing:** Fix lint issue in master ([5acd30a](https://github.com/cozy/cozy-libs/commit/5acd30a31412552be6b6223e43df2b320ea07098))
+
 ## [33.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.2.0...cozy-sharing@33.2.1) (2026-06-09)
 
 ### Bug Fixes
