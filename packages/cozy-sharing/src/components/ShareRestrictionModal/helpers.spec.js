@@ -1,6 +1,29 @@
-import { makeTTL, revokePermissions, updatePermissions } from './helpers'
+import { endOfDay } from 'date-fns'
+
+import {
+  makeTTL,
+  revokePermissions,
+  toExpirationDate,
+  updatePermissions
+} from './helpers'
 
 describe('ShareRestrictionModal/helpers', () => {
+  describe('toExpirationDate', () => {
+    it('returns falsy values unchanged', () => {
+      expect(toExpirationDate(null)).toBeNull()
+      expect(toExpirationDate(undefined)).toBeUndefined()
+      expect(toExpirationDate('')).toBe('')
+    })
+    it('normalizes a Date to the end of its day', () => {
+      const date = new Date(2100, 0, 1, 9, 30)
+      expect(toExpirationDate(date)).toEqual(endOfDay(date))
+    })
+    it('accepts an ISO string', () => {
+      const iso = '2100-01-01T09:30:00.000Z'
+      expect(toExpirationDate(iso)).toEqual(endOfDay(new Date(iso)))
+    })
+  })
+
   describe('makeTTL', () => {
     it('sould return undefined', () => {
       expect(makeTTL()).toBeUndefined()
@@ -13,6 +36,17 @@ describe('ShareRestrictionModal/helpers', () => {
     it('sould return TTL in seconds', () => {
       expect(makeTTL(new Date('2100-01-01T00:00:00.000Z'))).toBeDefined()
       expect(makeTTL('2100-01-01T00:00:00.000Z')).toBeDefined()
+    })
+    it('keeps a link picked for today valid until the end of the day', () => {
+      // Regression: picking "today" used to resolve to midnight (already past),
+      // which dropped the TTL and the link never expired or was unreachable.
+      jest.useFakeTimers()
+      jest.setSystemTime(new Date('2100-01-01T12:00:00.000Z'))
+      try {
+        expect(makeTTL(new Date())).toBeDefined()
+      } finally {
+        jest.useRealTimers()
+      }
     })
   })
 
@@ -118,11 +152,12 @@ describe('ShareRestrictionModal/helpers', () => {
       const updateDocumentPermissions = jest.fn()
       const file = { _id: '123' }
 
+      const selectedDate = new Date('2100-01-01T00:00:00.000Z')
       await updatePermissions({
         file,
         t: jest.fn(),
         dateToggle: true,
-        selectedDate: new Date('2100-01-01T00:00:00.000Z'),
+        selectedDate,
         passwordToggle: true,
         password: '1234',
         editingRights: 'readOnly',
@@ -132,10 +167,41 @@ describe('ShareRestrictionModal/helpers', () => {
       })
 
       expect(updateDocumentPermissions).toHaveBeenCalledWith(file, {
-        expiresAt: '2100-01-01T00:00:00.000Z',
+        expiresAt: endOfDay(selectedDate).toISOString(),
         password: '1234',
         verbs: ['GET']
       })
+    })
+
+    it('sets expiration to the end of the selected day so picking today stays valid', async () => {
+      // Freeze time so the "expires in the future" assertion can't flake near
+      // midnight or under slow CI.
+      jest.useFakeTimers()
+      jest.setSystemTime(new Date('2100-01-01T12:00:00.000Z'))
+      try {
+        const updateDocumentPermissions = jest.fn()
+        const file = { _id: '123' }
+        const today = new Date()
+
+        await updatePermissions({
+          file,
+          t: jest.fn(),
+          dateToggle: true,
+          selectedDate: today,
+          passwordToggle: false,
+          password: '',
+          editingRights: 'readOnly',
+          documentType,
+          updateDocumentPermissions,
+          showAlert: jest.fn()
+        })
+
+        const { expiresAt } = updateDocumentPermissions.mock.calls[0][1]
+        expect(expiresAt).toBe(endOfDay(today).toISOString())
+        expect(new Date(expiresAt).getTime()).toBeGreaterThan(Date.now())
+      } finally {
+        jest.useRealTimers()
+      }
     })
   })
 
