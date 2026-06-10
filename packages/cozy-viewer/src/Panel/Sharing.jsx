@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import {
-  useSharingContext,
+  getRecipientsFromSharing,
+  LinkRecipientLite,
   MemberRecipientLite,
   OwnerRecipientDefaultLite,
-  LinkRecipientLite
+  useSharingContext
 } from 'cozy-sharing'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -21,19 +23,27 @@ import { withViewerLocales } from '../hoc/withViewerLocales'
 import { useShareModal } from '../providers/ShareModalProvider'
 
 const Sharing = ({ file, t }) => {
+  const client = useClient()
   const { setShowShareModal } = useShareModal()
   const {
-    isOwner,
     getDocumentPermissions,
+    getSharingById,
     getSharingLink,
     allLoaded,
-    getRecipients
+    getRecipients,
+    isOwner
   } = useSharingContext()
 
-  const recipients = getRecipients(file._id)
+  const sharedDriveSharing = file.driveId ? getSharingById(file.driveId) : null
+  const recipients = sharedDriveSharing
+    ? getRecipientsFromSharing(sharedDriveSharing, file._id)
+    : getRecipients(file._id)
   const permissions = getDocumentPermissions(file._id)
   const link = getSharingLink(file._id)
-  const _isOwner = isOwner(file._id)
+  const owner = recipients.find(recipient => recipient.status === 'owner')
+  const isCurrentUserOwner = file.driveId
+    ? owner?.instance === client.options.uri
+    : isOwner(file._id)
 
   const showModal = () => {
     if (!flag('drive.new-file-viewer-ui.enabled')) {
@@ -71,7 +81,7 @@ const Sharing = ({ file, t }) => {
             <MemberRecipientLite
               key={recipient.index}
               recipient={recipient}
-              isOwner={_isOwner}
+              isOwner={isCurrentUserOwner}
             />
           ))
         ) : (
