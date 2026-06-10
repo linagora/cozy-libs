@@ -582,11 +582,13 @@ describe('Realtime features', () => {
 
       expect(mockCozyRealtime).toHaveBeenCalledWith({
         client: mockClient,
-        sharedDriveId: 'drive1'
+        sharedDriveId: 'drive1',
+        background: true
       })
       expect(mockCozyRealtime).toHaveBeenCalledWith({
         client: mockClient,
-        sharedDriveId: 'drive2'
+        sharedDriveId: 'drive2',
+        background: true
       })
     })
   })
@@ -814,7 +816,8 @@ describe('Realtime features', () => {
 
         expect(mockCozyRealtime).toHaveBeenCalledWith({
           client: mockClient,
-          sharedDriveId: 'drive1'
+          sharedDriveId: 'drive1',
+          background: true
         })
         expect(mockRealtimeInstance.subscribe).toHaveBeenCalledWith(
           'created',
