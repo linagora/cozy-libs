@@ -31,6 +31,7 @@ const FederatedFolderModalContent = ({
   const { t } = useI18n()
   const {
     share,
+    getSharingById,
     getSharingLink,
     getFederatedShareLink,
     getRecipients,
