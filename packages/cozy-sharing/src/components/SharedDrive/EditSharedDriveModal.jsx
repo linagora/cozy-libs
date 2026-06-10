@@ -14,6 +14,7 @@ import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import styles from '../../styles/share.styl'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import WhoHasAccess from '../WhoHasAccess'
 
@@ -68,10 +69,12 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
       onClose={onClose}
       classes={{ paper: 'u-ov-visible' }}
       componentsProps={{
-        dialogContent: { className: 'u-ov-visible' }
+        dialogContent: {
+          className: styles['share-dialog-scrollable-content']
+        }
       }}
       content={
-        <div>
+        <div className={styles['share-dialog-scrollable-body']}>
           <div className="u-ph-2 u-pt-2">
             <SharedDriveHeader
               title={t('SharedDrive.editSharedDriveModal.title')}
@@ -104,7 +107,7 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
             recipients={existingRecipients}
             document={document}
             documentType="Files"
-            className="u-w-100"
+            className={styles['share-dialog-members']}
             onRevoke={revoke}
           />
           <div className="u-flex u-ph-2 u-pv-1">

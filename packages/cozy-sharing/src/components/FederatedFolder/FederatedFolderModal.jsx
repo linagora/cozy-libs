@@ -186,10 +186,12 @@ const FederatedFolderModalContent = ({
       title={modalTitle}
       classes={{ paper: 'u-ov-visible' }}
       componentsProps={{
-        dialogContent: { className: 'u-ov-visible' }
+        dialogContent: {
+          className: styles['share-dialog-scrollable-content']
+        }
       }}
       content={
-        <div>
+        <div className={styles['share-dialog-scrollable-body']}>
           <div className="u-ph-2">
             <AntivirusAlert
               document={isSending ? frozenDoc : existingDocument}
@@ -240,7 +242,7 @@ const FederatedFolderModalContent = ({
             recipients={isSending ? frozenRecipients : existingRecipients}
             document={isSending ? frozenDoc : existingDocument}
             documentType="Files"
-            className="u-w-100"
+            className={styles['share-dialog-members']}
             onRevoke={revoke}
             link={displayedLink}
           />
