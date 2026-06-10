@@ -292,7 +292,6 @@ describe('updateDocumentPermissions', () => {
 })
 
 describe('updateSharingMemberType', () => {
-  const mockContact = { _id: 'contact-1', email: [{ address: 'bob@bob.cozy' }] }
   const mockSharing = {
     id: 'sharing-123',
     type: 'io.cozy.sharings',
@@ -305,16 +304,11 @@ describe('updateSharingMemberType', () => {
   }
 
   let instance
-  let mockContactsCollection
 
   beforeEach(() => {
-    mockContactsCollection = {
-      find: jest.fn().mockResolvedValue({ data: [mockContact] })
-    }
-
     const mockClient = {
       getStackClient: () => ({ uri: 'http://cozy.local' }),
-      collection: jest.fn().mockReturnValue(mockContactsCollection)
+      collection: jest.fn().mockReturnValue({})
     }
 
     instance = new SharingProvider({ client: mockClient })
@@ -323,9 +317,10 @@ describe('updateSharingMemberType', () => {
       sharings: [mockSharing]
     }
     instance.sharingCol = {
-      revokeRecipient: jest.fn().mockResolvedValue({})
+      setReadOnly: jest.fn().mockResolvedValue({}),
+      setReadWrite: jest.fn().mockResolvedValue({})
     }
-    jest.spyOn(instance, 'addRecipients').mockResolvedValue({})
+    jest.spyOn(instance, 'setState')
   })
 
   it('should throw when sharing is not found', async () => {
@@ -340,48 +335,65 @@ describe('updateSharingMemberType', () => {
     ).rejects.toThrow('Member not found')
   })
 
-  it('should throw when contact is not found', async () => {
-    mockContactsCollection.find.mockResolvedValue({ data: [] })
-
-    await expect(
-      instance.updateSharingMemberType('sharing-123', 1, 'one-way')
-    ).rejects.toThrow('Contact not found')
-  })
-
-  it('should revoke and re-add with readOnly when switching to one-way', async () => {
+  it('should call setReadOnly when switching to one-way', async () => {
     await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
 
-    expect(instance.sharingCol.revokeRecipient).toHaveBeenCalledWith(
-      mockSharing,
-      1
-    )
-    expect(instance.addRecipients).toHaveBeenCalledWith({
-      document: mockSharing,
-      recipients: [],
-      readOnlyRecipients: [mockContact]
-    })
+    expect(instance.sharingCol.setReadOnly).toHaveBeenCalledWith(mockSharing, 1)
+    expect(instance.sharingCol.setReadWrite).not.toHaveBeenCalled()
   })
 
-  it('should revoke and re-add as read-write when switching to two-way', async () => {
+  it('should call setReadWrite when switching to two-way', async () => {
     await instance.updateSharingMemberType('sharing-123', 1, 'two-way')
 
-    expect(instance.sharingCol.revokeRecipient).toHaveBeenCalledWith(
+    expect(instance.sharingCol.setReadWrite).toHaveBeenCalledWith(
       mockSharing,
       1
     )
-    expect(instance.addRecipients).toHaveBeenCalledWith({
-      document: mockSharing,
-      recipients: [mockContact],
-      readOnlyRecipients: []
-    })
+    expect(instance.sharingCol.setReadOnly).not.toHaveBeenCalled()
   })
 
-  it('should rethrow error if addRecipients fails after revocation', async () => {
-    instance.addRecipients.mockRejectedValue(new Error('Network error'))
+  it('should not dispatch a state update — realtime refreshes the store', async () => {
+    await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
+
+    expect(instance.setState).not.toHaveBeenCalled()
+  })
+
+  it('should not dispatch a state update for two-way — realtime refreshes the store', async () => {
+    await instance.updateSharingMemberType('sharing-123', 1, 'two-way')
+
+    expect(instance.setState).not.toHaveBeenCalled()
+  })
+
+  it('should rethrow error if setReadOnly fails', async () => {
+    instance.sharingCol.setReadOnly.mockRejectedValue(
+      new Error('Network error')
+    )
 
     await expect(
       instance.updateSharingMemberType('sharing-123', 1, 'one-way')
     ).rejects.toThrow('Network error')
+  })
+
+  it('should rethrow error if setReadWrite fails', async () => {
+    instance.sharingCol.setReadWrite.mockRejectedValue(
+      new Error('Network error')
+    )
+
+    await expect(
+      instance.updateSharingMemberType('sharing-123', 1, 'two-way')
+    ).rejects.toThrow('Network error')
+  })
+
+  it('should not dispatch state update if API call fails', async () => {
+    instance.sharingCol.setReadOnly.mockRejectedValue(
+      new Error('Network error')
+    )
+
+    await expect(
+      instance.updateSharingMemberType('sharing-123', 1, 'one-way')
+    ).rejects.toThrow('Network error')
+
+    expect(instance.setState).not.toHaveBeenCalled()
   })
 })
 
