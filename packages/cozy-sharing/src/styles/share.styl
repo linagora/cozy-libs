@@ -2,6 +2,39 @@
 @require 'components/popover.styl'
 @require 'settings/breakpoints.styl'
 
+// The federated share dialogs keep overflow visible so the contact
+// suggestions dropdown can pop over the dialog, which disables the dialog's
+// native scrolling. These classes pass the height constraint down through
+// the flex chain so only the members list scrolls.
+.share-dialog-scrollable-content
+    display flex
+    flex-direction column
+    min-height 0
+    // keep the contact suggestions dropdown visible over the dialog;
+    // !important to win over MUI's DialogContent overflow-y auto
+    overflow visible !important // @stylint ignore
+
+    // cozy-ui dialogs expose no componentsProps hook for their
+    // .dialogContentInner wrapper, but the classname is a stable contract:
+    // cozy-ui's own MUI theme overrides style it by name
+    > :global(.dialogContentInner) // @stylint ignore Naming imposed by cozy-ui
+        display flex
+        flex-direction column
+        flex 1 1 auto
+        min-height 0
+
+.share-dialog-scrollable-body
+    display flex
+    flex-direction column
+    flex 1 1 auto
+    min-height 0
+
+.share-dialog-members
+    flex 1 1 auto
+    min-height 0
+    overflow-y auto
+    width 100%
+
 .share-byemail-onlybylink
     background var(--defaultBackgroundColor)
     padding 1rem 2rem
