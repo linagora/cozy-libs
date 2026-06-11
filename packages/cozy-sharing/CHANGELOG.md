@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.3.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.3...cozy-sharing@33.3.4) (2026-06-11)
+
+### Bug Fixes
+
+- Remove strange custom color on share by me button ([712a261](https://github.com/cozy/cozy-libs/commit/712a2610eb572e00c9934745a978fd562154140a))
+
 ## [33.3.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.2...cozy-sharing@33.3.3) (2026-06-11)
 
 ### Bug Fixes
