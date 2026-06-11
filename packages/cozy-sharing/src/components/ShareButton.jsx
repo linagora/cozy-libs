@@ -22,7 +22,7 @@ export const ShareButton = ({ label, onClick, className, ...props }) => (
 export const SharedByMeButton = ({ label, onClick, className, ...props }) => (
   <Button
     data-test-id="share-by-me-button"
-    className={classNames(styles['coz-btn-shared'], className)}
+    className={className}
     onClick={() => onClick()}
     icon={<Icon icon={ShareIcon} />}
     label={label}
