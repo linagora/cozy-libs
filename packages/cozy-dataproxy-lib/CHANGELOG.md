@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.0...cozy-dataproxy-lib@4.15.1) (2026-06-11)
+
+### Bug Fixes
+
+- **cozy-realtime:** Keep drive sharings new on background connections ([1af02ec](https://github.com/cozy/cozy-libs/commit/1af02eccf73f9c3223edd8607878ceb91b606367))
+
 # [4.15.0](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.14.1...cozy-dataproxy-lib@4.15.0) (2026-03-27)
 
 ### Features

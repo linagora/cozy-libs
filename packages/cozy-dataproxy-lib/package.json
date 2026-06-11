@@ -1,7 +1,7 @@
 {
   "name": "cozy-dataproxy-lib",
   "description": "Library meant to be by Cozy Cloud's DataProxy apps for data manipulation",
-  "version": "4.15.0",
+  "version": "4.15.1",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
@@ -28,7 +28,7 @@
     "cozy-logger": "^1.18.1",
     "cozy-minilog": "^3.10.1",
     "cozy-pouch-link": "^60.17.2",
-    "cozy-realtime": "^5.9.1",
+    "cozy-realtime": "^5.9.2",
     "cross-fetch": "^4.0.0",
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",

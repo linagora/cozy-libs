@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.2](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.9.1...cozy-realtime@5.9.2) (2026-06-11)
+
+### Bug Fixes
+
+- **cozy-realtime:** Keep drive sharings new on background connections ([1af02ec](https://github.com/cozy/cozy-libs/commit/1af02eccf73f9c3223edd8607878ceb91b606367))
+
 ## [5.9.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.9.0...cozy-realtime@5.9.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-realtime
