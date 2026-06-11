@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.3.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.2...cozy-sharing@33.3.3) (2026-06-11)
+
+### Bug Fixes
+
+- **cozy-sharing:** Scroll members list in federated share dialogs ([a3b8a64](https://github.com/cozy/cozy-libs/commit/a3b8a6460efa0b6228cdbf825eca7b950300b2f9))
+
 ## [33.3.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.1...cozy-sharing@33.3.2) (2026-06-11)
 
 ### Bug Fixes
