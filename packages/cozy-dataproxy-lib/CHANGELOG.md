@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.2](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.1...cozy-dataproxy-lib@4.15.2) (2026-06-11)
+
+### Bug Fixes
+
+- **cozy-dataproxy-lib:** Require cozy-realtime with background option ([991d010](https://github.com/cozy/cozy-libs/commit/991d010364a06cf0c46856771890d0e4963b1780))
+
 ## [4.15.1](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.0...cozy-dataproxy-lib@4.15.1) (2026-06-11)
 
 ### Bug Fixes
