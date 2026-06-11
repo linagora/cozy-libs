@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.3.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.1...cozy-sharing@33.3.2) (2026-06-11)
+
+### Bug Fixes
+
+- **cozy-sharing:** Use readonly endpoint in updateSharingMemberType ([f4914b6](https://github.com/cozy/cozy-libs/commit/f4914b61daaf5c20b17c4b9f1ddda511860a56ac))
+
 ## [33.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.0...cozy-sharing@33.3.1) (2026-06-10)
 
 ### Bug Fixes
