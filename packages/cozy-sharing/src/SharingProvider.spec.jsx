@@ -291,6 +291,184 @@ describe('updateDocumentPermissions', () => {
   })
 })
 
+describe('fetchSharedDriveSharingLinks', () => {
+  const PERM_DRIVE_FILE = {
+    type: 'io.cozy.permissions',
+    id: 'perm_drive_file',
+    attributes: {
+      type: 'share',
+      permissions: {
+        rule0: {
+          type: 'io.cozy.files',
+          verbs: ['GET'],
+          values: ['file_in_drive']
+        }
+      },
+      shortcodes: { code: 'shortcode123' }
+    }
+  }
+
+  const driveFile = {
+    _id: 'file_in_drive',
+    id: 'file_in_drive',
+    driveId: 'drive_123'
+  }
+
+  it('fetches shared drive sharing links by file id', async () => {
+    const mockFindLinksByIds = jest
+      .fn()
+      .mockResolvedValue({ data: [PERM_DRIVE_FILE] })
+    const mockClient = createMockClient({})
+    mockClient.collection = jest.fn().mockReturnValue({
+      findLinksByIds: mockFindLinksByIds
+    })
+
+    const provider = new SharingProvider({ client: mockClient })
+    provider.state = reducer()
+    provider.dispatch = jest.fn(action => {
+      provider.state = reducer(provider.state, action)
+    })
+
+    const result = await provider.fetchSharedDriveSharingLinks(driveFile)
+
+    expect(mockClient.collection).toHaveBeenCalledWith('io.cozy.permissions', {
+      driveId: 'drive_123'
+    })
+    expect(mockFindLinksByIds).toHaveBeenCalledWith(['file_in_drive'])
+    expect(provider.dispatch).toHaveBeenCalled()
+    const permissions = getDocumentPermissions(provider.state, 'file_in_drive')
+    expect(permissions).toHaveLength(1)
+    expect(permissions[0].id).toBe(PERM_DRIVE_FILE.id)
+    expect(result).toEqual([PERM_DRIVE_FILE])
+  })
+
+  it('returns an empty array and skips the API call for non-shared-drive documents', async () => {
+    const mockClient = createMockClient({})
+    const findLinksByIds = jest.fn()
+    mockClient.collection = jest.fn().mockReturnValue({
+      findLinksByIds
+    })
+
+    const provider = new SharingProvider({ client: mockClient })
+    provider.dispatch = jest.fn()
+
+    const result = await provider.fetchSharedDriveSharingLinks({
+      _id: 'regular_file'
+    })
+
+    expect(result).toEqual([])
+    expect(findLinksByIds).not.toHaveBeenCalled()
+    expect(provider.dispatch).not.toHaveBeenCalled()
+  })
+
+  it('uses document.id as a fallback when _id is missing', async () => {
+    const mockFindLinksByIds = jest
+      .fn()
+      .mockResolvedValue({ data: [PERM_DRIVE_FILE] })
+    const mockClient = createMockClient({})
+    mockClient.collection = jest.fn().mockReturnValue({
+      findLinksByIds: mockFindLinksByIds
+    })
+
+    const provider = new SharingProvider({ client: mockClient })
+    provider.state = reducer()
+    provider.dispatch = jest.fn(action => {
+      provider.state = reducer(provider.state, action)
+    })
+
+    await provider.fetchSharedDriveSharingLinks({
+      id: 'file_in_drive',
+      driveId: 'drive_123'
+    })
+
+    expect(mockFindLinksByIds).toHaveBeenCalledWith(['file_in_drive'])
+  })
+
+  it('does not dispatch when the response has no data', async () => {
+    const mockFindLinksByIds = jest.fn().mockResolvedValue({ data: [] })
+    const mockClient = createMockClient({})
+    mockClient.collection = jest.fn().mockReturnValue({
+      findLinksByIds: mockFindLinksByIds
+    })
+
+    const provider = new SharingProvider({ client: mockClient })
+    provider.dispatch = jest.fn()
+
+    const result = await provider.fetchSharedDriveSharingLinks(driveFile)
+
+    expect(result).toEqual([])
+    expect(provider.dispatch).not.toHaveBeenCalled()
+  })
+})
+
+describe('shareByLink shared drive 409 recovery', () => {
+  const PERM_DRIVE_FILE = {
+    type: 'io.cozy.permissions',
+    id: 'perm_drive_file',
+    attributes: {
+      type: 'share',
+      permissions: {
+        rule0: {
+          type: 'io.cozy.files',
+          verbs: ['GET'],
+          values: ['file_in_drive']
+        }
+      },
+      shortcodes: { code: 'shortcode123' }
+    }
+  }
+
+  const driveFile = {
+    _id: 'file_in_drive',
+    id: 'file_in_drive',
+    driveId: 'drive_123'
+  }
+
+  it('falls back to fetching existing links when create returns 409', async () => {
+    const conflict = Object.assign(new Error('Conflict'), { status: 409 })
+    const mockCreateSharingLink = jest.fn().mockRejectedValue(conflict)
+    const mockFindLinksByIds = jest
+      .fn()
+      .mockResolvedValue({ data: [PERM_DRIVE_FILE] })
+    const mockClient = createMockClient({})
+    mockClient.collection = jest.fn().mockReturnValue({
+      createSharingLink: mockCreateSharingLink,
+      findLinksByIds: mockFindLinksByIds
+    })
+
+    const provider = new SharingProvider({ client: mockClient })
+    provider.state = reducer()
+    provider.dispatch = jest.fn(action => {
+      provider.state = reducer(provider.state, action)
+    })
+
+    const resp = await provider.shareByLink(driveFile, { verbs: ['GET'] })
+
+    expect(mockCreateSharingLink).toHaveBeenCalled()
+    expect(mockFindLinksByIds).toHaveBeenCalledWith(['file_in_drive'])
+    expect(resp.data.id).toBe(PERM_DRIVE_FILE.id)
+  })
+
+  it('rethrows the original error when 409 happens and no link is found', async () => {
+    const conflict = Object.assign(new Error('Conflict'), { status: 409 })
+    const mockCreateSharingLink = jest.fn().mockRejectedValue(conflict)
+    const mockFindLinksByIds = jest.fn().mockResolvedValue({ data: [] })
+    const mockClient = createMockClient({})
+    mockClient.collection = jest.fn().mockReturnValue({
+      createSharingLink: mockCreateSharingLink,
+      findLinksByIds: mockFindLinksByIds
+    })
+
+    const provider = new SharingProvider({ client: mockClient })
+    provider.state = reducer()
+    provider.dispatch = jest.fn()
+
+    await expect(
+      provider.shareByLink(driveFile, { verbs: ['GET'] })
+    ).rejects.toBe(conflict)
+  })
+})
+
 describe('updateSharingMemberType', () => {
   const mockSharing = {
     id: 'sharing-123',
