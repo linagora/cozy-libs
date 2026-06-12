@@ -17305,16 +17305,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-client@npm:^60.27.0":
-  version: 60.27.0
-  resolution: "cozy-client@npm:60.27.0"
+"cozy-client@npm:^60.28.0":
+  version: 60.28.0
+  resolution: "cozy-client@npm:60.28.0"
   dependencies:
     "@cozy/minilog": "npm:1.0.0"
     "@fastify/deepmerge": "npm:^2.0.2"
     "@types/jest": "npm:^26.0.20"
     "@types/lodash": "npm:^4.14.170"
     btoa: "npm:^1.2.1"
-    cozy-stack-client: "npm:^60.27.0"
+    cozy-stack-client: "npm:^60.28.0"
     date-fns: "npm:^2.30.0"
     fast-deep-equal: "npm:^3.1.3"
     json-stable-stringify: "npm:^1.0.1"
@@ -17340,7 +17340,7 @@ __metadata:
     react-native-google-play-integrity: ^1.1.0
     react-native-inappbrowser-reborn: ^3.5.1
     react-native-ios11-devicecheck: ^0.0.3
-  checksum: 10c0/c362cbb0a56a19c26d6fdb76454f3135a0721e76c09ecf60c3621b42a6a640a4c94864e25693808d170e0af2b44c915cd2e6cdab55207b8d12afc2b3d687f0d4
+  checksum: 10c0/f4ac08062b053e96bd9e20f1b308933e394341c638abb49a8847dc4f9a0dcbd56b75f3a5f0545f34494646185c1222573100fb3a99684e4d6a643124039ce738
   languageName: node
   linkType: hard
 
@@ -18002,7 +18002,7 @@ __metadata:
     babel-plugin-css-modules-transform: "npm:1.6.2"
     babel-plugin-inline-react-svg: "npm:1.1.2"
     classnames: "npm:^2.5.1"
-    cozy-client: "npm:^60.27.0"
+    cozy-client: "npm:^60.28.0"
     cozy-device-helper: "npm:^4.0.0"
     cozy-doctypes: "npm:^1.99.1"
     cozy-intent: "npm:^2.31.1"
@@ -18022,7 +18022,7 @@ __metadata:
     storybook: "npm:7.6.0"
     twake-i18n: "npm:^0.4.1"
   peerDependencies:
-    cozy-client: ">=60.27.0"
+    cozy-client: ">=60.28.0"
     cozy-device-helper: ">=4.0.0"
     cozy-flags: ">=4.8.1"
     cozy-intent: ">=2.29.1"
@@ -18203,16 +18203,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-stack-client@npm:^60.27.0":
-  version: 60.27.0
-  resolution: "cozy-stack-client@npm:60.27.0"
+"cozy-stack-client@npm:^60.28.0":
+  version: 60.28.0
+  resolution: "cozy-stack-client@npm:60.28.0"
   dependencies:
     detect-node: "npm:^2.0.4"
     mime: "npm:^2.4.0"
     qs: "npm:^6.7.0"
   peerDependencies:
     cozy-flags: ">2.8.6"
-  checksum: 10c0/53bd1200f3f812073782f994d4cdf3a6ac5771a6cec52f1ef239cc543d6e0b0e0acfb6171d944f6aef7231b1423a87ce7684bb92ce9d82fd6f4507aaf5764300
+  checksum: 10c0/e34fcb9bdeb36e7053528b925c9a432cf3015000d555adbb39a5ff8121d823e74603576ec634b39d7489c3f8f7cfd440cc0ba997508d60dfe6be5ffc9e0809df
   languageName: node
   linkType: hard
 

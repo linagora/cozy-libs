@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import minilog from 'cozy-minilog'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -21,6 +22,8 @@ import { default as DumbShareByEmail } from '../ShareByEmail'
 import ShareByLink from '../ShareByLink'
 import WhoHasAccess from '../WhoHasAccess'
 
+const log = minilog('FederatedFolderModal')
+
 const FederatedFolderModalContent = ({
   onClose,
   document: existingDocument,
@@ -34,6 +37,8 @@ const FederatedFolderModalContent = ({
     getSharingById,
     getSharingLink,
     getFederatedShareLink,
+    getDocumentPermissions,
+    fetchSharedDriveSharingLinks,
     getRecipients,
     hasSharedChild,
     hasSharedParent,
@@ -169,12 +174,36 @@ const FederatedFolderModalContent = ({
     }
   }
 
-  const existingRecipients = existingDocument
-    ? getRecipients(existingDocument._id)
+  const documentId = existingDocument?._id || existingDocument?.id
+  const existingRecipients = documentId ? getRecipients(documentId) : []
+  const documentPermissions = documentId
+    ? getDocumentPermissions(documentId)
     : []
   const displayedLink = existingDocument?.driveId
     ? getFederatedShareLink(existingDocument)
     : getSharingLink(existingDocument?._id)
+
+  useEffect(() => {
+    if (!existingDocument?.driveId) return
+    if (!documentId) return
+    if (!fetchSharedDriveSharingLinks) return
+    if (documentPermissions.length > 0) return
+
+    const fetchSharingLinks = async () => {
+      try {
+        await fetchSharedDriveSharingLinks(existingDocument)
+      } catch (error) {
+        log.error('Failed to fetch shared drive sharing links', error)
+      }
+    }
+
+    fetchSharingLinks()
+  }, [
+    documentId,
+    existingDocument,
+    documentPermissions.length,
+    fetchSharedDriveSharingLinks
+  ])
 
   const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
 

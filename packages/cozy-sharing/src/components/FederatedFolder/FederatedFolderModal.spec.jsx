@@ -17,6 +17,8 @@ const mockGetRecipients = jest.fn().mockReturnValue([])
 const mockGetSharingById = jest.fn()
 const mockHasSharedChild = jest.fn()
 const mockHasSharedParent = jest.fn()
+const mockFetchSharedDriveSharingLinks = jest.fn()
+const mockGetDocumentPermissions = jest.fn().mockReturnValue([])
 const mockShowAlert = jest.fn()
 const mockOnClose = jest.fn()
 
@@ -27,7 +29,8 @@ jest.mock('../../hooks/useSharingContext', () => ({
     revoke: mockRevoke,
     getSharingLink: mockGetSharingLink,
     getFederatedShareLink: mockGetFederatedShareLink,
-    getDocumentPermissions: jest.fn().mockReturnValue([]),
+    getDocumentPermissions: mockGetDocumentPermissions,
+    fetchSharedDriveSharingLinks: mockFetchSharedDriveSharingLinks,
     getOwner: jest.fn(),
     getRecipients: mockGetRecipients,
     getSharingById: mockGetSharingById,
@@ -65,7 +68,8 @@ const createSharingContextValue = () => ({
   hasWriteAccess: jest.fn(),
   getRecipients: jest.fn(),
   getSharingLink: mockGetSharingLink,
-  getDocumentPermissions: jest.fn().mockReturnValue([]),
+  getDocumentPermissions: mockGetDocumentPermissions,
+  fetchSharedDriveSharingLinks: mockFetchSharedDriveSharingLinks,
   share: mockShare
 })
 
@@ -96,6 +100,8 @@ describe('FederatedFolderModal', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
+    mockGetDocumentPermissions.mockReturnValue([])
+    mockFetchSharedDriveSharingLinks.mockResolvedValue([])
     mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
     mockGetFederatedShareLink.mockReturnValue(
       'https://example.com/share/federated-abc123'
@@ -224,6 +230,68 @@ describe('FederatedFolderModal', () => {
         queryByText('This folder can only be shared by link, because')
       ).toBe(null)
       expect(queryByText('it has a shared parent')).toBe(null)
+    })
+  })
+
+  describe('shared drive link fetch on mount', () => {
+    it('should fetch shared drive sharing links when document has a driveId and no permissions yet', async () => {
+      mockGetDocumentPermissions.mockReturnValue([])
+
+      setup({
+        document: { ...mockDocument, driveId: 'federated-folder-id' }
+      })
+
+      await waitFor(() => {
+        expect(mockFetchSharedDriveSharingLinks).toHaveBeenCalledTimes(1)
+      })
+      expect(mockFetchSharedDriveSharingLinks).toHaveBeenCalledWith(
+        expect.objectContaining({
+          _id: mockDocument._id,
+          driveId: 'federated-folder-id'
+        })
+      )
+    })
+
+    it('should use document.id when _id is missing', async () => {
+      const document = {
+        id: 'folder-id-only',
+        name: 'My Test Folder',
+        path: '/test/folder',
+        driveId: 'federated-folder-id'
+      }
+
+      setup({ document })
+
+      await waitFor(() => {
+        expect(mockFetchSharedDriveSharingLinks).toHaveBeenCalledWith(document)
+      })
+      expect(mockGetDocumentPermissions).toHaveBeenCalledWith('folder-id-only')
+    })
+
+    it('should not fetch shared drive sharing links when document has no driveId', async () => {
+      const { findByText } = setup({ document: mockDocument })
+
+      await findByText('Copy link')
+
+      expect(mockFetchSharedDriveSharingLinks).not.toHaveBeenCalled()
+    })
+
+    it('should not fetch shared drive sharing links when permissions are already loaded', async () => {
+      mockGetDocumentPermissions.mockReturnValue([
+        {
+          id: 'perm-1',
+          type: 'io.cozy.permissions',
+          attributes: { shortcodes: { code: 'abc' } }
+        }
+      ])
+
+      const { findByText } = setup({
+        document: { ...mockDocument, driveId: 'federated-folder-id' }
+      })
+
+      await findByText('Copy link')
+
+      expect(mockFetchSharedDriveSharingLinks).not.toHaveBeenCalled()
     })
   })
 

@@ -87,6 +87,7 @@ export class SharingProvider extends Component {
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
       getFederatedShareLink: this.getFederatedShareLink,
+      fetchSharedDriveSharingLinks: this.fetchSharedDriveSharingLinks,
       updateDocumentPermissions: this.updateDocumentPermissions,
       revokeSharingLink: this.revokeSharingLink,
       hasLoadedAtLeastOnePage: false,
@@ -373,17 +374,30 @@ export class SharingProvider extends Component {
   }
 
   shareByLink = async (document, options) => {
-    const resp = document.driveId
-      ? await this.createSharedDriveSharingLink(document, options)
-      : await this.permissionCol.createSharingLink(document, options)
-    this.dispatch(addSharingLink(resp.data))
-    return resp
+    try {
+      const resp = document.driveId
+        ? await this.createSharedDriveSharingLink(document, options)
+        : await this.permissionCol.createSharingLink(document, options)
+      this.dispatch(addSharingLink(resp.data))
+      return resp
+    } catch (error) {
+      if (document.driveId && error && error.status === 409) {
+        const permissions = await this.fetchSharedDriveSharingLinks(document)
+        if (permissions && permissions.length > 0) {
+          return { data: permissions[0] }
+        }
+      }
+      throw error
+    }
   }
 
   getFederatedShareLink = document => {
-    if (!document.driveId) return null
+    if (!document?.driveId) return null
 
-    const permissions = getDocumentPermissions(this.state, document._id)
+    const documentId = document._id || document.id
+    if (!documentId) return null
+
+    const permissions = getDocumentPermissions(this.state, documentId)
     const perm = permissions.find(p => getShortcode(p))
     if (!perm) return null
 
@@ -411,6 +425,26 @@ export class SharingProvider extends Component {
       options
     )
     return resp
+  }
+
+  fetchSharedDriveSharingLinks = async document => {
+    if (!document || !document.driveId) return []
+
+    const { client } = this.props
+    const drivePermissionCollection = client.collection('io.cozy.permissions', {
+      driveId: document.driveId
+    })
+    const documentId = document._id || document.id
+    if (!documentId) return []
+
+    const resp = await drivePermissionCollection.findLinksByIds([documentId])
+    const permissions = resp.data || []
+
+    if (permissions.length > 0) {
+      this.dispatch(addSharingLink(permissions))
+    }
+
+    return permissions
   }
 
   updateSharedDrivePermissions = async (
