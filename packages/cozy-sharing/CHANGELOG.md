@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.4.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.4.0...cozy-sharing@33.4.1) (2026-06-15)
+
+### Bug Fixes
+
+- **cozy-sharing:** Keep the owner avatar visible in the share modal ([f63ae1d](https://github.com/cozy/cozy-libs/commit/f63ae1de24de5ca7746b0c6da579f52fa5593806))
+
 # [33.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.4...cozy-sharing@33.4.0) (2026-06-15)
 
 ### Bug Fixes
