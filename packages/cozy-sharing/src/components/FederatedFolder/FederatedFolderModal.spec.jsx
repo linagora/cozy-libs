@@ -276,6 +276,23 @@ describe('FederatedFolderModal', () => {
       expect(mockFetchSharedDriveSharingLinks).not.toHaveBeenCalled()
     })
 
+    it('should not refetch after one attempt when permissions stay empty', async () => {
+      const document = { ...mockDocument, driveId: 'federated-folder-id' }
+      const { rerender } = setup({ document })
+
+      await waitFor(() => {
+        expect(mockFetchSharedDriveSharingLinks).toHaveBeenCalledTimes(1)
+      })
+
+      rerender(
+        <AppLike client={client} sharingContextValue={sharingContextValue}>
+          <FederatedFolderModal document={document} onClose={mockOnClose} />
+        </AppLike>
+      )
+
+      expect(mockFetchSharedDriveSharingLinks).toHaveBeenCalledTimes(1)
+    })
+
     it('should not fetch shared drive sharing links when permissions are already loaded', async () => {
       mockGetDocumentPermissions.mockReturnValue([
         {
