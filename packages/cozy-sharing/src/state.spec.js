@@ -343,6 +343,22 @@ describe('Sharing state', () => {
     )
   })
 
+  it('should forget a sharing when revoking the last recipient', () => {
+    const state = reducer(
+      reducer(
+        undefined,
+        receiveSharings({
+          sharings: [SHARING_1, SHARING_2]
+        })
+      ),
+      revokeRecipient(SHARING_2, 1)
+    )
+    expect(state.byDocId).toEqual({
+      folder_1: { sharings: [SHARING_1.id], permissions: [] }
+    })
+    expect(state.sharings).toEqual([SHARING_1])
+  })
+
   it('should revoke self', () => {
     const state = reducer(
       reducer(
