@@ -440,8 +440,16 @@ export class SharingProvider extends Component {
     const resp = await drivePermissionCollection.findLinksByIds([documentId])
     const permissions = resp.data || []
 
-    if (permissions.length > 0) {
-      this.dispatch(addSharingLink(permissions))
+    const existingPermissions = getDocumentPermissions(this.state, documentId)
+    const existingPermissionIds = existingPermissions.map(
+      permission => permission.id
+    )
+    const newPermissions = permissions.filter(
+      permission => !existingPermissionIds.includes(permission.id)
+    )
+
+    if (newPermissions.length > 0) {
+      this.dispatch(addSharingLink(newPermissions))
     }
 
     return permissions
