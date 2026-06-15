@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.4...cozy-sharing@33.4.0) (2026-06-15)
+
+### Bug Fixes
+
+- **cozy-sharing:** Prevent duplicate shared drive links ([0d93ae5](https://github.com/cozy/cozy-libs/commit/0d93ae50cba1d6fe9f6f070bba87b874119fffb7))
+- **cozy-sharing:** Prevent repeated shared drive link fetches ([fa8833e](https://github.com/cozy/cozy-libs/commit/fa8833e058a5432eef6743923b38ed42916ea3e3))
+
+### Features
+
+- **cozy-sharing:** Show shared drive links ([3736586](https://github.com/cozy/cozy-libs/commit/37365866117c630f730b108c69e56d0526fa5736))
+
 ## [33.3.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.3.3...cozy-sharing@33.3.4) (2026-06-11)
 
 ### Bug Fixes
