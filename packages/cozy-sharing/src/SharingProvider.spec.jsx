@@ -449,6 +449,32 @@ describe('shareByLink shared drive 409 recovery', () => {
     expect(resp.data.id).toBe(PERM_DRIVE_FILE.id)
   })
 
+  it('does not duplicate existing links when 409 recovery refetches them', async () => {
+    const conflict = Object.assign(new Error('Conflict'), { status: 409 })
+    const mockCreateSharingLink = jest.fn().mockRejectedValue(conflict)
+    const mockFindLinksByIds = jest
+      .fn()
+      .mockResolvedValue({ data: [PERM_DRIVE_FILE] })
+    const mockClient = createMockClient({})
+    mockClient.collection = jest.fn().mockReturnValue({
+      createSharingLink: mockCreateSharingLink,
+      findLinksByIds: mockFindLinksByIds
+    })
+
+    const provider = new SharingProvider({ client: mockClient })
+    provider.state = reducer(undefined, addSharingLink(PERM_DRIVE_FILE))
+    provider.dispatch = jest.fn(action => {
+      provider.state = reducer(provider.state, action)
+    })
+
+    const resp = await provider.shareByLink(driveFile, { verbs: ['GET'] })
+
+    const permissions = getDocumentPermissions(provider.state, 'file_in_drive')
+    expect(resp.data.id).toBe(PERM_DRIVE_FILE.id)
+    expect(provider.dispatch).not.toHaveBeenCalled()
+    expect(permissions).toHaveLength(1)
+  })
+
   it('rethrows the original error when 409 happens and no link is found', async () => {
     const conflict = Object.assign(new Error('Conflict'), { status: 409 })
     const mockCreateSharingLink = jest.fn().mockRejectedValue(conflict)
