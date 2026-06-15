@@ -61,6 +61,9 @@ const FederatedFolderModalContent = ({
   // in members before the modal closes. That's why when clicking on "Share"
   // we do not use the reactive existingDocument and existingRecipients.
   const [isSending, setIsSending] = useState(false)
+  const [isFetchingSharingLinks, setIsFetchingSharingLinks] = useState(false)
+  const [fetchedSharingLinksDocumentId, setFetchedSharingLinksDocumentId] =
+    useState(null)
   const [frozenDoc, setFrozenDoc] = useState(null)
   const [frozenRecipients, setFrozenRecipients] = useState(null)
 
@@ -188,12 +191,19 @@ const FederatedFolderModalContent = ({
     if (!documentId) return
     if (!fetchSharedDriveSharingLinks) return
     if (documentPermissions.length > 0) return
+    if (isFetchingSharingLinks) return
+    if (fetchedSharingLinksDocumentId === documentId) return
 
     const fetchSharingLinks = async () => {
+      setIsFetchingSharingLinks(true)
+
       try {
         await fetchSharedDriveSharingLinks(existingDocument)
       } catch (error) {
         log.error('Failed to fetch shared drive sharing links', error)
+      } finally {
+        setFetchedSharingLinksDocumentId(documentId)
+        setIsFetchingSharingLinks(false)
       }
     }
 
@@ -202,7 +212,9 @@ const FederatedFolderModalContent = ({
     documentId,
     existingDocument,
     documentPermissions.length,
-    fetchSharedDriveSharingLinks
+    fetchedSharingLinksDocumentId,
+    fetchSharedDriveSharingLinks,
+    isFetchingSharingLinks
   ])
 
   const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
