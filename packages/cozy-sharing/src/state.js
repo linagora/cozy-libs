@@ -258,6 +258,12 @@ const sharings = (state = [], action) => {
     case UPDATE_SHARING:
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
+      if (
+        !isSharingADrive(action.sharing) &&
+        areAllRecipientsRevoked(action.sharing)
+      ) {
+        return state.filter(s => s.id !== action.sharing.id)
+      }
       return state.map(s => {
         return s.id !== action.sharing.id ? s : action.sharing
       })
