@@ -647,7 +647,70 @@ describe('updateSharingMemberType', () => {
     })
     expect(instance.dispatch).toHaveBeenNthCalledWith(2, {
       type: 'UPDATE_SHARING',
-      sharing: mockSharing
+      sharing: {
+        ...mockSharing,
+        attributes: {
+          ...mockSharing.attributes,
+          members: [
+            mockSharing.attributes.members[0],
+            {
+              ...mockSharing.attributes.members[1],
+              read_only: false
+            }
+          ]
+        }
+      }
+    })
+  })
+
+  it('should preserve realtime changes when rolling back an API failure', async () => {
+    const realtimeSharing = {
+      ...mockSharing,
+      attributes: {
+        ...mockSharing.attributes,
+        description: 'updated by realtime',
+        members: [
+          {
+            ...mockSharing.attributes.members[0],
+            status: 'seen'
+          },
+          {
+            ...mockSharing.attributes.members[1],
+            read_only: true
+          }
+        ]
+      }
+    }
+
+    instance.sharingCol.setReadOnly.mockImplementation(async () => {
+      instance.state = {
+        ...instance.state,
+        sharings: instance.state.sharings.map(sharing =>
+          sharing.id === realtimeSharing.id ? realtimeSharing : sharing
+        )
+      }
+      throw new Error('Network error')
+    })
+
+    await expect(
+      instance.updateSharingMemberType('sharing-123', 1, 'one-way')
+    ).rejects.toThrow('Network error')
+
+    expect(instance.dispatch).toHaveBeenNthCalledWith(2, {
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...realtimeSharing,
+        attributes: {
+          ...realtimeSharing.attributes,
+          members: [
+            realtimeSharing.attributes.members[0],
+            {
+              ...realtimeSharing.attributes.members[1],
+              read_only: false
+            }
+          ]
+        }
+      }
     })
   })
 })
