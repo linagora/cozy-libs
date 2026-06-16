@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.4.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.4.2...cozy-sharing@33.4.3) (2026-06-16)
+
+### Bug Fixes
+
+- **cozy-sharing:** Remove revoked sharing after last recipient ([e0f486c](https://github.com/cozy/cozy-libs/commit/e0f486cd9b7805e8214c5586f0d7b2c7aed50491))
+
 ## [33.4.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.4.1...cozy-sharing@33.4.2) (2026-06-16)
 
 ### Bug Fixes
