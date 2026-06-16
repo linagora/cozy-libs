@@ -383,7 +383,23 @@ export class SharingProvider extends Component {
         await this.sharingCol.setReadWrite(sharing, memberIndex)
       }
     } catch (error) {
-      this.dispatch(updateSharing(sharing))
+      const currentSharing = getSharingById(this.state, sharingId) || sharing
+      const rollbackSharing = {
+        ...currentSharing,
+        attributes: {
+          ...currentSharing.attributes,
+          members: currentSharing.attributes.members.map((member, index) =>
+            index === memberIndex
+              ? {
+                  ...member,
+                  read_only: !makeReadOnly
+                }
+              : member
+          )
+        }
+      }
+
+      this.dispatch(updateSharing(rollbackSharing))
       log.error(
         `Failed to change member ${member.email} permission type to ${newType}`,
         error
