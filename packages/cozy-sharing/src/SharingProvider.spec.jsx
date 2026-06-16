@@ -524,7 +524,9 @@ describe('updateSharingMemberType', () => {
       setReadOnly: jest.fn().mockResolvedValue({}),
       setReadWrite: jest.fn().mockResolvedValue({})
     }
-    jest.spyOn(instance, 'setState')
+    instance.dispatch = jest.fn(action => {
+      instance.state = { ...instance.state, ...reducer(instance.state, action) }
+    })
   })
 
   it('should throw when sharing is not found', async () => {
@@ -556,16 +558,46 @@ describe('updateSharingMemberType', () => {
     expect(instance.sharingCol.setReadOnly).not.toHaveBeenCalled()
   })
 
-  it('should not dispatch a state update — realtime refreshes the store', async () => {
+  it('should optimistically dispatch a state update when switching to one-way', async () => {
     await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
 
-    expect(instance.setState).not.toHaveBeenCalled()
+    expect(instance.dispatch).toHaveBeenCalledWith({
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...mockSharing,
+        attributes: {
+          ...mockSharing.attributes,
+          members: [
+            mockSharing.attributes.members[0],
+            {
+              ...mockSharing.attributes.members[1],
+              read_only: true
+            }
+          ]
+        }
+      }
+    })
   })
 
-  it('should not dispatch a state update for two-way — realtime refreshes the store', async () => {
+  it('should optimistically dispatch a state update when switching to two-way', async () => {
     await instance.updateSharingMemberType('sharing-123', 1, 'two-way')
 
-    expect(instance.setState).not.toHaveBeenCalled()
+    expect(instance.dispatch).toHaveBeenCalledWith({
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...mockSharing,
+        attributes: {
+          ...mockSharing.attributes,
+          members: [
+            mockSharing.attributes.members[0],
+            {
+              ...mockSharing.attributes.members[1],
+              read_only: false
+            }
+          ]
+        }
+      }
+    })
   })
 
   it('should rethrow error if setReadOnly fails', async () => {
@@ -588,7 +620,7 @@ describe('updateSharingMemberType', () => {
     ).rejects.toThrow('Network error')
   })
 
-  it('should not dispatch state update if API call fails', async () => {
+  it('should rollback optimistic state update if API call fails', async () => {
     instance.sharingCol.setReadOnly.mockRejectedValue(
       new Error('Network error')
     )
@@ -597,7 +629,26 @@ describe('updateSharingMemberType', () => {
       instance.updateSharingMemberType('sharing-123', 1, 'one-way')
     ).rejects.toThrow('Network error')
 
-    expect(instance.setState).not.toHaveBeenCalled()
+    expect(instance.dispatch).toHaveBeenNthCalledWith(1, {
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...mockSharing,
+        attributes: {
+          ...mockSharing.attributes,
+          members: [
+            mockSharing.attributes.members[0],
+            {
+              ...mockSharing.attributes.members[1],
+              read_only: true
+            }
+          ]
+        }
+      }
+    })
+    expect(instance.dispatch).toHaveBeenNthCalledWith(2, {
+      type: 'UPDATE_SHARING',
+      sharing: mockSharing
+    })
   })
 })
 
