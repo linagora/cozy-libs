@@ -74,6 +74,7 @@ const MemberRecipientPermissions = ({
         hideMenu()
         return
       }
+      hideMenu()
       try {
         await updateSharingMemberType(sharingId, memberIndex, newType)
       } catch (error) {
@@ -84,7 +85,6 @@ const MemberRecipientPermissions = ({
           variant: 'filled'
         })
       }
-      hideMenu()
     },
     [
       hideMenu,

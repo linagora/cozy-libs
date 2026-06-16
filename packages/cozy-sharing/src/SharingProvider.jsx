@@ -358,6 +358,24 @@ export class SharingProvider extends Component {
     if (newType !== 'one-way' && newType !== 'two-way') {
       throw new Error('Unsupported sharing type: ' + newType)
     }
+
+    const optimisticSharing = {
+      ...sharing,
+      attributes: {
+        ...sharing.attributes,
+        members: sharing.attributes.members.map((member, index) =>
+          index === memberIndex
+            ? {
+                ...member,
+                read_only: makeReadOnly
+              }
+            : member
+        )
+      }
+    }
+
+    this.dispatch(updateSharing(optimisticSharing))
+
     try {
       if (makeReadOnly) {
         await this.sharingCol.setReadOnly(sharing, memberIndex)
@@ -365,6 +383,7 @@ export class SharingProvider extends Component {
         await this.sharingCol.setReadWrite(sharing, memberIndex)
       }
     } catch (error) {
+      this.dispatch(updateSharing(sharing))
       log.error(
         `Failed to change member ${member.email} permission type to ${newType}`,
         error
