@@ -329,6 +329,24 @@ export const isSharedDrive = (state, docId) => {
   return false
 }
 
+export const isOrgSharedDrive = (state, docId) => {
+  if (state.byDocId[docId] && state.byDocId[docId].sharings.length !== 0) {
+    const sharing = getSharingById(state, state.byDocId[docId].sharings[0])
+
+    return (
+      sharing.attributes.drive === true && sharing.attributes.org_drive === true
+    )
+  }
+  return false
+}
+
+export const canLeave = (state, docId) => {
+  if (isOrgSharedDrive(state, docId)) {
+    return false
+  }
+  return true
+}
+
 export const canReshare = (state, docId, instanceUri) => {
   const sharing = getDocumentSharing(state, docId)
   const me = sharing.attributes.members.find(matchingInstanceName(instanceUri))
