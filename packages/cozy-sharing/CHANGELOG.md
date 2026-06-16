@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.4.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.4.1...cozy-sharing@33.4.2) (2026-06-16)
+
+### Bug Fixes
+
+- **cozy-sharing:** Preserve sharing updates on rollback ([7c6db1a](https://github.com/cozy/cozy-libs/commit/7c6db1ad63f3997f01bdfee7140f9dad36dde2c2))
+- **sharing:** Update member permissions optimistically ([5c1ac86](https://github.com/cozy/cozy-libs/commit/5c1ac8631e4598ac6d2bc08761d2064c9b396f66))
+
 ## [33.4.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.4.0...cozy-sharing@33.4.1) (2026-06-15)
 
 ### Bug Fixes
