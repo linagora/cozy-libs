@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.4.3...cozy-sharing@33.5.0) (2026-06-17)
+
+### Features
+
+- Add isOrgSharedDrive and canLeave helpers ([f93d4bb](https://github.com/cozy/cozy-libs/commit/f93d4bb37cd748a7e18db3a3ac67e1b84e819440))
+
 ## [33.4.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.4.2...cozy-sharing@33.4.3) (2026-06-16)
 
 ### Bug Fixes
