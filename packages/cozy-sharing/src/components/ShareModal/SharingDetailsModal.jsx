@@ -27,11 +27,13 @@ export const SharingDetailsModal = ({
       content={
         <div className={styles['share-modal-content']}>
           <WhoHasAccess
+            isReadOnly
             recipients={recipients}
             document={document}
             documentType={documentType}
             onRevoke={onRevoke}
             onRevokeSelf={onRevokeSelf}
+            link="ok"
           />
         </div>
       }
