@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.5.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.5.0...cozy-sharing@33.5.1) (2026-06-17)
+
+### Bug Fixes
+
+- **cozy-sharing:** Avoid rendering email twice in recipient row ([800f091](https://github.com/cozy/cozy-libs/commit/800f0915853f167b47087b77ef1a4620a4615fa3))
+- **cozy-sharing:** Prioritize email over instance URL ([4814ab3](https://github.com/cozy/cozy-libs/commit/4814ab34ec13cd8f53641dd333107f2648fb8e76))
+
 # [33.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.4.3...cozy-sharing@33.5.0) (2026-06-17)
 
 ### Features
