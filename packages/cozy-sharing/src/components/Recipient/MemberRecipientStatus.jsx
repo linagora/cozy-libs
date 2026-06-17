@@ -9,6 +9,7 @@ const MemberRecipientStatus = ({
   isMe,
   instance,
   email,
+  name,
   typographyProps
 }) => {
   const { t } = useI18n()
@@ -17,7 +18,11 @@ const MemberRecipientStatus = ({
   const isReady = isMe || status === 'ready' || status === 'owner'
   let text
   if (isReady) {
-    text = email || instance
+    // Hide the email when the parent already uses it as the primary text
+    // (getDisplayName falls back to email when the recipient has no name).
+    // Keep the instance visible when there is no email at all, so the user
+    // can still tell the recipient lives on a different Cozy instance.
+    text = isMe || name || !email ? email || instance : ''
   } else if (isSendingEmail) {
     text = t('Share.status.mail-not-sent')
   } else {
@@ -39,6 +44,7 @@ MemberRecipientStatus.propTypes = {
   isMe: PropTypes.bool,
   instance: PropTypes.string,
   email: PropTypes.string,
+  name: PropTypes.string,
   typographyProps: PropTypes.object
 }
 

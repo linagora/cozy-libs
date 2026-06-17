@@ -39,6 +39,7 @@ const GroupRecipientDetailWithAccess = ({ withAccess }) => {
                     isMe={isMe}
                     instance={recipient.instance}
                     email={recipient.email}
+                    name={recipient.name || recipient.public_name}
                   />
                 }
               />

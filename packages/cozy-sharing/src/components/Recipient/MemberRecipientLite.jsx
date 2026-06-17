@@ -39,6 +39,7 @@ const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
             isMe={isMe}
             instance={recipient.instance}
             email={recipient.email}
+            name={recipient.name || recipient.public_name}
             typographyProps={{ noWrap: true }}
           />
         }
