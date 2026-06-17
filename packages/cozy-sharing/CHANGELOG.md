@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.5.1...cozy-sharing@33.6.0) (2026-06-17)
+
+### Features
+
+- Add prop to enable a readonly list in WhoHasAccess ([9643520](https://github.com/cozy/cozy-libs/commit/9643520bfbd9d1da425176efec5e361bf5ef1498))
+- Display read only modal (details modal) for B2B shared drive ([9960588](https://github.com/cozy/cozy-libs/commit/9960588289d67555f0a3cf3e0b24fd7c8fe222fc))
+- Enable readonly display of link recipient ([c5146b0](https://github.com/cozy/cozy-libs/commit/c5146b094b17c7956419dd50b47b113b929daa29))
+- Remove unwanted details from sharing details modal ([b067718](https://github.com/cozy/cozy-libs/commit/b0677189eeebe258177187ea98ce2f48b6af8777))
+- Show "Owner" if owner or type otherwise when no menu in member ([b4ef094](https://github.com/cozy/cozy-libs/commit/b4ef0942ecba54a21f4ed0ed16ccc480a1e1525d))
+- Show type instead of status when no menu in member ([ba87489](https://github.com/cozy/cozy-libs/commit/ba874890418899aeecdba41b792724dbae0ce7c9))
+
 ## [33.5.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.5.0...cozy-sharing@33.5.1) (2026-06-17)
 
 ### Bug Fixes
