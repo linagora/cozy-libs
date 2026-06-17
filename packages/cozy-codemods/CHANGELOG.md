@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.34.1...@cozy/codemods@1.35.0) (2026-06-17)
+
+### Features
+
+- Add codemods for cozy-ui BC 140.0.0 ([29c0ee2](https://github.com/cozy/cozy-libs/commit/29c0ee2cbfd7fb0f938a5b5199cd858a83f38f59))
+
 ## [1.34.1](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.34.0...@cozy/codemods@1.34.1) (2026-03-17)
 
 **Note:** Version bump only for package @cozy/codemods
