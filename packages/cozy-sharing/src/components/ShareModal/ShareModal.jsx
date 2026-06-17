@@ -22,8 +22,6 @@ export const ShareModal = withLocales(props => {
     isOwner,
     canReshare,
     documentType,
-    getOwner,
-    getSharingType,
     getRecipients,
     revokeSelf,
     allLoaded
@@ -48,11 +46,9 @@ export const ShareModal = withLocales(props => {
 
   return (
     <SharingDetailsModal
+      recipients={getRecipients(document.id)}
       document={document}
       documentType={documentType}
-      owner={getOwner(document.id)}
-      sharingType={getSharingType(document.id)}
-      recipients={getRecipients(document.id)}
       onRevoke={revokeSelf}
       onRevokeSelf={handleRevokeSelf}
       {...rest}

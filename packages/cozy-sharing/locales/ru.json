@@ -23,8 +23,7 @@
       "you": "Вы",
       "anyoneWithTheLink": "Любой, у кого есть ссылка",
       "linkWithPassword": "Любой с паролем",
-      "expires": "До %{date}",
-      "accessCount": "%{count} человек имеют доступ"
+      "expires": "До %{date}"
     },
     "create-cozy": "Создать |||| Создать мой Twake",
     "members": {
