@@ -1,42 +1,45 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
-import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
-import ToTheCloudIcon from 'cozy-ui/transpiled/react/Icons/ToTheCloud'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-const MemberRecipientStatus = ({ status, isMe, instance, typographyProps }) => {
+const MemberRecipientStatus = ({
+  status,
+  isMe,
+  instance,
+  email,
+  typographyProps
+}) => {
   const { t } = useI18n()
 
   const isSendingEmail = !isMe && status === 'mail-not-sent'
   const isReady = isMe || status === 'ready' || status === 'owner'
-  let text, icon
+  let text
   if (isReady) {
-    text = instance
-    icon = ToTheCloudIcon
+    text = email || instance
   } else if (isSendingEmail) {
     text = t('Share.status.mail-not-sent')
-    icon = PaperplaneIcon
   } else {
     const supportedStatus = ['pending', 'seen']
     text = supportedStatus.includes(status)
       ? t(`Share.status.${status}`)
       : t('Share.status.pending')
-
-    icon = status === 'seen' ? EyeIcon : PaperplaneIcon
   }
 
   return (
-    <div className="u-flex u-flex-items-center">
-      <Icon icon={icon} size={10} />
-      &nbsp;
-      <Typography variant="caption" color="textSecondary" {...typographyProps}>
-        {text}
-      </Typography>
-    </div>
+    <Typography variant="caption" color="textSecondary" {...typographyProps}>
+      {text}
+    </Typography>
   )
+}
+
+MemberRecipientStatus.propTypes = {
+  status: PropTypes.string,
+  isMe: PropTypes.bool,
+  instance: PropTypes.string,
+  email: PropTypes.string,
+  typographyProps: PropTypes.object
 }
 
 export default MemberRecipientStatus
