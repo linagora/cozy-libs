@@ -111,7 +111,11 @@ const MemberRecipientPermissions = ({
     <>
       {revoking && <Spinner />}
       {!shouldShowMenu && (
-        <Typography variant="body2">{t(`Share.type.${type}`)}</Typography>
+        <Typography variant="body2">
+          {contactIsOwner
+            ? t(`Share.status.${status}`)
+            : t(`Share.type.${type}`)}
+        </Typography>
       )}
       {shouldShowMenu && (
         <>
