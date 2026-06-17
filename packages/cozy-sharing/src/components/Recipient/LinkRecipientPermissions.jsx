@@ -7,6 +7,7 @@ import {
   divider
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { revokeLink } from './actions/revokeLink'
@@ -17,7 +18,7 @@ import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { WRITE_PERMS, READ_ONLY_PERMS } from '../ShareRestrictionModal/helpers'
 
-const LinkRecipientPermissions = ({ document }) => {
+const LinkRecipientPermissions = ({ document, isReadOnly }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
@@ -56,18 +57,31 @@ const LinkRecipientPermissions = ({ document }) => {
     handleRevocation
   })
 
+  const shouldShowMenu = !isReadOnly
+
   return (
     <>
-      <DropdownButton ref={buttonRef} textVariant="body2" onClick={toggleMenu}>
-        {t(`Share.type.${type}`)}
-      </DropdownButton>
-      <ActionsMenu
-        ref={buttonRef}
-        open={isMenuDisplayed}
-        actions={actions}
-        autoClose
-        onClose={hideMenu}
-      />
+      {!shouldShowMenu && (
+        <Typography variant="body2">{t(`Share.type.${type}`)}</Typography>
+      )}
+      {shouldShowMenu && (
+        <>
+          <DropdownButton
+            ref={buttonRef}
+            textVariant="body2"
+            onClick={toggleMenu}
+          >
+            {t(`Share.type.${type}`)}
+          </DropdownButton>
+          <ActionsMenu
+            ref={buttonRef}
+            open={isMenuDisplayed}
+            actions={actions}
+            autoClose
+            onClose={hideMenu}
+          />
+        </>
+      )}
     </>
   )
 }
