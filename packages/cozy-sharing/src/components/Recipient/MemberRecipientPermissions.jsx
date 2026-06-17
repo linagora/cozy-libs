@@ -21,6 +21,7 @@ const log = minilog('MemberRecipientPermissions')
 
 const MemberRecipientPermissions = ({
   isOwner,
+  isReadOnly,
   status,
   instance,
   type,
@@ -44,6 +45,7 @@ const MemberRecipientPermissions = ({
     instance !== undefined && instance === client.options.uri
   const contactIsOwner = status === 'owner'
   const shouldShowMenu =
+    !isReadOnly &&
     !revoking &&
     !contactIsOwner &&
     ((instanceMatchesClient && !isOwner) || isOwner)
