@@ -24,16 +24,51 @@ import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { ShareRestrictionModal } from '../ShareRestrictionModal/ShareRestrictionModal'
 
+const LinkRecipientTextReadOnly = ({ textPrimary, textSecondary }) => {
+  return (
+    <ListItemText
+      primary={
+        <div className="u-flex u-flex-items-center">
+          <Typography>{textPrimary}</Typography>
+        </div>
+      }
+      secondary={textSecondary}
+    />
+  )
+}
+
+const LinkRecipientText = ({ onClick, textPrimary, textSecondary }) => {
+  return (
+    <ListItemText
+      onClick={onClick}
+      primary={
+        <div className="u-flex u-flex-items-center">
+          <Typography className="u-c-pointer ">{textPrimary}</Typography>
+          <IconButton size="small" className="u-ml-half">
+            <Icon icon={Gear} />
+          </IconButton>
+        </div>
+      }
+      secondary={textSecondary}
+    />
+  )
+}
+
 const LinkRecipient = props => {
   const { t, f, lang } = useI18n()
   const { isMobile } = useBreakpoints()
   const { getDocumentPermissions } = useSharingContext()
 
-  const { recipientConfirmationData, verifyRecipient, fadeIn, document } = props
+  const {
+    recipientConfirmationData,
+    verifyRecipient,
+    fadeIn,
+    document,
+    isReadOnly
+  } = props
 
   const [openShareRestrictionModal, setOpenShareRestrictionModal] =
     useState(false)
-
   const permissions = getDocumentPermissions(document?._id)
   const hasPassword = checkIsPermissionHasPassword(permissions)
   const expiresDate = getPermissionExpiresDate(permissions)
@@ -68,18 +103,18 @@ const LinkRecipient = props => {
             <Icon icon={LinkIcon} />
           </Avatar>
         </ListItemIcon>
-        <ListItemText
-          onClick={() => setOpenShareRestrictionModal(true)}
-          primary={
-            <div className="u-flex u-flex-items-center">
-              <Typography className="u-c-pointer ">{textPrimary}</Typography>
-              <IconButton size="small" className="u-ml-half">
-                <Icon icon={Gear} />
-              </IconButton>
-            </div>
-          }
-          secondary={textSecondary}
-        />
+        {isReadOnly ? (
+          <LinkRecipientTextReadOnly
+            textPrimary={textPrimary}
+            textSecondary={textSecondary}
+          />
+        ) : (
+          <LinkRecipientText
+            onClick={() => setOpenShareRestrictionModal(true)}
+            textPrimary={textPrimary}
+            textSecondary={textSecondary}
+          />
+        )}
         {RightPart}
         {openShareRestrictionModal && (
           <ShareRestrictionModal
