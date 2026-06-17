@@ -23,8 +23,7 @@
       "you": "Bạn",
       "anyoneWithTheLink": "Bất kỳ ai có liên kết",
       "linkWithPassword": "Bất kỳ ai có mật khẩu",
-      "expires": "Cho đến %{date}",
-      "accessCount": "%{count} người có quyền truy cập"
+      "expires": "Cho đến %{date}"
     },
     "create-cozy": "Tạo |||| Tạo Twake của tôi",
     "members": {

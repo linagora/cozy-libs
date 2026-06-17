@@ -23,8 +23,7 @@
       "you": "You",
       "anyoneWithTheLink": "Anyone with the link",
       "linkWithPassword": "Anyone with a password",
-      "expires": "Until %{date}",
-      "accessCount": "%{count} people have access"
+      "expires": "Until %{date}"
     },
     "create-cozy": "Create |||| Create my Twake",
     "members": {

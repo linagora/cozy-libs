@@ -23,8 +23,7 @@
       "you": "Vous",
       "anyoneWithTheLink": "Tous les utilisateurs qui ont le lien",
       "linkWithPassword": "Tous les utilisateurs avec le mot de passe",
-      "expires": "Jusqu'au %{date}",
-      "accessCount": "%{count} personnes y ont accès"
+      "expires": "Jusqu'au %{date}"
     },
     "create-cozy": "Créer |||| Créer mon Twake",
     "members": {
