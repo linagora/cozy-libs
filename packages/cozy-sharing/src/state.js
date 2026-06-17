@@ -351,7 +351,7 @@ export const canReshare = (state, docId, instanceUri) => {
   const sharing = getDocumentSharing(state, docId)
   const me = sharing.attributes.members.find(matchingInstanceName(instanceUri))
   if (sharing.drive) {
-    return me && !me.read_only
+    return !sharing.org_drive && me && !me.read_only
   } else {
     return sharing.attributes.open_sharing === true && me && !me.read_only
   }
