@@ -67,6 +67,7 @@ const MemberRecipient = props => {
               isMe={isMe}
               instance={instance}
               email={rest.email}
+              name={rest.name || rest.public_name}
             />
           }
         />
