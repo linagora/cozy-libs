@@ -26,7 +26,6 @@ const MemberRecipientPermissions = ({
   instance,
   type,
   document,
-  className,
   onRevoke,
   onRevokeSelf,
   sharingId,
@@ -109,7 +108,7 @@ const MemberRecipientPermissions = ({
   )
 
   return (
-    <div className={className}>
+    <>
       {revoking && <Spinner />}
       {!shouldShowMenu && !revoking && (
         <Typography variant="body2">{t(`Share.type.${type}`)}</Typography>
@@ -142,7 +141,7 @@ const MemberRecipientPermissions = ({
           </IconButton>
         </>
       )}
-    </div>
+    </>
   )
 }
 

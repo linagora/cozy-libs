@@ -17,7 +17,7 @@ import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { WRITE_PERMS, READ_ONLY_PERMS } from '../ShareRestrictionModal/helpers'
 
-const LinkRecipientPermissions = ({ className, document }) => {
+const LinkRecipientPermissions = ({ document }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
@@ -57,29 +57,22 @@ const LinkRecipientPermissions = ({ className, document }) => {
   })
 
   return (
-    <div className={className}>
-      <>
-        <DropdownButton
-          ref={buttonRef}
-          textVariant="body2"
-          onClick={toggleMenu}
-        >
-          {t(`Share.type.${type}`)}
-        </DropdownButton>
-        <ActionsMenu
-          ref={buttonRef}
-          open={isMenuDisplayed}
-          actions={actions}
-          autoClose
-          onClose={hideMenu}
-        />
-      </>
-    </div>
+    <>
+      <DropdownButton ref={buttonRef} textVariant="body2" onClick={toggleMenu}>
+        {t(`Share.type.${type}`)}
+      </DropdownButton>
+      <ActionsMenu
+        ref={buttonRef}
+        open={isMenuDisplayed}
+        actions={actions}
+        autoClose
+        onClose={hideMenu}
+      />
+    </>
   )
 }
 
 LinkRecipientPermissions.propTypes = {
-  className: PropTypes.string,
   document: PropTypes.object.isRequired
 }
 
