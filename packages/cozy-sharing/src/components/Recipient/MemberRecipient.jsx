@@ -46,7 +46,7 @@ const MemberRecipient = props => {
       verifyRecipient={verifyRecipient}
     />
   ) : (
-    <MemberRecipientPermissions {...props} className="u-flex-shrink-0" />
+    <MemberRecipientPermissions {...props} />
   )
 
   return (

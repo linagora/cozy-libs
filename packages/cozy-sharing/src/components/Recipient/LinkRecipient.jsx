@@ -57,7 +57,7 @@ const LinkRecipient = props => {
       verifyRecipient={verifyRecipient}
     />
   ) : (
-    <LinkRecipientPermissions {...props} className="u-flex-shrink-0" />
+    <LinkRecipientPermissions {...props} />
   )
 
   return (
