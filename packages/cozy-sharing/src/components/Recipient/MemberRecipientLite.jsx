@@ -38,6 +38,7 @@ const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
             status={recipient.status}
             isMe={isMe}
             instance={recipient.instance}
+            email={recipient.email}
             typographyProps={{ noWrap: true }}
           />
         }

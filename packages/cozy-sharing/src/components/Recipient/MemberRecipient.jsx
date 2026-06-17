@@ -66,6 +66,7 @@ const MemberRecipient = props => {
               status={status}
               isMe={isMe}
               instance={instance}
+              email={rest.email}
             />
           }
         />
