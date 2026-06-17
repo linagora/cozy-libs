@@ -112,7 +112,7 @@ const MemberRecipientPermissions = ({
     <div className={className}>
       {revoking && <Spinner />}
       {!shouldShowMenu && !revoking && (
-        <Typography variant="body2">{t(`Share.status.${status}`)}</Typography>
+        <Typography variant="body2">{t(`Share.type.${type}`)}</Typography>
       )}
       {shouldShowMenu && (
         <>
