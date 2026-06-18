@@ -1,12 +1,12 @@
-import React from 'react'
-
-import { BarLike } from '../test/lib/BarLike'
-
 jest.mock('cozy-client', () => {
   const CozyClient = jest.requireActual('cozy-client/dist/CozyClient').default
   const CozyProvider = jest.requireActual('cozy-client/dist/Provider').default
-  const useClient = jest.requireActual('cozy-client/dist/hooks/useClient').default
-  const models = jest.requireActual('cozy-client/dist/models').default || jest.requireActual('cozy-client/dist/models')
+  const useClient = jest.requireActual(
+    'cozy-client/dist/hooks/useClient'
+  ).default
+  const models =
+    jest.requireActual('cozy-client/dist/models').default ||
+    jest.requireActual('cozy-client/dist/models')
   return {
     __esModule: true,
     default: CozyClient,
@@ -21,7 +21,9 @@ jest.mock('cozy-client', () => {
       instance: { data: {} },
       context: { data: {} }
     }),
-    useFetchHomeShortcuts: jest.fn().mockReturnValue({ data: [], fetchStatus: 'loaded' })
+    useFetchHomeShortcuts: jest
+      .fn()
+      .mockReturnValue({ data: [], fetchStatus: 'loaded' })
   }
 })
 
