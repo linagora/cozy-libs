@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "author": "Cozy Cloud <contact@cozycloud.cc> (https://cozy.io/)",
   "files": [
-    "dist"
+    "dist",
+    "rspack.config.mjs",
+    "babel.config.rspack.js"
   ],
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
     "build": "yarn build:clean && babel --extensions .js,.jsx --ignore '**/*.spec.jsx','**/*.spec.js' ./src -d ./dist --copy-files",
     "build:clean": "rm -rf ./dist",
     "build:watch": "yarn build --watch",
+    "build:standalone": "rspack build --config rspack.config.mjs",
     "prepublishOnly": "yarn build",
     "test": "jest --config=./jest.config.js",
     "test:watch": "yarn test --watchAll",
@@ -31,8 +34,11 @@
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "@cozy/minilog": "^1.0.0",
+    "@rspack/cli": "^1.2.7",
+    "@rspack/core": "^1.2.7",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "12.1.5",
+    "babel-loader": "^9.1.2",
     "babel-preset-cozy-app": "^2.8.4",
     "cozy-client": "^60.21.0",
     "cozy-dataproxy-lib": "^4.15.2",
@@ -44,12 +50,15 @@
     "cozy-search": "^0.24.0",
     "cozy-ui": "^138.1.0",
     "cozy-ui-plus": "^8.0.1",
+    "css-loader": "^6.10.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "30.3.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-router-dom": "6.14.2",
+    "style-loader": "^3.3.4",
     "stylus": "^0.64.0",
+    "stylus-loader": "^8.1.0",
     "twake-i18n": "^0.3.0"
   },
   "dependencies": {
