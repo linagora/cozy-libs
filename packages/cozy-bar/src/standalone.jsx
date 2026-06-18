@@ -2,6 +2,8 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 
 import CozyClient, { CozyProvider } from 'cozy-client'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import { BarComponent } from './components/BarComponent'
 import BarProvider from './components/BarProvider'
@@ -43,14 +45,16 @@ const tryMount = () => {
 
   createRoot(root).render(
     <CozyProvider client={client}>
-      <BarProvider>
-        <BarComponent
-          appSlug={cfg.appSlug}
-          appName={cfg.appName}
-          iconPath={cfg.iconURL}
-          searchOptions={{ enabled: false }}
-        />
-      </BarProvider>
+      <BreakpointsProvider>
+        <BarProvider>
+          <BarComponent
+            appSlug={cfg.appSlug}
+            appName={cfg.appName}
+            iconPath={cfg.iconURL}
+            searchOptions={{ enabled: false }}
+          />
+        </BarProvider>
+      </BreakpointsProvider>
     </CozyProvider>
   )
 }

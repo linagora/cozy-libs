@@ -4,6 +4,7 @@ import { createRequire } from 'node:module'
 import { defineConfig } from '@rspack/cli'
 
 const rq = createRequire(import.meta.url)
+const cozyStylus = rq('cozy-ui/stylus')
 
 export default defineConfig({
   entry: './src/standalone.jsx',
@@ -15,7 +16,22 @@ export default defineConfig({
   target: 'web',
   resolve: {
     modules: ['node_modules', path.resolve(import.meta.dirname, 'src')],
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      'cozy-client/dist/types': path.resolve(
+        import.meta.dirname,
+        'node_modules/cozy-client/dist/types'
+      )
+    },
+    fallback: {
+      path: false,
+      fs: false,
+      os: false,
+      url: false,
+      util: false,
+      stream: false,
+      buffer: false
+    }
   },
   module: {
     rules: [
@@ -36,7 +52,8 @@ export default defineConfig({
             loader: 'stylus-loader',
             options: {
               stylusOptions: {
-                use: [rq('cozy-ui/stylus')]
+                use: [cozyStylus()],
+                include: [cozyStylus.path]
               }
             }
           }
@@ -45,6 +62,10 @@ export default defineConfig({
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        type: 'asset'
       }
     ]
   },
