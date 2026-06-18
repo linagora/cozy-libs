@@ -69,4 +69,23 @@ describe('cozy-bar standalone entry', () => {
       '[cozy-bar] window.twakeConfig.accessToken or cozyURL missing after 30s; bar not mounted'
     )
   })
+
+  it('mounts when twakeConfig appears after a delay', () => {
+    require('./standalone')
+
+    // 2s passes with no config — should be 2 failed attempts
+    jest.advanceTimersByTime(2000)
+    expect(document.getElementById('cozy-bar')).toBe(null)
+
+    // Now config appears
+    window.twakeConfig = {
+      accessToken: 'tok-late',
+      cozyURL: 'http://cozy.localhost:8080'
+    }
+
+    // Next tick (1s) should mount
+    jest.advanceTimersByTime(1000)
+
+    expect(document.getElementById('cozy-bar')).toBeInTheDocument()
+  })
 })
