@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { useClient } from 'cozy-client'
+import { useClient, useQuery } from 'cozy-client'
 import flag from 'cozy-flags'
 import {
   getRecipientsFromSharing,
@@ -21,6 +21,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { withViewerLocales } from '../hoc/withViewerLocales'
 import { useShareModal } from '../providers/ShareModalProvider'
+import { buildFolderByPathQuery } from '../queries'
 
 const Sharing = ({ file, t }) => {
   const client = useClient()
@@ -31,19 +32,38 @@ const Sharing = ({ file, t }) => {
     getSharingLink,
     allLoaded,
     getRecipients,
+    getSharedParentPath,
+    hasSharedParent,
     isOwner
   } = useSharingContext()
 
   const sharedDriveSharing = file.driveId ? getSharingById(file.driveId) : null
+  const sharedParentPath =
+    !sharedDriveSharing && file.path && hasSharedParent(file.path)
+      ? getSharedParentPath(file.path)
+      : null
+  const sharedParentQuery = buildFolderByPathQuery(sharedParentPath)
+  const { data: sharedParentFolders, fetchStatus: sharedParentFetchStatus } =
+    useQuery(sharedParentQuery.definition, {
+      ...sharedParentQuery.options,
+      enabled: !!sharedParentPath
+    })
+  const sharingReferenceId =
+    !sharedDriveSharing && sharedParentPath && sharedParentFolders?.[0]?._id
+      ? sharedParentFolders[0]._id
+      : file._id
+
+  if (sharedParentPath && sharedParentFetchStatus !== 'loaded') return null
+
   const recipients = sharedDriveSharing
     ? getRecipientsFromSharing(sharedDriveSharing, file._id)
-    : getRecipients(file._id)
-  const permissions = getDocumentPermissions(file._id)
-  const link = getSharingLink(file._id)
+    : getRecipients(sharingReferenceId)
+  const permissions = getDocumentPermissions(sharingReferenceId)
+  const link = getSharingLink(sharingReferenceId)
   const owner = recipients.find(recipient => recipient.status === 'owner')
   const isCurrentUserOwner = file.driveId
     ? owner?.instance === client.options.uri
-    : isOwner(file._id)
+    : isOwner(sharingReferenceId)
 
   const showModal = () => {
     if (!flag('drive.new-file-viewer-ui.enabled')) {

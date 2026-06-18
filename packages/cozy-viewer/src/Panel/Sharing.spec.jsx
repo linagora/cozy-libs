@@ -5,6 +5,7 @@ import Sharing from './Sharing'
 
 const mockGetRecipientsFromSharing = jest.fn()
 const mockUseClient = jest.fn()
+const mockUseQuery = jest.fn()
 const mockUseShareModal = jest.fn()
 const mockUseSharingContext = jest.fn()
 const mockMemberRecipientLite = jest.fn(({ recipient, isOwner }) => (
@@ -14,7 +15,16 @@ const mockMemberRecipientLite = jest.fn(({ recipient, isOwner }) => (
 ))
 
 jest.mock('cozy-client', () => ({
-  useClient: () => mockUseClient()
+  Q: () => ({
+    where: jest.fn().mockReturnThis(),
+    indexFields: jest.fn().mockReturnThis(),
+    limitBy: jest.fn().mockReturnThis()
+  }),
+  fetchPolicies: {
+    olderThan: jest.fn(() => 'fetch-policy')
+  },
+  useClient: () => mockUseClient(),
+  useQuery: (...args) => mockUseQuery(...args)
 }))
 
 jest.mock('cozy-flags', () => jest.fn(() => false))
@@ -40,6 +50,15 @@ jest.mock('../providers/ShareModalProvider', () => ({
 
 const file = { _id: 'file-id' }
 const sharedFile = { _id: 'shared-file-id' }
+const fileInSharedFolder = {
+  _id: 'file-in-shared-folder-id',
+  path: '/shared-folder/subfolder/file.pdf'
+}
+const sharedFolder = {
+  _id: 'shared-folder-id',
+  path: '/shared-folder',
+  type: 'directory'
+}
 const sharedDriveFile = { _id: 'file-id', driveId: 'drive-id' }
 const ownerRecipient = {
   index: 'recipient-0',
@@ -60,19 +79,33 @@ const sharedDriveSharing = {
   }
 }
 
-const setup = ({
-  clientUri = 'http://bob.localhost:8080/',
-  targetFile = file,
-  userIsOwner = true
-} = {}) => {
+const setup = (options = {}) => {
+  const {
+    clientUri = 'http://bob.localhost:8080/',
+    sharedParentFetchStatus = 'loaded',
+    targetFile = file,
+    userIsOwner = true
+  } = options
+  const sharedParentFolders = Object.prototype.hasOwnProperty.call(
+    options,
+    'sharedParentFolders'
+  )
+    ? options.sharedParentFolders
+    : [sharedFolder]
   const getDocumentPermissions = jest
     .fn()
-    .mockImplementation(docId => (docId === 'file-id' ? ['perm'] : []))
+    .mockImplementation(docId =>
+      docId === 'file-id' || docId === 'shared-folder-id' ? ['perm'] : []
+    )
   const getSharingById = jest
     .fn()
     .mockImplementation(id => (id === 'drive-id' ? sharedDriveSharing : null))
   const getRecipients = jest.fn().mockImplementation(docId => {
-    if (docId === 'file-id' || docId === 'shared-file-id') {
+    if (
+      docId === 'file-id' ||
+      docId === 'shared-file-id' ||
+      docId === 'shared-folder-id'
+    ) {
       return [ownerRecipient]
     }
 
@@ -81,12 +114,26 @@ const setup = ({
   const getSharingLink = jest
     .fn()
     .mockImplementation(docId =>
-      docId === 'file-id' ? 'http://share-link' : null
+      docId === 'file-id' || docId === 'shared-folder-id'
+        ? 'http://share-link'
+        : null
     )
 
+  mockUseQuery.mockReturnValue({
+    data: sharedParentFolders,
+    fetchStatus: sharedParentFetchStatus
+  })
   mockGetRecipientsFromSharing.mockReturnValue([ownerRecipient])
   mockUseClient.mockReturnValue({ options: { uri: clientUri } })
   const isOwner = jest.fn().mockReturnValue(userIsOwner)
+  const hasSharedParent = jest
+    .fn()
+    .mockImplementation(path => path === '/shared-folder/subfolder/file.pdf')
+  const getSharedParentPath = jest
+    .fn()
+    .mockImplementation(path =>
+      path === '/shared-folder/subfolder/file.pdf' ? '/shared-folder' : null
+    )
 
   mockUseShareModal.mockReturnValue({ setShowShareModal: jest.fn() })
   mockUseSharingContext.mockReturnValue({
@@ -95,6 +142,8 @@ const setup = ({
     getSharingById,
     getRecipients,
     getSharingLink,
+    getSharedParentPath,
+    hasSharedParent,
     isOwner
   })
 
@@ -143,6 +192,66 @@ describe('Sharing', () => {
         recipient: expect.objectContaining(expectedOwnerRecipient),
         isOwner: true
       })
+    )
+  })
+
+  it('should use shared parent recipients when a file is inside a shared folder without driveId', () => {
+    setup({ targetFile: fileInSharedFolder })
+
+    expect(mockUseSharingContext().getSharedParentPath).toHaveBeenCalledWith(
+      '/shared-folder/subfolder/file.pdf'
+    )
+    expect(mockUseSharingContext().getRecipients).toHaveBeenCalledWith(
+      'shared-folder-id'
+    )
+    expect(mockUseSharingContext().getDocumentPermissions).toHaveBeenCalledWith(
+      'shared-folder-id'
+    )
+    expect(mockUseSharingContext().getSharingLink).toHaveBeenCalledWith(
+      'shared-folder-id'
+    )
+    expect(mockUseSharingContext().isOwner).toHaveBeenCalledWith(
+      'shared-folder-id'
+    )
+  })
+
+  it('should not display sharing section while shared parent folder is loading', () => {
+    const { queryByText } = setup({
+      sharedParentFetchStatus: 'loading',
+      sharedParentFolders: undefined,
+      targetFile: fileInSharedFolder
+    })
+
+    expect(queryByText('Viewer.panel.sharing')).toBeNull()
+  })
+
+  it('should not display sharing section while shared parent folder is in pending state', () => {
+    const { queryByText } = setup({
+      sharedParentFetchStatus: 'pending',
+      sharedParentFolders: undefined,
+      targetFile: fileInSharedFolder
+    })
+
+    expect(queryByText('Viewer.panel.sharing')).toBeNull()
+  })
+
+  it('should fallback to file recipients when no shared parent folder is found', () => {
+    setup({
+      sharedParentFolders: [],
+      targetFile: fileInSharedFolder
+    })
+
+    expect(mockUseSharingContext().getRecipients).toHaveBeenCalledWith(
+      'file-in-shared-folder-id'
+    )
+    expect(mockUseSharingContext().getDocumentPermissions).toHaveBeenCalledWith(
+      'file-in-shared-folder-id'
+    )
+    expect(mockUseSharingContext().getSharingLink).toHaveBeenCalledWith(
+      'file-in-shared-folder-id'
+    )
+    expect(mockUseSharingContext().isOwner).toHaveBeenCalledWith(
+      'file-in-shared-folder-id'
     )
   })
 
