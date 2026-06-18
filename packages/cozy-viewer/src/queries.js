@@ -18,3 +18,19 @@ export const buildFileByIdQuery = fileId => ({
     singleDocData: true
   }
 })
+
+export const buildFolderByPathQuery = path => {
+  const folderPath = path || ''
+
+  return {
+    definition: () =>
+      Q('io.cozy.files')
+        .where({ type: 'directory', path: folderPath })
+        .indexFields(['type', 'path'])
+        .limitBy(1),
+    options: {
+      as: `io.cozy.files/path/${encodeURIComponent(folderPath)}`,
+      fetchPolicy: defaultFetchPolicy
+    }
+  }
+}
