@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.3](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.2...cozy-dataproxy-lib@4.15.3) (2026-06-22)
+
+### Bug Fixes
+
+- **cozy-dataproxy-lib:** Exclude shared-drive shortcuts from search ([d1a7240](https://github.com/cozy/cozy-libs/commit/d1a7240ba658beb6900a92320b0e6b17c3605a7a))
+- **cozy-dataproxy-lib:** Index a shared drive received over realtime ([70a53e3](https://github.com/cozy/cozy-libs/commit/70a53e3cbebb30d0ffbd2966adc9c8335d010848))
+
 ## [4.15.2](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.1...cozy-dataproxy-lib@4.15.2) (2026-06-11)
 
 ### Bug Fixes
