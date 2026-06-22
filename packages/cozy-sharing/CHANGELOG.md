@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [33.6.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.6.0...cozy-sharing@33.6.1) (2026-06-22)
+
+### Bug Fixes
+
+- Forget owner-only shared drive sharings ([795eff2](https://github.com/cozy/cozy-libs/commit/795eff246218780d6315ae49d4b55dbe732c450b))
+
 # [33.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.5.1...cozy-sharing@33.6.0) (2026-06-17)
 
 ### Features
