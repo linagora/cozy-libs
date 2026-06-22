@@ -226,9 +226,32 @@ export class SearchEngine {
   }
 
   addSharedDrive(driveId: string): void {
+    const doctype = `${SHARED_DRIVE_FILES_DOCTYPE}-${driveId}`
+    // Seed an index right away so realtime events for this drive's files are
+    // not dropped while its first replication is still running. Without this,
+    // a drive received over realtime stays unsearchable until the next full
+    // init (a page refresh), because the replication event that would build
+    // its index does not fire for a dynamically-added doctype.
+    if (!this.searchIndexes[doctype]) {
+      this.searchIndexes[doctype] = {
+        index: initSearchIndex(doctype),
+        lastSeq: 0,
+        lastUpdated: new Date().toISOString()
+      }
+    }
     this.addSharedDriveRealtime(driveId)
     if (this.isLocalSearch) {
       this.debouncedReplication()
+    }
+    // Index the documents already replicated for this drive (existing files
+    // predate the realtime subscription) instead of waiting for a refresh.
+    void this.indexSharedDriveDocs(doctype)
+  }
+
+  private async indexSharedDriveDocs(doctype: string): Promise<void> {
+    const searchIndex = await this.indexDocsForSearch(doctype)
+    if (searchIndex) {
+      this.searchIndexes[doctype] = searchIndex
     }
   }
 
