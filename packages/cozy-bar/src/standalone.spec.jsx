@@ -1,38 +1,16 @@
-jest.mock('cozy-client', () => {
-  const CozyClient = jest.requireActual('cozy-client/dist/CozyClient').default
-  const CozyProvider = jest.requireActual('cozy-client/dist/Provider').default
-  const useClient = jest.requireActual(
-    'cozy-client/dist/hooks/useClient'
-  ).default
-  const models =
-    jest.requireActual('cozy-client/dist/models').default ||
-    jest.requireActual('cozy-client/dist/models')
-  return {
-    __esModule: true,
-    default: CozyClient,
-    CozyProvider,
-    useClient,
-    models,
-    useQuery: jest.fn().mockReturnValue({ data: [], fetchStatus: 'loaded' }),
-    RealTimeQueries: () => null,
-    useInstanceInfo: jest.fn().mockReturnValue({
-      isLoaded: true,
-      diskUsage: { data: { used: 0 } },
-      instance: { data: {} },
-      context: { data: {} }
-    }),
-    useFetchHomeShortcuts: jest
-      .fn()
-      .mockReturnValue({ data: [], fetchStatus: 'loaded' })
-  }
-})
+const flushMicrotasks = () => new Promise(resolve => resolve())
 
 describe('cozy-bar standalone entry', () => {
+  let mockMountBar
+
   beforeEach(() => {
     jest.useFakeTimers()
     document.body.innerHTML = ''
     delete window.twakeConfig
     jest.spyOn(console, 'warn').mockImplementation(() => {})
+
+    mockMountBar = jest.fn()
+    jest.doMock('./mountBar', () => ({ mountBar: mockMountBar }))
     jest.resetModules()
   })
 
@@ -41,7 +19,7 @@ describe('cozy-bar standalone entry', () => {
     jest.restoreAllMocks()
   })
 
-  it('mounts the bar when twakeConfig has accessToken and cozyURL', () => {
+  it('mounts the bar when twakeConfig has accessToken and cozyURL', async () => {
     window.twakeConfig = {
       accessToken: 'tok-123',
       cozyURL: 'http://cozy.localhost:8080',
@@ -52,42 +30,41 @@ describe('cozy-bar standalone entry', () => {
 
     require('./standalone')
 
-    // Flush React effects
-    jest.advanceTimersByTime(0)
+    // Flush microtasks through _asyncToGenerator's promise chain
+    await flushMicrotasks()
+    await flushMicrotasks()
 
-    const barEl = document.getElementById('cozy-bar')
-    expect(barEl).toBeInTheDocument()
+    expect(mockMountBar).toHaveBeenCalledWith(window.twakeConfig)
   })
 
   it('does nothing and warns when twakeConfig is missing after 30s', () => {
     require('./standalone')
 
-    // 29 interval ticks (29000ms) → attempts = 1 + 29 = 30 → warn fires
     jest.advanceTimersByTime(29000)
 
-    expect(document.getElementById('cozy-bar')).toBe(null)
+    expect(mockMountBar).not.toHaveBeenCalled()
     // eslint-disable-next-line no-console
     expect(console.warn).toHaveBeenCalledWith(
       '[cozy-bar] window.twakeConfig.accessToken or cozyURL missing after 30s; bar not mounted'
     )
   })
 
-  it('mounts when twakeConfig appears after a delay', () => {
+  it('mounts when twakeConfig appears after a delay', async () => {
     require('./standalone')
 
-    // 2s passes with no config — should be 2 failed attempts
     jest.advanceTimersByTime(2000)
-    expect(document.getElementById('cozy-bar')).toBe(null)
+    expect(mockMountBar).not.toHaveBeenCalled()
 
-    // Now config appears
     window.twakeConfig = {
       accessToken: 'tok-late',
       cozyURL: 'http://cozy.localhost:8080'
     }
 
-    // Next tick (1s) should mount
     jest.advanceTimersByTime(1000)
 
-    expect(document.getElementById('cozy-bar')).toBeInTheDocument()
+    await flushMicrotasks()
+    await flushMicrotasks()
+
+    expect(mockMountBar).toHaveBeenCalledWith(window.twakeConfig)
   })
 })
