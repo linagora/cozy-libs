@@ -184,10 +184,7 @@ const byDocId = (state = {}, action) => {
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
     case UPDATE_SHARING:
-      if (
-        !isSharingADrive(action.sharing) &&
-        areAllRecipientsRevoked(action.sharing)
-      ) {
+      if (areAllRecipientsRevoked(action.sharing)) {
         return forgetSharing(state, action.sharing)
       }
       return state
@@ -258,10 +255,7 @@ const sharings = (state = [], action) => {
     case UPDATE_SHARING:
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
-      if (
-        !isSharingADrive(action.sharing) &&
-        areAllRecipientsRevoked(action.sharing)
-      ) {
+      if (areAllRecipientsRevoked(action.sharing)) {
         return state.filter(s => s.id !== action.sharing.id)
       }
       return state.map(s => {
@@ -287,10 +281,8 @@ const sharedPaths = (state = [], action) => {
       return newState
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
-      if (
-        !isSharingADrive(action.sharing) &&
-        areAllRecipientsRevoked(action.sharing)
-      ) {
+    case UPDATE_SHARING:
+      if (areAllRecipientsRevoked(action.sharing)) {
         return state.filter(p => p !== action.path)
       }
       return state

@@ -6,6 +6,7 @@ import reducer, {
   revokeSharingLink,
   getRecipients,
   getRecipientsFromSharing,
+  revokeGroup,
   revokeRecipient,
   revokeSelf,
   updateSharing,
@@ -143,7 +144,7 @@ describe('Sharing state', () => {
     expect(state.sharings).toEqual([SHARING_1, SHARED_DRIVE_WITHOUT_RECIPIENTS])
   })
 
-  it('should not forget shared drives without recipients when updating', () => {
+  it('should forget shared drives without recipients when updating', () => {
     const SHARED_DRIVE_WITHOUT_RECIPIENTS = {
       ...SHARING_1,
       id: 'shared_drive_no_recipients',
@@ -184,16 +185,65 @@ describe('Sharing state', () => {
       }
     }
     const state = reducer(initialState, updateSharing(updatedSharing))
-    expect(state.byDocId).toEqual({
-      shared_drive_folder: {
-        sharings: [SHARED_DRIVE_WITHOUT_RECIPIENTS.id],
-        permissions: []
-      }
-    })
-    expect(state.sharings).toEqual([updatedSharing])
+
+    expect(state.byDocId).toEqual({})
+    expect(state.sharings).toEqual([])
   })
 
-  it('should not remove shared drive path when revoking last recipient', () => {
+  it('should forget a shared drive when revoking its last group', () => {
+    const SHARED_DRIVE_WITH_GROUP = {
+      ...SHARING_1,
+      id: 'shared_drive_group',
+      attributes: {
+        ...SHARING_1.attributes,
+        drive: true,
+        members: [
+          {
+            status: 'owner',
+            name: 'Jane Doe',
+            email: 'jane@doe.com',
+            instance: 'http://cozy.tools:8080'
+          }
+        ],
+        groups: [
+          {
+            name: 'Last group',
+            addedBy: 0
+          }
+        ],
+        rules: [
+          {
+            title: 'My Shared Drive',
+            doctype: 'io.cozy.files',
+            values: ['shared_drive_group_folder'],
+            add: 'sync',
+            update: 'sync',
+            remove: 'sync'
+          }
+        ]
+      }
+    }
+    const sharedDrivePath = '/shared_drive_group_folder'
+    const initialState = reducer(
+      reducer(
+        undefined,
+        receiveSharings({
+          sharings: [SHARED_DRIVE_WITH_GROUP]
+        })
+      ),
+      addSharing(SHARED_DRIVE_WITH_GROUP, sharedDrivePath)
+    )
+    const state = reducer(
+      initialState,
+      revokeGroup(SHARED_DRIVE_WITH_GROUP, 0, sharedDrivePath)
+    )
+
+    expect(state.byDocId).toEqual({})
+    expect(state.sharings).toEqual([])
+    expect(state.sharedPaths).toEqual([])
+  })
+
+  it('should forget a shared drive when revoking last recipient', () => {
     const SHARED_DRIVE_WITH_ONE_RECIPIENT = {
       ...SHARING_1,
       id: 'shared_drive_one_recipient',
@@ -236,30 +286,14 @@ describe('Sharing state', () => {
       ),
       addSharing(SHARED_DRIVE_WITH_ONE_RECIPIENT, sharedDrivePath)
     )
-    const sharingAfterRevoke = {
-      ...SHARED_DRIVE_WITH_ONE_RECIPIENT,
-      attributes: {
-        ...SHARED_DRIVE_WITH_ONE_RECIPIENT.attributes,
-        members: [
-          SHARED_DRIVE_WITH_ONE_RECIPIENT.attributes.members[0],
-          {
-            ...SHARED_DRIVE_WITH_ONE_RECIPIENT.attributes.members[1],
-            status: 'revoked'
-          }
-        ]
-      }
-    }
     const state = reducer(
       initialState,
-      revokeRecipient(sharingAfterRevoke, 1, sharedDrivePath)
+      revokeRecipient(SHARED_DRIVE_WITH_ONE_RECIPIENT, 1, sharedDrivePath)
     )
-    expect(state.sharedPaths).toContain(sharedDrivePath)
-    expect(state.byDocId).toEqual({
-      shared_drive_folder: {
-        sharings: [SHARED_DRIVE_WITH_ONE_RECIPIENT.id],
-        permissions: []
-      }
-    })
+
+    expect(state.byDocId).toEqual({})
+    expect(state.sharings).toEqual([])
+    expect(state.sharedPaths).toEqual([])
   })
 
   it('should index received permissions', () => {
