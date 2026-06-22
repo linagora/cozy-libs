@@ -5,7 +5,12 @@ import { createMockClient } from 'cozy-client'
 
 import { SharingProvider } from './SharingProvider'
 import SharingContext from './context'
-import reducer, { addSharingLink, getDocumentPermissions } from './state'
+import reducer, {
+  addSharingLink,
+  getDocumentPermissions,
+  getDocumentSharing,
+  receiveSharings
+} from './state'
 import AppLike from '../test/AppLike'
 
 const AppWrapper = ({ children, client, isPublic }) => {
@@ -288,6 +293,115 @@ describe('updateDocumentPermissions', () => {
     })
 
     expect(mockAdd).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('shared drive recipient revocation', () => {
+  const SHARED_DRIVE = {
+    _id: 'sharing_123',
+    id: 'sharing_123',
+    type: 'io.cozy.sharings',
+    attributes: {
+      drive: true,
+      owner: true,
+      description: 'Shared folder',
+      rules: [
+        {
+          title: 'Shared folder',
+          doctype: 'io.cozy.files',
+          values: ['folder_123'],
+          add: 'none',
+          update: 'none',
+          remove: 'none'
+        }
+      ],
+      members: [
+        {
+          status: 'owner',
+          email: 'owner@cozy.local',
+          instance: 'http://cozy.local'
+        },
+        {
+          status: 'pending',
+          email: 'recipient@cozy.local',
+          instance: 'http://recipient.cozy.local'
+        }
+      ]
+    }
+  }
+  const NEW_SHARING = {
+    ...SHARED_DRIVE,
+    _id: 'sharing_456',
+    id: 'sharing_456'
+  }
+  const document = {
+    _id: 'folder_123',
+    id: 'folder_123',
+    path: '/Shared folder'
+  }
+  const recipient = {
+    _id: 'contact_123',
+    id: 'contact_123',
+    _type: 'io.cozy.contacts',
+    email: 'recipient@cozy.local'
+  }
+
+  let provider
+  let sharingCol
+
+  beforeEach(() => {
+    const mockClient = createMockClient({})
+    mockClient.getStackClient = () => ({ uri: 'http://cozy.local' })
+    mockClient.collection = jest.fn().mockReturnValue({})
+
+    provider = new SharingProvider({ client: mockClient })
+    provider.state = {
+      ...provider.state,
+      ...reducer(undefined, receiveSharings({ sharings: [SHARED_DRIVE] }))
+    }
+    provider.dispatch = jest.fn(action => {
+      provider.state = {
+        ...provider.state,
+        ...reducer(provider.state, action)
+      }
+    })
+    sharingCol = {
+      addRecipients: jest.fn(),
+      create: jest.fn().mockResolvedValue({ data: NEW_SHARING }),
+      revokeRecipient: jest.fn().mockResolvedValue({})
+    }
+    provider.sharingCol = sharingCol
+  })
+
+  it('forgets the shared drive when revoking its last recipient', async () => {
+    await provider.revoke(document, SHARED_DRIVE.id, 1)
+
+    expect(sharingCol.revokeRecipient).toHaveBeenCalledWith(SHARED_DRIVE, 1)
+    expect(getDocumentSharing(provider.state, document.id)).toBeNull()
+  })
+
+  it('creates a new sharing when re-adding after the last recipient was revoked', async () => {
+    await provider.revoke(document, SHARED_DRIVE.id, 1)
+
+    await provider.share({
+      document,
+      recipients: [recipient],
+      readOnlyRecipients: [],
+      description: 'Shared folder',
+      openSharing: true,
+      sharedDrive: true
+    })
+
+    expect(sharingCol.addRecipients).not.toHaveBeenCalled()
+    expect(sharingCol.create).toHaveBeenCalledWith({
+      document,
+      recipients: [recipient],
+      readOnlyRecipients: [],
+      description: 'Shared folder',
+      previewPath: '/preview',
+      openSharing: true,
+      sharedDrive: true
+    })
   })
 })
 
