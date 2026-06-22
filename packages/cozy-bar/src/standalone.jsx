@@ -25,8 +25,27 @@ const tryMount = async () => {
   mounted = true
   if (intervalId) clearInterval(intervalId)
 
-  const { mountBar } = await import(/* webpackMode: 'eager' */ './mountBar')
-  mountBar(cfg)
+  // eslint-disable-next-line no-console
+  console.log('[cozy-bar] mounting...')
+
+  let mountBar
+  try {
+    const mod = await import(/* webpackMode: 'eager' */ './mountBar')
+    mountBar = mod.mountBar
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('[cozy-bar] failed to load mountBar:', e)
+    return
+  }
+
+  try {
+    mountBar(cfg)
+    // eslint-disable-next-line no-console
+    console.log('[cozy-bar] mountBar completed')
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('[cozy-bar] mountBar threw:', e)
+  }
 }
 
 tryMount()

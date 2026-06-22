@@ -14,7 +14,12 @@ import BarProvider from './components/BarProvider'
 import './styles/index.styl'
 
 export const mountBar = cfg => {
+  // eslint-disable-next-line no-console
+  console.log('[cozy-bar] mountBar called', cfg)
+
   const client = new CozyClient({ uri: cfg.cozyURL, token: cfg.accessToken })
+  // eslint-disable-next-line no-console
+  console.log('[cozy-bar] client created')
 
   const barHost = document.createElement('div')
   barHost.setAttribute('id', 'cozy-bar')
@@ -24,18 +29,29 @@ export const mountBar = cfg => {
   const root = document.createElement('div')
   document.body.appendChild(root)
 
-  createRoot(root).render(
-    <CozyProvider client={client}>
-      <BreakpointsProvider>
-        <BarProvider>
-          <BarComponent
-            appSlug={cfg.appSlug}
-            appName={cfg.appName}
-            iconPath={cfg.iconURL}
-            searchOptions={{ enabled: false }}
-          />
-        </BarProvider>
-      </BreakpointsProvider>
-    </CozyProvider>
-  )
+  try {
+    const rootInstance = createRoot(root)
+    // eslint-disable-next-line no-console
+    console.log('[cozy-bar] createRoot returned', rootInstance)
+
+    rootInstance.render(
+      <CozyProvider client={client}>
+        <BreakpointsProvider>
+          <BarProvider>
+            <BarComponent
+              appSlug={cfg.appSlug}
+              appName={cfg.appName}
+              iconPath={cfg.iconURL}
+              searchOptions={{ enabled: false }}
+            />
+          </BarProvider>
+        </BreakpointsProvider>
+      </CozyProvider>
+    )
+    // eslint-disable-next-line no-console
+    console.log('[cozy-bar] render called')
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('[cozy-bar] render error:', e)
+  }
 }
