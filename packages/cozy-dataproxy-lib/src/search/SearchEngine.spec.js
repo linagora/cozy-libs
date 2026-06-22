@@ -736,7 +736,9 @@ describe('Realtime features', () => {
     })
 
     describe('addSharedDrive method', () => {
-      it('should add shared drive realtime and trigger replication', () => {
+      it('should seed an index, add shared drive realtime and trigger replication', () => {
+        const { initSearchIndex } = require('./indexDocs')
+        initSearchIndex.mockReturnValue({ search: jest.fn() })
         const addSharedDriveRealtimeSpy = jest.spyOn(
           searchEngine,
           'addSharedDriveRealtime'
@@ -745,11 +747,23 @@ describe('Realtime features', () => {
           searchEngine,
           'debouncedReplication'
         )
+        const indexDocsForSearchSpy = jest
+          .spyOn(searchEngine, 'indexDocsForSearch')
+          .mockResolvedValue(undefined)
 
         searchEngine.addSharedDrive('drive1')
 
+        // The index is seeded immediately so realtime events are not dropped
+        // while the first replication is still running.
+        expect(
+          searchEngine.searchIndexes['io.cozy.files.shareddrives-drive1']
+        ).toBeDefined()
         expect(addSharedDriveRealtimeSpy).toHaveBeenCalledWith('drive1')
         expect(debouncedReplicationSpy).toHaveBeenCalled()
+        // Existing replicated documents are indexed without waiting for a refresh.
+        expect(indexDocsForSearchSpy).toHaveBeenCalledWith(
+          'io.cozy.files.shareddrives-drive1'
+        )
       })
 
       it('should not trigger replication for non-local search', () => {
