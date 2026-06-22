@@ -36,6 +36,14 @@ export const shouldKeepFile = (file: IOCozyFile): boolean => {
   // Shared drives folder to be hidden in search.
   // The files inside it though must appear. Thus only the file with the folder ID is filtered out.
   const notSharedDrivesDir = file._id !== SHARED_DRIVES_DIR_ID
+  // The shortcut placeholders sitting directly under the Shared Drives
+  // directory represent the drive itself, not its content; they must not appear
+  // in search.
+  const notSharedDriveShortcut = !(
+    file.dir_id === SHARED_DRIVES_DIR_ID && file.class === 'shortcut'
+  )
 
-  return notInTrash && notRootDir && notSharedDrivesDir
+  return (
+    notInTrash && notRootDir && notSharedDrivesDir && notSharedDriveShortcut
+  )
 }
