@@ -79,3 +79,16 @@ Note:
 - No trailing comma
 - Alphabetical import order (React before Button, Button before cx)
 - Empty line between import groups (builtin/external, external/internal, etc.)
+
+## Migration order within the monorepo
+
+The CI runs tests for **all** packages on every PR. When a package is modified and its `dist/` gets rebuilt, any other package importing from that dist (via workspace imports) may break.
+
+**Rule: migrate consumers before the packages they consume.** The most-consumed dependency should be migrated last.
+
+Dependency-aware migration steps for any package-level change:
+
+1. Check the dependency graph: which packages does this one consume? Which consume it?
+2. Migrate leaf consumers first (packages that no other workspace package depends on)
+3. Work up the dependency chain
+4. Migrate the root dependency (consumed by everyone) last
