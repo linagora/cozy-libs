@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [38.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@37.0.51...cozy-harvest-lib@38.0.0) (2026-06-23)
+
+### Features
+
+- **cozy-harvest-lib:** Add twake-icons ([b05b8bd](https://github.com/cozy/cozy-libs/commit/b05b8bd252d4c31418e9b68212354e762114aa07))
+
+### BREAKING CHANGES
+
+- **cozy-harvest-lib:** You must add `@linagora/twake-icons >= 2.6.2`
+
 ## [37.0.51](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@37.0.50...cozy-harvest-lib@37.0.51) (2026-06-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
