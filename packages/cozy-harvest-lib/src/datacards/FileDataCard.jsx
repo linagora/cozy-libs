@@ -8,8 +8,6 @@ import { useNavigate } from 'react-router-dom'
 import { RealTimeQueries } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Box from 'cozy-ui/transpiled/react/Box'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -25,6 +23,8 @@ import { getFileIcon } from './mime-utils'
 import { useDataCardFiles } from './useDataCardFiles'
 import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
 import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
+
+import { Icon, File } from '@linagora/twake-icons'
 
 const LoadingFileListItem = ({ divider }) => {
   return (
@@ -96,7 +96,7 @@ const FileCard = ({ files, loading, konnector, trigger, accountId }) => {
         <Media align="top">
           <Img>
             <Avatar size="sm" color={palette['puertoRico']} className="u-mr-1">
-              <Icon icon={FileIcon} color={palette['white']} />
+              <Icon icon={File} color={palette['white']} />
             </Avatar>
           </Img>
           <Bd>

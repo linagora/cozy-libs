@@ -1,9 +1,9 @@
+import { CloudSync2 } from '@linagora/twake-icons'
 import React from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Empty from 'cozy-ui/transpiled/react/Empty'
-import CloudSync2 from 'cozy-ui/transpiled/react/Icons/CloudSync2'
 
 interface ConnectCardProps {
   description: string

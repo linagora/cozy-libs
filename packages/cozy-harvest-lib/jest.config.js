@@ -22,7 +22,8 @@ module.exports = {
     '.styl$': 'identity-obj-proxy',
     '^cozy-ui$': '<rootDir>/node_modules/cozy-ui',
     '^uuid$': require.resolve('uuid'),
-    '^nanoid$': require.resolve('nanoid')
+    '^nanoid$': require.resolve('nanoid'),
+    '^@linagora/twake-icons$': '<rootDir>/src/__mocks__/twake-icons.js'
   },
   transformIgnorePatterns: [
     'node_modules/(?!(cozy-ui|cozy-ui-plus|cozy-client|cozy-keys-lib))'

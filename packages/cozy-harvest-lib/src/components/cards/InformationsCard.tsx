@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { Icon, Globe, Store } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
-import StoreIcon from 'cozy-ui/transpiled/react/Icons/Store'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -105,7 +103,7 @@ const StoreButton = ({ appSlug }: StoreButtonProps): JSX.Element | null => {
       url={url}
       primaryText={t('card.information.store')}
       secondaryText={t('card.information.storeDescription')}
-      icon={StoreIcon}
+      icon={Store}
     />
   )
 }
@@ -125,7 +123,7 @@ const VendorLinkButton = ({
       url={vendorLink}
       primaryText={t('card.information.websiteLink')}
       secondaryText={host}
-      icon={GlobeIcon}
+      icon={Globe}
     />
   )
 }

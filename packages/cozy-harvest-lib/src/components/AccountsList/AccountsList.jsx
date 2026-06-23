@@ -1,11 +1,10 @@
+import { Icon, Plus } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import { translate } from 'twake-i18n'
 
 import AccountsListItem from './AccountsListItem'
@@ -39,7 +38,7 @@ export class AccountsList extends React.PureComponent {
                 label={t('modal.addAccount.button')}
                 variant="text"
                 fullWidth
-                icon={<Icon icon={PlusIcon} />}
+                icon={<Icon icon={Plus} />}
                 className="u-bdrs-4"
                 onClick={addAccount}
               />

@@ -1,9 +1,7 @@
+import { Icon, WrenchCircle } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
 
 import { LaunchTriggerAlertMenu } from './LaunchTriggerAlertMenu'
 import { TriggerAlertTemplate } from './TriggerAlertTemplate'
@@ -50,7 +48,7 @@ function MaintenanceAlert({
   return (
     <TriggerAlertTemplate
       color="var(--defaultBackgroundColor)"
-      icon={<Icon icon={WrenchCircleIcon} color="var(--secondaryTextColor)" />}
+      icon={<Icon icon={WrenchCircle} color="var(--secondaryTextColor)" />}
       block={isBlock}
       label={label}
       labelColor="textSecondary"
