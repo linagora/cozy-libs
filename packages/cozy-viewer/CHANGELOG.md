@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [28.1.18](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.1.17...cozy-viewer@28.1.18) (2026-06-23)
+
+### Bug Fixes
+
+- **cozy-viewer:** Show inherited sharing recipients ([5da160a](https://github.com/cozy/cozy-libs/commit/5da160afce3f81f10969607bee76e58197c466a8))
+
 ## [28.1.17](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.1.16...cozy-viewer@28.1.17) (2026-06-22)
 
 **Note:** Version bump only for package cozy-viewer
