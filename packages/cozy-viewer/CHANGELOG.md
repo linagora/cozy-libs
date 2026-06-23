@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [29.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.1.18...cozy-viewer@29.0.0) (2026-06-23)
+
+### Features
+
+- **cozy-viewer:** Add twake-icons ([8f4b952](https://github.com/cozy/cozy-libs/commit/8f4b9525a011504ecbf9343b007e2a1115ca7d6a))
+
+### BREAKING CHANGES
+
+- **cozy-viewer:** You must add `@linagora/twake-icons >= 2.6.2`
+
 ## [28.1.18](https://github.com/cozy/cozy-libs/compare/cozy-viewer@28.1.17...cozy-viewer@28.1.18) (2026-06-23)
 
 ### Bug Fixes
