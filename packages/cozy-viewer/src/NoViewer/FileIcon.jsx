@@ -1,42 +1,43 @@
+import {
+  Icon,
+  FileTypeBin,
+  FileTypeCode,
+  FileTypeFiles,
+  FileTypePdf,
+  FileTypeSheet,
+  FileTypeSlide,
+  FileTypeText,
+  FileTypeZip
+} from '@linagora/twake-icons'
 import React from 'react'
-
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import FileTypeBinIcon from 'cozy-ui/transpiled/react/Icons/FileTypeBin'
-import FileTypeCodeIcon from 'cozy-ui/transpiled/react/Icons/FileTypeCode'
-import FileTypeFilesIcon from 'cozy-ui/transpiled/react/Icons/FileTypeFiles'
-import FileTypePdfIcon from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
-import FileTypeSheetIcon from 'cozy-ui/transpiled/react/Icons/FileTypeSheet'
-import FileTypeSlideIcon from 'cozy-ui/transpiled/react/Icons/FileTypeSlide'
-import FileTypeTextIcon from 'cozy-ui/transpiled/react/Icons/FileTypeText'
-import FileTypeZipIcon from 'cozy-ui/transpiled/react/Icons/FileTypeZip'
 
 const FileIcon = ({ type }) => {
   let icon
 
   switch (type) {
     case 'bin':
-      icon = FileTypeBinIcon
+      icon = FileTypeBin
       break
     case 'code':
-      icon = FileTypeCodeIcon
+      icon = FileTypeCode
       break
     case 'spreadsheet':
-      icon = FileTypeSheetIcon
+      icon = FileTypeSheet
       break
     case 'slide':
-      icon = FileTypeSlideIcon
+      icon = FileTypeSlide
       break
     case 'text':
-      icon = FileTypeTextIcon
+      icon = FileTypeText
       break
     case 'zip':
-      icon = FileTypeZipIcon
+      icon = FileTypeZip
       break
     case 'pdf':
-      icon = FileTypePdfIcon
+      icon = FileTypePdf
       break
     default:
-      icon = FileTypeFilesIcon
+      icon = FileTypeFiles
       break
   }
 

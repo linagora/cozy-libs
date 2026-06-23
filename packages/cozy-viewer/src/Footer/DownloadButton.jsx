@@ -1,11 +1,10 @@
+import { Icon, Download } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import DownloadIcon from 'cozy-ui/transpiled/react/Icons/Download'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useI18n } from 'twake-i18n'
 
@@ -13,7 +12,7 @@ const DownloadButton = ({ file, variant }) => {
   const client = useClient()
   const { t } = useI18n()
 
-  const icon = <Icon icon={DownloadIcon} />
+  const icon = <Icon icon={Download} />
   const label = t('Viewer.download')
 
   const handleClick = async () => {

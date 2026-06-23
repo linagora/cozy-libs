@@ -1,9 +1,7 @@
+import { Icon, Copy, Rename } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import Copy from 'cozy-ui/transpiled/react/Icons/Copy'
-import Edit from 'cozy-ui/transpiled/react/Icons/Rename'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import ActionMenu, {
   ActionMenuItem
@@ -32,7 +30,7 @@ const ActionMenuDesktop = forwardRef(
             onDismiss={onClose}
           >
             <ActionMenuItem
-              left={<Icon icon={Edit} color="var(--iconTextColor)" />}
+              left={<Icon icon={Rename} color="var(--iconTextColor)" />}
             >
               <Typography>
                 {t(`Viewer.panel.qualification.actions.edit`)}

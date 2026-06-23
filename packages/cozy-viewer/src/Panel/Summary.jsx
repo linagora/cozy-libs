@@ -1,3 +1,4 @@
+import { Icon, Bottom, Dots, Right, Text } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
@@ -16,12 +17,7 @@ import {
   exportToText
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
-import TextIcon from 'cozy-ui/transpiled/react/Icons/Text'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -100,24 +96,21 @@ const Summary = ({ file, isReadOnly, t }) => {
                     ref={anchorRef}
                     onClick={() => setShowMenu(v => !v)}
                   >
-                    <Icon icon={DotsIcon} />
+                    <Icon icon={Dots} />
                   </IconButton>
                   <IconButton
                     aria-label={t('Viewer.panel.collapse')}
                     size="small"
                     onClick={() => setIsExpanded(v => !v)}
                   >
-                    <Icon icon={BottomIcon} rotate={isExpanded ? 180 : 0} />
+                    <Icon icon={Bottom} rotate={isExpanded ? 180 : 0} />
                   </IconButton>
                 </ListItemSecondaryAction>
               ) : (
                 !isReadOnly && (
                   <ListItemSecondaryAction>
                     <IconButton size="small" onClick={() => setShowModal(true)}>
-                      <Icon
-                        icon={RightIcon}
-                        color="var(--secondaryTextColor)"
-                      />
+                      <Icon icon={Right} color="var(--secondaryTextColor)" />
                     </IconButton>
                   </ListItemSecondaryAction>
                 )
@@ -137,7 +130,7 @@ const Summary = ({ file, isReadOnly, t }) => {
       ) : (
         <ListItem button={!isReadOnly} onClick={handleClick}>
           <ListItemIcon>
-            <Icon icon={TextIcon} />
+            <Icon icon={Text} />
           </ListItemIcon>
           <QualificationListItemText
             style={{ wordBreak: 'break-word' }}
@@ -148,13 +141,13 @@ const Summary = ({ file, isReadOnly, t }) => {
           {value ? (
             <ListItemSecondaryAction>
               <IconButton ref={anchorRef} onClick={() => setShowMenu(v => !v)}>
-                <Icon icon={DotsIcon} />
+                <Icon icon={Dots} />
               </IconButton>
             </ListItemSecondaryAction>
           ) : (
             !isReadOnly && (
               <ListItemIcon>
-                <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+                <Icon icon={Right} color="var(--secondaryTextColor)" />
               </ListItemIcon>
             )
           )}

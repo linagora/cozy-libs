@@ -1,12 +1,10 @@
+import { Icon, Copy, Rename } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import BottomSheet, {
   BottomSheetItem
 } from 'cozy-ui/transpiled/react/BottomSheet'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import Copy from 'cozy-ui/transpiled/react/Icons/Copy'
-import Edit from 'cozy-ui/transpiled/react/Icons/Rename'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -32,7 +30,7 @@ const ActionMenuMobile = ({ actions, isEditable, onClose }) => {
             >
               <ListItem button>
                 <ListItemIcon>
-                  <Icon icon={Edit} />
+                  <Icon icon={Rename} />
                 </ListItemIcon>
                 <ListItemText
                   primary={t(`Viewer.panel.qualification.actions.edit`)}

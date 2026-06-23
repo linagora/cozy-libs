@@ -1,9 +1,7 @@
+import { Icon, DropdownClose } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
-
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import { default as ArrowIcon } from 'cozy-ui/transpiled/react/Icons/DropdownClose'
 
 import styles from './styles.styl'
 
@@ -24,7 +22,11 @@ const Navigation = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <Icon icon={ArrowIcon} size="32" className={styles['viewer-nav-arrow']} />
+      <Icon
+        icon={DropdownClose}
+        size="32"
+        className={styles['viewer-nav-arrow']}
+      />
     </div>
   )
 }

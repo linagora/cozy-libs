@@ -1,10 +1,8 @@
+import { ShieldClean, ShieldInfected, Spinner } from '@linagora/twake-icons'
 import get from 'lodash/get'
 
 import { splitFilename, isFromKonnector } from 'cozy-client/dist/models/file'
 import { KNOWN_BILLS_ATTRIBUTES_NAMES } from 'cozy-client/dist/models/paper'
-import ShieldCleanIcon from 'cozy-ui/transpiled/react/Icons/ShieldClean'
-import ShieldInfectedIcon from 'cozy-ui/transpiled/react/Icons/ShieldInfected'
-import SpinnerIcon from 'cozy-ui/transpiled/react/Icons/Spinner'
 
 /**
  * Returns file extension or class
@@ -219,13 +217,13 @@ export const getAntivirusStatus = (file, t) => {
   let isError = false
 
   if (['pending', 'error', 'skipped'].includes(fileState)) {
-    icon = SpinnerIcon
+    icon = Spinner
     text = t('Viewer.panel.antivirus.scanning')
   } else if (fileState === 'clean') {
-    icon = ShieldCleanIcon
+    icon = ShieldClean
     text = t('Viewer.panel.antivirus.scanned')
   } else if (fileState === 'infected') {
-    icon = ShieldInfectedIcon
+    icon = ShieldInfected
     text = t('Viewer.panel.antivirus.infected')
     isError = true
   }

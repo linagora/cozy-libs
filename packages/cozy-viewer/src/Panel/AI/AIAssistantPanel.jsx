@@ -1,3 +1,10 @@
+import {
+  Icon,
+  Assistant,
+  Copy,
+  CrossMedium,
+  Refresh
+} from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useCallback, useState, useEffect, useRef } from 'react'
@@ -9,12 +16,7 @@ import { fetchBlobFileById } from 'cozy-client/dist/models/file'
 import flag from 'cozy-flags'
 import logger from 'cozy-logger'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import AssistantIcon from 'cozy-ui/transpiled/react/Icons/Assistant'
-import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
-import CrossMediumIcon from 'cozy-ui/transpiled/react/Icons/CrossMedium'
-import RefreshIcon from 'cozy-ui/transpiled/react/Icons/Refresh'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -206,7 +208,7 @@ const AIAssistantPanel = ({ className }) => {
           <div className="u-flex u-flex-items-center u-flex-justify-between u-h-3 u-ph-1 u-flex-shrink-0">
             <Typography variant="h4">{t('Viewer.ai.panelTitle')}</Typography>
             <IconButton aria-label="Close AI Assistant" onClick={handleClose}>
-              <Icon icon={CrossMediumIcon} />
+              <Icon icon={CrossMedium} />
             </IconButton>
           </div>
           {!isLoading && (
@@ -221,7 +223,7 @@ const AIAssistantPanel = ({ className }) => {
                     onClick={handleRefresh}
                     aria-label="Refresh"
                   >
-                    <Icon icon={RefreshIcon} />
+                    <Icon icon={Refresh} />
                   </IconButton>
                   {summary && (
                     <IconButton
@@ -229,7 +231,7 @@ const AIAssistantPanel = ({ className }) => {
                       onClick={handleCopy}
                       aria-label="Copy"
                     >
-                      <Icon icon={CopyIcon} />
+                      <Icon icon={Copy} />
                     </IconButton>
                   )}
                 </div>
@@ -260,7 +262,7 @@ const AIAssistantPanel = ({ className }) => {
                 className="u-flex u-flex-items-center"
               >
                 <Icon
-                  icon={AssistantIcon}
+                  icon={Assistant}
                   color="var(--primaryColor)"
                   className="u-mr-1"
                 />

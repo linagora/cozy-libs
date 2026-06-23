@@ -1,9 +1,7 @@
+import { Icon, LabelOutlined, Right } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import LabelOutlinedIcon from 'cozy-ui/transpiled/react/Icons/LabelOutlined'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -25,7 +23,7 @@ const QualificationListItemQualificationEmpty = ({
         onClick={canEditQualification(file, isReadOnly) ? onClick : undefined}
       >
         <ListItemIcon>
-          <Icon icon={LabelOutlinedIcon} />
+          <Icon icon={LabelOutlined} />
         </ListItemIcon>
         <ListItemText
           style={{ color: 'var(--disabledTextColor)' }}
@@ -36,7 +34,7 @@ const QualificationListItemQualificationEmpty = ({
         />
         {canEditQualification(file, isReadOnly) && (
           <ListItemIcon>
-            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+            <Icon icon={Right} color="var(--secondaryTextColor)" />
           </ListItemIcon>
         )}
       </ListItem>

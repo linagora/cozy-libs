@@ -1,3 +1,4 @@
+import { Icon, Right } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -11,8 +12,6 @@ import {
   useSharingContext
 } from 'cozy-sharing'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -90,7 +89,7 @@ const Sharing = ({ file, t }) => {
         />
         {!flag('drive.new-file-viewer-ui.enabled') && (
           <ListItemIcon>
-            <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+            <Icon icon={Right} color="var(--secondaryTextColor)" />
           </ListItemIcon>
         )}
       </ListItem>

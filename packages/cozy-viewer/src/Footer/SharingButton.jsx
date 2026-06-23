@@ -1,10 +1,9 @@
+import { Icon, Share } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { ShareButton } from 'cozy-sharing'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
 
 import { useShareModal } from '../providers/ShareModalProvider'
 
@@ -14,7 +13,7 @@ const SharingButton = ({ className, file, variant }) => {
   if (variant === 'iconButton')
     return (
       <IconButton className="u-white" onClick={() => setShowShareModal(true)}>
-        <Icon icon={ShareIcon} />
+        <Icon icon={Share} />
       </IconButton>
     )
 

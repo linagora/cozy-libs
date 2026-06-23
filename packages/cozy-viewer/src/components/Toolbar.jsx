@@ -1,3 +1,4 @@
+import { Icon, Download, Previous } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
@@ -13,10 +14,7 @@ import {
 } from 'cozy-sharing'
 import { download } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import DownloadIcon from 'cozy-ui/transpiled/react/Icons/Download'
-import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
 import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
@@ -72,7 +70,7 @@ const Toolbar = ({
     >
       {onClose && (
         <IconButton className={cx({ 'u-white': isDesktop })} onClick={onClose}>
-          <Icon icon={PreviousIcon} />
+          <Icon icon={Previous} />
         </IconButton>
       )}
       <div
@@ -120,7 +118,7 @@ const Toolbar = ({
             variant="text"
             aria-label={t('Viewer.download')}
             label={t('Viewer.download')}
-            startIcon={<Icon icon={DownloadIcon} />}
+            startIcon={<Icon icon={Download} />}
             onClick={() =>
               download({ client, encryptedUrl: url, downloadFile }).action(
                 [file],

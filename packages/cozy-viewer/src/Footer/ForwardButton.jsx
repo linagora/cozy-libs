@@ -1,3 +1,4 @@
+import { Icon, Reply, ShareIos } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -5,14 +6,11 @@ import { useClient } from 'cozy-client'
 import { makeSharingLink } from 'cozy-client/dist/models/sharing'
 import { isIOS } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import ReplyIcon from 'cozy-ui/transpiled/react/Icons/Reply'
-import ShareIosIcon from 'cozy-ui/transpiled/react/Icons/ShareIos'
 import Alerter from 'cozy-ui/transpiled/react/deprecated/Alerter'
 import { useI18n } from 'twake-i18n'
 
-const ForwardIcon = isIOS() ? ShareIosIcon : ReplyIcon
+const ForwardIcon = isIOS() ? ShareIos : Reply
 
 const ForwardButton = ({ file, variant, onClick }) => {
   const { t } = useI18n()

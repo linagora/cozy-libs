@@ -1,11 +1,10 @@
+import { Icon, Article } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import ArticleIcon from 'cozy-ui/transpiled/react/Icons/Article'
 import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
@@ -36,7 +35,7 @@ const SummarizeByAIButton = ({ onPaywallRedirect, className }) => {
       variant="text"
       startIcon={
         <Icon
-          icon={ArticleIcon}
+          icon={Article}
           className={cx(styles['viewer-ai-summarise-btn'])}
         />
       }
