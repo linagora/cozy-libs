@@ -1,9 +1,7 @@
+import { Icon, Check, Warning } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
-import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { translate } from 'twake-i18n'
@@ -36,7 +34,7 @@ const Status = ({ t, trigger, konnector }) => {
                 {errorTitle}
               </Typography>
               <Icon
-                icon={WarningIcon}
+                icon={Warning}
                 size={16}
                 className="u-error u-flex-shrink-0"
               />
@@ -45,7 +43,7 @@ const Status = ({ t, trigger, konnector }) => {
         }
         return (
           <Icon
-            icon={CheckIcon}
+            icon={Check}
             size={16}
             className="u-flex-shrink-0 u-valid u-success"
           />

@@ -1,11 +1,10 @@
+import { Icon, Dots } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
 
 const LaunchTriggerAlertMenu = ({ actions, options, disabled }) => {
   const anchorRef = useRef()
@@ -23,7 +22,7 @@ const LaunchTriggerAlertMenu = ({ actions, options, disabled }) => {
         data-testid="alert-menu-button"
         disabled={disabled}
       >
-        <Icon icon={DotsIcon} />
+        <Icon icon={Dots} />
       </IconButton>
       {isMenuDisplayed ? (
         <ActionsMenu

@@ -1,10 +1,10 @@
+import { Eye } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
 import { useQuery } from 'cozy-client'
 import { Application } from 'cozy-doctypes'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 
 import { appsConn } from '../connections/apps'
@@ -22,7 +22,7 @@ const KonnectorUpdateButton = ({
     component="a"
     href={href}
     onClick={onClick}
-    icon={EyeIcon}
+    icon={Eye}
     label={label}
     color={isBlocking ? 'error' : undefined}
     variant={isBlocking ? undefined : 'secondary'}

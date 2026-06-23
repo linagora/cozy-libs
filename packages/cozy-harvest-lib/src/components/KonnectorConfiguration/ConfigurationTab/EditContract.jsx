@@ -1,3 +1,4 @@
+import { Icon, Trash } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useState, forwardRef } from 'react'
 
@@ -19,8 +20,6 @@ import Dialog, {
   DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
@@ -262,7 +261,7 @@ const EditContract = props => {
       <DialogContent className="u-pv-1">
         <Button
           className="u-ml-auto u-error u-ml-0 u-ph-half"
-          icon={<Icon icon={TrashIcon} />}
+          icon={<Icon icon={Trash} />}
           theme="text"
           label={t('contractForm.removeAccountBtn')}
           onClick={handleRequestDeletion}

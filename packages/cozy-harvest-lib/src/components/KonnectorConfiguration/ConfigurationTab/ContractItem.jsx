@@ -1,9 +1,7 @@
+import { Icon, Right, Wallet } from '@linagora/twake-icons'
 import startCase from 'lodash/startCase'
 import React, { useState } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
-import WalletIcon from 'cozy-ui/transpiled/react/Icons/Wallet'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -31,7 +29,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         }}
       >
         <ListItemIcon>
-          <Icon icon={WalletIcon} color={disabledColorWhenNeeded} />
+          <Icon icon={Wallet} color={disabledColorWhenNeeded} />
         </ListItemIcon>
         <ListItemText
           primary={
@@ -43,7 +41,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         />
         <ListItemSecondaryAction>
           <Icon
-            icon={RightIcon}
+            icon={Right}
             className="u-mr-1"
             color="var(--secondaryTextColor)"
           />

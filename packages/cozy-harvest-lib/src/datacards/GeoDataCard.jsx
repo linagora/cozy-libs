@@ -16,13 +16,7 @@ import CozyClient, {
 } from 'cozy-client'
 import flag from 'cozy-flags'
 import Box from 'cozy-ui/transpiled/react/Box'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import ClockIcon from 'cozy-ui/transpiled/react/Icons/Clock'
-import CompassIcon from 'cozy-ui/transpiled/react/Icons/Compass'
-import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
-import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -39,6 +33,8 @@ import {
 import useCycle from './useCycle'
 import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
 import AppLinkCard from '../components/cards/AppLinkCard'
+
+import { Icon, Clock, Compass, Flag, Left, Right } from '@linagora/twake-icons'
 
 const setupMap = node => {
   var map = L.map(node).setView([51.505, -0.09], 13)
@@ -126,7 +122,7 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
     <Stack spacing="xs">
       <Media>
         <Img>
-          <Icon icon={FlagIcon} color="var(--emerald)" className="u-mr-half" />
+          <Icon icon={Flag} color="var(--emerald)" className="u-mr-half" />
         </Img>
         <Bd>
           {loading ? (
@@ -140,11 +136,7 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
       </Media>
       <Media>
         <Img>
-          <Icon
-            icon={FlagIcon}
-            color="var(--pomegranate)"
-            className="u-mr-half"
-          />
+          <Icon icon={Flag} color="var(--pomegranate)" className="u-mr-half" />
         </Img>
         <Bd>
           {loading ? (
@@ -159,10 +151,10 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
       <div>
         {loading ? null : (
           <Typography variant="body2" color="textSecondary">
-            <Icon style={infoIconStyle} icon={ClockIcon} size={10} />
+            <Icon style={infoIconStyle} icon={Clock} size={10} />
             {duration}
             <MiddleDot />
-            <Icon style={infoIconStyle} icon={CompassIcon} size={10} />
+            <Icon style={infoIconStyle} icon={Compass} size={10} />
             {formatDistance(t, trip.properties.distance)}
             <MiddleDot />
             {modes.map(m => t(`datacards.trips.modes.${m}`)).join(', ')}
@@ -224,7 +216,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
       <Media>
         <Img className="u-pl-half">
           <IconButton onClick={setPrev} size="medium">
-            <Icon icon={LeftIcon} />
+            <Icon icon={Left} />
           </IconButton>
         </Img>
         <Bd className="u-ta-center">
@@ -239,7 +231,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
         </Bd>
         <Img className="u-pr-half">
           <IconButton onClick={setNext} size="medium">
-            <Icon icon={RightIcon} />
+            <Icon icon={Right} />
           </IconButton>
         </Img>
       </Media>

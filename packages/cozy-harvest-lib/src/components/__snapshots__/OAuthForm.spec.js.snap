@@ -49,7 +49,12 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
       <div
         class="styles__c-empty___3w5oV"
       >
-        CloudSync2
+        <svg
+          class="styles__c-empty-img___2GC4d styles__icon___23x3R"
+          data-mock-icon="CloudSync2"
+          height="100%"
+          width="100%"
+        />
         <h3
           class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
         >
@@ -140,7 +145,12 @@ exports[`OAuthForm should handle oauth cancelation 2`] = `
       <div
         class="styles__c-empty___3w5oV"
       >
-        CloudSync2
+        <svg
+          class="styles__c-empty-img___2GC4d styles__icon___23x3R"
+          data-mock-icon="CloudSync2"
+          height="100%"
+          width="100%"
+        />
         <h3
           class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
         >
@@ -185,7 +195,12 @@ exports[`OAuthForm should render 1`] = `
       <div
         class="styles__c-empty___3w5oV"
       >
-        CloudSync2
+        <svg
+          class="styles__c-empty-img___2GC4d styles__icon___23x3R"
+          data-mock-icon="CloudSync2"
+          height="100%"
+          width="100%"
+        />
         <h3
           class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
         >

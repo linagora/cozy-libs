@@ -1,9 +1,7 @@
+import { Icon, Info } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import InfoIcon from 'cozy-ui/transpiled/react/Icons/Info'
 
 import { LaunchButton } from './LaunchButton'
 import { LaunchTriggerAlertMenu } from './LaunchTriggerAlertMenu'
@@ -62,7 +60,7 @@ function ErrorAlert({
       <TriggerAlertTemplate
         block
         severity="error"
-        icon={<Icon icon={InfoIcon} />}
+        icon={<Icon icon={Info} />}
         label={label}
         labelColor="error"
         showAction={isRunnable}

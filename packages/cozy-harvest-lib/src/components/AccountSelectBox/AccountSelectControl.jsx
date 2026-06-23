@@ -1,7 +1,6 @@
+import { Icon, Bottom } from '@linagora/twake-icons'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const AccountSelectControlBig = ({ name }) => {
@@ -11,7 +10,7 @@ const AccountSelectControlBig = ({ name }) => {
         {name}
       </Typography>
       <Icon
-        icon={BottomIcon}
+        icon={Bottom}
         size="15"
         className="u-ml-half"
         color="var('--primaryTextColor')"
@@ -29,7 +28,7 @@ const AccountSelectControl = ({ name, variant }) => {
         {name}
       </Typography>
       <Icon
-        icon={BottomIcon}
+        icon={Bottom}
         size="12"
         className="u-ml-half"
         color="var(--iconTextColor)"

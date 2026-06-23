@@ -1,3 +1,4 @@
+import { Icon, Key, Right, Unlink } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
@@ -8,10 +9,6 @@ import { Account } from 'cozy-doctypes'
 import { useVaultClient, useVaultUnlockContext } from 'cozy-keys-lib'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
-import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -168,7 +165,7 @@ const ConfigurationTab = ({
               onClick={() => navigate(`../accounts/${account._id}/edit`)}
             >
               <ListItemIcon>
-                <Icon icon={KeyIcon} color="var(--iconTextColor)" />
+                <Icon icon={Key} color="var(--iconTextColor)" />
               </ListItemIcon>
               <ListItemText
                 primary={t('modal.updateAccount.identifiers')}
@@ -179,7 +176,7 @@ const ConfigurationTab = ({
                   {running && <Spinner />}
                   <Icon
                     className="u-mr-1"
-                    icon={RightIcon}
+                    icon={Right}
                     color="var(--iconTextColor)"
                   />
                 </div>
@@ -188,7 +185,7 @@ const ConfigurationTab = ({
           )}
           <ListItem button onClick={handleDeleteRequest}>
             <ListItemIcon>
-              <Icon icon={UnlinkIcon} className="u-error" />
+              <Icon icon={Unlink} className="u-error" />
             </ListItemIcon>
             <ListItemText
               primary={

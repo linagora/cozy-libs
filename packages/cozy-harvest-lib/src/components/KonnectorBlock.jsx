@@ -1,3 +1,4 @@
+import { Icon, Globe, Right } from '@linagora/twake-icons'
 import cx from 'classnames'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
@@ -5,9 +6,6 @@ import React, { useEffect, useState } from 'react'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -117,7 +115,7 @@ const KonnectorBlock = ({ file }) => {
           }
         />
         <ListItemIcon>
-          <Icon icon={RightIcon} />
+          <Icon icon={Right} />
         </ListItemIcon>
       </ListItem>
       <List>
@@ -135,7 +133,7 @@ const KonnectorBlock = ({ file }) => {
 
         <ListItem button {...vendorLink}>
           <ListItemIcon>
-            <Icon icon={GlobeIcon} />
+            <Icon icon={Globe} />
           </ListItemIcon>
           <ListItemText
             primary={t('konnectorBlock.open')}

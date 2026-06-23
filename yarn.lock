@@ -17583,6 +17583,7 @@ __metadata:
     "@babel/register": "npm:7.16.9"
     "@cozy/cli-tree": "npm:^0.15.1"
     "@cozy/minilog": "npm:^1.0.0"
+    "@linagora/twake-icons": "npm:^2.6.2"
     "@sentry/react": "npm:7.119.0"
     "@storybook/addon-essentials": "npm:^7.0.23"
     "@storybook/addon-interactions": "npm:^7.0.23"
@@ -17642,6 +17643,7 @@ __metadata:
     uuid: "npm:^3.3.2"
   peerDependencies:
     "@babel/runtime": ">=7.12.5"
+    "@linagora/twake-icons": ">=2.6.2"
     "@sentry/react": ">=7.118.0"
     cozy-client: ">=52.1.0"
     cozy-device-helper: ">=2.6.0"

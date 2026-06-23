@@ -1,8 +1,7 @@
+import { Icon, Info } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import InfoIcon from 'cozy-ui/transpiled/react/Icons/Info'
 import { useI18n } from 'twake-i18n'
 
 import { TriggerAlertTemplate } from './TriggerAlertTemplate'
@@ -27,11 +26,7 @@ function UnrunnableAlert({
     <TriggerAlertTemplate
       severity="secondary"
       icon={
-        withoutIcon ? (
-          false
-        ) : (
-          <Icon icon={InfoIcon} color="var(--iconTextColor)" />
-        )
+        withoutIcon ? false : <Icon icon={Info} color="var(--iconTextColor)" />
       }
       label={t('accountForm.notClientSide', { name: konnectorName })}
       className={className}

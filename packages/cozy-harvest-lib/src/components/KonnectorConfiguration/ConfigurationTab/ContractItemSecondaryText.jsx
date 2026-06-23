@@ -1,3 +1,4 @@
+import { Icon, Sync, Unlink } from '@linagora/twake-icons'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import dateFnsLocaleEn from 'date-fns/locale/en-US'
 import dateFnsLocaleEs from 'date-fns/locale/es'
@@ -5,9 +6,6 @@ import dateFnsLocalefr from 'date-fns/locale/fr'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
-import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 import { useI18n } from 'twake-i18n'
 
 import { isDeleted, isDisabled, isErrored, isImported } from './helpers'
@@ -25,7 +23,7 @@ const ContractItemSecondaryText = ({ contract }) => {
   if (isErrored(contract)) {
     return (
       <>
-        <Icon icon={SyncIcon} size={8} color="#FE952A" />{' '}
+        <Icon icon={Sync} size={8} color="#FE952A" />{' '}
         <span style={{ color: '#EFA82D' }}>
           {formatDistanceToNow(new Date(contract.metadata.updatedAt), {
             addSuffix: true,
@@ -38,7 +36,7 @@ const ContractItemSecondaryText = ({ contract }) => {
   if (isDisabled(contract)) {
     return (
       <>
-        <Icon icon={UnlinkIcon} size={8} />{' '}
+        <Icon icon={Unlink} size={8} />{' '}
         {t('contracts.desynchronized.message', {
           date: f(
             new Date(contract.metadata.disabledAt),
@@ -51,7 +49,7 @@ const ContractItemSecondaryText = ({ contract }) => {
   if (isImported(contract)) {
     return (
       <>
-        <Icon icon={SyncIcon} size={8} />{' '}
+        <Icon icon={Sync} size={8} />{' '}
         {formatDistanceToNow(new Date(contract.metadata.updatedAt), {
           addSuffix: true,
           locale: dateFnsLocales[lang]

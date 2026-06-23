@@ -1,9 +1,9 @@
+import { Openwith } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
 import { withClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 import { translate } from 'twake-i18n'
 
@@ -20,7 +20,7 @@ const DriveLink = memo(({ folderId, client, t }) => {
         {({ href, name, onClick }) => (
           <Button
             component="a"
-            icon={OpenwithIcon}
+            icon={Openwith}
             href={href}
             label={t('account.success.driveLinkText', {
               appName: name
@@ -35,7 +35,7 @@ const DriveLink = memo(({ folderId, client, t }) => {
     return (
       <Button
         component="a"
-        icon={OpenwithIcon}
+        icon={Openwith}
         label={t('account.success.banksLinkText', {
           appName: name
         })}

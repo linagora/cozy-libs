@@ -1,10 +1,9 @@
+import { Icon, BottomSelect } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BottomSelectIcon from 'cozy-ui/transpiled/react/Icons/BottomSelect'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 
 import KonnectorIcon from '../KonnectorIcon'
@@ -29,7 +28,7 @@ const ReadOnlyIdentifier = props => {
         </Img>
         <Bd>{identifier}</Bd>
         <Img>
-          <Icon icon={BottomSelectIcon} />
+          <Icon icon={BottomSelect} />
         </Img>
       </Media>
     </Box>

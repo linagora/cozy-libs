@@ -1,9 +1,9 @@
+import { Openwith } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { withClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 
 import withLocales from '../../hoc/withLocales'
@@ -19,7 +19,7 @@ const BanksLinkRedirectStore = ({ client, t }) => {
         {({ href, name, onClick }) => (
           <Button
             component="a"
-            icon={OpenwithIcon}
+            icon={Openwith}
             href={href}
             label={t('account.success.banksLinkText', {
               appName: name
@@ -34,7 +34,7 @@ const BanksLinkRedirectStore = ({ client, t }) => {
     return (
       <Button
         component="a"
-        icon={OpenwithIcon}
+        icon={Openwith}
         label={t('account.success.banksLinkText', {
           appName: name
         })}

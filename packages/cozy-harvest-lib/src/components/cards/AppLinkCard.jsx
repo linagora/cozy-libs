@@ -1,3 +1,4 @@
+import { Icon } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -5,7 +6,6 @@ import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import palette from 'cozy-ui/transpiled/react/palette'

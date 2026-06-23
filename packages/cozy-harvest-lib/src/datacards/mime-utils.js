@@ -1,29 +1,27 @@
-/**
- * @TODO Remove when https://github.com/cozy/cozy-ui/issues/1768 has been solved
- */
-
-import IconAudio from 'cozy-ui/transpiled/react/Icons/FileTypeAudio'
-import IconBin from 'cozy-ui/transpiled/react/Icons/FileTypeBin'
-import IconCode from 'cozy-ui/transpiled/react/Icons/FileTypeCode'
-import IconImage from 'cozy-ui/transpiled/react/Icons/FileTypeImage'
-import IconPdf from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
-import IconSheet from 'cozy-ui/transpiled/react/Icons/FileTypeSheet'
-import IconSlide from 'cozy-ui/transpiled/react/Icons/FileTypeSlide'
-import IconText from 'cozy-ui/transpiled/react/Icons/FileTypeText'
-import IconVideo from 'cozy-ui/transpiled/react/Icons/FileTypeVideo'
-import IconZip from 'cozy-ui/transpiled/react/Icons/FileTypeZip'
+import {
+  FileTypeAudio,
+  FileTypeBin,
+  FileTypeCode,
+  FileTypeImage,
+  FileTypePdf,
+  FileTypeSheet,
+  FileTypeSlide,
+  FileTypeText,
+  FileTypeVideo,
+  FileTypeZip
+} from '@linagora/twake-icons'
 
 const iconsBySubType = {
-  audio: IconAudio,
-  bin: IconBin,
-  code: IconCode,
-  image: IconImage,
-  pdf: IconPdf,
-  slide: IconSlide,
-  sheet: IconSheet,
-  text: IconText,
-  video: IconVideo,
-  zip: IconZip
+  audio: FileTypeAudio,
+  bin: FileTypeBin,
+  code: FileTypeCode,
+  image: FileTypeImage,
+  pdf: FileTypePdf,
+  slide: FileTypeSlide,
+  sheet: FileTypeSheet,
+  text: FileTypeText,
+  video: FileTypeVideo,
+  zip: FileTypeZip
 }
 
 const mappingMimetypeSubtype = {

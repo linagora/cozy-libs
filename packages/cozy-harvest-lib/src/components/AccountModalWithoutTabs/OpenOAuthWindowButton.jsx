@@ -1,11 +1,10 @@
+import { Icon, Sync } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useCallback } from 'react'
 
 import { useClient } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import { ActionMenuItem } from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
 import { useI18n } from 'twake-i18n'
 
@@ -53,7 +52,7 @@ const OpenOAuthWindowButton = ({
 
   return actionMenuItem ? (
     <ActionMenuItem
-      left={<Icon icon={SyncIcon} />}
+      left={<Icon icon={Sync} />}
       onClick={() => {
         handleClick()
         onClick()
