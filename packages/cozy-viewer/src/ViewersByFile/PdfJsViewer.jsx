@@ -1,3 +1,4 @@
+import { Icon, Pen } from '@linagora/twake-icons'
 import cx from 'classnames'
 import flow from 'lodash/flow'
 import throttle from 'lodash/throttle'
@@ -6,8 +7,6 @@ import React, { Component } from 'react'
 import { Document, Page } from 'react-pdf'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
 
 import styles from './styles.styl'
 import NoViewer from '../NoViewer'
@@ -290,7 +289,7 @@ export class PdfJsViewer extends Component {
                 variant="text"
                 color="secondary"
                 className="u-p-half u-m-half"
-                startIcon={<Icon icon={PenIcon} size={16} />}
+                startIcon={<Icon icon={Pen} size={16} />}
                 label={t('Viewer.editPdf')}
                 onClick={() => editPdfOpener(file)}
                 data-testid="pdf-edit-button"

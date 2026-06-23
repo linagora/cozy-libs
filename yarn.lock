@@ -6620,6 +6620,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@linagora/twake-icons@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "@linagora/twake-icons@npm:2.6.2"
+  dependencies:
+    mime: "npm:4.1.0"
+  peerDependencies:
+    react: ^18
+  checksum: 10c0/33679cd5a51ca800426cfa7b9b62e3a333915b75538afb52042d0de73b950b4956b791261e785ebc81899c8ed4d9026738f86d38aa8c170621ae9770a46dd862
+  languageName: node
+  linkType: hard
+
 "@material-ui/core@npm:4.12.3":
   version: 4.12.3
   resolution: "@material-ui/core@npm:4.12.3"
@@ -18526,6 +18537,7 @@ __metadata:
   dependencies:
     "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
+    "@linagora/twake-icons": "npm:^2.6.2"
     "@testing-library/jest-dom": "npm:5.17.0"
     "@testing-library/react": "npm:12.1.5"
     "@testing-library/react-hooks": "npm:8.0.1"
@@ -18556,6 +18568,7 @@ __metadata:
     twake-i18n: "npm:^0.4.1"
     typescript: "npm:5.5.2"
   peerDependencies:
+    "@linagora/twake-icons": ">=2.6.2"
     cozy-client: ">=57.0.0"
     cozy-device-helper: ">=2.0.0"
     cozy-flags: ">=4.8.1"
@@ -29248,6 +29261,15 @@ __metadata:
   bin:
     mime: cli.js
   checksum: 10c0/b92cd0adc44888c7135a185bfd0dddc42c32606401c72896a842ae15da71eb88858f17669af41e498b463cd7eb998f7b48939a25b08374c7924a9c8a6f8a81b0
+  languageName: node
+  linkType: hard
+
+"mime@npm:4.1.0":
+  version: 4.1.0
+  resolution: "mime@npm:4.1.0"
+  bin:
+    mime: bin/cli.js
+  checksum: 10c0/3b8602e50dff1049aea8bb2d4c65afc55bf7f3eb5c17fd2bcb315b8c8ae225a7553297d424d3621757c24cdba99e930ecdc4108467009cdc7ed55614cd55031d
   languageName: node
   linkType: hard
 

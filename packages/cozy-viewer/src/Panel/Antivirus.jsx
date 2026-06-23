@@ -1,10 +1,8 @@
+import { Icon, InfoOutlined, Shield } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import InfoIcon from 'cozy-ui/transpiled/react/Icons/InfoOutlined'
-import ShieldIcon from 'cozy-ui/transpiled/react/Icons/Shield'
 import Link from 'cozy-ui/transpiled/react/Link'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -54,7 +52,7 @@ const Antivirus = ({ file, t }) => {
             aria-label={t('Viewer.panel.antivirus.info.title')}
             aria-describedby={open ? 'antivirus-popover' : undefined}
           >
-            <Icon icon={InfoIcon} />
+            <Icon icon={InfoOutlined} />
           </IconButton>
         </ListItemIcon>
       </ListItem>
@@ -70,7 +68,7 @@ const Antivirus = ({ file, t }) => {
       >
         <div className="u-p-1 u-flex u-maw-5" onMouseLeave={handlePopoverClose}>
           <div className="u-mr-half u-flex-shrink-0">
-            <Icon icon={ShieldIcon} color="var(--primaryColor)" />
+            <Icon icon={Shield} color="var(--primaryColor)" />
           </div>
           <div>
             <Typography variant="subtitle1" className="u-mb-half">

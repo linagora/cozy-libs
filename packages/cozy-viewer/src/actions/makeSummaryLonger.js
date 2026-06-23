@@ -1,8 +1,7 @@
+import { Icon, Expand } from '@linagora/twake-icons'
 import React, { forwardRef } from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import ExpandIcon from 'cozy-ui/transpiled/react/Icons/Expand'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
@@ -24,7 +23,7 @@ const makeComponent = (label, icon) => {
 }
 
 export const makeSummaryLonger = ({ t, navigate, location }) => {
-  const icon = ExpandIcon
+  const icon = Expand
   const label = t('Viewer.panel.expand')
 
   return {

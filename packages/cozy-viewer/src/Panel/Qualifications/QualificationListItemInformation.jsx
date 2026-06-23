@@ -1,3 +1,14 @@
+import {
+  Icon,
+  Bell,
+  Company,
+  Contract,
+  Dots,
+  Euro,
+  Globe,
+  Number,
+  Right
+} from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
 
@@ -7,16 +18,7 @@ import {
   KNOWN_INFORMATION_METADATA_NAMES
 } from 'cozy-client/dist/models/paper'
 import { copyToClipboard } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import BellIcon from 'cozy-ui/transpiled/react/Icons/Bell'
-import CompanyIcon from 'cozy-ui/transpiled/react/Icons/Company'
-import ContractIcon from 'cozy-ui/transpiled/react/Icons/Contract'
-import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
-import EuroIcon from 'cozy-ui/transpiled/react/Icons/Euro'
-import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
-import NumberIcon from 'cozy-ui/transpiled/react/Icons/Number'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -27,16 +29,16 @@ import { useI18n } from 'twake-i18n'
 import QualificationListItemText from './QualificationListItemText'
 import IntentOpener from '../../components/IntentOpener'
 const KNOWN_INFORMATION_METADATA_ICONS = [
-  NumberIcon,
-  NumberIcon,
-  GlobeIcon,
-  EuroIcon,
-  ContractIcon,
-  EuroIcon,
-  CompanyIcon,
-  NumberIcon,
-  NumberIcon,
-  BellIcon
+  Number,
+  Number,
+  Globe,
+  Euro,
+  Contract,
+  Euro,
+  Company,
+  Number,
+  Number,
+  Bell
 ]
 
 const makeInformationMetadataIcon = name =>
@@ -105,7 +107,7 @@ const QualificationListItemInformation = forwardRef(
           ) : (
             !isReadOnly && (
               <ListItemIcon>
-                <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+                <Icon icon={Right} color="var(--secondaryTextColor)" />
               </ListItemIcon>
             )
           )}

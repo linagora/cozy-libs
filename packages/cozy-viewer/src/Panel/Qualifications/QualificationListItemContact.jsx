@@ -1,3 +1,4 @@
+import { Icon, Dots, People } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
 
@@ -6,10 +7,7 @@ import {
   formatContactValue
 } from 'cozy-client/dist/models/paper'
 import { copyToClipboard } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import Dots from 'cozy-ui/transpiled/react/Icons/Dots'
-import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -67,7 +65,7 @@ const QualificationListItemContact = forwardRef(
             onClick={handleClick}
           >
             <ListItemIcon>
-              <Icon icon={PeopleIcon} />
+              <Icon icon={People} />
             </ListItemIcon>
             <QualificationListItemText
               primary={formattedTitle}

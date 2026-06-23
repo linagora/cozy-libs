@@ -1,8 +1,7 @@
+import { Icon, Narrow } from '@linagora/twake-icons'
 import React, { forwardRef } from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import NarrowIcon from 'cozy-ui/transpiled/react/Icons/Narrow'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
@@ -24,7 +23,7 @@ const makeComponent = (label, icon) => {
 }
 
 export const makeSummaryShorter = ({ t, location, navigate }) => {
-  const icon = NarrowIcon
+  const icon = Narrow
   const label = t('Viewer.panel.shorter')
 
   return {

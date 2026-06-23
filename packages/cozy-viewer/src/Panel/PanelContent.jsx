@@ -1,11 +1,10 @@
+import { Icon, CrossMedium } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import flag from 'cozy-flags'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossMediumIcon from 'cozy-ui/transpiled/react/Icons/CrossMedium'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -46,7 +45,7 @@ const PanelContent = () => {
         >
           <Typography variant="h4">{t('Viewer.panel.header')}</Typography>
           <IconButton aria-label={t('Viewer.close')} onClick={closePanel}>
-            <Icon icon={CrossMediumIcon} />
+            <Icon icon={CrossMedium} />
           </IconButton>
         </Paper>
       )}

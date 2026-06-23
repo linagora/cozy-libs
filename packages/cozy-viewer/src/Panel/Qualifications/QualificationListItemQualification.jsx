@@ -1,9 +1,8 @@
+import { Icon, Right } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { formatOtherMetadataValue } from 'cozy-client/dist/models/paper'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -38,7 +37,7 @@ const QualificationListItemQualification = ({ file, isReadOnly, onClick }) => {
       />
       {canEditQualification(file, isReadOnly) && (
         <ListItemIcon>
-          <Icon icon={RightIcon} color="var(--secondaryTextColor)" />
+          <Icon icon={Right} color="var(--secondaryTextColor)" />
         </ListItemIcon>
       )}
     </ListItem>

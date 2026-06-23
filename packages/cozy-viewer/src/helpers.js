@@ -92,12 +92,13 @@ export const roughTokensEstimation = text => {
 export const sanitizeText = text => {
   if (!text) return ''
   return (
+    // Remove control chars
     text
       .replace(/\r\n?/g, '\n') // Normalize line endings
       .replace(/[^\S\r\n]{4,}/g, ' ') // Compress spaces
       .replace(/\n{2,}/g, '\n') // Remove empty lines
       // eslint-disable-next-line no-control-regex
-      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '') // Remove control chars
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '')
   )
 }
 

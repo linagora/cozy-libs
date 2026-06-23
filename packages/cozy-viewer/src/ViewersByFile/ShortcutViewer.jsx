@@ -1,8 +1,8 @@
+import { Openwith } from '@linagora/twake-icons'
 import get from 'lodash/get'
 import React from 'react'
 
 import { useClient, useFetchShortcut } from 'cozy-client'
-import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
@@ -22,7 +22,7 @@ const ShortcutViewer = ({ t, file }) => {
       renderFallbackExtraContent={() => (
         <ButtonLink
           label={`${t('Viewer.goto', { url: get(url, 'origin', '') })}`}
-          icon={OpenwithIcon}
+          icon={Openwith}
           href={`${get(url, 'origin', '')}`}
           target="_blank"
         />

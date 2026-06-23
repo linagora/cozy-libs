@@ -1,3 +1,13 @@
+import {
+  Icon,
+  Calendar,
+  CarbonCopy,
+  Dots,
+  FileOutline,
+  Folder,
+  Safe,
+  Server
+} from '@linagora/twake-icons'
 import has from 'lodash/has'
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
@@ -9,15 +19,7 @@ import {
   viewInDrive
 } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CalendarIcon from 'cozy-ui/transpiled/react/Icons/Calendar'
-import CarbonCopyIcon from 'cozy-ui/transpiled/react/Icons/CarbonCopy'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
-import FileOutlineIcon from 'cozy-ui/transpiled/react/Icons/FileOutline'
-import FolderIcon from 'cozy-ui/transpiled/react/Icons/Folder'
-import SafeIcon from 'cozy-ui/transpiled/react/Icons/Safe'
-import ServerIcon from 'cozy-ui/transpiled/react/Icons/Server'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -47,7 +49,7 @@ const Informations = ({ file, isPublic, t }) => {
     <List>
       <ListItem>
         <ListItemIcon>
-          <Icon icon={FileOutlineIcon} />
+          <Icon icon={FileOutline} />
         </ListItemIcon>
         <ListItemText
           primary={t('Viewer.panel.informations.format.title', { format })}
@@ -56,7 +58,7 @@ const Informations = ({ file, isPublic, t }) => {
       </ListItem>
       <ListItem>
         <ListItemIcon>
-          <Icon icon={ServerIcon} />
+          <Icon icon={Server} />
         </ListItemIcon>
         <ListItemText
           primary={size}
@@ -65,7 +67,7 @@ const Informations = ({ file, isPublic, t }) => {
       </ListItem>
       <ListItem>
         <ListItemIcon>
-          <Icon icon={FolderIcon} />
+          <Icon icon={Folder} />
         </ListItemIcon>
         <ListItemText
           primary={path}
@@ -74,7 +76,7 @@ const Informations = ({ file, isPublic, t }) => {
         {!isPublic && (
           <ListItemSecondaryAction>
             <IconButton ref={anchorRef} onClick={() => setShowMenu(v => !v)}>
-              <Icon icon={DotsIcon} />
+              <Icon icon={Dots} />
             </IconButton>
           </ListItemSecondaryAction>
         )}
@@ -102,7 +104,7 @@ const Informations = ({ file, isPublic, t }) => {
       )}
       <ListItem>
         <ListItemIcon>
-          <Icon icon={CalendarIcon} />
+          <Icon icon={Calendar} />
         </ListItemIcon>
         <ListItemText
           primary={creation}
@@ -111,7 +113,7 @@ const Informations = ({ file, isPublic, t }) => {
       </ListItem>
       <ListItem>
         <ListItemIcon>
-          <Icon icon={CalendarIcon} />
+          <Icon icon={Calendar} />
         </ListItemIcon>
         <ListItemText
           primary={modification}
@@ -121,7 +123,7 @@ const Informations = ({ file, isPublic, t }) => {
       {hasCarbonCopy && (
         <ListItem ellipsis={false}>
           <ListItemIcon>
-            <Icon icon={CarbonCopyIcon} />
+            <Icon icon={CarbonCopy} />
           </ListItemIcon>
           <ListItemText
             primary={t('Viewer.panel.certifications.carbonCopy.title')}
@@ -132,7 +134,7 @@ const Informations = ({ file, isPublic, t }) => {
       {hasElectronicSafe && (
         <ListItem ellipsis={false}>
           <ListItemIcon>
-            <Icon icon={SafeIcon} />
+            <Icon icon={Safe} />
           </ListItemIcon>
           <ListItemText
             primary={t('Viewer.panel.certifications.electronicSafe.title')}
