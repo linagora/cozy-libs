@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.30.1...cozy-search@1.1.0) (2026-06-24)
+
+### Features
+
+- **cozy-search:** Bump to 1.0.0 ([27c5cb7](https://github.com/cozy/cozy-libs/commit/27c5cb7618e25e6a3d83877317cc1bb922769821))
+- **cozy-search:** Bump to 1.0.0 ([9e84e2a](https://github.com/cozy/cozy-libs/commit/9e84e2a59a7c9962f4ce7e2b9488a1478e1eff2b))
+
 ## [0.30.1](https://github.com/cozy/cozy-libs/compare/cozy-search@0.30.0...cozy-search@0.30.1) (2026-06-24)
 
 **Note:** Version bump only for package cozy-search
