@@ -1,7 +1,5 @@
 import PropTypes from 'prop-types'
 
-import { iconPropType } from 'cozy-ui/transpiled/react/Icon'
-
 /**
  * @typedef {'text'|'tel'|'email'|'button'|'url'|'date'} FieldType
  */
@@ -64,7 +62,11 @@ export const labelPropTypes = PropTypes.shape({
 
 export const fieldInputAttributesTypes = PropTypes.shape({
   name: PropTypes.string,
-  icon: iconPropType,
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.func
+  ]),
   type: PropTypes.string,
   label: labelPropTypes,
   layout: PropTypes.string,

@@ -1,3 +1,11 @@
+import {
+  Icon,
+  IconCheckAnimated,
+  IconCrossAnimated,
+  LinkOut,
+  Plus,
+  WarningCircle
+} from '@linagora/twake-icons'
 import cx from 'classnames'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
@@ -5,12 +13,6 @@ import React, { useEffect, useState } from 'react'
 
 import { nameToColor } from 'cozy-ui/transpiled/react/Avatar/helpers'
 import Badge from 'cozy-ui/transpiled/react/Badge'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import IconCheckAnimated from 'cozy-ui/transpiled/react/Icons/IconCheckAnimated'
-import SvgIconCrossAnimated from 'cozy-ui/transpiled/react/Icons/IconCrossAnimated'
-import iconOut from 'cozy-ui/transpiled/react/Icons/LinkOut'
-import iconPlus from 'cozy-ui/transpiled/react/Icons/Plus'
-import iconWarning from 'cozy-ui/transpiled/react/Icons/WarningCircle'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -145,7 +147,7 @@ export const SquareAppIcon = ({
                 boxShadow: 'var(--shadow3)'
               }}
             >
-              <Icon size="10" icon={iconOut} />
+              <Icon size="10" icon={LinkOut} />
             </div>
           ) : null
         }
@@ -173,7 +175,7 @@ export const SquareAppIcon = ({
               <Icon
                 size={16}
                 className={cx(classes.errorIcon)}
-                icon={iconWarning}
+                icon={WarningCircle}
               />
             ) : (
               ''
@@ -215,14 +217,14 @@ export const SquareAppIcon = ({
                     icon={
                       animationState === 'success'
                         ? IconCheckAnimated
-                        : SvgIconCrossAnimated
+                        : IconCrossAnimated
                     }
                   />
                 )}
               </div>
 
               {variant === 'add' ? (
-                <Icon icon={iconPlus} color="var(--primaryColor)" />
+                <Icon icon={Plus} color="var(--primaryColor)" />
               ) : IconContent ? (
                 IconContent
               ) : (

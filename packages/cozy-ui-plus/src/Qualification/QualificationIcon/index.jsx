@@ -1,74 +1,76 @@
+import {
+  Icon,
+  Bank,
+  BankCheck,
+  Benefit,
+  Bill,
+  Car,
+  Chess,
+  Child,
+  Dots,
+  Email,
+  Euro,
+  Exchange,
+  Fitness,
+  Globe,
+  Gouv,
+  Heart,
+  Home,
+  Image,
+  Justice,
+  Laudry,
+  Lightning,
+  Note,
+  People,
+  Plane,
+  Remboursement,
+  Restaurant,
+  School,
+  Shop,
+  Team,
+  Telecom,
+  Telephone,
+  Water,
+  Work
+} from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { getIconByLabel } from 'cozy-client/dist/models/document/qualification'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BankIcon from 'cozy-ui/transpiled/react/Icons/Bank'
-import BankCheckIcon from 'cozy-ui/transpiled/react/Icons/BankCheck'
-import BenefitIcon from 'cozy-ui/transpiled/react/Icons/Benefit'
-import BillIcon from 'cozy-ui/transpiled/react/Icons/Bill'
-import CarIcon from 'cozy-ui/transpiled/react/Icons/Car'
-import ChessIcon from 'cozy-ui/transpiled/react/Icons/Chess'
-import ChildIcon from 'cozy-ui/transpiled/react/Icons/Child'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
-import EmailIcon from 'cozy-ui/transpiled/react/Icons/Email'
-import EuroIcon from 'cozy-ui/transpiled/react/Icons/Euro'
-import ExchangeIcon from 'cozy-ui/transpiled/react/Icons/Exchange'
-import FitnessIcon from 'cozy-ui/transpiled/react/Icons/Fitness'
-import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
-import GouvIcon from 'cozy-ui/transpiled/react/Icons/Gouv'
-import HeartIcon from 'cozy-ui/transpiled/react/Icons/Heart'
-import HomeIcon from 'cozy-ui/transpiled/react/Icons/Home'
-import ImageIcon from 'cozy-ui/transpiled/react/Icons/Image'
-import JusticeIcon from 'cozy-ui/transpiled/react/Icons/Justice'
-import LaudryIcon from 'cozy-ui/transpiled/react/Icons/Laudry'
-import LightningIcon from 'cozy-ui/transpiled/react/Icons/Lightning'
-import NoteIcon from 'cozy-ui/transpiled/react/Icons/Note'
-import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
-import PlaneIcon from 'cozy-ui/transpiled/react/Icons/Plane'
-import RemboursementIcon from 'cozy-ui/transpiled/react/Icons/Remboursement'
-import RestaurantIcon from 'cozy-ui/transpiled/react/Icons/Restaurant'
-import SchoolIcon from 'cozy-ui/transpiled/react/Icons/School'
-import ShopIcon from 'cozy-ui/transpiled/react/Icons/Shop'
-import TeamIcon from 'cozy-ui/transpiled/react/Icons/Team'
-import TelecomIcon from 'cozy-ui/transpiled/react/Icons/Telecom'
-import TelephoneIcon from 'cozy-ui/transpiled/react/Icons/Telephone'
-import WaterIcon from 'cozy-ui/transpiled/react/Icons/Water'
-import WorkIcon from 'cozy-ui/transpiled/react/Icons/Work'
 
 const IconByLabel = {
-  'bank-check': BankCheckIcon,
-  bank: BankIcon,
-  benefit: BenefitIcon,
-  bill: BillIcon,
-  car: CarIcon,
-  chess: ChessIcon,
-  child: ChildIcon,
-  dots: DotsIcon,
-  email: EmailIcon,
-  euro: EuroIcon,
-  exchange: ExchangeIcon,
-  'file-type-note': NoteIcon,
-  fitness: FitnessIcon,
-  globe: GlobeIcon,
-  gouv: GouvIcon,
-  heart: HeartIcon,
-  home: HomeIcon,
-  image: ImageIcon,
-  justice: JusticeIcon,
-  laudry: LaudryIcon,
-  lightning: LightningIcon,
-  people: PeopleIcon,
-  plane: PlaneIcon,
-  remboursement: RemboursementIcon,
-  restaurant: RestaurantIcon,
-  school: SchoolIcon,
-  shop: ShopIcon,
-  team: TeamIcon,
-  telecom: TelecomIcon,
-  telephone: TelephoneIcon,
-  water: WaterIcon,
-  work: WorkIcon
+  'bank-check': BankCheck,
+  bank: Bank,
+  benefit: Benefit,
+  bill: Bill,
+  car: Car,
+  chess: Chess,
+  child: Child,
+  dots: Dots,
+  email: Email,
+  euro: Euro,
+  exchange: Exchange,
+  'file-type-note': Note,
+  fitness: Fitness,
+  globe: Globe,
+  gouv: Gouv,
+  heart: Heart,
+  home: Home,
+  image: Image,
+  justice: Justice,
+  laudry: Laudry,
+  lightning: Lightning,
+  people: People,
+  plane: Plane,
+  remboursement: Remboursement,
+  restaurant: Restaurant,
+  school: School,
+  shop: Shop,
+  team: Team,
+  telecom: Telecom,
+  telephone: Telephone,
+  water: Water,
+  work: Work
 }
 
 const themeIconByLabel = {

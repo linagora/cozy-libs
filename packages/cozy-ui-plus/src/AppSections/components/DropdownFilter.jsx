@@ -1,9 +1,8 @@
+import { Icon, Bottom } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
 import SelectBox from 'cozy-ui/transpiled/react/SelectBox'
 
 import styles from './DropdownFilter.styl'
@@ -11,7 +10,7 @@ import styles from './DropdownFilter.styl'
 const SmallArrow = () => (
   <Icon
     className={cx(styles.DropdownFilter__icon, 'u-mr-1')}
-    icon={BottomIcon}
+    icon={Bottom}
     color="var(--coolGrey)"
     width={16}
     height={16}

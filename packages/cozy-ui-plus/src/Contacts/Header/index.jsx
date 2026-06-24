@@ -1,10 +1,9 @@
+import { Icon, PersonAdd } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PersonAddIcon from 'cozy-ui/transpiled/react/Icons/PersonAdd'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
@@ -37,7 +36,7 @@ const Header = ({
         <Button
           className="u-mr-half"
           variant="ghost"
-          startIcon={<Icon icon={PersonAddIcon} />}
+          startIcon={<Icon icon={PersonAdd} />}
           label={t('Contacts.Header.create')}
           fullWidth
           onClick={onContactCreate}

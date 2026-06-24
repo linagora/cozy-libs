@@ -1,11 +1,9 @@
+import { Icon, Bottom, Team } from '@linagora/twake-icons'
 import React, { useState, useRef } from 'react'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import { CONTACTS_DOCTYPE } from 'cozy-client/dist/models/contact'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
-import TeamIcon from 'cozy-ui/transpiled/react/Icons/Team'
 import Link from 'cozy-ui/transpiled/react/Link'
 import ActionMenu, {
   ActionMenuItem
@@ -37,7 +35,7 @@ const ImportDropdown = ({ onContactImport }) => {
         ref={anchorRef}
         variant="secondary"
         label={t('Contacts.Header.import.title')}
-        endIcon={<Icon icon={BottomIcon} />}
+        endIcon={<Icon icon={Bottom} />}
         fullWidth
         onClick={() => setShowMenu(v => !v)}
       />
@@ -48,10 +46,7 @@ const ImportDropdown = ({ onContactImport }) => {
           popperOptions={{ placement: 'bottom-end' }}
           onClose={() => setShowMenu(false)}
         >
-          <ActionMenuItem
-            left={<Icon icon={TeamIcon} />}
-            onClick={onContactImport}
-          >
+          <ActionMenuItem left={<Icon icon={Team} />} onClick={onContactImport}>
             {t('Contacts.Header.import.vcard')}
           </ActionMenuItem>
 

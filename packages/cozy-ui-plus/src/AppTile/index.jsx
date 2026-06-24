@@ -1,9 +1,8 @@
+import { Icon, WrenchCircle } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
 import Tile, {
   TileTitle,
   TileSubtitle,
@@ -96,7 +95,7 @@ export const AppTile = ({
         {isInMaintenanceWithSpecificDisplay && (
           <Icon
             data-testid="icon-maintenance"
-            icon={WrenchCircleIcon}
+            icon={WrenchCircle}
             color="var(--coolGrey)"
             className={styles['AppTile-icon-maintenance']}
           />

@@ -1,17 +1,19 @@
+import {
+  Icon,
+  Bottom,
+  Calendar,
+  Cloud,
+  Comment,
+  Company,
+  Email,
+  Location,
+  Matrix,
+  People,
+  Relationship,
+  Telephone
+} from '@linagora/twake-icons'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
-import CalendarIcon from 'cozy-ui/transpiled/react/Icons/Calendar'
-import CloudIcon from 'cozy-ui/transpiled/react/Icons/Cloud'
-import CommentIcon from 'cozy-ui/transpiled/react/Icons/Comment'
-import CompanyIcon from 'cozy-ui/transpiled/react/Icons/Company'
-import EmailIcon from 'cozy-ui/transpiled/react/Icons/Email'
-import LocationIcon from 'cozy-ui/transpiled/react/Icons/Location'
-import MatrixIcon from 'cozy-ui/transpiled/react/Icons/Matrix'
-import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
-import RelationshipIcon from 'cozy-ui/transpiled/react/Icons/Relationship'
-import TelephoneIcon from 'cozy-ui/transpiled/react/Icons/Telephone'
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 
 import TextFieldPhone from './TextFieldPhone/index'
@@ -22,7 +24,7 @@ import TextFieldPhone from './TextFieldPhone/index'
 export const fields = [
   {
     name: 'gender',
-    icon: PeopleIcon,
+    icon: People,
     select: true,
     options: [
       {
@@ -62,7 +64,7 @@ export const fields = [
   },
   {
     name: 'company',
-    icon: CompanyIcon,
+    icon: Company,
     type: 'text',
     layout: 'accordion',
     subFields: [
@@ -75,7 +77,7 @@ export const fields = [
   },
   {
     name: 'phone',
-    icon: TelephoneIcon,
+    icon: Telephone,
     type: 'tel',
     layout: 'array',
     component: TextFieldPhone,
@@ -119,7 +121,7 @@ export const fields = [
   },
   {
     name: 'email',
-    icon: EmailIcon,
+    icon: Email,
     type: 'email',
     layout: 'array',
     label: {
@@ -146,12 +148,12 @@ export const fields = [
   },
   {
     name: 'matrix',
-    icon: MatrixIcon,
+    icon: Matrix,
     type: 'text'
   },
   {
     name: 'address',
-    icon: LocationIcon,
+    icon: Location,
     type: 'text',
     layout: 'array',
     InputProps: {
@@ -243,13 +245,13 @@ export const fields = [
   },
   {
     name: 'note',
-    icon: CommentIcon,
+    icon: Comment,
     type: 'text',
     multiline: true
   },
   {
     name: 'cozy',
-    icon: CloudIcon,
+    icon: Cloud,
     type: 'url',
     isSecondary: true,
     label: {
@@ -276,7 +278,7 @@ export const fields = [
   },
   {
     name: 'birthday',
-    icon: CalendarIcon,
+    icon: Calendar,
     type: 'date',
     isSecondary: true,
     InputLabelProps: { shrink: true }
@@ -289,14 +291,14 @@ export const fields = [
   },
   {
     name: 'relatedContact',
-    icon: RelationshipIcon,
+    icon: Relationship,
     layout: 'array',
     isSecondary: true,
     InputProps: {
       readOnly: true,
       endAdornment: (
         <InputAdornment position="end">
-          <Icon icon={BottomIcon} color="var(--iconTextColor)" />
+          <Icon icon={Bottom} color="var(--iconTextColor)" />
         </InputAdornment>
       )
     },

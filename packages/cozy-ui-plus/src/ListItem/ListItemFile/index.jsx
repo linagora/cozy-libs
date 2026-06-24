@@ -1,9 +1,9 @@
+import { FileTypePdf } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { splitFilename } from 'cozy-client/dist/models/file'
 import Filename from 'cozy-ui/transpiled/react/Filename'
-import FiletypePdfIcon from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
 
 import ItemIcon from './ItemIcon'
 import PrimaryText from './PrimaryText'
@@ -35,7 +35,7 @@ const ListItemFile = ({
       actionMenuComp={{
         Header: (
           <Filename
-            icon={FiletypePdfIcon}
+            icon={FileTypePdf}
             filename={filename}
             extension={extension}
           />

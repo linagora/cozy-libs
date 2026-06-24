@@ -1,9 +1,8 @@
+import { Icon, FileDuotone } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import ButtonBase from 'cozy-ui/transpiled/react/ButtonBase'
-import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
-import FileDuotoneIcon from 'cozy-ui/transpiled/react/Icons/FileDuotone'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
@@ -36,7 +35,7 @@ const QualificationItem = ({ icon, label, isSelected, onClick, ...props }) => {
           />
         ) : (
           <Icon
-            icon={FileDuotoneIcon}
+            icon={FileDuotone}
             size="32"
             color={
               isSelected ? 'var(--primaryColor)' : 'var(--secondaryTextColor)'
@@ -50,7 +49,12 @@ const QualificationItem = ({ icon, label, isSelected, onClick, ...props }) => {
 }
 
 QualificationItem.propTypes = {
-  icon: PropTypes.oneOfType([PropTypes.node, iconPropType]),
+  icon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+    PropTypes.object,
+    PropTypes.func
+  ]),
   label: PropTypes.string,
   isSelected: PropTypes.bool,
   onClick: PropTypes.func

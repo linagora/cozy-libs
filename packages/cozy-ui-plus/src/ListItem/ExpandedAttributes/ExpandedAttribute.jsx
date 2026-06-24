@@ -1,8 +1,7 @@
+import { Icon, Copy } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -21,7 +20,7 @@ const ExpandedAttribute = ({ label, value, setAlertProps }) => {
       onClick={copyToClipboard({ value, setAlertProps, t })}
     >
       <ListItemIcon>
-        <Icon icon={CopyIcon} />
+        <Icon icon={Copy} />
       </ListItemIcon>
       <ListItemText
         primary={<Typography variant="caption">{label}</Typography>}

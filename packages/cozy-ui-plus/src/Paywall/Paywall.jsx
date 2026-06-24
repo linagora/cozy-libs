@@ -1,3 +1,4 @@
+import { Icon, CozyUpgrade } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 
@@ -7,8 +8,6 @@ import { isFlagshipApp } from 'cozy-device-helper'
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CozyUpgradeIcon from 'cozy-ui/transpiled/react/Icons/CozyUpgrade'
 import Markdown from 'cozy-ui/transpiled/react/Markdown'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -77,7 +76,7 @@ const Paywall = ({
       actionsLayout="column"
       title={
         <div className="u-flex u-flex-column u-flex-items-center">
-          <Icon icon={CozyUpgradeIcon} width={128} height={128} />
+          <Icon icon={CozyUpgrade} width={128} height={128} />
           <Typography variant="h3" className="u-mt-1">
             {t(`${variant}Paywall.${type}.title`)}
           </Typography>

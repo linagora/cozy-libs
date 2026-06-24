@@ -1,9 +1,8 @@
+import { Icon, BottomSelect } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BottomSelectIcon from 'cozy-ui/transpiled/react/Icons/BottomSelect'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../locales'
@@ -24,7 +23,7 @@ const Control = ({
         onClick={onControlClicked}
         onTouchStart={onControlClicked}
         label={t('Contacts.GroupsSelect.manage')}
-        startIcon={<Icon icon={BottomSelectIcon} width="12" />}
+        startIcon={<Icon icon={BottomSelect} width="12" />}
       />
     </div>
   )

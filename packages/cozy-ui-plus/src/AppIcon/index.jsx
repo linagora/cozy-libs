@@ -1,10 +1,9 @@
+import { Icon, Cube } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
-import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
-import CubeIcon from 'cozy-ui/transpiled/react/Icons/Cube'
 
 import styles from './styles.styl'
 import { isShortcutFile } from '../AppSections/helpers'
@@ -133,7 +132,7 @@ export class AppIcon extends Component {
               className
             )}
             height="100%"
-            icon={fallbackIcon || CubeIcon}
+            icon={fallbackIcon || Cube}
             width="100%"
             color="var(--coolGrey)"
             iconRef={this.props.iconRef}
@@ -148,7 +147,11 @@ AppIcon.propTypes = {
   /** Required if fetchIcon is not provided */
   app: PropTypes.oneOfType([AppDoctype, PropTypes.string]),
   /** Icon to fallback on error (optional), default cube icon */
-  fallbackIcon: iconPropType,
+  fallbackIcon: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.func
+  ]),
   /** Custom implementation of how to fetch icon */
   fetchIcon: PropTypes.func,
   client: PropTypes.object.isRequired,

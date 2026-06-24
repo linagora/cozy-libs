@@ -1,10 +1,9 @@
+import { Icon, Contacts } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import { getDisplayName } from 'cozy-client/dist/models/contact'
 import Filename from 'cozy-ui/transpiled/react/Filename'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import ContactsIcon from 'cozy-ui/transpiled/react/Icons/Contacts'
 
 import useActions from './useActions'
 import ListItemBase from '../ListItemBase'
@@ -22,7 +21,7 @@ const ListItemContact = ({
   const defaultActions = useActions(contact)
   const primaryText = primary || getDisplayName(contact)
   const secondaryText = secondary || contact.email?.[0]?.address
-  const itemIcon = icon || <Icon icon={ContactsIcon} width="32" height="32" />
+  const itemIcon = icon || <Icon icon={Contacts} width="32" height="32" />
 
   const itemActions = defaultActions.concat(actions)
 
@@ -34,7 +33,7 @@ const ListItemContact = ({
       icon={itemIcon}
       actions={itemActions}
       actionMenuComp={{
-        Header: <Filename icon={ContactsIcon} filename={primaryText} />
+        Header: <Filename icon={Contacts} filename={primaryText} />
       }}
       selectProps={selectProps}
       expandedAttributesProps={expandedAttributesProps}

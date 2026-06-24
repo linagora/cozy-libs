@@ -1,8 +1,7 @@
+import { Icon, Plus } from '@linagora/twake-icons'
 import classNames from 'classnames'
 import React, { Component } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import Input from 'cozy-ui/transpiled/react/legacy/Input'
 import { translate } from 'twake-i18n'
 
@@ -66,7 +65,7 @@ class GroupCreation extends Component {
               onClick={this.handleClick}
               className={styles['contact-group-create-div-icon']}
             >
-              <Icon icon={PlusIcon} />
+              <Icon icon={Plus} />
               <span className="u-pl-half">
                 {t('Contacts.GroupsSelect.create')}
               </span>
