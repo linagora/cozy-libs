@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [34.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.6.1...cozy-sharing@34.0.0) (2026-06-24)
+
+### Features
+
+- **cozy-sharing:** Add twake-icons ([7f2432a](https://github.com/cozy/cozy-libs/commit/7f2432a601ca02a72f0b792726c6c70919c6036a))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** You must add `@linagora/twake-icons >= 2.6.2`
+
 ## [33.6.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@33.6.0...cozy-sharing@33.6.1) (2026-06-22)
 
 ### Bug Fixes
