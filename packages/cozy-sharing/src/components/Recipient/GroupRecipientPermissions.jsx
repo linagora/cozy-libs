@@ -10,6 +10,7 @@ import CrossCircleOutlineIcon from 'cozy-ui/transpiled/react/Icons/CrossCircleOu
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { permission } from './actions/permission'
@@ -19,6 +20,7 @@ import { GroupAvatar } from '../Avatar/GroupAvatar'
 const GroupRecipientPermissions = ({
   name,
   isOwner,
+  isReadOnly,
   sharingId,
   groupIndex,
   read_only = false,
@@ -33,7 +35,8 @@ const GroupRecipientPermissions = ({
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
   const [revoking, setRevoking] = useState(false)
 
-  const shouldShowMenu = !revoking && (isOwner || isUserInsideMembers)
+  const shouldShowMenu =
+    !isReadOnly && !revoking && (isOwner || isUserInsideMembers)
 
   const toggleMenu = () => setMenuDisplayed(!isMenuDisplayed)
   const hideMenu = () => setMenuDisplayed(false)
@@ -58,6 +61,9 @@ const GroupRecipientPermissions = ({
   return (
     <div className={className}>
       {revoking && <Spinner />}
+      {!shouldShowMenu && (
+        <Typography variant="body2">{t(`Share.type.${type}`)}</Typography>
+      )}
       {shouldShowMenu && (
         <>
           <DropdownButton
