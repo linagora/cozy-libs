@@ -1,17 +1,19 @@
+import {
+  Bank,
+  Bill,
+  Car,
+  Chess,
+  Dots,
+  Heart,
+  Home,
+  People,
+  Team,
+  Work
+} from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { Fragment, useState } from 'react'
 
 import Grid from 'cozy-ui/transpiled/react/Grid'
-import BankIcon from 'cozy-ui/transpiled/react/Icons/Bank'
-import BillIcon from 'cozy-ui/transpiled/react/Icons/Bill'
-import CarIcon from 'cozy-ui/transpiled/react/Icons/Car'
-import ChessIcon from 'cozy-ui/transpiled/react/Icons/Chess'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
-import HeartIcon from 'cozy-ui/transpiled/react/Icons/Heart'
-import HomeIcon from 'cozy-ui/transpiled/react/Icons/Home'
-import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
-import TeamIcon from 'cozy-ui/transpiled/react/Icons/Team'
-import WorkIcon from 'cozy-ui/transpiled/react/Icons/Work'
 import { useI18n } from 'twake-i18n'
 
 import { getThemesList } from './helpers'
@@ -19,16 +21,16 @@ import QualificationItem from '../QualificationItem'
 import withLocales from './locales/withLocales'
 
 const IconByName = {
-  people: PeopleIcon,
-  team: TeamIcon,
-  work: WorkIcon,
-  heart: HeartIcon,
-  home: HomeIcon,
-  car: CarIcon,
-  chess: ChessIcon,
-  bank: BankIcon,
-  bill: BillIcon,
-  dots: DotsIcon
+  people: People,
+  team: Team,
+  work: Work,
+  heart: Heart,
+  home: Home,
+  car: Car,
+  chess: Chess,
+  bank: Bank,
+  bill: Bill,
+  dots: Dots
 }
 
 const QualificationGrid = ({ noUndefined, noOthers, noHealth, onClick }) => {

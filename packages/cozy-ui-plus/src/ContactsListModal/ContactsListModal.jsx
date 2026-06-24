@@ -1,3 +1,4 @@
+import { Icon, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
@@ -10,8 +11,6 @@ import {
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { DialogTitle, DialogContent } from 'cozy-ui/transpiled/react/Dialog'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import useRealtime from 'cozy-ui/transpiled/react/hooks/useRealtime'
@@ -97,9 +96,9 @@ const ContactsListModal = ({
               className={isMobile && 'u-mt-1'}
               variant="secondary"
               theme="secondary"
-              label={selfAddContactLabel || <Icon icon={PlusIcon} />}
+              label={selfAddContactLabel || <Icon icon={Plus} />}
               {...(selfAddContactLabel && {
-                startIcon: <Icon icon={PlusIcon} />
+                startIcon: <Icon icon={Plus} />
               })}
               onClick={setShowAddDialog}
             />

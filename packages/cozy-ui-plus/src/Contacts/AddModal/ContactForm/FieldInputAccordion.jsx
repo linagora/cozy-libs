@@ -1,9 +1,7 @@
+import { Icon, Dropdown, Dropup } from '@linagora/twake-icons'
 import React, { useState } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import DropdownIcon from 'cozy-ui/transpiled/react/Icons/Dropdown'
-import DropupIcon from 'cozy-ui/transpiled/react/Icons/Dropup'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import FieldInput from './FieldInput'
@@ -38,7 +36,7 @@ const FieldInputAccordion = ({
           size="medium"
           onClick={() => setShowExtended(v => !v)}
         >
-          <Icon icon={showExtended ? DropupIcon : DropdownIcon} />
+          <Icon icon={showExtended ? Dropup : Dropdown} />
         </IconButton>
       </div>
       {subFields.map(({ name, ...attributes }, index) => {

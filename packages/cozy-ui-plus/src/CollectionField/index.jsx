@@ -1,9 +1,7 @@
+import { Icon, CrossSmall, Plus } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CrossSmallIcon from 'cozy-ui/transpiled/react/Icons/CrossSmall'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import InputLabel from 'cozy-ui/transpiled/react/InputLabel'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
@@ -89,9 +87,7 @@ const CollectionField = props => {
                     label={removeButtonLabel}
                     iconOnly
                     round
-                    icon={
-                      <Icon icon={CrossSmallIcon} color="var(--slateGrey)" />
-                    }
+                    icon={<Icon icon={CrossSmall} color="var(--slateGrey)" />}
                     onClick={() => handleRemove(index)}
                   />
                 </div>
@@ -106,7 +102,7 @@ const CollectionField = props => {
             theme="text"
             icon={
               <Icon
-                icon={PlusIcon}
+                icon={Plus}
                 className={styles.CollectionField__addBtnIcon}
               />
             }

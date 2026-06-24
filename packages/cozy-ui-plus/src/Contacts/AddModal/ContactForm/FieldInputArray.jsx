@@ -1,10 +1,9 @@
+import { Icon, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 import { FieldArray } from 'react-final-form-arrays'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import FieldInput from './FieldInput'
@@ -63,7 +62,7 @@ const FieldInputArray = ({
             })}
             <Button
               variant="text"
-              startIcon={<Icon icon={PlusIcon} />}
+              startIcon={<Icon icon={Plus} />}
               onClick={() => addField(fields)}
               label={t(`Contacts.AddModal.ContactForm.addLabel.${name}`)}
             />

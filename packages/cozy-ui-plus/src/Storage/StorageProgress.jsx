@@ -1,9 +1,8 @@
+import { Icon, Cloud } from '@linagora/twake-icons'
 import React from 'react'
 
 import { useInstanceInfo } from 'cozy-client'
 import { makeDiskInfos } from 'cozy-client/dist/models/instance'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CloudIcon from 'cozy-ui/transpiled/react/Icons/Cloud'
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n, useExtendI18n } from 'twake-i18n'
@@ -29,7 +28,7 @@ const StorageProgress = () => {
       <div className="u-flex u-flex-items-center">
         <Icon
           className="u-mr-half"
-          icon={CloudIcon}
+          icon={Cloud}
           size={24}
           color="var(--iconTextColor)"
         />

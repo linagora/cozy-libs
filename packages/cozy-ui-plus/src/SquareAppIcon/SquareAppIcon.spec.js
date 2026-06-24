@@ -1,8 +1,7 @@
+import { Icon, Cozy } from '@linagora/twake-icons'
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CozyIcon from 'cozy-ui/transpiled/react/Icons/Cozy'
 import DemoProvider from 'cozy-ui/transpiled/react/providers/DemoProvider'
 
 import SquareAppIcon from '.'
@@ -69,7 +68,7 @@ describe('SquareAppIcon component', () => {
       <Wrapper
         variant="shortcut"
         name="shortcut"
-        IconContent={<Icon data-testid="icon-content" icon={CozyIcon} />}
+        IconContent={<Icon data-testid="icon-content" icon={Cozy} />}
       />
     )
     expect(queryByTestId('icon-content')).toBeTruthy()
@@ -77,7 +76,7 @@ describe('SquareAppIcon component', () => {
 
   it('should render correctly an app with custom content', () => {
     const root = render(
-      <Wrapper name="custom icon" IconContent={<Icon icon={CozyIcon} />} />
+      <Wrapper name="custom icon" IconContent={<Icon icon={Cozy} />} />
     )
     expect(root.getByTestId('square-app-icon')).toMatchSnapshot()
   })

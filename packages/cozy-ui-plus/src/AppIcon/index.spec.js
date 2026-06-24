@@ -2,18 +2,20 @@
 
 'use strict'
 
+import { Icon } from '@linagora/twake-icons'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-
 import { AppIcon } from '.'
 
-jest.mock('cozy-ui/transpiled/react/Icon', () => ({
-  ...jest.requireActual('cozy-ui/transpiled/react/Icon'),
-  __esModule: true,
-  default: jest.fn(() => <div data-testid="icon-component"></div>)
-}))
+jest.mock('@linagora/twake-icons', () => {
+  const React = require('react')
+  return {
+    __esModule: true,
+    Icon: jest.fn(() => <div data-testid="icon-component" />),
+    Cube: () => null
+  }
+})
 
 describe('AppIcon component', () => {
   const app = {}

@@ -1,9 +1,8 @@
+import { Icon, Previous } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
 import Input from 'cozy-ui/transpiled/react/Input'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 
@@ -20,7 +19,7 @@ const MobileHeader = ({ filter, placeholder, onChange, onDismiss }) => {
       style={barStyle}
     >
       <IconButton className="u-mr-half" onClick={onDismiss} size="medium">
-        <Icon icon={PreviousIcon} />
+        <Icon icon={Previous} />
       </IconButton>
       <Input
         type="text"

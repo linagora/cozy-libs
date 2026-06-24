@@ -1,8 +1,7 @@
+import { Icon, People } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
@@ -21,7 +20,7 @@ const AddContactContent = ({ t, setContactValues }) => {
       <Typography variant="h5">{t('coordinates')}</Typography>
       <Media>
         <Img className={styles.icon}>
-          <Icon icon={PeopleIcon} />
+          <Icon icon={People} />
         </Img>
         <Bd className="u-mr-1">
           <TextField

@@ -1,12 +1,11 @@
+import { Icon, Dots } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -58,7 +57,7 @@ const ListItemBase = ({
         {actions && !isSelectActive && (
           <ListItemSecondaryAction>
             <IconButton ref={anchorRef} onClick={toggleMenu}>
-              <Icon icon={DotsIcon} />
+              <Icon icon={Dots} />
             </IconButton>
           </ListItemSecondaryAction>
         )}

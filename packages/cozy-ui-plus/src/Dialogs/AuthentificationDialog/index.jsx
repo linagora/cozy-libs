@@ -1,10 +1,10 @@
+import { CozyAuthentification } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
 import PermissionDialog from 'cozy-ui/transpiled/react/CozyDialogs/PermissionDialog'
-import CozyAuthentificationIcon from 'cozy-ui/transpiled/react/Icons/CozyAuthentification'
 import PasswordField from 'cozy-ui/transpiled/react/PasswordField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
@@ -49,7 +49,7 @@ const AuthentificationDialog = ({
       open
       onClose={onClose}
       title={t(`authentification-dialog.${isOIDC ? 'title-oidc' : 'title'}`)}
-      icon={CozyAuthentificationIcon}
+      icon={CozyAuthentification}
       content={
         <form onSubmit={handleSubmit}>
           <Typography variant="body1" className="u-ta-center">

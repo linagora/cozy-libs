@@ -1,8 +1,8 @@
+import { Icon } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import FieldInput from './FieldInput'

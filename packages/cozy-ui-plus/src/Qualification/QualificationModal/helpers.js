@@ -1,10 +1,9 @@
+import { Icon, Note } from '@linagora/twake-icons'
 import React from 'react'
 
 import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
 import { isQualificationNote } from 'cozy-client/dist/models/document/documentTypeDataHelpers'
 import { getBoundT } from 'cozy-client/dist/models/document/locales'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import NoteIcon from 'cozy-ui/transpiled/react/Icons/Note'
 
 import QualificationIcon from '../QualificationIcon'
 
@@ -27,7 +26,7 @@ export const makeOptions = lang => {
           item,
           title: qualifT(`Scan.items.${item.label}`),
           icon: isQualificationNote(item) ? (
-            <Icon icon={NoteIcon} color="#E049BF" size={16} />
+            <Icon icon={Note} color="#E049BF" size={16} />
           ) : (
             <QualificationIcon qualification={item.label} />
           )
