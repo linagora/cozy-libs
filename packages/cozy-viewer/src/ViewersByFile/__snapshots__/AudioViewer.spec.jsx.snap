@@ -5,7 +5,7 @@ exports[`AudioViewer should render a spinner then the audio viewer 1`] = `
   <div
     class="viewer-audioviewer"
   >
-    <span
+    <svg
       data-icon="true"
       height="140"
       width="160"
