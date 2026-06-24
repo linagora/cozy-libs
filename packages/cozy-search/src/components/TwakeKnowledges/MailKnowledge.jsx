@@ -1,17 +1,19 @@
+import {
+  Icon,
+  Dropdown,
+  Email,
+  File,
+  Paperplane,
+  Right,
+  Star,
+  Upload,
+  Warn
+} from '@linagora/twake-icons'
 import React, { useState } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import Collapse from 'cozy-ui/transpiled/react/Collapse'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import DropdownIcon from 'cozy-ui/transpiled/react/Icons/Dropdown'
-import EmailIcon from 'cozy-ui/transpiled/react/Icons/Email'
-import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
-import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
-import StarIcon from 'cozy-ui/transpiled/react/Icons/Star'
-import UploadIcon from 'cozy-ui/transpiled/react/Icons/Upload'
-import WarnIcon from 'cozy-ui/transpiled/react/Icons/Warn'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -45,7 +47,7 @@ const MailSection = ({
     <>
       <ListItem className={styles['section-header']}>
         <ListItemIcon className="u-c-pointer" onClick={handleToggleSection}>
-          <Icon icon={isOpen ? DropdownIcon : RightIcon} />
+          <Icon icon={isOpen ? Dropdown : Right} />
         </ListItemIcon>
         <ListItemIcon>
           <Checkbox
@@ -194,7 +196,7 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
     <List>
       <MailSection
         title={t('assistant.twake_knowledges.inbox')}
-        icon={EmailIcon}
+        icon={Email}
         items={inboxItems}
         selectedItems={selectedItems}
         onToggleItem={onToggleItems}
@@ -203,7 +205,7 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
       />
       <MailSection
         title={t('assistant.twake_knowledges.starred')}
-        icon={StarIcon}
+        icon={Star}
         items={starredItems}
         selectedItems={selectedItems}
         onToggleItem={onToggleItems}
@@ -211,7 +213,7 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
       />
       <MailSection
         title={t('assistant.twake_knowledges.sent')}
-        icon={PaperplaneIcon}
+        icon={Paperplane}
         items={[]}
         selectedItems={selectedItems}
         onToggleItem={onToggleItems}
@@ -219,7 +221,7 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
       />
       <MailSection
         title={t('assistant.twake_knowledges.draft')}
-        icon={FileIcon}
+        icon={File}
         items={[]}
         selectedItems={selectedItems}
         onToggleItem={onToggleItems}
@@ -227,7 +229,7 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
       />
       <MailSection
         title={t('assistant.twake_knowledges.outbox')}
-        icon={UploadIcon}
+        icon={Upload}
         items={[]}
         selectedItems={selectedItems}
         onToggleItem={onToggleItems}
@@ -235,7 +237,7 @@ const MailKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
       />
       <MailSection
         title={t('assistant.twake_knowledges.spam')}
-        icon={WarnIcon}
+        icon={Warn}
         items={[]}
         selectedItems={selectedItems}
         onToggleItem={onToggleItems}

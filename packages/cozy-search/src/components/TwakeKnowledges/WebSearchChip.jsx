@@ -1,8 +1,7 @@
+import { Icon, Planet } from '@linagora/twake-icons'
 import React from 'react'
 
 import Chip from 'cozy-ui/transpiled/react/Chips'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PlanetIcon from 'cozy-ui/transpiled/react/Icons/Planet'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
@@ -22,7 +21,7 @@ const WebSearchChip = ({ websearchEnabled, onToggleWebsearch }) => {
       title={t('assistant.websearch.label')}
       icon={
         <Icon
-          icon={PlanetIcon}
+          icon={Planet}
           size={16}
           style={{
             height: 16,

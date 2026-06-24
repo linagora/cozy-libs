@@ -1,3 +1,4 @@
+import { Icon, Cross, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import debounce from 'lodash/debounce'
 import escapeRegExp from 'lodash/escapeRegExp'
@@ -5,10 +6,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -124,7 +122,7 @@ const SearchConversation = () => {
                 onClick={() => setIsOpenSearchConversation(false)}
                 aria-label={t('assistant.search_conversation.close')}
               >
-                <Icon icon={CrossIcon} />
+                <Icon icon={Cross} />
               </IconButton>
             )}
           </div>
@@ -132,7 +130,7 @@ const SearchConversation = () => {
           <Button
             label={t('assistant.search_conversation.new_chat')}
             variant="secondary"
-            startIcon={<Icon icon={PlusIcon} />}
+            startIcon={<Icon icon={Plus} />}
             onClick={createNewConversation}
             size="large"
             className={cx({

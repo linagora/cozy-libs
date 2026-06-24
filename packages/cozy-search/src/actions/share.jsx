@@ -1,4 +1,4 @@
-import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
+import { Share } from '@linagora/twake-icons'
 
 import makeActionComponent from './makeActionComponent'
 
@@ -7,9 +7,9 @@ export const share = ({ t }) => {
 
   return {
     name: 'share',
-    icon: ShareIcon,
+    icon: Share,
     label,
-    Component: makeActionComponent(label, ShareIcon),
+    Component: makeActionComponent(label, Share),
     action: () => {
       // TO DO: Add action to share due to this action does not exist yet in backend, we will implement it later
     }

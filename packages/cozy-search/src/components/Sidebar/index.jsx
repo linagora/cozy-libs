@@ -1,3 +1,4 @@
+import { Icon, CrossSmall, Magnifier, Menu, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -5,12 +6,7 @@ import { useParams } from 'react-router-dom'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossSmallIcon from 'cozy-ui/transpiled/react/Icons/CrossSmall'
-import SearchIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
-import MenuIcon from 'cozy-ui/transpiled/react/Icons/Menu'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import LoadMore from 'cozy-ui/transpiled/react/LoadMore'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -79,7 +75,7 @@ const Sidebar = ({ className }) => {
               onClick={onToggleSidebar}
               aria-label={t('assistant.sidebar.toggle_sidebar')}
             >
-              <Icon icon={MenuIcon} aria-hidden="true" />
+              <Icon icon={Menu} aria-hidden="true" />
             </IconButton>
           </div>
           <div>
@@ -91,7 +87,7 @@ const Sidebar = ({ className }) => {
                   onClick={onToggleSearch}
                   aria-label={t('assistant.sidebar.toggle_search')}
                 >
-                  <Icon icon={SearchIcon} aria-hidden="true" />
+                  <Icon icon={Magnifier} aria-hidden="true" />
                 </IconButton>
               )}
             {sidebarOpen && isMobile && (
@@ -101,7 +97,7 @@ const Sidebar = ({ className }) => {
                 onClick={onToggleSidebar}
                 aria-label={t('assistant.sidebar.close_sidebar')}
               >
-                <Icon icon={CrossSmallIcon} aria-hidden="true" />
+                <Icon icon={CrossSmall} aria-hidden="true" />
               </IconButton>
             )}
           </div>
@@ -111,7 +107,7 @@ const Sidebar = ({ className }) => {
             <Button
               className="u-w-100 u-bdrs-6"
               label={t('assistant.sidebar.create_new')}
-              startIcon={<Icon icon={PlusIcon} />}
+              startIcon={<Icon icon={Plus} />}
               fullWidth
               variant="primary"
               onClick={onCreateNewConversation}
@@ -123,7 +119,7 @@ const Sidebar = ({ className }) => {
               onClick={onCreateNewConversation}
               aria-label={t('assistant.sidebar.create_new')}
             >
-              <Icon icon={PlusIcon} aria-hidden="true" />
+              <Icon icon={Plus} aria-hidden="true" />
             </IconButton>
           )}
         </div>

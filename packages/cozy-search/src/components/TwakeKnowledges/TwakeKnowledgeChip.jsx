@@ -1,9 +1,8 @@
+import { Icon, Cross } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
 import Chip from 'cozy-ui/transpiled/react/Chips'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import styles from './styles.styl'
@@ -45,7 +44,7 @@ const TwakeKnowledgeChip = ({ twakeKnowledge, isLast, onSelect }) => {
       deleteIcon={
         hasSelection ? (
           <Icon
-            icon={CrossIcon}
+            icon={Cross}
             size={16}
             style={{
               height: 16,

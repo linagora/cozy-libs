@@ -1,10 +1,7 @@
+import { Icon, Check, PlusSmall, TwakeWorkplace } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
-import PlusSmallIcon from 'cozy-ui/transpiled/react/Icons/PlusSmall'
-import TwakeLogo from 'cozy-ui/transpiled/react/Icons/TwakeWorkplace'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
@@ -16,12 +13,12 @@ import MistralLogo from '../../assets/mistral.svg'
 import OpenAILogo from '../../assets/open_ai.svg'
 
 const ICONS = {
-  TwakeLogo,
+  TwakeWorkplace,
   GeminiLogo,
   OpenAILogo,
   MistralLogo,
   MetaLogo,
-  PlusSmallIcon
+  PlusSmall
 }
 
 const Provider = ({ selectedProvider, provider, onSelect }) => {
@@ -53,7 +50,7 @@ const Provider = ({ selectedProvider, provider, onSelect }) => {
         {
           /* FIXME: the twake icon is not rendered properly with Icon */
           isOpenRag ? (
-            <TwakeLogo width={40} height={40} />
+            <TwakeWorkplace width={40} height={40} />
           ) : (
             <Icon icon={ICONS[provider.icon]} size={40} preserveColor />
           )
@@ -72,7 +69,7 @@ const Provider = ({ selectedProvider, provider, onSelect }) => {
       </div>
       {isSelected && (
         <Icon
-          icon={CheckIcon}
+          icon={Check}
           className={`u-c-white u-bg-primary u-br-circle u-p-half ${styles['check-icon']}`}
           size={12}
         />

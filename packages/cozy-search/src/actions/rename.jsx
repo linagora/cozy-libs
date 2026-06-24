@@ -1,4 +1,4 @@
-import RenameIcon from 'cozy-ui/transpiled/react/Icons/Rename'
+import { Rename } from '@linagora/twake-icons'
 
 import makeActionComponent from './makeActionComponent'
 
@@ -7,9 +7,9 @@ export const rename = ({ t, onRename }) => {
 
   return {
     name: 'rename',
-    icon: RenameIcon,
+    icon: Rename,
     label,
-    Component: makeActionComponent(label, RenameIcon),
+    Component: makeActionComponent(label, Rename),
     action: () => {
       onRename()
     }

@@ -1,3 +1,4 @@
+import { Icon, Dropdown, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useState, useRef, useEffect } from 'react'
 
@@ -5,9 +6,6 @@ import { useQuery } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Chips from 'cozy-ui/transpiled/react/Chips'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import DropdownIcon from 'cozy-ui/transpiled/react/Icons/Dropdown'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
@@ -77,7 +75,7 @@ const AssistantSelection = ({ className, disabled }) => {
             }
             label={
               isMobile ? (
-                <Icon icon={DropdownIcon} size={16} />
+                <Icon icon={Dropdown} size={16} />
               ) : (
                 selectedAssistant.name
               )
@@ -124,7 +122,7 @@ const AssistantSelection = ({ className, disabled }) => {
           >
             <div className="u-flex u-flex-items-center">
               <div className="u-flex u-flex-justify-center u-w-1-half u-mr-half">
-                <Icon icon={PlusIcon} size={16} />
+                <Icon icon={Plus} size={16} />
               </div>
               <Typography variant="body1">
                 {t('assistant_create.title')}

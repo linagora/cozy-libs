@@ -1,12 +1,9 @@
+import { Icon, Dropdown, FileTypeFolder, Right } from '@linagora/twake-icons'
 import React, { useState } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import Collapse from 'cozy-ui/transpiled/react/Collapse'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import DropdownIcon from 'cozy-ui/transpiled/react/Icons/Dropdown'
-import FolderIcon from 'cozy-ui/transpiled/react/Icons/FileTypeFolder'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -68,7 +65,7 @@ const DriveTreeItem = ({ item, depth, selectedItems, onToggleItem }) => {
             if (hasChildren) setIsOpen(open => !open)
           }}
         >
-          <Icon icon={isOpen ? DropdownIcon : RightIcon} />
+          <Icon icon={isOpen ? Dropdown : Right} />
         </ListItemIcon>
         <ListItemIcon>
           <Checkbox
@@ -78,7 +75,7 @@ const DriveTreeItem = ({ item, depth, selectedItems, onToggleItem }) => {
           />
         </ListItemIcon>
         <ListItemIcon>
-          <Icon icon={FolderIcon} color="var(--primaryColor)" />
+          <Icon icon={FileTypeFolder} color="var(--primaryColor)" />
         </ListItemIcon>
         <ListItemText primary={item.name} />
       </ListItem>
@@ -123,7 +120,7 @@ const DriveSection = ({
           className="u-c-pointer"
           onClick={() => setIsOpen(open => !open)}
         >
-          <Icon icon={isOpen ? DropdownIcon : RightIcon} />
+          <Icon icon={isOpen ? Dropdown : Right} />
         </ListItemIcon>
         <ListItemIcon>
           <Checkbox
@@ -139,7 +136,7 @@ const DriveSection = ({
           />
         </ListItemIcon>
         <ListItemIcon>
-          <Icon icon={FolderIcon} className={styles['section-icon']} />
+          <Icon icon={FileTypeFolder} className={styles['section-icon']} />
         </ListItemIcon>
         <ListItemText primary={title} />
         {selectedCount > 0 && (

@@ -1,7 +1,6 @@
+import { Icon, Plus } from '@linagora/twake-icons'
 import React, { useRef } from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
@@ -58,7 +57,7 @@ const BasicInfoStep = ({
                 className={`u-w-100 u-h-100 u-obj-cover ${styles['avatar-image']}`}
               />
             ) : (
-              <Icon icon={PlusIcon} />
+              <Icon icon={Plus} />
             )}
           </div>
           <input

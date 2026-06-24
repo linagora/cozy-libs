@@ -1,12 +1,10 @@
+import { Icon, MultiFiles, Right } from '@linagora/twake-icons'
 import React, { useState, useRef, useEffect } from 'react'
 
 import { useQuery, isQueryLoading } from 'cozy-client'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import Grow from 'cozy-ui/transpiled/react/Grow'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import MultiFilesIcon from 'cozy-ui/transpiled/react/Icons/MultiFiles'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import { useI18n } from 'twake-i18n'
 
 import EmailSourceItem from './EmailSourceItem'
@@ -49,17 +47,13 @@ const Sources = ({ messageId, files, emails, urls }) => {
     <Box ref={ref} className="u-mt-1-half">
       <Chip
         className="u-mb-1"
-        icon={<Icon icon={MultiFilesIcon} className="u-ml-half" />}
+        icon={<Icon icon={MultiFiles} className="u-ml-half" />}
         label={t(
           'assistant.sources',
           files.length + emails.length + urls.length
         )}
         deleteIcon={
-          <Icon
-            className="u-h-1"
-            icon={RightIcon}
-            rotate={showSources ? 90 : 0}
-          />
+          <Icon className="u-h-1" icon={Right} rotate={showSources ? 90 : 0} />
         }
         clickable
         onClick={handleShowSources}

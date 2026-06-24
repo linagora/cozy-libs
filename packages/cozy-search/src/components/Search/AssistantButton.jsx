@@ -1,7 +1,7 @@
+import { Icon } from '@linagora/twake-icons'
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 

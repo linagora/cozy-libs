@@ -1,10 +1,9 @@
+import { Icon, Magnifier } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import { useExtendI18n } from 'twake-i18n'
 
@@ -24,7 +23,7 @@ export const AssistantMobile = ({ componentsProps }) => {
       icon={
         <Icon
           className={cx('u-ml-1 u-mr-half', styles['search-bar-icon'])}
-          icon={MagnifierIcon}
+          icon={Magnifier}
           size={16}
         />
       }
