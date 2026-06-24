@@ -16,6 +16,7 @@ import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { getRecipientsFromSharing } from '../../state'
 import styles from '../../styles/share.styl'
 import AntivirusAlert from '../AntivirusAlert'
 import { default as DumbShareByEmail } from '../ShareByEmail'
@@ -40,6 +41,7 @@ const FederatedFolderModalContent = ({
     getDocumentPermissions,
     fetchSharedDriveSharingLinks,
     getRecipients,
+    getSharedParentPath,
     hasSharedChild,
     hasSharedParent,
     revoke
@@ -178,7 +180,40 @@ const FederatedFolderModalContent = ({
   }
 
   const documentId = existingDocument?._id || existingDocument?.id
-  const existingRecipients = documentId ? getRecipients(documentId) : []
+  // Owner case: when document is inside a shared folder (via path) but has no driveId,
+  // find the parent shared folder to use its _id for recipient/permission lookups.
+  const sharedParentPath =
+    !sharedDriveSharing && hasSharedParentByPath && documentPath
+      ? getSharedParentPath(documentPath)
+      : null
+  const [sharedParentFolder, setSharedParentFolder] = useState(null)
+
+  useEffect(() => {
+    if (!sharedParentPath) return
+    const fetchParentFolder = async () => {
+      try {
+        const res = await client
+          .collection('io.cozy.files')
+          .statByPath(sharedParentPath)
+        if (res.data) setSharedParentFolder(res.data)
+      } catch (err) {
+        log.error('Failed to fetch shared parent folder', err)
+      }
+    }
+    fetchParentFolder()
+  }, [sharedParentPath, client])
+
+  const sharingReferenceId =
+    !sharedDriveSharing && sharedParentFolder?._id
+      ? sharedParentFolder._id
+      : documentId
+
+  const existingRecipients =
+    sharedDriveSharing?.attributes?.members && documentId
+      ? getRecipientsFromSharing(sharedDriveSharing, documentId)
+      : sharingReferenceId
+        ? getRecipients(sharingReferenceId)
+        : []
   const documentPermissions = documentId
     ? getDocumentPermissions(documentId)
     : []
