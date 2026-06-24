@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [34.0.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.3.7...cozy-bar@34.0.0) (2026-06-24)
+
+### Features
+
+- **cozy-bar:** Add twake-icons ([f2e9d55](https://github.com/cozy/cozy-libs/commit/f2e9d553faaac7e4ee203b2e8217551cf4ea91b9))
+
+### BREAKING CHANGES
+
+- **cozy-bar:** You must add `@linagora/twake-icons >= 2.6.2`.
+
 ## [33.3.7](https://github.com/cozy/cozy-libs/compare/cozy-bar@33.3.6...cozy-bar@33.3.7) (2026-06-22)
 
 **Note:** Version bump only for package cozy-bar
