@@ -1,11 +1,10 @@
+import { Icon, Cross } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useState, useEffect } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -116,7 +115,7 @@ const TwakeKnowledgePanel = ({ onClose }) => {
           {t(title)}
         </Typography>
         <IconButton onClick={onClose}>
-          <Icon icon={CrossIcon} />
+          <Icon icon={Cross} />
         </IconButton>
       </div>
 

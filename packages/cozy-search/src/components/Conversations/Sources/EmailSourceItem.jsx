@@ -1,9 +1,8 @@
+import { Icon, Mail } from '@linagora/twake-icons'
 import React from 'react'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import logger from 'cozy-logger'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import MailIcon from 'cozy-ui/transpiled/react/Icons/Mail'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -47,7 +46,7 @@ const EmailSourceItem = ({ email }) => {
       button
     >
       <ListItemIcon>
-        <Icon icon={MailIcon} size={32} />
+        <Icon icon={Mail} size={32} />
       </ListItemIcon>
       <ListItemText
         primary={`${emailDate} - ${email['email.subject']}`}

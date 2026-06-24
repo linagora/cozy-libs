@@ -1,4 +1,4 @@
-import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
+import { Trash } from '@linagora/twake-icons'
 
 import makeActionComponent from './makeActionComponent'
 
@@ -7,9 +7,9 @@ export const remove = ({ t, onDelete }) => {
 
   return {
     name: 'delete',
-    icon: TrashIcon,
+    icon: Trash,
     label,
-    Component: makeActionComponent(label, TrashIcon, { className: 'u-error' }),
+    Component: makeActionComponent(label, Trash, { className: 'u-error' }),
     action: () => {
       onDelete()
     }

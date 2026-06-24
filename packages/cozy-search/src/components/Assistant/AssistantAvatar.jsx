@@ -1,9 +1,8 @@
+import { Icon, AssistantColor } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import AssistantColorIcon from 'cozy-ui/transpiled/react/Icons/AssistantColor'
 
 import styles from './styles.styl'
 
@@ -19,7 +18,7 @@ const AssistantAvatar = ({ assistant, isSmall, className }) => {
   )
 
   if (!assistant.icon) {
-    return <Icon icon={AssistantColorIcon} className={iconClassName} />
+    return <Icon icon={AssistantColor} className={iconClassName} />
   }
 
   return (

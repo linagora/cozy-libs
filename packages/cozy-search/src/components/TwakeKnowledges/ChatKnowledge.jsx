@@ -1,9 +1,8 @@
+import { Icon, Comment } from '@linagora/twake-icons'
 import React from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CommentIcon from 'cozy-ui/transpiled/react/Icons/Comment'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -54,7 +53,7 @@ const ChatKnowledge = ({ selectedItems, onToggleItems, onClearItems }) => {
               />
             </ListItemIcon>
             <ListItemIcon>
-              <Icon icon={CommentIcon} color="var(--primaryColor)" />
+              <Icon icon={Comment} color="var(--primaryColor)" />
             </ListItemIcon>
             <ListItemText primary={chat.name} />
           </ListItem>

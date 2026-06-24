@@ -1,13 +1,10 @@
+import { Icon, Check, Pen, Trash } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useMemo } from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Badge from 'cozy-ui/transpiled/react/Badge'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
-import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
-import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
@@ -62,7 +59,7 @@ const AssistantSelectionItem = ({
           <Badge
             badgeContent={
               <Icon
-                icon={CheckIcon}
+                icon={Check}
                 size={10}
                 className={styles['selected-item--mobile']}
               />
@@ -83,9 +80,7 @@ const AssistantSelectionItem = ({
         <Typography variant="body1">{assistant.name}</Typography>
       </div>
       <div className="u-flex u-flex-items-center u-flex-justify-between">
-        {isSelected && !isMobile && (
-          <Icon icon={CheckIcon} className="u-success" />
-        )}
+        {isSelected && !isMobile && <Icon icon={Check} className="u-success" />}
         {!disableActions && (
           <div className={styles['menu-item-actions']}>
             <IconButton
@@ -98,7 +93,7 @@ const AssistantSelectionItem = ({
               })}
               onClick={handleEdit}
             >
-              <Icon icon={PenIcon} color="var(--primaryColor)" />
+              <Icon icon={Pen} color="var(--primaryColor)" />
             </IconButton>
             <IconButton
               aria-label="Delete assistant"
@@ -110,7 +105,7 @@ const AssistantSelectionItem = ({
               })}
               onClick={handleDelete}
             >
-              <Icon icon={TrashIcon} className="u-error" />
+              <Icon icon={Trash} className="u-error" />
             </IconButton>
           </div>
         )}

@@ -1,10 +1,9 @@
+import { Icon, Eye } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useState } from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
@@ -101,7 +100,7 @@ const ApiKeyStep = ({ formData, selectedProvider, onChange }) => {
                   showPassword ? t('assistant.hide') : t('assistant.show')
                 }
               >
-                <Icon icon={EyeIcon} />
+                <Icon icon={Eye} />
               </IconButton>
             )
           }}

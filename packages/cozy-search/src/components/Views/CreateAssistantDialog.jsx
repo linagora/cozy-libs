@@ -1,3 +1,4 @@
+import { Icon, Cross } from '@linagora/twake-icons'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
@@ -9,9 +10,7 @@ import {
   DialogActions,
   DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n, useExtendI18n } from 'twake-i18n'
@@ -88,7 +87,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
         onClick={onClose}
         className={styles['close-button']}
       >
-        <Icon icon={CrossIcon} />
+        <Icon icon={Cross} />
       </IconButton>
       <DialogContent>
         <AssistantDialogContent

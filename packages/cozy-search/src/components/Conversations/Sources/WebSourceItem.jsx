@@ -1,7 +1,6 @@
+import { Icon, Globe } from '@linagora/twake-icons'
 import React from 'react'
 
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -28,7 +27,7 @@ const WebSourceItem = ({ source }) => {
       button
     >
       <ListItemIcon>
-        <Icon icon={GlobeIcon} size={32} color="var(--primaryColor)" />
+        <Icon icon={Globe} size={32} color="var(--primaryColor)" />
       </ListItemIcon>
       <ListItemText primary={displayTitle} secondary={url} />
     </ListItem>

@@ -1,9 +1,8 @@
+import { Icon, Magnifier } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useRef } from 'react'
 
 import ClickAwayListener from 'cozy-ui/transpiled/react/ClickAwayListener'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 
 import { AssistantButton } from './AssistantButton'
@@ -81,13 +80,13 @@ const SearchBarDesktop = ({
             size === 'large' ? (
               <Icon
                 className={cx('u-mh-1', styles['search-bar-icon'])}
-                icon={MagnifierIcon}
+                icon={Magnifier}
                 size={24}
               />
             ) : (
               <Icon
                 className={cx('u-ml-1 u-mr-half', styles['search-bar-icon'])}
-                icon={MagnifierIcon}
+                icon={Magnifier}
                 size={16}
               />
             )

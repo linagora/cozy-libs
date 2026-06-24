@@ -1,3 +1,4 @@
+import { Icon, Dots } from '@linagora/twake-icons'
 import React, { useState, useRef } from 'react'
 
 import { useClient } from 'cozy-client'
@@ -6,9 +7,7 @@ import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
@@ -87,7 +86,7 @@ const ConversationActions = ({ buttonClassName, conversation }) => {
         ref={anchorRef}
         onClick={toggleMenu}
       >
-        <Icon icon={DotsIcon} />
+        <Icon icon={Dots} />
       </IconButton>
       {isMenuOpen && (
         <ActionsMenu

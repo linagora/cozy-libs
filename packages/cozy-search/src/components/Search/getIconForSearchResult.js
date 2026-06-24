@@ -1,20 +1,22 @@
+import {
+  Contacts,
+  FileTypeAudio,
+  FileTypeBin,
+  FileTypeCode,
+  FileTypeFiles,
+  FileTypeFolder,
+  FileTypeImage,
+  FileTypeNote,
+  FileTypePdf,
+  FileTypeSheet,
+  FileTypeSlide,
+  FileTypeText,
+  FileTypeVideo,
+  FileTypeZip
+} from '@linagora/twake-icons'
 import get from 'lodash/get'
 
 import { isNote, isDocs } from 'cozy-client/dist/models/file'
-import ContactsIcon from 'cozy-ui/transpiled/react/Icons/Contacts'
-import IconAudio from 'cozy-ui/transpiled/react/Icons/FileTypeAudio'
-import IconBin from 'cozy-ui/transpiled/react/Icons/FileTypeBin'
-import IconCode from 'cozy-ui/transpiled/react/Icons/FileTypeCode'
-import IconFiles from 'cozy-ui/transpiled/react/Icons/FileTypeFiles'
-import IconFolder from 'cozy-ui/transpiled/react/Icons/FileTypeFolder'
-import IconImage from 'cozy-ui/transpiled/react/Icons/FileTypeImage'
-import IconNote from 'cozy-ui/transpiled/react/Icons/FileTypeNote'
-import IconPdf from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
-import IconSheet from 'cozy-ui/transpiled/react/Icons/FileTypeSheet'
-import IconSlide from 'cozy-ui/transpiled/react/Icons/FileTypeSlide'
-import IconText from 'cozy-ui/transpiled/react/Icons/FileTypeText'
-import IconVideo from 'cozy-ui/transpiled/react/Icons/FileTypeVideo'
-import IconZip from 'cozy-ui/transpiled/react/Icons/FileTypeZip'
 
 import IconDocs from './Icons/DocsIcon'
 import EncryptedFolderIcon from './Icons/EncryptedFolderIcon'
@@ -31,7 +33,7 @@ export const getIconForSearchResult = searchResult => {
   if (searchResult.slug === 'notes') {
     return {
       type: 'component',
-      component: IconNote
+      component: FileTypeNote
     }
   }
 
@@ -45,13 +47,13 @@ export const getIconForSearchResult = searchResult => {
   if (searchResult.slug === 'contacts') {
     return {
       type: 'component',
-      component: ContactsIcon
+      component: Contacts
     }
   }
 
   return {
     type: 'component',
-    component: IconFiles
+    component: FileTypeFiles
   }
 }
 
@@ -74,25 +76,25 @@ export const getDriveMimeTypeIcon = (file, { isEncrypted = false } = {}) => {
     return EncryptedFolderIcon
   }
   if (isDirectory) {
-    return IconFolder
+    return FileTypeFolder
   } else if (isNote(file)) {
-    return IconNote
+    return FileTypeNote
   } else if (isDocs(file)) {
     return IconDocs
   } else {
     const iconsByMimeType = {
-      audio: IconAudio,
-      bin: IconBin,
-      code: IconCode,
-      image: IconImage,
-      pdf: IconPdf,
-      slide: IconSlide,
-      sheet: IconSheet,
-      text: IconText,
-      video: IconVideo,
-      zip: IconZip
+      audio: FileTypeAudio,
+      bin: FileTypeBin,
+      code: FileTypeCode,
+      image: FileTypeImage,
+      pdf: FileTypePdf,
+      slide: FileTypeSlide,
+      sheet: FileTypeSheet,
+      text: FileTypeText,
+      video: FileTypeVideo,
+      zip: FileTypeZip
     }
     const type = getFileMimetype(iconsByMimeType)(mime, name)
-    return get(iconsByMimeType, type, IconFiles)
+    return get(iconsByMimeType, type, FileTypeFiles)
   }
 }

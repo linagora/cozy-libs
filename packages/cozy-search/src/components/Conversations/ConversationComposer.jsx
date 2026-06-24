@@ -4,14 +4,12 @@ import {
   useThread,
   useComposer
 } from '@assistant-ui/react'
+import { Icon, Paperplane, Stop } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useCallback } from 'react'
 
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
-import StopIcon from 'cozy-ui/transpiled/react/Icons/Stop'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
@@ -80,12 +78,12 @@ const ConversationComposer = () => {
             classes={{ label: 'u-flex u-w-auto' }}
             {...(isRunning
               ? {
-                  label: <Icon icon={StopIcon} size={12} />,
+                  label: <Icon icon={Stop} size={12} />,
                   onClick: handleCancel
                 }
               : {
                   variant: 'primary',
-                  label: <Icon icon={PaperplaneIcon} size={12} rotate={-45} />,
+                  label: <Icon icon={Paperplane} size={12} rotate={-45} />,
                   onClick: handleSend
                 })}
           />

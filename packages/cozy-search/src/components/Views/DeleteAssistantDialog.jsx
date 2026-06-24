@@ -1,3 +1,4 @@
+import { Icon, Cross } from '@linagora/twake-icons'
 import React, { useState } from 'react'
 
 import { useClient, useQuery } from 'cozy-client'
@@ -8,9 +9,7 @@ import {
   DialogActions,
   DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
@@ -71,7 +70,7 @@ const DeleteAssistantDialog = ({ open, onClose }) => {
         onClick={onClose}
         className={styles['close-button']}
       >
-        <Icon icon={CrossIcon} />
+        <Icon icon={Cross} />
       </IconButton>
       <DialogContent>
         {t('assistant_delete.content', { name: displayName })}
