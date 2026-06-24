@@ -9,6 +9,7 @@ const RecipientList = ({
   recipients,
   recipientsToBeConfirmed,
   isOwner,
+  canManageSharing,
   isSharedDrive,
   isReadOnly,
   document,
@@ -49,6 +50,7 @@ const RecipientList = ({
         {...recipient}
         key={recipient.index}
         isOwner={isOwner}
+        canManageSharing={canManageSharing}
         isSharedDrive={isSharedDrive}
         isReadOnly={isReadOnly}
         document={document}

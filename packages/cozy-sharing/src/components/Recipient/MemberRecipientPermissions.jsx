@@ -20,6 +20,7 @@ const log = minilog('MemberRecipientPermissions')
 
 const MemberRecipientPermissions = ({
   isOwner,
+  canManageSharing = isOwner,
   isReadOnly,
   status,
   instance,
@@ -46,7 +47,7 @@ const MemberRecipientPermissions = ({
     !isReadOnly &&
     !revoking &&
     !contactIsOwner &&
-    ((instanceMatchesClient && !isOwner) || isOwner)
+    ((instanceMatchesClient && !isOwner) || canManageSharing)
 
   const toggleMenu = useCallback(() => {
     setMenuDisplayed(displayed => !displayed)
@@ -58,15 +59,23 @@ const MemberRecipientPermissions = ({
   const handleRevocation = useCallback(async () => {
     setRevoking(true)
     try {
-      if (isOwner) {
-        await onRevoke(document, sharingId, memberIndex)
-      } else {
+      if (instanceMatchesClient && !isOwner) {
         await onRevokeSelf(document)
+      } else {
+        await onRevoke(document, sharingId, memberIndex)
       }
     } finally {
       setRevoking(false)
     }
-  }, [isOwner, onRevoke, onRevokeSelf, document, sharingId, memberIndex])
+  }, [
+    document,
+    instanceMatchesClient,
+    isOwner,
+    memberIndex,
+    onRevoke,
+    onRevokeSelf,
+    sharingId
+  ])
 
   const setType = useCallback(
     async newType => {

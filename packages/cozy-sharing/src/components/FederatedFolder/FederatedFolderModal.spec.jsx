@@ -11,6 +11,8 @@ import AppLike from '../SharingBanner/test/AppLike'
 const mockShare = jest.fn()
 const mockShareByLink = jest.fn()
 const mockRevoke = jest.fn()
+const mockRevokeSelf = jest.fn()
+const mockIsOwner = jest.fn()
 const mockGetSharingLink = jest.fn()
 const mockGetFederatedShareLink = jest.fn()
 const mockGetRecipients = jest.fn().mockReturnValue([])
@@ -27,6 +29,8 @@ jest.mock('../../hooks/useSharingContext', () => ({
     share: mockShare,
     shareByLink: mockShareByLink,
     revoke: mockRevoke,
+    revokeSelf: mockRevokeSelf,
+    isOwner: mockIsOwner,
     getSharingLink: mockGetSharingLink,
     getFederatedShareLink: mockGetFederatedShareLink,
     getDocumentPermissions: mockGetDocumentPermissions,
@@ -100,6 +104,9 @@ describe('FederatedFolderModal', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
+    mockRevoke.mockResolvedValue()
+    mockRevokeSelf.mockResolvedValue()
+    mockIsOwner.mockReturnValue(false)
     mockGetDocumentPermissions.mockReturnValue([])
     mockFetchSharedDriveSharingLinks.mockResolvedValue([])
     mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
@@ -124,6 +131,10 @@ describe('FederatedFolderModal', () => {
       }
     })
     client = createTestClient()
+    client.options = {
+      ...client.options,
+      uri: 'https://me.mycozy.cloud'
+    }
     sharingContextValue = createSharingContextValue()
     usePendingRecipients.mockReturnValue({
       pendingRecipients: [],
@@ -433,6 +444,30 @@ describe('FederatedFolderModal', () => {
 
       await act(async () => {
         resolveShare({})
+      })
+    })
+  })
+
+  describe('onRevoke callback', () => {
+    const currentUserRecipient = {
+      instance: 'https://me.mycozy.cloud',
+      memberIndex: 1,
+      sharingId: 'sharing-id',
+      type: 'two-way'
+    }
+
+    it('should call onRevokeSelf and onRevokeSuccess when the current user is revoked', async () => {
+      const onRevokeSuccess = jest.fn()
+      mockGetRecipients.mockReturnValue([currentUserRecipient])
+
+      const { findByLabelText } = setup({ onRevokeSuccess })
+
+      fireEvent.click(await findByLabelText('Remove from sharing'))
+
+      await waitFor(() => {
+        expect(mockRevokeSelf).toHaveBeenCalledWith(mockDocument)
+        expect(mockRevoke).not.toHaveBeenCalled()
+        expect(onRevokeSuccess).toHaveBeenCalledWith(mockDocument)
       })
     })
   })

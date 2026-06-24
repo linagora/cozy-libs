@@ -26,6 +26,7 @@ const log = minilog('FederatedFolderModal')
 
 const FederatedFolderModalContent = ({
   onClose,
+  onRevokeSuccess,
   document: existingDocument,
   autoOpenShareRestriction,
   showGenerateLinkButton
@@ -42,7 +43,9 @@ const FederatedFolderModalContent = ({
     getRecipients,
     hasSharedChild,
     hasSharedParent,
-    revoke
+    isOwner,
+    revoke,
+    revokeSelf
   } = useSharingContext()
   const { showAlert } = useAlert()
   const { showConfirmDialog, closeConfirmDialog } = useConfirmDialog()
@@ -185,6 +188,12 @@ const FederatedFolderModalContent = ({
   const displayedLink = existingDocument?.driveId
     ? getFederatedShareLink(existingDocument)
     : getSharingLink(existingDocument?._id)
+  const isCurrentUserOwner = documentId ? isOwner(documentId) : false
+
+  const handleRevokeSelf = async document => {
+    await revokeSelf(document)
+    onRevokeSuccess?.(document)
+  }
 
   useEffect(() => {
     if (!existingDocument?.driveId) return
@@ -278,13 +287,14 @@ const FederatedFolderModalContent = ({
             )}
           </div>
           <WhoHasAccess
-            isOwner
+            isOwner={isCurrentUserOwner}
             isSharedDrive
             recipients={isSending ? frozenRecipients : existingRecipients}
             document={isSending ? frozenDoc : existingDocument}
             documentType="Files"
             className={styles['share-dialog-members']}
             onRevoke={revoke}
+            onRevokeSelf={handleRevokeSelf}
             link={displayedLink}
           />
         </div>
@@ -320,6 +330,7 @@ export const FederatedFolderModal = withLocales(props => (
 
 FederatedFolderModal.propTypes = {
   onClose: PropTypes.func.isRequired,
+  onRevokeSuccess: PropTypes.func,
   document: PropTypes.object.isRequired,
   autoOpenShareRestriction: PropTypes.bool,
   showGenerateLinkButton: PropTypes.bool
