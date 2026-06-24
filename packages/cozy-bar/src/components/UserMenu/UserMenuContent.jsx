@@ -1,3 +1,11 @@
+import {
+  Icon,
+  CloudRainbow,
+  Company,
+  FromUser,
+  Logout,
+  Right
+} from '@linagora/twake-icons'
 import cx from 'classnames'
 import useI18n from 'components/useI18n'
 import React from 'react'
@@ -8,12 +16,6 @@ import { makeDiskInfos } from 'cozy-client/dist/models/instance'
 import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
 import Divider from 'cozy-ui/transpiled/react/Divider'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CloudRainbowIcon from 'cozy-ui/transpiled/react/Icons/CloudRainbow'
-import CompanyIcon from 'cozy-ui/transpiled/react/Icons/Company'
-import FromUserIcon from 'cozy-ui/transpiled/react/Icons/FromUser'
-import LogoutIcon from 'cozy-ui/transpiled/react/Icons/Logout'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -72,7 +74,7 @@ const UserMenuContent = ({
             onClick={closeMenu}
           >
             <ListItemIcon>
-              <Icon icon={FromUserIcon} />
+              <Icon icon={FromUser} />
             </ListItemIcon>
             <ListItemText primary={t('userMenu.manageProfile')} />
           </ListItem>
@@ -87,7 +89,7 @@ const UserMenuContent = ({
             onClick={closeMenu}
           >
             <ListItemIcon>
-              <Icon icon={CompanyIcon} />
+              <Icon icon={Company} />
             </ListItemIcon>
             <ListItemText primary={t('userMenu.createBusinessAccount')} />
           </ListItem>
@@ -102,7 +104,7 @@ const UserMenuContent = ({
             onClick={closeMenu}
           >
             <ListItemIcon>
-              <Icon icon={CloudRainbowIcon} />
+              <Icon icon={CloudRainbow} />
             </ListItemIcon>
             <ListItemText
               primary={t('userMenu.storage')}
@@ -112,7 +114,7 @@ const UserMenuContent = ({
               )}
             />
             <ListItemIcon>
-              <Icon icon={RightIcon} />
+              <Icon icon={Right} />
             </ListItemIcon>
           </ListItem>
         )}
@@ -126,7 +128,7 @@ const UserMenuContent = ({
           onClick={() => logOut({ client, webviewIntent, onLogOut })}
         >
           <ListItemIcon>
-            <Icon icon={LogoutIcon} />
+            <Icon icon={Logout} />
           </ListItemIcon>
           <ListItemText primary={t('userMenu.logOut')} />
         </ListItem>

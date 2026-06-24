@@ -1,7 +1,7 @@
+import { TwakeWorkplace } from '@linagora/twake-icons'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
-import TwakeWorkplaceIcon from 'cozy-ui/transpiled/react/Icons/TwakeWorkplace'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import AppIcon from 'cozy-ui-plus/dist/AppIcon'
 
@@ -16,7 +16,7 @@ const IconCozyHome = () => {
   return (
     <AppIcon
       fetchIcon={fetchIcon}
-      fallbackIcon={TwakeWorkplaceIcon}
+      fallbackIcon={TwakeWorkplace}
       className={isMobile ? 'u-ml-half' : undefined}
     />
   )

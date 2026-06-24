@@ -1,10 +1,9 @@
+import { Icon, Mosaic } from '@linagora/twake-icons'
 import AppsMenuContent from 'components/AppsMenu/AppsMenuContent'
 import React, { useRef, useState } from 'react'
 
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import MosaicIcon from 'cozy-ui/transpiled/react/Icons/Mosaic'
 import Menu from 'cozy-ui/transpiled/react/Menu'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
@@ -35,7 +34,7 @@ const AppsMenu = ({ shortcuts, apps, homeApp, isFetchingApps }) => {
   return (
     <nav ref={containerRef}>
       <IconButton ref={buttonRef} onClick={toggleMenu} className="u-p-half">
-        <Icon icon={MosaicIcon} size="18" />
+        <Icon icon={Mosaic} size="18" />
       </IconButton>
       {isMobile ? (
         <ConfirmDialog
