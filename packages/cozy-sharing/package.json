@@ -40,6 +40,7 @@
   "devDependencies": {
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
+    "@linagora/twake-icons": "^2.6.2",
     "@storybook/addon-essentials": "7.6.0",
     "@storybook/addon-interactions": "7.6.0",
     "@storybook/addon-links": "7.6.0",
@@ -68,6 +69,7 @@
     "twake-i18n": "^0.4.1"
   },
   "peerDependencies": {
+    "@linagora/twake-icons": ">=2.6.2",
     "cozy-client": ">=60.28.0",
     "cozy-device-helper": ">=4.0.0",
     "cozy-flags": ">=4.8.1",

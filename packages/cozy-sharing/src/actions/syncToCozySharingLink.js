@@ -1,8 +1,7 @@
+import { Icon, Sync } from '@linagora/twake-icons'
 import React, { forwardRef } from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
@@ -34,7 +33,7 @@ export const syncToCozySharingLink = ({
   const label = t('Share.banner.sync_to_mine', {
     smart_count: isShortLabel ? 1 : 2
   })
-  const icon = SyncIcon
+  const icon = Sync
 
   return {
     name: 'syncToCozySharingLink',

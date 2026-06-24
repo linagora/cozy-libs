@@ -1,8 +1,7 @@
+import { Icon, Forbidden } from '@linagora/twake-icons'
 import React from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import ForbiddenIcon from 'cozy-ui/transpiled/react/Icons/Forbidden'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -23,7 +22,7 @@ const GroupRecipientDetailWithoutAccess = ({ withoutAccess, isOwner }) => {
       </Typography>
       <List>
         {withoutAccess.map(recipient => {
-          const icon = recipient.status === 'revoked' ? ForbiddenIcon : null
+          const icon = recipient.status === 'revoked' ? Forbidden : null
           const defaultDisplayName = t(DEFAULT_DISPLAY_NAME)
           const name = getDisplayName(recipient, defaultDisplayName)
 

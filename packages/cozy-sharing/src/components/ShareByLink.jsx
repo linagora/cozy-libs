@@ -1,11 +1,9 @@
+import { Icon, Copy, Link } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useReducer, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
-import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
@@ -144,12 +142,12 @@ const ShareByLink = ({
             label={t(`${documentType}.share.shareByLink.send`)}
             variant="secondary"
             size="medium"
-            startIcon={<Icon icon={LinkIcon} />}
+            startIcon={<Icon icon={Link} />}
             onClick={shareLink}
             busy={isGenerating}
           />
           <Button
-            label={<Icon icon={CopyIcon} />}
+            label={<Icon icon={Copy} />}
             variant="secondary"
             size="medium"
             onClick={generateLinkAndCopyLinkToClipboard}
@@ -162,7 +160,7 @@ const ShareByLink = ({
           label={t(`${documentType}.share.shareByLink.copy`)}
           variant="secondary"
           size="medium"
-          startIcon={<Icon icon={LinkIcon} />}
+          startIcon={<Icon icon={Link} />}
           onClick={generateLinkAndCopyLinkToClipboard}
           busy={isGenerating}
         />
@@ -172,7 +170,7 @@ const ShareByLink = ({
           label={t(`${documentType}.share.shareByLink.create`)}
           variant="secondary"
           size="medium"
-          startIcon={<Icon icon={LinkIcon} />}
+          startIcon={<Icon icon={Link} />}
           onClick={generateLinkSilently}
           busy={isGenerating}
         />
