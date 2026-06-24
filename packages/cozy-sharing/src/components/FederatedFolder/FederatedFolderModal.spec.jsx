@@ -33,6 +33,7 @@ jest.mock('../../hooks/useSharingContext', () => ({
     fetchSharedDriveSharingLinks: mockFetchSharedDriveSharingLinks,
     getOwner: jest.fn(),
     getRecipients: mockGetRecipients,
+    getSharedParentPath: jest.fn().mockReturnValue(null),
     getSharingById: mockGetSharingById,
     hasSharedChild: mockHasSharedChild,
     hasSharedParent: mockHasSharedParent
