@@ -1,7 +1,6 @@
+import { CloudPlusOutlined, Sync, ToTheCloud } from '@linagora/twake-icons'
+
 import { Q } from 'cozy-client'
-import CloudPlusOutlinedIcon from 'cozy-ui/transpiled/react/Icons/CloudPlusOutlined'
-import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
-import ToTheCloudIcon from 'cozy-ui/transpiled/react/Icons/ToTheCloud'
 
 import { fetchFilesPaths } from './files'
 import {
@@ -78,20 +77,20 @@ export const getIconWithlabel = ({
 }) => {
   if (link === CREATE_COZY_HREF) {
     return {
-      icon: ToTheCloudIcon,
+      icon: ToTheCloud,
       label: t('Share.create-cozy', { smart_count: isShortLabel ? 1 : 2 })
     }
   }
   if (!isSharingShortcutCreated) {
     return {
-      icon: CloudPlusOutlinedIcon,
+      icon: CloudPlusOutlined,
       label: t('Share.banner.add_to_mine', {
         smart_count: isShortLabel ? 1 : 2
       })
     }
   }
   return {
-    icon: SyncIcon,
+    icon: Sync,
     label: t('Share.banner.sync_to_mine', { smart_count: isShortLabel ? 1 : 2 })
   }
 }

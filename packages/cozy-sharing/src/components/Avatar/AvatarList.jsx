@@ -1,10 +1,9 @@
+import { Icon, Link } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 
 import { ExtraAvatar } from './ExtraAvatar'
 import { GroupAvatar } from './GroupAvatar'
@@ -75,7 +74,7 @@ const AvatarList = ({
       {link && (
         <span data-testid="AvatarList-link">
           <Avatar color="none" border innerBorder size={size}>
-            <Icon icon={LinkIcon} />
+            <Icon icon={Link} />
           </Avatar>
         </span>
       )}

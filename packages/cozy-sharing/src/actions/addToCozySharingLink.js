@@ -1,8 +1,7 @@
+import { Icon, CloudPlusOutlined } from '@linagora/twake-icons'
 import React, { forwardRef } from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import CloudPlusOutlinedIcon from 'cozy-ui/transpiled/react/Icons/CloudPlusOutlined'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
@@ -35,7 +34,7 @@ export const addToCozySharingLink = ({
   const label = t('Share.banner.add_to_mine', {
     smart_count: isShortLabel ? 1 : 2
   })
-  const icon = CloudPlusOutlinedIcon
+  const icon = CloudPlusOutlined
 
   return {
     name: 'addToCozySharingLink',

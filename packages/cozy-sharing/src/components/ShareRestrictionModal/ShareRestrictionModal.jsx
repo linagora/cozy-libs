@@ -1,3 +1,4 @@
+import { Icon, Trash } from '@linagora/twake-icons'
 import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
@@ -6,8 +7,6 @@ import { generateWebLink, useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
@@ -172,7 +171,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
               label={t('Share.permissionLink.deactivate')}
               variant="secondary"
               color="error"
-              startIcon={<Icon icon={TrashIcon} />}
+              startIcon={<Icon icon={Trash} />}
               onClick={handleRevokeLink}
               busy={loading}
             />

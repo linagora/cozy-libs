@@ -1,8 +1,6 @@
+import { Icon, Share } from '@linagora/twake-icons'
 import classNames from 'classnames'
 import React from 'react'
-
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
 
 import styles from '../styles/badge.styl'
 
@@ -17,7 +15,7 @@ const SharedBadge = ({ byMe, className, small, xsmall }) => (
     )}
   >
     <Icon
-      icon={ShareIcon}
+      icon={Share}
       color="var(--primaryContrastTextColor)"
       className={styles['shared-badge-icon']}
     />

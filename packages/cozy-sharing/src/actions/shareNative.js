@@ -1,8 +1,7 @@
+import { Icon, Reply } from '@linagora/twake-icons'
 import React, { forwardRef } from 'react'
 
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import ReplyIcon from 'cozy-ui/transpiled/react/Icons/Reply'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
@@ -31,7 +30,7 @@ export const shareNative = ({
   const { t } = getActionsI18n()
 
   const label = t('Share.send')
-  const icon = ReplyIcon
+  const icon = Reply
 
   return {
     name: 'shareNative',

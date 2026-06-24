@@ -1,3 +1,4 @@
+import { Icon, Bottom, People } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useReducer, useRef } from 'react'
 
@@ -7,9 +8,6 @@ import flag from 'cozy-flags'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import Box from 'cozy-ui/transpiled/react/Box'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
-import PeopleIcon from 'cozy-ui/transpiled/react/Icons/People'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -67,11 +65,11 @@ export const BoxEditingRights = ({ file, editingRights, setEditingRights }) => {
               onClick={toggleMenuDisplayed}
             >
               <ListItemIcon>
-                <Icon icon={PeopleIcon} />
+                <Icon icon={People} />
               </ListItemIcon>
               <ListItemText primary={textPrimary} secondary={textSecondary} />
               <ListItemIcon className="u-mr-half">
-                <Icon icon={BottomIcon} />
+                <Icon icon={Bottom} />
               </ListItemIcon>
             </ListItem>
           </List>

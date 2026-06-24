@@ -1,12 +1,11 @@
+import { Icon, CrossCircleOutline } from '@linagora/twake-icons'
 import React, { useState, useRef } from 'react'
 
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossCircleOutlineIcon from 'cozy-ui/transpiled/react/Icons/CrossCircleOutline'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -92,7 +91,7 @@ const GroupRecipientPermissions = ({
             className="u-ml-half"
             aria-label={t('Share.members.revoke')}
           >
-            <Icon icon={CrossCircleOutlineIcon} />
+            <Icon icon={CrossCircleOutline} />
           </IconButton>
         </>
       )}

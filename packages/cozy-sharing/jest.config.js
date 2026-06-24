@@ -26,10 +26,11 @@ module.exports = {
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js',
     '^cozy-client/dist/types$':
       '<rootDir>/node_modules/cozy-client/dist/types.js',
-    '^twake-i18n$': '<rootDir>/../twake-i18n/dist/index.js'
+    '^twake-i18n$': '<rootDir>/../twake-i18n/dist/index.js',
+    '^@linagora/twake-icons$': '<rootDir>/jestHelpers/mocks/twake-icons.js'
   },
   transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!(cozy-ui|cozy-harvest-lib))'
+    '<rootDir>/node_modules/(?!(cozy-ui|cozy-harvest-lib|cozy-ui-plus))'
   ],
   setupFilesAfterEnv: ['<rootDir>/jestHelpers/setup.js']
 }

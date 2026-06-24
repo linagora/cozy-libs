@@ -1,9 +1,8 @@
+import { Icon, Link } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -24,7 +23,7 @@ const LinkRecipientLite = ({ permissions, link }) => {
     <ListItem size="small" ellipsis>
       <ListItemIcon>
         <Avatar size="m" color="none" border innerBorder>
-          <Icon icon={LinkIcon} />
+          <Icon icon={Link} />
         </Avatar>
       </ListItemIcon>
       <ListItemText
