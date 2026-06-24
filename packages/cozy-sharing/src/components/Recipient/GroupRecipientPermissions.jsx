@@ -20,7 +20,7 @@ const GroupRecipientPermissions = ({
   isOwner,
   sharingId,
   groupIndex,
-  read_only: isReadOnly = false,
+  read_only = false,
   className,
   isUserInsideMembers,
   document
@@ -47,7 +47,7 @@ const GroupRecipientPermissions = ({
     setRevoking(false)
   }
 
-  const type = isReadOnly ? 'one-way' : 'two-way'
+  const type = read_only ? 'one-way' : 'two-way'
 
   const actions = makeActions([permission], {
     t,
