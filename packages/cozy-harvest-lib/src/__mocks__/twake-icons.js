@@ -1,7 +1,7 @@
 const React = require('react')
 
 const Icon = ({ icon, iconRef, ...props }) =>
-  React.createElement('span', { 'data-icon': true, ...props })
+  React.createElement('svg', { 'data-icon': true, ...props })
 
 const Sprite = () => null
 
