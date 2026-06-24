@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@8.0.1...cozy-ui-plus@9.0.0) (2026-06-24)
+
+### Features
+
+- **cozy-ui-plus:** Add twake-icons ([34c7c1f](https://github.com/cozy/cozy-libs/commit/34c7c1fdbeadd99a7dc17f1a903359407d316afa))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** You must add `@linagora/twake-icons >= 2.6.2`.
+
 ## [8.0.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@8.0.0...cozy-ui-plus@8.0.1) (2026-05-18)
 
 ### Bug Fixes
