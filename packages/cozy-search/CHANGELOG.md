@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.29.2...cozy-search@0.30.0) (2026-06-24)
+
+### Features
+
+- **cozy-search:** Add twake-icons ([8cd4f71](https://github.com/cozy/cozy-libs/commit/8cd4f7186de04b2f359605029d445c85ff5b11b8))
+
+### BREAKING CHANGES
+
+- **cozy-search:** You must add `@linagora/twake-icons >= 2.6.2`
+
 ## [0.29.2](https://github.com/cozy/cozy-libs/compare/cozy-search@0.29.1...cozy-search@0.29.2) (2026-06-11)
 
 **Note:** Version bump only for package cozy-search
