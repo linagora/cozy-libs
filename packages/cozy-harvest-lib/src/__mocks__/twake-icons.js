@@ -1,6 +1,6 @@
 const React = require('react')
 
-const Icon = ({ icon, ...props }) =>
+const Icon = ({ icon, iconRef, ...props }) =>
   React.createElement('span', { 'data-icon': true, ...props })
 
 const Sprite = () => null
@@ -14,7 +14,7 @@ const proxyHandler = {
   get: function (target, prop) {
     if (prop in target) return target[prop]
     if (prop === 'default') return target.Icon
-    return function IconMock(props) {
+    return function IconMock({ iconRef, ...props }) {
       return React.createElement('svg', { 'data-mock-icon': prop, ...props })
     }
   }
