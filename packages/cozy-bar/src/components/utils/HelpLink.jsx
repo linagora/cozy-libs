@@ -1,9 +1,8 @@
+import { Icon, HelpOutlined } from '@linagora/twake-icons'
 import React from 'react'
 
 import { useInstanceInfo } from 'cozy-client'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import HelpOutlinedIcon from 'cozy-ui/transpiled/react/Icons/HelpOutlined'
 
 const HelpLink = () => {
   const { context } = useInstanceInfo()
@@ -19,7 +18,7 @@ const HelpLink = () => {
       rel="noopener, noreferrer"
       className="u-p-half"
     >
-      <Icon icon={HelpOutlinedIcon} size="18" />
+      <Icon icon={HelpOutlined} size="18" />
     </IconButton>
   )
 }

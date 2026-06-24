@@ -31,6 +31,7 @@
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "@cozy/minilog": "^1.0.0",
+    "@linagora/twake-icons": "^2.6.2",
     "@testing-library/jest-dom": "5.17.0",
     "@testing-library/react": "12.1.5",
     "babel-preset-cozy-app": "^2.8.4",
@@ -59,6 +60,7 @@
   },
   "peerDependencies": {
     "@cozy/minilog": ">=1.0.0",
+    "@linagora/twake-icons": ">=2.6.2",
     "cozy-client": ">=60.21.0",
     "cozy-dataproxy-lib": ">=4.1.0",
     "cozy-device-helper": ">=2.6.0",
