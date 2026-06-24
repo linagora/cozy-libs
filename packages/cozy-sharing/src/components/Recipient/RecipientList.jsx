@@ -34,6 +34,7 @@ const RecipientList = ({
         <GroupRecipient
           {...recipient}
           isOwner={isOwner}
+          isReadOnly={isReadOnly}
           key={recipient.index}
           document={document}
           documentType={documentType}
