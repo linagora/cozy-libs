@@ -1,6 +1,6 @@
 {
   "name": "cozy-devtools",
-  "version": "1.5.1",
+  "version": "2.0.0",
   "description": "Cozy-Devtools exposes a devtool that can be injected in an app for debug and better developer experience.",
   "main": "dist/index.js",
   "license": "MIT",
