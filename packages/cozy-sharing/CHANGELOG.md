@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [34.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@34.0.2...cozy-sharing@34.1.0) (2026-06-25)
+
+### Features
+
+- Show text and not menu if forced readonly for groups ([24d6df8](https://github.com/cozy/cozy-libs/commit/24d6df8c6d7ad0da2f63719d264001dbf67624cc))
+
 ## [34.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@34.0.1...cozy-sharing@34.0.2) (2026-06-24)
 
 **Note:** Version bump only for package cozy-sharing
