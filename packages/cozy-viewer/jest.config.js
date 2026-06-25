@@ -10,7 +10,6 @@ module.exports = {
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/__mocks__/fileMock.js',
     '\\.styl$': 'identity-obj-proxy',
     'react-pdf/dist/esm/entry.webpack': 'react-pdf',
-    '^@linagora/twake-icons$': '<rootDir>/test/__mocks__/twake-icons.js',
     '^cozy-client/src/(.*)$': '<rootDir>/node_modules/cozy-client/dist/$1',
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index',
     '^cozy-client/dist/(.*)$': '<rootDir>/node_modules/cozy-client/dist/$1',

@@ -11,8 +11,7 @@ module.exports = {
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index',
     '^cozy-client/dist/types$':
       '<rootDir>/node_modules/cozy-client/dist/types.js',
-    '^cozy-ui(.*)': '<rootDir>/node_modules/cozy-ui/$1',
-    '^@linagora/twake-icons$': '<rootDir>/test/__mocks__/twake-icons.js'
+    '^cozy-ui(.*)': '<rootDir>/node_modules/cozy-ui/$1'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui))'],
   testPathIgnorePatterns: ['node_modules', 'dist'],

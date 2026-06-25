@@ -20,7 +20,7 @@
   "devDependencies": {
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
-    "@linagora/twake-icons": "^2.6.2",
+    "@linagora/twake-icons": "^2.6.6",
     "@testing-library/react": "12.1.5",
     "@testing-library/react-hooks": "8.0.1",
     "babel-plugin-inline-react-svg": "1.1.2",
@@ -61,7 +61,7 @@
     "./dist/stylesheet.css": "./dist/stylesheet.css"
   },
   "peerDependencies": {
-    "@linagora/twake-icons": ">=2.6.2",
+    "@linagora/twake-icons": ">=2.6.6",
     "cozy-client": ">=60.26.0",
     "cozy-device-helper": ">=3.7.1",
     "cozy-flags": ">=4.6.1",

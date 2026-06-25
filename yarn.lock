@@ -6620,14 +6620,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@linagora/twake-icons@npm:^2.6.2":
-  version: 2.6.2
-  resolution: "@linagora/twake-icons@npm:2.6.2"
+"@linagora/twake-icons@npm:^2.6.6":
+  version: 2.6.6
+  resolution: "@linagora/twake-icons@npm:2.6.6"
   dependencies:
     mime: "npm:4.1.0"
   peerDependencies:
     react: ^18
-  checksum: 10c0/33679cd5a51ca800426cfa7b9b62e3a333915b75538afb52042d0de73b950b4956b791261e785ebc81899c8ed4d9026738f86d38aa8c170621ae9770a46dd862
+  checksum: 10c0/4e68c10c3ebea0ae8eddee691727ac4dca12b314220ae720683767b7c55c8b34e657128d048f41b3a67312355d8ebff1e015fd38b994ceff36d45634c4fb9e04
   languageName: node
   linkType: hard
 
@@ -16763,7 +16763,7 @@ __metadata:
     "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
     "@cozy/minilog": "npm:^1.0.0"
-    "@linagora/twake-icons": "npm:^2.6.2"
+    "@linagora/twake-icons": "npm:^2.6.6"
     "@testing-library/jest-dom": "npm:5.17.0"
     "@testing-library/react": "npm:12.1.5"
     babel-preset-cozy-app: "npm:^2.8.4"
@@ -16789,7 +16789,7 @@ __metadata:
     twake-i18n: "npm:^0.3.0"
   peerDependencies:
     "@cozy/minilog": ">=1.0.0"
-    "@linagora/twake-icons": ">=2.6.2"
+    "@linagora/twake-icons": ">=2.6.6"
     cozy-client: ">=60.21.0"
     cozy-dataproxy-lib: ">=4.1.0"
     cozy-device-helper: ">=2.6.0"
@@ -17585,7 +17585,7 @@ __metadata:
     "@babel/register": "npm:7.16.9"
     "@cozy/cli-tree": "npm:^0.15.1"
     "@cozy/minilog": "npm:^1.0.0"
-    "@linagora/twake-icons": "npm:^2.6.2"
+    "@linagora/twake-icons": "npm:^2.6.6"
     "@sentry/react": "npm:7.119.0"
     "@storybook/addon-essentials": "npm:^7.0.23"
     "@storybook/addon-interactions": "npm:^7.0.23"
@@ -17645,7 +17645,7 @@ __metadata:
     uuid: "npm:^3.3.2"
   peerDependencies:
     "@babel/runtime": ">=7.12.5"
-    "@linagora/twake-icons": ">=2.6.2"
+    "@linagora/twake-icons": ">=2.6.6"
     "@sentry/react": ">=7.118.0"
     cozy-client: ">=52.1.0"
     cozy-device-helper: ">=2.6.0"
@@ -17949,7 +17949,7 @@ __metadata:
     "@assistant-ui/react": "npm:^0.12.5"
     "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
-    "@linagora/twake-icons": "npm:^2.6.2"
+    "@linagora/twake-icons": "npm:^2.6.6"
     "@testing-library/react": "npm:12.1.5"
     "@testing-library/react-hooks": "npm:8.0.1"
     babel-plugin-inline-react-svg: "npm:1.1.2"
@@ -17980,7 +17980,7 @@ __metadata:
     twake-i18n: "npm:^0.4.1"
     typescript: "npm:5.5.2"
   peerDependencies:
-    "@linagora/twake-icons": ">=2.6.2"
+    "@linagora/twake-icons": ">=2.6.6"
     cozy-client: ">=60.26.0"
     cozy-device-helper: ">=3.7.1"
     cozy-flags: ">=4.6.1"
@@ -18005,7 +18005,7 @@ __metadata:
     "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
     "@cozy/minilog": "npm:^1.0.0"
-    "@linagora/twake-icons": "npm:^2.6.2"
+    "@linagora/twake-icons": "npm:^2.6.6"
     "@storybook/addon-essentials": "npm:7.6.0"
     "@storybook/addon-interactions": "npm:7.6.0"
     "@storybook/addon-links": "npm:7.6.0"
@@ -18040,7 +18040,7 @@ __metadata:
     storybook: "npm:7.6.0"
     twake-i18n: "npm:^0.4.1"
   peerDependencies:
-    "@linagora/twake-icons": ">=2.6.2"
+    "@linagora/twake-icons": ">=2.6.6"
     cozy-client: ">=60.28.0"
     cozy-device-helper: ">=4.0.0"
     cozy-flags: ">=4.8.1"
@@ -18252,7 +18252,7 @@ __metadata:
   dependencies:
     "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
-    "@linagora/twake-icons": "npm:^2.6.2"
+    "@linagora/twake-icons": "npm:^2.6.6"
     "@testing-library/jest-dom": "npm:5.17.0"
     "@testing-library/react": "npm:12.1.5"
     "@testing-library/react-hooks": "npm:8.0.1"
@@ -18290,7 +18290,7 @@ __metadata:
     twake-i18n: "npm:^0.4.1"
     typescript: "npm:5.5.2"
   peerDependencies:
-    "@linagora/twake-icons": ">=2.6.2"
+    "@linagora/twake-icons": ">=2.6.6"
     cozy-client: ">=60.21.3"
     cozy-device-helper: ">=2.0.0"
     cozy-intent: ">=2.30.0"
@@ -18547,7 +18547,7 @@ __metadata:
   dependencies:
     "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
-    "@linagora/twake-icons": "npm:^2.6.2"
+    "@linagora/twake-icons": "npm:^2.6.6"
     "@testing-library/jest-dom": "npm:5.17.0"
     "@testing-library/react": "npm:12.1.5"
     "@testing-library/react-hooks": "npm:8.0.1"
@@ -18578,7 +18578,7 @@ __metadata:
     twake-i18n: "npm:^0.4.1"
     typescript: "npm:5.5.2"
   peerDependencies:
-    "@linagora/twake-icons": ">=2.6.2"
+    "@linagora/twake-icons": ">=2.6.6"
     cozy-client: ">=57.0.0"
     cozy-device-helper: ">=2.0.0"
     cozy-flags: ">=4.8.1"
