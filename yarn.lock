@@ -11453,13 +11453,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.175":
-  version: 4.14.182
-  resolution: "@types/lodash@npm:4.14.182"
-  checksum: 10c0/d6bd4789dfb3be631d5e3277e6a1be5becb21440f3364f5d15b982c2e6b6bb1f8048d46fc5bff5ef0f90bebaf4d07c49b2919ba369d07af72d3beb3fea70c61a
-  languageName: node
-  linkType: hard
-
 "@types/mdast@npm:^3.0.0":
   version: 3.0.3
   resolution: "@types/mdast@npm:3.0.3"
@@ -13872,15 +13865,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.21.1":
-  version: 0.21.4
-  resolution: "axios@npm:0.21.4"
-  dependencies:
-    follow-redirects: "npm:^1.14.0"
-  checksum: 10c0/fbcff55ec68f71f02d3773d467db2fcecdf04e749826c82c2427a232f9eba63242150a05f15af9ef15818352b814257541155de0281f8fb2b7e8a5b79f7f2142
-  languageName: node
-  linkType: hard
-
 "axios@npm:^1.11.0":
   version: 1.11.0
   resolution: "axios@npm:1.11.0"
@@ -14616,15 +14600,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"brotli-size@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "brotli-size@npm:4.0.0"
-  dependencies:
-    duplexer: "npm:0.1.1"
-  checksum: 10c0/711b8ec3e9c943da5acb983ea8d1dc813fe52023123d0a8f4df2a1700c761fcab7ca2155cabcc9646545d8a5cb56ea311f273a45a4cbf98c58c46d680c5f1b05
-  languageName: node
-  linkType: hard
-
 "browser-assert@npm:^1.2.1":
   version: 1.2.1
   resolution: "browser-assert@npm:1.2.1"
@@ -15006,35 +14981,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bundlemon-utils@npm:^0.4.0":
-  version: 0.4.0
-  resolution: "bundlemon-utils@npm:0.4.0"
-  dependencies:
-    bytes: "npm:^3.1.0"
-  checksum: 10c0/f7d0aeaf8c83eeb1da7cc25d811c32c0d61746abdd0ff65c2cd6239adf022672118baf4b50838e8ad7745629028a6425b26ba3562960a6b4aa76b3e571ec4c21
-  languageName: node
-  linkType: hard
-
-"bundlemon@npm:^1.3.2":
-  version: 1.3.2
-  resolution: "bundlemon@npm:1.3.2"
-  dependencies:
-    axios: "npm:^0.21.1"
-    brotli-size: "npm:^4.0.0"
-    bundlemon-utils: "npm:^0.4.0"
-    bytes: "npm:^3.1.0"
-    chalk: "npm:^4.1.1"
-    commander: "npm:^8.0.0"
-    cosmiconfig: "npm:^7.0.0"
-    gzip-size: "npm:^6.0.0"
-    micromatch: "npm:^4.0.4"
-    yup: "npm:^0.32.11"
-  bin:
-    bundlemon: bin/bundlemon.js
-  checksum: 10c0/d58c79c48bc42c02b35e210c89cd426ca6247dec597a9cf0cc8db432454110a2584bee55b7daf11881f2b87612039181a638218132a77a8ee5acd713b30ae267
-  languageName: node
-  linkType: hard
-
 "byte-size@npm:8.1.1":
   version: 8.1.1
   resolution: "byte-size@npm:8.1.1"
@@ -15049,7 +14995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bytes@npm:3.1.2, bytes@npm:^3.1.0":
+"bytes@npm:3.1.2":
   version: 3.1.2
   resolution: "bytes@npm:3.1.2"
   checksum: 10c0/76d1c43cbd602794ad8ad2ae94095cddeb1de78c5dddaa7005c51af10b0176c69971a6d88e805a90c2b6550d76636e43c40d8427a808b8645ede885de4a0358e
@@ -16170,7 +16116,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^8.0.0, commander@npm:^8.3.0":
+"commander@npm:^8.3.0":
   version: 8.3.0
   resolution: "commander@npm:8.3.0"
   checksum: 10c0/8b043bb8322ea1c39664a1598a95e0495bfe4ca2fad0d84a92d7d1d8d213e2a155b441d2470c8e08de7c4a28cf2bc6e169211c49e1b21d9f7edc6ae4d9356060
@@ -16934,82 +16880,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-client@npm:^50.0.0":
-  version: 50.0.0
-  resolution: "cozy-client@npm:50.0.0"
-  dependencies:
-    "@cozy/minilog": "npm:1.0.0"
-    "@types/jest": "npm:^26.0.20"
-    "@types/lodash": "npm:^4.14.170"
-    btoa: "npm:^1.2.1"
-    cozy-stack-client: "npm:^50.0.0"
-    date-fns: "npm:2.29.3"
-    json-stable-stringify: "npm:^1.0.1"
-    lodash: "npm:^4.17.13"
-    microee: "npm:^0.0.6"
-    node-fetch: "npm:^2.6.1"
-    node-polyglot: "npm:2.4.2"
-    open: "npm:7.4.2"
-    prop-types: "npm:^15.6.2"
-    react-redux: "npm:^7.2.0"
-    redux: "npm:3 || 4"
-    redux-thunk: "npm:^2.3.0"
-    server-destroy: "npm:^1.0.1"
-    sift: "npm:^6.0.0"
-    url-search-params-polyfill: "npm:^8.0.0"
-  peerDependencies:
-    cozy-device-helper: ">=2.1.0"
-    cozy-flags: ">2.8.6"
-    cozy-intent: ">=2.23.0"
-    cozy-logger: ">1.7.0"
-    cozy-ui: ">=93.1.1"
-    react: ^16.7.0
-    react-native: ^0.65.0
-    react-native-google-play-integrity: "*"
-    react-native-inappbrowser-reborn: ^3.5.1
-    react-native-ios11-devicecheck: "*"
-  checksum: 10c0/494ef8dcf304b8ace31038974de6f119ee5c272b865f00fea6a5dfe56ec1599d64030be6dbb7df533f4da853060a3f95dda414da7a1221240b95a970636dd7ef
-  languageName: node
-  linkType: hard
-
-"cozy-client@npm:^50.4.0":
-  version: 50.4.0
-  resolution: "cozy-client@npm:50.4.0"
-  dependencies:
-    "@cozy/minilog": "npm:1.0.0"
-    "@types/jest": "npm:^26.0.20"
-    "@types/lodash": "npm:^4.14.170"
-    btoa: "npm:^1.2.1"
-    cozy-stack-client: "npm:^50.4.0"
-    date-fns: "npm:2.29.3"
-    json-stable-stringify: "npm:^1.0.1"
-    lodash: "npm:^4.17.13"
-    microee: "npm:^0.0.6"
-    node-fetch: "npm:^2.6.1"
-    node-polyglot: "npm:2.4.2"
-    open: "npm:7.4.2"
-    prop-types: "npm:^15.6.2"
-    react-redux: "npm:^7.2.0"
-    redux: "npm:3 || 4"
-    redux-thunk: "npm:^2.3.0"
-    server-destroy: "npm:^1.0.1"
-    sift: "npm:^6.0.0"
-    url-search-params-polyfill: "npm:^8.0.0"
-  peerDependencies:
-    cozy-device-helper: ">=2.1.0"
-    cozy-flags: ">2.8.6"
-    cozy-intent: ">=2.23.0"
-    cozy-logger: ">1.7.0"
-    cozy-ui: ">=93.1.1"
-    react: ^16.7.0
-    react-native: ^0.65.0
-    react-native-google-play-integrity: "*"
-    react-native-inappbrowser-reborn: ^3.5.1
-    react-native-ios11-devicecheck: "*"
-  checksum: 10c0/bc7ebfed37ae063c4e8f30c0c091872e07648e610f8f5a852438ca02d329b19a30f2a1d19285d230393b51d524966e71b408fec425c25bbc03d341fe647633c5
-  languageName: node
-  linkType: hard
-
 "cozy-client@npm:^52.1.0":
   version: 52.2.0
   resolution: "cozy-client@npm:52.2.0"
@@ -17452,12 +17322,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "cozy-devtools@workspace:packages/cozy-devtools"
   dependencies:
+    "@linagora/twake-icons": "npm:^2.6.6"
     babel-preset-cozy-app: "npm:^2.8.4"
-    cozy-client: "npm:^50.0.0"
+    cozy-client: "npm:^60.28.0"
     cozy-flags: "npm:^4.9.1"
     cozy-intent: "npm:^2.31.1"
-    cozy-pouch-link: "npm:^50.0.0"
-    cozy-ui: "npm:^111.19.0"
+    cozy-pouch-link: "npm:^60.28.0"
+    cozy-ui: "npm:^140.1.0"
     date-fns: "npm:2.29.3"
     jest: "npm:30.3.0"
     jest-environment-jsdom: "npm:30.3.0"
@@ -17467,11 +17338,12 @@ __metadata:
     react-inspector: "npm:5.1.1"
     stylus: "npm:0.64.0"
   peerDependencies:
-    cozy-client: ">=50.0.0"
-    cozy-flags: ">=4.3.0"
-    cozy-intent: ">=2.26.0"
-    cozy-pouch-link: ">=50.0.0"
-    cozy-ui: ">=111.19.0"
+    "@linagora/twake-icons": ">=2.6.6"
+    cozy-client: ">=60.28.0"
+    cozy-flags: ">=4.9.1"
+    cozy-intent: ">=2.31.1"
+    cozy-pouch-link: ">=60.28.0"
+    cozy-ui: ">=140.1.0"
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
   languageName: unknown
@@ -17830,20 +17702,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-pouch-link@npm:^50.0.0":
-  version: 50.4.0
-  resolution: "cozy-pouch-link@npm:50.4.0"
-  dependencies:
-    cozy-client: "npm:^50.4.0"
-    pouchdb-browser: "npm:^7.2.2"
-    pouchdb-find: "npm:^7.2.2"
-  peerDependencies:
-    "@cozy/minilog": 1.0.0
-    cozy-device-helper: ">=2.1.0"
-  checksum: 10c0/f4e5dd5c8d52bd88483434d2a042f7645152fd55fda9b92ecf9922eba67b94d4d1b894d2f2dc7464eb98ecbddf371ca2be4a635675bb3c32580c4f53fa3b35b3
-  languageName: node
-  linkType: hard
-
 "cozy-pouch-link@npm:^54.0.0":
   version: 54.0.0
   resolution: "cozy-pouch-link@npm:54.0.0"
@@ -17870,6 +17728,21 @@ __metadata:
     "@op-engineering/op-sqlite": "*"
     cozy-device-helper: ">=2.1.0"
   checksum: 10c0/da6ca1f8001b805dab98e23ad04553e2c29b393f255129c29792697512afdb04cf49b3d27b18954a57a18a8dd4fb7a3ce39325bd364ddae6b8b10f9610853a0e
+  languageName: node
+  linkType: hard
+
+"cozy-pouch-link@npm:^60.28.0":
+  version: 60.28.0
+  resolution: "cozy-pouch-link@npm:60.28.0"
+  dependencies:
+    cozy-client: "npm:^60.28.0"
+    pouchdb-browser: "npm:^7.2.2"
+    pouchdb-find: "npm:^7.2.2"
+  peerDependencies:
+    "@cozy/minilog": 1.0.0
+    "@op-engineering/op-sqlite": "*"
+    cozy-device-helper: ">=2.1.0"
+  checksum: 10c0/d8efd06816d139bdfcc2e4547a9c23ed0c96570f5ce4cbcb75cf94ccd32536a6ffed61cc165ea7d5e157c97745eb23b9f253030629dc956c0c6b4af2f5b83077
   languageName: node
   linkType: hard
 
@@ -18076,32 +17949,6 @@ __metadata:
   peerDependencies:
     cozy-flags: ">2.8.6"
   checksum: 10c0/187ac76d70c84ab27ab963b5a065a4fb32e94d352cde2cdd725ab9560708ce53b90f7380e10eabd4667d194ca5baf229a05f93549fddab82c9e2b58e450f8db5
-  languageName: node
-  linkType: hard
-
-"cozy-stack-client@npm:^50.0.0":
-  version: 50.0.0
-  resolution: "cozy-stack-client@npm:50.0.0"
-  dependencies:
-    detect-node: "npm:^2.0.4"
-    mime: "npm:^2.4.0"
-    qs: "npm:^6.7.0"
-  peerDependencies:
-    cozy-flags: ">2.8.6"
-  checksum: 10c0/50745b0da534e71ff28f807fc86d07d5c9f42feef47a896e09ea9d999c54a69990d12bf21410d541e4a958140d29f474138c692f822a21f0c3670308f16ab640
-  languageName: node
-  linkType: hard
-
-"cozy-stack-client@npm:^50.4.0":
-  version: 50.4.0
-  resolution: "cozy-stack-client@npm:50.4.0"
-  dependencies:
-    detect-node: "npm:^2.0.4"
-    mime: "npm:^2.4.0"
-    qs: "npm:^6.7.0"
-  peerDependencies:
-    cozy-flags: ">2.8.6"
-  checksum: 10c0/4093059105730a0e5acdddaa80b9ed0d71fec09f4e818e09922fe3be26c71165836cedd5150341e94fcc52cd2ad717a7b48b90b48899a1a09fc35ea3342bbd07
   languageName: node
   linkType: hard
 
@@ -18343,50 +18190,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-ui@npm:^111.19.0":
-  version: 111.21.0
-  resolution: "cozy-ui@npm:111.21.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.3.4"
-    "@material-ui/core": "npm:4.12.3"
-    "@material-ui/lab": "npm:^4.0.0-alpha.61"
-    "@popperjs/core": "npm:^2.4.4"
-    bundlemon: "npm:^1.3.2"
-    chart.js: "npm:3.7.1"
-    classnames: "npm:^2.2.5"
-    cozy-interapp: "npm:^0.5.4"
-    date-fns: "npm:^1.28.5"
-    filesize: "npm:8.0.7"
-    hammerjs: "npm:^2.0.8"
-    intersection-observer: "npm:0.11.0"
-    mime-types: "npm:2.1.35"
-    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
-    node-polyglot: "npm:^2.5.0"
-    normalize.css: "npm:^8.0.0"
-    pdf-lib: "npm:1.17.1"
-    piwik-react-router: "npm:0.12.1"
-    react-chartjs-2: "npm:4.1.0"
-    react-markdown: "npm:^4.0.8"
-    react-pdf: "npm:^5.7.2"
-    react-popper: "npm:^2.2.3"
-    react-remove-scroll: "npm:^2.4.0"
-    react-select: "npm:^4.3.0"
-    react-swipeable-views: "npm:^0.13.3"
-    rooks: "npm:^5.11.2"
-  peerDependencies:
-    cozy-client: ">=48.8.0"
-    cozy-device-helper: ^2.0.0
-    cozy-harvest-lib: ^6.7.3
-    cozy-intent: ">=1.3.0"
-    cozy-sharing: ">=14.1.0"
-    react: ^16.8.6
-    react-dom: ^16.8.6
-  bin:
-    rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/031e3cc556666a012b926c06db0c0e5ec8579f1cbe09328a28134d875655d9e1f995ad906d33f582ef1c98c10d07d9ca519c4d565a0ed655024b1f465c579da3
-  languageName: node
-  linkType: hard
-
 "cozy-ui@npm:^138.1.0":
   version: 138.1.0
   resolution: "cozy-ui@npm:138.1.0"
@@ -18504,6 +18307,47 @@ __metadata:
   bin:
     rsg-screenshots: scripts/screenshots.js
   checksum: 10c0/4583ef011291ce6b867a36263725035a3da911750c752f9960debbbbad94448d714da5d3bb1b59df9077bf4bcd6bfcfdb92ee8d1cdc21714e8a02d6ec875bd72
+  languageName: node
+  linkType: hard
+
+"cozy-ui@npm:^140.1.0":
+  version: 140.1.0
+  resolution: "cozy-ui@npm:140.1.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.3.4"
+    "@date-io/date-fns": "npm:1"
+    "@material-ui/core": "npm:4.12.3"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@material-ui/pickers": "npm:3.3.11"
+    "@popperjs/core": "npm:^2.4.4"
+    classnames: "npm:^2.2.5"
+    date-fns: "npm:2.30.0"
+    hammerjs: "npm:^2.0.8"
+    intersection-observer: "npm:0.11.0"
+    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
+    node-polyglot: "npm:^2.5.0"
+    normalize.css: "npm:^8.0.0"
+    patch-package: "npm:^8.0.0"
+    pdf-lib: "npm:1.17.1"
+    react-markdown: "npm:^4.0.8"
+    react-popper: "npm:^2.2.3"
+    react-remove-scroll: "npm:^2.4.0"
+    react-select: "npm:^4.3.0"
+    react-swipeable-views: "npm:^0.13.3"
+    react-virtuoso: "npm:^4.13.0"
+    rooks: "npm:7.14.1"
+  peerDependencies:
+    "@linagora/twake-icons": ">=2.6.2"
+    cozy-device-helper: ">=2.0.0"
+    cozy-intent: ">=2.29.1"
+    react: ^16 || ^17 || ^18
+    react-dnd: ^16.0.1
+    react-dnd-html5-backend: ^16.0.1
+    react-dom: ^16 || ^17 || ^18
+    twake-i18n: ">=0.3.0"
+  bin:
+    rsg-screenshots: scripts/screenshots.js
+  checksum: 10c0/e6e8b07a89d59af1492f9f30ba79ea6f71820f6d375b9065b9436a34e28b81a655efa8d6ae3e70349c571479f0fe94e83c8effdef406f6ec874e866d69b49e00
   languageName: node
   linkType: hard
 
@@ -20135,7 +19979,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"duplexer@npm:0.1.1, duplexer@npm:^0.1.1":
+"duplexer@npm:^0.1.1":
   version: 0.1.1
   resolution: "duplexer@npm:0.1.1"
   checksum: 10c0/bdc5dbb577955e8b3f367a7da869010420b2f1d20283d8675ca94897b50a52e5fbf2d6bb8fdf7f11008e45eff0161f22ffed5cd4d5a99cbce54fe969e3f49df6
@@ -22633,16 +22477,6 @@ __metadata:
     debug:
       optional: true
   checksum: 10c0/5829165bd112c3c0e82be6c15b1a58fa9dcfaede3b3c54697a82fe4a62dd5ae5e8222956b448d2f98e331525f05d00404aba7d696de9e761ef6e42fdc780244f
-  languageName: node
-  linkType: hard
-
-"follow-redirects@npm:^1.14.0":
-  version: 1.15.0
-  resolution: "follow-redirects@npm:1.15.0"
-  peerDependenciesMeta:
-    debug:
-      optional: true
-  checksum: 10c0/351dea908f3fd4492066584c52dfd2a748e7b7ff14926e3f44e1db1ef2f98d9bf778dc00808b4559bb3d4894f6613567eafdb62962577c0e1bbe3bdc1b282269
   languageName: node
   linkType: hard
 
@@ -28319,7 +28153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash-es@npm:^4.17.21, lodash-es@npm:^4.2.1":
+"lodash-es@npm:^4.2.1":
   version: 4.17.21
   resolution: "lodash-es@npm:4.17.21"
   checksum: 10c0/fb407355f7e6cd523a9383e76e6b455321f0f153a6c9625e21a8827d10c54c2a2341bd2ae8d034358b60e07325e1330c14c224ff582d04612a46a4f0479ff2f2
@@ -30370,13 +30204,6 @@ __metadata:
   dependencies:
     node-gyp: "npm:latest"
   checksum: 10c0/3774836ebb4084446e6b31cdf7c96662e59561be4a43299bd6aca5d2e360ddb0cec895959cfe70264489da55a89215ee15aeaebfe440e9a6bb0717796e47a16d
-  languageName: node
-  linkType: hard
-
-"nanoclone@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "nanoclone@npm:0.2.1"
-  checksum: 10c0/760b569ea841c9678fdf8d763c6d7bb093f0889150087f82d86c536a318b302939c82ce35cdaec999d0f687789d0d79d0f3f75a272d7a98dfac7a067c0b47053
   languageName: node
   linkType: hard
 
@@ -33372,13 +33199,6 @@ __metadata:
     object-assign: "npm:^4.1.1"
     react-is: "npm:^16.13.1"
   checksum: 10c0/59ece7ca2fb9838031d73a48d4becb9a7cc1ed10e610517c7d8f19a1e02fa47f7c27d557d8a5702bec3cfeccddc853579832b43f449e54635803f277b1c78077
-  languageName: node
-  linkType: hard
-
-"property-expr@npm:^2.0.4":
-  version: 2.0.5
-  resolution: "property-expr@npm:2.0.5"
-  checksum: 10c0/adf05900e3b0fceca83e1318edba211aec089010e43807abe608165d37640f2e54133a261151d2593a9e93bf3ae98a5ac768c5153e14e7d2b09fc9db48237860
   languageName: node
   linkType: hard
 
@@ -39146,13 +38966,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"toposort@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "toposort@npm:2.0.2"
-  checksum: 10c0/ab9ca91fce4b972ccae9e2f539d755bf799a0c7eb60da07fd985fce0f14c159ed1e92305ff55697693b5bc13e300f5417db90e2593b127d421c9f6c440950222
-  languageName: node
-  linkType: hard
-
 "totalist@npm:^1.0.0":
   version: 1.1.0
   resolution: "totalist@npm:1.1.0"
@@ -42372,21 +42185,6 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: 10c0/dceb44c28578b31641e13695d200d34ec4ab3966a5729814d5445b194933c096b7ced71494ce53a0e8820685d1d010df8b2422e5bf2cdea7e469d97ffbea306f
-  languageName: node
-  linkType: hard
-
-"yup@npm:^0.32.11":
-  version: 0.32.11
-  resolution: "yup@npm:0.32.11"
-  dependencies:
-    "@babel/runtime": "npm:^7.15.4"
-    "@types/lodash": "npm:^4.14.175"
-    lodash: "npm:^4.17.21"
-    lodash-es: "npm:^4.17.21"
-    nanoclone: "npm:^0.2.1"
-    property-expr: "npm:^2.0.4"
-    toposort: "npm:^2.0.2"
-  checksum: 10c0/f0802798dc64b49f313886b983a9bea5f283e2094ee2aa1197587b84f50ac5b5d03af99857c313139e63dc02558fac3aaa343503bdbffa96f70006b39d1f59c9
   languageName: node
   linkType: hard
 

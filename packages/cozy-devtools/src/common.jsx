@@ -1,8 +1,7 @@
+import { Icon, Right } from '@linagora/twake-icons'
 import React from 'react'
 
 import Grid from 'cozy-ui/transpiled/react/Grid'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 
 /**
@@ -24,7 +23,7 @@ const NavSecondaryAction = () => {
   return (
     <ListItemSecondaryAction>
       <Icon
-        icon={RightIcon}
+        icon={Right}
         className="u-mr-half"
         color="var(--secondaryTextColor)"
       />

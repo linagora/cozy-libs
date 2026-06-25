@@ -1,12 +1,10 @@
+import { Icon, Pen, Trash } from '@linagora/twake-icons'
 import React from 'react'
 import { ObjectInspector } from 'react-inspector'
 
 import flagUtils from 'cozy-flags'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
-import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
@@ -41,10 +39,10 @@ const FlagItem = ({ flag, onEdit, onTrash }) => {
       />
       <ListItemSecondaryAction>
         <IconButton onClick={() => onEdit(flag)}>
-          <Icon icon={PenIcon} />
+          <Icon icon={Pen} />
         </IconButton>
         <IconButton onClick={() => onTrash(flag)}>
-          <Icon icon={TrashIcon} />
+          <Icon icon={Trash} />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
