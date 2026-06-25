@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [34.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@34.1.1...cozy-sharing@34.1.2) (2026-06-25)
+
+### Bug Fixes
+
+- **sharing:** Call self revoke for federated recipients ([25e62c2](https://github.com/cozy/cozy-libs/commit/25e62c2416e4b91bdab1e06fbbd77b00574a0b11))
+
 ## [34.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@34.1.0...cozy-sharing@34.1.1) (2026-06-25)
 
 ### Bug Fixes
