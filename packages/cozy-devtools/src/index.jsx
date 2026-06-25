@@ -1,12 +1,10 @@
+import { Icon, CrossMedium, Gear } from '@linagora/twake-icons'
 import React, { useCallback, useMemo, useRef } from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Fab from 'cozy-ui/transpiled/react/Fab'
 import Grid from 'cozy-ui/transpiled/react/Grid'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import CrossMedium from 'cozy-ui/transpiled/react/Icons/CrossMedium'
-import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -213,7 +211,7 @@ const DevTools = ({ panels }) => {
   return (
     <>
       <Fab color="primary" onClick={handleToggle} className={classes.fab}>
-        <Icon icon={GearIcon} />
+        <Icon icon={Gear} />
       </Fab>
 
       <DevToolsPanel
