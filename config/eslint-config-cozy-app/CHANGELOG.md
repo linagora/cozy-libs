@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.1.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@7.0.0...eslint-config-cozy-app@7.1.0) (2026-06-25)
+
+### Features
+
+- Consider @linagora/<name> packages in linting ([918c77b](https://github.com/cozy/cozy-libs/commit/918c77b9ae67c676827faaf59b38350ceba627d8))
+
 # [7.0.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@6.7.2...eslint-config-cozy-app@7.0.0) (2026-03-16)
 
 ### Features
