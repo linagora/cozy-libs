@@ -7,10 +7,29 @@ exports[`Shortcutviewer renders the component 1`] = `
     data-testid="no-viewer"
   >
     <svg
-      data-icon="true"
+      class="twake-icon"
+      fill="none"
       height="140"
+      viewBox="0 0 15 17"
       width="160"
-    />
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M3.52 1.2h5.834l4.966 4.966V13.6a2.8 2.8 0 0 1-2.8 2.8h-8a2.8 2.8 0 0 1-2.8-2.8V4a2.8 2.8 0 0 1 2.8-2.8Z"
+        fill="#e8edf3"
+        stroke="#4f5b69"
+        stroke-width="0.8"
+      />
+      <path
+        d="M14.72 6.2 9.32.8v2.793c0 1.44 1.128 2.607 2.52 2.607z"
+        fill="#4f5b69"
+      />
+      <path
+        d="M4.695 14.05v-1.476L9.278 8a.8.8 0 0 1 .23-.148.72.72 0 0 1 .534 0 .6.6 0 0 1 .226.156l.477.486q.104.097.152.226a.75.75 0 0 1 0 .525.65.65 0 0 1-.152.23L6.171 14.05zm5.07-4.583.486-.486-.487-.487-.486.487z"
+        fill="#4f5b69"
+        fill-opacity="0.72"
+      />
+    </svg>
     <p
       class="viewer-filename"
     />
@@ -23,11 +42,16 @@ exports[`Shortcutviewer renders the component 1`] = `
         <svg
           aria-hidden="true"
           class="styles__icon___23x3R"
-          data-mock-icon="Openwith"
           focusable="false"
           height="16"
+          viewBox="0 0 16 16"
           width="16"
-        />
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14.222 14.222H1.778V1.778H8V0H1.778C.79 0 0 .8 0 1.778v12.444C0 15.2.791 16 1.778 16h12.444C15.2 16 16 15.2 16 14.222V8h-1.778zM9.778 0v1.778h3.19l-8.737 8.738 1.253 1.253 8.738-8.738v3.191H16V0z"
+          />
+        </svg>
         <span>
           Viewer.goto
         </span>
