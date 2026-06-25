@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@34.1.2...cozy-sharing@35.0.0) (2026-06-25)
+
+### Features
+
+- Ugrade twake-icons in libs and remove test mock ([46178bc](https://github.com/cozy/cozy-libs/commit/46178bcfff73fb8486b6a5209a14e306b497371b))
+
+### BREAKING CHANGES
+
+- You must have `@linagora/twake-icons >=2.6.6`
+
 ## [34.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@34.1.1...cozy-sharing@34.1.2) (2026-06-25)
 
 ### Bug Fixes

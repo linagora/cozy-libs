@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@9.0.0...cozy-ui-plus@10.0.0) (2026-06-25)
+
+### Features
+
+- Ugrade twake-icons in libs and remove test mock ([46178bc](https://github.com/cozy/cozy-libs/commit/46178bcfff73fb8486b6a5209a14e306b497371b))
+
+### BREAKING CHANGES
+
+- You must have `@linagora/twake-icons >=2.6.6`
+
 # [9.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@8.0.1...cozy-ui-plus@9.0.0) (2026-06-24)
 
 ### Features

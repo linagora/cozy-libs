@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-search@1.1.0...cozy-search@2.0.0) (2026-06-25)
+
+### Features
+
+- Ugrade twake-icons in libs and remove test mock ([46178bc](https://github.com/cozy/cozy-libs/commit/46178bcfff73fb8486b6a5209a14e306b497371b))
+
+### BREAKING CHANGES
+
+- You must have `@linagora/twake-icons >=2.6.6`
+
 # [1.1.0](https://github.com/cozy/cozy-libs/compare/cozy-search@0.30.1...cozy-search@1.1.0) (2026-06-24)
 
 ### Features
