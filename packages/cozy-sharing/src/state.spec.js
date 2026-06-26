@@ -739,6 +739,13 @@ describe('hasSharedParent helper', () => {
     const result = hasSharedParent(state, documentPath)
     expect(result).toBe(false)
   })
+
+  it('should return false when documentPath is undefined', () => {
+    const state = {
+      sharedPaths: ['/dir0/doc0', '/dir1', '/dir2/doc1']
+    }
+    expect(hasSharedParent(state, undefined)).toBe(false)
+  })
 })
 
 describe('hasSharedChild helper', () => {
@@ -758,6 +765,13 @@ describe('hasSharedChild helper', () => {
     const documentPath = '/dir3'
     const result = hasSharedChild(state, documentPath)
     expect(result).toBe(false)
+  })
+
+  it('should return false when documentPath is undefined', () => {
+    const state = {
+      sharedPaths: ['/dir0/doc0', '/dir1', '/dir2/doc1']
+    }
+    expect(hasSharedChild(state, undefined)).toBe(false)
   })
 })
 
