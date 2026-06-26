@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/cozy/cozy-libs/compare/cozy-search@2.0.0...cozy-search@2.0.1) (2026-06-26)
+
+### Bug Fixes
+
+- **cozy-search:** Align sidebar items and icons to 16px gutter ([3d45f74](https://github.com/cozy/cozy-libs/commit/3d45f74b34706e03755c541ef79d43895e183780))
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-search@1.1.0...cozy-search@2.0.0) (2026-06-25)
 
 ### Features

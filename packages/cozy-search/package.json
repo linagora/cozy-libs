@@ -1,7 +1,7 @@
 {
   "name": "cozy-search",
   "description": "UI components about search bar and IA assistant",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
