@@ -506,14 +506,14 @@ const getPermissionById = (state, id) =>
 const getApps = state => state.apps
 
 export const hasSharedParent = (state, documentPath) => {
-  if (!state.sharedPaths) {
+  if (!state.sharedPaths || !documentPath) {
     return false // hasSharedParent should not occur
   }
   return state.sharedPaths.some(path => documentPath.indexOf(`${path}/`) === 0)
 }
 
 export const hasSharedChild = (state, documentPath) => {
-  if (!state.sharedPaths) {
+  if (!state.sharedPaths || !documentPath) {
     return false // hasSharedChild should not occur
   }
   const ret = state.sharedPaths.some(
