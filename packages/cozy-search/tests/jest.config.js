@@ -3,6 +3,7 @@
 const config = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/tests/jest.setup.ts'],
+  clearMocks: true,
   collectCoverage: false,
   collectCoverageFrom: ['./src/**/*.{ts,tsx}'],
   coverageDirectory: './tests/coverage',
