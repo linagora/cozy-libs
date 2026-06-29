@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [36.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.0.0...cozy-sharing@36.0.1) (2026-06-29)
+
+### Bug Fixes
+
+- **sharing:** Guard shared-path helpers against undefined path ([0365f75](https://github.com/cozy/cozy-libs/commit/0365f755ce4b4125250eb883658912ec05b77253))
+
 # [36.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@35.0.0...cozy-sharing@36.0.0) (2026-06-25)
 
 ### Features
