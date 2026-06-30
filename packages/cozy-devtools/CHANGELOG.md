@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-devtools@2.0.0...cozy-devtools@3.0.0) (2026-06-30)
+
+### Features
+
+- **cozy-devtools:** Downgrade cozy-ui to 139.0.2 ([14dc512](https://github.com/cozy/cozy-libs/commit/14dc5121e47e3b1f75bdf3cc616d5361f44757cb))
+
+### BREAKING CHANGES
+
+- **cozy-devtools:** You must have `cozy-ui >= 139.0.2`
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-devtools@1.5.1...cozy-devtools@2.0.0) (2026-06-25)
 
 ### Features
