@@ -448,19 +448,19 @@
   },
   "SharedDrive": {
     "sharedDriveModal": {
-      "title": "Новый общий диск",
+      "title": "Новый командный диск",
       "nameLabel": "Имя диска",
       "add": "Добавить",
       "cancel": "Отмена",
       "create": "Создать",
       "save": "Сохранить",
-      "successNotification": "Общий диск добавлен",
-      "errorNotification": "Ошибка при создании общего диска"
+      "successNotification": "Командный диск добавлен",
+      "errorNotification": "Ошибка при создании командного диска"
     },
     "editSharedDriveModal": {
-      "title": "Редактировать общий диск",
-      "successNotification": "Общий диск был изменён",
-      "errorNotification": "Ошибка при модификации общего диска"
+      "title": "Редактировать командный диск",
+      "successNotification": "Командный диск был изменён",
+      "errorNotification": "Ошибка при модификации командного диска"
     }
   }
 }
