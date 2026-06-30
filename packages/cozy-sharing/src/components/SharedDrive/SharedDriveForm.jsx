@@ -16,6 +16,7 @@ const ShareByEmailSection = memo(function ShareByEmailSection({
   pendingRecipients,
   setPendingRecipients,
   selectedOption,
+  autoFocus,
   setSelectedOption
 }) {
   return (
@@ -25,6 +26,7 @@ const ShareByEmailSection = memo(function ShareByEmailSection({
       pendingRecipients={pendingRecipients}
       onPendingRecipientsChange={setPendingRecipients}
       selectedOption={selectedOption}
+      autoFocus={autoFocus}
       onSelectedOptionChange={setSelectedOption}
     />
   )
@@ -54,6 +56,7 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
           size="small"
           className="u-w-100 u-mt-1-half u-mb-1-half"
           value={sharedDriveName}
+          autoFocus
           onChange={handleSharedDriveNameChange}
         />
         <Typography variant="h6" className="u-mb-half">
@@ -63,6 +66,7 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
           pendingRecipients={pendingRecipients}
           setPendingRecipients={setPendingRecipients}
           selectedOption={selectedOption}
+          autoFocus={false}
           setSelectedOption={setSelectedOption}
         />
       </div>
