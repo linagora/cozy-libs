@@ -10,6 +10,7 @@ const MemberRecipientStatus = ({
   instance,
   email,
   name,
+  isOrgSharedDrive,
   typographyProps
 }) => {
   const { t } = useI18n()
@@ -22,7 +23,13 @@ const MemberRecipientStatus = ({
     // (getDisplayName falls back to email when the recipient has no name).
     // Keep the instance visible when there is no email at all, so the user
     // can still tell the recipient lives on a different Cozy instance.
-    text = isMe || name || !email ? email || instance : ''
+    // For org shared drive owners, hide the email and instance entirely.
+    text =
+      status === 'owner' && isOrgSharedDrive
+        ? ''
+        : isMe || name || !email
+          ? email || instance
+          : ''
   } else if (isSendingEmail) {
     text = t('Share.status.mail-not-sent')
   } else {
@@ -45,6 +52,7 @@ MemberRecipientStatus.propTypes = {
   instance: PropTypes.string,
   email: PropTypes.string,
   name: PropTypes.string,
+  isOrgSharedDrive: PropTypes.bool,
   typographyProps: PropTypes.object
 }
 

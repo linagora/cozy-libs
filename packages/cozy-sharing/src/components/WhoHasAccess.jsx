@@ -8,6 +8,7 @@ import LinkRecipient from './Recipient/LinkRecipient'
 import OwnerRecipient from './Recipient/OwnerRecipient'
 import { RecipientList } from './Recipient/RecipientList'
 import { usePrevious } from '../helpers/hooks'
+import { useSharingContext } from '../hooks/useSharingContext'
 
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing
@@ -46,6 +47,8 @@ const WhoHasAccess = ({
 }) => {
   const previousLink = usePrevious(link)
   const linkHasBeenJustCreated = link && previousLink === null
+  const { isOrgSharedDrive } = useSharingContext()
+  const isOrgDrive = isOrgSharedDrive(document?._id)
 
   return (
     <div className={className}>
@@ -65,7 +68,12 @@ const WhoHasAccess = ({
           />
         )}
 
-        {showOwner && <OwnerRecipient recipients={recipients} />}
+        {showOwner && (
+          <OwnerRecipient
+            recipients={recipients}
+            isOrgSharedDrive={isOrgDrive}
+          />
+        )}
 
         <RecipientList
           recipients={recipients}

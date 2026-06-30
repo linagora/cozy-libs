@@ -32,6 +32,7 @@ const MemberRecipient = props => {
     recipientConfirmationData,
     verifyRecipient,
     fadeIn,
+    isOrgSharedDrive,
     ...rest
   } = props
 
@@ -68,6 +69,7 @@ const MemberRecipient = props => {
               instance={instance}
               email={rest.email}
               name={rest.name || rest.public_name}
+              isOrgSharedDrive={isOrgSharedDrive}
             />
           }
         />
@@ -82,7 +84,8 @@ MemberRecipient.propTypes = {
   isOwner: PropTypes.bool,
   status: PropTypes.string,
   recipientConfirmationData: PropTypes.object,
-  verifyRecipient: PropTypes.func
+  verifyRecipient: PropTypes.func,
+  isOrgSharedDrive: PropTypes.bool
 }
 
 export default MemberRecipient

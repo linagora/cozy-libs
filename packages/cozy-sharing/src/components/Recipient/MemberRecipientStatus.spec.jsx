@@ -63,6 +63,19 @@ describe('MemberRecipientStatus component', () => {
     expect(getByText('owner@example.com')).toBeTruthy()
   })
 
+  it('should hide email and instance when status is owner and isOrgSharedDrive is true', () => {
+    const { queryByText } = setup({
+      status: 'owner',
+      isMe: false,
+      email: 'org@example.com',
+      instance: 'foo.mycozy.cloud',
+      name: 'Org Owner',
+      isOrgSharedDrive: true
+    })
+    expect(queryByText('org@example.com')).toBe(null)
+    expect(queryByText('foo.mycozy.cloud')).toBe(null)
+  })
+
   it('should show "Sending invitation mail..." when status is mail-not-sent and not isMe', () => {
     const { getByText } = setup({
       status: 'mail-not-sent',

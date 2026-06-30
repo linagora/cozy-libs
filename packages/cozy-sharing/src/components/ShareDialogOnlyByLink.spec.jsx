@@ -14,7 +14,8 @@ jest.mock('../hooks/useSharingContext', () => ({
     getDocumentPermissions: () => [],
     getSharingLink: () => mockSharingLink,
     revokeSharingLink: jest.fn(),
-    updateDocumentPermissions: jest.fn()
+    updateDocumentPermissions: jest.fn(),
+    isOrgSharedDrive: jest.fn(() => false)
   })
 }))
 
