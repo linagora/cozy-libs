@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.1.0...cozy-sharing@36.2.0) (2026-06-30)
+
+### Features
+
+- Rename shared drive to team drive ([b997bf6](https://github.com/cozy/cozy-libs/commit/b997bf64b60ca3d0203899e331f9e96878967c2b))
+
 # [36.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.0.1...cozy-sharing@36.1.0) (2026-06-30)
 
 ### Features
