@@ -23,6 +23,7 @@ const ShareAutosuggest = ({
   onRemove,
   enableCreateContact,
   placeholder,
+  autoFocus,
   endAdornment
 }) => {
   const [inputValue, setInputValue] = useState('')
@@ -201,7 +202,7 @@ const ShareAutosuggest = ({
         renderInputComponent={renderInput}
         highlightFirstSuggestion
         inputProps={{
-          autoFocus: true,
+          autoFocus,
           onFocus: onAutosuggestFocus,
           onChange: onAutosuggestChange,
           onPaste: onAutosuggestPaste,
@@ -217,6 +218,10 @@ const ShareAutosuggest = ({
   )
 }
 
+ShareAutosuggest.defaultProps = {
+  autoFocus: true
+}
+
 ShareAutosuggest.propTypes = {
   loading: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -226,6 +231,7 @@ ShareAutosuggest.propTypes = {
   onRemove: PropTypes.func.isRequired,
   enableCreateContact: PropTypes.bool,
   placeholder: PropTypes.string,
+  autoFocus: PropTypes.bool,
   endAdornment: PropTypes.node
 }
 

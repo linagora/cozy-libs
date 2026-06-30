@@ -30,6 +30,7 @@ const ShareRecipientsInput = ({
   onRemove,
   enableCreateContact,
   disabled,
+  autoFocus,
   endAdornment
 }) => {
   const reachableContactsQuery = buildReachableContactsQuery()
@@ -128,6 +129,7 @@ const ShareRecipientsInput = ({
       onRemove={onRemove}
       enableCreateContact={enableCreateContact}
       placeholder={placeholder}
+      autoFocus={autoFocus}
       endAdornment={endAdornment}
     />
   )
@@ -141,6 +143,7 @@ ShareRecipientsInput.propTypes = {
   onRemove: PropTypes.func.isRequired,
   enableCreateContact: PropTypes.bool,
   disabled: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   endAdornment: PropTypes.node
 }
 

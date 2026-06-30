@@ -22,6 +22,7 @@ export const ShareByEmail = ({
   selectedOption,
   onSelectedOptionChange,
   enableCreateContact,
+  autoFocus,
   sharing
 }) => {
   const { t } = useI18n()
@@ -70,6 +71,7 @@ export const ShareByEmail = ({
           enableCreateContact={enableCreateContact}
           currentRecipients={currentRecipients}
           recipients={pendingRecipients}
+          autoFocus={autoFocus}
           endAdornment={
             <ShareTypeSelect
               value={selectedOption}
@@ -92,6 +94,7 @@ ShareByEmail.propTypes = {
   selectedOption: PropTypes.oneOf(['readWrite', 'readOnly']).isRequired,
   onSelectedOptionChange: PropTypes.func.isRequired,
   enableCreateContact: PropTypes.bool,
+  autoFocus: PropTypes.bool,
   sharing: PropTypes.object
 }
 
