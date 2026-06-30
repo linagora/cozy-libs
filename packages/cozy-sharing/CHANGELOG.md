@@ -29,13 +29,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### BREAKING CHANGES
 
-- You need:
-  "@linagora/twake-icons": ">=2.6.6"
-  "cozy-client": ">=60.28.0"
-  "cozy-flags": ">=4.9.1"
-  "cozy-intent": ">=2.31.1"
-  "cozy-pouch-link": ">=60.28.0"
-  "cozy-ui": ">=140.1.0
+- You must have `"cozy-client": ">=60.28.0"`
 
 # [35.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@34.1.2...cozy-sharing@35.0.0) (2026-06-25)
 
