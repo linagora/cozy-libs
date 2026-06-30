@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.0.1...cozy-sharing@36.1.0) (2026-06-30)
+
+### Features
+
+- **cozy-sharing:** ShareAutosuggest can now be autofocus false ([fabac23](https://github.com/cozy/cozy-libs/commit/fabac23c23cdd041d4bd70f0adaa99a974caf33d))
+
 ## [36.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.0.0...cozy-sharing@36.0.1) (2026-06-29)
 
 ### Bug Fixes
