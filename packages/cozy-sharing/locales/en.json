@@ -448,19 +448,19 @@
   },
   "SharedDrive": {
     "sharedDriveModal": {
-      "title": "New shared drive",
-      "nameLabel": "Drive name",
+      "title": "New team drive",
+      "nameLabel": "Team drive name",
       "add": "Add",
       "cancel": "Cancel",
       "create": "Create",
       "save": "Save",
-      "successNotification": "Shared drive has been added",
-      "errorNotification": "Error during shared drive creation"
+      "successNotification": "Team drive has been added",
+      "errorNotification": "Error during team drive creation"
     },
     "editSharedDriveModal": {
-      "title": "Edit shared drive",
-      "successNotification": "Shared drive has been modified",
-      "errorNotification": "Error during shared drive modification"
+      "title": "Edit team drive",
+      "successNotification": "Team drive has been modified",
+      "errorNotification": "Error during team drive modification"
     }
   }
 }

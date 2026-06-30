@@ -448,19 +448,19 @@
   },
   "SharedDrive": {
     "sharedDriveModal": {
-      "title": "Ổ đĩa được chia sẻ mới",
+      "title": "Ổ đĩa nhóm mới",
       "nameLabel": "Tên ổ đĩa",
       "add": "Thêm",
       "cancel": "Hủy",
       "create": "Tạo",
       "save": "Lưu",
-      "successNotification": "Ổ đĩa được chia sẻ đã được thêm",
-      "errorNotification": "Lỗi trong quá trình tạo ổ đĩa được chia sẻ"
+      "successNotification": "Ổ đĩa nhóm đã được thêm",
+      "errorNotification": "Lỗi trong quá trình tạo ổ đĩa nhóm"
     },
     "editSharedDriveModal": {
-      "title": "Sửa ổ đĩa được chia sẻ",
-      "successNotification": "Ổ đĩa được chia sẻ đã được sửa đổi",
-      "errorNotification": "Lỗi khi sửa đổi ổ đĩa được chia sẻ"
+      "title": "Sửa ổ đĩa nhóm",
+      "successNotification": "Ổ đĩa nhóm đã được sửa đổi",
+      "errorNotification": "Lỗi khi sửa đổi ổ đĩa nhóm"
     }
   }
 }
