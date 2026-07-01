@@ -90,9 +90,9 @@ function getRsbuildConfig({
     },
     tools: {
       rspack: {
-        // We want to watch cozy-* packages when using rlink
+        // We want to watch cozy-*, twake-*, and @linagora/* packages when using rlink
         watchOptions: {
-          ignored: /\.git|node_modules\/(?!cozy-)/
+          ignored: /\.git|node_modules\/(?!cozy-|twake-|@linagora\/)/
         },
         module: {
           rules: [
