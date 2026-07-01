@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.1.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.0.0...cozy-bar@35.1.0) (2026-07-01)
+
+### Features
+
+- Display all entrypoints ([ff2d416](https://github.com/cozy/cozy-libs/commit/ff2d41695f6c2a78e57a8801dbdde2a6fdc63eb3))
+
 # [35.0.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@34.0.2...cozy-bar@35.0.0) (2026-06-25)
 
 ### Features
