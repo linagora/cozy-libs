@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.2.1...cozy-sharing@36.3.0) (2026-07-01)
+
+### Features
+
+- **cozy-sharing:** Hide email for org instance owner ([5d15a29](https://github.com/cozy/cozy-libs/commit/5d15a297a485e98ff6c0e3afe7ab466d9bf4fe99))
+
 ## [36.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.2.0...cozy-sharing@36.2.1) (2026-06-30)
 
 **Note:** Version bump only for package cozy-sharing
