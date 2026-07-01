@@ -58,6 +58,10 @@
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
+    "./ai-chat-ui": {
+      "types": "./dist/ai-chat-ui.d.ts",
+      "default": "./dist/ai-chat-ui.js"
+    },
     "./dist/stylesheet.css": "./dist/stylesheet.css"
   },
   "peerDependencies": {

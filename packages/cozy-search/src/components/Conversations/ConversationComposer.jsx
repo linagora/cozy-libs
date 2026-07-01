@@ -8,23 +8,19 @@ import { Icon, Paperplane, Stop } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useCallback } from 'react'
 
-import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import ConversationBar from './ConversationBar'
 import styles from './styles.styl'
-import AssistantSelection from '../Assistant/AssistantSelection'
-import { useAssistant } from '../AssistantProvider'
-import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
+import { useChatComponents } from '../../contexts/ChatComponentsContext'
 
 const ConversationComposer = () => {
   const { isMobile } = useBreakpoints()
   const composerRuntime = useComposerRuntime()
   const isRunning = useThread(state => state.isRunning)
   const isThreadEmpty = useThread(state => state.messages.length === 0)
-  const { setOpenedKnowledgePanel, websearchEnabled, setWebsearchEnabled } =
-    useAssistant()
+  const { ComposerExtras } = useChatComponents()
 
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
@@ -52,11 +48,6 @@ const ConversationComposer = () => {
     },
     [isMobile, handleSend]
   )
-
-  const handleToggleWebsearch = useCallback(() => {
-    if (isRunning) return
-    setWebsearchEnabled(prev => !prev)
-  }, [isRunning, setWebsearchEnabled])
 
   return (
     <ComposerPrimitive.Root
@@ -96,15 +87,7 @@ const ConversationComposer = () => {
           styles['composerActions']
         )}
       >
-        {flag('cozy.assistant.create-assistant.enabled') && (
-          <AssistantSelection disabled={!isThreadEmpty} />
-        )}
-        <TwakeKnowledgeSelector
-          className="u-ml-auto"
-          onSelectTwakeKnowledge={setOpenedKnowledgePanel}
-          websearchEnabled={websearchEnabled}
-          onToggleWebsearch={handleToggleWebsearch}
-        />
+        <ComposerExtras disabled={!isThreadEmpty} />
       </div>
     </ComposerPrimitive.Root>
   )

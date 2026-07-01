@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import { isAssistantEnabled, makeConversationId } from '../helpers'
+import { isAssistantEnabled } from '../cozyHelpers'
+import { makeConversationId } from '../helpers'
 
 const AssistantLink = ({ children }) => {
   const navigate = useNavigate()

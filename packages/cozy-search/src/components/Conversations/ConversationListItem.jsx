@@ -7,8 +7,8 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
-import ConversationActions from './ConversationActions'
 import styles from './styles.styl'
+import { useChatComponents } from '../../contexts/ChatComponentsContext'
 import AssistantAvatar from '../Assistant/AssistantAvatar'
 import {
   formatConversationDate,
@@ -19,10 +19,12 @@ import {
 const ConversationListItem = ({
   conversation,
   selected,
-  onOpenConversation
+  onOpenConversation,
+  disableAction
 }) => {
   const { t, lang } = useI18n()
   const { type: theme } = useCozyTheme()
+  const { ConversationActions } = useChatComponents()
 
   return (
     <ListItem
@@ -37,10 +39,12 @@ const ConversationListItem = ({
       )}
       selected={selected}
     >
-      <ConversationActions
-        buttonClassName={styles['conversation-list-item-action']}
-        conversation={conversation}
-      />
+      {!disableAction && (
+        <ConversationActions
+          buttonClassName={styles['conversation-list-item-action']}
+          conversation={conversation}
+        />
+      )}
       <ListItemText
         className="u-m-0"
         primaryTypographyProps={{

@@ -1,9 +1,8 @@
-import { Icon, CrossSmall, Magnifier, Menu, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import flag from 'cozy-flags'
+import { Icon, CrossSmall, Magnifier, Menu, Plus } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -13,8 +12,9 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
+import { useChatComponents } from '../../contexts/ChatComponentsContext'
+import { useConversationStore } from '../../contexts/ConversationStoreContext'
 import useConversation from '../../hooks/useConversation'
-import useFetchConversations from '../../hooks/useFetchConversations'
 import { useAssistant } from '../AssistantProvider'
 import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import ConversationList from '../Conversations/ConversationList'
@@ -27,8 +27,11 @@ const Sidebar = ({ className }) => {
     useAssistant()
   const { isMobile } = useBreakpoints()
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile)
+  const { useSearchConversationEnabled } = useChatComponents()
+  const searchConversationEnabled = useSearchConversationEnabled()
 
-  const { conversations, hasMore, fetchMore } = useFetchConversations()
+  const { conversations, hasMore, fetchMore } =
+    useConversationStore().useConversations()
 
   // When the sidebar is closed on mobile, the toggle sits over the scrolling
   // conversation and must read as a distinct floating button, not blend into
@@ -80,18 +83,17 @@ const Sidebar = ({ className }) => {
             </IconButton>
           </div>
           <div>
-            {sidebarOpen &&
-              flag('cozy.assistant.search-conversation.enabled') && (
-                <IconButton
-                  size="medium"
-                  edge="end"
-                  className="u-bdrs-6"
-                  onClick={onToggleSearch}
-                  aria-label={t('assistant.sidebar.toggle_search')}
-                >
-                  <Icon icon={Magnifier} aria-hidden="true" />
-                </IconButton>
-              )}
+            {sidebarOpen && searchConversationEnabled && (
+              <IconButton
+                size="medium"
+                edge="end"
+                className="u-bdrs-6"
+                onClick={onToggleSearch}
+                aria-label={t('assistant.sidebar.toggle_search')}
+              >
+                <Icon icon={Magnifier} aria-hidden="true" />
+              </IconButton>
+            )}
             {sidebarOpen && isMobile && (
               <IconButton
                 size="medium"

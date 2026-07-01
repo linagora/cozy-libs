@@ -1,7 +1,6 @@
-import { Icon, MultiFiles, Right } from '@linagora/twake-icons'
 import React, { useState, useRef, useEffect } from 'react'
 
-import { useQuery, isQueryLoading } from 'cozy-client'
+import { Icon, MultiFiles, Right } from '@linagora/twake-icons'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import Grow from 'cozy-ui/transpiled/react/Grow'
@@ -10,11 +9,8 @@ import { useI18n } from 'twake-i18n'
 import EmailSourceItem from './EmailSourceItem'
 import FileSourcesItem from './FileSourcesItem'
 import WebSourceItem from './WebSourceItem'
-import { EMAIL_DOCTYPE, buildFilesByIds } from '../../queries'
 
-const WEB_SOURCE_TYPE = 'web'
-
-const Sources = ({ messageId, files, emails, urls }) => {
+export const Sources = ({ messageId, files = [], emails = [], urls = [] }) => {
   const [showSources, setShowSources] = useState(false)
   const { t } = useI18n()
   const ref = useRef()
@@ -83,40 +79,3 @@ const Sources = ({ messageId, files, emails, urls }) => {
     </Box>
   )
 }
-
-const SourcesWithFilesQuery = ({ messageId, sources }) => {
-  const fileIds = []
-  const emails = []
-  const urls = []
-  let files
-  sources.map(source => {
-    if (source.sourceType === WEB_SOURCE_TYPE) {
-      urls.push(source)
-    } else if (source.doctype === EMAIL_DOCTYPE) {
-      emails.push(source)
-    } else {
-      fileIds.push(source.id)
-    }
-  })
-  const enabled = fileIds && fileIds.length > 0
-  const filesByIds = buildFilesByIds(fileIds, enabled)
-  const { data: fetchedFiles, ...queryResult } = useQuery(
-    filesByIds.definition,
-    filesByIds.options
-  )
-
-  const isLoading = isQueryLoading(queryResult)
-  files = fetchedFiles || []
-
-  if (
-    (isLoading && enabled) ||
-    (files.length === 0 && emails.length === 0 && urls.length === 0)
-  )
-    return null
-
-  return (
-    <Sources messageId={messageId} files={files} emails={emails} urls={urls} />
-  )
-}
-
-export default SourcesWithFilesQuery
