@@ -22,6 +22,7 @@
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "@babel/runtime": "7.18.6",
+    "@linagora/twake-icons": "^2.6.7",
     "babel-loader": "8.2.3",
     "babel-preset-cozy-app": "^1.5.0",
     "eslint": "10.0.2",

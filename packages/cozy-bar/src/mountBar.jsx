@@ -5,8 +5,14 @@ import 'cozy-ui-plus/dist/stylesheet.css'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 
+import Polyglot from 'node-polyglot'
+
 import CozyClient, { CozyProvider } from 'cozy-client'
+import { RealtimePlugin } from 'cozy-realtime'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { I18n } from 'twake-i18n'
+
+import enLocale from 'locales/en.json'
 
 import { BarComponent } from './components/BarComponent'
 import BarProvider from './components/BarProvider'
@@ -18,8 +24,11 @@ export const mountBar = cfg => {
   console.log('[cozy-bar] mountBar called', cfg)
 
   const client = new CozyClient({ uri: cfg.cozyURL, token: cfg.accessToken })
+  client.registerPlugin(RealtimePlugin)
   // eslint-disable-next-line no-console
   console.log('[cozy-bar] client created')
+
+  document.body.style.setProperty('--zIndex-bar', '9999')
 
   const barHost = document.createElement('div')
   barHost.setAttribute('id', 'cozy-bar')
@@ -38,12 +47,14 @@ export const mountBar = cfg => {
       <CozyProvider client={client}>
         <BreakpointsProvider>
           <BarProvider>
-            <BarComponent
-              appSlug={cfg.appSlug}
-              appName={cfg.appName}
-              iconPath={cfg.iconURL}
-              searchOptions={{ enabled: false }}
-            />
+            <I18n lang="en" polyglot={new Polyglot({ locale: 'en', phrases: enLocale })}>
+              <BarComponent
+                appSlug={cfg.appSlug}
+                appName={cfg.appName}
+                iconPath={cfg.iconURL}
+                searchOptions={{ enabled: false }}
+              />
+            </I18n>
           </BarProvider>
         </BreakpointsProvider>
       </CozyProvider>

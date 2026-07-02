@@ -6,8 +6,6 @@ import { getEntrypoints } from 'components/AppsMenu/helper'
 import useI18n from 'components/useI18n'
 import PropTypes from 'prop-types'
 import React from 'react'
-import styles from 'styles/apps-menu.styl'
-
 import { sortApplicationsList } from 'cozy-client/dist/models/applications'
 import flag from 'cozy-flags'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -31,7 +29,7 @@ const AppsMenuContent = ({
 
   if (isFetchingApps) {
     return (
-      <div className={styles['apps-menu-grid']}>
+      <div className={'apps-menu-grid'}>
         <AppItemPlaceholder key="1" />
         <AppItemPlaceholder key="2" />
         <AppItemPlaceholder key="3" />
@@ -50,7 +48,7 @@ const AppsMenuContent = ({
   const entrypoints = getEntrypoints(apps)
 
   return (
-    <div className={styles['apps-menu-grid']}>
+    <div className={'apps-menu-grid'}>
       {sortedApps.map(app => (
         <AppItem key={app.slug} app={app} onAppSwitch={closeMenu} />
       ))}

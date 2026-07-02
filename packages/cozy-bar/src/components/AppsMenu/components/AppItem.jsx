@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import { appShape } from 'proptypes/index'
 import React from 'react'
-import styles from 'styles/apps-menu.styl'
 
 import { useClient } from 'cozy-client'
 import { getAppDisplayName } from 'cozy-client/dist/models/applications'
@@ -44,10 +43,10 @@ export const AppItem = ({ app, onAppSwitch }) => {
             href={href}
             title={appName}
             onClick={onClick}
-            className={cx(styles['apps-menu-grid-item-wrapper'], 'u-bdrs-5')}
+            className={cx('apps-menu-grid-item-wrapper', 'u-bdrs-5')}
             label={
-              <div className={styles['apps-menu-grid-item']}>
-                <div className={styles['apps-menu-grid-item-icon']}>
+              <div className="apps-menu-grid-item">
+                <div className={'apps-menu-grid-item-icon'}>
                   <AppIcon app={app} key={app.slug} {...iconProps} />
                 </div>
                 <Typography

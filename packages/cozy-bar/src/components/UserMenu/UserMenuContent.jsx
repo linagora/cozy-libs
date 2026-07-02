@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import useI18n from 'components/useI18n'
 import React from 'react'
-import styles from 'styles/user-menu.styl'
 
 import { useClient } from 'cozy-client'
 import { makeDiskInfos } from 'cozy-client/dist/models/instance'
@@ -54,7 +53,7 @@ const UserMenuContent = ({
   const gutters = isMobile ? 'disabled' : undefined
 
   return (
-    <div className={cx(styles['user-menu-content'], 'u-flex u-flex-column')}>
+    <div className={cx('user-menu-content', 'u-flex u-flex-column')}>
       <div className="u-flex u-flex-column u-flex-items-center u-mt-half">
         <AvatarMyself className="u-mb-half" />
         <Typography variant="h4">{public_name}</Typography>

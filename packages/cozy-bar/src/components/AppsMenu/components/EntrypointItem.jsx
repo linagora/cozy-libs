@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import useI18n from 'components/useI18n'
 import React from 'react'
-import styles from 'styles/apps-menu.styl'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
@@ -45,10 +44,10 @@ export const EntrypointItem = ({ entrypoint }) => {
       variant="text"
       href={entrypointUrl}
       title={title}
-      className={cx(styles['apps-menu-grid-item-wrapper'], 'u-bdrs-5')}
+      className={cx('apps-menu-grid-item-wrapper', 'u-bdrs-5')}
       label={
-        <div className={styles['apps-menu-grid-item']}>
-          <div className={styles['apps-menu-grid-item-icon']}>
+        <div className="apps-menu-grid-item">
+          <div className={'apps-menu-grid-item-icon'}>
             <img
               className="u-bdrs-5 u-w-100"
               src={`data:image/svg+xml;base64,${entrypoint.icon}`}

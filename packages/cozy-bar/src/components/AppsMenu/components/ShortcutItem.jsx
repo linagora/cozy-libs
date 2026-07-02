@@ -1,6 +1,5 @@
 import cx from 'classnames'
 import React from 'react'
-import styles from 'styles/apps-menu.styl'
 
 import { useClient, useFetchShortcut } from 'cozy-client'
 import { splitFilename, getShortcutImgSrc } from 'cozy-client/dist/models/file'
@@ -37,10 +36,10 @@ export const ShortcutItem = ({ shortcut }) => {
       variant="text"
       href={url}
       title={filename}
-      className={cx(styles['apps-menu-grid-item-wrapper'], 'u-bdrs-5')}
+      className={cx('apps-menu-grid-item-wrapper', 'u-bdrs-5')}
       label={
-        <div className={styles['apps-menu-grid-item']}>
-          <div className={styles['apps-menu-grid-item-icon']}>
+        <div className="apps-menu-grid-item">
+          <div className={'apps-menu-grid-item-icon'}>
             {shortcutImgSrc ? (
               <img className="u-bdrs-5 u-w-100" src={shortcutImgSrc} alt="" />
             ) : (
