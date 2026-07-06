@@ -16,6 +16,7 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
+import { useAssistant } from '../AssistantProvider'
 import AssistantDialogContent from '../CreateAssistantSteps/AssistantDialogContent'
 import { getSelectedProviderById } from '../CreateAssistantSteps/helpers'
 import styles from '../CreateAssistantSteps/styles.styl'
@@ -32,6 +33,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
   const client = useClient()
   const { showAlert } = useAlert()
   const { isMobile } = useBreakpoints()
+  const { setSelectedAssistantId } = useAssistant()
 
   const {
     step,
@@ -61,7 +63,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
   }
 
   const onSubmit = async () => {
-    await createAssistant(client, {
+    const savedAssistant = await createAssistant(client, {
       name: formData.name,
       prompt: formData.description,
       icon: formData.icon,
@@ -70,6 +72,9 @@ const CreateAssistantDialog = ({ open, onClose }) => {
       baseUrl: formData.baseUrl,
       providerId: selectedProvider.id
     })
+    if (savedAssistant?._id) {
+      setSelectedAssistantId(savedAssistant._id)
+    }
     showAlert({ message: t('assistant_create.success'), severity: 'success' })
   }
 

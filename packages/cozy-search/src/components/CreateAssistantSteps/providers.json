@@ -48,7 +48,7 @@
     "id": "custom",
     "name": "assistant_create.steps.provider_selection.custom.name",
     "description": "assistant_create.steps.provider_selection.custom.description",
-    "icon": "PlusSmallIcon",
+    "icon": "PlusSmall",
     "external": true
   }
 ]
