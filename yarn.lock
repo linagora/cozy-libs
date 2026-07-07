@@ -18114,6 +18114,7 @@ __metadata:
     cozy-intent: "npm:^2.31.1"
     cozy-interapp: "npm:^0.17.1"
     cozy-logger: "npm:^1.18.1"
+    cozy-sharing: "npm:^36.4.0"
     cozy-stack-client: "npm:^60.21.1"
     cozy-ui: "npm:^138.1.0"
     filesize: "npm:8.0.7"
@@ -18143,6 +18144,7 @@ __metadata:
     cozy-intent: ">=2.30.0"
     cozy-interapp: ">=0.17.1"
     cozy-logger: ">=1.17.0"
+    cozy-sharing: ">=36.4.0"
     cozy-ui: ">=138.1.0"
     react: ^16 || ^17 || ^18
     react-dom: ^16 || ^17 || ^18

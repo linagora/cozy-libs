@@ -2,8 +2,7 @@ import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { getInitials } from 'cozy-client/dist/models/contact'
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import { MemberAvatar } from 'cozy-sharing/dist/components/Avatar/MemberAvatar'
 import { TableCell } from 'cozy-ui/transpiled/react/deprecated/Table'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
@@ -23,9 +22,12 @@ const ContactIdentity = ({ contact, disable }) => {
 
   return (
     <>
-      <Avatar className={cx({ 'u-o-60': disable })} display="inline" size="s">
-        {getInitials(contact)}
-      </Avatar>
+      <MemberAvatar
+        recipient={contact}
+        className={cx({ 'u-o-60': disable })}
+        display="inline"
+        size="s"
+      />
       <ContactName contact={contact} disable={disable} />
       {isMyself && <MyselfMarker />}
     </>
