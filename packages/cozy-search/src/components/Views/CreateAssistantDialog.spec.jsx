@@ -69,6 +69,12 @@ describe('CreateAssistantDialog', () => {
     mockCreateAssistant.mockResolvedValue({ _id: 'assistant-1' })
   })
 
+  afterEach(() => {
+    mockFormData.knowledgeBase = [
+      { doctype: 'io.cozy.files', folderId: 'folder-1' }
+    ]
+  })
+
   it('saves the knowledge base after creating the assistant', async () => {
     render(<CreateAssistantDialog open onClose={jest.fn()} />)
 
@@ -92,8 +98,5 @@ describe('CreateAssistantDialog', () => {
 
     await waitFor(() => expect(mockCreateAssistant).toHaveBeenCalled())
     expect(mockSaveKnowledgeBase).not.toHaveBeenCalled()
-    mockFormData.knowledgeBase = [
-      { doctype: 'io.cozy.files', folderId: 'folder-1' }
-    ]
   })
 })

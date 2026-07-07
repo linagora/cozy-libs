@@ -23,7 +23,15 @@ const KnowledgeBaseSection = ({ knowledgeBase = [], onChange }) => {
 
   const folderId = getKnowledgeBaseFolderId({ knowledgeBase })
   const fileQuery = buildFileByIdQuery(folderId)
-  const { data: folder } = useQuery(fileQuery.definition, fileQuery.options)
+  const { data: folder, fetchStatus } = useQuery(
+    fileQuery.definition,
+    fileQuery.options
+  )
+  const isUnavailable =
+    !!folderId &&
+    (fetchStatus === 'failed' ||
+      !!folder?.trashed ||
+      !!folder?.path?.startsWith('/.cozy_trash'))
 
   const showMailButton = flag('cozy.assistant.source-knowledge.enabled')
 
@@ -42,7 +50,11 @@ const KnowledgeBaseSection = ({ knowledgeBase = [], onChange }) => {
       {folderId ? (
         <Chip
           icon={<img alt="" aria-hidden="true" src={TDrive} width={16} />}
-          label={folder?.name ?? '…'}
+          label={
+            isUnavailable
+              ? t('assistant.knowledge_base.unavailable')
+              : (folder?.name ?? '…')
+          }
           deleteIcon={
             <Icon
               icon={Cross}

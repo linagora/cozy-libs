@@ -67,7 +67,7 @@ export const buildAssistantByIdQuery = id => ({
 })
 
 export const buildFileByIdQuery = fileId => ({
-  definition: Q(FILES_DOCTYPE).getById(fileId),
+  definition: () => Q(FILES_DOCTYPE).getById(fileId),
   options: {
     as: `${FILES_DOCTYPE}/${fileId}`,
     fetchPolicy: defaultFetchPolicy,

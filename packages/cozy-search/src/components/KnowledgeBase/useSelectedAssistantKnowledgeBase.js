@@ -30,6 +30,10 @@ export const useSelectedAssistantKnowledgeBase = () => {
   return {
     folderId,
     folder: folder ?? null,
-    isUnavailable: !!folderId && (fetchStatus === 'failed' || !!folder?.trashed)
+    isUnavailable:
+      !!folderId &&
+      (fetchStatus === 'failed' ||
+        !!folder?.trashed ||
+        !!folder?.path?.startsWith('/.cozy_trash'))
   }
 }

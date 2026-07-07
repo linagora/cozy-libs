@@ -121,4 +121,32 @@ describe('FolderPickerDialog', () => {
     expect(onSelect).not.toHaveBeenCalled()
     expect(onClose).not.toHaveBeenCalled()
   })
+
+  it('ignores a late resolution that arrives after unmount (React 18 StrictMode safety)', async () => {
+    const folder = {
+      id: 'folder-1',
+      name: 'HR',
+      type: 'directory',
+      doctype: 'io.cozy.files'
+    }
+    let resolveStart
+    const stop = jest.fn()
+    const pending = new Promise(resolve => {
+      resolveStart = resolve
+    })
+    pending.stop = stop
+    mockStart.mockReturnValue(pending)
+    const onClose = jest.fn()
+    const onSelect = jest.fn()
+    const { unmount } = setup({ onClose, onSelect })
+
+    await waitFor(() => expect(mockStart).toHaveBeenCalled())
+    unmount()
+
+    resolveStart([folder])
+    await pending
+
+    expect(onSelect).not.toHaveBeenCalled()
+    expect(onClose).not.toHaveBeenCalled()
+  })
 })

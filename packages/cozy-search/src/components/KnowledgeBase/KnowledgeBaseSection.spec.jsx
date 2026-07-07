@@ -73,6 +73,27 @@ describe('KnowledgeBaseSection', () => {
     ).toBeNull()
   })
 
+  it('shows the unavailable label but keeps the remove affordance', () => {
+    mockFileQueryResult = {
+      data: { _id: 'folder-1', name: 'HR' },
+      fetchStatus: 'failed'
+    }
+    render(
+      <KnowledgeBaseSection
+        knowledgeBase={[{ doctype: 'io.cozy.files', folderId: 'folder-1' }]}
+        onChange={jest.fn()}
+      />
+    )
+
+    expect(
+      screen.getByText('assistant.knowledge_base.unavailable')
+    ).toBeTruthy()
+    expect(screen.queryByText('HR')).toBeNull()
+    expect(
+      screen.getByLabelText('assistant.knowledge_base.remove')
+    ).toBeTruthy()
+  })
+
   it('removes the folder', () => {
     mockFileQueryResult = {
       data: { _id: 'folder-1', name: 'HR' },

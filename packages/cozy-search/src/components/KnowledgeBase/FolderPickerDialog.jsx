@@ -19,6 +19,7 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
   useEffect(() => {
     if (!open || !intentHostRef.current) return undefined
 
+    let cancelled = false
     const intents = new Intents({ client })
     const startPromise = intents
       .create('PICK', 'io.cozy.files', {
@@ -34,6 +35,7 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
 
     startPromise
       .then(result => {
+        if (cancelled) return undefined
         const folder = Array.isArray(result) ? result[0] : result
         if (folder) {
           onSelect(folder)
@@ -42,6 +44,7 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
         return undefined
       })
       .catch(() => {
+        if (cancelled) return
         showAlert({
           message: t('assistant.knowledge_base.picker_error'),
           severity: 'error'
@@ -49,7 +52,10 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
         onClose()
       })
 
-    return () => startPromise.stop?.()
+    return () => {
+      cancelled = true
+      startPromise.stop?.()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, client])
 
