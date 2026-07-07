@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
+import { CozyProvider, createMockClient } from 'cozy-client'
 import logger from 'cozy-logger'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
@@ -14,10 +15,15 @@ const makeContact = attrs => ({
   ...attrs
 })
 
+const client = createMockClient({})
+client.options = { uri: 'http://cozy.example.com' }
+
 const setup = ({ contact }) => {
   render(
     <BreakpointsProvider>
-      <ContactRow contact={contact} />
+      <CozyProvider client={client}>
+        <ContactRow contact={contact} />
+      </CozyProvider>
     </BreakpointsProvider>
   )
 }
