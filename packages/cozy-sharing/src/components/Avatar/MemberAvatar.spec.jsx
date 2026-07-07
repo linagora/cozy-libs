@@ -52,6 +52,42 @@ describe('MemberAvatar', () => {
     )
   })
 
+  it('renders a full URL avatarPath without prefixing the local instance URI', () => {
+    const { container } = setup({
+      public_name: 'Jon Snow',
+      status: 'contact',
+      avatarPath: 'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials'
+    })
+
+    expect(container.querySelector('img').getAttribute('src')).toBe(
+      'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials&v=contact'
+    )
+  })
+
+  it('derives avatarPath from cozy URL when avatarPath is not set', () => {
+    const { container } = setup({
+      _type: 'io.cozy.contacts',
+      name: { givenName: 'Jon', familyName: 'Snow' },
+      cozy: [{ url: 'https://jonsnow.mycozy.cloud' }]
+    })
+
+    const img = container.querySelector('img')
+    expect(img).toBeTruthy()
+    expect(img.getAttribute('src')).toBe(
+      'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials&v=contact'
+    )
+  })
+
+  it('renders initials when there is no avatarPath and no cozy URL', () => {
+    const { container, getByText } = setup({
+      _type: 'io.cozy.contacts',
+      name: { givenName: 'Jon', familyName: 'Snow' }
+    })
+
+    expect(container.querySelector('img')).toBeNull()
+    expect(getByText('JS')).toBeTruthy()
+  })
+
   it('renders the initials when there is no avatarPath', () => {
     const { container, getByText } = setup({
       public_name: 'Bob',

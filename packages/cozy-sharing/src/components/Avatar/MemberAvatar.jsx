@@ -1,10 +1,36 @@
 import React, { useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import { getPrimaryCozy } from 'cozy-client/dist/models/contact'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import logger from '../../logger'
 import { getInitials } from '../../models'
+
+/**
+ * makeAvatarUrl derives the avatar image URL for the recipient.
+ * - If the recipient has an avatarPath (sharing context), it is
+ *   used directly with a base URI prefix (unless it is already
+ *   a full URL for a remote Cozy).
+ * - If the recipient has no avatarPath but has a cozy URL
+ *   (contact context), it points to that Cozy's public avatar.
+ * - The status is used as a cache-buster in the URL so the
+ *   browser refreshes the image when the sharing status changes.
+ *   For non-sharing recipients, 'contact' is the stable default.
+ */
+const makeAvatarUrl = (recipient, instanceUri) => {
+  const avatarPath = recipient.avatarPath
+  const cozyUrl = !avatarPath ? getPrimaryCozy(recipient) : null
+  if (!avatarPath && !cozyUrl) return null
+
+  const finalPath =
+    avatarPath ||
+    `${cozyUrl.replace(/\/$/, '')}/public/avatar?fallback=initials`
+  const status = recipient.status || 'contact'
+  const isFullPath = finalPath.startsWith('http')
+  const base = isFullPath ? '' : instanceUri
+  return `${base}${finalPath}${finalPath.includes('?') ? '&' : '?'}v=${status}`
+}
 
 const MemberAvatar = ({ recipient, ...rest }) => {
   const client = useClient()
@@ -23,22 +49,7 @@ const MemberAvatar = ({ recipient, ...rest }) => {
     return null
   }
 
-  /**
-   * avatarPath is always the same for a recipient, but image
-   * can be different since the stack generate it on the fly
-   * because they can be customized by the user.
-   * It can be "gray" during the first load depending of the
-   * status' sharing, but can become active (from the realtime)
-   * so we need a way to "refresh" the image. Passing the
-   * status in the url force the refresh of the image when the
-   * status changes
-   */
-  const image =
-    recipient.avatarPath && recipient.status
-      ? `${client.options.uri}${recipient.avatarPath}${
-          recipient.avatarPath.includes('?') ? '&' : '?'
-        }v=${recipient.status}`
-      : null
+  const image = makeAvatarUrl(recipient, client.options.uri)
 
   // The avatar can become unreachable (eg. the related sharing is revoked
   // while its members are still rendered), in which case the image request
