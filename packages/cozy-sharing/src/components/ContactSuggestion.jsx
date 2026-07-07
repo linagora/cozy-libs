@@ -1,47 +1,44 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { models } from 'cozy-client'
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import { getPrimaryCozy } from 'cozy-client/dist/models/contact'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'twake-i18n'
 
-import { Contact, Group, getDisplayName, getInitials } from '../models'
+import { Contact, Group, getDisplayName } from '../models'
 import { GroupAvatar } from './Avatar/GroupAvatar'
-
-const ContactModel = models.contact
+import { MemberAvatar } from './Avatar/MemberAvatar'
 
 export const ContactSuggestion = ({ contactOrGroup }) => {
   const { t } = useI18n()
-  let avatarText, name, details
-  const isContactGroup = contactOrGroup._type === Group.doctype
-  if (isContactGroup) {
-    name = contactOrGroup.name
-    avatarText = 'G'
-    details = t('Share.members.count', {
-      smart_count: contactOrGroup.members.length.toString()
-    })
-  } else {
-    name = getDisplayName(contactOrGroup)
-    avatarText = getInitials(contactOrGroup)
-    details = ContactModel.getPrimaryCozy(contactOrGroup)
+
+  if (contactOrGroup._type === Group.doctype) {
+    return (
+      <ListItem button>
+        <ListItemIcon>
+          <GroupAvatar size="m" />
+        </ListItemIcon>
+        <ListItemText
+          primary={contactOrGroup.name}
+          secondary={t('Share.members.count', {
+            smart_count: contactOrGroup.members.length.toString()
+          })}
+        />
+      </ListItem>
+    )
   }
+
+  const name = getDisplayName(contactOrGroup)
+  const cozyUrl = getPrimaryCozy(contactOrGroup)
 
   return (
     <ListItem button>
       <ListItemIcon>
-        {isContactGroup ? (
-          <GroupAvatar size="m" />
-        ) : (
-          <Avatar size="m">{avatarText}</Avatar>
-        )}
+        <MemberAvatar recipient={contactOrGroup} size="m" />
       </ListItemIcon>
-      <ListItemText
-        primary={name}
-        secondary={details && details !== '' ? details : '-'}
-      />
+      <ListItemText primary={name} secondary={cozyUrl || '-'} />
     </ListItem>
   )
 }
