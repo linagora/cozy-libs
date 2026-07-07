@@ -89,6 +89,9 @@
       "outbox": "Boîte d'envoi",
       "spam": "Spam",
       "search_in": "Rechercher dans"
+    },
+    "knowledge_base": {
+      "picker_error": "Impossible d'ouvrir le sélecteur de dossier Drive. Veuillez réessayer."
     }
   },
   "assistant_create": {

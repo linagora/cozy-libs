@@ -89,6 +89,9 @@
       "outbox": "Outbox",
       "spam": "Spam",
       "search_in": "Search in"
+    },
+    "knowledge_base": {
+      "picker_error": "Unable to open the Drive folder picker. Please try again."
     }
   },
   "assistant_create": {
