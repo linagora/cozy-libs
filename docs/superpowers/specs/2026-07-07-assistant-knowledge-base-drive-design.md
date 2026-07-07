@@ -44,9 +44,9 @@ link-oriented (`sharingLink` / `downloadLink`), not a folder reference.
 
 ### Create
 
-The BASIC_INFO (first) step of the create-assistant wizard gains a **Knowledge base (optional)**
-section (per validated mockup): helper text plus buttons `+ Load files`, `From drive`,
-`From mail`. Only **From drive** is functional; the other two are flag-gated demo.
+The BASIC_INFO (first) step of the create-assistant wizard gains a **Knowledge base**
+section (per validated mockup): helper text plus buttons `From drive`,
+`From mail`. Only **From drive** is functional; **From mail** is flag-gated demo.
 
 Clicking **From drive** opens Drive's picker intent as an in-app iframe dialog. The wizard stays
 mounted, so no draft persistence is needed. On confirm, the chosen folder is held in wizard
