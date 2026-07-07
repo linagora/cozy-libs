@@ -11,8 +11,7 @@ const config = {
   testMatch: ['./**/*.spec.{ts,tsx,js,jsx}'],
   moduleNameMapper: {
     '\\.(styl|css)$': '<rootDir>/tests/styleMock.js',
-    '\\.(png|jpe?g|gif|svg|webp)$': '<rootDir>/tests/fileMock.js',
-    '^cozy-client$': '<rootDir>/tests/cozyClientMock.js'
+    '\\.(png|jpe?g|gif|svg|webp)$': '<rootDir>/tests/fileMock.js'
   },
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   coverageThreshold: {

@@ -1,7 +1,6 @@
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react-hooks/dom'
 
-import useConversation from './useConversation'
-
+// Store mutable state for mocks
 const mockNavigate = jest.fn()
 let mockLocation = {
   pathname: '/',
@@ -9,21 +8,27 @@ let mockLocation = {
   hash: ''
 }
 
-jest.mock('react-router-dom', () => ({
-  useNavigate: () => mockNavigate,
-  useLocation: () => mockLocation
-}))
-
 const mockSetIsOpenSearchConversation = jest.fn()
-jest.mock('../components/AssistantProvider', () => ({
-  useAssistant: () => ({
-    setIsOpenSearchConversation: mockSetIsOpenSearchConversation
-  })
-}))
 
-jest.mock('../components/helpers', () => ({
-  makeConversationId: () => 'mock-id-123'
+// Mock the modules
+jest.mock('react-router-dom')
+jest.mock('../components/AssistantProvider')
+jest.mock('../components/helpers')
+
+// Set up mock implementations
+import * as routerModule from 'react-router-dom'
+import * as assistantModule from '../components/AssistantProvider'
+import * as helpersModule from '../components/helpers'
+
+routerModule.useNavigate.mockImplementation(() => mockNavigate)
+routerModule.useLocation.mockImplementation(() => mockLocation)
+assistantModule.useAssistant.mockImplementation(() => ({
+  setIsOpenSearchConversation: mockSetIsOpenSearchConversation
 }))
+helpersModule.makeConversationId.mockImplementation(() => 'mock-id-123')
+
+// Now import the hook after setting up mocks
+import useConversation from './useConversation'
 
 describe('useConversation', () => {
   beforeEach(() => {
@@ -33,11 +38,13 @@ describe('useConversation', () => {
       search: '',
       hash: ''
     }
+    routerModule.useLocation.mockImplementation(() => mockLocation)
   })
 
   describe('goToConversation', () => {
     it('appends /assistant/id to a base url', () => {
       mockLocation.pathname = '/drive/folders/123'
+      routerModule.useLocation.mockImplementation(() => mockLocation)
       const { result } = renderHook(() => useConversation())
 
       act(() => {
@@ -54,6 +61,7 @@ describe('useConversation', () => {
 
     it('replaces existing /assistant/... path intelligently', () => {
       mockLocation.pathname = '/drive/folders/123/assistant/old-convo-789'
+      routerModule.useLocation.mockImplementation(() => mockLocation)
       const { result } = renderHook(() => useConversation())
 
       act(() => {
@@ -69,6 +77,7 @@ describe('useConversation', () => {
 
     it('handles trailing slashes on base path correctly', () => {
       mockLocation.pathname = '/drive/folders/123/'
+      routerModule.useLocation.mockImplementation(() => mockLocation)
       const { result } = renderHook(() => useConversation())
 
       act(() => {
@@ -84,6 +93,7 @@ describe('useConversation', () => {
 
     it('navigates correctly when assistant route is at the root', () => {
       mockLocation.pathname = '/assistant/old-convo-123'
+      routerModule.useLocation.mockImplementation(() => mockLocation)
       const { result } = renderHook(() => useConversation())
 
       act(() => {
@@ -103,6 +113,7 @@ describe('useConversation', () => {
         search: '?foo=bar',
         hash: '#section1'
       }
+      routerModule.useLocation.mockImplementation(() => mockLocation)
       const { result } = renderHook(() => useConversation())
 
       act(() => {
@@ -120,6 +131,7 @@ describe('useConversation', () => {
   describe('createNewConversation', () => {
     it('creates a new conversation using makeConversationId', () => {
       mockLocation.pathname = '/docs'
+      routerModule.useLocation.mockImplementation(() => mockLocation)
       const { result } = renderHook(() => useConversation())
 
       act(() => {
