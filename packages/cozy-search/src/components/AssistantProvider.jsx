@@ -27,7 +27,6 @@ const AssistantProvider = ({ children }) => {
   const [isOpenSearchConversation, setIsOpenSearchConversation] =
     useState(false)
   const [selectedTwakeKnowledge, setSelectedTwakeKnowledge] = useState({
-    drive: [],
     mail: [],
     chat: []
   })

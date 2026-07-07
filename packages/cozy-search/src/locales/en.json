@@ -92,7 +92,9 @@
     },
     "knowledge_base": {
       "picker_error": "Unable to open the Drive folder picker. Please try again.",
-      "remove": "Remove folder"
+      "remove": "Remove folder",
+      "unavailable": "Folder unavailable",
+      "open_folder": "Open folder in Drive"
     }
   },
   "assistant_create": {

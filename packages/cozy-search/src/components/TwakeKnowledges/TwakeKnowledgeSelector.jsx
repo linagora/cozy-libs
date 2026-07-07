@@ -8,8 +8,9 @@ import { useI18n } from 'twake-i18n'
 import TwakeKnowledgeChip from './TwakeKnowledgeChip'
 import WebSearchChip from './WebSearchChip'
 import TChat from '../../assets/tchat.png'
-import TDrive from '../../assets/tdrive.png'
 import TMail from '../../assets/tmail.png'
+import KnowledgeBaseChip from '../KnowledgeBase/KnowledgeBaseChip'
+import { useSelectedAssistantKnowledgeBase } from '../KnowledgeBase/useSelectedAssistantKnowledgeBase'
 
 const TwakeKnowledgeSelector = ({
   className,
@@ -18,11 +19,14 @@ const TwakeKnowledgeSelector = ({
   onToggleWebsearch
 }) => {
   const { t } = useI18n()
+  const { folderId, folder, isUnavailable } =
+    useSelectedAssistantKnowledgeBase()
 
   const websearchEnabledFlag = flag('cozy.assistant.websearch.enabled')
   const sourceKnowledgeEnabledFlag = flag(
     'cozy.assistant.source-knowledge.enabled'
   )
+  const hasKnowledgeBase = !!folderId
 
   const twakeKnowledges = [
     {
@@ -32,12 +36,6 @@ const TwakeKnowledgeSelector = ({
       icon: TChat
     },
     {
-      id: 'drive',
-      label: t('assistant.twake_knowledges.drive'),
-      display: true,
-      icon: TDrive
-    },
-    {
       id: 'mail',
       label: t('assistant.twake_knowledges.mail'),
       display: true,
@@ -45,7 +43,11 @@ const TwakeKnowledgeSelector = ({
     }
   ].filter(twakeKnowledge => twakeKnowledge.display)
 
-  if (!websearchEnabledFlag && !sourceKnowledgeEnabledFlag) {
+  if (
+    !websearchEnabledFlag &&
+    !sourceKnowledgeEnabledFlag &&
+    !hasKnowledgeBase
+  ) {
     return null
   }
 
@@ -63,6 +65,14 @@ const TwakeKnowledgeSelector = ({
         <WebSearchChip
           websearchEnabled={websearchEnabled}
           onToggleWebsearch={onToggleWebsearch}
+        />
+      )}
+      {hasKnowledgeBase && (
+        <KnowledgeBaseChip
+          folderId={folderId}
+          folder={folder}
+          isUnavailable={isUnavailable}
+          isLast={!sourceKnowledgeEnabledFlag || twakeKnowledges.length === 0}
         />
       )}
       {sourceKnowledgeEnabledFlag &&

@@ -1,7 +1,6 @@
 import React from 'react'
 
 export interface TwakeKnowledgeState {
-  drive: { id: string; name: string }[]
   mail: { id: string; name: string }[]
   chat: { id: string; name: string }[]
 }
