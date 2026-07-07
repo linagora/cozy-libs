@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.3.0...cozy-sharing@36.4.0) (2026-07-07)
+
+### Features
+
+- **cozy-sharing:** Expose MemberAvatar in main API ([2af294e](https://github.com/cozy/cozy-libs/commit/2af294e565eb3c727a9d0505e6e5c204f3d8e05c))
+- **cozy-sharing:** MemberAvatar can get avatar image with cozy.url path ([2f694bd](https://github.com/cozy/cozy-libs/commit/2f694bde7c8bd2e30ae9b5c6a51d31e229fec2ef))
+- **cozy-sharing:** Now getInitials return 2 letters if possible ([175ad40](https://github.com/cozy/cozy-libs/commit/175ad40116f6face3bdfdff1642a8d26cdc01596))
+- **cozy-sharing:** Use MemberAvatar in ContactSuggestion ([b03da9f](https://github.com/cozy/cozy-libs/commit/b03da9f1d3f3e23b5b90154c313fd5adbab7aa8a))
+
 # [36.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.2.1...cozy-sharing@36.3.0) (2026-07-01)
 
 ### Features
