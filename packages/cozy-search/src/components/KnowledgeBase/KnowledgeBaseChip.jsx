@@ -47,7 +47,9 @@ const KnowledgeBaseChip = ({ folderId, folder, isUnavailable, isLast }) => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={t('assistant.knowledge_base.open_folder')}
-      className={cx('u-w-auto u-ph-half u-mr-0 u-c-pointer', { 'u-mr-half': !isLast })}
+      className={cx('u-w-auto u-ph-half u-mr-0 u-c-pointer', {
+        'u-mr-half': !isLast
+      })}
     />
   )
 }
