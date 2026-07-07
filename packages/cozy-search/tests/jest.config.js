@@ -14,6 +14,9 @@ const config = {
     '\\.(png|jpe?g|gif|svg|webp)$': '<rootDir>/tests/fileMock.js'
   },
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(cozy-ui|@linagora/twake-icons)/)'
+  ],
   coverageThreshold: {
     global: {
       branches: 80,

@@ -91,7 +91,8 @@
       "search_in": "Rechercher dans"
     },
     "knowledge_base": {
-      "picker_error": "Impossible d'ouvrir le sélecteur de dossier Drive. Veuillez réessayer."
+      "picker_error": "Impossible d'ouvrir le sélecteur de dossier Drive. Veuillez réessayer.",
+      "remove": "Retirer le dossier"
     }
   },
   "assistant_create": {

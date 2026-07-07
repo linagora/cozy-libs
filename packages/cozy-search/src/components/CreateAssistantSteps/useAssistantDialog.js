@@ -39,6 +39,7 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
     model: '',
     baseUrl: '',
     apiKey: '',
+    knowledgeBase: [],
     ...initialData
   })
 
