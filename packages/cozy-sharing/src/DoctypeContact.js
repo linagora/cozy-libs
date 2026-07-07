@@ -1,29 +1,46 @@
-import { models } from 'cozy-client'
+import {
+  getInitials as clientGetInitials,
+  getDisplayName as clientGetDisplayName
+} from 'cozy-client/dist/models/contact'
 import { Contact as DoctypeContact } from 'cozy-doctypes'
-const ContactModel = models.contact
 
 const isContact = candidate => {
   return candidate._type === 'io.cozy.contacts'
 }
 export const getInitials = (contactOrRecipient, defaultValue = '') => {
   if (isContact(contactOrRecipient)) {
-    return ContactModel.getInitials(contactOrRecipient)
+    return clientGetInitials(contactOrRecipient)
   } else {
     // @todo Extract to RecipientModel ?
     const s =
       contactOrRecipient.public_name ||
+      contactOrRecipient.displayName ||
       contactOrRecipient.name ||
       contactOrRecipient.email
-    return (s && s[0].toUpperCase()) || defaultValue
+
+    if (!s) return defaultValue
+
+    const parts = s.split(' ').filter(Boolean)
+    if (parts.length === 0) return defaultValue
+    const firstLetter = parts[0][0]
+    const lastLetter = parts.length > 1 ? parts.at(-1)[0] : ''
+
+    return (firstLetter + lastLetter).toUpperCase()
   }
 }
 
 export const getDisplayName = (contact, defaultValue = '') => {
   if (isContact(contact)) {
-    return ContactModel.getDisplayName(contact)
+    return clientGetDisplayName(contact)
   } else {
     // @todo Extract to RecipientModel ?
-    return contact.public_name || contact.name || contact.email || defaultValue
+    return (
+      contact.public_name ||
+      contact.displayName ||
+      contact.name ||
+      contact.email ||
+      defaultValue
+    )
   }
 }
 
