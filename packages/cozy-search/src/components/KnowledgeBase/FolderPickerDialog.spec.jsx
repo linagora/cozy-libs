@@ -104,4 +104,21 @@ describe('FolderPickerDialog', () => {
     setup({ open: false })
     expect(mockCreate).not.toHaveBeenCalled()
   })
+
+  it('stops a pending intent on unmount without selecting or closing', async () => {
+    const stop = jest.fn()
+    const pending = new Promise(() => {})
+    pending.stop = stop
+    mockStart.mockReturnValue(pending)
+    const onClose = jest.fn()
+    const onSelect = jest.fn()
+    const { unmount } = setup({ onClose, onSelect })
+
+    await waitFor(() => expect(mockStart).toHaveBeenCalled())
+    unmount()
+
+    expect(stop).toHaveBeenCalled()
+    expect(onSelect).not.toHaveBeenCalled()
+    expect(onClose).not.toHaveBeenCalled()
+  })
 })
