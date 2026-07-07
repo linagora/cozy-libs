@@ -1,6 +1,7 @@
-import { Icon, CrossCircleOutline } from '@linagora/twake-icons'
 import React, { useState, useRef } from 'react'
 
+import { Icon, CrossCircleOutline } from '@linagora/twake-icons'
+import minilog from 'cozy-minilog'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
@@ -10,11 +11,15 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import { permission } from './actions/permission'
+import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
+import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { GroupAvatar } from '../Avatar/GroupAvatar'
+
+const log = minilog('GroupRecipientPermissions')
 
 const GroupRecipientPermissions = ({
   name,
@@ -29,7 +34,9 @@ const GroupRecipientPermissions = ({
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
-  const { revokeGroup, revokeSelf } = useSharingContext()
+  const { updateSharingGroupType, revokeGroup, revokeSelf } =
+    useSharingContext()
+  const { showAlert } = useAlert()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
   const [revoking, setRevoking] = useState(false)
@@ -52,10 +59,32 @@ const GroupRecipientPermissions = ({
 
   const type = read_only ? 'one-way' : 'two-way'
 
-  const actions = makeActions([permission], {
-    t,
-    type
-  })
+  const setType = async newType => {
+    if (newType === type) {
+      hideMenu()
+      return
+    }
+    hideMenu()
+    try {
+      await updateSharingGroupType(sharingId, groupIndex, newType)
+    } catch (error) {
+      log.error('Failed to change group permission type', error)
+      showAlert({
+        message: t('Share.members.error.changePermission'),
+        severity: 'error',
+        variant: 'filled'
+      })
+    }
+  }
+
+  const actions = makeActions(
+    [setReadOnlySharedPermission, setReadWriteSharedPermission],
+    {
+      t,
+      type: type ?? 'one-way',
+      setType
+    }
+  )
 
   return (
     <div className={className}>

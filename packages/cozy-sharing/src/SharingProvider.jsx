@@ -100,7 +100,8 @@ export class SharingProvider extends Component {
       refresh: this.fetchAllSharings,
       hasWriteAccess: this.hasWriteAccess,
       renameSharedDrive: this.renameSharedDrive,
-      updateSharingMemberType: this.updateSharingMemberType
+      updateSharingMemberType: this.updateSharingMemberType,
+      updateSharingGroupType: this.updateSharingGroupType
     }
     this.isPublic = props.isPublic ?? false
     this.realtime = null
@@ -406,6 +407,73 @@ export class SharingProvider extends Component {
       this.dispatch(updateSharing(rollbackSharing))
       log.error(
         `Failed to change member ${member.email} permission type to ${newType}`,
+        error
+      )
+      throw error
+    }
+  }
+
+  /**
+   * Update a sharing group's read_only field to change permission type
+   * @param {string} sharingId - The ID of the sharing
+   * @param {number} group - The index of the group in the sharing groups array
+   * @param {string} newType - 'one-way' for read-only, 'two-way' for read-write
+   */
+  updateSharingGroupType = async (sharingId, groupIndex, newType) => {
+    const sharing = getSharingById(this.state, sharingId)
+    if (!sharing) throw new Error('Sharing not found')
+
+    const group = sharing.attributes.groups[groupIndex]
+    if (!group) throw new Error('Group not found')
+
+    const makeReadOnly = newType === 'one-way'
+    if (newType !== 'one-way' && newType !== 'two-way') {
+      throw new Error('Unsupported sharing type: ' + newType)
+    }
+
+    const optimisticSharing = {
+      ...sharing,
+      attributes: {
+        ...sharing.attributes,
+        groups: sharing.attributes.groups.map((group, index) =>
+          index === groupIndex
+            ? {
+                ...group,
+                read_only: makeReadOnly
+              }
+            : group
+        )
+      }
+    }
+
+    this.dispatch(updateSharing(optimisticSharing))
+
+    try {
+      if (makeReadOnly) {
+        await this.sharingCol.setGroupReadOnly(sharing, groupIndex)
+      } else {
+        await this.sharingCol.setGroupReadWrite(sharing, groupIndex)
+      }
+    } catch (error) {
+      const currentSharing = getSharingById(this.state, sharingId) || sharing
+      const rollbackSharing = {
+        ...currentSharing,
+        attributes: {
+          ...currentSharing.attributes,
+          groups: currentSharing.attributes.groups.map((group, index) =>
+            index === groupIndex
+              ? {
+                  ...group,
+                  read_only: !makeReadOnly
+                }
+              : group
+          )
+        }
+      }
+
+      this.dispatch(updateSharing(rollbackSharing))
+      log.error(
+        `Failed to change group ${group.name} permission type to ${newType}`,
         error
       )
       throw error
