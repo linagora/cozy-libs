@@ -3,8 +3,10 @@
     height 70vh
 
     // cozy-interapp injects a bare <iframe> with no styling of its own
-    // (browser default is 150px tall) — make it fill the host
+    // (browser default: 150px tall, display inline — the inline baseline
+    // gap adds ~4px below, overflowing the dialog into a phantom scrollbar)
     iframe
+        display block
         width 100%
         height 100%
         border none
