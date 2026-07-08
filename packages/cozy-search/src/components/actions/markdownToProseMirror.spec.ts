@@ -35,21 +35,21 @@ describe('markdownToProseMirror', () => {
     })
   })
 
-  it('groups bullet lines into one bullet_list', () => {
+  it('groups bullet lines into one bulletList', () => {
     expect(markdownToProseMirror('- a\n- b')).toEqual({
       type: 'doc',
       content: [
         {
-          type: 'bullet_list',
+          type: 'bulletList',
           content: [
             {
-              type: 'list_item',
+              type: 'listItem',
               content: [
                 { type: 'paragraph', content: [{ type: 'text', text: 'a' }] }
               ]
             },
             {
-              type: 'list_item',
+              type: 'listItem',
               content: [
                 { type: 'paragraph', content: [{ type: 'text', text: 'b' }] }
               ]
@@ -65,7 +65,7 @@ describe('markdownToProseMirror', () => {
     expect(doc.content?.map(n => n.type)).toEqual([
       'heading',
       'paragraph',
-      'bullet_list'
+      'bulletList'
     ])
   })
 

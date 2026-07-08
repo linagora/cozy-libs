@@ -13,15 +13,19 @@ export interface PmNode {
 }
 
 /**
- * The standard cozy-notes ProseMirror schema spec (OrderedMaps as arrays),
- * as documented in cozy-stack docs/notes.md. Required by POST /notes.
+ * ProseMirror schema spec (OrderedMaps as arrays) sent with POST /notes.
+ *
+ * The cozy-notes editor renders content with the Atlaskit schema, whose node
+ * names are camelCase (`bulletList`, `listItem`, …). Emitting the cozy-stack
+ * doc example's snake_case names (`bullet_list`, `list_item`) creates a note
+ * the stack accepts but the editor cannot display ("This editor does not
+ * support displaying this content"). So we use Atlaskit-compatible names and
+ * content models for exactly the nodes markdownToProseMirror emits.
  */
 export const NOTES_SCHEMA = {
   nodes: [
     ['doc', { content: 'block+' }],
     ['paragraph', { content: 'inline*', group: 'block' }],
-    ['blockquote', { content: 'block+', group: 'block' }],
-    ['horizontal_rule', { group: 'block' }],
     [
       'heading',
       {
@@ -30,27 +34,17 @@ export const NOTES_SCHEMA = {
         attrs: { level: { default: 1 } }
       }
     ],
-    ['code_block', { content: 'text*', marks: '', group: 'block' }],
     ['text', { group: 'inline' }],
     [
-      'image',
+      'orderedList',
       {
-        group: 'inline',
-        inline: true,
-        attrs: { alt: {}, src: {}, title: {} }
-      }
-    ],
-    ['hard_break', { group: 'inline', inline: true }],
-    [
-      'ordered_list',
-      {
-        content: 'list_item+',
+        content: 'listItem+',
         group: 'block',
         attrs: { order: { default: 1 } }
       }
     ],
-    ['bullet_list', { content: 'list_item+', group: 'block' }],
-    ['list_item', { content: 'paragraph block*' }]
+    ['bulletList', { content: 'listItem+', group: 'block' }],
+    ['listItem', { content: 'paragraph block*' }]
   ],
   marks: [
     ['link', { attrs: { href: {}, title: {} }, inclusive: false }],
@@ -82,9 +76,9 @@ export const markdownToProseMirror = (markdown: string): PmNode => {
   const flushBullets = (): void => {
     if (bulletItems.length > 0) {
       nodes.push({
-        type: 'bullet_list',
+        type: 'bulletList',
         content: bulletItems.map(item => ({
-          type: 'list_item',
+          type: 'listItem',
           content: [
             {
               type: 'paragraph',
