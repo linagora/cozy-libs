@@ -59,6 +59,7 @@ describe('CozyRealtimeChatAdapter action branch', () => {
   const proposal = {
     sentence: 'Sure, click to confirm.',
     action: 'create_note',
+    lang: 'en',
     params: { title: 'My note', content: '# Summary' }
   }
 
@@ -89,7 +90,7 @@ describe('CozyRealtimeChatAdapter action branch', () => {
     })
     expect(last.content.find(p => p.type === 'tool-call')).toMatchObject({
       toolName: 'create_note',
-      args: proposal.params
+      args: { lang: 'en', params: proposal.params }
     })
   })
 

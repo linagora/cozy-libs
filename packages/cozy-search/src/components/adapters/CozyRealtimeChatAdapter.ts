@@ -106,6 +106,10 @@ export const createCozyRealtimeChatAdapter = (
         return
       }
       if (proposal) {
+        const toolArgs = {
+          ...(proposal.lang ? { lang: proposal.lang } : {}),
+          params: proposal.params
+        }
         yield {
           content: [
             { type: 'text', text: proposal.sentence },
@@ -113,8 +117,8 @@ export const createCozyRealtimeChatAdapter = (
               type: 'tool-call',
               toolCallId: `${capability.id}-${Date.now()}`,
               toolName: capability.id,
-              args: proposal.params,
-              argsText: JSON.stringify(proposal.params)
+              args: toolArgs,
+              argsText: JSON.stringify(toolArgs)
             }
           ],
           status: { type: 'complete', reason: 'stop' }

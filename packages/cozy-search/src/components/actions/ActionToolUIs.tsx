@@ -6,21 +6,30 @@ import { useClient } from 'cozy-client'
 import ActionCard from './ActionCard'
 import { CapabilityId } from './capabilities'
 import { ActionClient, executeAction } from './executeAction'
+import { ActionLang } from './extractActionJson'
+
+interface ActionToolArgs {
+  lang?: ActionLang
+  params?: Record<string, string>
+}
 
 interface ActionToolRendererProps {
   capabilityId: CapabilityId
   args: Record<string, string>
+  lang?: ActionLang
 }
 
 const ActionToolRenderer = ({
   capabilityId,
-  args
+  args,
+  lang
 }: ActionToolRendererProps): JSX.Element => {
   const client = useClient()
   return (
     <ActionCard
       capabilityId={capabilityId}
       args={args}
+      lang={lang}
       execute={(): ReturnType<typeof executeAction> =>
         executeAction(client as unknown as ActionClient, capabilityId, args)
       }
@@ -31,10 +40,14 @@ const ActionToolRenderer = ({
 const makeActionToolUI = (
   capabilityId: CapabilityId
 ): ReturnType<typeof makeAssistantToolUI> =>
-  makeAssistantToolUI<Record<string, string>, unknown>({
+  makeAssistantToolUI<ActionToolArgs, unknown>({
     toolName: capabilityId,
     render: ({ args }) => (
-      <ActionToolRenderer capabilityId={capabilityId} args={args} />
+      <ActionToolRenderer
+        capabilityId={capabilityId}
+        args={args.params ?? {}}
+        lang={args.lang}
+      />
     )
   })
 

@@ -14,7 +14,7 @@ describe('ActionCard', () => {
   const args = { title: 'My note', content: '# Body' }
 
   it('shows title, params and the confirm button in proposed state', () => {
-    render(
+    const { container } = render(
       <ActionCard capabilityId="create_note" args={args} execute={jest.fn()} />
     )
     expect(
@@ -23,6 +23,32 @@ describe('ActionCard', () => {
     expect(screen.getByText(/My note/)).toBeTruthy()
     expect(
       screen.getByText('assistant.app_actions.create_note.confirm')
+    ).toBeTruthy()
+    // app icon rendered in the header
+    expect(container.querySelector('svg')).toBeTruthy()
+  })
+
+  it('uses the request language for card strings when lang is provided', () => {
+    render(
+      <ActionCard
+        capabilityId="create_note"
+        args={args}
+        execute={jest.fn()}
+        lang="en"
+      />
+    )
+    // resolved from src/locales/en.json even though the app locale (mocked t)
+    // would echo the key
+    expect(screen.getByText('New note')).toBeTruthy()
+    expect(screen.getByText('Create the note')).toBeTruthy()
+  })
+
+  it('falls back to the app locale for card strings without lang', () => {
+    render(
+      <ActionCard capabilityId="create_event" args={{}} execute={jest.fn()} />
+    )
+    expect(
+      screen.getByText('assistant.app_actions.create_event.title')
     ).toBeTruthy()
   })
 

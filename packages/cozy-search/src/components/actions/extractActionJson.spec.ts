@@ -66,4 +66,17 @@ describe('extractActionJson', () => {
     })
     expect(extractActionJson(raw, createNote)).toEqual(valid)
   })
+
+  it('passes through a supported lang', () => {
+    const raw = JSON.stringify({ ...valid, lang: 'fr' })
+    expect(extractActionJson(raw, createNote)).toEqual({
+      ...valid,
+      lang: 'fr'
+    })
+  })
+
+  it('drops an unsupported lang', () => {
+    const raw = JSON.stringify({ ...valid, lang: 'de' })
+    expect(extractActionJson(raw, createNote)).toEqual(valid)
+  })
 })

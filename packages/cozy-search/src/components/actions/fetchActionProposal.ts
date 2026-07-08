@@ -41,9 +41,10 @@ export const toSimpleMessages = (
 const buildSystemPrompt = (capability: Capability): string =>
   'You prepare the parameters of an app action for the user. ' +
   'Reply with ONLY one JSON object and nothing else — no markdown fence, no explanation. ' +
-  'The JSON must match: {"sentence": string, "action": string, "params": object}. ' +
+  'The JSON must match: {"sentence": string, "action": string, "lang": string, "params": object}. ' +
   '"sentence" is one short friendly sentence in the user\'s language inviting ' +
   'them to click the card below to confirm the action. ' +
+  '"lang" is the two-letter code of the language the user wrote in: "fr" or "en". ' +
   `"action" must be "${capability.id}". ` +
   capability.paramsPrompt +
   ` Today is ${new Date().toISOString()}.`

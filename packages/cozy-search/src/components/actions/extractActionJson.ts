@@ -1,10 +1,17 @@
 import { Capability, CapabilityId } from './capabilities'
 
+export type ActionLang = 'en' | 'fr'
+
 export interface ActionProposal {
   sentence: string
   action: CapabilityId
+  /** Language of the user's request, so the card can match it */
+  lang?: ActionLang
   params: Record<string, string>
 }
+
+const isActionLang = (value: unknown): value is ActionLang =>
+  value === 'en' || value === 'fr'
 
 const FENCED_RE = /```(?:json)?\s*([\s\S]*?)```/
 
@@ -52,9 +59,11 @@ export const extractActionJson = (
     }
     if (isValid(parsed, capability)) {
       const params = parsed.params as Record<string, unknown>
+      const lang = (parsed as Record<string, unknown>).lang
       return {
         sentence: parsed.sentence,
         action: parsed.action,
+        ...(isActionLang(lang) ? { lang } : {}),
         params: Object.fromEntries(
           capability.knownParams
             .map((key): [string, unknown] => [key, params[key]])
