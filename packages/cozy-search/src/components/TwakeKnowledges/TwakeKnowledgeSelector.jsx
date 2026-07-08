@@ -8,13 +8,13 @@ import { useI18n } from 'twake-i18n'
 import TwakeKnowledgeChip from './TwakeKnowledgeChip'
 import WebSearchChip from './WebSearchChip'
 import TChat from '../../assets/tchat.png'
+import TDrive from '../../assets/tdrive.png'
 import TMail from '../../assets/tmail.png'
 import KnowledgeBaseChip from '../KnowledgeBase/KnowledgeBaseChip'
 import { useSelectedAssistantKnowledgeBase } from '../KnowledgeBase/useSelectedAssistantKnowledgeBase'
 
 const TwakeKnowledgeSelector = ({
   className,
-  onSelectTwakeKnowledge,
   websearchEnabled,
   onToggleWebsearch
 }) => {
@@ -28,7 +28,16 @@ const TwakeKnowledgeSelector = ({
   )
   const hasKnowledgeBase = !!folderId
 
+  // Source toggles. Drive appears here only when no knowledge base is set;
+  // when a KB folder is configured it is rendered as KnowledgeBaseChip below
+  // (with its own menu) instead.
   const twakeKnowledges = [
+    {
+      id: 'drive',
+      label: t('assistant.twake_knowledges.drive'),
+      display: !hasKnowledgeBase,
+      icon: TDrive
+    },
     {
       id: 'chat',
       label: t('assistant.twake_knowledges.chat'),
@@ -82,7 +91,6 @@ const TwakeKnowledgeSelector = ({
             key={twakeKnowledge.id}
             twakeKnowledge={twakeKnowledge}
             isLast={index === twakeKnowledges.length - 1}
-            onSelect={onSelectTwakeKnowledge}
           />
         ))}
     </div>

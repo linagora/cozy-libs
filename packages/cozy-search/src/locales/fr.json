@@ -64,6 +64,7 @@
     },
     "twake_knowledges": {
       "chat": "Chat",
+      "drive": "Drive",
       "mail": "Email",
       "title_mail": "Sélectionner des sources d'email",
       "title_chat": "Sélectionner des sources de discussion",

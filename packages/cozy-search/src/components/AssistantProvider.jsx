@@ -26,9 +26,12 @@ const AssistantProvider = ({ children }) => {
   )
   const [isOpenSearchConversation, setIsOpenSearchConversation] =
     useState(false)
+  // Source chips are all-or-nothing toggles (mail/chat/drive), selected by
+  // default. This selection is demo-only UI — it is not sent to the backend.
   const [selectedTwakeKnowledge, setSelectedTwakeKnowledge] = useState({
-    mail: [],
-    chat: []
+    mail: true,
+    chat: true,
+    drive: true
   })
   const [openedKnowledgePanel, setOpenedKnowledgePanel] = useState(null)
   const [websearchEnabled, setWebsearchEnabled] = useState(false)
