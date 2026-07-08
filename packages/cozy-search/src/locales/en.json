@@ -91,6 +91,29 @@
       "remove": "Remove folder",
       "select_folder": "Select this folder",
       "unavailable": "Folder unavailable"
+    },
+    "app_actions": {
+      "error": "The action could not be completed.",
+      "retry": "Retry",
+      "create_note": {
+        "title": "New note",
+        "confirm": "Create the note",
+        "done": "Note created.",
+        "open": "Open the note"
+      },
+      "create_event": {
+        "title": "New calendar event",
+        "confirm": "Open in Calendar",
+        "done": "Calendar opened.",
+        "open": "Reopen"
+      },
+      "params": {
+        "title": "Title",
+        "content": "Content",
+        "start": "Start",
+        "end": "End",
+        "attendee": "With"
+      }
     }
   },
   "assistant_create": {

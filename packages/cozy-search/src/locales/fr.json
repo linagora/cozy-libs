@@ -91,6 +91,29 @@
       "remove": "Retirer le dossier",
       "select_folder": "Sélectionner ce dossier",
       "unavailable": "Dossier indisponible"
+    },
+    "app_actions": {
+      "error": "L'action n'a pas pu aboutir.",
+      "retry": "Réessayer",
+      "create_note": {
+        "title": "Nouvelle note",
+        "confirm": "Créer la note",
+        "done": "Note créée.",
+        "open": "Ouvrir la note"
+      },
+      "create_event": {
+        "title": "Nouvel événement",
+        "confirm": "Ouvrir dans l'agenda",
+        "done": "Agenda ouvert.",
+        "open": "Rouvrir"
+      },
+      "params": {
+        "title": "Titre",
+        "content": "Contenu",
+        "start": "Début",
+        "end": "Fin",
+        "attendee": "Avec"
+      }
     }
   },
   "assistant_create": {

@@ -30,6 +30,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from './AssistantProvider'
+import { CreateNoteToolUI, CreateEventToolUI } from './actions/ActionToolUIs'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
 import { DEFAULT_ASSISTANT } from './constants'
@@ -334,6 +335,8 @@ const CozyAssistantRuntimeProviderInner = ({
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>
+      <CreateNoteToolUI />
+      <CreateEventToolUI />
       {children}
     </AssistantRuntimeProvider>
   )
