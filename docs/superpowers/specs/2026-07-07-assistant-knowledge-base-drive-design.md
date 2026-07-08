@@ -61,13 +61,19 @@ with **change** (reopens the picker) and **remove** actions. Saved with the rest
 ### Display in the composer
 
 When the selected assistant has a knowledge base, the composer chip area (today's
-`TwakeKnowledgeSelector`) shows one chip with the folder's current name (resolved live from
-`io.cozy.files`, so Drive renames are reflected). Clicking it opens the Drive app on that folder
-**in a new tab** via `generateWebLink` (same pattern as `Conversations/Sources/FileSourcesItem.jsx`:
-slug `drive`, hash `/folder/<folderId>`). This is also where "manage the files" (rename, move,
-upload) happens — in the real Drive app.
+`TwakeKnowledgeSelector`) shows one chip in the "selected source" style (ghost variant + caret)
+with the folder's current name (resolved live from `io.cozy.files`, so Drive renames are
+reflected). Clicking the chip stays in-app and opens a small popover with two actions:
 
-Editing the KB goes through the edit-assistant dialog, not the chip.
+- **Open in Drive** — opens the folder in the Drive app **in a new tab** via `generateWebLink`
+  (slug `drive`, hash `/folder/<folderId>`). This is where "manage the files" (rename, move,
+  upload) happens — in the real Drive app.
+- **Change folder…** — reopens the Drive folder picker; the new pick is persisted on the
+  assistant immediately.
+
+The chip itself never navigates, keeping it consistent with the other source chips of the row
+(websearch toggles, mail/chat open panels). The KB can also be edited from the edit-assistant
+dialog.
 
 ## Data model
 

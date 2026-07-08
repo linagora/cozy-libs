@@ -5,6 +5,12 @@ import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoi
 
 import KnowledgeBaseChip from './KnowledgeBaseChip'
 
+let mockPickerProps = null
+jest.mock('./FolderPickerDialog', () => props => {
+  mockPickerProps = props
+  return props.open ? <div data-testid="folder-picker" /> : null
+})
+
 jest.mock('cozy-client', () => ({
   useClient: () => ({
     getStackClient: () => ({ uri: 'https://claude.mycozy.cloud' }),
@@ -13,16 +19,6 @@ jest.mock('cozy-client', () => ({
   generateWebLink: jest.fn(
     ({ hash }) => `https://claude-drive.mycozy.cloud/#${hash}`
   )
-}))
-
-const mockSetAssistantIdInAction = jest.fn()
-const mockSetIsOpenEditAssistant = jest.fn()
-jest.mock('../AssistantProvider', () => ({
-  useAssistant: () => ({
-    selectedAssistantId: 'assistant-1',
-    setAssistantIdInAction: mockSetAssistantIdInAction,
-    setIsOpenEditAssistant: mockSetIsOpenEditAssistant
-  })
 }))
 
 jest.mock('twake-i18n', () => ({
@@ -39,6 +35,7 @@ jest.mock('cozy-intent', () => ({
 describe('KnowledgeBaseChip', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    mockPickerProps = null
   })
 
   const setup = (props = {}) =>
@@ -49,6 +46,7 @@ describe('KnowledgeBaseChip', () => {
           folder={{ _id: 'folder-1', name: 'HR', path: '/Perso/HR' }}
           isUnavailable={false}
           isLast
+          onChangeFolder={jest.fn()}
           {...props}
         />
       </BreakpointsProvider>
@@ -61,13 +59,13 @@ describe('KnowledgeBaseChip', () => {
     expect(screen.queryByRole('link')).toBeNull()
   })
 
-  it('opens a menu with the folder path and an Open in Drive link', () => {
+  it('opens a menu with an Open in Drive link and no folder header', () => {
     setup()
 
     fireEvent.click(screen.getByText('HR'))
 
-    expect(screen.getByText('/Perso/HR')).toBeTruthy()
-    // the menu item renders as an anchor but keeps MUI's menuitem role
+    // no name/path header in the menu, actions only
+    expect(screen.queryByText('/Perso/HR')).toBeNull()
     const link = screen
       .getByText('assistant.knowledge_base.open_folder')
       .closest('a')
@@ -78,14 +76,18 @@ describe('KnowledgeBaseChip', () => {
     expect(link.getAttribute('target')).toBe('_blank')
   })
 
-  it('opens the edit-assistant dialog from Change folder', () => {
-    setup()
+  it('opens the Drive folder picker from Change folder and persists the pick', () => {
+    const onChangeFolder = jest.fn()
+    setup({ onChangeFolder })
 
     fireEvent.click(screen.getByText('HR'))
     fireEvent.click(screen.getByText('assistant.knowledge_base.change_folder'))
 
-    expect(mockSetAssistantIdInAction).toHaveBeenCalledWith('assistant-1')
-    expect(mockSetIsOpenEditAssistant).toHaveBeenCalledWith(true)
+    expect(screen.getByTestId('folder-picker')).toBeTruthy()
+
+    const picked = { id: 'folder-2', name: 'Legal', type: 'directory' }
+    mockPickerProps.onSelect(picked)
+    expect(onChangeFolder).toHaveBeenCalledWith(picked)
   })
 
   it('hides the Drive link when the folder is unavailable but still offers Change folder', () => {

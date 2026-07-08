@@ -1,6 +1,14 @@
-import { useQuery } from 'cozy-client'
+import { useCallback } from 'react'
 
-import { getKnowledgeBaseFolderId } from './knowledgeBase'
+import { useClient, useQuery } from 'cozy-client'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
+import { useI18n } from 'twake-i18n'
+
+import {
+  getKnowledgeBaseFolderId,
+  makeKnowledgeBaseEntry,
+  saveKnowledgeBase
+} from './knowledgeBase'
 import { useAssistant } from '../AssistantProvider'
 import { DEFAULT_ASSISTANT } from '../constants'
 import { buildAssistantByIdQuery, buildFileByIdQuery } from '../queries'
@@ -10,6 +18,9 @@ import { buildAssistantByIdQuery, buildFileByIdQuery } from '../queries'
  * io.cozy.files (renames in Drive are reflected; deletion is detected).
  */
 export const useSelectedAssistantKnowledgeBase = () => {
+  const client = useClient()
+  const { t } = useI18n()
+  const { showAlert } = useAlert()
   const { selectedAssistantId } = useAssistant()
   const realAssistantId =
     selectedAssistantId !== DEFAULT_ASSISTANT._id ? selectedAssistantId : null
@@ -27,6 +38,20 @@ export const useSelectedAssistantKnowledgeBase = () => {
     fileQuery.options
   )
 
+  const setKnowledgeBaseFolder = useCallback(
+    async pickedFolder => {
+      if (!realAssistantId || !pickedFolder) return
+      try {
+        await saveKnowledgeBase(client, realAssistantId, [
+          makeKnowledgeBaseEntry(pickedFolder)
+        ])
+      } catch {
+        showAlert({ message: t('assistant.default_error'), severity: 'error' })
+      }
+    },
+    [client, realAssistantId, showAlert, t]
+  )
+
   return {
     folderId,
     folder: folder ?? null,
@@ -34,6 +59,7 @@ export const useSelectedAssistantKnowledgeBase = () => {
       !!folderId &&
       (fetchStatus === 'failed' ||
         !!folder?.trashed ||
-        !!folder?.path?.startsWith('/.cozy_trash'))
+        !!folder?.path?.startsWith('/.cozy_trash')),
+    setKnowledgeBaseFolder
   }
 }
