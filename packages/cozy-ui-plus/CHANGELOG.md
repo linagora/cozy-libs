@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@10.0.0...cozy-ui-plus@11.0.0) (2026-07-08)
+
+### Features
+
+- **cozy-ui-plus:** Replace Avatar by MemberAvatar in ContactIdentity ([1c6c2c1](https://github.com/cozy/cozy-libs/commit/1c6c2c1d8689738d5aa8d983e5c8298cc7c8c7ea))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** You must have `"cozy-sharing": ">=36.4.0"` when using `cozy-ui-plus > ContactIdentity` component
+
 # [10.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@9.0.0...cozy-ui-plus@10.0.0) (2026-06-25)
 
 ### Features
