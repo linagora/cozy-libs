@@ -28,20 +28,18 @@ const PermissionTypeMenuComponent = ({ sharingId, memberIndex, type }) => {
 
   const setType = useCallback(
     async newType => {
-      if (newType === type) {
-        hideMenu()
-        return
-      }
       hideMenu()
-      try {
-        await updateSharingMemberType(sharingId, memberIndex, newType)
-      } catch (error) {
-        log.error('Failed to change member permission type', error)
-        showAlert({
-          message: t('Share.members.error.changePermission'),
-          severity: 'error',
-          variant: 'filled'
-        })
+      if (newType !== type) {
+        try {
+          await updateSharingMemberType(sharingId, memberIndex, newType)
+        } catch (error) {
+          log.error('Failed to change member permission type', error)
+          showAlert({
+            message: t('Share.members.error.changePermission'),
+            severity: 'error',
+            variant: 'filled'
+          })
+        }
       }
     },
     [
