@@ -48,6 +48,10 @@ Assistants (`io.cozy.ai.chat.assistants`) now persist
   context already covers workspace routes).
 - Garbage-collecting stale workspaces (enabled by the `keep_files` patch below, but the
   collector itself is follow-up work).
+- **Subfolder moves** (known limitation): moving a whole subfolder into/out of the KB folder
+  only changes directory docs, which the indexer skips, so descendants' membership diverges
+  until each file next changes. Follow-up: on a dir change, walk its file subtree and
+  reconcile. Single-file moves are handled (E2E-verified).
 
 ## Mapping
 
