@@ -4,7 +4,9 @@ import React from 'react'
 import ActionCard from './ActionCard'
 
 jest.mock('twake-i18n', () => ({
-  useI18n: () => ({ t: (key: string) => key }),
+  useI18n: (): { t: (key: string) => string } => ({
+    t: (key: string): string => key
+  }),
   useExtendI18n: jest.fn()
 }))
 

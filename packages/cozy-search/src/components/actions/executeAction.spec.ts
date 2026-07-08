@@ -2,7 +2,13 @@ import { executeAction } from './executeAction'
 
 jest.mock('cozy-client', () => ({
   generateWebLink: jest.fn(
-    ({ slug, searchParams }) =>
+    ({
+      slug,
+      searchParams
+    }: {
+      slug: string
+      searchParams: Array<[string, string]>
+    }): string =>
       `https://claude-${slug}.mycozy.cloud/?${new URLSearchParams(
         searchParams
       ).toString()}`
@@ -10,15 +16,25 @@ jest.mock('cozy-client', () => ({
 }))
 
 jest.mock('cozy-client/dist/models/note', () => ({
-  fetchURL: jest.fn(async (client, file) => `https://notes/#/n/${file.id}`)
+  fetchURL: jest.fn(
+    (client: unknown, file: { id: string }): Promise<string> =>
+      Promise.resolve(`https://notes/#/n/${file.id}`)
+  )
 }))
 
-const makeClient = (fetchJSON = jest.fn()) =>
+const makeClient = (
+  fetchJSON = jest.fn()
+): Parameters<typeof executeAction>[0] =>
   ({
     stackClient: { fetchJSON },
     getStackClient: () => ({ uri: 'https://claude.mycozy.cloud' }),
     getInstanceOptions: () => ({ subdomain: 'flat' })
   }) as Parameters<typeof executeAction>[0]
+
+// `expect.objectContaining` is typed as `(obj: E) => any` in @types/jest,
+// which trips no-unsafe-assignment wherever the result is embedded in an
+// object literal. Re-type it to echo the input shape instead of `any`.
+const objectContaining = <T>(obj: T): T => expect.objectContaining(obj) as T
 
 describe('executeAction create_note', () => {
   it('POSTs to /notes with schema and converted content, returns note url', async () => {
@@ -31,10 +47,10 @@ describe('executeAction create_note', () => {
     expect(fetchJSON).toHaveBeenCalledWith('POST', '/notes', {
       data: {
         type: 'io.cozy.notes.documents',
-        attributes: expect.objectContaining({
+        attributes: objectContaining({
           title: 'My summary',
-          schema: expect.objectContaining({ topNode: 'doc' }),
-          content: expect.objectContaining({ type: 'doc' })
+          schema: objectContaining({ topNode: 'doc' }),
+          content: objectContaining({ type: 'doc' })
         })
       }
     })

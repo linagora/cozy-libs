@@ -9,9 +9,20 @@ const proposal = {
   params: { title: 'T', content: 'C' }
 }
 
-const makeClient = (fetchJSON: jest.Mock) => ({
+interface ProposalClient {
+  stackClient: { fetchJSON: jest.Mock }
+}
+
+const makeClient = (fetchJSON: jest.Mock): ProposalClient => ({
   stackClient: { fetchJSON }
 })
+
+type RequestBody = {
+  model?: unknown
+  stream: boolean
+  messages: Array<{ role: string; content: string }>
+}
+type FetchJSONCall = [string, string, RequestBody]
 
 describe('fetchActionProposal', () => {
   it('POSTs to the completions proxy without a model and returns the proposal', async () => {
@@ -28,7 +39,7 @@ describe('fetchActionProposal', () => {
 
     expect(result).toEqual(proposal)
     expect(fetchJSON).toHaveBeenCalledTimes(1)
-    const [method, path, body] = fetchJSON.mock.calls[0]
+    const [method, path, body] = fetchJSON.mock.calls[0] as FetchJSONCall
     expect(method).toBe('POST')
     expect(path).toBe('/ai/v1/chat/completions')
     // omitting "model" makes openRAG use direct-LLM mode (no RAG retrieval)
@@ -78,7 +89,7 @@ describe('fetchActionProposal', () => {
       content: `m${i}`
     }))
     await fetchActionProposal(makeClient(fetchJSON), createNote, 'q', history)
-    const body = fetchJSON.mock.calls[0][2]
+    const body = (fetchJSON.mock.calls[0] as FetchJSONCall)[2]
     // system + 10 history + final user query
     expect(body.messages).toHaveLength(12)
     expect(body.messages[1].content).toBe('m5')
