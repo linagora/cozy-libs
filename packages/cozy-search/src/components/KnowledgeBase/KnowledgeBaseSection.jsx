@@ -58,7 +58,7 @@ const KnowledgeBaseSection = ({ knowledgeBase = [], onChange }) => {
           deleteIcon={
             <Icon
               icon={Cross}
-              size={16}
+              size={10}
               aria-label={t('assistant.knowledge_base.remove')}
             />
           }
