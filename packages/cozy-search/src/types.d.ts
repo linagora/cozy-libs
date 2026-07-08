@@ -69,10 +69,6 @@ declare module 'cozy-client/dist/models/note' {
   export function fetchURL(client: any, file: { id: string }): Promise<string>
 }
 
-declare module 'cozy-client' {
-  export function generateWebLink(options: any): string
-}
-
 declare module 'cozy-realtime/dist/useRealtime' {
   interface RealtimeConfig {
     [doctype: string]: {

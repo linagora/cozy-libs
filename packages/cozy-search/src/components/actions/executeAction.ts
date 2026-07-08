@@ -54,6 +54,8 @@ const createEvent = (
     cozyUrl: client.getStackClient().uri,
     subDomainType: client.getInstanceOptions().subdomain,
     slug: 'calendar',
+    pathname: '',
+    hash: '',
     searchParams
   })
   window.open(url, '_blank', 'noopener')
