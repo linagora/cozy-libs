@@ -59,6 +59,8 @@ const KnowledgeBaseSection = ({ knowledgeBase = [], onChange }) => {
             <Icon
               icon={Cross}
               size={10}
+              // inline width/height beats MUI v4's fixed deleteIcon class size
+              style={{ height: 10, width: 10 }}
               aria-label={t('assistant.knowledge_base.remove')}
             />
           }
