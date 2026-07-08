@@ -60,20 +60,19 @@ const GroupRecipientPermissions = ({
   const type = read_only ? 'one-way' : 'two-way'
 
   const setType = async newType => {
-    if (newType === type) {
-      hideMenu()
-      return
-    }
     hideMenu()
-    try {
-      await updateSharingGroupType(sharingId, groupIndex, newType)
-    } catch (error) {
-      log.error('Failed to change group permission type', error)
-      showAlert({
-        message: t('Share.members.error.changePermission'),
-        severity: 'error',
-        variant: 'filled'
-      })
+
+    if (newType !== type) {
+      try {
+        await updateSharingGroupType(sharingId, groupIndex, newType)
+      } catch (error) {
+        log.error('Failed to change group permission type', error)
+        showAlert({
+          message: t('Share.members.error.changePermission'),
+          severity: 'error',
+          variant: 'filled'
+        })
+      }
     }
   }
 
