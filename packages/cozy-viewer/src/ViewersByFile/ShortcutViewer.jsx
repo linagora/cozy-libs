@@ -21,6 +21,7 @@ const ShortcutViewer = ({ t, file }) => {
       file={file}
       renderFallbackExtraContent={() => (
         <Button
+          component="a"
           label={`${t('Viewer.goto', { url: get(url, 'origin', '') })}`}
           startIcon={<Openwith />}
           href={`${get(url, 'origin', '')}`}
