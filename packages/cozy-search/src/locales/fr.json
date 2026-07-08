@@ -85,6 +85,8 @@
       "search_in": "Rechercher dans"
     },
     "knowledge_base": {
+      "change_folder": "Modifier le dossier…",
+      "open_folder": "Ouvrir dans Drive",
       "picker_error": "Impossible d'ouvrir le sélecteur de dossier Drive. Veuillez réessayer.",
       "remove": "Retirer le dossier",
       "select_folder": "Sélectionner ce dossier",

@@ -85,6 +85,8 @@
       "search_in": "Search in"
     },
     "knowledge_base": {
+      "change_folder": "Change folder…",
+      "open_folder": "Open in Drive",
       "picker_error": "Unable to open the Drive folder picker. Please try again.",
       "remove": "Remove folder",
       "select_folder": "Select this folder",

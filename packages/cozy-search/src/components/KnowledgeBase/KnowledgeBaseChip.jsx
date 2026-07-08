@@ -1,42 +1,43 @@
+import { Icon, LinkOut, Pen } from '@linagora/twake-icons'
 import cx from 'classnames'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 
 import { useClient, generateWebLink } from 'cozy-client'
+import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
+import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Chip from 'cozy-ui/transpiled/react/Chips'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import TDrive from '../../assets/tdrive.png'
-
-// MUI Chip's own `cursor: default` rule loads after the utility stylesheet
-// and ties `u-c-pointer` on specificity, so only an inline style wins.
-const styles = { pointer: { cursor: 'pointer' } }
+import { useAssistant } from '../AssistantProvider'
 
 /**
  * Composer chip showing the selected assistant's knowledge-base folder,
  * rendered in the "selected source" style (like the demo mail/chat chips).
  *
- * Purely informational: the knowledge base is defined on the assistant and
- * edited through the edit-assistant dialog, so the chip offers no removal.
- * Clicking opens the real Drive app on that folder in a new tab — that is
- * where file management (rename, move, upload) happens.
+ * Clicking stays in-app: it opens a small menu with the folder path and
+ * explicit actions — open the folder in Drive (new tab) or change the
+ * knowledge base via the edit-assistant dialog. The chip itself never
+ * navigates, so it behaves like the other source chips of the row.
  */
 const KnowledgeBaseChip = ({ folderId, folder, isUnavailable, isLast }) => {
   const { t } = useI18n()
   const client = useClient()
+  const chipRef = useRef(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const {
+    selectedAssistantId,
+    setAssistantIdInAction,
+    setIsOpenEditAssistant
+  } = useAssistant()
 
-  const chipIcon = (
-    <img alt="" aria-hidden="true" src={TDrive} width={16} className="u-m-0" />
-  )
+  const closeMenu = () => setIsMenuOpen(false)
 
-  if (isUnavailable) {
-    return (
-      <Chip
-        icon={chipIcon}
-        label={t('assistant.knowledge_base.unavailable')}
-        variant="ghost"
-        className={cx('u-w-auto u-ph-half u-mr-0', { 'u-mr-half': !isLast })}
-      />
-    )
+  const handleChangeFolder = () => {
+    setAssistantIdInAction(selectedAssistantId)
+    setIsOpenEditAssistant(true)
+    closeMenu()
   }
 
   const folderUrl = generateWebLink({
@@ -46,20 +47,73 @@ const KnowledgeBaseChip = ({ folderId, folder, isUnavailable, isLast }) => {
     hash: `/folder/${folderId}`
   })
 
+  const label = isUnavailable
+    ? t('assistant.knowledge_base.unavailable')
+    : folder?.name ?? '…'
+
   return (
-    <Chip
-      icon={chipIcon}
-      label={folder?.name ?? '…'}
-      variant="ghost"
-      component="a"
-      href={folderUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cx('u-w-auto u-ph-half u-mr-0', {
-        'u-mr-half': !isLast
-      })}
-      style={styles.pointer}
-    />
+    <>
+      <div ref={chipRef} className={cx({ 'u-mr-half': !isLast })}>
+        <Chip
+          icon={
+            <img
+              alt=""
+              aria-hidden="true"
+              src={TDrive}
+              width={16}
+              className="u-m-0"
+            />
+          }
+          label={label}
+          variant="ghost"
+          clickable
+          onClick={() => setIsMenuOpen(true)}
+          className="u-w-auto u-ph-half u-mr-0"
+        />
+      </div>
+      {isMenuOpen && (
+        <ActionsMenu
+          open
+          ref={chipRef}
+          onClose={closeMenu}
+          actions={[]}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        >
+          <div className="u-ph-1 u-pv-half">
+            <Typography variant="body1">{label}</Typography>
+            {!isUnavailable && folder?.path && (
+              <Typography variant="caption" className="u-c-text-secondary">
+                {folder.path}
+              </Typography>
+            )}
+          </div>
+          {!isUnavailable && (
+            <ActionsMenuItem
+              component="a"
+              href={folderUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMenu}
+            >
+              <div className="u-flex u-flex-items-center">
+                <Icon icon={LinkOut} size={16} className="u-mr-half" />
+                <Typography variant="body1">
+                  {t('assistant.knowledge_base.open_folder')}
+                </Typography>
+              </div>
+            </ActionsMenuItem>
+          )}
+          <ActionsMenuItem onClick={handleChangeFolder}>
+            <div className="u-flex u-flex-items-center">
+              <Icon icon={Pen} size={16} className="u-mr-half" />
+              <Typography variant="body1">
+                {t('assistant.knowledge_base.change_folder')}
+              </Typography>
+            </div>
+          </ActionsMenuItem>
+        </ActionsMenu>
+      )}
+    </>
   )
 }
 
