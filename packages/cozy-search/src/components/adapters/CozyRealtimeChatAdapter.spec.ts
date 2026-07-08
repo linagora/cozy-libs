@@ -15,10 +15,15 @@ const makeStreamBridge = (): StreamBridge =>
     cleanup: jest.fn()
   }) as unknown as StreamBridge
 
-const runAdapter = async (
+type RunResult = { content: Array<Record<string, unknown>> } & {
+  status?: Record<string, unknown>
+}
+
+const runAdapterWithController = async (
   query: string,
-  fetchJSON: jest.Mock
-): Promise<Array<{ content: Array<Record<string, unknown>> }>> => {
+  fetchJSON: jest.Mock,
+  controller: AbortController
+): Promise<RunResult[]> => {
   const adapter = createCozyRealtimeChatAdapter(
     {
       client: { stackClient: { fetchJSON } },
@@ -27,10 +32,10 @@ const runAdapter = async (
     (key: string) => key,
     { current: makeStreamBridge() }
   )
-  const results: Array<{ content: Array<Record<string, unknown>> }> = []
+  const results: RunResult[] = []
   const options = {
     messages: [{ role: 'user', content: [{ type: 'text', text: query }] }],
-    abortSignal: new AbortController().signal
+    abortSignal: controller.signal
   } as unknown as ChatModelRunOptions
   // ChatModelAdapter['run'] is typed as
   // `Promise<ChatModelRunResult> | AsyncGenerator<ChatModelRunResult, void>`;
@@ -39,12 +44,16 @@ const runAdapter = async (
   for await (const result of adapter.run(
     options
   ) as AsyncGenerator<ChatModelRunResult>) {
-    results.push(
-      result as unknown as { content: Array<Record<string, unknown>> }
-    )
+    results.push(result as unknown as RunResult)
   }
   return results
 }
+
+const runAdapter = async (
+  query: string,
+  fetchJSON: jest.Mock
+): Promise<RunResult[]> =>
+  runAdapterWithController(query, fetchJSON, new AbortController())
 
 describe('CozyRealtimeChatAdapter action branch', () => {
   const proposal = {
@@ -97,6 +106,39 @@ describe('CozyRealtimeChatAdapter action branch', () => {
     expect(
       results.every(r => r.content.every(p => p.type !== 'tool-call'))
     ).toBe(true)
+  })
+
+  it('yields a terminal cancelled status and skips the card when aborted during the side-call', async () => {
+    const controller = new AbortController()
+    const fetchJSON = jest.fn((method: string, path: string) => {
+      if (path === '/ai/v1/chat/completions') {
+        controller.abort()
+        return Promise.resolve({
+          choices: [{ message: { content: JSON.stringify(proposal) } }]
+        })
+      }
+      return Promise.resolve({})
+    })
+
+    const results = await runAdapterWithController(
+      'Create a note summarizing this discussion',
+      fetchJSON,
+      controller
+    )
+
+    const last = results[results.length - 1]
+    expect(last.status).toMatchObject({
+      type: 'incomplete',
+      reason: 'cancelled'
+    })
+    expect(
+      results.every(r => r.content.every(p => p.type !== 'tool-call'))
+    ).toBe(true)
+    expect(fetchJSON).not.toHaveBeenCalledWith(
+      'POST',
+      '/ai/chat/conversations/conv-1',
+      expect.any(Object)
+    )
   })
 
   it('falls back to the conversation flow when the side-call fails', async () => {

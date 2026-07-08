@@ -51,13 +51,16 @@ export const extractActionJson = (
       continue
     }
     if (isValid(parsed, capability)) {
+      const params = parsed.params as Record<string, unknown>
       return {
         sentence: parsed.sentence,
         action: parsed.action,
         params: Object.fromEntries(
-          Object.entries(parsed.params).filter(
-            (entry): entry is [string, string] => typeof entry[1] === 'string'
-          )
+          capability.knownParams
+            .map((key): [string, unknown] => [key, params[key]])
+            .filter(
+              (entry): entry is [string, string] => typeof entry[1] === 'string'
+            )
         )
       }
     }

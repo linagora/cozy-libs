@@ -58,4 +58,12 @@ describe('extractActionJson', () => {
     })
     expect(extractActionJson(raw, createNote)).toEqual(valid)
   })
+
+  it('drops extra string params not in the capability whitelist', () => {
+    const raw = JSON.stringify({
+      ...valid,
+      params: { ...valid.params, location: 'Paris' }
+    })
+    expect(extractActionJson(raw, createNote)).toEqual(valid)
+  })
 })

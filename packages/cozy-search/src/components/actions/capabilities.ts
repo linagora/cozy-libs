@@ -15,6 +15,11 @@ export interface Capability {
   paramsPrompt: string
   /** Params that must be non-empty strings for a proposal to be valid */
   requiredParams: string[]
+  /**
+   * Params rendered on the confirmation card. Anything else the LLM
+   * returns is dropped so unknown keys never leak raw i18n keys into the UI.
+   */
+  knownParams: string[]
 }
 
 const NOTE_VERB =
@@ -37,7 +42,8 @@ export const CAPABILITIES: Capability[] = [
       '"content" is the note body in simple Markdown: use "#"/"##" headings, ' +
       'plain paragraphs and "- " bullet lists only. If the user asks to ' +
       'summarize the discussion, write a summary of the conversation so far.',
-    requiredParams: ['title', 'content']
+    requiredParams: ['title', 'content'],
+    knownParams: ['title', 'content']
   },
   {
     id: 'create_event',
@@ -49,7 +55,8 @@ export const CAPABILITIES: Capability[] = [
       'datetimes like "2026-07-10T10:00:00"; if the user gives no end time, set ' +
       '"end" one hour after "start". "attendee" is the invited person\'s name ' +
       'or email, or "" if none.',
-    requiredParams: ['title', 'start']
+    requiredParams: ['title', 'start'],
+    knownParams: ['title', 'start', 'end', 'attendee']
   }
 ]
 

@@ -98,7 +98,14 @@ export const createCozyRealtimeChatAdapter = (
         userQuery,
         toSimpleMessages(messages.slice(0, -1))
       )
-      if (proposal && !abortSignal?.aborted) {
+      if (abortSignal?.aborted) {
+        yield {
+          content: [{ type: 'text', text: '' }],
+          status: { type: 'incomplete', reason: 'cancelled' }
+        }
+        return
+      }
+      if (proposal) {
         yield {
           content: [
             { type: 'text', text: proposal.sentence },
