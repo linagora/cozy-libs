@@ -20,6 +20,15 @@ declare module 'cozy-ui/transpiled/react/SearchBar' {
   export default SearchBar
 }
 
+// Alert's shipped d.ts types the component as
+// ForwardRefExoticComponent<RefAttributes<any>>, dropping its actual props
+// (severity, action, children, etc.) — widen it here rather than fight the
+// generated types.
+declare module 'cozy-ui/transpiled/react/Alert' {
+  const Alert: any
+  export default Alert
+}
+
 declare module 'cozy-ui/transpiled/react/hooks/useEventListener' {
   const useEventListener: (
     element: any,
