@@ -22,13 +22,17 @@ export interface Capability {
   knownParams: string[]
 }
 
-const NOTE_VERB =
-  /(cr[ée]e|cr[ée]er|r[ée]dige|[ée]cris|fais|create|make|write|take)/i
+// Input is stripped of diacritics before matching (see stripAccents), so the
+// patterns are written accent-free: "cree" also covers crée/créé/créer.
+const NOTE_VERB = /(cree|redige|ecris|fais|create|make|write|take)/i
 const NOTE_OBJECT = /\bnotes?\b/i
 const EVENT_VERB =
-  /(cr[ée]e|cr[ée]er|planifie|organise|ajoute|programme|create|schedule|plan|add|set\s?up|book)/i
+  /(cree|planifie|organise|ajoute|programme|create|schedule|plan|add|set\s?up|book)/i
 const EVENT_OBJECT =
-  /(r[ée]union|rendez[- ]vous|\brdv\b|meeting|\bevents?\b|[ée]v[ée]nement|visio|\bcall\b)/i
+  /(reunion|rendez[- ]vous|\brdv\b|meeting|\bevents?\b|evenement|visio|\bcall\b)/i
+
+const stripAccents = (text: string): string =>
+  text.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 
 // Order matters: create_note first, "note" is the more specific object
 // (e.g. "create a note about the meeting" must map to create_note).
@@ -60,5 +64,7 @@ export const CAPABILITIES: Capability[] = [
   }
 ]
 
-export const matchCapability = (text: string): Capability | null =>
-  CAPABILITIES.find(capability => capability.match(text)) ?? null
+export const matchCapability = (text: string): Capability | null => {
+  const normalized = stripAccents(text)
+  return CAPABILITIES.find(capability => capability.match(normalized)) ?? null
+}

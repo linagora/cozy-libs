@@ -5,6 +5,9 @@ describe('matchCapability', () => {
     'Create a note summarizing this discussion',
     'write a note about the project',
     'Crée une note avec un résumé de cette discussion',
+    "Créé une note sur l'IA", // past-participle accent variant
+    'Cree une note sans accents',
+    'REDIGE UNE NOTE EN MAJUSCULES',
     'Rédige une note sur le budget'
   ])('detects create_note in "%s"', text => {
     expect(matchCapability(text)?.id).toBe('create_note')
@@ -14,6 +17,8 @@ describe('matchCapability', () => {
     'Schedule a meeting with Alice on Friday at 10am',
     'create an event for tomorrow',
     'Crée une réunion avec Bob vendredi',
+    'Créé une reunion sans accent avec Bob',
+    'Planifie un évènement pour vendredi',
     'Planifie une visio avec Alice demain',
     'ajoute un rendez-vous lundi à 9h'
   ])('detects create_event in "%s"', text => {
