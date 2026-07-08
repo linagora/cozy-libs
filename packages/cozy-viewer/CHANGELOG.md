@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [30.0.10](https://github.com/cozy/cozy-libs/compare/cozy-viewer@30.0.9...cozy-viewer@30.0.10) (2026-07-08)
+
+### Bug Fixes
+
+- **cozy-viewer:** Ensure ShortcutViewer button renders as anchor ([cf5e226](https://github.com/cozy/cozy-libs/commit/cf5e2268806c6c7a71c35354449607b0aaec7d99))
+
 ## [30.0.9](https://github.com/cozy/cozy-libs/compare/cozy-viewer@30.0.8...cozy-viewer@30.0.9) (2026-07-08)
 
 ### Bug Fixes
