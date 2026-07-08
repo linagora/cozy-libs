@@ -1,7 +1,7 @@
-import { Icon, CloudBroken } from '@linagora/twake-icons'
 import React from 'react'
 
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import { Icon, CloudBroken } from '@linagora/twake-icons'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 
 import styles from './styles.styl'
 import { withViewerLocales } from '../hoc/withViewerLocales'
