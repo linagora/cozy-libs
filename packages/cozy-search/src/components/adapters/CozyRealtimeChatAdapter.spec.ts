@@ -13,7 +13,7 @@ const makeStreamBridge = (): StreamBridge =>
     }),
     getSources: jest.fn(() => null),
     cleanup: jest.fn()
-  } as unknown as StreamBridge)
+  }) as unknown as StreamBridge
 
 const runAdapter = async (
   query: string,

@@ -18,7 +18,7 @@ const makeClient = (fetchJSON = jest.fn()) =>
     stackClient: { fetchJSON },
     getStackClient: () => ({ uri: 'https://claude.mycozy.cloud' }),
     getInstanceOptions: () => ({ subdomain: 'flat' })
-  } as Parameters<typeof executeAction>[0])
+  }) as Parameters<typeof executeAction>[0]
 
 describe('executeAction create_note', () => {
   it('POSTs to /notes with schema and converted content, returns note url', async () => {

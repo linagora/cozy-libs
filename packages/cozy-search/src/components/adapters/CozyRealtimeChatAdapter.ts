@@ -17,12 +17,12 @@ import type {
 import Minilog from 'cozy-minilog'
 
 import { StreamBridge } from './StreamBridge'
-import { sanitizeChatContent } from '../helpers'
 import { matchCapability } from '../actions/capabilities'
 import {
   fetchActionProposal,
   toSimpleMessages
 } from '../actions/fetchActionProposal'
+import { sanitizeChatContent } from '../helpers'
 
 const log = Minilog('🔍 [CozyRealtimeChatAdapter]')
 

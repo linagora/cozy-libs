@@ -17,7 +17,8 @@ export interface Capability {
   requiredParams: string[]
 }
 
-const NOTE_VERB = /(cr[ée]e|cr[ée]er|r[ée]dige|[ée]cris|fais|create|make|write|take)/i
+const NOTE_VERB =
+  /(cr[ée]e|cr[ée]er|r[ée]dige|[ée]cris|fais|create|make|write|take)/i
 const NOTE_OBJECT = /\bnotes?\b/i
 const EVENT_VERB =
   /(cr[ée]e|cr[ée]er|planifie|organise|ajoute|programme|create|schedule|plan|add|set\s?up|book)/i

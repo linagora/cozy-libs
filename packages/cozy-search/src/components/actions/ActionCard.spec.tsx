@@ -13,11 +13,7 @@ describe('ActionCard', () => {
 
   it('shows title, params and the confirm button in proposed state', () => {
     render(
-      <ActionCard
-        capabilityId="create_note"
-        args={args}
-        execute={jest.fn()}
-      />
+      <ActionCard capabilityId="create_note" args={args} execute={jest.fn()} />
     )
     expect(
       screen.getByText('assistant.app_actions.create_note.title')
@@ -29,9 +25,7 @@ describe('ActionCard', () => {
   })
 
   it('executes on click and shows the done state with a link', async () => {
-    const execute = jest
-      .fn()
-      .mockResolvedValue({ url: 'https://notes/#/n/1' })
+    const execute = jest.fn().mockResolvedValue({ url: 'https://notes/#/n/1' })
     render(
       <ActionCard capabilityId="create_note" args={args} execute={execute} />
     )
@@ -62,9 +56,7 @@ describe('ActionCard', () => {
     fireEvent.click(
       screen.getByText('assistant.app_actions.create_note.confirm')
     )
-    expect(
-      await screen.findByText('assistant.app_actions.error')
-    ).toBeTruthy()
+    expect(await screen.findByText('assistant.app_actions.error')).toBeTruthy()
 
     fireEvent.click(screen.getByText('assistant.app_actions.retry'))
     expect(

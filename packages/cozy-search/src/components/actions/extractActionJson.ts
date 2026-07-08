@@ -35,8 +35,7 @@ const isValid = (
   if (typeof obj.params !== 'object' || obj.params === null) return false
   const params = obj.params as Record<string, unknown>
   return capability.requiredParams.every(
-    key =>
-      typeof params[key] === 'string' && (params[key] as string).trim() !== ''
+    key => typeof params[key] === 'string' && params[key].trim() !== ''
   )
 }
 

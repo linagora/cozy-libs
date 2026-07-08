@@ -1,8 +1,5 @@
 import { CAPABILITIES } from './capabilities'
-import {
-  fetchActionProposal,
-  toSimpleMessages
-} from './fetchActionProposal'
+import { fetchActionProposal, toSimpleMessages } from './fetchActionProposal'
 
 const createNote = CAPABILITIES[0]
 

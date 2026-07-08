@@ -20,21 +20,19 @@ describe('markdownToProseMirror', () => {
   })
 
   it('joins consecutive lines into one paragraph, splits on blank lines', () => {
-    expect(markdownToProseMirror('line one\nline two\n\nsecond para')).toEqual(
-      {
-        type: 'doc',
-        content: [
-          {
-            type: 'paragraph',
-            content: [{ type: 'text', text: 'line one line two' }]
-          },
-          {
-            type: 'paragraph',
-            content: [{ type: 'text', text: 'second para' }]
-          }
-        ]
-      }
-    )
+    expect(markdownToProseMirror('line one\nline two\n\nsecond para')).toEqual({
+      type: 'doc',
+      content: [
+        {
+          type: 'paragraph',
+          content: [{ type: 'text', text: 'line one line two' }]
+        },
+        {
+          type: 'paragraph',
+          content: [{ type: 'text', text: 'second para' }]
+        }
+      ]
+    })
   })
 
   it('groups bullet lines into one bullet_list', () => {
