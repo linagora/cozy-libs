@@ -18,6 +18,11 @@ import Minilog from 'cozy-minilog'
 
 import { StreamBridge } from './StreamBridge'
 import { sanitizeChatContent } from '../helpers'
+import { matchCapability } from '../actions/capabilities'
+import {
+  fetchActionProposal,
+  toSimpleMessages
+} from '../actions/fetchActionProposal'
 
 const log = Minilog('🔍 [CozyRealtimeChatAdapter]')
 
@@ -75,6 +80,41 @@ export const createCozyRealtimeChatAdapter = (
     if (!userQuery) {
       log.error('No user message found in:', messages)
       return
+    }
+
+    // Demo app-action branch: on an action intent, ask the LLM directly
+    // (stack /ai/v1/chat/completions proxy) for structured params and yield
+    // a confirm-first tool-call card instead of the conversation flow.
+    // This exchange is not persisted in the conversation (demo trade-off).
+    const capability = matchCapability(userQuery)
+    if (capability) {
+      yield {
+        content: [{ type: 'text', text: '' }],
+        status: { type: 'requires-action', reason: 'tool-calls' }
+      }
+      const proposal = await fetchActionProposal(
+        client,
+        capability,
+        userQuery,
+        toSimpleMessages(messages.slice(0, -1))
+      )
+      if (proposal && !abortSignal?.aborted) {
+        yield {
+          content: [
+            { type: 'text', text: proposal.sentence },
+            {
+              type: 'tool-call',
+              toolCallId: `${capability.id}-${Date.now()}`,
+              toolName: capability.id,
+              args: proposal.params,
+              argsText: JSON.stringify(proposal.params)
+            }
+          ],
+          status: { type: 'complete', reason: 'stop' }
+        }
+        return
+      }
+      log.warn('Action proposal unavailable, falling back to chat flow')
     }
 
     const stream = streamBridge.createStream(conversationId)
