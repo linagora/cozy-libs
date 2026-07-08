@@ -33,12 +33,13 @@ exports[`Shortcutviewer renders the component 1`] = `
     <p
       class="viewer-filename"
     />
-    <button
+    <a
+      aria-disabled="false"
       class="MuiButtonBase-root MuiButton-root MuiButton-contained customColor-primary customSize-default MuiButton-containedPrimary MuiButton-disableElevation"
       href=""
+      role="button"
       tabindex="0"
       target="_blank"
-      type="button"
     >
       <span
         class="MuiButton-label"
@@ -60,7 +61,7 @@ exports[`Shortcutviewer renders the component 1`] = `
       <span
         class="MuiTouchRipple-root"
       />
-    </button>
+    </a>
   </div>
 </div>
 `;
