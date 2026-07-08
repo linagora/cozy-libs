@@ -110,6 +110,7 @@
       "params": {
         "title": "Titre",
         "content": "Contenu",
+        "summary": "Résumé",
         "start": "Début",
         "end": "Fin",
         "attendee": "Avec"

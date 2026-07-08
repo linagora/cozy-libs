@@ -106,4 +106,23 @@ describe('ActionCard', () => {
     ).toBeNull()
     expect(screen.getByText(/x{10,}…/)).toBeTruthy()
   })
+
+  it('shows the note summary but never its raw markdown content', () => {
+    render(
+      <ActionCard
+        capabilityId="create_note"
+        args={{
+          title: 'My note',
+          content: '# Raw markdown body',
+          summary: 'A short description of the note'
+        }}
+        execute={jest.fn()}
+      />
+    )
+    expect(screen.getByText(/A short description of the note/)).toBeTruthy()
+    expect(screen.queryByText(/Raw markdown body/)).toBeNull()
+    expect(
+      screen.queryByText('assistant.app_actions.params.content')
+    ).toBeNull()
+  })
 })

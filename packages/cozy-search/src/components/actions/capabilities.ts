@@ -16,10 +16,15 @@ export interface Capability {
   /** Params that must be non-empty strings for a proposal to be valid */
   requiredParams: string[]
   /**
-   * Params rendered on the confirmation card. Anything else the LLM
-   * returns is dropped so unknown keys never leak raw i18n keys into the UI.
+   * Params kept from the LLM proposal. Anything else the LLM returns is
+   * dropped so unknown keys never leak raw i18n keys into the UI.
    */
   knownParams: string[]
+  /**
+   * Subset of knownParams rendered on the confirmation card, in display
+   * order (e.g. raw markdown content is kept for execution but not shown).
+   */
+  displayParams: string[]
 }
 
 // Input is stripped of diacritics before matching (see stripAccents), so the
@@ -42,12 +47,15 @@ export const CAPABILITIES: Capability[] = [
     match: (text: string): boolean =>
       NOTE_VERB.test(text) && NOTE_OBJECT.test(text),
     paramsPrompt:
-      'For action "create_note", "params" is {"title": string, "content": string}. ' +
-      '"content" is the note body in simple Markdown: use "#"/"##" headings, ' +
-      'plain paragraphs and "- " bullet lists only. If the user asks to ' +
+      'For action "create_note", "params" is {"title": string, "content": string, ' +
+      '"summary": string}. "content" is the note body in simple Markdown: use ' +
+      '"#"/"##" headings, plain paragraphs and "- " bullet lists only; do NOT ' +
+      'add a date or signature to it. "summary" is one short sentence, in the ' +
+      "user's language, describing what the note contains. If the user asks to " +
       'summarize the discussion, write a summary of the conversation so far.',
     requiredParams: ['title', 'content'],
-    knownParams: ['title', 'content']
+    knownParams: ['title', 'content', 'summary'],
+    displayParams: ['title', 'summary']
   },
   {
     id: 'create_event',
@@ -60,7 +68,8 @@ export const CAPABILITIES: Capability[] = [
       '"end" one hour after "start". "attendee" is the invited person\'s name ' +
       'or email, or "" if none.',
     requiredParams: ['title', 'start'],
-    knownParams: ['title', 'start', 'end', 'attendee']
+    knownParams: ['title', 'start', 'end', 'attendee'],
+    displayParams: ['title', 'start', 'end', 'attendee']
   }
 ]
 

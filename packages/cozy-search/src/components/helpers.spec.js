@@ -72,6 +72,12 @@ describe('sanitizeChatContent', () => {
     expect(sanitizeChatContent(text)).toBe('See applications here')
   })
 
+  it('should remove [Sources: none] and other non-numeric Sources tags', () => {
+    const text = 'I could not find anything. [Sources: none]'
+    expect(sanitizeChatContent(text)).toBe('I could not find anything.')
+    expect(sanitizeChatContent('Done [Sources: N/A] here')).toBe('Done here')
+  })
+
   it('should not remove simple REF or [REF]', () => {
     const text = 'REF not closed [REF]not closed either'
     expect(sanitizeChatContent(text)).toBe(text)

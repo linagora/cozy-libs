@@ -7,7 +7,7 @@ import Paper from 'cozy-ui/transpiled/react/Paper'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import { CapabilityId } from './capabilities'
+import { CAPABILITIES, CapabilityId } from './capabilities'
 import { ExecuteResult } from './executeAction'
 import { ActionLang } from './extractActionJson'
 import { locales } from '../../locales'
@@ -80,7 +80,14 @@ const ActionCard = ({
     }
   }
 
-  const shownParams = Object.entries(args).filter(([, value]) => !!value)
+  // Only the capability's displayParams appear on the card (raw markdown
+  // content stays hidden — it is still sent on execution), in display order.
+  const displayParams =
+    CAPABILITIES.find(capability => capability.id === capabilityId)
+      ?.displayParams ?? Object.keys(args)
+  const shownParams = displayParams
+    .map((key): [string, string] => [key, args[key]])
+    .filter(([, value]) => !!value)
 
   return (
     <Paper elevation={2} className="u-p-1 u-mt-half">

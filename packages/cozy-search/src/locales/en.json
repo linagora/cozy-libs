@@ -110,6 +110,7 @@
       "params": {
         "title": "Title",
         "content": "Content",
+        "summary": "Summary",
         "start": "Start",
         "end": "End",
         "attendee": "With"

@@ -26,8 +26,9 @@ export const sanitizeChatContent = content => {
       .replace(/\s?\[doc_\d+\]/g, '')
       // remove « [Source 1] », « [Source 4, 6] » or « [Source 4, Source 6] »
       .replace(/\s?\[Source\s+\d+(?:\s*,\s*(?:Source\s+)?\d+)*\]/g, '')
-      // remove « [Sources: 1, 3, 6] » citations, with optional empty link parens
-      .replace(/\s?\[Sources?:\s*\d+(?:\s*,\s*\d+)*\s*\](?:\([^)]*\))?/g, '')
+      // remove « [Sources: 1, 3, 6] » citations — digits, "none" or any other
+      // value the LLM writes there — with optional empty link parens
+      .replace(/\s?\[Sources?:\s*[^\]]*\](?:\([^)]*\))?/g, '')
   )
 }
 
