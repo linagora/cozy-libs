@@ -4,7 +4,7 @@ import React from 'react'
 import { withClient } from 'cozy-client'
 import { downloadFile } from 'cozy-client/dist/models/file'
 import { useWebviewIntent } from 'cozy-intent'
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 import { useI18n } from 'twake-i18n'
 

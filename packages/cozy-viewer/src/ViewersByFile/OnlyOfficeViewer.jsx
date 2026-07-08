@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Button from 'cozy-ui/transpiled/react/deprecated/Button'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
 import NoViewer from '../NoViewer'

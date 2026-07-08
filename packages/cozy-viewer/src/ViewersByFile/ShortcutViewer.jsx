@@ -1,9 +1,9 @@
-import { Openwith } from '@linagora/twake-icons'
 import get from 'lodash/get'
 import React from 'react'
 
+import { Openwith } from '@linagora/twake-icons'
 import { useClient, useFetchShortcut } from 'cozy-client'
-import { ButtonLink } from 'cozy-ui/transpiled/react/deprecated/Button'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
 import NoViewer from '../NoViewer'
@@ -20,9 +20,9 @@ const ShortcutViewer = ({ t, file }) => {
     <NoViewer
       file={file}
       renderFallbackExtraContent={() => (
-        <ButtonLink
+        <Button
           label={`${t('Viewer.goto', { url: get(url, 'origin', '') })}`}
-          icon={Openwith}
+          startIcon={<Openwith />}
           href={`${get(url, 'origin', '')}`}
           target="_blank"
         />
