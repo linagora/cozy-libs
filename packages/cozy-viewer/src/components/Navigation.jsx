@@ -1,7 +1,8 @@
-import { Icon, DropdownClose } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
+
+import { Icon, DropdownClose } from '@linagora/twake-icons'
 
 import styles from './styles.styl'
 

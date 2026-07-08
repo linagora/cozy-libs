@@ -1,7 +1,7 @@
-import { Icon, Right } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Right } from '@linagora/twake-icons'
 import { formatOtherMetadataValue } from 'cozy-client/dist/models/paper'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'

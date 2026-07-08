@@ -1,4 +1,3 @@
-import { Icon, Pen } from '@linagora/twake-icons'
 import cx from 'classnames'
 import flow from 'lodash/flow'
 import throttle from 'lodash/throttle'
@@ -6,6 +5,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Document, Page } from 'react-pdf'
 
+import { Icon, Pen } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 
 import styles from './styles.styl'

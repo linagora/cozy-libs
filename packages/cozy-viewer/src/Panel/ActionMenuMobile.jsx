@@ -1,7 +1,7 @@
-import { Icon, Copy, Rename } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Copy, Rename } from '@linagora/twake-icons'
 import BottomSheet, {
   BottomSheetItem
 } from 'cozy-ui/transpiled/react/BottomSheet'

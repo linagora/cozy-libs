@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   Icon,
   FileTypeBin,
@@ -9,7 +11,6 @@ import {
   FileTypeText,
   FileTypeZip
 } from '@linagora/twake-icons'
-import React from 'react'
 
 const FileIcon = ({ type }) => {
   let icon

@@ -1,6 +1,6 @@
-import { ShieldClean, ShieldInfected, Spinner } from '@linagora/twake-icons'
 import get from 'lodash/get'
 
+import { ShieldClean, ShieldInfected, Spinner } from '@linagora/twake-icons'
 import { splitFilename, isFromKonnector } from 'cozy-client/dist/models/file'
 import { KNOWN_BILLS_ATTRIBUTES_NAMES } from 'cozy-client/dist/models/paper'
 

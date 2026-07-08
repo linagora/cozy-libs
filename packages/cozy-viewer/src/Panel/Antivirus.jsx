@@ -1,7 +1,7 @@
-import { Icon, InfoOutlined, Shield } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
+import { Icon, InfoOutlined, Shield } from '@linagora/twake-icons'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Link from 'cozy-ui/transpiled/react/Link'
 import List from 'cozy-ui/transpiled/react/List'

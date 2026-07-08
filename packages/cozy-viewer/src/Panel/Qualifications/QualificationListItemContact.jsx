@@ -1,7 +1,7 @@
-import { Icon, Dots, People } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
 
+import { Icon, Dots, People } from '@linagora/twake-icons'
 import {
   getTranslatedNameForContact,
   formatContactValue

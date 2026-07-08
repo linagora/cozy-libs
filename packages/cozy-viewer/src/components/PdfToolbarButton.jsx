@@ -1,7 +1,7 @@
-import { Icon } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 
 const PdfToolbarButton = ({ icon, onClick, disabled, label }) => (

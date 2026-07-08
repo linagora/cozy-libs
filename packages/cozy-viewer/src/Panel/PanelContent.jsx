@@ -1,8 +1,8 @@
-import { Icon, CrossMedium } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Icon, CrossMedium } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Paper from 'cozy-ui/transpiled/react/Paper'
