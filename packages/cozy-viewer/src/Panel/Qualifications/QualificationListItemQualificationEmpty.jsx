@@ -1,7 +1,7 @@
-import { Icon, LabelOutlined, Right } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, LabelOutlined, Right } from '@linagora/twake-icons'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'

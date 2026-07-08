@@ -1,7 +1,7 @@
-import { Icon, Right } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Right } from '@linagora/twake-icons'
 import { useClient, useQuery } from 'cozy-client'
 import flag from 'cozy-flags'
 import {

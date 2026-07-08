@@ -1,3 +1,8 @@
+import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React, { useCallback, useState, useEffect, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+
 import {
   Icon,
   Assistant,
@@ -5,11 +10,6 @@ import {
   CrossMedium,
   Refresh
 } from '@linagora/twake-icons'
-import cx from 'classnames'
-import PropTypes from 'prop-types'
-import React, { useCallback, useState, useEffect, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-
 import { useClient } from 'cozy-client'
 import { extractText, chatCompletion } from 'cozy-client/dist/models/ai'
 import { fetchBlobFileById } from 'cozy-client/dist/models/file'

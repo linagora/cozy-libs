@@ -1,7 +1,7 @@
-import { Icon, Reply, ShareIos } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Reply, ShareIos } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import { makeSharingLink } from 'cozy-client/dist/models/sharing'
 import { isIOS } from 'cozy-device-helper'

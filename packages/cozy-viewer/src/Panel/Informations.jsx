@@ -1,3 +1,7 @@
+import has from 'lodash/has'
+import PropTypes from 'prop-types'
+import React, { useRef, useState } from 'react'
+
 import {
   Icon,
   Calendar,
@@ -8,10 +12,6 @@ import {
   Safe,
   Server
 } from '@linagora/twake-icons'
-import has from 'lodash/has'
-import PropTypes from 'prop-types'
-import React, { useRef, useState } from 'react'
-
 import { useClient } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import {

@@ -1,8 +1,8 @@
-import { Icon, Article } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Article } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'twake-i18n'

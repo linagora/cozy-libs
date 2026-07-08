@@ -1,9 +1,9 @@
-import { Icon, Bottom, Dots, Right, Text } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import { Icon, Bottom, Dots, Right, Text } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
 import Accordion from 'cozy-ui/transpiled/react/Accordion'
 import AccordionDetails from 'cozy-ui/transpiled/react/AccordionDetails'

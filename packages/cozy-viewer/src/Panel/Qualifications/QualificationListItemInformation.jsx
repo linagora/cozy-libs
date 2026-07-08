@@ -1,3 +1,6 @@
+import PropTypes from 'prop-types'
+import React, { forwardRef } from 'react'
+
 import {
   Icon,
   Bell,
@@ -9,9 +12,6 @@ import {
   Number,
   Right
 } from '@linagora/twake-icons'
-import PropTypes from 'prop-types'
-import React, { forwardRef } from 'react'
-
 import {
   getTranslatedNameForInformationMetadata,
   formatInformationMetadataValue,

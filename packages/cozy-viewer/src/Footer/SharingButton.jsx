@@ -1,7 +1,7 @@
-import { Icon, Share } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Share } from '@linagora/twake-icons'
 import { ShareButton } from 'cozy-sharing'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 

@@ -1,8 +1,8 @@
-import { Icon, Download, Previous } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Download, Previous } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import { downloadFile } from 'cozy-client/dist/models/file'
 import { useWebviewIntent } from 'cozy-intent'

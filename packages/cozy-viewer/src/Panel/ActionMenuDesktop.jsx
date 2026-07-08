@@ -1,7 +1,7 @@
-import { Icon, Copy, Rename } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { forwardRef } from 'react'
 
+import { Icon, Copy, Rename } from '@linagora/twake-icons'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import ActionMenu, {
   ActionMenuItem
