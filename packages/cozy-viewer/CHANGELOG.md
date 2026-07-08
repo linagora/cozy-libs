@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [30.0.9](https://github.com/cozy/cozy-libs/compare/cozy-viewer@30.0.8...cozy-viewer@30.0.9) (2026-07-08)
+
+### Bug Fixes
+
+- **cozy-viewer:** Lint ([09551ce](https://github.com/cozy/cozy-libs/commit/09551ce63e95b03a70648693d25294d7c1d41ae5))
+- **cozy-viewer:** Migrate deprecated Button to Buttons ([2f46ee1](https://github.com/cozy/cozy-libs/commit/2f46ee1f6a6f4874138248f8b048a459ffcfd4fb))
+
 ## [30.0.8](https://github.com/cozy/cozy-libs/compare/cozy-viewer@30.0.7...cozy-viewer@30.0.8) (2026-07-08)
 
 **Note:** Version bump only for package cozy-viewer
