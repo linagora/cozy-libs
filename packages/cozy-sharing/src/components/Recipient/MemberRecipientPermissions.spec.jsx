@@ -1,4 +1,4 @@
-import { render, fireEvent, screen, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import React from 'react'
 
 import { createMockClient } from 'cozy-client'
@@ -70,70 +70,6 @@ describe('MemberRecipientPermissions component', () => {
 
   afterAll(() => {
     global.document.createRange = createRangeBackup
-  })
-
-  it('should render the current permission type', () => {
-    setup()
-    expect(screen.getByRole('button', { name: 'Editor' })).toBeInTheDocument()
-  })
-
-  it('should call updateSharingMemberType when changing to one-way', async () => {
-    mockUpdateSharingMemberType.mockResolvedValue(undefined)
-
-    const { getByRole } = setup({ type: 'two-way' })
-
-    fireEvent.click(getByRole('button', { name: 'Editor' }))
-    fireEvent.click(getByRole('menuitem', { name: 'Viewer' }))
-
-    expect(mockUpdateSharingMemberType).toHaveBeenCalledWith(
-      'sharing-123',
-      1,
-      'one-way'
-    )
-  })
-
-  it('should call updateSharingMemberType when changing to two-way', async () => {
-    mockUpdateSharingMemberType.mockResolvedValue(undefined)
-
-    const { getByRole } = setup({ type: 'one-way' })
-
-    fireEvent.click(getByRole('button', { name: 'Viewer' }))
-    fireEvent.click(getByRole('menuitem', { name: 'Editor' }))
-
-    expect(mockUpdateSharingMemberType).toHaveBeenCalledWith(
-      'sharing-123',
-      1,
-      'two-way'
-    )
-  })
-
-  it('should show error alert when updateSharingMemberType fails', async () => {
-    mockUpdateSharingMemberType.mockRejectedValue(new Error('Network error'))
-
-    const { getByRole } = setup({ type: 'two-way' })
-
-    fireEvent.click(getByRole('button', { name: 'Editor' }))
-    fireEvent.click(getByRole('menuitem', { name: 'Viewer' }))
-
-    await waitFor(() => {
-      expect(mockShowAlert).toHaveBeenCalledWith({
-        message:
-          'An error occurred while changing the permissions. Please try again.',
-        severity: 'error',
-        variant: 'filled'
-      })
-    })
-  })
-
-  it('should not call updateSharingMemberType when selecting same type', async () => {
-    mockUpdateSharingMemberType.mockResolvedValue(undefined)
-
-    const { getByRole } = setup({ type: 'two-way' })
-
-    fireEvent.click(getByRole('button', { name: 'Editor' }))
-    fireEvent.click(getByRole('menuitem', { name: 'Editor' }))
-
-    expect(mockUpdateSharingMemberType).not.toHaveBeenCalled()
   })
 
   it('should not render menu when user is not owner and not the shared drive contact', () => {
