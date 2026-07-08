@@ -6,6 +6,8 @@ import Dialog, { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
+import styles from './styles.styl'
+
 /**
  * Hosts the Drive `PICK io.cozy.files` intent (folder `reference` mode)
  * in an iframe dialog, so the surrounding wizard keeps its state.
@@ -65,12 +67,8 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogContent className="u-p-0">
-        {/* The intent protocol resizes this element itself (inline styles) */}
-        <div
-          ref={setIntentHost}
-          className="u-w-100"
-          style={{ minHeight: 480 }}
-        />
+        {/* The intent protocol may also resize this element (inline styles) */}
+        <div ref={setIntentHost} className={styles.intentHost} />
       </DialogContent>
     </Dialog>
   )
