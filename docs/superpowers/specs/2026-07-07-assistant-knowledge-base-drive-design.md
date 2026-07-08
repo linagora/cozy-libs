@@ -94,11 +94,11 @@ The existing `PICK` / `io.cozy.files` intent gains a **folder-reference return m
 contract (final shape to be settled in the cozy-drive repo, on top of the existing
 `FilePickerConfig` / `ActionConfig` in `docs/file-picker-intent.md`):
 
-- Request: `action: 'PICK'`, `type: 'io.cozy.files'`, with an action config selecting the new
-  mode, e.g. `{ label: <confirm label>, action: 'reference', allowFolder: true }` — alongside
-  the existing `sharingLink` / `downloadLink` actions.
-- Response entry: `{ id, name, type: 'directory', doctype: 'io.cozy.files' }` — no link
-  generation.
+- Request: `action: 'PICK'`, `type: 'io.cozy.files'`, with data following Drive's keyed
+  `FilePickerConfig` shape (`null` hides an action):
+  `{ sharingLink: null, downloadLink: null, reference: { label, allowFolder: true, onlyFolder: true } }`.
+- Response entry: `{ id, name, size, mimeType, type: 'directory', doctype: 'io.cozy.files' }`
+  — no link generation, no side effects. `onlyFolder` disables the confirm for file selections.
 - Everything else (iframe handshake via `cozy-interapp` `createService`, cancel/terminate
   semantics, navigation UI) is unchanged.
 

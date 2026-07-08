@@ -28,13 +28,15 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
     const intents = new Intents({ client })
     const startPromise = intents
       .create('PICK', 'io.cozy.files', {
-        actions: [
-          {
-            label: t('assistant_create.from_drive.actions.add'),
-            action: 'reference',
-            allowFolder: true
-          }
-        ]
+        // Drive's FilePickerConfig: null hides an action, so only the
+        // side-effect-free folder `reference` action remains visible
+        sharingLink: null,
+        downloadLink: null,
+        reference: {
+          label: t('assistant.knowledge_base.select_folder'),
+          allowFolder: true,
+          onlyFolder: true
+        }
       })
       .start(intentHost)
 

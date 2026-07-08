@@ -87,6 +87,7 @@
     "knowledge_base": {
       "picker_error": "Impossible d'ouvrir le sélecteur de dossier Drive. Veuillez réessayer.",
       "remove": "Retirer le dossier",
+      "select_folder": "Sélectionner ce dossier",
       "unavailable": "Dossier indisponible"
     }
   },

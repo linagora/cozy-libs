@@ -58,13 +58,13 @@ describe('FolderPickerDialog', () => {
 
     await waitFor(() => expect(mockCreate).toHaveBeenCalled())
     expect(mockCreate).toHaveBeenCalledWith('PICK', 'io.cozy.files', {
-      actions: [
-        {
-          label: 'assistant_create.from_drive.actions.add',
-          action: 'reference',
-          allowFolder: true
-        }
-      ]
+      sharingLink: null,
+      downloadLink: null,
+      reference: {
+        label: 'assistant.knowledge_base.select_folder',
+        allowFolder: true,
+        onlyFolder: true
+      }
     })
     expect(mockStart).toHaveBeenCalledWith(expect.any(HTMLElement))
   })
