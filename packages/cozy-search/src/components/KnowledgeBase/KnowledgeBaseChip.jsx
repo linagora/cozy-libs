@@ -7,6 +7,10 @@ import { useI18n } from 'twake-i18n'
 
 import TDrive from '../../assets/tdrive.png'
 
+// MUI Chip's own `cursor: default` rule loads after the utility stylesheet
+// and ties `u-c-pointer` on specificity, so only an inline style wins.
+const styles = { pointer: { cursor: 'pointer' } }
+
 /**
  * Composer chip showing the selected assistant's knowledge-base folder.
  * Clicking opens the real Drive app on that folder in a new tab — that is
@@ -46,9 +50,10 @@ const KnowledgeBaseChip = ({ folderId, folder, isUnavailable, isLast }) => {
       href={folderUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={cx('u-w-auto u-ph-half u-mr-0 u-c-pointer', {
+      className={cx('u-w-auto u-ph-half u-mr-0', {
         'u-mr-half': !isLast
       })}
+      style={styles.pointer}
     />
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import Intents from 'cozy-interapp'
@@ -14,10 +14,13 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
   const client = useClient()
   const { t } = useI18n()
   const { showAlert } = useAlert()
-  const intentHostRef = useRef(null)
+  // Callback-ref into state: MUI's Portal attaches the dialog content in its
+  // own effect, so a plain ref is still null when this component's first
+  // effect runs. State makes the effect re-run once the host node exists.
+  const [intentHost, setIntentHost] = useState(null)
 
   useEffect(() => {
-    if (!open || !intentHostRef.current) return undefined
+    if (!open || !intentHost) return undefined
 
     let cancelled = false
     const intents = new Intents({ client })
@@ -31,7 +34,7 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
           }
         ]
       })
-      .start(intentHostRef.current)
+      .start(intentHost)
 
     startPromise
       .then(result => {
@@ -57,14 +60,14 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
       startPromise.stop?.()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, client])
+  }, [open, client, intentHost])
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogContent className="u-p-0">
         {/* The intent protocol resizes this element itself (inline styles) */}
         <div
-          ref={intentHostRef}
+          ref={setIntentHost}
           className="u-w-100"
           style={{ minHeight: 480 }}
         />

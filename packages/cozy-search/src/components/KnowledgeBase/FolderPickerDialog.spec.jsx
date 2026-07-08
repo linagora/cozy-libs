@@ -24,8 +24,17 @@ jest.mock('twake-i18n', () => ({
 }))
 
 jest.mock('cozy-ui/transpiled/react/Dialog', () => {
-  const MockDialog = ({ open, children }) =>
-    open ? <div>{children}</div> : null
+  const MockReact = jest.requireActual('react')
+  // Mimics MUI v4's Portal: dialog children only attach to the DOM after an
+  // effect tick, so a plain ref is still null during the consumer's first
+  // effect. Regression guard for the intent never starting in a real browser.
+  const MockDialog = ({ open, children }) => {
+    const [mounted, setMounted] = MockReact.useState(false)
+    MockReact.useEffect(() => {
+      setMounted(true)
+    }, [])
+    return open && mounted ? <div>{children}</div> : null
+  }
   return {
     __esModule: true,
     default: MockDialog,
