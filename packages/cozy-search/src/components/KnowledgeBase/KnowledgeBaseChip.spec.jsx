@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 
 import KnowledgeBaseChip from './KnowledgeBaseChip'
@@ -26,6 +26,7 @@ describe('KnowledgeBaseChip', () => {
         folder={{ _id: 'folder-1', name: 'HR' }}
         isUnavailable={false}
         isLast
+        onRemove={jest.fn()}
       />
     )
 
@@ -37,13 +38,32 @@ describe('KnowledgeBaseChip', () => {
     expect(screen.getByText('HR')).toBeTruthy()
   })
 
-  it('shows the unavailable state without a link', () => {
+  it('removes the knowledge base from the cross without navigating', () => {
+    const onRemove = jest.fn()
+    render(
+      <KnowledgeBaseChip
+        folderId="folder-1"
+        folder={{ _id: 'folder-1', name: 'HR' }}
+        isUnavailable={false}
+        isLast
+        onRemove={onRemove}
+      />
+    )
+
+    fireEvent.click(screen.getByLabelText('assistant.knowledge_base.remove'))
+
+    expect(onRemove).toHaveBeenCalled()
+  })
+
+  it('shows the unavailable state without a link but with the remove cross', () => {
+    const onRemove = jest.fn()
     render(
       <KnowledgeBaseChip
         folderId="folder-1"
         folder={null}
         isUnavailable
         isLast
+        onRemove={onRemove}
       />
     )
 
@@ -51,5 +71,8 @@ describe('KnowledgeBaseChip', () => {
     expect(
       screen.getByText('assistant.knowledge_base.unavailable')
     ).toBeTruthy()
+
+    fireEvent.click(screen.getByLabelText('assistant.knowledge_base.remove'))
+    expect(onRemove).toHaveBeenCalled()
   })
 })

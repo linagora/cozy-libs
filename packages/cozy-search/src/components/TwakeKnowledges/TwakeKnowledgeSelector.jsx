@@ -19,7 +19,7 @@ const TwakeKnowledgeSelector = ({
   onToggleWebsearch
 }) => {
   const { t } = useI18n()
-  const { folderId, folder, isUnavailable } =
+  const { folderId, folder, isUnavailable, removeKnowledgeBase } =
     useSelectedAssistantKnowledgeBase()
 
   const websearchEnabledFlag = flag('cozy.assistant.websearch.enabled')
@@ -73,6 +73,7 @@ const TwakeKnowledgeSelector = ({
           folder={folder}
           isUnavailable={isUnavailable}
           isLast={!sourceKnowledgeEnabledFlag || twakeKnowledges.length === 0}
+          onRemove={removeKnowledgeBase}
         />
       )}
       {sourceKnowledgeEnabledFlag &&
