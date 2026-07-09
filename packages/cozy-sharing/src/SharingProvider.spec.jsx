@@ -829,6 +829,241 @@ describe('updateSharingMemberType', () => {
   })
 })
 
+describe('updateSharingGroupType', () => {
+  const mockSharing = {
+    id: 'sharing-123',
+    type: 'io.cozy.sharings',
+    attributes: {
+      groups: [
+        {
+          id: 'group-owner-123',
+          name: 'Admins',
+          addedBy: 0,
+          read_only: false,
+          revoked: false
+        },
+        {
+          id: 'group-editors-456',
+          name: 'Editors',
+          addedBy: 0,
+          read_only: false,
+          revoked: false
+        }
+      ]
+    }
+  }
+
+  let instance
+
+  beforeEach(() => {
+    const mockClient = {
+      getStackClient: () => ({ uri: 'http://cozy.local' }),
+      collection: jest.fn().mockReturnValue({})
+    }
+
+    instance = new SharingProvider({ client: mockClient })
+    instance.state = {
+      ...instance.state,
+      sharings: [mockSharing]
+    }
+    instance.sharingCol = {
+      setGroupReadOnly: jest.fn().mockResolvedValue({}),
+      setGroupReadWrite: jest.fn().mockResolvedValue({})
+    }
+    instance.dispatch = jest.fn(action => {
+      instance.state = { ...instance.state, ...reducer(instance.state, action) }
+    })
+  })
+
+  it('should throw when sharing is not found', async () => {
+    await expect(
+      instance.updateSharingGroupType('unknown-id', 1, 'one-way')
+    ).rejects.toThrow('Sharing not found')
+  })
+
+  it('should throw when group is not found', async () => {
+    await expect(
+      instance.updateSharingGroupType('sharing-123', 99, 'one-way')
+    ).rejects.toThrow('Group not found')
+  })
+
+  it('should call setGroupReadOnly when switching to one-way', async () => {
+    await instance.updateSharingGroupType('sharing-123', 1, 'one-way')
+
+    expect(instance.sharingCol.setGroupReadOnly).toHaveBeenCalledWith(
+      mockSharing,
+      1
+    )
+    expect(instance.sharingCol.setGroupReadWrite).not.toHaveBeenCalled()
+  })
+
+  it('should call setGroupReadWrite when switching to two-way', async () => {
+    await instance.updateSharingGroupType('sharing-123', 1, 'two-way')
+
+    expect(instance.sharingCol.setGroupReadWrite).toHaveBeenCalledWith(
+      mockSharing,
+      1
+    )
+    expect(instance.sharingCol.setGroupReadOnly).not.toHaveBeenCalled()
+  })
+
+  it('should optimistically dispatch a state update when switching to one-way', async () => {
+    await instance.updateSharingGroupType('sharing-123', 1, 'one-way')
+
+    expect(instance.dispatch).toHaveBeenCalledWith({
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...mockSharing,
+        attributes: {
+          ...mockSharing.attributes,
+          groups: [
+            mockSharing.attributes.groups[0],
+            {
+              ...mockSharing.attributes.groups[1],
+              read_only: true
+            }
+          ]
+        }
+      }
+    })
+  })
+
+  it('should optimistically dispatch a state update when switching to two-way', async () => {
+    await instance.updateSharingGroupType('sharing-123', 1, 'two-way')
+
+    expect(instance.dispatch).toHaveBeenCalledWith({
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...mockSharing,
+        attributes: {
+          ...mockSharing.attributes,
+          groups: [
+            mockSharing.attributes.groups[0],
+            {
+              ...mockSharing.attributes.groups[1],
+              read_only: false
+            }
+          ]
+        }
+      }
+    })
+  })
+
+  it('should rethrow error if setGroupReadOnly fails', async () => {
+    instance.sharingCol.setGroupReadOnly.mockRejectedValue(
+      new Error('Network error')
+    )
+
+    await expect(
+      instance.updateSharingGroupType('sharing-123', 1, 'one-way')
+    ).rejects.toThrow('Network error')
+  })
+
+  it('should rethrow error if setGroupReadWrite fails', async () => {
+    instance.sharingCol.setGroupReadWrite.mockRejectedValue(
+      new Error('Network error')
+    )
+
+    await expect(
+      instance.updateSharingGroupType('sharing-123', 1, 'two-way')
+    ).rejects.toThrow('Network error')
+  })
+
+  it('should rollback optimistic state update if API call fails', async () => {
+    instance.sharingCol.setGroupReadOnly.mockRejectedValue(
+      new Error('Network error')
+    )
+
+    await expect(
+      instance.updateSharingGroupType('sharing-123', 1, 'one-way')
+    ).rejects.toThrow('Network error')
+
+    expect(instance.dispatch).toHaveBeenNthCalledWith(1, {
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...mockSharing,
+        attributes: {
+          ...mockSharing.attributes,
+          groups: [
+            mockSharing.attributes.groups[0],
+            {
+              ...mockSharing.attributes.groups[1],
+              read_only: true
+            }
+          ]
+        }
+      }
+    })
+    expect(instance.dispatch).toHaveBeenNthCalledWith(2, {
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...mockSharing,
+        attributes: {
+          ...mockSharing.attributes,
+          groups: [
+            mockSharing.attributes.groups[0],
+            {
+              ...mockSharing.attributes.groups[1],
+              read_only: false
+            }
+          ]
+        }
+      }
+    })
+  })
+
+  it('should preserve realtime changes when rolling back an API failure', async () => {
+    const realtimeSharing = {
+      ...mockSharing,
+      attributes: {
+        ...mockSharing.attributes,
+        description: 'updated by realtime',
+        groups: [
+          {
+            ...mockSharing.attributes.groups[0],
+            revoked: true
+          },
+          {
+            ...mockSharing.attributes.groups[1],
+            read_only: true
+          }
+        ]
+      }
+    }
+
+    instance.sharingCol.setGroupReadOnly.mockImplementation(async () => {
+      instance.state = {
+        ...instance.state,
+        sharings: instance.state.sharings.map(sharing =>
+          sharing.id === realtimeSharing.id ? realtimeSharing : sharing
+        )
+      }
+      throw new Error('Network error')
+    })
+
+    await expect(
+      instance.updateSharingGroupType('sharing-123', 1, 'one-way')
+    ).rejects.toThrow('Network error')
+
+    expect(instance.dispatch).toHaveBeenNthCalledWith(2, {
+      type: 'UPDATE_SHARING',
+      sharing: {
+        ...realtimeSharing,
+        attributes: {
+          ...realtimeSharing.attributes,
+          groups: [
+            realtimeSharing.attributes.groups[0],
+            {
+              ...realtimeSharing.attributes.groups[1],
+              read_only: false
+            }
+          ]
+        }
+      }
+    })
+  })
+})
+
 // TODO Convert with react-testing-library
 // describe('hasWriteAccess', () => {
 //   it('tells if a doc is writtable', () => {
