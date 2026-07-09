@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@11.0.0...cozy-ui-plus@12.0.0) (2026-07-09)
+
+### Features
+
+- **cozy-ui-plus:** Remove FilePicker component ([01be811](https://github.com/cozy/cozy-libs/commit/01be8113795612181c424019226a766a635354ca))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** The FilePicker component has been removed from cozy-ui-plus.
+
 # [11.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@10.0.0...cozy-ui-plus@11.0.0) (2026-07-08)
 
 ### Features
