@@ -67,6 +67,13 @@ function getRsbuildConfig({
     },
     output: {
       cleanDistPath: true,
+      // cozy-stack serves an asset as immutable (max-age=1y) only when its
+      // filename fingerprint is at least 10 hex chars (statik's ExtractAssetID /
+      // isLongHexString). Rsbuild's default [contenthash:8] is 8 chars, so the
+      // stack does not recognize it and falls back to ETag revalidation, making
+      // every asset pay a 304 round-trip on each load. 16 chars crosses the
+      // threshold and lets the browser serve JS/CSS straight from disk cache.
+      filenameHash: 'contenthash:16',
       filename: {
         html: 'index.html'
       },
