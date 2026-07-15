@@ -853,5 +853,33 @@ describe('Realtime features', () => {
         )
       })
     })
+
+    describe('shared drives realtime lifecycle', () => {
+      it('stops the previous realtime when re-subscribing the same drive', () => {
+        const firstInstance = { subscribe: jest.fn(), stop: jest.fn() }
+        const secondInstance = { subscribe: jest.fn(), stop: jest.fn() }
+        mockCozyRealtime
+          .mockReturnValueOnce(firstInstance)
+          .mockReturnValueOnce(secondInstance)
+
+        searchEngine.addSharedDriveRealtime('drive1')
+        searchEngine.addSharedDriveRealtime('drive1')
+
+        expect(firstInstance.stop).toHaveBeenCalledTimes(1)
+        expect(searchEngine.sharedDrivesRealtimes.drive1).toBe(secondInstance)
+      })
+
+      it('stopSharedDrivesRealtimes stops every socket and clears the map', () => {
+        const driveA = { subscribe: jest.fn(), stop: jest.fn() }
+        const driveB = { subscribe: jest.fn(), stop: jest.fn() }
+        searchEngine.sharedDrivesRealtimes = { driveA, driveB }
+
+        searchEngine.stopSharedDrivesRealtimes()
+
+        expect(driveA.stop).toHaveBeenCalledTimes(1)
+        expect(driveB.stop).toHaveBeenCalledTimes(1)
+        expect(searchEngine.sharedDrivesRealtimes).toEqual({})
+      })
+    })
   })
 })
