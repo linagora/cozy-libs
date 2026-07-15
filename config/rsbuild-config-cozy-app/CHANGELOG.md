@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.7.2...rsbuild-config-cozy-app@0.7.3) (2026-07-15)
+
+### Bug Fixes
+
+- **rsbuild-config-cozy-app:** Use a 16-char hash for immutable assets ([da1c8bc](https://github.com/cozy/cozy-libs/commit/da1c8bcd9a48585eab24ca10c3bf4f558d544b68))
+
 ## [0.7.2](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.7.1...rsbuild-config-cozy-app@0.7.2) (2026-03-16)
 
 **Note:** Version bump only for package rsbuild-config-cozy-app
