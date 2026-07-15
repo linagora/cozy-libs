@@ -268,6 +268,7 @@ export class SearchEngine {
   }
 
   private addSharedDriveRealtime(sharedDriveId: string): void {
+    this.sharedDrivesRealtimes[sharedDriveId]?.stop()
     // background: the indexer watches the drive without the user looking at
     // it, so the stack must not mark the sharing as seen
     const realtime = new CozyRealtime({
@@ -277,6 +278,13 @@ export class SearchEngine {
     })
     this.subscribeDoctype(this.client, FILES_DOCTYPE, realtime, sharedDriveId)
     this.sharedDrivesRealtimes[sharedDriveId] = realtime
+  }
+
+  stopSharedDrivesRealtimes(): void {
+    for (const driveId of Object.keys(this.sharedDrivesRealtimes)) {
+      this.sharedDrivesRealtimes[driveId]?.stop()
+    }
+    this.sharedDrivesRealtimes = {}
   }
 
   subscribeDoctype(
