@@ -104,6 +104,10 @@ export class SearchEngine {
         this.afterLogin()
       })
     }
+
+    this.client.on('logout', () => {
+      this.stopSharedDrivesRealtimes()
+    })
   }
 
   afterLogin(): void {

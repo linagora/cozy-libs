@@ -880,6 +880,18 @@ describe('Realtime features', () => {
         expect(driveB.stop).toHaveBeenCalledTimes(1)
         expect(searchEngine.sharedDrivesRealtimes).toEqual({})
       })
+
+      it('stops all shared drives realtimes when the client logs out', () => {
+        const stopSpy = jest.spyOn(searchEngine, 'stopSharedDrivesRealtimes')
+        const logoutHandler = mockClient.on.mock.calls.find(
+          ([event]) => event === 'logout'
+        )?.[1]
+
+        expect(logoutHandler).toBeDefined()
+        logoutHandler()
+
+        expect(stopSpy).toHaveBeenCalled()
+      })
     })
   })
 })
