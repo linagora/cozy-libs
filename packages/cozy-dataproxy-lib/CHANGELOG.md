@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.5](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.4...cozy-dataproxy-lib@4.15.5) (2026-07-16)
+
+### Bug Fixes
+
+- **dataproxy-lib:** Do not leak shared-drive realtime sockets ([95a832f](https://github.com/cozy/cozy-libs/commit/95a832ffbe242e00cffd2bca071f28cd5394ca5e))
+- **dataproxy-lib:** Stop shared-drive realtimes on client logout ([044aa69](https://github.com/cozy/cozy-libs/commit/044aa69b4b174c536256fdbd91e1cf7e1169852d))
+
 ## [4.15.4](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.3...cozy-dataproxy-lib@4.15.4) (2026-07-16)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
