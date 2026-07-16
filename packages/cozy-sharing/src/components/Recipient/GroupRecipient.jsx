@@ -19,7 +19,7 @@ import {
 import { GroupAvatar } from '../Avatar/GroupAvatar'
 
 const GroupRecipient = props => {
-  const { name, members, fadeIn, owner, isOwner } = props
+  const { name, color, members, fadeIn, owner, isOwner } = props
   const { t } = useI18n()
   const client = useClient()
   const { isMobile } = useBreakpoints()
@@ -52,7 +52,7 @@ const GroupRecipient = props => {
           size="small"
         >
           <ListItemIcon>
-            <GroupAvatar size="m" />
+            <GroupAvatar size="m" color={color} />
           </ListItemIcon>
           <ListItemText
             primary={<Typography variant="body1">{name}</Typography>}

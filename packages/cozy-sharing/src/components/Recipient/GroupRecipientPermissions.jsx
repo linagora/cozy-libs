@@ -1,6 +1,6 @@
-import { Icon, CrossCircleOutline } from '@linagora/twake-icons'
 import React, { useState, useRef } from 'react'
 
+import { Icon, CrossCircleOutline } from '@linagora/twake-icons'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
@@ -18,6 +18,7 @@ import { GroupAvatar } from '../Avatar/GroupAvatar'
 
 const GroupRecipientPermissions = ({
   name,
+  color,
   isOwner,
   isReadOnly,
   sharingId,
@@ -83,7 +84,7 @@ const GroupRecipientPermissions = ({
           >
             <ActionsMenuMobileHeader>
               <ListItemIcon>
-                <GroupAvatar size="m" />
+                <GroupAvatar size="m" color={color} />
               </ListItemIcon>
               <ListItemText
                 primary={name}
