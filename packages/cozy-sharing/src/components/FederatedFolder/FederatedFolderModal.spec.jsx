@@ -13,6 +13,7 @@ const mockShareByLink = jest.fn()
 const mockRevoke = jest.fn()
 const mockRevokeSelf = jest.fn()
 const mockIsOwner = jest.fn()
+const mockCanReshare = jest.fn()
 const mockGetSharingLink = jest.fn()
 const mockGetFederatedShareLink = jest.fn()
 const mockGetRecipients = jest.fn().mockReturnValue([])
@@ -31,6 +32,7 @@ jest.mock('../../hooks/useSharingContext', () => ({
     revoke: mockRevoke,
     revokeSelf: mockRevokeSelf,
     isOwner: mockIsOwner,
+    canReshare: mockCanReshare,
     getSharingLink: mockGetSharingLink,
     getFederatedShareLink: mockGetFederatedShareLink,
     getDocumentPermissions: mockGetDocumentPermissions,
@@ -109,6 +111,7 @@ describe('FederatedFolderModal', () => {
     mockRevoke.mockResolvedValue()
     mockRevokeSelf.mockResolvedValue()
     mockIsOwner.mockReturnValue(false)
+    mockCanReshare.mockReturnValue(false)
     mockGetDocumentPermissions.mockReturnValue([])
     mockFetchSharedDriveSharingLinks.mockResolvedValue([])
     mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
@@ -470,6 +473,31 @@ describe('FederatedFolderModal', () => {
         expect(mockRevokeSelf).toHaveBeenCalledWith(mockDocument)
         expect(mockRevoke).not.toHaveBeenCalled()
         expect(onRevokeSuccess).toHaveBeenCalledWith(mockDocument)
+      })
+    })
+
+    it('should allow a write recipient to revoke another recipient', async () => {
+      const otherRecipient = {
+        instance: 'https://other.mycozy.cloud',
+        memberIndex: 2,
+        sharingId: 'sharing-id',
+        type: 'two-way'
+      }
+      mockCanReshare.mockReturnValue(true)
+      mockGetRecipients.mockReturnValue([otherRecipient])
+
+      const { findByLabelText } = setup()
+
+      fireEvent.click(await findByLabelText('Remove from sharing'))
+
+      await waitFor(() => {
+        expect(mockCanReshare).toHaveBeenCalledWith(mockDocument._id)
+        expect(mockRevoke).toHaveBeenCalledWith(
+          mockDocument,
+          otherRecipient.sharingId,
+          otherRecipient.memberIndex
+        )
+        expect(mockRevokeSelf).not.toHaveBeenCalled()
       })
     })
   })
