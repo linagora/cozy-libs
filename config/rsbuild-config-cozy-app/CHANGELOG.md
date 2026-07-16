@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.7.3...rsbuild-config-cozy-app@0.8.0) (2026-07-16)
+
+### Features
+
+- Watch @linagora/_ and twake-_ packages with rsbuild ([7db953d](https://github.com/cozy/cozy-libs/commit/7db953dd43ca6568271275b03fccad9acb1dfb7b))
+
 ## [0.7.3](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.7.2...rsbuild-config-cozy-app@0.7.3) (2026-07-15)
 
 ### Bug Fixes
