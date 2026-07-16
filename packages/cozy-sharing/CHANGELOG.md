@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.5.0...cozy-sharing@37.0.0) (2026-07-16)
+
+### Features
+
+- Display correct icon and colors for group avatar ([e630c7a](https://github.com/cozy/cozy-libs/commit/e630c7a9c9cc2d3b784c3bce1848bdcbbf257c25))
+- Update cozy-ui ([8d1d2a1](https://github.com/cozy/cozy-libs/commit/8d1d2a1a32963e7b1fc8efdc07ca76f3e48a430b))
+
+### BREAKING CHANGES
+
+- You need cozy-ui >= 140.5.0
+
 # [36.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.4.2...cozy-sharing@36.5.0) (2026-07-09)
 
 ### Features
