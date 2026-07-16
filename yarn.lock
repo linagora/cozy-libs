@@ -17898,7 +17898,7 @@ __metadata:
     cozy-doctypes: "npm:^1.99.1"
     cozy-intent: "npm:^2.31.1"
     cozy-minilog: "npm:^3.10.1"
-    cozy-ui: "npm:^139.0.2"
+    cozy-ui: "npm:^140.5.0"
     cozy-ui-plus: "npm:^12.0.1"
     date-fns: "npm:2.30.0"
     jest: "npm:30.3.0"
@@ -17919,7 +17919,7 @@ __metadata:
     cozy-flags: ">=4.8.1"
     cozy-intent: ">=2.29.1"
     cozy-minilog: ">=3.9.1"
-    cozy-ui: ">=139.0.2"
+    cozy-ui: ">=140.5.0"
     cozy-ui-plus: ">=6.0.0"
     prop-types: ">=15.7.2"
     react: ">=16.12.0"
@@ -18309,6 +18309,48 @@ __metadata:
   bin:
     rsg-screenshots: scripts/screenshots.js
   checksum: 10c0/4583ef011291ce6b867a36263725035a3da911750c752f9960debbbbad94448d714da5d3bb1b59df9077bf4bcd6bfcfdb92ee8d1cdc21714e8a02d6ec875bd72
+  languageName: node
+  linkType: hard
+
+"cozy-ui@npm:^140.5.0":
+  version: 140.5.0
+  resolution: "cozy-ui@npm:140.5.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.3.4"
+    "@date-io/date-fns": "npm:1"
+    "@material-ui/core": "npm:4.12.3"
+    "@material-ui/lab": "npm:^4.0.0-alpha.61"
+    "@material-ui/pickers": "npm:3.3.11"
+    "@popperjs/core": "npm:^2.4.4"
+    classnames: "npm:^2.2.5"
+    date-fns: "npm:2.30.0"
+    hammerjs: "npm:^2.0.8"
+    intersection-observer: "npm:0.11.0"
+    mui-bottom-sheet: "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
+    node-polyglot: "npm:^2.5.0"
+    normalize.css: "npm:^8.0.0"
+    patch-package: "npm:^8.0.0"
+    pdf-lib: "npm:1.17.1"
+    react-colorful: "npm:5.7.0"
+    react-markdown: "npm:^4.0.8"
+    react-popper: "npm:^2.2.3"
+    react-remove-scroll: "npm:^2.4.0"
+    react-select: "npm:^4.3.0"
+    react-swipeable-views: "npm:^0.13.3"
+    react-virtuoso: "npm:^4.13.0"
+    rooks: "npm:7.14.1"
+  peerDependencies:
+    "@linagora/twake-icons": ">=2.6.2"
+    cozy-device-helper: ">=2.0.0"
+    cozy-intent: ">=2.29.1"
+    react: ^16 || ^17 || ^18
+    react-dnd: ^16.0.1
+    react-dnd-html5-backend: ^16.0.1
+    react-dom: ^16 || ^17 || ^18
+    twake-i18n: ">=0.3.0"
+  bin:
+    rsg-screenshots: scripts/screenshots.js
+  checksum: 10c0/164d73653a32e850312814dd3275d57a5a5b573f4a6754af4e93aead04484c5d2e0f0c433e3a6251078e55968b832b01f35b1ffa8bdef2281071066b916e3753
   languageName: node
   linkType: hard
 
@@ -33523,6 +33565,16 @@ __metadata:
     chart.js: ^3.5.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
   checksum: 10c0/e0ca798e153d2dd03dfc97c6b74826639d5e5fcbb97a1a94f13091b22e83e1349f34763f6d650738fc11dc57116dce38167d9bebc6fbc8f3f07f8d039d66d046
+  languageName: node
+  linkType: hard
+
+"react-colorful@npm:5.7.0":
+  version: 5.7.0
+  resolution: "react-colorful@npm:5.7.0"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 10c0/d8db4e66b6f6edf30cc2bb6c755bea45e8e133f9667c373897a048da6931d1a31554c0253043be7853c21f9df1e0928af9528122f698bcd5b847a83663c58f0e
   languageName: node
   linkType: hard
 
