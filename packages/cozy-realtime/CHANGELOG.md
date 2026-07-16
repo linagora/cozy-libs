@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.3](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.9.2...cozy-realtime@5.9.3) (2026-07-16)
+
+### Bug Fixes
+
+- **cozy-realtime:** Give up reconnecting background sockets after a cap ([ce9f364](https://github.com/cozy/cozy-libs/commit/ce9f36472fb1924ae644dc530049067fbfe2b0a3))
+
 ## [5.9.2](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.9.1...cozy-realtime@5.9.2) (2026-06-11)
 
 ### Bug Fixes
