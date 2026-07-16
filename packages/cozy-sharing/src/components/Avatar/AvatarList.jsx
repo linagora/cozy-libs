@@ -92,7 +92,7 @@ const AvatarList = ({
               }`}
               key={recipient.index}
             >
-              <GroupAvatar size={size} />
+              <GroupAvatar size={size} color={recipient.color} />
             </span>
           )
         }

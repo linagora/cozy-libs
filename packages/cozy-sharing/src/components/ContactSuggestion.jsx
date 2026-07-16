@@ -18,7 +18,7 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
     return (
       <ListItem button>
         <ListItemIcon>
-          <GroupAvatar size="m" />
+          <GroupAvatar size="m" color={contactOrGroup.color} />
         </ListItemIcon>
         <ListItemText
           primary={contactOrGroup.name}

@@ -161,7 +161,7 @@ const ShareAutosuggest = ({
             key={`key_recipient_${idx}`}
             avatar={
               isContactGroup ? (
-                <GroupAvatar size="xs" />
+                <GroupAvatar size="xs" color={recipient.color} />
               ) : (
                 <Avatar size="xs">{avatarText}</Avatar>
               )

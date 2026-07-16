@@ -1,12 +1,15 @@
-import { Icon, Team } from '@linagora/twake-icons'
 import React from 'react'
 
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import { Icon, Peoples } from '@linagora/twake-icons'
+import Avatar, { colorToGradient } from 'cozy-ui/transpiled/react/Avatar'
+import { COLORS } from 'cozy-ui/transpiled/react/ColorList/helpers'
 
-const GroupAvatar = ({ size, className }) => {
+const DEFAULT_COLOR = COLORS[4]
+
+const GroupAvatar = ({ size, color = DEFAULT_COLOR, className }) => {
   return (
-    <Avatar size={size} className={className} border>
-      <Icon icon={Team} />
+    <Avatar size={size} color={colorToGradient(color)} className={className}>
+      <Icon icon={Peoples} />
     </Avatar>
   )
 }
