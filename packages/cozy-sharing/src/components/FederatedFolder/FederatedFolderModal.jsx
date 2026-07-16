@@ -35,6 +35,7 @@ const FederatedFolderModalContent = ({
   const client = useClient()
   const { t } = useI18n()
   const {
+    canReshare,
     share,
     getSharingById,
     getSharingLink,
@@ -224,6 +225,8 @@ const FederatedFolderModalContent = ({
     ? getFederatedShareLink(existingDocument)
     : getSharingLink(existingDocument?._id)
   const isCurrentUserOwner = documentId ? isOwner(documentId) : false
+  const canManageSharing =
+    isCurrentUserOwner || (documentId ? canReshare(documentId) : false)
 
   const handleRevokeSelf = async document => {
     await revokeSelf(document)
@@ -323,6 +326,7 @@ const FederatedFolderModalContent = ({
           </div>
           <WhoHasAccess
             isOwner={isCurrentUserOwner}
+            canManageSharing={canManageSharing}
             isSharedDrive
             recipients={isSending ? frozenRecipients : existingRecipients}
             document={isSending ? frozenDoc : existingDocument}
