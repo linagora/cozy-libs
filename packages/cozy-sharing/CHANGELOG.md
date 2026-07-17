@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.0.0...cozy-sharing@37.0.1) (2026-07-17)
+
+### Bug Fixes
+
+- **cozy-sharing:** Restore federated recipient management ([7442f26](https://github.com/cozy/cozy-libs/commit/7442f26f6cdb757d62d656f19d237d7694335c0c))
+
 # [37.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@36.5.0...cozy-sharing@37.0.0) (2026-07-16)
 
 ### Features
