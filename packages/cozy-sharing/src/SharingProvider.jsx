@@ -5,8 +5,7 @@ import minilog from 'cozy-minilog'
 
 import {
   generateShareLinkFromFile,
-  makeTTL,
-  toExpirationDate
+  getLinkAccessOptions
 } from './components/ShareRestrictionModal/helpers'
 import SharingContext from './context'
 import { fetchNextPermissions } from './fetchNextPermissions'
@@ -58,25 +57,6 @@ const SHARING_DOCTYPE = 'io.cozy.sharings'
 const PERMISSION_DOCTYPE = 'io.cozy.permissions'
 
 const getDocumentId = document => document?._id || document?.id || null
-
-const getLinkAccessOptions = ({
-  editingRights,
-  dateEnabled,
-  selectedDate,
-  passwordEnabled,
-  password
-}) => {
-  const expirationDate =
-    dateEnabled && selectedDate ? toExpirationDate(selectedDate) : null
-
-  return {
-    verbs:
-      editingRights === 'write' ? ['GET', 'POST', 'PUT', 'PATCH'] : ['GET'],
-    expiresAt: expirationDate?.toISOString() || '',
-    ttl: expirationDate ? makeTTL(expirationDate) : undefined,
-    password: passwordEnabled ? password : ''
-  }
-}
 
 export class SharingProvider extends Component {
   constructor(props, context) {
@@ -526,7 +506,7 @@ export class SharingProvider extends Component {
   getFederatedShareLink = document => {
     if (!document?.driveId) return null
 
-    const documentId = document._id || document.id
+    const documentId = getDocumentId(document)
     if (!documentId) return null
 
     const permissions = getDocumentPermissions(this.state, documentId)
@@ -597,6 +577,8 @@ export class SharingProvider extends Component {
    * @param {string[]} options.verbs The new verbs to use for the permission, eg. ['GET']
    * @param {string} [options.expiresAt] The new expiration date for the permission
    * @param {string} [options.password] The new password for the permission
+   * @param {object[]|null} [permissionsToUpdate] Permission documents to update
+   * instead of the document's permissions from state
    *
    * @return {Array}
    */

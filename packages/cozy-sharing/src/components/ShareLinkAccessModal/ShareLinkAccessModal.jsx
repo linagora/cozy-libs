@@ -75,17 +75,17 @@ export const ShareLinkAccessModal = ({
     setError(null)
 
     try {
-      const results = []
-      for (const document of documents) {
-        const result = await ensureSharingLink(document, {
-          editingRights,
-          dateEnabled,
-          selectedDate,
-          passwordEnabled,
-          password: password.trim()
-        })
-        results.push(result)
-      }
+      const results = await Promise.all(
+        documents.map(document =>
+          ensureSharingLink(document, {
+            editingRights,
+            dateEnabled,
+            selectedDate,
+            passwordEnabled,
+            password: password.trim()
+          })
+        )
+      )
       onSuccess(results)
     } catch {
       setError(t('ShareLinkAccessModal.error.persistence'))
@@ -146,7 +146,9 @@ export const ShareLinkAccessModal = ({
                 helperText={
                   isPasswordValid
                     ? null
-                    : t('ShareLinkAccessModal.passwordTooShort')
+                    : t('ShareLinkAccessModal.passwordTooShort', {
+                        count: PASSWORD_MIN_LENGTH
+                      })
                 }
                 fullWidth
                 inputProps={{ minLength: PASSWORD_MIN_LENGTH }}

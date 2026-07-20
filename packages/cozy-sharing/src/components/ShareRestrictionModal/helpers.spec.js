@@ -124,7 +124,7 @@ describe('ShareRestrictionModal/helpers', () => {
       })
     })
 
-    it('should call updateDocumentPermissions with "undefined" date & password if their switches are true but the permission doesn\'t yet have these values', async () => {
+    it('should call updateDocumentPermissions with empty date & password if enabled without values', async () => {
       const updateDocumentPermissions = jest.fn()
       const file = { _id: '123' }
 
@@ -142,8 +142,8 @@ describe('ShareRestrictionModal/helpers', () => {
       })
 
       expect(updateDocumentPermissions).toHaveBeenCalledWith(file, {
-        expiresAt: undefined,
-        password: undefined,
+        expiresAt: '',
+        password: '',
         verbs: ['GET']
       })
     })

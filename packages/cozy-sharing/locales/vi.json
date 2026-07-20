@@ -476,7 +476,7 @@
     "expiryDate": "Ngày hết hạn",
     "password": "Yêu cầu mật khẩu",
     "passwordLabel": "Mật khẩu",
-    "passwordTooShort": "Mật khẩu phải có ít nhất 4 ký tự.",
+    "passwordTooShort": "Mật khẩu phải có ít nhất %{count} ký tự.",
     "cancel": "Hủy",
     "addLinks": "Thêm liên kết",
     "error": {
