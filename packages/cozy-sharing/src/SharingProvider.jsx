@@ -3,7 +3,11 @@ import React, { Component } from 'react'
 import { withClient } from 'cozy-client'
 import minilog from 'cozy-minilog'
 
-import { generateShareLinkFromFile } from './components/ShareRestrictionModal/helpers'
+import {
+  generateShareLinkFromFile,
+  makeTTL,
+  toExpirationDate
+} from './components/ShareRestrictionModal/helpers'
 import SharingContext from './context'
 import { fetchNextPermissions } from './fetchNextPermissions'
 import { fetchFilesPaths } from './helpers/files'
@@ -41,6 +45,7 @@ import reducer, {
   getSharedDocIdsBySharings,
   getDocumentSharing,
   getDocumentPermissions,
+  getPermissionDocIds,
   hasSharedParent,
   hasSharedChild,
   getSharedParentPath,
@@ -51,6 +56,27 @@ import reducer, {
 const log = minilog('SharingProvider')
 const SHARING_DOCTYPE = 'io.cozy.sharings'
 const PERMISSION_DOCTYPE = 'io.cozy.permissions'
+
+const getDocumentId = document => document?._id || document?.id || null
+
+const getLinkAccessOptions = ({
+  editingRights,
+  dateEnabled,
+  selectedDate,
+  passwordEnabled,
+  password
+}) => {
+  const expirationDate =
+    dateEnabled && selectedDate ? toExpirationDate(selectedDate) : null
+
+  return {
+    verbs:
+      editingRights === 'write' ? ['GET', 'POST', 'PUT', 'PATCH'] : ['GET'],
+    expiresAt: expirationDate?.toISOString() || '',
+    ttl: expirationDate ? makeTTL(expirationDate) : undefined,
+    password: passwordEnabled ? password : ''
+  }
+}
 
 export class SharingProvider extends Component {
   constructor(props, context) {
@@ -90,6 +116,7 @@ export class SharingProvider extends Component {
       revokeGroup: this.revokeGroup,
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
+      ensureSharingLink: this.ensureSharingLink,
       getFederatedShareLink: this.getFederatedShareLink,
       fetchSharedDriveSharingLinks: this.fetchSharedDriveSharingLinks,
       updateDocumentPermissions: this.updateDocumentPermissions,
@@ -430,6 +457,72 @@ export class SharingProvider extends Component {
     }
   }
 
+  fetchSharingLinks = async (document, permissionCol = this.permissionCol) => {
+    const documentId = getDocumentId(document)
+    if (!documentId) return []
+
+    const response = document.driveId
+      ? await permissionCol.findLinksByIds([documentId])
+      : await permissionCol.findLinksByDoctype(this.props.doctype)
+    const permissions = (response?.data || []).filter(
+      permission =>
+        document.driveId || getPermissionDocIds(permission).includes(documentId)
+    )
+    const existingPermissions = getDocumentPermissions(this.state, documentId)
+    const existingPermissionIds = existingPermissions.map(
+      permission => permission.id
+    )
+    const newPermissions = permissions.filter(
+      permission => !existingPermissionIds.includes(permission.id)
+    )
+
+    if (newPermissions.length > 0) {
+      this.dispatch(addSharingLink(newPermissions))
+    }
+
+    return permissions
+  }
+
+  ensureSharingLink = async (document, linkAccess) => {
+    const documentId = getDocumentId(document)
+    if (!documentId) {
+      throw new Error('Sharing links require a document id')
+    }
+
+    const permissions = document.driveId
+      ? await this.fetchSharedDriveSharingLinks(document)
+      : await this.fetchSharingLinks(document)
+    const { verbs, expiresAt, ttl, password } = getLinkAccessOptions(linkAccess)
+    const permissionResponse =
+      permissions.length > 0
+        ? (
+            await this.updateDocumentPermissions(
+              { ...document, id: documentId },
+              { verbs, expiresAt, password },
+              permissions
+            )
+          )[0]
+        : await this.shareByLink(document, { verbs, ttl, password })
+    const permission = permissionResponse?.data
+    const sharecode = getShortcode(permission)
+
+    if (!sharecode) {
+      throw new Error('Sharing permission does not contain a shortcode')
+    }
+
+    return {
+      documentId,
+      url: generateShareLinkFromFile({
+        client: this.props.client,
+        file: document,
+        sharecode,
+        getOwner: this.state.getOwner,
+        getSharingById: this.state.getSharingById,
+        documentType: this.state.documentType
+      })
+    }
+  }
+
   getFederatedShareLink = document => {
     if (!document?.driveId) return null
 
@@ -473,25 +566,7 @@ export class SharingProvider extends Component {
     const drivePermissionCollection = client.collection('io.cozy.permissions', {
       driveId: document.driveId
     })
-    const documentId = document._id || document.id
-    if (!documentId) return []
-
-    const resp = await drivePermissionCollection.findLinksByIds([documentId])
-    const permissions = resp.data || []
-
-    const existingPermissions = getDocumentPermissions(this.state, documentId)
-    const existingPermissionIds = existingPermissions.map(
-      permission => permission.id
-    )
-    const newPermissions = permissions.filter(
-      permission => !existingPermissionIds.includes(permission.id)
-    )
-
-    if (newPermissions.length > 0) {
-      this.dispatch(addSharingLink(newPermissions))
-    }
-
-    return permissions
+    return this.fetchSharingLinks(document, drivePermissionCollection)
   }
 
   updateSharedDrivePermissions = async (
@@ -525,9 +600,15 @@ export class SharingProvider extends Component {
    *
    * @return {Array}
    */
-  updateDocumentPermissions = async (document, options) => {
+  updateDocumentPermissions = async (
+    document,
+    options,
+    permissionsToUpdate = null
+  ) => {
     const { verbs, expiresAt, password } = options
-    const permissions = getDocumentPermissions(this.state, document.id)
+    const documentId = getDocumentId(document)
+    const permissions =
+      permissionsToUpdate || getDocumentPermissions(this.state, documentId)
 
     if (!permissions || permissions.length === 0) {
       return []
@@ -535,10 +616,11 @@ export class SharingProvider extends Component {
 
     const responses = await Promise.all(
       permissions.map(async permissionDocument => {
-        const updatedPermissions = permissionDocument.attributes.permissions
-        Object.keys(updatedPermissions).forEach(permType => {
-          updatedPermissions[permType].verbs = verbs
-        })
+        const updatedPermissions = Object.fromEntries(
+          Object.entries(permissionDocument.attributes.permissions).map(
+            ([permissionType, rules]) => [permissionType, { ...rules, verbs }]
+          )
+        )
 
         const resp = document.driveId
           ? await this.updateSharedDrivePermissions(
