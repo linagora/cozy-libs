@@ -113,7 +113,7 @@ describe('Interapp', () => {
         id: 'fileId'
       })
       intent = await promIntent
-      prom = promIntent.start(element)
+      prom = promIntent.start(element, {})
       await sleep(1)
       iframe = element.querySelector('iframe')
       iframe.postMessage = jest.fn()

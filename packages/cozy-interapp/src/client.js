@@ -36,7 +36,7 @@ export function start(createIntent, intent, element, data, options = {}) {
       intent,
       element,
       service.href,
-      options.onReadyCallback
+      options.onReady
     )
 
     const serviceOrigin = extractOrigin(service.href)
@@ -47,6 +47,10 @@ export function start(createIntent, intent, element, data, options = {}) {
 
       onReady: event => {
         event.source.postMessage(data, event.origin)
+      },
+
+      onReadyToUse: () => {
+        if (options.onReadyToUse) options.onReadyToUse()
       },
 
       onDone: event => {

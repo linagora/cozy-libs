@@ -17,30 +17,20 @@ class Intents {
 
     const createPromise = this.request.post(action, type, data, permissions)
 
-    createPromise.start = (
-      element,
-      onReadyCallback,
-      onHideCross,
-      onShowCross
-    ) => {
-      const options = {
+    createPromise.start = (element, options = {}) => {
+      const opts = {
         filteredServices: data.filteredServices,
-        onReadyCallback: onReadyCallback,
-        onHideCross: onHideCross,
-        onShowCross: onShowCross
+        onReady: options.onReady,
+        onHideCross: options.onHideCross,
+        onShowCross: options.onShowCross,
+        onReadyToUse: options.onReadyToUse
       }
 
       delete data.filteredServices
 
       let intentManager
       const prom = createPromise.then(intent => {
-        intentManager = client.start(
-          this.create,
-          intent,
-          element,
-          data,
-          options
-        )
+        intentManager = client.start(this.create, intent, element, data, opts)
         return intentManager
       })
 

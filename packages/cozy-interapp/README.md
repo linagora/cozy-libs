@@ -18,7 +18,11 @@ const intents = new Intents({ client })
 
 `intents.create(action, doctype [, data, permissions])` create an intent. It returns a modified Promise for the intent document, having a custom `start(element)` method. This method interacts with the DOM to append an iframe to the given HTML element. This iframe will provide an access to an app, which will serve a service page able to manage the intent action for the intent doctype. The `start(element)` method returns a promise for the result document provided by intent service.
 
-> **On Intent ready callback:** This `start` method also takes a second optional argument which is a callback function (`start(element, onReadyCallback)`). When provided, this function will be run when the intent iframe will be completely loaded (using the `onload` iframe listener). This callback could be useful to run a client code only when the intent iframe is ready and loaded.
+> **`start` options:** The `start` method takes an optional second argument, an options object: `start(element, options)`. Supported keys:
+>
+> - `onReady` — called when the intent iframe has finished loading (iframe `onload`). Useful for running client code once the iframe is ready.
+> - `onHideCross` / `onShowCross` — called when the service asks the client to hide/show the close button.
+> - `onReadyToUse` — called when the service signals it is **truly ready** (UI rendered and initial data loaded), via `service.notifyReadyToUse()`. Distinct from `onReady`, which only signals the iframe loaded. See `intents.createService()` below.
 
 An intent has to be created everytime an app need to perform an action over a doctype for wich it does not have permission. For example, the Cozy Drive app should create an intent to `pick` a `io.cozy.contacts` document. The cozy-stack will determines which app can offer a service to resolve the intent. It's this service's URL that will be passed to the iframe `src` property.
 
@@ -90,6 +94,8 @@ const app = await service.compose('INSTALL', 'io.cozy.apps', { slug: 'drive' })
 - `cancel()`: ends the intent process by passing a `null` value to the client. This method terminate the intent service the same way that `terminate()`.
 
 - `throw(error)`: throw an error to client and causes the intent promise rejection.
+
+- `notifyReadyToUse()`: tells the client the service UI is rendered and its initial data has loaded. A service may call this only once; a second call is a no-op with a warning. Throws if called after `terminate()`. The client receives it via the `onReadyToUse` option of `start()`.
 
 #### Example
 
