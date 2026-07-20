@@ -476,7 +476,7 @@
     "expiryDate": "Expiration date",
     "password": "Require a password",
     "passwordLabel": "Password",
-    "passwordTooShort": "Password must contain at least 4 characters.",
+    "passwordTooShort": "Password must contain at least %{count} characters.",
     "cancel": "Cancel",
     "addLinks": "Add links",
     "error": {

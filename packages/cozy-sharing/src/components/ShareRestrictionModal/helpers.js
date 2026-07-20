@@ -192,6 +192,24 @@ export const makeTTL = selectedDate => {
   }
 }
 
+export const getLinkAccessOptions = ({
+  editingRights,
+  dateEnabled,
+  selectedDate,
+  passwordEnabled,
+  password
+}) => {
+  const expirationDate =
+    dateEnabled && selectedDate ? toExpirationDate(selectedDate) : null
+
+  return {
+    verbs: editingRights === 'write' ? WRITE_PERMS : READ_ONLY_PERMS,
+    expiresAt: expirationDate?.toISOString() || '',
+    ttl: expirationDate ? makeTTL(expirationDate) : undefined,
+    password: passwordEnabled ? password : ''
+  }
+}
+
 /**
  * createPermissions - Create the permissions of a file
  * @param {object} options
@@ -257,15 +275,21 @@ export const updatePermissions = async ({
   showAlert
 }) => {
   try {
-    const expiresAt = dateToggle
-      ? toExpirationDate(selectedDate)?.toISOString() || undefined
-      : ''
-    const ensurePassword = passwordToggle ? password || undefined : ''
-    const verbs = editingRights === 'readOnly' ? READ_ONLY_PERMS : WRITE_PERMS
+    const {
+      verbs,
+      expiresAt,
+      password: ensuredPassword
+    } = getLinkAccessOptions({
+      editingRights,
+      dateEnabled: dateToggle,
+      selectedDate,
+      passwordEnabled: passwordToggle,
+      password
+    })
     return updateDocumentPermissions(file, {
       verbs,
       expiresAt,
-      password: ensurePassword
+      password: ensuredPassword
     })
   } catch (err) {
     showAlert({

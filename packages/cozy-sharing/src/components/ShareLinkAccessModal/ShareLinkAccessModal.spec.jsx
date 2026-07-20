@@ -222,14 +222,28 @@ describe('ShareLinkAccessModal', () => {
     await waitFor(() => expect(onSuccess).toHaveBeenCalledTimes(1))
   })
 
-  it('returns one ordered link result for every selected document', async () => {
+  it('starts every link concurrently and returns ordered results', async () => {
+    let resolveFirst
+    let resolveSecond
     ensureSharingLink
-      .mockResolvedValueOnce({ documentId: 'file-id', url: 'https://first' })
-      .mockResolvedValueOnce({ documentId: 'folder-id', url: 'https://second' })
+      .mockReturnValueOnce(
+        new Promise(resolve => {
+          resolveFirst = resolve
+        })
+      )
+      .mockReturnValueOnce(
+        new Promise(resolve => {
+          resolveSecond = resolve
+        })
+      )
 
     renderModal()
 
     fireEvent.click(screen.getByRole('button', { name: 'Add links' }))
+
+    expect(ensureSharingLink).toHaveBeenCalledTimes(2)
+    resolveSecond({ documentId: 'folder-id', url: 'https://second' })
+    resolveFirst({ documentId: 'file-id', url: 'https://first' })
 
     await waitFor(() =>
       expect(onSuccess).toHaveBeenCalledWith([

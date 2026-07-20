@@ -476,7 +476,7 @@
     "expiryDate": "Дата истечения",
     "password": "Требовать пароль",
     "passwordLabel": "Пароль",
-    "passwordTooShort": "Пароль должен содержать не менее 4 символов.",
+    "passwordTooShort": "Пароль должен содержать не менее %{count} символов.",
     "cancel": "Отмена",
     "addLinks": "Добавить ссылки",
     "error": {
