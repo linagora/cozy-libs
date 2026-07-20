@@ -7,49 +7,50 @@ import { useI18n } from 'twake-i18n'
 
 import TwakeKnowledgeChip from './TwakeKnowledgeChip'
 import WebSearchChip from './WebSearchChip'
-import TChat from '../../assets/tchat.png'
+import TDrive from '../../assets/tdrive.png'
 import TMail from '../../assets/tmail.png'
 import KnowledgeBaseChip from '../KnowledgeBase/KnowledgeBaseChip'
 import { useSelectedAssistantKnowledgeBase } from '../KnowledgeBase/useSelectedAssistantKnowledgeBase'
 
 const TwakeKnowledgeSelector = ({
   className,
-  onSelectTwakeKnowledge,
   websearchEnabled,
   onToggleWebsearch
 }) => {
   const { t } = useI18n()
-  const { dirId, folder, isUnavailable, setKnowledgeBaseFolder } =
-    useSelectedAssistantKnowledgeBase()
+  const {
+    dirId,
+    folder,
+    isUnavailable,
+    setKnowledgeBaseFolder,
+    isRealAssistant,
+    hasEmail
+  } = useSelectedAssistantKnowledgeBase()
 
   const websearchEnabledFlag = flag('cozy.assistant.websearch.enabled')
-  const sourceKnowledgeEnabledFlag = flag(
-    'cozy.assistant.source-knowledge.enabled'
+  const mailSourceEnabledFlag = flag(
+    'cozy.assistant.source-knowledge.mail.enabled'
   )
   const hasKnowledgeBase = !!dirId
 
+  // The Drive source is always on and cannot be disabled: a knowledge-base
+  // folder is rendered as KnowledgeBaseChip (with its own menu); otherwise
+  // (default assistant, or no folder configured) a static Drive chip stands
+  // for the whole Drive. The email source (behind its own flag) is shown on
+  // the default assistant always, and on a custom assistant only once the
+  // user enabled it in the wizard. The chips are static indicators: sources
+  // are enabled/disabled from the wizard, never from the composer.
   const twakeKnowledges = [
-    {
-      id: 'chat',
-      label: t('assistant.twake_knowledges.chat'),
-      display: flag('cozy.assistant.source-knowledge.chat.enabled'),
-      icon: TChat
-    },
     {
       id: 'mail',
       label: t('assistant.twake_knowledges.mail'),
-      display: true,
-      icon: TMail
+      display: mailSourceEnabledFlag && (!isRealAssistant || hasEmail),
+      icon: TMail,
+      isSelected: true
     }
   ].filter(twakeKnowledge => twakeKnowledge.display)
 
-  if (
-    !websearchEnabledFlag &&
-    !sourceKnowledgeEnabledFlag &&
-    !hasKnowledgeBase
-  ) {
-    return null
-  }
+  const showSourceChips = twakeKnowledges.length > 0
 
   return (
     <div
@@ -67,22 +68,33 @@ const TwakeKnowledgeSelector = ({
           onToggleWebsearch={onToggleWebsearch}
         />
       )}
-      {hasKnowledgeBase && (
+      {hasKnowledgeBase ? (
         <KnowledgeBaseChip
           dirId={dirId}
           folder={folder}
           isUnavailable={isUnavailable}
-          isLast={!sourceKnowledgeEnabledFlag || twakeKnowledges.length === 0}
+          isLast={!showSourceChips}
           onChangeFolder={setKnowledgeBaseFolder}
         />
+      ) : (
+        <TwakeKnowledgeChip
+          twakeKnowledge={{
+            id: 'drive',
+            label: t('assistant.twake_knowledges.drive'),
+            icon: TDrive
+          }}
+          isSelected
+          isLast={!showSourceChips}
+        />
       )}
-      {sourceKnowledgeEnabledFlag &&
+      {showSourceChips &&
         twakeKnowledges.map((twakeKnowledge, index) => (
           <TwakeKnowledgeChip
             key={twakeKnowledge.id}
             twakeKnowledge={twakeKnowledge}
+            isSelected={twakeKnowledge.isSelected}
+            onToggle={twakeKnowledge.onToggle}
             isLast={index === twakeKnowledges.length - 1}
-            onSelect={onSelectTwakeKnowledge}
           />
         ))}
     </div>

@@ -1,34 +1,32 @@
-import { Icon, Cross } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
+import { Icon, Cross } from '@linagora/twake-icons'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
 import styles from './styles.styl'
-import { useAssistant } from '../AssistantProvider'
 
 const CHIP_CLASSES = {
   label: 'u-p-0',
   icon: 'u-m-0'
 }
 
-const TwakeKnowledgeChip = ({ twakeKnowledge, isLast, onSelect }) => {
+/**
+ * Source chip rendered as an all-or-nothing toggle: clicking the chip (or its
+ * cross) selects/deselects the whole source. Selection state and persistence
+ * are owned by the parent through isSelected/onToggle. Without onToggle the
+ * chip is a static indicator (always-on source, no cross, not clickable).
+ */
+const TwakeKnowledgeChip = ({
+  twakeKnowledge,
+  isLast,
+  isSelected,
+  onToggle
+}) => {
   const { isMobile } = useBreakpoints()
-  const {
-    openedKnowledgePanel,
-    selectedTwakeKnowledge,
-    setSelectedTwakeKnowledge
-  } = useAssistant()
 
-  const isPanelOpen = openedKnowledgePanel === twakeKnowledge.id
-  const hasSelection = selectedTwakeKnowledge[twakeKnowledge.id].length > 0
-  const isActive = isPanelOpen || hasSelection
-  const isPill = !isMobile || hasSelection
-
-  const handleClear = () => {
-    setSelectedTwakeKnowledge(prev => ({ ...prev, [twakeKnowledge.id]: [] }))
-  }
+  const isPill = !isMobile || isSelected
 
   return (
     <Chip
@@ -42,24 +40,19 @@ const TwakeKnowledgeChip = ({ twakeKnowledge, isLast, onSelect }) => {
         />
       }
       deleteIcon={
-        hasSelection ? (
+        isSelected && onToggle ? (
           <Icon
             icon={Cross}
-            size={16}
-            style={{
-              height: 16,
-              width: 16,
-              marginLeft: 10,
-              marginRight: 0
-            }}
+            size={10}
+            style={{ height: 10, width: 10, marginLeft: 6, marginRight: 0 }}
             color="var(--primaryColor)"
           />
         ) : undefined
       }
-      onDelete={hasSelection ? handleClear : undefined}
+      onDelete={isSelected ? onToggle : undefined}
       label={isMobile ? '' : twakeKnowledge.label}
-      clickable
-      variant={isActive ? 'ghost' : 'default'}
+      clickable={!!onToggle}
+      variant={isSelected ? 'ghost' : 'default'}
       classes={
         isMobile
           ? CHIP_CLASSES
@@ -69,7 +62,7 @@ const TwakeKnowledgeChip = ({ twakeKnowledge, isLast, onSelect }) => {
         'u-w-auto u-ph-half': isPill,
         'u-mr-half': !isLast
       })}
-      onClick={() => onSelect(twakeKnowledge.id)}
+      onClick={onToggle}
     />
   )
 }

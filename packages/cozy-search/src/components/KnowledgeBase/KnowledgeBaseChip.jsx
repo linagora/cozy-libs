@@ -14,7 +14,7 @@ import TDrive from '../../assets/tdrive.png'
 
 /**
  * Composer chip showing the selected assistant's knowledge-base folder,
- * rendered in the "selected source" style (like the demo mail/chat chips).
+ * rendered in the "selected source" style (like the email source chip).
  *
  * Clicking stays in-app: it opens a small menu with explicit actions —
  * open the folder in Drive (new tab) or change the knowledge base through

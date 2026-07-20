@@ -26,11 +26,6 @@ const AssistantProvider = ({ children }) => {
   )
   const [isOpenSearchConversation, setIsOpenSearchConversation] =
     useState(false)
-  const [selectedTwakeKnowledge, setSelectedTwakeKnowledge] = useState({
-    mail: [],
-    chat: []
-  })
-  const [openedKnowledgePanel, setOpenedKnowledgePanel] = useState(null)
   const [websearchEnabled, setWebsearchEnabled] = useState(false)
 
   const value = useMemo(
@@ -41,16 +36,12 @@ const AssistantProvider = ({ children }) => {
       assistantIdInAction,
       selectedAssistantId,
       isOpenSearchConversation,
-      openedKnowledgePanel,
-      selectedTwakeKnowledge,
       setAssistantIdInAction,
       setIsOpenDeleteAssistant,
       setIsOpenCreateAssistant,
       setIsOpenEditAssistant,
       setSelectedAssistantId,
       setIsOpenSearchConversation,
-      setOpenedKnowledgePanel,
-      setSelectedTwakeKnowledge,
       websearchEnabled,
       setWebsearchEnabled
     }),
@@ -61,8 +52,6 @@ const AssistantProvider = ({ children }) => {
       assistantIdInAction,
       selectedAssistantId,
       isOpenSearchConversation,
-      openedKnowledgePanel,
-      selectedTwakeKnowledge,
       websearchEnabled
     ]
   )
