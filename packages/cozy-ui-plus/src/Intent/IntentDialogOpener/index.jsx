@@ -22,6 +22,7 @@ const IntentDialogOpener = props => {
     tag,
     onComplete,
     onDismiss,
+    onReadyToUse,
     iframeProps,
     Component,
     ...componentProps
@@ -68,6 +69,7 @@ const IntentDialogOpener = props => {
           create={create}
           onCancel={handleDismiss}
           onTerminate={handleComplete}
+          onReadyToUse={onReadyToUse}
           iframeProps={iframeProps}
         />
       </Component>
@@ -84,6 +86,8 @@ IntentDialogOpener.propTypes = {
   onComplete: PropTypes.func,
   /** What should happen when the intent has dismissed */
   onDismiss: PropTypes.func,
+  /** Called when the intent service signals it is ready to use */
+  onReadyToUse: PropTypes.func,
   /** Action you want to execute */
   action: PropTypes.string.isRequired,
   /** Doctype on which you want to execute the action */
