@@ -1,10 +1,5 @@
 import React from 'react'
 
-export interface TwakeKnowledgeState {
-  mail: { id: string; name: string }[]
-  chat: { id: string; name: string }[]
-}
-
 export interface AssistantContextValue {
   isOpenCreateAssistant: boolean
   isOpenDeleteAssistant: boolean
@@ -12,18 +7,12 @@ export interface AssistantContextValue {
   assistantIdInAction: string | null
   selectedAssistantId: string
   isOpenSearchConversation: boolean
-  openedKnowledgePanel: string | null
-  selectedTwakeKnowledge: TwakeKnowledgeState
   setAssistantIdInAction: (id: string | null) => void
   setIsOpenDeleteAssistant: (isOpen: boolean) => void
   setIsOpenCreateAssistant: (isOpen: boolean) => void
   setIsOpenEditAssistant: (isOpen: boolean) => void
   setSelectedAssistantId: (id: string) => void
   setIsOpenSearchConversation: (isOpen: boolean) => void
-  setOpenedKnowledgePanel: (panel: string | null) => void
-  setSelectedTwakeKnowledge: React.Dispatch<
-    React.SetStateAction<TwakeKnowledgeState>
-  >
   websearchEnabled: boolean
   setWebsearchEnabled: React.Dispatch<React.SetStateAction<boolean>>
 }

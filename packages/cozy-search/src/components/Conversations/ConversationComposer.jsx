@@ -4,10 +4,10 @@ import {
   useThread,
   useComposer
 } from '@assistant-ui/react'
-import { Icon, Paperplane, Stop } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useCallback } from 'react'
 
+import { Icon, Paperplane, Stop } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -23,8 +23,7 @@ const ConversationComposer = () => {
   const composerRuntime = useComposerRuntime()
   const isRunning = useThread(state => state.isRunning)
   const isThreadEmpty = useThread(state => state.messages.length === 0)
-  const { setOpenedKnowledgePanel, websearchEnabled, setWebsearchEnabled } =
-    useAssistant()
+  const { websearchEnabled, setWebsearchEnabled } = useAssistant()
 
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
@@ -101,7 +100,6 @@ const ConversationComposer = () => {
         )}
         <TwakeKnowledgeSelector
           className="u-ml-auto"
-          onSelectTwakeKnowledge={setOpenedKnowledgePanel}
           websearchEnabled={websearchEnabled}
           onToggleWebsearch={handleToggleWebsearch}
         />
