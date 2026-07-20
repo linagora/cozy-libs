@@ -41,12 +41,12 @@ class IntentIframe extends React.Component {
       ...DEFAULT_DATA,
       ...data
     })
-      .start(
-        this.intentViewer,
-        this.onFrameLoaded,
-        this.props.onHideCross,
-        this.props.onShowCross
-      )
+      .start(this.intentViewer, {
+        onReady: this.onFrameLoaded,
+        onHideCross: this.props.onHideCross,
+        onShowCross: this.props.onShowCross,
+        onReadyToUse: this.props.onReadyToUse
+      })
       .then(result => {
         // eslint-disable-next-line promise/always-return
         result ? onTerminate && onTerminate(result) : onCancel()
@@ -102,7 +102,8 @@ IntentIframe.propTypes = {
   onTerminate: PropTypes.func.isRequired,
   iframeProps: iframeProps,
   onHideCross: PropTypes.func,
-  onShowCross: PropTypes.func
+  onShowCross: PropTypes.func,
+  onReadyToUse: PropTypes.func
 }
 
 IntentIframe.defaultProps = {
