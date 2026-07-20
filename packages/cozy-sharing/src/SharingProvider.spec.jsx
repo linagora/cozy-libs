@@ -1,4 +1,5 @@
 import { act, render, screen } from '@testing-library/react'
+import { endOfDay } from 'date-fns'
 import React from 'react'
 
 import { createMockClient } from 'cozy-client'
@@ -21,6 +22,24 @@ const AppWrapper = ({ children, client, isPublic }) => {
       </SharingProvider>
     </AppLike>
   )
+}
+
+const setupProvider = (client, options = {}, state = reducer()) => {
+  const provider = new SharingProvider({ client, ...options })
+  provider.state = {
+    ...provider.state,
+    ...state,
+    onShared: provider.state.onShared
+  }
+  provider.dispatch = jest.fn(action => {
+    const onShared = provider.state.onShared
+    provider.state = {
+      ...provider.state,
+      ...reducer(provider.state, action),
+      onShared
+    }
+  })
+  return provider
 }
 
 describe('allLoaded', () => {
@@ -142,11 +161,7 @@ describe('shareByLink', () => {
       createSharingLink: mockCreateSharingLink
     })
 
-    const provider = new SharingProvider({ client: mockClient })
-    provider.state = reducer()
-    provider.dispatch = jest.fn(action => {
-      provider.state = reducer(provider.state, action)
-    })
+    const provider = setupProvider(mockClient)
 
     await provider.shareByLink(driveFile, { verbs: ['GET'] })
 
@@ -181,12 +196,8 @@ describe('shareByLink', () => {
       createSharingLink: mockCreateSharingLink
     })
 
-    const provider = new SharingProvider({ client: mockClient })
-    provider.state = reducer()
+    const provider = setupProvider(mockClient)
     provider.permissionCol = { createSharingLink: mockCreateSharingLink }
-    provider.dispatch = jest.fn(action => {
-      provider.state = reducer(provider.state, action)
-    })
 
     await provider.shareByLink(regularFile, { verbs: ['GET'] })
 
@@ -194,6 +205,163 @@ describe('shareByLink', () => {
     const permissions = getDocumentPermissions(provider.state, regularFile._id)
     expect(permissions).toHaveLength(1)
     expect(permissions[0].id).toBe(PERM_REGULAR_FILE.id)
+  })
+})
+
+describe('ensureSharingLink', () => {
+  const permission = {
+    id: 'permission-id',
+    attributes: {
+      permissions: {
+        rule0: {
+          verbs: ['GET'],
+          values: ['file-id']
+        }
+      },
+      shortcodes: { code: 'share-code' }
+    }
+  }
+  const document = { _id: 'file-id', name: 'invoice.pdf' }
+  const linkAccess = {
+    editingRights: 'write',
+    dateEnabled: false,
+    selectedDate: null,
+    passwordEnabled: false,
+    password: ''
+  }
+
+  it('fetches regular links with the regular permission API', async () => {
+    const client = createMockClient({})
+    client.getStackClient = () => ({ uri: 'https://cozy.example' })
+    client.collection = jest.fn().mockReturnValue({})
+    client.capabilities = { flat_subdomains: true }
+    const provider = setupProvider(client, {
+      doctype: 'io.cozy.files',
+      documentType: 'Files'
+    })
+    const unrelatedPermission = {
+      ...permission,
+      id: 'unrelated-permission-id',
+      attributes: {
+        ...permission.attributes,
+        permissions: {
+          rule0: {
+            ...permission.attributes.permissions.rule0,
+            values: ['other']
+          }
+        }
+      }
+    }
+    const findLinksByDoctype = jest
+      .fn()
+      .mockResolvedValue({ data: [permission, unrelatedPermission] })
+    const findLinksByIds = jest.fn(() => {
+      throw new Error('findLinksByIds is only supported for shared drives')
+    })
+    provider.permissionCol = { findLinksByDoctype, findLinksByIds }
+    provider.updateDocumentPermissions = jest
+      .fn()
+      .mockResolvedValue([{ data: permission }])
+
+    await provider.ensureSharingLink(document, linkAccess)
+
+    expect(findLinksByDoctype).toHaveBeenCalledWith('io.cozy.files')
+    expect(findLinksByIds).not.toHaveBeenCalled()
+    expect(provider.updateDocumentPermissions).toHaveBeenCalledWith(
+      { ...document, id: 'file-id' },
+      expect.any(Object),
+      [permission]
+    )
+  })
+
+  it('updates an existing link and returns its public URL', async () => {
+    const client = createMockClient({})
+    client.getStackClient = () => ({ uri: 'https://cozy.example' })
+    client.collection = jest.fn().mockReturnValue({})
+    client.capabilities = { flat_subdomains: true }
+    const provider = setupProvider(client, { documentType: 'Files' })
+    provider.fetchSharingLinks = jest.fn().mockResolvedValue([permission])
+    provider.updateDocumentPermissions = jest
+      .fn()
+      .mockResolvedValue([{ data: permission }])
+
+    const result = await provider.ensureSharingLink(document, linkAccess)
+
+    expect(provider.updateDocumentPermissions).toHaveBeenCalledWith(
+      { ...document, id: 'file-id' },
+      {
+        verbs: ['GET', 'POST', 'PUT', 'PATCH'],
+        expiresAt: '',
+        password: ''
+      },
+      [permission]
+    )
+    expect(result.documentId).toBe('file-id')
+    expect(result.url).toContain('sharecode=share-code')
+  })
+
+  it('creates a link when no existing permission is found', async () => {
+    const client = createMockClient({})
+    client.getStackClient = () => ({ uri: 'https://cozy.example' })
+    client.collection = jest.fn().mockReturnValue({})
+    client.capabilities = { flat_subdomains: true }
+    const provider = setupProvider(client, { documentType: 'Files' })
+    provider.fetchSharingLinks = jest.fn().mockResolvedValue([])
+    provider.shareByLink = jest.fn().mockResolvedValue({ data: permission })
+
+    await provider.ensureSharingLink(document, linkAccess)
+
+    expect(provider.shareByLink).toHaveBeenCalledWith(
+      document,
+      expect.objectContaining({ verbs: ['GET', 'POST', 'PUT', 'PATCH'] })
+    )
+  })
+
+  it('sends the selected expiry and password when updating a link', async () => {
+    const client = createMockClient({})
+    client.getStackClient = () => ({ uri: 'https://cozy.example' })
+    client.collection = jest.fn().mockReturnValue({})
+    client.capabilities = { flat_subdomains: true }
+    const provider = setupProvider(client, { documentType: 'Files' })
+    const selectedDate = new Date('2100-01-01T12:00:00.000Z')
+    provider.fetchSharingLinks = jest.fn().mockResolvedValue([permission])
+    provider.updateDocumentPermissions = jest
+      .fn()
+      .mockResolvedValue([{ data: permission }])
+
+    await provider.ensureSharingLink(document, {
+      editingRights: 'readOnly',
+      dateEnabled: true,
+      selectedDate,
+      passwordEnabled: true,
+      password: 'secret'
+    })
+
+    expect(provider.updateDocumentPermissions).toHaveBeenCalledWith(
+      { ...document, id: 'file-id' },
+      {
+        verbs: ['GET'],
+        expiresAt: endOfDay(selectedDate).toISOString(),
+        password: 'secret'
+      },
+      [permission]
+    )
+  })
+
+  it('updates permissions discovered outside the current store state', async () => {
+    const client = createMockClient({})
+    client.getStackClient = () => ({ uri: 'https://cozy.example' })
+    client.collection = jest.fn().mockReturnValue({})
+    client.capabilities = { flat_subdomains: true }
+    const provider = setupProvider(client, { documentType: 'Files' })
+    const updatePermission = jest.fn().mockResolvedValue({ data: permission })
+    provider.permissionCol = { add: updatePermission }
+    provider.fetchSharingLinks = jest.fn().mockResolvedValue([permission])
+    provider.dispatch = jest.fn()
+
+    await provider.ensureSharingLink(document, linkAccess)
+
+    expect(updatePermission).toHaveBeenCalledTimes(1)
   })
 })
 
@@ -217,11 +385,11 @@ describe('revokeSharingLink', () => {
     const mockClient = createMockClient({})
     mockClient.getStackClient = () => ({ uri: 'http://cozy.local' })
     mockClient.collection = jest.fn().mockReturnValue({ destroy: mockDestroy })
-    provider = new SharingProvider({ client: mockClient })
-    provider.state = reducer(undefined, addSharingLink(PERM))
-    provider.dispatch = jest.fn(action => {
-      provider.state = reducer(provider.state, action)
-    })
+    provider = setupProvider(
+      mockClient,
+      {},
+      reducer(undefined, addSharingLink(PERM))
+    )
   })
 
   it('uses permissionCol.destroy for a regular file', async () => {
@@ -281,9 +449,12 @@ describe('updateDocumentPermissions', () => {
     const mockClient = createMockClient({})
     mockClient.collection = jest.fn().mockReturnValue({ add: mockAdd })
 
-    const provider = new SharingProvider({ client: mockClient })
     // Seed the state with exactly one permission (as it would be after a correct shareByLink)
-    provider.state = reducer(undefined, addSharingLink(PERM_DRIVE_FILE))
+    const provider = setupProvider(
+      mockClient,
+      {},
+      reducer(undefined, addSharingLink(PERM_DRIVE_FILE))
+    )
     provider.dispatch = jest.fn()
 
     await provider.updateDocumentPermissions(driveFile, {
@@ -354,17 +525,11 @@ describe('shared drive recipient revocation', () => {
     mockClient.getStackClient = () => ({ uri: 'http://cozy.local' })
     mockClient.collection = jest.fn().mockReturnValue({})
 
-    provider = new SharingProvider({ client: mockClient })
-    provider.state = {
-      ...provider.state,
-      ...reducer(undefined, receiveSharings({ sharings: [SHARED_DRIVE] }))
-    }
-    provider.dispatch = jest.fn(action => {
-      provider.state = {
-        ...provider.state,
-        ...reducer(provider.state, action)
-      }
-    })
+    provider = setupProvider(
+      mockClient,
+      {},
+      reducer(undefined, receiveSharings({ sharings: [SHARED_DRIVE] }))
+    )
     sharingCol = {
       addRecipients: jest.fn(),
       create: jest.fn().mockResolvedValue({ data: NEW_SHARING }),
@@ -437,11 +602,7 @@ describe('fetchSharedDriveSharingLinks', () => {
       findLinksByIds: mockFindLinksByIds
     })
 
-    const provider = new SharingProvider({ client: mockClient })
-    provider.state = reducer()
-    provider.dispatch = jest.fn(action => {
-      provider.state = reducer(provider.state, action)
-    })
+    const provider = setupProvider(mockClient)
 
     const result = await provider.fetchSharedDriveSharingLinks(driveFile)
 
@@ -463,7 +624,7 @@ describe('fetchSharedDriveSharingLinks', () => {
       findLinksByIds
     })
 
-    const provider = new SharingProvider({ client: mockClient })
+    const provider = setupProvider(mockClient)
     provider.dispatch = jest.fn()
 
     const result = await provider.fetchSharedDriveSharingLinks({
@@ -484,11 +645,7 @@ describe('fetchSharedDriveSharingLinks', () => {
       findLinksByIds: mockFindLinksByIds
     })
 
-    const provider = new SharingProvider({ client: mockClient })
-    provider.state = reducer()
-    provider.dispatch = jest.fn(action => {
-      provider.state = reducer(provider.state, action)
-    })
+    const provider = setupProvider(mockClient)
 
     await provider.fetchSharedDriveSharingLinks({
       id: 'file_in_drive',
@@ -505,7 +662,7 @@ describe('fetchSharedDriveSharingLinks', () => {
       findLinksByIds: mockFindLinksByIds
     })
 
-    const provider = new SharingProvider({ client: mockClient })
+    const provider = setupProvider(mockClient)
     provider.dispatch = jest.fn()
 
     const result = await provider.fetchSharedDriveSharingLinks(driveFile)
@@ -550,11 +707,7 @@ describe('shareByLink shared drive 409 recovery', () => {
       findLinksByIds: mockFindLinksByIds
     })
 
-    const provider = new SharingProvider({ client: mockClient })
-    provider.state = reducer()
-    provider.dispatch = jest.fn(action => {
-      provider.state = reducer(provider.state, action)
-    })
+    const provider = setupProvider(mockClient)
 
     const resp = await provider.shareByLink(driveFile, { verbs: ['GET'] })
 
@@ -575,11 +728,11 @@ describe('shareByLink shared drive 409 recovery', () => {
       findLinksByIds: mockFindLinksByIds
     })
 
-    const provider = new SharingProvider({ client: mockClient })
-    provider.state = reducer(undefined, addSharingLink(PERM_DRIVE_FILE))
-    provider.dispatch = jest.fn(action => {
-      provider.state = reducer(provider.state, action)
-    })
+    const provider = setupProvider(
+      mockClient,
+      {},
+      reducer(undefined, addSharingLink(PERM_DRIVE_FILE))
+    )
 
     const resp = await provider.shareByLink(driveFile, { verbs: ['GET'] })
 
@@ -599,8 +752,7 @@ describe('shareByLink shared drive 409 recovery', () => {
       findLinksByIds: mockFindLinksByIds
     })
 
-    const provider = new SharingProvider({ client: mockClient })
-    provider.state = reducer()
+    const provider = setupProvider(mockClient)
     provider.dispatch = jest.fn()
 
     await expect(
@@ -629,18 +781,18 @@ describe('updateSharingMemberType', () => {
       collection: jest.fn().mockReturnValue({})
     }
 
-    instance = new SharingProvider({ client: mockClient })
-    instance.state = {
-      ...instance.state,
-      sharings: [mockSharing]
-    }
+    instance = setupProvider(
+      mockClient,
+      {},
+      {
+        ...reducer(),
+        sharings: [mockSharing]
+      }
+    )
     instance.sharingCol = {
       setReadOnly: jest.fn().mockResolvedValue({}),
       setReadWrite: jest.fn().mockResolvedValue({})
     }
-    instance.dispatch = jest.fn(action => {
-      instance.state = { ...instance.state, ...reducer(instance.state, action) }
-    })
   })
 
   it('should throw when sharing is not found', async () => {
