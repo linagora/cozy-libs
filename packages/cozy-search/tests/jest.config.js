@@ -8,8 +8,15 @@ const config = {
   coverageDirectory: './tests/coverage',
   coveragePathIgnorePatterns: ['./tests'],
   rootDir: '../',
-  testMatch: ['./**/*.spec.{ts,tsx,js}'],
+  testMatch: ['./**/*.spec.{ts,tsx,js,jsx}'],
+  moduleNameMapper: {
+    '\\.(styl|css)$': '<rootDir>/tests/styleMock.js',
+    '\\.(png|jpe?g|gif|svg|webp)$': '<rootDir>/tests/fileMock.js'
+  },
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(cozy-ui|@linagora/twake-icons)/)'
+  ],
   coverageThreshold: {
     global: {
       branches: 80,

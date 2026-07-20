@@ -13,21 +13,12 @@ import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from '../AssistantProvider'
 import ChatKnowledge from './ChatKnowledge'
-import DriveKnowledge from './DriveKnowledge'
 import MailKnowledge from './MailKnowledge'
 import styles from './styles.styl'
 import TChat from '../../assets/tchat.png'
-import TDrive from '../../assets/tdrive.png'
 import TMail from '../../assets/tmail.png'
 
 const PANEL_CONFIG = {
-  drive: {
-    title: 'assistant.twake_knowledges.title_drive',
-    desc: 'assistant.twake_knowledges.desc_drive',
-    icon: TDrive,
-    Component: DriveKnowledge,
-    actionLabel: 'assistant.twake_knowledges.select_folders'
-  },
   mail: {
     title: 'assistant.twake_knowledges.title_mail',
     desc: 'assistant.twake_knowledges.desc_mail',

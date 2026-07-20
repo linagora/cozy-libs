@@ -6,13 +6,16 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
+import KnowledgeBaseSection from '../KnowledgeBase/KnowledgeBaseSection'
 
 const BasicInfoStep = ({
   name,
   description,
   icon,
+  knowledgeBase,
   onChange,
-  onAvatarChange
+  onAvatarChange,
+  onKnowledgeBaseChange
 }) => {
   const { t } = useI18n()
   const fileInputRef = useRef(null)
@@ -100,6 +103,11 @@ const BasicInfoStep = ({
           variant="outlined"
         />
       </div>
+
+      <KnowledgeBaseSection
+        knowledgeBase={knowledgeBase}
+        onChange={onKnowledgeBaseChange}
+      />
     </div>
   )
 }

@@ -24,6 +24,7 @@ import {
   useAssistantDialog,
   STEPS
 } from '../CreateAssistantSteps/useAssistantDialog'
+import { saveKnowledgeBase } from '../KnowledgeBase/knowledgeBase'
 
 const defaultProvider = getSelectedProviderById('openrag')
 
@@ -73,6 +74,13 @@ const CreateAssistantDialog = ({ open, onClose }) => {
       providerId: selectedProvider.id
     })
     if (savedAssistant?._id) {
+      if (formData.knowledgeBase?.length > 0) {
+        await saveKnowledgeBase(
+          client,
+          savedAssistant._id,
+          formData.knowledgeBase
+        )
+      }
       setSelectedAssistantId(savedAssistant._id)
     }
     showAlert({ message: t('assistant_create.success'), severity: 'success' })
