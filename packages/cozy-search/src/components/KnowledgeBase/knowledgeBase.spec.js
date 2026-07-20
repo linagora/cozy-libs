@@ -1,5 +1,9 @@
 import {
   makeKnowledgeBaseEntry,
+  makeEmailKnowledgeBaseEntry,
+  hasEmailKnowledgeBase,
+  withKnowledgeBaseEntry,
+  withoutKnowledgeBaseDoctype,
   getKnowledgeBaseDirId,
   saveKnowledgeBase
 } from './knowledgeBase'
@@ -10,6 +14,89 @@ describe('makeKnowledgeBaseEntry', () => {
       doctype: 'io.cozy.files',
       dirId: 'folder-1'
     })
+  })
+})
+
+describe('makeEmailKnowledgeBaseEntry', () => {
+  it('builds an all-or-nothing email entry', () => {
+    expect(makeEmailKnowledgeBaseEntry()).toEqual({
+      doctype: 'com.linagora.email'
+    })
+  })
+})
+
+describe('hasEmailKnowledgeBase', () => {
+  it('detects the email entry', () => {
+    expect(
+      hasEmailKnowledgeBase({
+        knowledgeBase: [{ doctype: 'com.linagora.email' }]
+      })
+    ).toBe(true)
+  })
+
+  it('returns false when there is no email entry', () => {
+    expect(hasEmailKnowledgeBase(undefined)).toBe(false)
+    expect(hasEmailKnowledgeBase({})).toBe(false)
+    expect(
+      hasEmailKnowledgeBase({
+        knowledgeBase: [{ doctype: 'io.cozy.files', dirId: 'folder-1' }]
+      })
+    ).toBe(false)
+  })
+})
+
+describe('withKnowledgeBaseEntry', () => {
+  it('adds an entry and preserves entries of other doctypes', () => {
+    expect(
+      withKnowledgeBaseEntry([{ doctype: 'com.linagora.email' }], {
+        doctype: 'io.cozy.files',
+        dirId: 'folder-1'
+      })
+    ).toEqual([
+      { doctype: 'com.linagora.email' },
+      { doctype: 'io.cozy.files', dirId: 'folder-1' }
+    ])
+  })
+
+  it('replaces an existing entry of the same doctype', () => {
+    expect(
+      withKnowledgeBaseEntry(
+        [
+          { doctype: 'io.cozy.files', dirId: 'folder-1' },
+          { doctype: 'com.linagora.email' }
+        ],
+        { doctype: 'io.cozy.files', dirId: 'folder-2' }
+      )
+    ).toEqual([
+      { doctype: 'com.linagora.email' },
+      { doctype: 'io.cozy.files', dirId: 'folder-2' }
+    ])
+  })
+
+  it('works from an undefined knowledge base', () => {
+    expect(
+      withKnowledgeBaseEntry(undefined, { doctype: 'com.linagora.email' })
+    ).toEqual([{ doctype: 'com.linagora.email' }])
+  })
+})
+
+describe('withoutKnowledgeBaseDoctype', () => {
+  it('removes only the entries of the given doctype', () => {
+    expect(
+      withoutKnowledgeBaseDoctype(
+        [
+          { doctype: 'io.cozy.files', dirId: 'folder-1' },
+          { doctype: 'com.linagora.email' }
+        ],
+        'com.linagora.email'
+      )
+    ).toEqual([{ doctype: 'io.cozy.files', dirId: 'folder-1' }])
+  })
+
+  it('works from an undefined knowledge base', () => {
+    expect(
+      withoutKnowledgeBaseDoctype(undefined, 'com.linagora.email')
+    ).toEqual([])
   })
 })
 
@@ -57,6 +144,34 @@ describe('saveKnowledgeBase', () => {
     expect(client.save).toHaveBeenCalledWith({
       ...assistantDoc,
       knowledgeBase
+    })
+  })
+
+  it('applies an updater function to the freshly fetched knowledgeBase', async () => {
+    const assistantDoc = {
+      _id: 'assistant-1',
+      _type: 'io.cozy.ai.chat.assistants',
+      name: 'My assistant',
+      knowledgeBase: [{ doctype: 'io.cozy.files', dirId: 'fresh-folder' }]
+    }
+    const client = {
+      query: jest.fn().mockResolvedValue({ data: assistantDoc }),
+      save: jest.fn().mockResolvedValue({ data: assistantDoc })
+    }
+    const updater = jest.fn(kb =>
+      withKnowledgeBaseEntry(kb, makeEmailKnowledgeBaseEntry())
+    )
+
+    await saveKnowledgeBase(client, 'assistant-1', updater)
+
+    expect(client.query).toHaveBeenCalledTimes(1)
+    expect(updater).toHaveBeenCalledWith(assistantDoc.knowledgeBase)
+    expect(client.save).toHaveBeenCalledWith({
+      ...assistantDoc,
+      knowledgeBase: [
+        { doctype: 'io.cozy.files', dirId: 'fresh-folder' },
+        { doctype: 'com.linagora.email' }
+      ]
     })
   })
 })

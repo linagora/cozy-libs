@@ -86,9 +86,11 @@
     },
     "knowledge_base": {
       "change_folder": "Change folder…",
+      "emails": "Emails",
       "open_folder": "Open in Drive",
       "picker_error": "Unable to open the Drive folder picker. Please try again.",
       "remove": "Remove folder",
+      "remove_emails": "Remove emails",
       "select_folder": "Select this folder",
       "unavailable": "Folder unavailable"
     }
