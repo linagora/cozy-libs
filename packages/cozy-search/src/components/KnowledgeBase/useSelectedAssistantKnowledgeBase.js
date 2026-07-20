@@ -6,16 +6,19 @@ import { useI18n } from 'twake-i18n'
 
 import {
   getKnowledgeBaseDirId,
+  hasEmailKnowledgeBase,
   makeKnowledgeBaseEntry,
-  saveKnowledgeBase
+  saveKnowledgeBase,
+  withKnowledgeBaseEntry
 } from './knowledgeBase'
 import { useAssistant } from '../AssistantProvider'
 import { DEFAULT_ASSISTANT } from '../constants'
 import { buildAssistantByIdQuery, buildFileByIdQuery } from '../queries'
 
 /**
- * Resolves the selected assistant's knowledge-base folder, live from
- * io.cozy.files (renames in Drive are reflected; deletion is detected).
+ * Resolves the selected assistant's knowledge-base sources: the Drive folder
+ * (live from io.cozy.files — renames reflected, deletion detected) and the
+ * all-or-nothing email source.
  */
 export const useSelectedAssistantKnowledgeBase = () => {
   const client = useClient()
@@ -38,13 +41,15 @@ export const useSelectedAssistantKnowledgeBase = () => {
     fileQuery.options
   )
 
+  const hasEmail = hasEmailKnowledgeBase(assistant)
+
   const setKnowledgeBaseFolder = useCallback(
     async pickedFolder => {
       if (!realAssistantId || !pickedFolder) return
       try {
-        await saveKnowledgeBase(client, realAssistantId, [
-          makeKnowledgeBaseEntry(pickedFolder)
-        ])
+        await saveKnowledgeBase(client, realAssistantId, kb =>
+          withKnowledgeBaseEntry(kb, makeKnowledgeBaseEntry(pickedFolder))
+        )
       } catch {
         showAlert({ message: t('assistant.default_error'), severity: 'error' })
       }
@@ -60,6 +65,8 @@ export const useSelectedAssistantKnowledgeBase = () => {
       (fetchStatus === 'failed' ||
         !!folder?.trashed ||
         !!folder?.path?.startsWith('/.cozy_trash')),
-    setKnowledgeBaseFolder
+    setKnowledgeBaseFolder,
+    isRealAssistant: !!realAssistantId,
+    hasEmail
   }
 }
