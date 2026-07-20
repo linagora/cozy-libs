@@ -462,5 +462,25 @@
       "successNotification": "Ổ đĩa nhóm đã được sửa đổi",
       "errorNotification": "Lỗi khi sửa đổi ổ đĩa nhóm"
     }
+  },
+  "ShareLinkAccessModal": {
+    "title": "Cài đặt quyền truy cập liên kết",
+    "introText": "Chọn những gì người nhận có thể làm với các tệp này.",
+    "anyoneWithLink": "Cho phép bất kỳ ai có liên kết truy cập",
+    "settings": "Cài đặt chia sẻ",
+    "accessLevel": "Cấp độ truy cập",
+    "viewer": "Người xem",
+    "editor": "Người chỉnh sửa",
+    "settingsTitle": "Cài đặt chia sẻ",
+    "expiry": "Đặt ngày hết hạn",
+    "expiryDate": "Ngày hết hạn",
+    "password": "Yêu cầu mật khẩu",
+    "passwordLabel": "Mật khẩu",
+    "passwordTooShort": "Mật khẩu phải có ít nhất 4 ký tự.",
+    "cancel": "Hủy",
+    "addLinks": "Thêm liên kết",
+    "error": {
+      "persistence": "Không thể lưu quyền của liên kết. Vui lòng thử lại."
+    }
   }
 }

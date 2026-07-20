@@ -460,5 +460,25 @@
       "successNotification": "Le drive d'équipe a été modifié",
       "errorNotification": "Erreur lors de la modification du drive d'équipe"
     }
+  },
+  "ShareLinkAccessModal": {
+    "title": "Définir l'accès par lien",
+    "introText": "Choisissez ce que les destinataires peuvent faire avec ces fichiers.",
+    "anyoneWithLink": "Autoriser toute personne disposant du lien à accéder",
+    "settings": "Paramètres de partage",
+    "accessLevel": "Niveau d'accès",
+    "viewer": "Lecteur",
+    "editor": "Éditeur",
+    "settingsTitle": "Paramètres de partage",
+    "expiry": "Définir une date d'expiration",
+    "expiryDate": "Date d'expiration",
+    "password": "Exiger un mot de passe",
+    "passwordLabel": "Mot de passe",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 4 caractères.",
+    "cancel": "Annuler",
+    "addLinks": "Ajouter les liens",
+    "error": {
+      "persistence": "Impossible d'enregistrer les autorisations du lien. Veuillez réessayer."
+    }
   }
 }
