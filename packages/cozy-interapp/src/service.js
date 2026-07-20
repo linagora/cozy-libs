@@ -46,6 +46,7 @@ export const start = request => (intentIdArg, serviceWindowArg) => {
 
   return request.get(intentId).then(intent => {
     let terminated = false
+    let notifiedReadyToUse = false
 
     const sendMessage = message => {
       if (terminated)
@@ -137,7 +138,17 @@ export const start = request => (intentIdArg, serviceWindowArg) => {
         resizeClient: resizeClient,
         cancel: cancel,
         hideCross: hideCross,
-        showCross: showCross
+        showCross: showCross,
+        notifyReadyToUse: () => {
+          if (notifiedReadyToUse) {
+            throw new Error('Intent service is already ready to use')
+          }
+          if (terminated) {
+            throw new Error('Intent service is terminated')
+          }
+          notifiedReadyToUse = true
+          sendMessage({ type: `intent-${intent._id}:readyToUse` })
+        }
       }
     })
   })
