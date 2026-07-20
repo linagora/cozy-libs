@@ -210,6 +210,69 @@ describe('Interapp', () => {
         expect(element.querySelector('iframe')).toBe(null)
       })
 
+      describe('notifyReadyToUse', () => {
+        let service
+        beforeEach(async () => {
+          const freshIntent = {
+            id: 'readytouse-intent-id',
+            meta: { _rev: undefined },
+            attributes: {
+              action: 'PICK',
+              type: 'io.cozy.files',
+              permissions: ['GET'],
+              client: serviceOrigin,
+              services: [{ slug: 'files', href: serviceURL }]
+            }
+          }
+          api.respond('GET', '/intents/readytouse-intent-id', {
+            data: freshIntent
+          })
+          const freshIntents = new Intents({ client: cozyClient })
+          const servicePromise = freshIntents.createService(
+            freshIntent.id,
+            window
+          )
+          await sleep(1)
+          window.dispatchEvent(
+            Object.assign(new Event('message'), {
+              data: { id: 'fileId' },
+              origin: serviceOrigin,
+              source: window
+            })
+          )
+          service = await servicePromise
+        })
+
+        it('posts readyToUse message to parent', () => {
+          const postSpy = jest.spyOn(window, 'postMessage')
+          postSpy.mockClear()
+          service.notifyReadyToUse()
+          expect(postSpy).toHaveBeenCalledWith(
+            { type: `intent-${service.getIntent()._id}:readyToUse` },
+            service.getIntent().attributes.client
+          )
+          postSpy.mockRestore()
+        })
+
+        it('throws on second call', () => {
+          const postSpy = jest.spyOn(window, 'postMessage')
+          postSpy.mockClear()
+          service.notifyReadyToUse()
+          expect(() => service.notifyReadyToUse()).toThrow(
+            'Intent service is already ready to use'
+          )
+          expect(postSpy).toHaveBeenCalledTimes(1)
+          postSpy.mockRestore()
+        })
+
+        it('throws if called after terminate', () => {
+          service.terminate({})
+          expect(() => service.notifyReadyToUse()).toThrow(
+            'Intent service is terminated'
+          )
+        })
+      })
+
       it('handles composition', async () => {
         api.respond(
           'POST',
