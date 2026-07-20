@@ -21,8 +21,10 @@ const AssistantDialogContent = ({
           name={formData.name}
           description={formData.description}
           icon={formData.icon}
+          knowledgeBase={formData.knowledgeBase}
           onChange={onChange}
           onAvatarChange={onAvatarChange}
+          onKnowledgeBaseChange={onChange('knowledgeBase')}
         />
       )
     case STEPS.MODEL_SELECTION:

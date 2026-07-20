@@ -17563,6 +17563,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cozy-interapp@npm:^0.17.1":
+  version: 0.17.1
+  resolution: "cozy-interapp@npm:0.17.1"
+  peerDependencies:
+    "@babel/runtime": ">=7.12.5"
+  checksum: 10c0/b3ec14d4a4aaf897f6bd441c841f34861afbfd85bcec7fc713939f4c53e072ce1a0547ec67888aa7a1735fc5578cff0e022214cc231f3f8f132322ee2f3fe46e
+  languageName: node
+  linkType: hard
+
 "cozy-interapp@npm:^0.18.0, cozy-interapp@workspace:packages/cozy-interapp":
   version: 0.0.0-use.local
   resolution: "cozy-interapp@workspace:packages/cozy-interapp"
@@ -17834,6 +17843,7 @@ __metadata:
     cozy-device-helper: "npm:^4.0.3"
     cozy-flags: "npm:^4.9.1"
     cozy-intent: "npm:^2.31.1"
+    cozy-interapp: "npm:^0.17.1"
     cozy-logger: "npm:^1.18.1"
     cozy-minilog: "npm:^3.10.1"
     cozy-pouch-link: "npm:^54.0.0"
@@ -17858,6 +17868,7 @@ __metadata:
     cozy-device-helper: ">=3.7.1"
     cozy-flags: ">=4.6.1"
     cozy-intent: ">=2.26.0"
+    cozy-interapp: ">=0.17.1"
     cozy-logger: ">=1.10.4"
     cozy-minilog: ">=3.3.1"
     cozy-pouch-link: 54.0.0

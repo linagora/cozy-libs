@@ -24,6 +24,7 @@ import {
   useAssistantDialog,
   STEPS
 } from '../CreateAssistantSteps/useAssistantDialog'
+import { saveKnowledgeBase } from '../KnowledgeBase/knowledgeBase'
 
 const EditAssistantDialog = ({ open, onClose }) => {
   useExtendI18n(locales)
@@ -70,7 +71,8 @@ const EditAssistantDialog = ({ open, onClose }) => {
         baseUrl: provider?.data?.baseUrl || '',
         apiKey: provider?.auth?.apiKey || '',
         encryptedApiKey: provider?.auth?.credentials_encrypted || '',
-        providerId
+        providerId,
+        knowledgeBase: assistant.knowledgeBase || []
       })
 
       const selectProviderDefault = getSelectedProviderById(providerId)
@@ -104,6 +106,11 @@ const EditAssistantDialog = ({ open, onClose }) => {
       baseUrl: formData.baseUrl,
       providerId: selectedProvider.id
     })
+    await saveKnowledgeBase(
+      client,
+      assistantIdInAction,
+      formData.knowledgeBase || []
+    )
     setSelectedAssistantId(assistantIdInAction)
     showAlert({ message: t('assistant_edit.success'), severity: 'success' })
   }

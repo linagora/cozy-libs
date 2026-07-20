@@ -64,24 +64,18 @@
     },
     "twake_knowledges": {
       "chat": "Chat",
-      "drive": "Drive",
       "mail": "Email",
-      "title_drive": "Sélectionner des dossiers Drive",
       "title_mail": "Sélectionner des sources d'email",
       "title_chat": "Sélectionner des sources de discussion",
       "title_default": "Sélectionner des sources",
-      "desc_drive": "Les éléments sélectionnés seront utilisés pour répondre à vos questions.",
       "desc_mail": "Les emails sélectionnés seront utilisés pour répondre à vos questions.",
       "desc_chat": "Les messages sélectionnés seront utilisés pour répondre à vos questions.",
       "search_placeholder": "Rechercher",
       "clear_all": "Tout effacer",
       "see_more": "Voir plus",
       "cancel": "Annuler",
-      "select_folders": "Sélectionner des dossiers",
       "select_emails": "Sélectionner des emails",
       "select_messages": "Sélectionner des messages",
-      "my_drive": "Mon Drive",
-      "shared_with_me": "Partagé avec moi",
       "inbox": "Boîte de réception",
       "starred": "Favoris",
       "sent": "Envoyé",
@@ -89,6 +83,14 @@
       "outbox": "Boîte d'envoi",
       "spam": "Spam",
       "search_in": "Rechercher dans"
+    },
+    "knowledge_base": {
+      "change_folder": "Modifier le dossier…",
+      "open_folder": "Ouvrir dans Drive",
+      "picker_error": "Impossible d'ouvrir le sélecteur de dossier Drive. Veuillez réessayer.",
+      "remove": "Retirer le dossier",
+      "select_folder": "Sélectionner ce dossier",
+      "unavailable": "Dossier indisponible"
     }
   },
   "assistant_create": {

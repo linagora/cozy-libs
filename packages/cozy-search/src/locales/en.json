@@ -64,24 +64,18 @@
     },
     "twake_knowledges": {
       "chat": "Chat",
-      "drive": "Drive",
       "mail": "Email",
-      "title_drive": "Select Drive folders",
       "title_mail": "Select Mail sources",
       "title_chat": "Select Chat sources",
       "title_default": "Select sources",
-      "desc_drive": "Selected items will be used to answer your questions.",
       "desc_mail": "Selected emails will be used to answer your questions.",
       "desc_chat": "Selected messages will be used to answer your questions.",
       "search_placeholder": "Search",
       "clear_all": "Clear all",
       "see_more": "See more",
       "cancel": "Cancel",
-      "select_folders": "Select folders",
       "select_emails": "Select emails",
       "select_messages": "Select messages",
-      "my_drive": "My Drive",
-      "shared_with_me": "Shared with me",
       "inbox": "Inbox",
       "starred": "Starred",
       "sent": "Sent",
@@ -89,6 +83,14 @@
       "outbox": "Outbox",
       "spam": "Spam",
       "search_in": "Search in"
+    },
+    "knowledge_base": {
+      "change_folder": "Change folder…",
+      "open_folder": "Open in Drive",
+      "picker_error": "Unable to open the Drive folder picker. Please try again.",
+      "remove": "Remove folder",
+      "select_folder": "Select this folder",
+      "unavailable": "Folder unavailable"
     }
   },
   "assistant_create": {
