@@ -139,8 +139,11 @@ describe('ShareLinkAccessModal', () => {
 
     expect(screen.getByRole('dialog')).toHaveTextContent('invoice.pdf')
     expect(screen.getByRole('dialog')).toHaveTextContent('Projects')
+    expect(screen.getByText('invoice.pdf').parentElement).toHaveClass(
+      'u-maw-100'
+    )
     expect(screen.getByLabelText('Access level')).toHaveTextContent('Viewer')
-    expect(screen.getByRole('dialog')).toHaveAttribute('data-size', 'medium')
+    expect(screen.getByRole('dialog')).toHaveAttribute('data-size', 'small')
   })
 
   it('keeps document icons inside their chips', () => {

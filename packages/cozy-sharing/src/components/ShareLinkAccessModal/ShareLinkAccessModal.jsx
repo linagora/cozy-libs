@@ -11,6 +11,7 @@ import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import DatePicker from 'cozy-ui/transpiled/react/DatePicker'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import FormControlLabel from 'cozy-ui/transpiled/react/FormControlLabel'
+import Grid from 'cozy-ui/transpiled/react/Grid'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Menu from 'cozy-ui/transpiled/react/Menu'
 import MenuItem from 'cozy-ui/transpiled/react/MenuItem'
@@ -99,6 +100,7 @@ export const ShareLinkAccessModal = ({
       <ConfirmDialog
         open
         classes={DIALOG_CLASSES}
+        size="small"
         onBack={busy ? undefined : handleSettingsBack}
         onClose={busy ? undefined : handleSettingsBack}
         title={t('ShareLinkAccessModal.settingsTitle')}
@@ -165,27 +167,29 @@ export const ShareLinkAccessModal = ({
     <ConfirmDialog
       open
       classes={DIALOG_CLASSES}
-      size="medium"
+      size="small"
       onBack={busy ? undefined : onCancel}
       onClose={busy ? undefined : onCancel}
       title={t('ShareLinkAccessModal.title')}
       content={
         <Box display="flex" flexDirection="column" gridGap="1rem">
           <Typography>{t('ShareLinkAccessModal.introText')}</Typography>
-          <Box display="flex" flexWrap="wrap" gridGap="0.5rem">
+          <Grid container spacing={1}>
             {documents.map(document => (
-              <Chip
-                key={document._id || document.id}
-                avatar={
-                  <Box component="span" className="u-flex u-ov-hidden">
-                    {renderDocumentIcon(document, DOCUMENT_ICON_SIZE)}
-                  </Box>
-                }
-                label={document.name}
-                size="small"
-              />
+              <Grid item key={document._id || document.id} xs={12} sm={6}>
+                <Chip
+                  avatar={
+                    <Box component="span" className="u-flex u-ov-hidden">
+                      {renderDocumentIcon(document, DOCUMENT_ICON_SIZE)}
+                    </Box>
+                  }
+                  className="u-maw-100"
+                  label={document.name}
+                  size="small"
+                />
+              </Grid>
             ))}
-          </Box>
+          </Grid>
           {error && <Alert severity="error">{error}</Alert>}
           <Box
             display="flex"
