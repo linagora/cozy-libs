@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.17.1...cozy-interapp@0.18.0) (2026-07-21)
+
+### Features
+
+- **cozy-interapp:** Add service.notifyReadyToUse method ([c536c01](https://github.com/cozy/cozy-libs/commit/c536c0199555dfe40a705e2794702a5cbe990356))
+- **cozy-interapp:** Migrate start() to options object ([9e1865d](https://github.com/cozy/cozy-libs/commit/9e1865d90b5a1c7c74765419294bf0007ce8d42f))
+
+### BREAKING CHANGES
+
+- **cozy-interapp:** intents.create().start() now takes an options object
+  as its second argument. The positional form is removed. Migrate to
+  start(element, { onReady, onHideCross, onShowCross, onReadyToUse }).
+
 ## [0.17.1](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.17.0...cozy-interapp@0.17.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-interapp

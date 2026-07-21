@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@12.0.3...cozy-ui-plus@12.1.0) (2026-07-21)
+
+### Features
+
+- **cozy-ui-plus:** Thread onReadyToUse through IntentDialogOpener ([7598656](https://github.com/cozy/cozy-libs/commit/75986568d5fb3b4a5304bc21291a69a093705534))
+
 ## [12.0.3](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@12.0.2...cozy-ui-plus@12.0.3) (2026-07-17)
 
 **Note:** Version bump only for package cozy-ui-plus
