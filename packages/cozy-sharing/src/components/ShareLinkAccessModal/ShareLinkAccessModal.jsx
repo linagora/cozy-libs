@@ -23,6 +23,7 @@ import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 
 const DIALOG_CLASSES = { paper: 'u-h-auto' }
+const DOCUMENT_ICON_SIZE = 18
 const PASSWORD_MIN_LENGTH = 4
 
 export const ShareLinkAccessModal = ({
@@ -175,7 +176,11 @@ export const ShareLinkAccessModal = ({
             {documents.map(document => (
               <Chip
                 key={document._id || document.id}
-                avatar={renderDocumentIcon(document)}
+                avatar={
+                  <Box component="span" className="u-flex u-ov-hidden">
+                    {renderDocumentIcon(document, DOCUMENT_ICON_SIZE)}
+                  </Box>
+                }
                 label={document.name}
                 size="small"
               />
