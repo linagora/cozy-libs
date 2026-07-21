@@ -1,3 +1,8 @@
+import cx from 'classnames'
+import useI18n from 'components/useI18n'
+import React from 'react'
+import styles from 'styles/user-menu.styl'
+
 import {
   Icon,
   CloudRainbow,
@@ -6,11 +11,6 @@ import {
   Logout,
   Right
 } from '@linagora/twake-icons'
-import cx from 'classnames'
-import useI18n from 'components/useI18n'
-import React from 'react'
-import styles from 'styles/user-menu.styl'
-
 import { useClient } from 'cozy-client'
 import { makeDiskInfos } from 'cozy-client/dist/models/instance'
 import flag from 'cozy-flags'
@@ -20,6 +20,7 @@ import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
@@ -60,7 +61,9 @@ const UserMenuContent = ({
       <div className="u-flex u-flex-column u-flex-items-center u-mt-half">
         <AvatarMyself className="u-mb-half" />
         <Typography variant="h4">{public_name}</Typography>
-        <Typography variant="body2">{email}</Typography>
+        <Typography className="u-maw-100" variant="body2">
+          <MidEllipsis className="u-mh-0 u-mv-auto" text={email} />
+        </Typography>
       </div>
       {showEmailDomainChip && <EmailDomainChip />}
       <List className="u-pb-0">
