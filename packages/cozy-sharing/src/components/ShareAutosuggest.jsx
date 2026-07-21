@@ -2,15 +2,15 @@ import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 import Autosuggest from 'react-autosuggest'
 
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import { GroupAvatar } from './Avatar/GroupAvatar'
+import { MemberAvatar } from './Avatar/MemberAvatar'
 import ContactSuggestion from './ContactSuggestion'
 import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
-import { getDisplayName, getInitials, Contact, Group } from '../models'
+import { getDisplayName, Contact, Group } from '../models'
 import styles from '../styles/autosuggest.styl'
 import { contactOrGroupMatch } from '../suggestionMatchers'
 
@@ -153,7 +153,6 @@ const ShareAutosuggest = ({
     <div className={styles['recipientsContainer']}>
       {recipients.map((recipient, idx) => {
         const isContactGroup = recipient._type === Group.doctype
-        const avatarText = getInitials(recipient)
         const name = getDisplayName(recipient)
         return (
           <Chip
@@ -163,7 +162,7 @@ const ShareAutosuggest = ({
               isContactGroup ? (
                 <GroupAvatar size="xs" color={recipient.color} />
               ) : (
-                <Avatar size="xs">{avatarText}</Avatar>
+                <MemberAvatar size="xs" recipient={recipient} />
               )
             }
             label={name}
