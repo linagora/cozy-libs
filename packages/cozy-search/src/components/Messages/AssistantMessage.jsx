@@ -9,7 +9,7 @@ import { useI18n } from 'twake-i18n'
 
 import MarkdownText from './MarkdownText'
 import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
-import Sources from '../Conversations/Sources/Sources'
+import { useChatComponents } from '../../contexts/ChatComponentsContext'
 
 const useIsErrorMessage = () => {
   return useMessage(s => s.metadata?.custom?.isError === true)
@@ -22,6 +22,7 @@ const AssistantMessage = () => {
   const isError = useIsErrorMessage()
   const messageId = useMessage(s => s.id)
   const sources = useMessage(s => s.metadata?.custom?.sources)
+  const { SourcesRenderer } = useChatComponents()
 
   return (
     <MessagePrimitive.Root className="u-mt-1-half">
@@ -48,7 +49,7 @@ const AssistantMessage = () => {
         />
       )}
       {sources?.length > 0 && (
-        <Sources messageId={messageId} sources={sources} />
+        <SourcesRenderer messageId={messageId} sources={sources} />
       )}
     </MessagePrimitive.Root>
   )
