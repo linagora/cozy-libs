@@ -389,10 +389,8 @@
     "secondary_you": "dont vous"
   },
   "GroupRecipientDetail": {
-    "subtitle": "Géré par %{ownerName}",
     "empty": {
-      "content": "Votre groupe de contacts est vide ! Ajoutez rapidement des membres pour commencer à leur partager vos précieux documents !",
-      "action": "Ouvrir Contacts"
+      "content": "Ce groupe est vide. Pour ajouter des membres à ce groupe, contactez votre administrateur."
     },
     "withAccess": {
       "title": "Accès à l’élément"

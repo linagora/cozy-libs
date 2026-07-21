@@ -391,10 +391,8 @@
     "secondary_you": "bao gồm cả bạn"
   },
   "GroupRecipientDetail": {
-    "subtitle": "Được quản lý bởi %{ownerName}",
     "empty": {
-      "content": "Nhóm liên hệ của bạn trống! Nhanh chóng thêm thành viên để bắt đầu chia sẻ các tài liệu quý giá của bạn với họ!",
-      "action": "Mở Danh bạ"
+      "content": "Nhóm này hiện không có thành viên nào. Để thêm thành viên vào nhóm này, vui lòng liên hệ với quản trị viên."
     },
     "withAccess": {
       "title": "Quyền truy cập vào mục"
