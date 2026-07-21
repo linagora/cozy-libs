@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.2.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.1.9...cozy-bar@35.2.0) (2026-07-21)
+
+### Features
+
+- **cozy-bar:** Add midellipsis on user menu email ([1f26c4a](https://github.com/cozy/cozy-libs/commit/1f26c4a66d2d4bb52631cad8a683649079b4efca))
+
 ## [35.1.9](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.1.8...cozy-bar@35.1.9) (2026-07-21)
 
 **Note:** Version bump only for package cozy-bar
