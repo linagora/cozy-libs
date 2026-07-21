@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.1.0...cozy-sharing@37.2.0) (2026-07-21)
+
+### Bug Fixes
+
+- **sharing:** Constrain document icons in link access chips ([7749db2](https://github.com/cozy/cozy-libs/commit/7749db2bd4ccdaada1e8ad2aadba472612235c08))
+- **sharing:** Make share link access updates consistent ([d2a350a](https://github.com/cozy/cozy-libs/commit/d2a350a5589bf21f494a83618c6e0f82d0ec0825))
+- **sharing:** Refine link access modal layout ([b4e004d](https://github.com/cozy/cozy-libs/commit/b4e004d2f4052ea07b48e37da51d05002e5803b4))
+
+### Features
+
+- **cozy-sharing:** Remove CTA in empty group and change wording ([3f36cb1](https://github.com/cozy/cozy-libs/commit/3f36cb1312b76f9515cb69535a913cc02e9ec2e8))
+- **sharing:** Add link access management to SharingProvider ([328b43b](https://github.com/cozy/cozy-libs/commit/328b43b4c804c1df123361d26aaaa507b6646a00))
+- **sharing:** Add ShareLinkAccessModal ([5982905](https://github.com/cozy/cozy-libs/commit/598290547626045a5c2e0b2b3ef902b739ee9f58))
+
 # [37.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.0.2...cozy-sharing@37.1.0) (2026-07-21)
 
 ### Features
