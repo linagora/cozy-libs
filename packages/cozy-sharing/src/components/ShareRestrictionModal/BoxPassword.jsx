@@ -1,7 +1,7 @@
-import { Icon, Copy, Password } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
+import { Icon, Copy, Password } from '@linagora/twake-icons'
 import Box from 'cozy-ui/transpiled/react/Box'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import List from 'cozy-ui/transpiled/react/List'

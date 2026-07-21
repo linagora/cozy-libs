@@ -1,7 +1,7 @@
-import { Icon, Bottom, People } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useReducer, useRef } from 'react'
 
+import { Icon, Bottom, People } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import { isDirectory as isDir } from 'cozy-client/dist/models/file'
 import flag from 'cozy-flags'

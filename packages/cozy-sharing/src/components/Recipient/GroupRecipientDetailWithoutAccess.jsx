@@ -1,6 +1,6 @@
-import { Icon, Forbidden } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon, Forbidden } from '@linagora/twake-icons'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'

@@ -1,7 +1,7 @@
-import { Icon, Share } from '@linagora/twake-icons'
 import classNames from 'classnames'
 import React from 'react'
 
+import { Icon, Share } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 
 import styles from '../styles/button.styl'

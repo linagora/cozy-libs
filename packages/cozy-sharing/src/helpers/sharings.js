@@ -1,5 +1,4 @@
 import { CloudPlusOutlined, Sync, ToTheCloud } from '@linagora/twake-icons'
-
 import { Q } from 'cozy-client'
 
 import { fetchFilesPaths } from './files'

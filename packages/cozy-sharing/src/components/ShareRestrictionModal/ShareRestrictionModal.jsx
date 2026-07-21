@@ -1,8 +1,8 @@
-import { Icon, Trash } from '@linagora/twake-icons'
 import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
+import { Icon, Trash } from '@linagora/twake-icons'
 import { generateWebLink, useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'

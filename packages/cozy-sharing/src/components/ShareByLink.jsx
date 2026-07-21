@@ -1,7 +1,7 @@
-import { Icon, Copy, Link } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useReducer, useState } from 'react'
 
+import { Icon, Copy, Link } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'

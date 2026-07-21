@@ -1,6 +1,6 @@
-import { Icon } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon } from '@linagora/twake-icons'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import SharedDriveIcon from '../../assets/icons/shared-drive.svg'
