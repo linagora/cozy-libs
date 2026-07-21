@@ -143,15 +143,19 @@ describe('ShareLinkAccessModal', () => {
     expect(screen.getByRole('dialog')).toHaveAttribute('data-size', 'medium')
   })
 
-  it('renders document icons supplied by the caller', () => {
-    renderModal({
-      renderDocumentIcon: document => (
-        <span data-testid={`icon-${document._id}`}>icon</span>
-      )
-    })
+  it('keeps document icons inside their chips', () => {
+    const renderDocumentIcon = jest.fn(document => (
+      <span data-testid={`icon-${document._id}`}>icon</span>
+    ))
 
-    expect(screen.getByTestId('icon-file-id')).toBeInTheDocument()
-    expect(screen.getByTestId('icon-folder-id')).toBeInTheDocument()
+    renderModal({ renderDocumentIcon })
+
+    expect(renderDocumentIcon).toHaveBeenNthCalledWith(1, documents[0], 18)
+    expect(renderDocumentIcon).toHaveBeenNthCalledWith(2, documents[1], 18)
+    expect(screen.getByTestId('icon-file-id').parentElement).toHaveClass(
+      'u-flex',
+      'u-ov-hidden'
+    )
   })
 
   it('calls onCancel from the back button', () => {
