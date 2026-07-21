@@ -391,10 +391,8 @@
     "secondary_you": "including you"
   },
   "GroupRecipientDetail": {
-    "subtitle": "Managed by %{ownerName}",
     "empty": {
-      "content": "Your contact group is empty! Quickly add members to start sharing your valuable documents with them!",
-      "action": "Open Contacts"
+      "content": "This group is empty. To add some members in this group, contact your administrator."
     },
     "withAccess": {
       "title": "Access to item"
