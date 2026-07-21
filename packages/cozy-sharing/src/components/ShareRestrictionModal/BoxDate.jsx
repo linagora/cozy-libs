@@ -1,8 +1,8 @@
-import { Icon, Calendar } from '@linagora/twake-icons'
 import { format } from 'date-fns'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Calendar } from '@linagora/twake-icons'
 import Box from 'cozy-ui/transpiled/react/Box'
 import DatePicker from 'cozy-ui/transpiled/react/DatePicker'
 import List from 'cozy-ui/transpiled/react/List'

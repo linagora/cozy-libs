@@ -1,7 +1,7 @@
-import { Icon, Link } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
+import { Icon, Link } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 

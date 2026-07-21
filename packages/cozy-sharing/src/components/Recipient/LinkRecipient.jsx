@@ -1,7 +1,7 @@
-import { Icon, Gear, Link } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
+import { Icon, Gear, Link } from '@linagora/twake-icons'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Fade from 'cozy-ui/transpiled/react/Fade'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'

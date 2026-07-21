@@ -1,6 +1,7 @@
-import { Icon, Share } from '@linagora/twake-icons'
 import classNames from 'classnames'
 import React from 'react'
+
+import { Icon, Share } from '@linagora/twake-icons'
 
 import styles from '../styles/badge.styl'
 
