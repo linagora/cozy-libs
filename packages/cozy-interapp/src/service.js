@@ -44,7 +44,7 @@ export const start = request => (intentIdArg, serviceWindowArg) => {
   if (!intentId)
     return Promise.reject(new Error('Cannot retrieve intent from URL'))
 
-  return request.get(intentId).then(intent => {
+  return request.get(intentId, { tryDOM: true }).then(intent => {
     let terminated = false
     let notifiedReadyToUse = false
 
