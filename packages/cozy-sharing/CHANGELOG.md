@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.0.2...cozy-sharing@37.1.0) (2026-07-21)
+
+### Features
+
+- Display image from user in chip ([fd7a03b](https://github.com/cozy/cozy-libs/commit/fd7a03bc6607e7688d639b63f6b0ecc00a936369))
+
 ## [37.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.0.1...cozy-sharing@37.0.2) (2026-07-21)
 
 **Note:** Version bump only for package cozy-sharing
