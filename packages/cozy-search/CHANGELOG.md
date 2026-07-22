@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.0.11...cozy-search@2.1.0) (2026-07-22)
+
+### Features
+
+- **cozy-search:** Add assistant knowledge base with Drive folder source ([14199bd](https://github.com/cozy/cozy-libs/commit/14199bdd8861b0ca6b2fe00647063863902acb46))
+- **cozy-search:** Select emails as knowledge base source ([6d6c882](https://github.com/cozy/cozy-libs/commit/6d6c882c9416069d3ea73965073d7456a80f8386))
+- **cozy-search:** Wire composer source chips to the knowledge base ([35ef740](https://github.com/cozy/cozy-libs/commit/35ef7400058b054b57097150b2c796403ac213df))
+
 ## [2.0.11](https://github.com/cozy/cozy-libs/compare/cozy-search@2.0.10...cozy-search@2.0.11) (2026-07-21)
 
 **Note:** Version bump only for package cozy-search
