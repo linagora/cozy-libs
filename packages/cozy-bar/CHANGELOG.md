@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [35.2.2](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.2.1...cozy-bar@35.2.2) (2026-07-22)
+
+### Bug Fixes
+
+- Add small padding to user section ([ab72cf8](https://github.com/cozy/cozy-libs/commit/ab72cf8bd4f5c64ffe7e82fe1722d039f6682977))
+
 ## [35.2.1](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.2.0...cozy-bar@35.2.1) (2026-07-21)
 
 **Note:** Version bump only for package cozy-bar
