@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.1.1...cozy-search@2.2.0) (2026-07-22)
+
+### Bug Fixes
+
+- **cozy-search:** Don't send default assistant sentinel to the stack ([6385d0e](https://github.com/cozy/cozy-libs/commit/6385d0e1b88c6689e5865edca43241f1b0705242))
+
+### Features
+
+- **cozy-search:** Add agent description field in creation wizard ([71cda0d](https://github.com/cozy/cozy-libs/commit/71cda0de13b88c3d2a65d2bc606c7fcaa691a6c3))
+
 ## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-search@2.1.0...cozy-search@2.1.1) (2026-07-22)
 
 **Note:** Version bump only for package cozy-search
