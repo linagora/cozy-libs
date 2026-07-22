@@ -89,14 +89,14 @@ const BasicInfoStep = ({
 
       <div className="u-mb-1">
         <Typography variant="h6" className="u-mb-half">
-          {t('assistant_create.steps.basic_info.instructions')}
+          {t('assistant_create.steps.basic_info.description_label')}
         </Typography>
         <TextField
           fullWidth
           multiline
           rows={6}
           placeholder={t(
-            'assistant_create.steps.basic_info.instructions_placeholder'
+            'assistant_create.steps.basic_info.description_placeholder'
           )}
           value={description}
           onChange={onChange('description')}

@@ -7,6 +7,7 @@ import Badge from 'cozy-ui/transpiled/react/Badge'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 import AssistantAvatar from '../Assistant/AssistantAvatar'
@@ -22,6 +23,7 @@ const AssistantSelectionItem = ({
   disableActions = false
 }) => {
   const { isMobile } = useBreakpoints()
+  const { t } = useI18n()
 
   const handleSelect = assistant => {
     onSelect(assistant)
@@ -84,7 +86,7 @@ const AssistantSelectionItem = ({
         {!disableActions && (
           <div className={styles['menu-item-actions']}>
             <IconButton
-              aria-label="Edit assistant"
+              aria-label={t('assistant_edit.title')}
               size="small"
               className={cx({
                 [styles['menu-item-icon-button']]:
@@ -96,7 +98,7 @@ const AssistantSelectionItem = ({
               <Icon icon={Pen} color="var(--primaryColor)" />
             </IconButton>
             <IconButton
-              aria-label="Delete assistant"
+              aria-label={t('assistant_delete.title')}
               size="small"
               className={cx({
                 [styles['menu-item-icon-button']]:

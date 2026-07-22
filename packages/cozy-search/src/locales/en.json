@@ -79,18 +79,17 @@
     }
   },
   "assistant_create": {
-    "title": "Create Assistant",
+    "title": "Create Agent",
     "steps": {
       "basic_info": {
-        "description": "Customize your assistant's identity and behavior to match your specific needs.",
+        "description": "Customize your agent. Choose its knowledge base, then its AI model.",
         "avatar": "Avatar (optional)",
         "name": "Name",
-        "name_placeholder": "Name your assistant",
-        "instructions": "Instructions (optional)",
-        "instructions_placeholder": "What does this assistant do? How should it behave? What should it avoid doing?",
+        "name_placeholder": "Name your agent",
+        "description_label": "Description",
+        "description_placeholder": "Optional description of this agent's role. This description will not be used by the AI",
         "knowledge_base": "Knowledge Base (optional)",
         "knowledge_base_placeholder": "Conversations may reveal some or all of the files that have been uploaded.",
-        "load_file": "Load files",
         "from_drive": "From Drive",
         "from_mail": "From Mail"
       },
@@ -119,7 +118,7 @@
         "external_warning": "Your data will be processed on external servers. This mode does not provide enhanced security protections."
       },
       "configuration": {
-        "description": "Enter provider URL, model and your API key to configure the new assistant. Your key will be stored securely.",
+        "description": "Enter provider URL, model and your API key to configure the new agent. Your key will be stored securely.",
         "custom_provider_description": "Configure your custom AI provider settings",
         "model": {
           "label": "Model",
@@ -145,25 +144,25 @@
       "next": "Next",
       "create": "Create"
     },
-    "configure_api_key_title": "Configure a new assistant",
-    "configure_api_key_description": "Enter provider URL, model and your API key to configure the new assistant. Your key will be stored securely.",
+    "configure_api_key_title": "Configure a new agent",
+    "configure_api_key_description": "Enter provider URL, model and your API key to configure the new agent. Your key will be stored securely.",
     "from_drive": {
       "actions": {
         "cancel": "Cancel",
         "add": "Add"
       }
     },
-    "success": "Assistant created successfully"
+    "success": "Agent created successfully"
   },
   "assistant_edit": {
-    "title": "Edit Assistant",
+    "title": "Edit Agent",
     "buttons": {
       "cancel": "Cancel",
       "next": "Next",
       "edit": "Edit"
     },
-    "configure_api_key_title": "Configure your assistant",
-    "success": "Assistant updated successfully"
+    "configure_api_key_title": "Configure your agent",
+    "success": "Agent updated successfully"
   },
   "conversation_delete": {
     "title": "Delete conversation",
@@ -174,8 +173,8 @@
     }
   },
   "assistant_delete": {
-    "title": "Delete AI Assistant",
-    "content": "Are you sure you want to delete %{name}? This action cannot be undone and will permanently remove this assistant from your Twake.",
+    "title": "Delete Agent",
+    "content": "Are you sure you want to delete %{name}? This action cannot be undone and will permanently remove this agent from your Twake.",
     "buttons": {
       "cancel": "Cancel",
       "confirm": "Delete"
