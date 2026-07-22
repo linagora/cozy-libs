@@ -58,7 +58,7 @@ const UserMenuContent = ({
 
   return (
     <div className={cx(styles['user-menu-content'], 'u-flex u-flex-column')}>
-      <div className="u-flex u-flex-column u-flex-items-center u-mt-half">
+      <div className="u-flex u-flex-column u-flex-items-center u-mt-half u-ph-half">
         <AvatarMyself className="u-mb-half" />
         <Typography variant="h4">{public_name}</Typography>
         <Typography className="u-maw-100" variant="body2">
