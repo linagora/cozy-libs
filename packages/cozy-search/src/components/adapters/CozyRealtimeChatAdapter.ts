@@ -17,6 +17,7 @@ import type {
 import Minilog from 'cozy-minilog'
 
 import { StreamBridge } from './StreamBridge'
+import { DEFAULT_ASSISTANT } from '../constants'
 import { sanitizeChatContent } from '../helpers'
 
 const log = Minilog('🔍 [CozyRealtimeChatAdapter]')
@@ -95,7 +96,13 @@ export const createCozyRealtimeChatAdapter = (
         `/ai/chat/conversations/${conversationId}`,
         {
           q: userQuery,
-          assistantID: assistantId,
+          // The default assistant is a client-side sentinel with no CouchDB
+          // document behind it: sending its id would make the stack store a
+          // dangling relationship and fail rag-query on assistant resolution.
+          ...(assistantId &&
+            assistantId !== DEFAULT_ASSISTANT._id && {
+              assistantID: assistantId
+            }),
           ...(websearchEnabled && { websearch: true })
         }
       )
