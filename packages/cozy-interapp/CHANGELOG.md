@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.18.0...cozy-interapp@0.18.1) (2026-07-22)
+
+### Bug Fixes
+
+- Read inline intent from script tag ([765d6cf](https://github.com/cozy/cozy-libs/commit/765d6cffee12b0b51665d529cde8a25507e9af99))
+
 # [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.17.1...cozy-interapp@0.18.0) (2026-07-21)
 
 ### Features
