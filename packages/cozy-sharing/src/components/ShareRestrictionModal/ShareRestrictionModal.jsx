@@ -27,8 +27,6 @@ import {
 } from '../../helpers/permissions'
 import { useSharingContext } from '../../hooks/useSharingContext'
 
-const PASSWORD_MIN_LENGTH = 4
-
 export const ShareRestrictionModal = ({ file, onClose }) => {
   const client = useClient()
   const { t } = useI18n()
@@ -67,12 +65,6 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const [editingRights, setEditingRights] = useState(
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
   )
-
-  const helperTextPassword = !isValidPassword
-    ? t('ShareRestrictionModal.invalidPasswordMessage', {
-        smart_count: PASSWORD_MIN_LENGTH - password.length
-      })
-    : null
 
   const handleClick = async () => {
     setLoading(true)
@@ -153,7 +145,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
           selectedDate={selectedDate}
           setIsValidDate={setIsValidDate}
           // Password
-          helperTextPassword={helperTextPassword}
+          isPasswordValid={isValidPassword}
           passwordToggle={passwordToggle}
           setPasswordToggle={setPasswordToggle}
           password={password}

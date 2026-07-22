@@ -1,4 +1,3 @@
-import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
@@ -8,25 +7,20 @@ import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import DatePicker from 'cozy-ui/transpiled/react/DatePicker'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
-import FormControlLabel from 'cozy-ui/transpiled/react/FormControlLabel'
 import Grid from 'cozy-ui/transpiled/react/Grid'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Menu from 'cozy-ui/transpiled/react/Menu'
 import MenuItem from 'cozy-ui/transpiled/react/MenuItem'
-import Switch from 'cozy-ui/transpiled/react/Switch'
-import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { ShareLinkSettings } from '../ShareRestrictionModal/ShareLinkSettings'
 
 const DIALOG_CLASSES = { paper: 'u-h-auto' }
 const DOCUMENT_ICON_SIZE = 18
-const PASSWORD_MIN_LENGTH = 4
-
 export const ShareLinkAccessModal = ({
   documents,
   onCancel,
@@ -42,26 +36,13 @@ export const ShareLinkAccessModal = ({
   const [selectedDate, setSelectedDate] = useState(null)
   const [passwordEnabled, setPasswordEnabled] = useState(false)
   const [password, setPassword] = useState('')
+  const [isDateValid, setIsDateValid] = useState(true)
+  const [isPasswordValid, setIsPasswordValid] = useState(true)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(null)
 
-  const isPasswordValid =
-    !passwordEnabled || password.trim().length >= PASSWORD_MIN_LENGTH
   const handleAccessMenuClose = () => {
     setAccessAnchorEl(null)
-  }
-
-  const handleDateEnabledChange = event => {
-    setDateEnabled(event.target.checked)
-    setSelectedDate(event.target.checked ? addDays(new Date(), 30) : null)
-  }
-
-  const handlePasswordEnabledChange = event => {
-    setPasswordEnabled(event.target.checked)
-  }
-
-  const handlePasswordChange = event => {
-    setPassword(event.target.value)
   }
 
   const handleSettingsOpen = () => {
@@ -106,58 +87,27 @@ export const ShareLinkAccessModal = ({
         title={t('ShareLinkAccessModal.settingsTitle')}
         content={
           <Box display="flex" flexDirection="column" gridGap="1rem">
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={dateEnabled}
-                  onChange={handleDateEnabledChange}
-                  disabled={busy}
-                  color="primary"
-                />
-              }
-              label={t('ShareLinkAccessModal.expiry')}
+            <ShareLinkSettings
+              dateEnabled={dateEnabled}
+              isPasswordValid={isPasswordValid}
+              password={password}
+              passwordEnabled={passwordEnabled}
+              selectedDate={selectedDate}
+              setDateEnabled={setDateEnabled}
+              setIsDateValid={setIsDateValid}
+              setIsPasswordValid={setIsPasswordValid}
+              setPassword={setPassword}
+              setPasswordEnabled={setPasswordEnabled}
+              setSelectedDate={setSelectedDate}
             />
-            {dateEnabled && (
-              <DatePicker
-                label={t('ShareLinkAccessModal.expiryDate')}
-                value={selectedDate}
-                minDate={new Date()}
-                onChange={setSelectedDate}
-                disabled={busy}
-                className="u-w-100"
-              />
-            )}
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={passwordEnabled}
-                  onChange={handlePasswordEnabledChange}
-                  disabled={busy}
-                  color="primary"
-                />
-              }
-              label={t('ShareLinkAccessModal.password')}
-            />
-            {passwordEnabled && (
-              <TextField
-                label={t('ShareLinkAccessModal.passwordLabel')}
-                value={password}
-                onChange={handlePasswordChange}
-                disabled={busy}
-                type="password"
-                error={!isPasswordValid}
-                helperText={
-                  isPasswordValid
-                    ? null
-                    : t('ShareLinkAccessModal.passwordTooShort', {
-                        count: PASSWORD_MIN_LENGTH
-                      })
-                }
-                fullWidth
-                inputProps={{ minLength: PASSWORD_MIN_LENGTH }}
-              />
-            )}
           </Box>
+        }
+        actions={
+          <Button
+            label={t('ShareRestrictionModal.action.confirm')}
+            onClick={handleSettingsBack}
+            disabled={!isDateValid || !isPasswordValid}
+          />
         }
       />
     )
@@ -270,7 +220,7 @@ export const ShareLinkAccessModal = ({
           <Button
             label={t('ShareLinkAccessModal.addLinks')}
             onClick={handleSubmit}
-            disabled={busy || !isPasswordValid}
+            disabled={busy || !isDateValid || !isPasswordValid}
             busy={busy}
           />
         </>
