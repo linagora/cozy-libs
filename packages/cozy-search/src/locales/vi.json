@@ -78,22 +78,35 @@
       "draft": "Nháp",
       "outbox": "Hộp thư đi",
       "spam": "Thư rác",
-      "search_in": "Tìm kiếm trong"
+      "search_in": "Tìm kiếm trong",
+      "drive": "Drive"
+    },
+    "knowledge_base": {
+      "change_folder": "Thay đổi thư mục…",
+      "emails": "Email",
+      "open_folder": "Mở trong Drive",
+      "picker_error": "Không thể mở bộ chọn thư mục Drive. Vui lòng thử lại.",
+      "remove": "Gỡ thư mục",
+      "remove_emails": "Gỡ email",
+      "select_folder": "Chọn thư mục này",
+      "unavailable": "Thư mục không khả dụng"
+    },
+    "websearch": {
+      "label": "Tìm kiếm web"
     }
   },
   "assistant_create": {
-    "title": "Tạo trợ lý",
+    "title": "Tạo tác nhân",
     "steps": {
       "basic_info": {
-        "description": "Tùy chỉnh danh tính và hành vi của trợ lý để phù hợp với nhu cầu của bạn.",
+        "description": "Tùy chỉnh tác nhân của bạn. Chọn cơ sở tri thức, sau đó là mô hình AI.",
         "avatar": "Ảnh đại diện (tùy chọn)",
         "name": "Tên",
-        "name_placeholder": "Đặt tên cho trợ lý của bạn",
-        "instructions": "Hướng dẫn (tùy chọn)",
-        "instructions_placeholder": "Trợ lý này làm gì? Nên hành xử như thế nào? Nên tránh điều gì?",
+        "name_placeholder": "Đặt tên cho tác nhân của bạn",
+        "description_label": "Mô tả",
+        "description_placeholder": "Mô tả tùy chọn về vai trò của tác nhân này. Mô tả này sẽ không được AI sử dụng",
         "knowledge_base": "Cơ sở tri thức (tùy chọn)",
         "knowledge_base_placeholder": "Các cuộc trò chuyện có thể làm lộ một phần hoặc toàn bộ các tệp đã được tải lên.",
-        "load_file": "Tải tệp",
         "from_drive": "Từ Drive",
         "from_mail": "Từ Mail"
       },
@@ -122,7 +135,7 @@
         "external_warning": "Dữ liệu của bạn sẽ được xử lý trên máy chủ bên ngoài. Chế độ này không cung cấp các biện pháp bảo vệ bảo mật nâng cao."
       },
       "configuration": {
-        "description": "Nhập URL nhà cung cấp, mô hình và khóa API của bạn để định cấu hình trợ lý mới. Khóa của bạn sẽ được lưu trữ an toàn.",
+        "description": "Nhập URL nhà cung cấp, mô hình và khóa API của bạn để định cấu hình tác nhân mới. Khóa của bạn sẽ được lưu trữ an toàn.",
         "custom_provider_description": "Cấu hình cài đặt nhà cung cấp AI tùy chỉnh",
         "model": {
           "label": "Mô hình",
@@ -148,25 +161,25 @@
       "next": "Tiếp",
       "create": "Tạo"
     },
-    "configure_api_key_title": "Cấu hình trợ lý mới",
-    "configure_api_key_description": "Nhập URL nhà cung cấp, mô hình và khóa API của bạn để định cấu hình trợ lý mới. Khóa của bạn sẽ được lưu trữ an toàn.",
+    "configure_api_key_title": "Cấu hình tác nhân mới",
+    "configure_api_key_description": "Nhập URL nhà cung cấp, mô hình và khóa API của bạn để định cấu hình tác nhân mới. Khóa của bạn sẽ được lưu trữ an toàn.",
     "from_drive": {
       "actions": {
         "cancel": "Hủy",
         "add": "Thêm"
       }
     },
-    "success": "Tạo trợ lý thành công"
+    "success": "Tạo tác nhân thành công"
   },
   "assistant_edit": {
-    "title": "Chỉnh sửa trợ lý",
+    "title": "Chỉnh sửa tác nhân",
     "buttons": {
       "cancel": "Hủy",
       "next": "Tiếp",
       "edit": "Lưu"
     },
-    "configure_api_key_title": "Cấu hình trợ lý của bạn",
-    "success": "Chỉnh sửa trợ lý thành công"
+    "configure_api_key_title": "Cấu hình tác nhân của bạn",
+    "success": "Chỉnh sửa tác nhân thành công"
   },
   "conversation_delete": {
     "title": "Xóa cuộc trò chuyện",
@@ -177,8 +190,8 @@
     }
   },
   "assistant_delete": {
-    "title": "Xóa trợ lý",
-    "content": "Bạn có chắc chắn muốn xóa %{name}? Hành động này không thể hoàn tác và sẽ xóa vĩnh viễn trợ lý này khỏi Twake của bạn.",
+    "title": "Xóa tác nhân",
+    "content": "Bạn có chắc chắn muốn xóa %{name}? Hành động này không thể hoàn tác và sẽ xóa vĩnh viễn tác nhân này khỏi Twake của bạn.",
     "buttons": {
       "cancel": "Hủy",
       "confirm": "Xóa"

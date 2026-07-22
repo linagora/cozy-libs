@@ -79,18 +79,17 @@
     }
   },
   "assistant_create": {
-    "title": "Créer un assistant",
+    "title": "Créer un agent",
     "steps": {
       "basic_info": {
-        "description": "Personnalisez l'identité et le comportement de votre assistant pour répondre à vos besoins spécifiques.",
+        "description": "Personnalisez votre agent. Choisissez la base de connaissances, puis son modèle d'IA.",
         "avatar": "Avatar (optionnel)",
         "name": "Nom",
-        "name_placeholder": "Nommez votre assistant",
-        "instructions": "Instructions (optionnel)",
-        "instructions_placeholder": "Que fait cet assistant ? Comment doit-il se comporter ? Que doit-il éviter de faire ?",
+        "name_placeholder": "Nommez votre agent",
+        "description_label": "Description",
+        "description_placeholder": "Description optionnelle du rôle de cet agent. Cette description ne sera pas utilisée par l'IA",
         "knowledge_base": "Base de connaissances (optionnel)",
         "knowledge_base_placeholder": "Les conversations peuvent révéler une partie ou l'intégralité des fichiers qui ont été téléversés.",
-        "load_file": "Charger des fichiers",
         "from_drive": "Depuis Drive",
         "from_mail": "Depuis Mail"
       },
@@ -119,7 +118,7 @@
         "external_warning": "Vos données seront traitées sur des serveurs externes. Ce mode ne fournit pas de protections de sécurité renforcées."
       },
       "configuration": {
-        "description": "Saisissez l'URL du fournisseur, le modèle et votre clé API pour configurer le nouvel assistant. Votre clé sera stockée de manière sécurisée.",
+        "description": "Saisissez l'URL du fournisseur, le modèle et votre clé API pour configurer le nouvel agent. Votre clé sera stockée de manière sécurisée.",
         "custom_provider_description": "Configurez les paramètres de votre fournisseur d'IA personnalisé",
         "model": {
           "label": "Modèle",
@@ -145,25 +144,25 @@
       "next": "Suivant",
       "create": "Créer"
     },
-    "configure_api_key_title": "Configurer un nouvel assistant",
-    "configure_api_key_description": "Saisissez l'URL du fournisseur, le modèle et votre clé API pour configurer le nouvel assistant. Votre clé sera stockée de manière sécurisée.",
+    "configure_api_key_title": "Configurer un nouvel agent",
+    "configure_api_key_description": "Saisissez l'URL du fournisseur, le modèle et votre clé API pour configurer le nouvel agent. Votre clé sera stockée de manière sécurisée.",
     "from_drive": {
       "actions": {
         "cancel": "Annuler",
         "add": "Ajouter"
       }
     },
-    "success": "Assistant créé avec succès"
+    "success": "Agent créé avec succès"
   },
   "assistant_edit": {
-    "title": "Modifier l'assistant",
+    "title": "Modifier l'agent",
     "buttons": {
       "cancel": "Annuler",
       "next": "Suivant",
       "edit": "Modifier"
     },
-    "configure_api_key_title": "Configurer votre assistant",
-    "success": "Assistant modifié avec succès"
+    "configure_api_key_title": "Configurer votre agent",
+    "success": "Agent modifié avec succès"
   },
   "conversation_delete": {
     "title": "Supprimer la conversation",
@@ -174,8 +173,8 @@
     }
   },
   "assistant_delete": {
-    "title": "Supprimer l'assistant",
-    "content": "Êtes-vous sûr de vouloir supprimer %{name} ? Cette action ne peut pas être annulée et supprimera définitivement cet assistant de votre Twake.",
+    "title": "Supprimer l'agent",
+    "content": "Êtes-vous sûr de vouloir supprimer %{name} ? Cette action ne peut pas être annulée et supprimera définitivement cet agent de votre Twake.",
     "buttons": {
       "cancel": "Annuler",
       "confirm": "Supprimer"
