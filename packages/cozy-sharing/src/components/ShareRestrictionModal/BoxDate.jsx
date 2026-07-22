@@ -40,6 +40,7 @@ export const BoxDate = ({ onChange, date, toggle, onToggle }) => {
               edge="start"
               color="primary"
               checked={toggle}
+              inputProps={{ 'aria-label': t('BoxDate.text') }}
               onChange={handleDateToggle}
             />
           </ListItemSecondaryAction>

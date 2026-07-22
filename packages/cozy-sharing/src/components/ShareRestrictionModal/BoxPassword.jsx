@@ -15,11 +15,9 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
 import { copyToClipboard } from './helpers'
-import { checkIsPermissionHasPassword } from '../../helpers/permissions'
-import { useSharingContext } from '../../hooks/useSharingContext'
 
 export const BoxPassword = ({
-  file,
+  hasPassword = false,
   onChange,
   password,
   onToggle,
@@ -31,10 +29,6 @@ export const BoxPassword = ({
   const { showAlert } = useAlert()
   const [displayHelper, setDisplayHelper] = useState(false)
   const inputRef = React.useRef()
-  const { getDocumentPermissions } = useSharingContext()
-
-  const permissions = getDocumentPermissions(file._id)
-  const hasPassword = checkIsPermissionHasPassword(permissions)
 
   const handlePasswordToggle = val => {
     const value = val?.target?.checked ?? val
@@ -75,6 +69,7 @@ export const BoxPassword = ({
               edge="start"
               color="primary"
               checked={toggle}
+              inputProps={{ 'aria-label': t('BoxPassword.text') }}
               onChange={handlePasswordToggle}
             />
           </ListItemSecondaryAction>
@@ -117,6 +112,7 @@ export const BoxPassword = ({
 }
 
 BoxPassword.propTypes = {
+  hasPassword: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   password: PropTypes.string,
   onToggle: PropTypes.func.isRequired,

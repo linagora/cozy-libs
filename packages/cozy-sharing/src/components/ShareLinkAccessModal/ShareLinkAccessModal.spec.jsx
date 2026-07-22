@@ -12,6 +12,10 @@ jest.mock('../../hoc/withLocales', () => Component => props => (
   <Component {...props} />
 ))
 
+jest.mock('cozy-ui/transpiled/react/providers/Alert', () => ({
+  useAlert: () => ({ showAlert: jest.fn() })
+}))
+
 jest.mock('cozy-ui/transpiled/react/CozyDialogs', () => ({
   ConfirmDialog: ({ title, content, actions, onBack, onClose, size }) => (
     <div role="dialog" data-size={size}>
@@ -98,12 +102,13 @@ jest.mock('twake-i18n', () => ({
         'ShareLinkAccessModal.cancel': 'Cancel',
         'ShareLinkAccessModal.addLinks': 'Add links',
         'ShareLinkAccessModal.settingsTitle': 'Sharing settings',
-        'ShareLinkAccessModal.expiry': 'Set an expiration date',
-        'ShareLinkAccessModal.expiryDate': 'Expiration date',
-        'ShareLinkAccessModal.password': 'Require a password',
-        'ShareLinkAccessModal.passwordLabel': 'Password',
-        'ShareLinkAccessModal.passwordTooShort':
+        'ShareRestrictionModal.action.confirm': 'Confirm',
+        'ShareRestrictionModal.invalidPasswordMessage':
           'Password must contain at least 4 characters.',
+        'BoxDate.text': 'Set an expiration date',
+        'BoxDate.label': 'Expiration date',
+        'BoxPassword.text': 'Require a password',
+        'BoxPassword.label': 'Password',
         'ShareLinkAccessModal.error.persistence':
           'Could not save link permissions. Please try again.'
       })[key] || key
@@ -169,7 +174,7 @@ describe('ShareLinkAccessModal', () => {
     expect(onCancel).toHaveBeenCalledTimes(1)
   })
 
-  it('preserves the access settings after returning from the settings screen', () => {
+  it('validates the settings by returning to the access screen', () => {
     renderModal()
 
     fireEvent.click(screen.getByLabelText('Access level'))
@@ -180,7 +185,7 @@ describe('ShareLinkAccessModal', () => {
     fireEvent.change(screen.getByLabelText('Password'), {
       target: { value: 'secret' }
     })
-    fireEvent.click(screen.getByRole('button', { name: 'Back' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Confirm' }))
 
     expect(screen.getByLabelText('Access level')).toHaveTextContent('Editor')
 
@@ -199,6 +204,9 @@ describe('ShareLinkAccessModal', () => {
     fireEvent.change(screen.getByLabelText('Password'), {
       target: { value: 'abc' }
     })
+
+    expect(screen.getByRole('button', { name: 'Confirm' })).toBeDisabled()
+
     fireEvent.click(screen.getByRole('button', { name: 'Back' }))
 
     expect(screen.getByRole('button', { name: 'Add links' })).toBeDisabled()
