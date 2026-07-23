@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.1...cozy-search@2.2.2) (2026-07-23)
+
+### Bug Fixes
+
+- AI providers ([4d80f13](https://github.com/cozy/cozy-libs/commit/4d80f1314afdd002d196b93542778a8ea008d903))
+
 ## [2.2.1](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.0...cozy-search@2.2.1) (2026-07-22)
 
 **Note:** Version bump only for package cozy-search
