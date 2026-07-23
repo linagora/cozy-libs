@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.6](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.5...cozy-dataproxy-lib@4.15.6) (2026-07-23)
+
+### Bug Fixes
+
+- **dataproxy-lib:** Remove hidden iframe border ([3c75f2f](https://github.com/cozy/cozy-libs/commit/3c75f2f2c83b70348a3a1ffdcbe5e03cb6c08452))
+
 ## [4.15.5](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.4...cozy-dataproxy-lib@4.15.5) (2026-07-16)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.2.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.2...cozy-sharing@37.2.3) (2026-07-23)
+
+### Bug Fixes
+
+- **cozy-sharing:** Add padding to document chips ([0a26e8e](https://github.com/cozy/cozy-libs/commit/0a26e8ece49e40343e5eb800777d8b55234ac90f))
+
 ## [37.2.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.1...cozy-sharing@37.2.2) (2026-07-22)
 
 **Note:** Version bump only for package cozy-sharing
