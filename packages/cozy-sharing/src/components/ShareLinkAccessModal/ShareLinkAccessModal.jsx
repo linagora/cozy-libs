@@ -133,7 +133,7 @@ export const ShareLinkAccessModal = ({
                       {renderDocumentIcon(document, DOCUMENT_ICON_SIZE)}
                     </Box>
                   }
-                  className="u-maw-100"
+                  className="u-maw-100 u-p-half"
                   label={document.name}
                   size="small"
                 />
