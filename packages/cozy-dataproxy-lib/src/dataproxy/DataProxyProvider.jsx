@@ -261,7 +261,8 @@ export const DataProxyProvider = React.memo(
               height={0}
               style={{
                 width: 0,
-                height: 0
+                height: 0,
+                border: 0
               }}
               sandbox="allow-same-origin allow-scripts"
               onError={() => {
