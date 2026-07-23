@@ -1,6 +1,6 @@
 export const DEFAULT_ASSISTANT = {
   _id: 'default_ai_assistant',
-  name: 'AI Assistant'
+  name: 'Twake assistant'
 }
 
 export const FETCH_CONVERSATIONS_LIMIT = 50
