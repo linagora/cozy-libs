@@ -76,6 +76,16 @@
       "remove_emails": "Retirer les emails",
       "select_folder": "Sélectionner ce dossier",
       "unavailable": "Dossier indisponible"
+    },
+    "attachments": {
+      "all_documents": "Tous mes documents",
+      "choose": "Choisir un dossier ou des fichiers…",
+      "edit": "Modifier la sélection…",
+      "items": "%{smart_count} élément |||| %{smart_count} éléments",
+      "over_limit": "La sélection dépasse 1 000 fichiers",
+      "unavailable": "Sélection indisponible",
+      "blocked": "Ajustez votre sélection Drive avant d'envoyer votre message.",
+      "select": "Sélectionner"
     }
   },
   "assistant_create": {
