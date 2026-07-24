@@ -57,8 +57,25 @@ describe('AttachmentsResolver', () => {
       attachmentIds: ['f1', 'f2'],
       isOverLimit: false,
       isLoading: false,
-      isUnavailable: false
+      isUnavailable: false,
+      isEmpty: false
     })
+  })
+
+  it('publishes isEmpty when a resolved folder has no files', () => {
+    const root = dir('d1')
+    const { setAttachmentsResolution } = renderResolver({
+      selectedDocs: [root],
+      pickedResult: { data: [root], fetchStatus: 'loaded' },
+      resultsByDirId: {
+        d1: { data: [], fetchStatus: 'loaded', hasMore: false }
+      }
+    })
+
+    expect(setAttachmentsResolution).toHaveBeenLastCalledWith(
+      'conv-1',
+      expect.objectContaining({ isEmpty: true })
+    )
   })
 
   it('publishes a loading resolution while a directory is unresolved', () => {

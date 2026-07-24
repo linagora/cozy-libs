@@ -23,8 +23,11 @@ const isTrashed = doc =>
  *   hasMore: boolean|undefined}>} params.resultsByDirId - one entry per
  *   watched directory (`useQueryAll` result)
  * @returns {{dirIds: string[], attachmentIds: string[], isOverLimit: boolean,
- *   isLoading: boolean, isUnavailable: boolean}} `dirIds` is the closure of
- *   directories to watch (roots + discovered subfolders, BFS order)
+ *   isLoading: boolean, isUnavailable: boolean, isEmpty: boolean}} `dirIds`
+ *   is the closure of directories to watch (roots + discovered subfolders,
+ *   BFS order); traversal stops enqueueing new directories once the file
+ *   count exceeds the cap, so `dirIds` may be a strict subset of the full
+ *   tree while `isOverLimit` is true
  */
 export const collectAttachmentsResolution = ({
   selectedDocs,
@@ -40,7 +43,8 @@ export const collectAttachmentsResolution = ({
   const liveSelected = selectedDocs
     .map(doc => pickedById.get(getDocId(doc)))
     .filter(doc => !!doc && !isTrashed(doc))
-  const isUnavailable = pickedLoaded && liveSelected.length < selectedDocs.length
+  const isUnavailable =
+    pickedLoaded && liveSelected.length < selectedDocs.length
 
   const dirIds = []
   const seenDirIds = new Set()
@@ -65,30 +69,46 @@ export const collectAttachmentsResolution = ({
       continue
     }
     for (const child of result.data ?? []) {
-      if (child.type === 'directory') enqueueDir(getDocId(child))
-      else if (child.type === 'file' && !isTrashed(child))
+      if (child.type === 'directory') {
+        // Once over the cap the exact tree shape no longer matters (sending
+        // is already blocked): stop growing the BFS queue so the resolver
+        // doesn't mount a DirWatcher (Mango query) per remaining directory.
+        if (fileIds.size <= ATTACHMENTS_MAX_FILES) enqueueDir(getDocId(child))
+      } else if (child.type === 'file' && !isTrashed(child)) {
         fileIds.add(getDocId(child))
+      }
     }
   }
+
+  const isOverLimit = fileIds.size > ATTACHMENTS_MAX_FILES
+  const isEmpty =
+    selectedDocs.length > 0 &&
+    !isLoading &&
+    !isUnavailable &&
+    fileIds.size === 0
 
   return {
     dirIds,
     attachmentIds: [...fileIds].slice(0, ATTACHMENTS_MAX_FILES),
-    isOverLimit: fileIds.size > ATTACHMENTS_MAX_FILES,
+    isOverLimit,
     isLoading,
-    isUnavailable
+    isUnavailable,
+    isEmpty
   }
 }
 
 /**
  * A restriction must never silently degrade to an unrestricted search:
- * while the selection is loading, over the limit or unavailable, sending
- * is blocked.
+ * while the selection is loading, over the limit, unavailable or resolves to
+ * zero files, sending is blocked.
  */
 export const isAttachmentsBlocked = (selection, resolution) => {
   if (!selection || selection.length === 0) return false
   if (!resolution) return true
   return (
-    resolution.isLoading || resolution.isOverLimit || resolution.isUnavailable
+    resolution.isLoading ||
+    resolution.isOverLimit ||
+    resolution.isUnavailable ||
+    resolution.isEmpty
   )
 }

@@ -84,6 +84,7 @@
       "items": "%{smart_count} élément |||| %{smart_count} éléments",
       "over_limit": "La sélection dépasse 1 000 fichiers",
       "unavailable": "Sélection indisponible",
+      "empty": "Aucun fichier dans la sélection",
       "blocked": "Ajustez votre sélection Drive avant d'envoyer votre message.",
       "select": "Sélectionner"
     }

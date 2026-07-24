@@ -77,7 +77,8 @@ const AttachmentsResolver = ({ conversationId, selectedDocs }) => {
     attachmentIds: resolution.attachmentIds,
     isOverLimit: resolution.isOverLimit,
     isLoading: resolution.isLoading,
-    isUnavailable: resolution.isUnavailable
+    isUnavailable: resolution.isUnavailable,
+    isEmpty: resolution.isEmpty
   })
 
   useEffect(() => {

@@ -66,9 +66,13 @@ const DriveSourceChip = ({ conversationId, isLast }) => {
       ? t('assistant.attachments.unavailable')
       : resolution?.isOverLimit
         ? t('assistant.attachments.over_limit')
-        : selection.length === 1
-          ? selection[0].name
-          : t('assistant.attachments.items', { smart_count: selection.length })
+        : resolution?.isEmpty
+          ? t('assistant.attachments.empty')
+          : selection.length === 1
+            ? selection[0].name
+            : t('assistant.attachments.items', {
+                smart_count: selection.length
+              })
 
   return (
     <>

@@ -5,6 +5,7 @@ export interface AttachmentsResolution {
   isOverLimit: boolean
   isLoading: boolean
   isUnavailable: boolean
+  isEmpty: boolean
 }
 
 export interface AttachmentsSelectionDoc {

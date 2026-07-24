@@ -111,6 +111,73 @@ describe('collectAttachmentsResolution', () => {
     expect(res.isOverLimit).toBe(true)
   })
 
+  it('reports over-limit above ATTACHMENTS_MAX_FILES and stops traversal', () => {
+    const root = dir('d1')
+    const tooMany = Array.from({ length: ATTACHMENTS_MAX_FILES + 1 }, (_, i) =>
+      file(`f${i}`)
+    )
+    const res = collectAttachmentsResolution({
+      selectedDocs: [root],
+      pickedDocs: [root],
+      pickedFetchStatus: 'loaded',
+      resultsByDirId: {
+        d1: loaded([...tooMany, dir('d2')]),
+        d2: loaded([file('should-not-be-collected')])
+      }
+    })
+    expect(res.isOverLimit).toBe(true)
+    expect(res.dirIds).toEqual(['d1'])
+    expect(res.dirIds).not.toContain('d2')
+  })
+
+  it('reports isEmpty when a resolved selection yields zero files', () => {
+    const root = dir('d1')
+    const res = collectAttachmentsResolution({
+      selectedDocs: [root],
+      pickedDocs: [root],
+      pickedFetchStatus: 'loaded',
+      resultsByDirId: { d1: loaded([]) }
+    })
+    expect(res.isEmpty).toBe(true)
+    expect(res.attachmentIds).toEqual([])
+    expect(res.isLoading).toBe(false)
+  })
+
+  it('does not report isEmpty when files are resolved', () => {
+    const root = dir('d1')
+    const res = collectAttachmentsResolution({
+      selectedDocs: [root],
+      pickedDocs: [root],
+      pickedFetchStatus: 'loaded',
+      resultsByDirId: { d1: loaded([file('f1')]) }
+    })
+    expect(res.isEmpty).toBe(false)
+  })
+
+  it('does not report isEmpty while still loading', () => {
+    const root = dir('d1')
+    const res = collectAttachmentsResolution({
+      selectedDocs: [root],
+      pickedDocs: [root],
+      pickedFetchStatus: 'loaded',
+      resultsByDirId: {}
+    })
+    expect(res.isLoading).toBe(true)
+    expect(res.isEmpty).toBe(false)
+  })
+
+  it('does not report isEmpty when unavailable', () => {
+    const gone = file('f1')
+    const res = collectAttachmentsResolution({
+      selectedDocs: [gone],
+      pickedDocs: [],
+      pickedFetchStatus: 'loaded',
+      resultsByDirId: {}
+    })
+    expect(res.isUnavailable).toBe(true)
+    expect(res.isEmpty).toBe(false)
+  })
+
   it('reports unavailable when a picked doc was deleted or trashed', () => {
     const gone = file('f1')
     const trashed = file('f2', { trashed: true })
@@ -140,7 +207,8 @@ describe('isAttachmentsBlocked', () => {
     attachmentIds: ['f1'],
     isOverLimit: false,
     isLoading: false,
-    isUnavailable: false
+    isUnavailable: false,
+    isEmpty: false
   }
 
   it('never blocks without a selection', () => {
@@ -164,6 +232,12 @@ describe('isAttachmentsBlocked', () => {
         ...okResolution,
         isUnavailable: true
       })
+    ).toBe(true)
+  })
+
+  it('blocks an empty resolved selection (must not silently search everything)', () => {
+    expect(
+      isAttachmentsBlocked([dir('d1')], { ...okResolution, isEmpty: true })
     ).toBe(true)
   })
 

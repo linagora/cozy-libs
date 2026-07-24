@@ -84,6 +84,7 @@
       "items": "%{smart_count} item |||| %{smart_count} items",
       "over_limit": "Selection exceeds 1,000 files",
       "unavailable": "Selection unavailable",
+      "empty": "No files in selection",
       "blocked": "Adjust your Drive selection before sending your message.",
       "select": "Select"
     }

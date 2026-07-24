@@ -135,11 +135,28 @@ describe('DriveSourceChip', () => {
         attachmentIds: [],
         isOverLimit: true,
         isLoading: false,
-        isUnavailable: false
+        isUnavailable: false,
+        isEmpty: false
       }
     })
     expect(screen.getByTestId('chip')).toHaveTextContent(
       'assistant.attachments.over_limit'
+    )
+  })
+
+  it('surfaces the empty-selection state on the label', () => {
+    renderChip({
+      selection: [{ id: 'd1', type: 'directory', name: 'Bills' }],
+      resolution: {
+        attachmentIds: [],
+        isOverLimit: false,
+        isLoading: false,
+        isUnavailable: false,
+        isEmpty: true
+      }
+    })
+    expect(screen.getByTestId('chip')).toHaveTextContent(
+      'assistant.attachments.empty'
     )
   })
 
