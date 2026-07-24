@@ -43,15 +43,21 @@ jest.mock('cozy-ui/transpiled/react/Typography', () => {
   const MockTypography = ({ children }) => <span>{children}</span>
   return { __esModule: true, default: MockTypography }
 })
+let lastPickerProps
 jest.mock('../KnowledgeBase/FolderPickerDialog', () => {
-  const MockPicker = ({ onSelect }) => (
-    <button
-      data-testid="picker"
-      onClick={() => onSelect([{ id: 'd1', type: 'directory', name: 'Bills' }])}
-    >
-      picker
-    </button>
-  )
+  const MockPicker = props => {
+    lastPickerProps = props
+    return (
+      <button
+        data-testid="picker"
+        onClick={() =>
+          props.onSelect([{ id: 'd1', type: 'directory', name: 'Bills' }])
+        }
+      >
+        picker
+      </button>
+    )
+  }
   return { __esModule: true, default: MockPicker }
 })
 
@@ -71,6 +77,9 @@ const renderChip = ({ selection, resolution } = {}) => {
 }
 
 describe('DriveSourceChip', () => {
+  beforeEach(() => {
+    lastPickerProps = undefined
+  })
   it('shows the generic Drive label and offers picking from the menu', () => {
     renderChip()
     expect(screen.getByTestId('chip')).toHaveTextContent(
@@ -132,5 +141,51 @@ describe('DriveSourceChip', () => {
     expect(screen.getByTestId('chip')).toHaveTextContent(
       'assistant.attachments.over_limit'
     )
+  })
+
+  it('passes correct props to FolderPickerDialog', () => {
+    renderChip()
+    fireEvent.click(screen.getByTestId('chip'))
+    fireEvent.click(screen.getByText('assistant.attachments.choose'))
+    expect(lastPickerProps).toEqual(
+      expect.objectContaining({
+        multiple: true,
+        onlyFolder: false,
+        selectLabel: 'assistant.attachments.select'
+      })
+    )
+  })
+
+  it('shows Open in Drive item when exactly one directory is selected', () => {
+    renderChip({
+      selection: [{ id: 'd1', type: 'directory', name: 'Bills' }]
+    })
+    fireEvent.click(screen.getByTestId('chip'))
+    expect(
+      screen.getByText('assistant.knowledge_base.open_folder')
+    ).toBeInTheDocument()
+  })
+
+  it('hides Open in Drive item when one file is selected', () => {
+    renderChip({
+      selection: [{ id: 'f1', type: 'file', name: 'a.pdf' }]
+    })
+    fireEvent.click(screen.getByTestId('chip'))
+    expect(
+      screen.queryByText('assistant.knowledge_base.open_folder')
+    ).not.toBeInTheDocument()
+  })
+
+  it('hides Open in Drive item when multiple docs are selected', () => {
+    renderChip({
+      selection: [
+        { id: 'd1', type: 'directory', name: 'Bills' },
+        { id: 'f1', type: 'file', name: 'a.pdf' }
+      ]
+    })
+    fireEvent.click(screen.getByTestId('chip'))
+    expect(
+      screen.queryByText('assistant.knowledge_base.open_folder')
+    ).not.toBeInTheDocument()
   })
 })
