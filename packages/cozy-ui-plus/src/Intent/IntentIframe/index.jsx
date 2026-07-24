@@ -18,7 +18,7 @@ const DEFAULT_DATA = {
 }
 
 class IntentIframe extends React.Component {
-  state = { loading: false }
+  state = { error: null, frameLoaded: false, readyToUse: false }
 
   componentDidMount() {
     const { action, data, type, onCancel, onError, onTerminate, client } =
@@ -36,7 +36,6 @@ class IntentIframe extends React.Component {
       create = intents.create
     }
 
-    this.setState({ loading: true })
     create(action, type, {
       ...DEFAULT_DATA,
       ...data
@@ -45,7 +44,7 @@ class IntentIframe extends React.Component {
         onReady: this.onFrameLoaded,
         onHideCross: this.props.onHideCross,
         onShowCross: this.props.onShowCross,
-        onReadyToUse: this.props.onReadyToUse
+        onReadyToUse: this.onReadyToUse
       })
       .then(result => {
         // eslint-disable-next-line promise/always-return
@@ -53,29 +52,51 @@ class IntentIframe extends React.Component {
       })
       .catch(error => {
         onError?.(error)
-        this.setState({ error: error, loading: false })
-        this.props.iframeProps?.setIsLoading?.(false)
+        this.setState({ error })
+        this.setIsLoading(false)
       })
   }
 
   onFrameLoaded = () => {
-    this.setState({ loading: false })
-    this.props.iframeProps?.setIsLoading?.(false)
+    this.setState({ frameLoaded: true }, () => {
+      if (!this.props.waitForReadyToUse || this.state.readyToUse) {
+        this.setIsLoading(false)
+      }
+    })
+  }
+
+  onReadyToUse = () => {
+    this.setState({ readyToUse: true }, () => {
+      if (this.props.waitForReadyToUse && this.state.frameLoaded) {
+        this.setIsLoading(false)
+      }
+    })
+    this.props.onReadyToUse?.()
+  }
+
+  setIsLoading = isLoading => {
+    this.props.iframeProps?.setIsLoading?.(isLoading)
   }
 
   render() {
-    const { iframeProps } = this.props
-    const { error, loading } = this.state
+    const { iframeProps, waitForReadyToUse } = this.props
+    const { error, frameLoaded, readyToUse } = this.state
+    const loading =
+      error === null && (!frameLoaded || (waitForReadyToUse && !readyToUse))
 
     return (
       <div
         ref={intentViewer => (this.intentViewer = intentViewer)}
         className={styles.intentContainer}
         aria-busy={loading}
+        data-iframe-loaded={frameLoaded}
+        data-waiting-for-ready-to-use={waitForReadyToUse && !readyToUse}
         {...get(iframeProps, 'wrapperProps')}
       >
         {loading && (
-          <Spinner size="xxlarge" {...get(iframeProps, 'spinnerProps')} />
+          <div className={styles.intentContainer__loader}>
+            <Spinner size="xxlarge" {...get(iframeProps, 'spinnerProps')} />
+          </div>
         )}
         {error && (
           <div className={styles.intentContainer__error}>{error.message}</div>
@@ -103,11 +124,13 @@ IntentIframe.propTypes = {
   iframeProps: iframeProps,
   onHideCross: PropTypes.func,
   onShowCross: PropTypes.func,
-  onReadyToUse: PropTypes.func
+  onReadyToUse: PropTypes.func,
+  waitForReadyToUse: PropTypes.bool
 }
 
 IntentIframe.defaultProps = {
-  data: {}
+  data: {},
+  waitForReadyToUse: false
 }
 
 export default withClient(IntentIframe)

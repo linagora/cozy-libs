@@ -11,10 +11,30 @@ iframe
     justify-content center
     align-items center
 
+.intentContainer
+    position relative
+
+.intentContainer__loader
+    display flex
+    justify-content center
+    align-items center
+
+.intentContainer[data-iframe-loaded=true] .intentContainer__loader
+    position absolute
+    z-index 1
+    top 0
+    right 0
+    bottom 0
+    left 0
+    background-color var(--paperBackgroundColor)
+
 /* Don't mess with the spinner centering until the iframe is fully loaded. */
-.intentContainer[aria-busy=true] iframe
+.intentContainer[data-iframe-loaded=false] iframe
     height 0
     width 0
+
+.intentContainer[data-waiting-for-ready-to-use=true] iframe
+    visibility hidden
 
 .intentContainer__error
     color var(--errorColor)

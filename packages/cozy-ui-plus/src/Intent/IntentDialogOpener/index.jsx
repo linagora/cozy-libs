@@ -23,6 +23,7 @@ const IntentDialogOpener = props => {
     onComplete,
     onDismiss,
     onReadyToUse,
+    waitForReadyToUse,
     iframeProps,
     Component,
     ...componentProps
@@ -70,6 +71,7 @@ const IntentDialogOpener = props => {
           onCancel={handleDismiss}
           onTerminate={handleComplete}
           onReadyToUse={onReadyToUse}
+          waitForReadyToUse={waitForReadyToUse}
           iframeProps={iframeProps}
         />
       </Component>
@@ -88,6 +90,8 @@ IntentDialogOpener.propTypes = {
   onDismiss: PropTypes.func,
   /** Called when the intent service signals it is ready to use */
   onReadyToUse: PropTypes.func,
+  /** Keep the loading state until the intent service signals it is ready to use */
+  waitForReadyToUse: PropTypes.bool,
   /** Action you want to execute */
   action: PropTypes.string.isRequired,
   /** Doctype on which you want to execute the action */
@@ -108,7 +112,8 @@ IntentDialogOpener.defaultProps = {
   tag: 'span',
   closable: true,
   Component: Dialog,
-  showCloseButton: true
+  showCloseButton: true,
+  waitForReadyToUse: false
 }
 
 export default IntentDialogOpener
