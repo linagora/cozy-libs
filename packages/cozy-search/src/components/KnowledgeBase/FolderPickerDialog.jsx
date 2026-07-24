@@ -12,7 +12,14 @@ import styles from './styles.styl'
  * Hosts the Drive `PICK io.cozy.files` intent (folder `reference` mode)
  * in an iframe dialog, so the surrounding wizard keeps its state.
  */
-const FolderPickerDialog = ({ open, onClose, onSelect }) => {
+const FolderPickerDialog = ({
+  open,
+  onClose,
+  onSelect,
+  multiple = false,
+  onlyFolder = true,
+  selectLabel
+}) => {
   const client = useClient()
   const { t } = useI18n()
   const { showAlert } = useAlert()
@@ -29,13 +36,14 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
     const startPromise = intents
       .create('PICK', 'io.cozy.files', {
         // Drive's FilePickerConfig: null hides an action, so only the
-        // side-effect-free folder `reference` action remains visible
+        // side-effect-free `reference` action remains visible
         sharingLink: null,
         downloadLink: null,
+        ...(multiple && { multiple: true }),
         reference: {
-          label: t('assistant.knowledge_base.select_folder'),
+          label: selectLabel ?? t('assistant.knowledge_base.select_folder'),
           allowFolder: true,
-          onlyFolder: true
+          onlyFolder
         }
       })
       .start(intentHost)
@@ -43,9 +51,18 @@ const FolderPickerDialog = ({ open, onClose, onSelect }) => {
     startPromise
       .then(result => {
         if (cancelled) return undefined
-        const folder = Array.isArray(result) ? result[0] : result
-        if (folder) {
-          onSelect(folder)
+        if (multiple) {
+          const docs = (Array.isArray(result) ? result : [result]).filter(
+            Boolean
+          )
+          if (docs.length > 0) {
+            onSelect(docs)
+          }
+        } else {
+          const folder = Array.isArray(result) ? result[0] : result
+          if (folder) {
+            onSelect(folder)
+          }
         }
         onClose()
         return undefined
