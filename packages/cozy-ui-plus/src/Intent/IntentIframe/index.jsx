@@ -7,6 +7,7 @@ import React from 'react'
 import { withClient } from 'cozy-client'
 import { Intents } from 'cozy-interapp'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
 import styles from './styles.styl'
 
@@ -79,30 +80,38 @@ class IntentIframe extends React.Component {
   }
 
   render() {
-    const { iframeProps, waitForReadyToUse } = this.props
+    const { data, iframeProps, waitForReadyToUse } = this.props
     const { error, frameLoaded, readyToUse } = this.state
     const loading =
       error === null && (!frameLoaded || (waitForReadyToUse && !readyToUse))
-
+    const forcedTheme = ['light', 'dark'].includes(data?.theme)
+      ? data.theme
+      : null
     return (
-      <div
-        ref={intentViewer => (this.intentViewer = intentViewer)}
+      <CozyTheme
+        type={forcedTheme}
+        ignoreItself={false}
         className={styles.intentContainer}
-        aria-busy={loading}
-        data-iframe-loaded={frameLoaded}
-        data-waiting-for-ready-to-use={waitForReadyToUse && !readyToUse}
-        {...get(iframeProps, 'wrapperProps')}
       >
-        {loading && (
-          <div className={styles.intentContainer__loader}>
-            <Spinner size="xxlarge" {...get(iframeProps, 'spinnerProps')} />
-          </div>
-        )}
-        {error && (
-          <div className={styles.intentContainer__error}>{error.message}</div>
-        )}
-        {/* intent iframe will be appended here */}
-      </div>
+        <div
+          ref={intentViewer => (this.intentViewer = intentViewer)}
+          className={styles.intentContainer}
+          aria-busy={loading}
+          data-iframe-loaded={frameLoaded}
+          data-waiting-for-ready-to-use={waitForReadyToUse && !readyToUse}
+          {...get(iframeProps, 'wrapperProps')}
+        >
+          {loading && (
+            <div className={styles.intentContainer__loader}>
+              <Spinner size="xxlarge" {...get(iframeProps, 'spinnerProps')} />
+            </div>
+          )}
+          {error && (
+            <div className={styles.intentContainer__error}>{error.message}</div>
+          )}
+          {/* intent iframe will be appended here */}
+        </div>
+      </CozyTheme>
     )
   }
 }
