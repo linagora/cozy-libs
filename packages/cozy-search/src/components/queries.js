@@ -76,6 +76,17 @@ export const buildFileByIdQuery = fileId => ({
   }
 })
 
+const attachmentsFetchPolicy = fetchPolicies.olderThan(5 * 60 * 1000) // 5 minutes
+
+export const buildFilesByDirIdQuery = dirId => ({
+  definition: () =>
+    Q(FILES_DOCTYPE).where({ dir_id: dirId }).indexFields(['dir_id']).limitBy(1000),
+  options: {
+    as: `${FILES_DOCTYPE}/by-dir-id/${dirId}`,
+    fetchPolicy: attachmentsFetchPolicy
+  }
+})
+
 export const buildChatConversationsQuery = () => {
   return {
     definition: ({ bookmark, query = {} }) =>
