@@ -19,8 +19,13 @@ import utils from '../../docs/utils'
   onCancel={() => alert('intent cancelled')}
   onError={(error) => alert('intent has failed with error: ' + error.message)}
   onTerminate={doc => alert('intent has completed ! ' + JSON.stringify(doc))}
+  waitForReadyToUse
 />
 ```
+
+Set `waitForReadyToUse` to keep the intent hidden behind the loading spinner
+until its service sends the `readyToUse` signal. This option is disabled by
+default because older intent services do not send this signal.
 
 ### Within an application side controled Dialog
 

@@ -16,6 +16,7 @@ import DemoProvider from 'cozy-ui/docs/components/DemoProvider'
     fullWidth // extra props will be passed to the dialog
     maxWidth="md" // extra props will be passed to the dialog
     iframeProps={{ spinnerProps: { middle: true } }}
+    waitForReadyToUse
     onComplete={res => alert('intent has completed ! ' + JSON.stringify(res))}
     onDismiss={() => alert('intent has been dismissed !')}
   >
@@ -23,3 +24,7 @@ import DemoProvider from 'cozy-ui/docs/components/DemoProvider'
   </IntentDialogOpener>
 </DemoProvider>
 ```
+
+Set `waitForReadyToUse` to keep the intent hidden behind the loading spinner
+until its service sends the `readyToUse` signal. This option is disabled by
+default because older intent services do not send this signal.
