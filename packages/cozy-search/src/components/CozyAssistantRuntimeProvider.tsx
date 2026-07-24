@@ -30,7 +30,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from './AssistantProvider'
-import { isAttachmentsBlocked } from './KnowledgeBase/attachments'
+import { useAttachmentsGate } from './KnowledgeBase/useAttachmentsGate'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
 import { DEFAULT_ASSISTANT } from './constants'
@@ -151,22 +151,10 @@ const CozyAssistantRuntimeProviderInner = ({
   const messagesIdRef = useRef<string[]>([])
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set())
   const currentStreamingMessageIdRef = useRef<string | null>(null)
-  const {
-    selectedAssistantId,
-    websearchEnabled,
-    attachmentsSelections,
-    attachmentsResolutions
-  } = useAssistant()
+  const { selectedAssistantId, websearchEnabled } = useAssistant()
 
-  const attachmentsSelection = attachmentsSelections[conversationId]
-  const attachmentsResolution = attachmentsResolutions[conversationId]
-  const attachmentIds =
-    attachmentsSelection && attachmentsSelection.length > 0
-      ? attachmentsResolution?.attachmentIds
-      : undefined
-  const attachmentsBlocked: boolean = Boolean(
-    isAttachmentsBlocked(attachmentsSelection, attachmentsResolution)
-  )
+  const { attachmentIds, attachmentsBlocked } =
+    useAttachmentsGate(conversationId)
 
   useEffect(() => {
     messagesIdRef.current = initialMessages

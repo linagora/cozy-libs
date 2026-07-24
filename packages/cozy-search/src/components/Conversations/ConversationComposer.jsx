@@ -19,7 +19,7 @@ import ConversationBar from './ConversationBar'
 import styles from './styles.styl'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
-import { isAttachmentsBlocked } from '../KnowledgeBase/attachments'
+import { useAttachmentsGate } from '../KnowledgeBase/useAttachmentsGate'
 import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
 
 const ConversationComposer = () => {
@@ -30,17 +30,9 @@ const ConversationComposer = () => {
   const { t } = useI18n()
   const { showAlert } = useAlert()
   const { conversationId } = useParams()
-  const {
-    websearchEnabled,
-    setWebsearchEnabled,
-    attachmentsSelections,
-    attachmentsResolutions
-  } = useAssistant()
+  const { websearchEnabled, setWebsearchEnabled } = useAssistant()
 
-  const attachmentsBlocked = isAttachmentsBlocked(
-    conversationId ? attachmentsSelections[conversationId] : undefined,
-    conversationId ? attachmentsResolutions[conversationId] : undefined
-  )
+  const { attachmentsBlocked } = useAttachmentsGate(conversationId)
 
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
