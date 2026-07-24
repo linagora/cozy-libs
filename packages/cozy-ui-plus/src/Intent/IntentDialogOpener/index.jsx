@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 
 import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
+import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
 import IntentIframe, { iframeProps } from '../IntentIframe'
 
@@ -48,33 +49,37 @@ const IntentDialogOpener = props => {
   }
 
   const Tag = tag // React needs uppercase element names
+  const forcedTheme = ['light', 'dark'].includes(options?.theme)
+    ? options.theme
+    : undefined
   const elements = [
     React.cloneElement(children, { key: 'opener', onClick: openModal })
   ]
 
   if (modalOpened) {
     elements.push(
-      <Component
-        key="intent-modal"
-        open={modalOpened}
-        onClose={closable && handleDismiss}
-        {...componentProps}
-      >
-        {closable && showCloseButton && (
-          <DialogCloseButton onClick={handleDismiss} />
-        )}
-        <IntentIframe
-          action={action}
-          type={doctype}
-          data={options}
-          create={create}
-          onCancel={handleDismiss}
-          onTerminate={handleComplete}
-          onReadyToUse={onReadyToUse}
-          waitForReadyToUse={waitForReadyToUse}
-          iframeProps={iframeProps}
-        />
-      </Component>
+      <CozyTheme key="intent-modal" type={forcedTheme}>
+        <Component
+          open={modalOpened}
+          onClose={closable && handleDismiss}
+          {...componentProps}
+        >
+          {closable && showCloseButton && (
+            <DialogCloseButton onClick={handleDismiss} />
+          )}
+          <IntentIframe
+            action={action}
+            type={doctype}
+            data={options}
+            create={create}
+            onCancel={handleDismiss}
+            onTerminate={handleComplete}
+            onReadyToUse={onReadyToUse}
+            waitForReadyToUse={waitForReadyToUse}
+            iframeProps={iframeProps}
+          />
+        </Component>
+      </CozyTheme>
     )
   }
 
@@ -94,6 +99,10 @@ IntentDialogOpener.propTypes = {
   waitForReadyToUse: PropTypes.bool,
   /** Action you want to execute */
   action: PropTypes.string.isRequired,
+  /** Options passed to the intent */
+  options: PropTypes.shape({
+    theme: PropTypes.oneOf(['light', 'dark', 'auto'])
+  }),
   /** Doctype on which you want to execute the action */
   doctype: PropTypes.string.isRequired,
   /** Whether the dialog is closable by itself (not by the Intent) with a button or by clicking outside of it */
