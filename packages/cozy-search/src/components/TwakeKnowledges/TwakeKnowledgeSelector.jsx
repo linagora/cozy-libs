@@ -1,14 +1,18 @@
 import cx from 'classnames'
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 import flag from 'cozy-flags'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
+import DriveSourceChip from './DriveSourceChip'
 import TwakeKnowledgeChip from './TwakeKnowledgeChip'
 import WebSearchChip from './WebSearchChip'
 import TDrive from '../../assets/tdrive.png'
 import TMail from '../../assets/tmail.png'
+import { useAssistant } from '../AssistantProvider'
+import AttachmentsResolver from '../KnowledgeBase/AttachmentsResolver'
 import KnowledgeBaseChip from '../KnowledgeBase/KnowledgeBaseChip'
 import { useSelectedAssistantKnowledgeBase } from '../KnowledgeBase/useSelectedAssistantKnowledgeBase'
 
@@ -26,6 +30,15 @@ const TwakeKnowledgeSelector = ({
     isRealAssistant,
     hasEmail
   } = useSelectedAssistantKnowledgeBase()
+  const { conversationId } = useParams()
+  const { attachmentsSelections } = useAssistant()
+
+  const attachmentsFlag = flag('cozy.assistant.attachments.enabled')
+  const canRestrictDrive =
+    !!attachmentsFlag && !isRealAssistant && !!conversationId
+  const attachmentsSelection = conversationId
+    ? attachmentsSelections[conversationId]
+    : undefined
 
   const websearchEnabledFlag = flag('cozy.assistant.websearch.enabled')
   const mailSourceEnabledFlag = flag(
@@ -34,8 +47,11 @@ const TwakeKnowledgeSelector = ({
   const hasKnowledgeBase = !!dirId
 
   // The Drive source is always on and cannot be disabled: a knowledge-base
-  // folder is rendered as KnowledgeBaseChip (with its own menu); otherwise
-  // (default assistant, or no folder configured) a static Drive chip stands
+  // folder is rendered as KnowledgeBaseChip (with its own menu); for the
+  // default assistant, behind `cozy.assistant.attachments.enabled`, it is
+  // rendered as the interactive DriveSourceChip, letting the user restrict
+  // the search to a folder/files picked for the current conversation;
+  // otherwise (flag off, or no folder configured) a static Drive chip stands
   // for the whole Drive. The email source (behind its own flag) is shown on
   // the default assistant always, and on a custom assistant only once the
   // user enabled it in the wizard. The chips are static indicators: sources
@@ -76,6 +92,11 @@ const TwakeKnowledgeSelector = ({
           isLast={!showSourceChips}
           onChangeFolder={setKnowledgeBaseFolder}
         />
+      ) : canRestrictDrive ? (
+        <DriveSourceChip
+          conversationId={conversationId}
+          isLast={!showSourceChips}
+        />
       ) : (
         <TwakeKnowledgeChip
           twakeKnowledge={{
@@ -85,6 +106,12 @@ const TwakeKnowledgeSelector = ({
           }}
           isSelected
           isLast={!showSourceChips}
+        />
+      )}
+      {canRestrictDrive && attachmentsSelection?.length > 0 && (
+        <AttachmentsResolver
+          conversationId={conversationId}
+          selectedDocs={attachmentsSelection}
         />
       )}
       {showSourceChips &&

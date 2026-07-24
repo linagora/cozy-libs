@@ -30,6 +30,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from './AssistantProvider'
+import { isAttachmentsBlocked } from './KnowledgeBase/attachments'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
 import { DEFAULT_ASSISTANT } from './constants'
@@ -150,7 +151,22 @@ const CozyAssistantRuntimeProviderInner = ({
   const messagesIdRef = useRef<string[]>([])
   const cancelledMessageIdsRef = useRef<Set<string>>(new Set())
   const currentStreamingMessageIdRef = useRef<string | null>(null)
-  const { selectedAssistantId, websearchEnabled } = useAssistant()
+  const {
+    selectedAssistantId,
+    websearchEnabled,
+    attachmentsSelections,
+    attachmentsResolutions
+  } = useAssistant()
+
+  const attachmentsSelection = attachmentsSelections[conversationId]
+  const attachmentsResolution = attachmentsResolutions[conversationId]
+  const attachmentIds =
+    attachmentsSelection && attachmentsSelection.length > 0
+      ? attachmentsResolution?.attachmentIds
+      : undefined
+  const attachmentsBlocked: boolean = Boolean(
+    isAttachmentsBlocked(attachmentsSelection, attachmentsResolution)
+  )
 
   useEffect(() => {
     messagesIdRef.current = initialMessages
@@ -308,13 +324,23 @@ const CozyAssistantRuntimeProviderInner = ({
           >[0]['client'],
           conversationId,
           assistantId: selectedAssistantId,
-          websearchEnabled
+          websearchEnabled,
+          attachmentIds,
+          attachmentsBlocked
         },
         t,
         // eslint-disable-next-line react-hooks/refs -- streamBridgeRef is stable and only read inside adapter.run(), not during render
         streamBridgeRef
       ),
-    [client, conversationId, selectedAssistantId, websearchEnabled, t]
+    [
+      client,
+      conversationId,
+      selectedAssistantId,
+      websearchEnabled,
+      attachmentIds,
+      attachmentsBlocked,
+      t
+    ]
   )
 
   const runtime = useLocalRuntime(adapter, {

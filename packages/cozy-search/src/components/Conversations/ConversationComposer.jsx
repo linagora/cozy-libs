@@ -6,16 +6,20 @@ import {
 } from '@assistant-ui/react'
 import cx from 'classnames'
 import React, { useCallback } from 'react'
+import { useParams } from 'react-router-dom'
 
 import { Icon, Paperplane, Stop } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useI18n } from 'twake-i18n'
 
 import ConversationBar from './ConversationBar'
 import styles from './styles.styl'
 import AssistantSelection from '../Assistant/AssistantSelection'
 import { useAssistant } from '../AssistantProvider'
+import { isAttachmentsBlocked } from '../KnowledgeBase/attachments'
 import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
 
 const ConversationComposer = () => {
@@ -23,14 +27,34 @@ const ConversationComposer = () => {
   const composerRuntime = useComposerRuntime()
   const isRunning = useThread(state => state.isRunning)
   const isThreadEmpty = useThread(state => state.messages.length === 0)
-  const { websearchEnabled, setWebsearchEnabled } = useAssistant()
+  const { t } = useI18n()
+  const { showAlert } = useAlert()
+  const { conversationId } = useParams()
+  const {
+    websearchEnabled,
+    setWebsearchEnabled,
+    attachmentsSelections,
+    attachmentsResolutions
+  } = useAssistant()
+
+  const attachmentsBlocked = isAttachmentsBlocked(
+    conversationId ? attachmentsSelections[conversationId] : undefined,
+    conversationId ? attachmentsResolutions[conversationId] : undefined
+  )
 
   const value = useComposer(state => state.text)
   const isEmpty = useComposer(state => state.isEmpty)
 
   const handleSend = useCallback(() => {
+    if (attachmentsBlocked) {
+      showAlert({
+        message: t('assistant.attachments.blocked'),
+        severity: 'error'
+      })
+      return
+    }
     composerRuntime.send()
-  }, [composerRuntime])
+  }, [composerRuntime, attachmentsBlocked, showAlert, t])
 
   const handleCancel = useCallback(() => {
     composerRuntime.cancel()
