@@ -33,6 +33,8 @@ export interface CozyRealtimeChatAdapterOptions {
   conversationId: string
   assistantId?: string
   websearchEnabled?: boolean
+  attachmentIds?: string[]
+  attachmentsBlocked?: boolean
 }
 
 /**
@@ -69,12 +71,32 @@ export const createCozyRealtimeChatAdapter = (
     messages,
     abortSignal
   }: ChatModelRunOptions): AsyncGenerator<ChatModelRunResult> {
-    const { client, conversationId, assistantId, websearchEnabled } = options
+    const {
+      client,
+      conversationId,
+      assistantId,
+      websearchEnabled,
+      attachmentIds,
+      attachmentsBlocked
+    } = options
     const streamBridge = streamBridgeRef.current
 
     const userQuery = findUserQuery(messages)
     if (!userQuery) {
       log.error('No user message found in:', messages)
+      return
+    }
+
+    // A Drive restriction must never silently degrade to an unrestricted
+    // search: while its resolution is loading, over the 1000-file limit or
+    // unavailable, refuse to post (belt-and-braces with the composer block,
+    // this also covers assistant-ui's regenerate path).
+    if (attachmentsBlocked) {
+      yield {
+        content: [{ type: 'text', text: t('assistant.attachments.blocked') }],
+        status: { type: 'incomplete', reason: 'error' },
+        metadata: { custom: { isError: true } }
+      }
       return
     }
 
@@ -103,7 +125,9 @@ export const createCozyRealtimeChatAdapter = (
             assistantId !== DEFAULT_ASSISTANT._id && {
               assistantID: assistantId
             }),
-          ...(websearchEnabled && { websearch: true })
+          ...(websearchEnabled && { websearch: true }),
+          ...(attachmentIds &&
+            attachmentIds.length > 0 && { attachmentIDs: attachmentIds })
         }
       )
 

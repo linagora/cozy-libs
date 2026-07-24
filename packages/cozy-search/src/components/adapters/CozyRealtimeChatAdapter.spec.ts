@@ -19,13 +19,17 @@ const makeRunOptions = (): ChatModelRunOptions =>
     abortSignal: undefined
   }) as unknown as ChatModelRunOptions
 
-const runAdapter = async (assistantId?: string): Promise<jest.Mock> => {
+const runAdapter = async (
+  assistantId?: string,
+  extraOptions: Record<string, unknown> = {}
+): Promise<jest.Mock> => {
   const fetchJSON = jest.fn().mockResolvedValue({})
   const adapter = createCozyRealtimeChatAdapter(
     {
       client: { stackClient: { fetchJSON } },
       conversationId: 'conv-1',
-      assistantId
+      assistantId,
+      ...extraOptions
     },
     key => key,
     { current: makeStreamBridge() }
@@ -66,5 +70,46 @@ describe('CozyRealtimeChatAdapter', () => {
       Record<string, unknown>
     ]
     expect(body).not.toHaveProperty('assistantID')
+  })
+})
+
+describe('CozyRealtimeChatAdapter attachments', () => {
+  it('sends attachmentIDs when attachmentIds are provided', async () => {
+    const fetchJSON = await runAdapter(undefined, {
+      attachmentIds: ['f1', 'f2']
+    })
+    expect(fetchJSON).toHaveBeenCalledWith(
+      'POST',
+      '/ai/chat/conversations/conv-1',
+      expect.objectContaining({ attachmentIDs: ['f1', 'f2'] })
+    )
+  })
+
+  it('omits attachmentIDs without a selection', async () => {
+    const fetchJSON = await runAdapter(undefined)
+    const [, , body] = fetchJSON.mock.calls[0] as [
+      string,
+      string,
+      Record<string, unknown>
+    ]
+    expect(body).not.toHaveProperty('attachmentIDs')
+  })
+
+  it('omits attachmentIDs for an empty list', async () => {
+    const fetchJSON = await runAdapter(undefined, { attachmentIds: [] })
+    const [, , body] = fetchJSON.mock.calls[0] as [
+      string,
+      string,
+      Record<string, unknown>
+    ]
+    expect(body).not.toHaveProperty('attachmentIDs')
+  })
+
+  it('never posts while the attachments resolution is blocked', async () => {
+    const fetchJSON = await runAdapter(undefined, {
+      attachmentsBlocked: true,
+      attachmentIds: ['f1']
+    })
+    expect(fetchJSON).not.toHaveBeenCalled()
   })
 })
