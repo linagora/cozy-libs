@@ -1,4 +1,4 @@
-import React, { useMemo, useContext, useState } from 'react'
+import React, { useMemo, useContext, useState, useCallback } from 'react'
 
 import { DEFAULT_ASSISTANT } from './constants'
 
@@ -28,6 +28,33 @@ const AssistantProvider = ({ children }) => {
     useState(false)
   const [websearchEnabled, setWebsearchEnabled] = useState(false)
 
+  // Per-conversation Drive restriction for the default assistant:
+  // conversationId → docs picked in the Drive file picker. No entry means
+  // "search in all my documents". Resolutions (flat file ids + status) are
+  // published back by AttachmentsResolver, keyed the same way.
+  const [attachmentsSelections, setAttachmentsSelections] = useState({})
+  const [attachmentsResolutions, setAttachmentsResolutions] = useState({})
+
+  const setForConversation = (setState, conversationId, value) => {
+    setState(prev => {
+      if (!value || (Array.isArray(value) && value.length === 0)) {
+        if (!(conversationId in prev)) return prev
+        const next = { ...prev }
+        delete next[conversationId]
+        return next
+      }
+      return { ...prev, [conversationId]: value }
+    })
+  }
+
+  const setAttachmentsSelection = useCallback((conversationId, docs) => {
+    setForConversation(setAttachmentsSelections, conversationId, docs)
+  }, [])
+
+  const setAttachmentsResolution = useCallback((conversationId, resolution) => {
+    setForConversation(setAttachmentsResolutions, conversationId, resolution)
+  }, [])
+
   const value = useMemo(
     () => ({
       isOpenCreateAssistant,
@@ -43,7 +70,11 @@ const AssistantProvider = ({ children }) => {
       setSelectedAssistantId,
       setIsOpenSearchConversation,
       websearchEnabled,
-      setWebsearchEnabled
+      setWebsearchEnabled,
+      attachmentsSelections,
+      setAttachmentsSelection,
+      attachmentsResolutions,
+      setAttachmentsResolution
     }),
     [
       isOpenCreateAssistant,
@@ -52,7 +83,9 @@ const AssistantProvider = ({ children }) => {
       assistantIdInAction,
       selectedAssistantId,
       isOpenSearchConversation,
-      websearchEnabled
+      websearchEnabled,
+      attachmentsSelections,
+      attachmentsResolutions
     ]
   )
 

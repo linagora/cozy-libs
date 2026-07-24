@@ -1,5 +1,20 @@
 import React from 'react'
 
+export interface AttachmentsResolution {
+  attachmentIds: string[]
+  isOverLimit: boolean
+  isLoading: boolean
+  isUnavailable: boolean
+}
+
+export interface AttachmentsSelectionDoc {
+  _id?: string
+  id?: string
+  type?: string
+  name?: string
+  dir_id?: string
+}
+
 export interface AssistantContextValue {
   isOpenCreateAssistant: boolean
   isOpenDeleteAssistant: boolean
@@ -15,6 +30,16 @@ export interface AssistantContextValue {
   setIsOpenSearchConversation: (isOpen: boolean) => void
   websearchEnabled: boolean
   setWebsearchEnabled: React.Dispatch<React.SetStateAction<boolean>>
+  attachmentsSelections: Record<string, AttachmentsSelectionDoc[]>
+  setAttachmentsSelection: (
+    conversationId: string,
+    docs: AttachmentsSelectionDoc[] | null
+  ) => void
+  attachmentsResolutions: Record<string, AttachmentsResolution>
+  setAttachmentsResolution: (
+    conversationId: string,
+    resolution: AttachmentsResolution | null
+  ) => void
 }
 
 export function useAssistant(): AssistantContextValue
