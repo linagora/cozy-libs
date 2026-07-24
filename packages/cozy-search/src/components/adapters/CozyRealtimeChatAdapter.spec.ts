@@ -42,6 +42,29 @@ const runAdapter = async (
   return fetchJSON
 }
 
+const collectAdapterResults = async (
+  assistantId?: string,
+  extraOptions: Record<string, unknown> = {}
+): Promise<{ fetchJSON: jest.Mock; results: unknown[] }> => {
+  const fetchJSON = jest.fn().mockResolvedValue({})
+  const adapter = createCozyRealtimeChatAdapter(
+    {
+      client: { stackClient: { fetchJSON } },
+      conversationId: 'conv-1',
+      assistantId,
+      ...extraOptions
+    },
+    key => key,
+    { current: makeStreamBridge() }
+  )
+  const generator = adapter.run(makeRunOptions()) as AsyncGenerator<unknown>
+  const results: unknown[] = []
+  for await (const result of generator) {
+    results.push(result)
+  }
+  return { fetchJSON, results }
+}
+
 describe('CozyRealtimeChatAdapter', () => {
   it('sends the assistantID for a real assistant', async () => {
     const fetchJSON = await runAdapter('real-assistant-id')
@@ -111,5 +134,22 @@ describe('CozyRealtimeChatAdapter attachments', () => {
       attachmentIds: ['f1']
     })
     expect(fetchJSON).not.toHaveBeenCalled()
+  })
+
+  it('yields an incomplete error result while blocked, without posting', async () => {
+    const { fetchJSON, results } = await collectAdapterResults(undefined, {
+      attachmentsBlocked: true,
+      attachmentIds: ['f1']
+    })
+    expect(fetchJSON).not.toHaveBeenCalled()
+    expect(results).toHaveLength(1)
+    const finalResult = results[0] as {
+      content: Array<{ type: string; text: string }>
+      status: { type: string; reason: string }
+      metadata: { custom: { isError: boolean } }
+    }
+    expect(finalResult.content[0].text).toBe('assistant.attachments.blocked')
+    expect(finalResult.status).toEqual({ type: 'incomplete', reason: 'error' })
+    expect(finalResult.metadata.custom.isError).toBe(true)
   })
 })
