@@ -1,8 +1,20 @@
-# Intents
+# cozy-interapp
 
-Library to create intents : actions that need to be fullfilled by another app than the current one.
+`cozy-interapp` implements Cozy intents. It lets an app (the **client**) ask another app (the **service**) to perform an action it does not have permissions for. The two apps communicate through an `<iframe>` or a `WebView` and `postMessage` and follow a postMessage intent protocol described below. This library helps build a client and a service. You can also implement the postMessage intent protocol yourself.
 
-See cozy-stack [documentation](https://docs.cozy.io/en/cozy-stack/intents/) for more details.
+See [cozy-stack](https://docs.cozy.io/en/cozy-stack/intents/) for more details on Cozy intents.
+
+See [cozy-drive](https://github.com/linagora/twake-drive/blob/master/docs/file-picker-intent.md) for an example intent.
+
+## Usage
+
+### Install
+
+```bash
+yarn add cozy-interapp
+```
+
+`cozy-interapp` does not depend on React. It needs a `cozy-client` instance to talk to the stack.
 
 ### Initialization
 
@@ -13,6 +25,74 @@ import Intents from 'cozy-interapp'
 const client = new CozyClient({ uri, token })
 const intents = new Intents({ client })
 ```
+
+See [cozy-ui-plus](https://github.com/linagora/cozy-libs/tree/master/packages/cozy-ui-plus/src/Intent) for ready for use React components using cozy-interapp.
+
+## postMessage intent protocol overview
+
+### Roles
+
+| Role | Where it runs | What it does |
+|---|---|---|
+| **Client** | The calling app (top window) | Creates the intent via the stack, inserts the iframe, listens for messages, resolves a promise with the result. |
+| **Service** | The serving app (inside the iframe) | Receives intent data, renders UI, sends back `done` / `cancel` / `error` / `resize` / ... messages. |
+| **Stack** | `cozy-stack` | `POST /intents` creates the intent, returns the list of matching services and `availableApps`. `GET /intents/:id` is used by the service to retrieve the intent. |
+
+The stack returns the list of services that can handle the intent. The client picks one and loads its `href` in an iframe. The service page runs inside the iframe and talks back to its parent via `postMessage`.
+
+### Sequence diagram
+
+```mermaid
+sequenceDiagram
+    participant Client as Client (parent window)
+    participant Stack as cozy-stack
+    participant Service as Service (iframe)
+
+    Client->>Stack: POST /intents { action, type, data, permissions }
+    Stack-->>Client: intent { id, attributes.services[] }
+    Client->>Client: insert iframe service.href
+    Service->>Client: postMessage { type: "intent-{id}:ready" }
+    Client->>Service: postMessage(data)  (raw intent data, no envelope)
+    Service->>Client: postMessage { type: "intent-{id}:readyToUse" }
+    Note over Client,Service: Intent is usable (optional messages can happen here)
+    Service->>Client: postMessage { type: "intent-{id}:done", document } OR
+    Service->>Client: postMessage { type: "intent-{id}:exposeFrameRemoval", document } OR
+    Service->>Client: postMessage { type: "intent-{id}:cancel" } OR
+    Service->>Client: postMessage { type: "intent-{id}:error", error }
+    Client->>Client: use and the result and remove iframe
+```
+
+### Messages
+
+All messages from service to client are objects with a `type` field of the form `intent-{intentId}:{subtype}`.
+
+The service sends all those messages via `serviceWindow.parent.postMessage(message, intent.attributes.client)`. The client must listen via `window.addEventListener('message', ...)` and filter by `event.origin === serviceOrigin`.
+
+Errors are serialized: the service sends a plain object with `message` and `name` and the client can reconstruct a `new Error(message)` with the original properties copied back onto it.
+
+#### Core messages
+
+| Direction | `type` (or payload shape) | Fields | Meaning |
+|---|---|---|---|
+| Service → Client | `intent-{id}:ready` | — | Handshake. Client responds by posting the raw intent `data` back to the service. |
+| Client → Service | *(raw `data`, no envelope)* | whatever was passed to `intents.create(action, type, data, ...)` | Sent immediately after `ready`. The service reads it via `service.getData()`. |
+| Service → Client | `intent-{id}:readyToUse` | — | The service's UI is rendered and its initial data has loaded. Fires the client's `onReadyToUse` callback. Sent at most once. |
+| Client → Service | *(raw `doc`, no envelope)* | the resulting document of the composed intent | Sent back after the composed intent resolves. The service's `compose(...)` promise resolves with it. |
+| Service → Client | `intent-{id}:done` | `document` | Successful termination. Client resolves the intent promise with `document`, removes the iframe. |
+| Service → Client | `intent-{id}:exposeFrameRemoval` | `document` | Like `done`, but the client keeps the iframe in the DOM and returns `{ document, removeIntentIframe }` so the caller can animate closing before removing the iframe. Only sent when the client passed `exposeIntentFrameRemoval: true` in the intent data. |
+| Service → Client | `intent-{id}:cancel` | — | The service cancels. Client resolves the intent promise with `null`, removes the iframe. Also sent automatically on the service's `unload` event if the service was never terminated. |
+| Service → Client | `intent-{id}:error` | `error` | Failure. Client rejects the intent promise with a deserialized `Error`. |
+
+#### Optional messages
+
+| Direction | `type` (or payload shape) | Fields | Meaning |
+|---|---|---|---|
+| Service → Client | `intent-{id}:resize` | `dimensions: { width?, height?, maxWidth?, maxHeight?, element? }`, `transition?: string` | Resizes the element that holds the iframe. `element` is measured client-side by the service and converted to `maxWidth` / `maxHeight`. `transition` is applied as a CSS `transition` property. |
+| Service → Client | `intent-{id}:hideCross` | — | Ask the client to hide its close button. Fires `onHideCross`. |
+| Service → Client | `intent-{id}:showCross` | — | Ask the client to show its close button. Fires `onShowCross`. |
+| Service → Client | `intent-{id}:compose` | `action`, `doctype`, `data` | Ask the client to start a nested intent. The client creates it, hides the current service iframe, runs the nested intent, then posts the resulting document back to the service via `postMessage(doc, origin)`. |
+
+## API reference
 
 ### `intents.create()`
 
