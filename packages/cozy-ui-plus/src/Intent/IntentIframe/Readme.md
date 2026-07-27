@@ -14,7 +14,7 @@ import utils from '../../docs/utils'
 <IntentIframe
   action="PICK"
   create={utils.fakeIntentCreate}
-  data={{folder: '840af7e7be6c41bed3c5b76d03f66328', theme: 'dark'}}
+  data={{folder: '840af7e7be6c41bed3c5b76d03f66328', theme: { type: 'dark' }}}
   type="io.cozy.files"
   onCancel={() => alert('intent cancelled')}
   onError={(error) => alert('intent has failed with error: ' + error.message)}
@@ -27,9 +27,9 @@ Set `waitForReadyToUse` to keep the intent hidden behind the loading spinner
 until its service sends the `readyToUse` signal. This option is disabled by
 default because older intent services do not send this signal.
 
-Set `data.theme` to `light` or `dark` to force that theme on the loading
-surface and pass it to the intent service. With `auto`, an invalid value or no
-value, the loading surface keeps the caller's theme.
+Set `data.theme.type` to `light` or `dark` to force that theme on the
+loading surface and pass it to the intent service. Any other value or no value
+keeps the caller's theme.
 
 ### Within an application side controled Dialog
 

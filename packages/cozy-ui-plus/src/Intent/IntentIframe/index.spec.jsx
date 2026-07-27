@@ -70,7 +70,7 @@ describe('IntentIframe', () => {
   it.each(['light', 'dark'])(
     'forces the %s theme on the iframe surface',
     theme => {
-      const { getByTestId } = setup({ data: { theme } })
+      const { getByTestId } = setup({ data: { theme: { type: theme } } })
 
       const intentTheme = getByTestId('intent-theme')
 
@@ -83,7 +83,7 @@ describe('IntentIframe', () => {
   it.each([undefined, 'auto', 'sepia'])(
     'preserves the caller theme for %s',
     theme => {
-      const data = theme === undefined ? undefined : { theme }
+      const data = theme === undefined ? undefined : { theme: { type: theme } }
       const { getByTestId } = setup({ data })
       const intentTheme = getByTestId('intent-theme')
 

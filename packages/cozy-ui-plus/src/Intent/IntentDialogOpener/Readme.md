@@ -16,7 +16,7 @@ import DemoProvider from 'cozy-ui/docs/components/DemoProvider'
     fullWidth // extra props will be passed to the dialog
     maxWidth="md" // extra props will be passed to the dialog
     iframeProps={{ spinnerProps: { middle: true } }}
-    options={{ theme: 'dark' }}
+    options={{ theme: { type: 'dark' } }}
     waitForReadyToUse
     onComplete={res => alert('intent has completed ! ' + JSON.stringify(res))}
     onDismiss={() => alert('intent has been dismissed !')}
@@ -30,6 +30,6 @@ Set `waitForReadyToUse` to keep the intent hidden behind the loading spinner
 until its service sends the `readyToUse` signal. This option is disabled by
 default because older intent services do not send this signal.
 
-Set `options.theme` to `light` or `dark` to force that theme on the dialog,
-close button and loading surface as well as passing it to the intent service.
-With `auto`, an invalid value or no value, the dialog keeps the caller's theme.
+Set `options.theme.type` to `light` or `dark` to force that theme on the
+dialog, close button and loading surface as well as passing it to the intent
+service. Any other value or no value keeps the caller's theme.

@@ -84,9 +84,8 @@ class IntentIframe extends React.Component {
     const { error, frameLoaded, readyToUse } = this.state
     const loading =
       error === null && (!frameLoaded || (waitForReadyToUse && !readyToUse))
-    const forcedTheme = ['light', 'dark'].includes(data?.theme)
-      ? data.theme
-      : null
+    const themeType = data?.theme?.type
+    const forcedTheme = ['light', 'dark'].includes(themeType) ? themeType : null
     return (
       <CozyTheme
         type={forcedTheme}
