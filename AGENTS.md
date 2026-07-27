@@ -80,6 +80,10 @@ Note:
 - Alphabetical import order (React before Button, Button before cx)
 - Empty line between import groups (builtin/external, external/internal, etc.)
 
+## Package update within the monorepo
+
+Do not manually bump package versions. Lerna updates them automatically in CI based on conventional commits.
+
 ## Migration order within the monorepo
 
 The CI runs tests for **all** packages on every PR. When a package is modified and its `dist/` gets rebuilt, any other package importing from that dist (via workspace imports) may break.
