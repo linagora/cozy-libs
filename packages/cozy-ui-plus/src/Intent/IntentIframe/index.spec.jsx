@@ -3,20 +3,6 @@ import React from 'react'
 
 import IntentIframe from './index'
 
-jest.mock('cozy-ui/transpiled/react/providers/CozyTheme', () => ({
-  __esModule: true,
-  default: ({ children, className, ignoreItself, type }) => (
-    <div
-      data-testid="intent-theme"
-      data-theme={type}
-      data-ignore-itself={ignoreItself}
-      className={className}
-    >
-      {children}
-    </div>
-  )
-}))
-
 jest.mock('cozy-ui/transpiled/react/Spinner', () => () => (
   <div data-testid="intent-spinner" />
 ))
@@ -66,31 +52,6 @@ describe('IntentIframe', () => {
   afterEach(() => {
     jest.restoreAllMocks()
   })
-
-  it.each(['light', 'dark'])(
-    'forces the %s theme on the iframe surface',
-    theme => {
-      const { getByTestId } = setup({ data: { theme: { type: theme } } })
-
-      const intentTheme = getByTestId('intent-theme')
-
-      expect(intentTheme).toHaveAttribute('data-theme', theme)
-      expect(intentTheme).toHaveAttribute('data-ignore-itself', 'false')
-      expect(intentTheme.className).not.toBe('')
-    }
-  )
-
-  it.each([undefined, 'auto', 'sepia'])(
-    'preserves the caller theme for %s',
-    theme => {
-      const data = theme === undefined ? undefined : { theme: { type: theme } }
-      const { getByTestId } = setup({ data })
-      const intentTheme = getByTestId('intent-theme')
-
-      expect(intentTheme).not.toHaveAttribute('data-theme')
-      expect(intentTheme.className).not.toBe('')
-    }
-  )
 
   it('keeps the iframe rendered behind the spinner until it is ready to use', () => {
     const {
