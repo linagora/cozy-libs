@@ -49,8 +49,9 @@ const IntentDialogOpener = props => {
   }
 
   const Tag = tag // React needs uppercase element names
-  const forcedTheme = ['light', 'dark'].includes(options?.theme)
-    ? options.theme
+  const themeType = options?.theme?.type
+  const forcedTheme = ['light', 'dark'].includes(themeType)
+    ? themeType
     : undefined
   const elements = [
     React.cloneElement(children, { key: 'opener', onClick: openModal })
@@ -101,7 +102,9 @@ IntentDialogOpener.propTypes = {
   action: PropTypes.string.isRequired,
   /** Options passed to the intent */
   options: PropTypes.shape({
-    theme: PropTypes.oneOf(['light', 'dark', 'auto'])
+    theme: PropTypes.shape({
+      type: PropTypes.oneOf(['light', 'dark'])
+    })
   }),
   /** Doctype on which you want to execute the action */
   doctype: PropTypes.string.isRequired,
