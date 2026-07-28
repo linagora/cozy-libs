@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.3.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@12.2.1...cozy-ui-plus@12.3.0) (2026-07-28)
+
+### Features
+
+- **intent:** Support forced themes ([b207c1c](https://github.com/cozy/cozy-libs/commit/b207c1c488d26cfc60b1408ad356983a8aa2cd66))
+
 ## [12.2.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@12.2.0...cozy-ui-plus@12.2.1) (2026-07-28)
 
 **Note:** Version bump only for package cozy-ui-plus
