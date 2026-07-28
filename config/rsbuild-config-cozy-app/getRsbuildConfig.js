@@ -85,13 +85,6 @@ function getRsbuildConfig({
       // We enable old API polyfill to keep compatibility with old browsers
       polyfill: 'usage'
     },
-    performance: {
-      chunkSplit: {
-        forceSplitting: {
-          cozy: /node_modules[\\/]cozy*/
-        }
-      }
-    },
     html: {
       title
     },
