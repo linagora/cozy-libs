@@ -30,6 +30,17 @@ See [cozy-ui-plus](https://github.com/linagora/cozy-libs/tree/master/packages/co
 
 ## Guideline to build an intent
 
+### UI lifecycle
+
+The client app is responsible of the UI lifecycle of the intent, e.g.:
+- opening the intent
+- hiding the intent
+- closing the intent
+
+As the service app can not know how client application will display the service, we let the client:
+- choose how to display the intent: inside a modal, inside a bottomshet, inside a card, etc
+- choose how the user can close it (with a cross button, with a keyboard shortcut, etc) or hide it (with a minimize button, etc), etc
+
 ### Error handling
 
 The rule:
