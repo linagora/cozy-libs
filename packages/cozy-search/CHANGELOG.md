@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.10](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.9...cozy-search@2.2.10) (2026-07-29)
+
+### Bug Fixes
+
+- **assistant:** Blur the websearch chip after a pointer click ([c755a9b](https://github.com/cozy/cozy-libs/commit/c755a9be34ed9aaff7acaa3820d1ba4f15482008))
+- **assistant:** Rename the default assistant to "AI Agent" ([d4a9d3d](https://github.com/cozy/cozy-libs/commit/d4a9d3d5bfba56303ba91cf8656411ce6b474355))
+- **assistant:** Show a dropdown chevron on the assistant chip ([93640c8](https://github.com/cozy/cozy-libs/commit/93640c8162474047a101fe2e9002ba69ec6aa463))
+
 ## [2.2.9](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.8...cozy-search@2.2.9) (2026-07-29)
 
 **Note:** Version bump only for package cozy-search
