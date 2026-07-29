@@ -32,6 +32,12 @@ const FederatedFolderModalContent = ({
   autoOpenShareRestriction,
   showGenerateLinkButton
 }) => {
+  // share from CozyProvider is wired to callbacks and realtime that
+  // makes existingDocument and existingRecipients reactive to changes.
+  // But we want it to be reactive only when we revoke a member. When we add member
+  // we close the popup and we do not want to see briefly the new contacts added
+  // in members before the modal closes. That's why when clicking on "Share"
+  // we do not use the reactive existingDocument and existingRecipients.
   const client = useClient()
   const { t } = useI18n()
   const {
@@ -52,26 +58,79 @@ const FederatedFolderModalContent = ({
   } = useSharingContext()
   const { showAlert } = useAlert()
   const { showConfirmDialog, closeConfirmDialog } = useConfirmDialog()
-
   const {
     pendingRecipients,
     setPendingRecipients,
     selectedOption,
     setSelectedOption
   } = usePendingRecipients()
-
-  // share from CozyProvider is wired to callbacks and realtime that
-  // makes existingDocument and existingRecipients reactive to changes.
-  // But we want it to be reactive only when we revoke a member. When we add member
-  // we close the popup and we do not want to see briefly the new contacts added
-  // in members before the modal closes. That's why when clicking on "Share"
-  // we do not use the reactive existingDocument and existingRecipients.
   const [isSending, setIsSending] = useState(false)
   const [isFetchingSharingLinks, setIsFetchingSharingLinks] = useState(false)
   const [fetchedSharingLinksDocumentId, setFetchedSharingLinksDocumentId] =
     useState(null)
   const [frozenDoc, setFrozenDoc] = useState(null)
   const [frozenRecipients, setFrozenRecipients] = useState(null)
+  const [sharedParentFolder, setSharedParentFolder] = useState(null)
+
+  const documentId = existingDocument?._id || existingDocument?.id
+  const folderName = existingDocument?.name || ''
+  const documentPath = existingDocument?.path
+  const sharedDriveSharing = existingDocument?.driveId
+    ? getSharingById(existingDocument.driveId)
+    : null
+  const sharedDriveRootIds =
+    sharedDriveSharing?.attributes?.rules?.reduce(
+      (ids, rule) => ids.concat(rule.values || []),
+      []
+    ) || []
+  // Owner case: when document is inside a shared folder (via path) but has no driveId,
+  // find the parent shared folder to use its _id for recipient/permission lookups.
+  const hasSharedParentByPath = Boolean(
+    documentPath && hasSharedParent(documentPath)
+  )
+  const sharedParentPath =
+    !sharedDriveSharing && hasSharedParentByPath && documentPath
+      ? getSharedParentPath(documentPath)
+      : null
+  const sharingReferenceId =
+    !sharedDriveSharing && sharedParentFolder?._id
+      ? sharedParentFolder._id
+      : documentId
+  const existingRecipients =
+    sharedDriveSharing?.attributes?.members && documentId
+      ? getRecipientsFromSharing(sharedDriveSharing, documentId)
+      : sharingReferenceId
+        ? getRecipients(sharingReferenceId)
+        : []
+  const documentPermissions = documentId
+    ? getDocumentPermissions(documentId)
+    : []
+  const displayedLink = existingDocument?.driveId
+    ? getFederatedShareLink(existingDocument)
+    : getSharingLink(existingDocument?._id)
+
+  const isSharedDriveRoot = Boolean(
+    existingDocument?.driveId &&
+    sharedDriveRootIds.some(
+      id => id === existingDocument?._id || id === existingDocument?.id
+    )
+  )
+  const isInsideSharedDrive = Boolean(
+    existingDocument?.driveId && !isSharedDriveRoot
+  )
+  const isCurrentUserOwner = documentId ? isOwner(documentId) : false
+  const hasParentRestriction = isInsideSharedDrive || hasSharedParentByPath
+  const hasChildRestriction = Boolean(
+    documentPath && hasSharedChild(documentPath)
+  )
+  const canShareByEmail = !hasParentRestriction && !hasChildRestriction
+  const canManageSharing =
+    isCurrentUserOwner || (documentId ? canReshare(documentId) : false)
+
+  const handleRevokeSelf = async document => {
+    await revokeSelf(document)
+    onRevokeSuccess?.(document)
+  }
 
   const handleCloseRequest = useCallback(() => {
     if (pendingRecipients.length === 0) {
@@ -108,34 +167,6 @@ const FederatedFolderModalContent = ({
     showConfirmDialog,
     t
   ])
-
-  const folderName = existingDocument?.name || ''
-  const documentPath = existingDocument?.path
-  const sharedDriveSharing = existingDocument?.driveId
-    ? getSharingById(existingDocument.driveId)
-    : null
-  const sharedDriveRootIds =
-    sharedDriveSharing?.attributes?.rules?.reduce(
-      (ids, rule) => ids.concat(rule.values || []),
-      []
-    ) || []
-  const isSharedDriveRoot = Boolean(
-    existingDocument?.driveId &&
-    sharedDriveRootIds.some(
-      id => id === existingDocument?._id || id === existingDocument?.id
-    )
-  )
-  const isInsideSharedDrive = Boolean(
-    existingDocument?.driveId && !isSharedDriveRoot
-  )
-  const hasSharedParentByPath = Boolean(
-    documentPath && hasSharedParent(documentPath)
-  )
-  const hasParentRestriction = isInsideSharedDrive || hasSharedParentByPath
-  const hasChildRestriction = Boolean(
-    documentPath && hasSharedChild(documentPath)
-  )
-  const canShareByEmail = !hasParentRestriction && !hasChildRestriction
 
   const onSend = async () => {
     if (isSending || pendingRecipients.length === 0) {
@@ -183,15 +214,6 @@ const FederatedFolderModalContent = ({
     }
   }
 
-  const documentId = existingDocument?._id || existingDocument?.id
-  // Owner case: when document is inside a shared folder (via path) but has no driveId,
-  // find the parent shared folder to use its _id for recipient/permission lookups.
-  const sharedParentPath =
-    !sharedDriveSharing && hasSharedParentByPath && documentPath
-      ? getSharedParentPath(documentPath)
-      : null
-  const [sharedParentFolder, setSharedParentFolder] = useState(null)
-
   useEffect(() => {
     if (!sharedParentPath) return
     const fetchParentFolder = async () => {
@@ -206,32 +228,6 @@ const FederatedFolderModalContent = ({
     }
     fetchParentFolder()
   }, [sharedParentPath, client])
-
-  const sharingReferenceId =
-    !sharedDriveSharing && sharedParentFolder?._id
-      ? sharedParentFolder._id
-      : documentId
-
-  const existingRecipients =
-    sharedDriveSharing?.attributes?.members && documentId
-      ? getRecipientsFromSharing(sharedDriveSharing, documentId)
-      : sharingReferenceId
-        ? getRecipients(sharingReferenceId)
-        : []
-  const documentPermissions = documentId
-    ? getDocumentPermissions(documentId)
-    : []
-  const displayedLink = existingDocument?.driveId
-    ? getFederatedShareLink(existingDocument)
-    : getSharingLink(existingDocument?._id)
-  const isCurrentUserOwner = documentId ? isOwner(documentId) : false
-  const canManageSharing =
-    isCurrentUserOwner || (documentId ? canReshare(documentId) : false)
-
-  const handleRevokeSelf = async document => {
-    await revokeSelf(document)
-    onRevokeSuccess?.(document)
-  }
 
   useEffect(() => {
     if (!existingDocument?.driveId) return
@@ -264,14 +260,12 @@ const FederatedFolderModalContent = ({
     isFetchingSharingLinks
   ])
 
-  const modalTitle = t('FederatedFolder.shareTitle', { name: folderName })
-
   return (
     <FixedDialog
       open
       disableGutters
       onClose={handleCloseRequest}
-      title={modalTitle}
+      title={t('FederatedFolder.shareTitle', { name: folderName })}
       classes={{ paper: 'u-ov-visible' }}
       componentsProps={{
         dialogContent: {
