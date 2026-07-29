@@ -14,6 +14,18 @@ const WebSearchChip = ({ websearchEnabled, onToggleWebsearch }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
 
+  // Pointer activation leaves the DOM focus on the chip, and the `:focus`
+  // background is darker than the plain ghost one: the toggled chip then looks
+  // different from the sibling source chips (which are not clickable) until
+  // something else takes the focus. Drop it for pointer activation only
+  // (`detail > 0`), so keyboard users keep their focus ring.
+  const handleClick = event => {
+    if (event.detail > 0) {
+      event.currentTarget.blur()
+    }
+    onToggleWebsearch(event)
+  }
+
   return (
     <Chip
       aria-pressed={websearchEnabled}
@@ -37,7 +49,7 @@ const WebSearchChip = ({ websearchEnabled, onToggleWebsearch }) => {
       variant={websearchEnabled ? 'ghost' : 'default'}
       classes={isMobile ? CHIP_CLASSES : { label: 'u-pl-0 u-fz-tiny' }}
       className="u-mr-half"
-      onClick={onToggleWebsearch}
+      onClick={handleClick}
     />
   )
 }
