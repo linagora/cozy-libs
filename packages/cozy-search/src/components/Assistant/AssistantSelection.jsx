@@ -77,7 +77,16 @@ const AssistantSelection = ({ className, disabled }) => {
               isMobile ? (
                 <Icon icon={Dropdown} size={16} />
               ) : (
-                selectedAssistant.name
+                <span className="u-flex u-flex-items-center">
+                  {selectedAssistant.name}
+                  {!disabled && (
+                    <Icon
+                      icon={Dropdown}
+                      size={16}
+                      className="u-ml-half u-flex-shrink-0"
+                    />
+                  )}
+                </span>
               )
             }
             {...(disabled
