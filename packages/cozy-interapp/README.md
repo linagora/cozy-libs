@@ -14,9 +14,12 @@ See [cozy-drive](https://github.com/linagora/twake-drive/blob/master/docs/file-p
 yarn add cozy-interapp
 ```
 
-`cozy-interapp` does not depend on React. It needs a `cozy-client` instance to talk to the stack.
+`cozy-interapp` does not depend on React. It needs a way to talk to the
+stack: either a `cozy-client` instance or a `fetch` function managing authentication.
 
 ### Initialization
+
+With `cozy-client`:
 
 ```js
 import CozyClient from 'cozy-client'
@@ -24,6 +27,27 @@ import Intents from 'cozy-interapp'
 
 const client = new CozyClient({ uri, token })
 const intents = new Intents({ client })
+```
+
+Without `cozy-client`, pass a `fetch` function with the following signature:
+
+```js
+import Intents from 'cozy-interapp'
+
+const fetchJSON = async (method, path, body) => {
+  const res = await fetch(`${WORKSPACE_URL}${path}`, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${TOKEN}`
+    },
+    body: body ? JSON.stringify(body) : undefined
+  })
+  if (!res.ok) throw new Error(await res.text())
+  return res.json()
+}
+
+const intents = new Intents({ fetch: fetchJSON })
 ```
 
 See [cozy-ui-plus](https://github.com/linagora/cozy-libs/tree/master/packages/cozy-ui-plus/src/Intent) for ready for use React components using cozy-interapp.
