@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.2.8](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.7...cozy-sharing@37.2.8) (2026-07-29)
+
+**Note:** Version bump only for package cozy-sharing
+
 ## [37.2.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.6...cozy-sharing@37.2.7) (2026-07-29)
 
 ### Bug Fixes
