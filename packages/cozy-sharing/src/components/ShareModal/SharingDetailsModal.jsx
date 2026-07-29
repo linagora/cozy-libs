@@ -8,12 +8,12 @@ import styles from '../../styles/share.styl'
 import WhoHasAccess from '../WhoHasAccess'
 
 export const SharingDetailsModal = ({
-  onClose,
   recipients,
   document,
   documentType = 'Document',
   onRevoke,
-  onRevokeSelf
+  onRevokeSelf,
+  onClose
 }) => {
   const { t } = useI18n()
 
@@ -42,12 +42,11 @@ export const SharingDetailsModal = ({
 }
 
 SharingDetailsModal.propTypes = {
-  onClose: PropTypes.func,
-  sharingType: PropTypes.string,
-  owner: PropTypes.object.isRequired,
+  recipients: PropTypes.array.isRequired,
   document: PropTypes.object.isRequired,
   documentType: PropTypes.string.isRequired,
   onRevoke: PropTypes.func.isRequired,
-  onRevokeSelf: PropTypes.func
+  onRevokeSelf: PropTypes.func,
+  onClose: PropTypes.func
 }
 export default SharingDetailsModal
