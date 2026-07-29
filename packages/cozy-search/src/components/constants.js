@@ -1,6 +1,6 @@
 export const DEFAULT_ASSISTANT = {
   _id: 'default_ai_assistant',
-  name: 'AI Assistant'
+  name: 'AI Agent'
 }
 
 export const FETCH_CONVERSATIONS_LIMIT = 50
