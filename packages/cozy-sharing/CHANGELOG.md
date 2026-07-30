@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.2.12](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.11...cozy-sharing@37.2.12) (2026-07-30)
+
+### Bug Fixes
+
+- **sharing:** Make shared-drive member modals consistent and correct ([9dcf67d](https://github.com/cozy/cozy-libs/commit/9dcf67d375600a1a02298dc3036880ae37d08aef))
+
 ## [37.2.11](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.10...cozy-sharing@37.2.11) (2026-07-30)
 
 **Note:** Version bump only for package cozy-sharing
