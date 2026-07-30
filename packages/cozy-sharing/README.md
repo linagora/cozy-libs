@@ -177,6 +177,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Federated folder modal | Enabled by `drive.federated-shared-folder.enabled` flag | `ShareModal.jsx:39` |
 | Email sharing in federated folder | Disabled for files inside a federated shared folder (has `driveId` but is not the root) | `FederatedFolderModal.jsx:122-126` |
 | Link sharing in federated folder | Uses `getFederatedShareLink` which resolves the owner's instance URL | `FederatedFolderModal.jsx:108-110` |
+| Member view inside shared drive | Members see link management (gear + copy link) but no member perm management (cross/perm menu). Both root and subfolder modals are consistent. | `FederatedFolderModal.jsx:121-128`, `SharingDetailsModal.jsx:39-42` |
 
 ### Share management
 
@@ -252,3 +253,4 @@ Key decisions:
 - `EditableSharingModal` renders `ShareModal` (the dumb component), which decides `ShareDialogCozyToCozy` vs `ShareDialogOnlyByLink` based on flags and context.
 - `ShareDialogTwoStepsConfirmationContainer` wraps the cozy-to-cozy dialog when recipients need confirmation (untrusted contacts).
 - Federated mode: when `drive.federated-shared-folder.enabled` is true, `FederatedFolderModal` replaces the standard `EditableSharingModal`.
+- `WhoHasAccess` accepts an independent `canManageLink` prop to control link management (gear + perm dropdown) separately from `isReadOnly` which controls member management. This allows shared-drive members to see the link gear without the member cross/perm menu.
