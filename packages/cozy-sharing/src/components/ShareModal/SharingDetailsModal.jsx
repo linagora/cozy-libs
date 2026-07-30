@@ -35,7 +35,7 @@ export const SharingDetailsModal = ({
       content={
         <div className={styles['share-modal-content']}>
           <WhoHasAccess
-            isReadOnly
+            canManageMembers={false}
             canManageLink={isSharedDrive}
             isSharedDrive={isSharedDrive}
             recipients={recipients}

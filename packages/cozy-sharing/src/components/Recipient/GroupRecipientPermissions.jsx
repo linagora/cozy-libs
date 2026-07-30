@@ -20,7 +20,7 @@ const GroupRecipientPermissions = ({
   name,
   color,
   isOwner,
-  isReadOnly,
+  canManageMembers = true,
   sharingId,
   groupIndex,
   read_only = false,
@@ -36,7 +36,7 @@ const GroupRecipientPermissions = ({
   const [revoking, setRevoking] = useState(false)
 
   const shouldShowMenu =
-    !isReadOnly && !revoking && (isOwner || isUserInsideMembers)
+    canManageMembers && !revoking && (isOwner || isUserInsideMembers)
 
   const toggleMenu = () => setMenuDisplayed(!isMenuDisplayed)
   const hideMenu = () => setMenuDisplayed(false)

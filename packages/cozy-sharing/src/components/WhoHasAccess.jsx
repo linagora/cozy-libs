@@ -32,7 +32,8 @@ const WhoHasAccess = ({
   canManageSharing = isOwner,
   isSharedDrive = false,
   isReadOnly = false,
-  canManageLink = !isReadOnly,
+  canManageMembers = !isReadOnly,
+  canManageLink = canManageMembers,
   showOwner = true,
   recipients,
   recipientsToBeConfirmed = [],
@@ -81,8 +82,8 @@ const WhoHasAccess = ({
           recipientsToBeConfirmed={recipientsToBeConfirmed}
           isOwner={isOwner}
           canManageSharing={canManageSharing}
+          canManageMembers={canManageMembers}
           isSharedDrive={isSharedDrive}
-          isReadOnly={isReadOnly}
           document={document}
           documentType={documentType}
           onRevoke={onRevoke}
@@ -98,6 +99,7 @@ const WhoHasAccess = ({
 WhoHasAccess.propTypes = {
   isOwner: PropTypes.bool,
   canManageSharing: PropTypes.bool,
+  canManageMembers: PropTypes.bool,
   canManageLink: PropTypes.bool,
   showOwner: PropTypes.bool,
   recipients: PropTypes.array.isRequired,

@@ -10,8 +10,8 @@ const RecipientList = ({
   recipientsToBeConfirmed,
   isOwner,
   canManageSharing,
+  canManageMembers,
   isSharedDrive,
-  isReadOnly,
   document,
   documentType,
   onRevoke,
@@ -35,7 +35,7 @@ const RecipientList = ({
         <GroupRecipient
           {...recipient}
           isOwner={isOwner}
-          isReadOnly={isReadOnly}
+          canManageMembers={canManageMembers}
           key={recipient.index}
           document={document}
           documentType={documentType}
@@ -52,8 +52,8 @@ const RecipientList = ({
         key={recipient.index}
         isOwner={isOwner}
         canManageSharing={canManageSharing}
+        canManageMembers={canManageMembers}
         isSharedDrive={isSharedDrive}
-        isReadOnly={isReadOnly}
         document={document}
         documentType={documentType}
         onRevoke={onRevoke}
