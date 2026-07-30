@@ -120,7 +120,9 @@ const FederatedFolderModalContent = ({
   )
   const isCurrentUserOwner = existingDocument?.driveId
     ? Boolean(sharedDriveSharing?.attributes?.owner)
-    : (documentId ? isOwner(documentId) : false)
+    : documentId
+      ? isOwner(documentId)
+      : false
   const isMemberReadOnly = isInsideSharedDrive && !isCurrentUserOwner
   const hasParentRestriction = isInsideSharedDrive || hasSharedParentByPath
   const hasChildRestriction = Boolean(
@@ -325,7 +327,7 @@ const FederatedFolderModalContent = ({
             isOwner={isCurrentUserOwner}
             canManageSharing={canManageSharing}
             isSharedDrive
-            isReadOnly={isMemberReadOnly}
+            canManageMembers={!isMemberReadOnly}
             canManageLink={true}
             recipients={isSending ? frozenRecipients : existingRecipients}
             document={isSending ? frozenDoc : existingDocument}

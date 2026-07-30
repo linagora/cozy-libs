@@ -12,7 +12,7 @@ import { PermissionTypeMenu } from './PermissionTypeMenu'
 const MemberRecipientPermissions = ({
   isOwner,
   canManageSharing = isOwner,
-  isReadOnly,
+  canManageMembers = true,
   status,
   instance,
   type,
@@ -31,7 +31,7 @@ const MemberRecipientPermissions = ({
     instance !== undefined && instance === client.options.uri
   const contactIsOwner = status === 'owner'
   const shouldShowMenu =
-    !isReadOnly &&
+    canManageMembers &&
     !revoking &&
     !contactIsOwner &&
     ((instanceMatchesClient && !isOwner) || canManageSharing)
