@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.18.2...cozy-interapp@0.19.0) (2026-07-30)
+
+### Features
+
+- Allow to use cozy-interapp without a client from cozy-client ([710fcb7](https://github.com/cozy/cozy-libs/commit/710fcb7411b88f6aa9be45d7406bc8b2c0627dd7))
+
 ## [0.18.2](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.18.1...cozy-interapp@0.18.2) (2026-07-28)
 
 **Note:** Version bump only for package cozy-interapp
