@@ -174,17 +174,17 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Org shared drive | `isOrgSharedDrive` = `sharing.drive === true && sharing.org_drive === true` | `state.js:324` |
 | `canLeave` | `false` for org shared drives | `state.js:335` |
 | `canReshare` | `!org_drive && !read_only` for drives; `open_sharing && !read_only` for folders | `state.js:342` |
-| Federated folder modal | Enabled by `drive.federated-shared-folder.enabled` flag | `ShareModal.jsx:39` |
+| Federated folder modal | Enabled by `drive.federated-shared-folder.enabled` flag and `document.driveId` | `ShareModal.jsx:39` |
 | Email sharing in federated folder | Disabled for files inside a federated shared folder (has `driveId` but is not the root) | `FederatedFolderModal.jsx:122-126` |
 | Link sharing in federated folder | Uses `getFederatedShareLink` which resolves the owner's instance URL | `FederatedFolderModal.jsx:108-110` |
-| Member view inside shared drive | Members see link management (gear + copy link) but no member perm management (cross/perm menu). Both root and subfolder modals are consistent. | `FederatedFolderModal.jsx:121-128`, `SharingDetailsModal.jsx:39-42` |
+| Member view inside shared drive | Subfolder members see link management only (no member cross/perm). Root members with `canReshare` see full member management; read-only root members see link management only. | `FederatedFolderModal.jsx:118-133`, `SharingDetailsModal.jsx:38-39` |
 
 ### Share management
 
 | Condition | Rule | Source |
 |-----------|------|--------|
 | Editable modal | `isEditable = !byDocId[doc] \|\| isOwner(doc) \|\| canReshare(doc)` | `ShareModal.jsx:35-36` |
-| Non-editable view | `SharingDetailsModal` — read-only view of members, with revoke-self | `ShareModal.jsx:53-62` |
+| Non-editable view | `SharingDetailsModal` — read-only members (no cross/perm menu), with link management (gear + copy link) for shared drives | `ShareModal.jsx:53-62` |
 | Updating member type | `updateSharingMemberType` calls `setReadOnly` / `setReadWrite` on the stack | `SharingProvider.jsx:361-420` |
 | Revoke self | Available to all recipients | `SharingProvider.jsx:349-353` |
 | Revoke group | Available to owner/editor; removes all group members at once | `SharingProvider.jsx:336-347` |
@@ -253,4 +253,4 @@ Key decisions:
 - `EditableSharingModal` renders `ShareModal` (the dumb component), which decides `ShareDialogCozyToCozy` vs `ShareDialogOnlyByLink` based on flags and context.
 - `ShareDialogTwoStepsConfirmationContainer` wraps the cozy-to-cozy dialog when recipients need confirmation (untrusted contacts).
 - Federated mode: when `drive.federated-shared-folder.enabled` is true, `FederatedFolderModal` replaces the standard `EditableSharingModal`.
-- `WhoHasAccess` accepts an independent `canManageLink` prop to control link management (gear + perm dropdown) separately from `isReadOnly` which controls member management. This allows shared-drive members to see the link gear without the member cross/perm menu.
+- `WhoHasAccess` accepts an independent `canManageLink` prop to control link management (gear + perm dropdown) separately from `canManageMembers` which controls member management. This allows shared-drive members to see the link gear without the member cross/perm menu.
