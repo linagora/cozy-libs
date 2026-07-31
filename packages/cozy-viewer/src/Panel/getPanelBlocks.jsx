@@ -1,6 +1,4 @@
-import { isFromKonnector } from 'cozy-client/dist/models/file'
 import flag from 'cozy-flags'
-import KonnectorBlock from 'cozy-harvest-lib/dist/components/KonnectorBlock'
 
 import Antivirus from './Antivirus'
 import Informations from './Informations'
@@ -42,13 +40,6 @@ export const getPanelBlocksSpecs = (isPublic = false, panelProps) =>
           condition: () => !panelProps?.summary?.disabled,
           component: Summary
         },
-        konnector: {
-          condition: file =>
-            !panelProps?.konnector?.disabled &&
-            isFromKonnector(file) &&
-            !isPublic,
-          component: KonnectorBlock
-        },
         informations: {
           condition: () => !panelProps?.informations?.disabled,
           component: Informations
@@ -73,13 +64,6 @@ export const getPanelBlocksSpecs = (isPublic = false, panelProps) =>
         summary: {
           condition: () => !panelProps?.summary?.disabled,
           component: Summary
-        },
-        konnector: {
-          condition: file =>
-            !panelProps?.konnector?.disabled &&
-            isFromKonnector(file) &&
-            !isPublic,
-          component: KonnectorBlock
         },
         informations: {
           condition: () => !panelProps?.informations?.disabled,
