@@ -8,7 +8,6 @@ The `Viewer` can display an **information panel** to show additional information
 
 - You must have [WebviewIntent Provider](https://github.com/cozy/cozy-libs/blob/b1ad6f5933b463878f641d9fbb63eddd4c45b0d0/packages/cozy-intent/src/view/components/WebviewIntentProvider.tsx#L89) & [CozySharing Provider](https://github.com/cozy/cozy-libs/tree/master/packages/cozy-sharing)
 - In order to download and display the files, it will need a `cozy-client` instance in the React context.
-- To have the panels, the app need to have [cozy-harvest-lib](https://github.com/cozy/cozy-libs/tree/master/packages/cozy-harvest-lib) installed
 
 ### Props
 

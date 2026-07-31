@@ -183,10 +183,6 @@ ViewerContainer.propTypes = {
         /** Whether the summary panel is disabled */
         disabled: PropTypes.bool
       }),
-      konnector: PropTypes.shape({
-        /** Whether the konnector panel is disabled */
-        disabled: PropTypes.bool
-      }),
       informations: PropTypes.shape({
         /** Whether the informations panel is disabled */
         disabled: PropTypes.bool

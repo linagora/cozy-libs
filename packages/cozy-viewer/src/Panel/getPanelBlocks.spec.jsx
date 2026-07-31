@@ -4,7 +4,6 @@ import getPanelBlocks, { getPanelBlocksSpecs } from './getPanelBlocks'
 
 jest.mock('./Sharing', () => () => <div data-testid="SharingBlock" />)
 
-jest.mock('cozy-harvest-lib/dist/components/KonnectorBlock', () => jest.fn())
 const block1Component = jest.fn()
 const block2Component = jest.fn()
 
@@ -75,10 +74,6 @@ describe('getPanelBlocksSpecs', () => {
         component: expect.anything()
       },
       summary: {
-        condition: expect.any(Function),
-        component: expect.anything()
-      },
-      konnector: {
         condition: expect.any(Function),
         component: expect.anything()
       },
