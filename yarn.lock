@@ -17448,7 +17448,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-harvest-lib@npm:^39.0.30, cozy-harvest-lib@workspace:packages/cozy-harvest-lib":
+"cozy-harvest-lib@workspace:packages/cozy-harvest-lib":
   version: 0.0.0-use.local
   resolution: "cozy-harvest-lib@workspace:packages/cozy-harvest-lib"
   dependencies:
@@ -18414,7 +18414,6 @@ __metadata:
     classnames: "npm:^2.5.1"
     cozy-client: "npm:^60.20.0"
     cozy-device-helper: "npm:2.0.0"
-    cozy-harvest-lib: "npm:^39.0.30"
     cozy-intent: "npm:^2.31.1"
     cozy-logger: "npm:^1.18.1"
     cozy-sharing: "npm:^37.2.12"
@@ -18440,7 +18439,6 @@ __metadata:
     cozy-client: ">=57.0.0"
     cozy-device-helper: ">=2.0.0"
     cozy-flags: ">=4.8.1"
-    cozy-harvest-lib: ">=32.2.12"
     cozy-intent: ">=2.30.0"
     cozy-logger: ">=1.17.0"
     cozy-sharing: ">=30.0.0"

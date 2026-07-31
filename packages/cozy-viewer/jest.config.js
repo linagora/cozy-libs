@@ -20,13 +20,9 @@ module.exports = {
     '^cozy-flags$': '<rootDir>/test/__mocks__/cozyFlagsMock.js',
     '^cozy-intent$': '<rootDir>/test/__mocks__/cozy-intent.js',
     '^cozy-sharing$': '<rootDir>/test/__mocks__/cozy-sharing.js',
-    '^twake-i18n$': '<rootDir>/test/__mocks__/twake-i18n.js',
-    '^cozy-harvest-lib/dist/components/KonnectorBlock$':
-      '<rootDir>/test/__mocks__/cozy-harvest-lib.js'
+    '^twake-i18n$': '<rootDir>/test/__mocks__/twake-i18n.js'
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(cozy-ui|cozy-harvest-lib|cozy-ui-plus))'
-  ],
+  transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-ui-plus))'],
   transform: {
     '^.+\\.(ts|tsx|js|jsx)?$': 'babel-jest'
   }
