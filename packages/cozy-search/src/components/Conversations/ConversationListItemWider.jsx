@@ -65,7 +65,7 @@ const ConversationListItemWider = ({
         }
         secondary={
           <Typography variant="h6" className="u-coolGrey">
-            {getDescriptionOfConversation(conversation)}
+            {getDescriptionOfConversation(conversation, t)}
           </Typography>
         }
       />

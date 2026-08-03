@@ -44,6 +44,7 @@
       "yesterday": "Hôm qua"
     },
     "default_error": "Đã xảy ra lỗi, vui lòng thử lại",
+    "default_empty_response": "Tôi không tìm thấy câu trả lời cho yêu cầu của bạn. Vui lòng thử diễn đạt lại",
     "hide": "Ẩn",
     "show": "Hiện",
     "message": {

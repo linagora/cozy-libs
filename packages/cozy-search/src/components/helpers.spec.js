@@ -179,4 +179,25 @@ describe('getDescriptionOfConversation', () => {
     }
     expect(getDescriptionOfConversation(convo)).toBe('It is 4')
   })
+
+  it('returns the translated fallback when the last assistant message has no content', () => {
+    const t = key => key
+    const convo = {
+      messages: [
+        { role: 'user', content: 'sum?' },
+        { role: 'assistant', content: '' }
+      ]
+    }
+    expect(getDescriptionOfConversation(convo, t)).toBe(
+      'assistant.default_empty_response'
+    )
+  })
+
+  it('does not apply the fallback when the last message is from the user', () => {
+    const t = key => key
+    const convo = {
+      messages: [{ role: 'user', content: '[Source 1]' }]
+    }
+    expect(getDescriptionOfConversation(convo, t)).toBe('')
+  })
 })

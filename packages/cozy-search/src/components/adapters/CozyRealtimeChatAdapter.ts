@@ -18,7 +18,7 @@ import Minilog from 'cozy-minilog'
 
 import { StreamBridge } from './StreamBridge'
 import { DEFAULT_ASSISTANT } from '../constants'
-import { sanitizeChatContent } from '../helpers'
+import { sanitizeChatContent, formatAnswer } from '../helpers'
 
 const log = Minilog('🔍 [CozyRealtimeChatAdapter]')
 
@@ -113,7 +113,6 @@ export const createCozyRealtimeChatAdapter = (
       for await (const chunk of stream) {
         if (abortSignal?.aborted) {
           wasAborted = true
-          streamBridge.cleanup(conversationId)
           break
         }
 
@@ -126,16 +125,23 @@ export const createCozyRealtimeChatAdapter = (
         }
       }
 
-      if (!wasAborted) {
-        const finalText = sanitizeChatContent(fullText)
+      // abortSignal is re-checked here (not just wasAborted) to cover
+      // cancellation before the first chunk: the loop above then exits
+      // via a normal 'done' with zero iterations, never setting wasAborted
+      if (!wasAborted && !abortSignal?.aborted) {
         const sources = streamBridge.getSources(conversationId)
         yield {
-          content: [{ type: 'text', text: finalText }],
+          content: [
+            {
+              type: 'text',
+              text: formatAnswer({ role: 'assistant', content: fullText }, t)
+            }
+          ],
           status: { type: 'complete', reason: 'stop' },
           ...(sources ? { metadata: { custom: { sources } } } : {})
         }
-        streamBridge.cleanup(conversationId)
       }
+      streamBridge.cleanup(conversationId)
     } catch (error) {
       log.error('Error:', error)
       streamBridge.cleanup(conversationId)
