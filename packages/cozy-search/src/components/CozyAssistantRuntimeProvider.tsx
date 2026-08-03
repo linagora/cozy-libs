@@ -33,7 +33,7 @@ import { useAssistant } from './AssistantProvider'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
 import { DEFAULT_ASSISTANT } from './constants'
-import { sanitizeChatContent } from './helpers'
+import { formatAnswer } from './helpers'
 import {
   CHAT_EVENTS_DOCTYPE,
   CHAT_CONVERSATIONS_DOCTYPE,
@@ -73,14 +73,15 @@ interface CozyAssistantRuntimeProviderProps {
 }
 
 const convertMessagesToThreadMessages = (
-  messages: ConversationMessage[] | undefined
+  messages: ConversationMessage[] | undefined,
+  t: (key: string) => string
 ): ThreadMessageLike[] => {
   if (!messages) return []
 
   return messages.map((msg, idx) => ({
     id: msg.id || `msg-${idx}`,
     role: msg.role,
-    content: sanitizeChatContent(msg.content),
+    content: formatAnswer(msg, t),
     metadata:
       msg.role === 'assistant' && msg.sources
         ? { custom: { sources: msg.sources } }
@@ -94,6 +95,7 @@ const ConversationLoader = ({
 }: CozyAssistantRuntimeProviderProps & {
   conversationId: string
 }): JSX.Element | null => {
+  const { t } = useI18n()
   const { setSelectedAssistantId } = useAssistant()
   const conversationQuery = buildChatConversationQueryById(conversationId)
   const queryResult = useQuery(
@@ -104,8 +106,8 @@ const ConversationLoader = ({
   const isLoading = isQueryLoading(queryResult)
 
   const initialMessages = useMemo(
-    () => convertMessagesToThreadMessages(conversation?.messages),
-    [conversation?.messages]
+    () => convertMessagesToThreadMessages(conversation?.messages, t),
+    [conversation?.messages, t]
   )
 
   useEffect(() => {

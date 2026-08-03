@@ -31,6 +31,22 @@ export const sanitizeChatContent = content => {
   )
 }
 
+/**
+ * Formats a chat message's answer: sanitizes citation markup, and
+ * substitutes a translated fallback when an assistant answer is empty.
+ * Used wherever an assistant response may come back empty from the RAG backend.
+ *
+ * @param {{ role: string, content: string }} message
+ * @param {(key: string) => string} t - translation function from twake-i18n
+ * @returns {string}
+ */
+export const formatAnswer = (message, t) => {
+  const sanitized = sanitizeChatContent(message.content)
+  return message.role === 'assistant' && !sanitized.trim()
+    ? t('assistant.default_empty_response')
+    : sanitized
+}
+
 export const formatConversationDate = (dateString, t, lang) => {
   if (!dateString) return ''
   const date = new Date(dateString)
@@ -85,8 +101,9 @@ export const getNameOfConversation = conversation => {
  * Since we don't have rule for description of the conversation
  * So temporary we get the last answer from assistant as description of the conversation
  */
-export const getDescriptionOfConversation = conversation => {
-  const content =
-    conversation.messages?.[conversation.messages.length - 1]?.content
-  return content && sanitizeChatContent(content)
+export const getDescriptionOfConversation = (conversation, t) => {
+  if (!conversation) return undefined
+  const lastMessage = conversation.messages?.[conversation.messages.length - 1]
+  if (!lastMessage) return undefined
+  return formatAnswer(lastMessage, t)
 }

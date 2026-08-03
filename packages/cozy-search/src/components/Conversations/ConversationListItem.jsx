@@ -69,7 +69,7 @@ const ConversationListItem = ({
                 styles['conversation-list-item-subtitle']
               )}
             >
-              {getDescriptionOfConversation(conversation)}
+              {getDescriptionOfConversation(conversation, t)}
             </span>
             <span
               className={cx(
