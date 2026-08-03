@@ -47,6 +47,7 @@
       "yesterday": "Yesterday"
     },
     "default_error": "An error occurred during response generation. Please try again",
+    "default_empty_response": "I could not find an answer to your request. Please try rephrasing it",
     "hide": "Hide",
     "show": "Show",
     "search_conversation": {

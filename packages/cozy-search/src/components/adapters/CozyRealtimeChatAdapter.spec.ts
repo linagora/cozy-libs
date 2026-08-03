@@ -1,4 +1,7 @@
-import type { ChatModelRunOptions } from '@assistant-ui/react'
+import type {
+  ChatModelRunOptions,
+  ChatModelRunResult
+} from '@assistant-ui/react'
 
 import { createCozyRealtimeChatAdapter } from './CozyRealtimeChatAdapter'
 import type { StreamBridge } from './StreamBridge'
@@ -38,6 +41,27 @@ const runAdapter = async (assistantId?: string): Promise<jest.Mock> => {
   return fetchJSON
 }
 
+const runAdapterAndCollectResults = async (
+  streamBridge: StreamBridge
+): Promise<ChatModelRunResult[]> => {
+  const adapter = createCozyRealtimeChatAdapter(
+    {
+      client: { stackClient: { fetchJSON: jest.fn().mockResolvedValue({}) } },
+      conversationId: 'conv-1'
+    },
+    key => key,
+    { current: streamBridge }
+  )
+  const generator = adapter.run(
+    makeRunOptions()
+  ) as AsyncGenerator<ChatModelRunResult>
+  const results: ChatModelRunResult[] = []
+  for await (const result of generator) {
+    results.push(result)
+  }
+  return results
+}
+
 describe('CozyRealtimeChatAdapter', () => {
   it('sends the assistantID for a real assistant', async () => {
     const fetchJSON = await runAdapter('real-assistant-id')
@@ -66,5 +90,29 @@ describe('CozyRealtimeChatAdapter', () => {
       Record<string, unknown>
     ]
     expect(body).not.toHaveProperty('assistantID')
+  })
+
+  it('yields the fallback message when the stream completes with no content', async () => {
+    const results = await runAdapterAndCollectResults(makeStreamBridge())
+    const finalResult = results[results.length - 1]
+    expect(finalResult.content).toEqual([
+      { type: 'text', text: 'assistant.default_empty_response' }
+    ])
+  })
+
+  it('yields the sanitized content when the stream returns text', async () => {
+    const streamBridge = {
+      // eslint-disable-next-line @typescript-eslint/require-await
+      createStream: jest.fn(async function* () {
+        yield 'Hello '
+        yield 'world'
+      }),
+      getSources: jest.fn(() => null),
+      cleanup: jest.fn()
+    } as unknown as StreamBridge
+
+    const results = await runAdapterAndCollectResults(streamBridge)
+    const finalResult = results[results.length - 1]
+    expect(finalResult.content).toEqual([{ type: 'text', text: 'Hello world' }])
   })
 })
