@@ -18,7 +18,7 @@ import Minilog from 'cozy-minilog'
 
 import { StreamBridge } from './StreamBridge'
 import { DEFAULT_ASSISTANT } from '../constants'
-import { sanitizeChatContent } from '../helpers'
+import { sanitizeChatContent, withEmptyResponseFallback } from '../helpers'
 
 const log = Minilog('🔍 [CozyRealtimeChatAdapter]')
 
@@ -129,8 +129,15 @@ export const createCozyRealtimeChatAdapter = (
       if (!wasAborted) {
         const finalText = sanitizeChatContent(fullText)
         const sources = streamBridge.getSources(conversationId)
+        if (!finalText.trim()) {
+          log.info(
+            `Empty content was received for conversation ${conversationId}, using fallback message`
+          )
+        }
         yield {
-          content: [{ type: 'text', text: finalText }],
+          content: [
+            { type: 'text', text: withEmptyResponseFallback(finalText, t) }
+          ],
           status: { type: 'complete', reason: 'stop' },
           ...(sources ? { metadata: { custom: { sources } } } : {})
         }

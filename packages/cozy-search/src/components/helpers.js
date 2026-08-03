@@ -6,6 +6,19 @@ export const makeConversationId = () =>
 export const isAssistantEnabled = () => flag('cozy.assistant.enabled')
 
 /**
+ * Returns sanitized text, or a translated fallback if it is empty/whitespace.
+ * Used whenever an assistant response may come back empty from the RAG backend.
+ *
+ * @param {string} sanitizedContent - already sanitized assistant content
+ * @param {(key: string) => string} t - translation function from twake-i18n
+ * @returns {string}
+ */
+export const withEmptyResponseFallback = (sanitizedContent, t) =>
+  sanitizedContent.trim()
+    ? sanitizedContent
+    : t('assistant.default_empty_response')
+
+/**
  * Sanitize chat content by removing special sources tags like
  * [REF]...[/REF] or [doc_X] that are not currently handled.
  *
@@ -85,8 +98,11 @@ export const getNameOfConversation = conversation => {
  * Since we don't have rule for description of the conversation
  * So temporary we get the last answer from assistant as description of the conversation
  */
-export const getDescriptionOfConversation = conversation => {
-  const content =
-    conversation.messages?.[conversation.messages.length - 1]?.content
-  return content && sanitizeChatContent(content)
+export const getDescriptionOfConversation = (conversation, t) => {
+  const lastMessage = conversation.messages?.[conversation.messages.length - 1]
+  if (!lastMessage) return undefined
+  const sanitized = sanitizeChatContent(lastMessage.content)
+  return lastMessage.role === 'assistant'
+    ? withEmptyResponseFallback(sanitized, t)
+    : sanitized
 }
