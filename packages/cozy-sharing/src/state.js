@@ -1,3 +1,4 @@
+import { generateWebLink } from 'cozy-client'
 import flag from 'cozy-flags'
 
 import { getShortcode } from './helpers/shortcodes'
@@ -21,8 +22,7 @@ export const SHARING_TYPE = {
 export const receiveSharings = ({
   instanceUri,
   sharings = [],
-  permissions = [],
-  apps = []
+  permissions = []
 }) => ({
   type: RECEIVE_SHARINGS,
   data: {
@@ -32,8 +32,7 @@ export const receiveSharings = ({
         (isSharingADrive(s) || !areAllRecipientsRevoked(s)) &&
         !hasBeenSelfRevoked(s, instanceUri)
     ),
-    permissions,
-    apps
+    permissions
   }
 })
 export const addSharing = (data, path) => ({
@@ -231,15 +230,6 @@ const permissions = (state = [], action) => {
   }
 }
 
-const apps = (state = [], action) => {
-  switch (action.type) {
-    case RECEIVE_SHARINGS:
-      return action.data.apps
-    default:
-      return state
-  }
-}
-
 const sharings = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_SHARINGS:
@@ -295,7 +285,6 @@ const reducer = (state = {}, action = {}) => ({
   byDocId: byDocId(state.byDocId, action),
   sharings: sharings(state.sharings, action),
   permissions: permissions(state.permissions, action),
-  apps: apps(state.apps, action),
   sharedPaths: sharedPaths(state.sharedPaths, action)
 })
 export default reducer
@@ -503,8 +492,6 @@ export const getDocumentPermissions = (state, docId) =>
 const getPermissionById = (state, id) =>
   state.permissions.find(s => s.id === id)
 
-const getApps = state => state.apps
-
 export const hasSharedParent = (state, documentPath) => {
   if (!state.sharedPaths || !documentPath) {
     return false // hasSharedParent should not occur
@@ -666,26 +653,15 @@ export const isReadOnlySharing = (sharing, docId) => {
     : true
 }
 
-const buildSharingLink = (state, documentType, sharecode) => {
-  const appUrl = getAppUrlForDoctype(state, documentType)
+const getSlugForDoctype = documentType => {
   switch (documentType) {
     case 'Notes':
-      return `${appUrl}public/?sharecode=${sharecode}`
-    default:
-      return `${appUrl}public?sharecode=${sharecode}`
-  }
-}
-
-const getAppUrlForDoctype = (state, documentType) => {
-  const apps = getApps(state)
-  switch (documentType) {
-    case 'Notes':
-      return getAppUrl(apps, 'notes')
+      return 'notes'
     case 'Files':
     case 'Document':
-      return getAppUrl(apps, 'drive')
+      return 'drive'
     case 'Albums':
-      return getAppUrl(apps, 'photos')
+      return 'photos'
     default:
       throw new Error(
         `Sharing link: don't know which app to use for doctype ${documentType}`
@@ -693,12 +669,16 @@ const getAppUrlForDoctype = (state, documentType) => {
   }
 }
 
-const getAppUrl = (apps, appName) => {
-  const app = apps.find(a => a?.slug === appName && a?.state === 'ready')
-  if (!app) {
-    throw new Error(`Sharing link: app ${appName} not installed`)
-  }
-  return app.links.related
+const buildSharingLink = (state, documentType, sharecode) => {
+  const slug = getSlugForDoctype(documentType)
+  const link = generateWebLink({
+    cozyUrl: state.instanceUri,
+    slug,
+    subDomainType: state.subDomainType,
+    pathname: slug === 'notes' ? '/public/' : '/public',
+    searchParams: [['sharecode', sharecode]]
+  })
+  return link.replace(/#\/$/, '')
 }
 
 /**

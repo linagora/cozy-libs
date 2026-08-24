@@ -17,7 +17,6 @@ import {
 } from './helpers/sharings'
 import { getShortcode } from './helpers/shortcodes'
 import { SynchronousJobQueue } from './helpers/synchronousJobQueue'
-import { fetchApps } from './queries/queries'
 import reducer, {
   receiveSharings,
   addSharing,
@@ -62,6 +61,7 @@ export class SharingProvider extends Component {
   constructor(props, context) {
     super(props, context)
     const instanceUri = props.client.getStackClient().uri
+    const subDomainType = props.client.getInstanceOptions().subdomain
     const documentType = props.documentType || 'Document'
     const onShared = props.onShared || (() => {})
 
@@ -72,6 +72,8 @@ export class SharingProvider extends Component {
       permissions: [],
       sharedFolderPaths: [],
       documentType,
+      instanceUri,
+      subDomainType,
       isOwner: docId => isOwner(this.state, docId),
       isSharedDrive: docId => isSharedDrive(this.state, docId),
       isOrgSharedDrive: docId => isOrgSharedDrive(this.state, docId),
@@ -207,17 +209,15 @@ export class SharingProvider extends Component {
       return
     }
     const { doctype, client } = this.props
-    const [sharings, permissions, apps] = await Promise.all([
+    const [sharings, permissions] = await Promise.all([
       this.sharingCol.findByDoctype(doctype, { withSharedDocs: false }),
-      this.permissionCol.findLinksByDoctype(doctype),
-      client.fetchQueryAndGetFromState(fetchApps())
+      this.permissionCol.findLinksByDoctype(doctype)
     ])
     this.dispatch(
       receiveSharings({
         instanceUri: client.options.uri,
         sharings: sharings.data,
-        permissions: permissions.data,
-        apps: apps.data
+        permissions: permissions.data
       })
     )
     this.setState({ hasLoadedAtLeastOnePage: true })

@@ -778,6 +778,7 @@ describe('updateSharingMemberType', () => {
   beforeEach(() => {
     const mockClient = {
       getStackClient: () => ({ uri: 'http://cozy.local' }),
+      getInstanceOptions: () => ({ subdomain: 'nested' }),
       collection: jest.fn().mockReturnValue({})
     }
 

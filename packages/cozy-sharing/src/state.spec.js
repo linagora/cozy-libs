@@ -31,8 +31,7 @@ import {
   PERM_2,
   PERM_WITHOUT_DOC,
   SHARING_NO_ACTIVE,
-  SHARING_WITH_SHORTCUT,
-  APPS
+  SHARING_WITH_SHORTCUT
 } from '../__tests__/fixtures'
 
 describe('Sharing state', () => {
@@ -42,7 +41,6 @@ describe('Sharing state', () => {
       byDocId: {},
       sharings: [],
       permissions: [],
-      apps: [],
       sharedPaths: []
     })
   })
@@ -509,8 +507,7 @@ describe('Sharing state', () => {
           undefined,
           receiveSharings({
             sharings: [SHARING_1, SHARING_2, SHARING_2, SHARING_WITH_SHORTCUT],
-            permissions: [PERM_1],
-            apps: APPS
+            permissions: [PERM_1]
           })
         ),
         addSharing(SHARING_3)
@@ -677,11 +674,12 @@ describe('generating a sharing link', () => {
         undefined,
         receiveSharings({
           sharings: [SHARING_1, SHARING_2],
-          permissions: [PERM_1, PERM_2],
-          apps: APPS
+          permissions: [PERM_1, PERM_2]
         })
       )
     )
+    state.instanceUri = 'https://cozy.tools'
+    state.subDomainType = 'nested'
   })
 
   it('should use the correct app', () => {
@@ -696,15 +694,11 @@ describe('generating a sharing link', () => {
     )
   })
 
-  it('should throw when no app is found', () => {
+  it('should throw when no doctype mapping is found', () => {
     expect(() =>
       getSharingLink(state, 'folder_1', 'made up for the test')
     ).toThrow(
       "Sharing link: don't know which app to use for doctype made up for the test"
-    )
-    state.apps = []
-    expect(() => getSharingLink(state, 'folder_1', 'Document')).toThrow(
-      'Sharing link: app drive not installed'
     )
   })
 
