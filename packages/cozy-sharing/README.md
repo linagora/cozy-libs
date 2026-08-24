@@ -82,6 +82,17 @@ const MyComp = () => {
 }
 ```
 
+### Recipient types
+
+`SharingMember` and `SharingGroup` model the values returned by the stack.
+`cozy-sharing` adds display metadata and returns `SharingMemberRecipient` or
+`SharingGroupRecipient` from its recipient selectors. TypeScript consumers can
+use their union when both are possible:
+
+```ts
+import type { SharingRecipient } from 'cozy-sharing/types'
+```
+
 ***
 
 ## How it works
