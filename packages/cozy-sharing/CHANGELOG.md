@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.12...cozy-sharing@37.3.0) (2026-08-24)
+
+### Features
+
+- **cozy-sharing:** Export group avatar ([6029b34](https://github.com/cozy/cozy-libs/commit/6029b349a818a6bb6e082f3958f3c67aca111a1f))
+
 ## [37.2.12](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.11...cozy-sharing@37.2.12) (2026-07-30)
 
 ### Bug Fixes
