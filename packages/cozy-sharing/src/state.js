@@ -341,11 +341,13 @@ export const canReshare = (state, docId, instanceUri) => {
 export const getOwner = (state, docId) =>
   getRecipients(state, docId).find(r => r.status === 'owner')
 
+/** @returns {import('../types').SharingRecipient[]} */
 export const getRecipients = (state, docId) => {
   const sharings = getDocumentSharings(state, docId)
   return getRecipientsFromSharings(sharings, docId)
 }
 
+/** @returns {import('../types').SharingRecipient[]} */
 export const getRecipientsFromSharing = (sharing, docId) => {
   if (!sharing) {
     return []
@@ -379,6 +381,7 @@ const getRecipientType = (sharing, member, documentType) => {
   return documentType
 }
 
+/** @returns {import('../types').SharingMemberRecipient[]} */
 const getRecipientsWithoutGroups = (sharings, docId) => {
   const recipients = sharings
     .map(sharing => {
@@ -400,6 +403,7 @@ const getRecipientsWithoutGroups = (sharings, docId) => {
   return recipients
 }
 
+/** @returns {import('../types').SharingRecipient[]} */
 export const getRecipientsWithGroups = (sharings, docId) => {
   const recipients = sharings.flatMap(sharing => {
     const type = getDocumentSharingType(sharing, docId)
