@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.4.0...cozy-sharing@37.5.0) (2026-08-25)
+
+### Features
+
+- **cozy-sharing:** Export recipient types ([ca5fd55](https://github.com/cozy/cozy-libs/commit/ca5fd554471320993cd89eaca33a65a09d2ecc46))
+
 # [37.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.3.0...cozy-sharing@37.4.0) (2026-08-25)
 
 ### Features
