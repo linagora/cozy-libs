@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.3.0...cozy-sharing@37.4.0) (2026-08-25)
+
+### Features
+
+- Build sharing link staticaly instead of using io.cozy.apps ([285f608](https://github.com/cozy/cozy-libs/commit/285f60883c5f60c5c306a2d7a0a7f00c6d1de238))
+
 # [37.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.2.12...cozy-sharing@37.3.0) (2026-08-24)
 
 ### Features
