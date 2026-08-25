@@ -23,7 +23,8 @@ export const ShareModal = withLocales(props => {
     canReshare,
     documentType,
     getRecipients,
-    revokeSelf
+    revokeSelf,
+    allLoaded
   } = useSharingContext()
 
   const handleRevokeSelf = async document => {
@@ -36,7 +37,7 @@ export const ShareModal = withLocales(props => {
 
   if (isEditable) {
     const isFederatedMode = flag('drive.federated-shared-folder.enabled')
-    if (isFederatedMode && document.driveId) {
+    if (isFederatedMode && allLoaded) {
       return (
         <FederatedFolderModal
           document={document}
