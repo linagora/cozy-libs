@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.5.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.5.0...cozy-sharing@37.5.1) (2026-08-25)
+
+### Bug Fixes
+
+- **sharing:** Restore allLoaded gate for federated modal routing ([fcb492a](https://github.com/cozy/cozy-libs/commit/fcb492a3d09110beb0cd3a9e524d3547bdaafa21))
+
 # [37.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.4.0...cozy-sharing@37.5.0) (2026-08-25)
 
 ### Features
