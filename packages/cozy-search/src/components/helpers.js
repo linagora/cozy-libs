@@ -102,8 +102,7 @@ export const getNameOfConversation = conversation => {
  * So temporary we get the last answer from assistant as description of the conversation
  */
 export const getDescriptionOfConversation = (conversation, t) => {
-  if (!conversation) return undefined
-  const lastMessage = conversation.messages?.[conversation.messages.length - 1]
+  const lastMessage = conversation?.messages?.[conversation.messages.length - 1]
   if (!lastMessage) return undefined
   return formatAnswer(lastMessage, t)
 }
