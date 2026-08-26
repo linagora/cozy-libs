@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.5.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.5.1...cozy-sharing@37.5.2) (2026-08-26)
+
+### Bug Fixes
+
+- **cozy-sharing:** Guard canReshare against missing sharing ([56cc19d](https://github.com/cozy/cozy-libs/commit/56cc19d09eed55472646cdc04ce8f4c7f2eb7f1e))
+
 ## [37.5.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.5.0...cozy-sharing@37.5.1) (2026-08-25)
 
 ### Bug Fixes
