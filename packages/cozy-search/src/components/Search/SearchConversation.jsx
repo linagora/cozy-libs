@@ -16,9 +16,9 @@ import { useI18n } from 'twake-i18n'
 import NotFoundConversation from './NotFoundConversation'
 import { formatDayLabel, groupConversationsByDate } from './helpers'
 import styles from './styles.styl'
+import { useChatUIState } from '../../contexts/ChatUIStateContext'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
-import { useAssistant } from '../AssistantProvider'
 import ConversationList from '../Conversations/ConversationList'
 import ConversationListItemWider from '../Conversations/ConversationListItemWider'
 
@@ -40,7 +40,7 @@ const SearchConversation = () => {
   const [searchStr, setSearchStr] = useState('')
 
   const { createNewConversation, goToConversation } = useConversation()
-  const { setIsOpenSearchConversation } = useAssistant()
+  const { setIsOpenSearchConversation } = useChatUIState()
   const { conversations, isLoading } = useFetchConversations({ query })
 
   const groupedConversations = useMemo(

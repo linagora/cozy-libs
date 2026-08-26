@@ -9,7 +9,7 @@ import { AssistantButton } from './AssistantButton'
 import { useSearch } from './SearchProvider'
 import styles from './styles.styl'
 import ResultMenu from '../ResultMenu/ResultMenu'
-import { isAssistantEnabled } from '../helpers'
+import { isAssistantEnabled } from '../cozyHelpers'
 
 const SearchBarDesktop = ({
   value,
