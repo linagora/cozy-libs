@@ -1,4 +1,5 @@
 import reducer, {
+  canReshare,
   receiveSharings,
   addSharing,
   addSharingLink,
@@ -978,6 +979,19 @@ describe('getDocumentSharingType', () => {
         'folder_1'
       )
     ).toBe('one-way')
+  })
+})
+
+describe('canReshare', () => {
+  const state = {
+    byDocId: {},
+    sharings: []
+  }
+
+  it('should return false when the document has no sharing', () => {
+    expect(canReshare(state, 'unknown_doc', 'http://cozy.tools:8080')).toBe(
+      false
+    )
   })
 })
 

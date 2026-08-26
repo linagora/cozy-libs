@@ -330,6 +330,7 @@ export const canLeave = (state, docId) => {
 
 export const canReshare = (state, docId, instanceUri) => {
   const sharing = getDocumentSharing(state, docId)
+  if (!sharing) return false
   const me = sharing.attributes.members.find(matchingInstanceName(instanceUri))
   if (sharing.drive) {
     return !sharing.org_drive && me && !me.read_only
