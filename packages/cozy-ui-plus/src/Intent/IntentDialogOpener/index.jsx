@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 
 import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
-import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
+import CozyTheme from '../../providers/CozyTheme'
 import IntentIframe, { iframeProps } from '../IntentIframe'
 
 /**
