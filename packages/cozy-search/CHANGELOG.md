@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.19](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.18...cozy-search@2.2.19) (2026-08-27)
+
+### Bug Fixes
+
+- **cozy-search:** Add fallback message for empty assistant replies ([2428017](https://github.com/cozy/cozy-libs/commit/242801715e53daa79d7a0f76dfbef6d5f7ba36ac))
+
 ## [2.2.18](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.17...cozy-search@2.2.18) (2026-08-26)
 
 **Note:** Version bump only for package cozy-search
