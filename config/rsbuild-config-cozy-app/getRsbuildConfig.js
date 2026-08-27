@@ -82,6 +82,13 @@ function getRsbuildConfig({
         // This option forces all .styl files to be resolved as CSS modules.
         auto: resource => resource.endsWith('.styl')
       },
+      // rsbuild 1.x defaults
+      overrideBrowserslist: [
+        'chrome >= 87',
+        'edge >= 88',
+        'firefox >= 78',
+        'safari >= 14'
+      ],
       // We enable old API polyfill to keep compatibility with old browsers
       polyfill: 'usage'
     },
@@ -217,6 +224,9 @@ function getRsbuildConfig({
           },
           output: {
             target: 'node',
+            // cozy-stack loads services as CommonJS
+            module: false,
+            minify: true,
             distPath: {
               root: 'build/services'
             }
