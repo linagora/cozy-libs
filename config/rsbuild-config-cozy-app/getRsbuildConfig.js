@@ -217,6 +217,9 @@ function getRsbuildConfig({
           },
           output: {
             target: 'node',
+            // cozy-stack loads services as CommonJS
+            module: false,
+            minify: true,
             distPath: {
               root: 'build/services'
             }
