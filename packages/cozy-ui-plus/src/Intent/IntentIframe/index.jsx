@@ -7,9 +7,9 @@ import React from 'react'
 import { withClient } from 'cozy-client'
 import { Intents } from 'cozy-interapp'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import CozyTheme from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
 import styles from './styles.styl'
+import CozyTheme from '../../providers/CozyTheme'
 
 const DEFAULT_DATA = {
   // TODO remove `closeable` since it is only there for backward compatibility
@@ -85,7 +85,10 @@ class IntentIframe extends React.Component {
     const loading =
       error === null && (!frameLoaded || (waitForReadyToUse && !readyToUse))
     const themeType = data?.theme?.type
-    const forcedTheme = ['light', 'dark'].includes(themeType) ? themeType : null
+    const forcedTheme = ['light', 'dark'].includes(themeType)
+      ? themeType
+      : undefined
+
     return (
       <CozyTheme
         type={forcedTheme}
