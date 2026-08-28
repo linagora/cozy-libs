@@ -66,11 +66,14 @@ const EditAssistantDialog = ({ open, onClose }) => {
       const provider = response.included[0]
       const providerId =
         assistant?.relationships?.provider?.data?.metadata?.providerId
+      // `auth.login` held the model before it moved to `data.model`: kept as a
+      // fallback for accounts that have not been rewritten yet.
+      const model = provider?.data?.model || provider?.auth?.login
       setFormData({
         name: assistant.name || '',
         description: assistant.prompt || '',
         icon: assistant.icon || '',
-        model: provider?.auth?.login || '',
+        model: model || '',
         baseUrl: provider?.data?.baseUrl || '',
         apiKey: provider?.auth?.apiKey || '',
         encryptedApiKey: provider?.auth?.credentials_encrypted || '',
@@ -81,11 +84,11 @@ const EditAssistantDialog = ({ open, onClose }) => {
       const selectProviderDefault = getSelectedProviderById(providerId)
       setSelectedProvider({
         ...selectProviderDefault,
-        model: provider?.auth?.login,
+        model,
         baseUrl: provider?.data?.baseUrl,
         name:
           selectProviderDefault.id === 'custom'
-            ? provider?.auth?.login
+            ? provider?.auth?.accountName || model
             : selectProviderDefault.name
       })
     }
