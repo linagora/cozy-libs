@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { Document, Page } from 'react-pdf'
 
-import { Icon, Pen } from '@linagora/twake-icons'
+import { Bottom, Dash, Icon, Pen, Plus, Top } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 
 import styles from './styles.styl'
@@ -298,7 +298,7 @@ export class PdfJsViewer extends Component {
             {!renderAllPages && (
               <span className="u-mh-half">
                 <ToolbarButton
-                  icon="top"
+                  icon={Top}
                   onClick={this.previousPage}
                   disabled={currentPage === 1}
                   label={t('Viewer.previous')}
@@ -320,7 +320,7 @@ export class PdfJsViewer extends Component {
                   /{totalPages}
                 </label>
                 <ToolbarButton
-                  icon="bottom"
+                  icon={Bottom}
                   onClick={this.nextPage}
                   disabled={currentPage === totalPages}
                   label={t('Viewer.next')}
@@ -330,13 +330,13 @@ export class PdfJsViewer extends Component {
 
             <span className="u-mh-half">
               <ToolbarButton
-                icon="dash"
+                icon={Dash}
                 onClick={this.scaleDown}
                 disabled={scale === MIN_SCALE}
                 label={t('Viewer.scaledown')}
               />
               <ToolbarButton
-                icon="plus"
+                icon={Plus}
                 onClick={this.scaleUp}
                 disabled={scale === MAX_SCALE}
                 label={t('Viewer.scaleup')}
