@@ -6,6 +6,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
+import { getProviderName } from './helpers'
 import styles from './styles.styl'
 import GeminiLogo from '../../assets/gemini.svg'
 import MetaLogo from '../../assets/meta.svg'
@@ -61,7 +62,7 @@ const Provider = ({ selectedProvider, provider, onSelect }) => {
           variant="body1"
           className="u-flex u-flex-justify-between u-flex-items-start"
         >
-          {provider.id === 'custom' ? t(provider.name) : provider.name}
+          {getProviderName(provider, t)}
         </Typography>
         <Typography variant="body2" className="u-mt-half u-c-text-secondary">
           {t(provider.description)}

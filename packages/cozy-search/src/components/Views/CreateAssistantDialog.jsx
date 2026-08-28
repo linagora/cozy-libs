@@ -18,7 +18,10 @@ import { useI18n, useExtendI18n } from 'twake-i18n'
 import { locales } from '../../locales'
 import { useAssistant } from '../AssistantProvider'
 import AssistantDialogContent from '../CreateAssistantSteps/AssistantDialogContent'
-import { getSelectedProviderById } from '../CreateAssistantSteps/helpers'
+import {
+  getProviderNameById,
+  getSelectedProviderById
+} from '../CreateAssistantSteps/helpers'
 import styles from '../CreateAssistantSteps/styles.styl'
 import {
   useAssistantDialog,
@@ -71,7 +74,8 @@ const CreateAssistantDialog = ({ open, onClose }) => {
       model: formData.model,
       apiKey: formData.apiKey,
       baseUrl: formData.baseUrl,
-      providerId: selectedProvider.id
+      providerId: selectedProvider.id,
+      providerName: getProviderNameById(selectedProvider.id, t)
     })
     if (savedAssistant?._id) {
       if (formData.knowledgeBase?.length > 0) {
