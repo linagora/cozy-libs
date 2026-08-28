@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import snarkdown from 'snarkdown'
 
+import { Icon, SyncCozy, ToTheCloud } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Alert from 'cozy-ui/transpiled/react/Alert'
@@ -60,12 +61,12 @@ const SharingBannerCozyToCozy = ({
   const buttonOne = isSharingShortcutCreated
     ? {
         label: t('Share.banner.sync_to_mine', { smart_count: 2 }),
-        icon: 'sync-cozy',
+        icon: SyncCozy,
         action
       }
     : {
         label: t('Share.banner.add_to_mine', { smart_count: 2 }),
-        icon: 'to-the-cloud',
+        icon: ToTheCloud,
         action
       }
   return (
@@ -78,7 +79,7 @@ const SharingBannerCozyToCozy = ({
           <Button
             variant="text"
             label={buttonOne.label}
-            icon={buttonOne.icon}
+            startIcon={<Icon icon={buttonOne.icon} />}
             onClick={buttonOne.action}
           />
           <Button
@@ -138,7 +139,7 @@ const SharingBannerByLink = ({ onClose }) => {
             component="a"
             variant="text"
             label={t('Share.create-cozy', { smart_count: 2 })}
-            icon={CozyHomeLinkIcon}
+            startIcon={<Icon icon={CozyHomeLinkIcon} />}
             href={HOME_LINK_HREF}
           />
           <Button
