@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.20](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.19...cozy-search@2.2.20) (2026-08-28)
+
+### Bug Fixes
+
+- **cozy-search:** Name the provider account after the provider ([60f1bfc](https://github.com/cozy/cozy-libs/commit/60f1bfc5bf8edd07147c7df0e446dd7565ab9f08))
+- **cozy-search:** Read the assistant model from the account data ([d3050aa](https://github.com/cozy/cozy-libs/commit/d3050aad1c5126eb992b0727ef21aff70d1013e2))
+
 ## [2.2.19](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.18...cozy-search@2.2.19) (2026-08-27)
 
 ### Bug Fixes
