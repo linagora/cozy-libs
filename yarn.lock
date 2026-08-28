@@ -16804,16 +16804,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-client@npm:60.26.0":
-  version: 60.26.0
-  resolution: "cozy-client@npm:60.26.0"
+"cozy-client@npm:60.30.6":
+  version: 60.30.6
+  resolution: "cozy-client@npm:60.30.6"
   dependencies:
     "@cozy/minilog": "npm:1.0.0"
     "@fastify/deepmerge": "npm:^2.0.2"
     "@types/jest": "npm:^26.0.20"
     "@types/lodash": "npm:^4.14.170"
     btoa: "npm:^1.2.1"
-    cozy-stack-client: "npm:^60.24.0"
+    cozy-stack-client: "npm:^60.28.0"
     date-fns: "npm:^2.30.0"
     fast-deep-equal: "npm:^3.1.3"
     json-stable-stringify: "npm:^1.0.1"
@@ -16839,7 +16839,7 @@ __metadata:
     react-native-google-play-integrity: ^1.1.0
     react-native-inappbrowser-reborn: ^3.5.1
     react-native-ios11-devicecheck: ^0.0.3
-  checksum: 10c0/8cd919e7ac75274b0f5122552fdff79637325b065d9dadd568951ff44e896c3d243ff268aa70dace177965240105bf2259506b9c937c89db9d3a39cf0ed6b684
+  checksum: 10c0/d6176e43531ad8f09b40f5cf7d219afc0b4626d8449c5cdcd97683c3b93520952500d47f6979bd68616646ebeb7c2e8e182be30ed274ec99efd68db1059c9ecb
   languageName: node
   linkType: hard
 
@@ -17839,7 +17839,7 @@ __metadata:
     babel-plugin-tsconfig-paths: "npm:^1.0.3"
     babel-preset-cozy-app: "npm:^2.8.4"
     classnames: "npm:^2.5.1"
-    cozy-client: "npm:60.26.0"
+    cozy-client: "npm:60.30.6"
     cozy-device-helper: "npm:^4.0.3"
     cozy-flags: "npm:^4.9.1"
     cozy-intent: "npm:^2.31.1"
@@ -17864,7 +17864,7 @@ __metadata:
     typescript: "npm:5.5.2"
   peerDependencies:
     "@linagora/twake-icons": ">=2.6.6"
-    cozy-client: ">=60.26.0"
+    cozy-client: ">=60.30.6"
     cozy-device-helper: ">=3.7.1"
     cozy-flags: ">=4.6.1"
     cozy-intent: ">=2.26.0"
@@ -18064,19 +18064,6 @@ __metadata:
   peerDependencies:
     cozy-flags: ">2.8.6"
   checksum: 10c0/c0b402de95699a896ca68f36f38197bc525f72a5bb02654215d385c4833b494b816fbc5bcccaf01fd343031a59652808563f32e236300bb1a4418b1a65a0ebb3
-  languageName: node
-  linkType: hard
-
-"cozy-stack-client@npm:^60.24.0":
-  version: 60.24.0
-  resolution: "cozy-stack-client@npm:60.24.0"
-  dependencies:
-    detect-node: "npm:^2.0.4"
-    mime: "npm:^2.4.0"
-    qs: "npm:^6.7.0"
-  peerDependencies:
-    cozy-flags: ">2.8.6"
-  checksum: 10c0/62f70b9ee944b50b1246634a797a1050acd044ef244da4d5b2a5ca0a809b6496840ffac55f865eac705999c117bd106f8134c865aa232188b9736a4447415b2c
   languageName: node
   linkType: hard
 
