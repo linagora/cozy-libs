@@ -9,7 +9,6 @@ const PdfToolbarButton = ({ icon, onClick, disabled, label }) => (
     variant="text"
     color="secondary"
     className="u-p-half u-m-half u-mah-2"
-    icon={icon}
     onClick={onClick}
     disabled={disabled}
     label={<Icon icon={icon} size={16} />}
@@ -19,7 +18,7 @@ const PdfToolbarButton = ({ icon, onClick, disabled, label }) => (
 )
 
 PdfToolbarButton.propTypes = {
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
   onClick: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   label: PropTypes.string.isRequired
