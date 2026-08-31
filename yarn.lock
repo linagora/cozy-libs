@@ -16723,7 +16723,7 @@ __metadata:
     cozy-realtime: "npm:^4.0.5"
     cozy-search: "npm:^0.24.0"
     cozy-ui: "npm:^138.1.0"
-    cozy-ui-plus: "npm:^12.3.11"
+    cozy-ui-plus: "npm:^12.3.12"
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:30.3.0"
     lodash.set: "npm:^4.3.2"
@@ -17485,8 +17485,8 @@ __metadata:
     cozy-realtime: "npm:^5.9.3"
     cozy-tsconfig: "npm:^2.0.0"
     cozy-ui: "npm:^138.1.0"
-    cozy-ui-plus: "npm:^12.3.11"
-    cozy-viewer: "npm:^30.0.36"
+    cozy-ui-plus: "npm:^12.3.12"
+    cozy-viewer: "npm:^30.0.37"
     date-fns: "npm:2.30.0"
     final-form: "npm:^4.18.5"
     form-data: "npm:4.0.0"
@@ -17849,7 +17849,7 @@ __metadata:
     cozy-pouch-link: "npm:^54.0.0"
     cozy-realtime: "npm:^5.9.3"
     cozy-ui: "npm:^138.4.0"
-    cozy-ui-plus: "npm:^12.3.11"
+    cozy-ui-plus: "npm:^12.3.12"
     cross-fetch: "npm:^4.0.0"
     jest: "npm:30.3.0"
     lodash: "npm:^4.17.21"
@@ -17882,7 +17882,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-sharing@npm:^37.5.2, cozy-sharing@workspace:packages/cozy-sharing":
+"cozy-sharing@npm:^37.5.3, cozy-sharing@workspace:packages/cozy-sharing":
   version: 0.0.0-use.local
   resolution: "cozy-sharing@workspace:packages/cozy-sharing"
   dependencies:
@@ -17910,7 +17910,7 @@ __metadata:
     cozy-intent: "npm:^2.31.1"
     cozy-minilog: "npm:^3.10.1"
     cozy-ui: "npm:^140.5.0"
-    cozy-ui-plus: "npm:^12.3.11"
+    cozy-ui-plus: "npm:^12.3.12"
     date-fns: "npm:2.30.0"
     jest: "npm:30.3.0"
     jest-environment-jsdom: "npm:30.3.0"
@@ -18091,7 +18091,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"cozy-ui-plus@npm:^12.3.11, cozy-ui-plus@workspace:packages/cozy-ui-plus":
+"cozy-ui-plus@npm:^12.3.12, cozy-ui-plus@workspace:packages/cozy-ui-plus":
   version: 0.0.0-use.local
   resolution: "cozy-ui-plus@workspace:packages/cozy-ui-plus"
   dependencies:
@@ -18112,7 +18112,7 @@ __metadata:
     cozy-intent: "npm:^2.31.1"
     cozy-interapp: "npm:^0.19.0"
     cozy-logger: "npm:^1.18.1"
-    cozy-sharing: "npm:^37.5.2"
+    cozy-sharing: "npm:^37.5.3"
     cozy-stack-client: "npm:^60.21.1"
     cozy-ui: "npm:^138.1.0"
     filesize: "npm:8.0.7"
@@ -18386,7 +18386,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-viewer@npm:^30.0.36, cozy-viewer@workspace:packages/cozy-viewer":
+"cozy-viewer@npm:^30.0.37, cozy-viewer@workspace:packages/cozy-viewer":
   version: 0.0.0-use.local
   resolution: "cozy-viewer@workspace:packages/cozy-viewer"
   dependencies:
@@ -18403,9 +18403,9 @@ __metadata:
     cozy-device-helper: "npm:2.0.0"
     cozy-intent: "npm:^2.31.1"
     cozy-logger: "npm:^1.18.1"
-    cozy-sharing: "npm:^37.5.2"
+    cozy-sharing: "npm:^37.5.3"
     cozy-ui: "npm:^138.1.0"
-    cozy-ui-plus: "npm:^12.3.11"
+    cozy-ui-plus: "npm:^12.3.12"
     hammerjs: "npm:^2.0.8"
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:30.3.0"

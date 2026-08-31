@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.3.12](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@12.3.11...cozy-ui-plus@12.3.12) (2026-08-31)
+
+### Bug Fixes
+
+- Use CozyTheme from cozy-ui-plus in Intent components ([53a764f](https://github.com/cozy/cozy-libs/commit/53a764f416c77d8dce4338dec251d70d0c00e4aa))
+
 ## [12.3.11](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@12.3.10...cozy-ui-plus@12.3.11) (2026-08-26)
 
 **Note:** Version bump only for package cozy-ui-plus
