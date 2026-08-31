@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [30.0.38](https://github.com/cozy/cozy-libs/compare/cozy-viewer@30.0.37...cozy-viewer@30.0.38) (2026-08-31)
+
+### Bug Fixes
+
+- **cozy-viewer:** Render the PDF toolbar icons ([49efb42](https://github.com/cozy/cozy-libs/commit/49efb42ee26ed5b1c3ea80b51ebba93f30dcf29d))
+
 ## [30.0.37](https://github.com/cozy/cozy-libs/compare/cozy-viewer@30.0.36...cozy-viewer@30.0.37) (2026-08-31)
 
 **Note:** Version bump only for package cozy-viewer

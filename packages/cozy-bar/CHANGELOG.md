@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [35.2.21](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.2.20...cozy-bar@35.2.21) (2026-08-31)
+
+**Note:** Version bump only for package cozy-bar
+
 ## [35.2.20](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.2.19...cozy-bar@35.2.20) (2026-08-31)
 
 **Note:** Version bump only for package cozy-bar

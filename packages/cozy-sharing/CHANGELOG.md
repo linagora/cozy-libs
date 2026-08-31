@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.5.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.5.3...cozy-sharing@37.5.4) (2026-08-31)
+
+### Bug Fixes
+
+- **cozy-sharing:** Render the public banner button icons ([b4627f7](https://github.com/cozy/cozy-libs/commit/b4627f7689f73db592147f99a3baab11df612131))
+
 ## [37.5.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.5.2...cozy-sharing@37.5.3) (2026-08-31)
 
 **Note:** Version bump only for package cozy-sharing
