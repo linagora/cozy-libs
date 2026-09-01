@@ -57,6 +57,9 @@
     "storageAvailable": "Còn trống %{smart_count} GB",
     "emailDomainNotActive": "Địa chỉ email chưa được kích hoạt",
     "logOut": "Đăng xuất"
+  },
+  "platformBanners": {
+    "dismiss": "Ẩn"
   }
 }
 
