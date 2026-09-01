@@ -57,5 +57,8 @@
     "storageAvailable": "%{smart_count} Go disponible",
     "emailDomainNotActive": "E-mail inactif",
     "logOut": "Se déconnecter"
+  },
+  "platformBanners": {
+    "dismiss": "Masquer"
   }
 }

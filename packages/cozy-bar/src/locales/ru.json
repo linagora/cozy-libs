@@ -57,5 +57,8 @@
     "storageAvailable": "Доступно %{smart_count} ГБ",
     "emailDomainNotActive": "Электронная почта неактивна",
     "logOut": "Выйти"
+  },
+  "platformBanners": {
+    "dismiss": "Скрыть"
   }
 }

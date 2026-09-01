@@ -14,6 +14,7 @@ import {
 } from '../dom'
 import Bar from './Bar'
 import { useBarContext } from './BarProvider'
+import { PlatformBanners } from './PlatformBanners'
 
 const createBarElement = wrapperId => {
   const barNode = document.createElement('div')
@@ -118,20 +119,23 @@ const BarComponent = ({
   const cozyThemeProps = componentsProps?.CozyTheme || {}
 
   return (
-    <ReactPortal
-      wrapperElement={wrapperElement}
-      setWrapperElement={setWrapperElement}
-    >
-      <CozyTheme {...cozyThemeProps} ignoreCozySettings={options.isPublic}>
-        <Bar
-          {...options}
-          barSearch={barSearch}
-          barLeft={barLeft}
-          barCenter={barCenter}
-          barRight={barRight}
-        />
-      </CozyTheme>
-    </ReactPortal>
+    <>
+      <ReactPortal
+        wrapperElement={wrapperElement}
+        setWrapperElement={setWrapperElement}
+      >
+        <CozyTheme {...cozyThemeProps} ignoreCozySettings={options.isPublic}>
+          <Bar
+            {...options}
+            barSearch={barSearch}
+            barLeft={barLeft}
+            barCenter={barCenter}
+            barRight={barRight}
+          />
+        </CozyTheme>
+      </ReactPortal>
+      {!options.isPublic && <PlatformBanners />}
+    </>
   )
 }
 
