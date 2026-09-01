@@ -75,8 +75,6 @@ export const ShareModal = ({
   )
 }
 
-export default ShareModal
-
 ShareModal.propTypes = {
   autoOpenShareRestriction: PropTypes.bool,
   createContact: PropTypes.func.isRequired,
@@ -100,3 +98,5 @@ ShareModal.propTypes = {
     recipientConfirmationDialogContent: PropTypes.func
   })
 }
+
+export default ShareModal
