@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.9.4](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.9.3...cozy-realtime@5.9.4) (2026-09-02)
+
+### Bug Fixes
+
+- Make offline connection test deterministic ([f140c9d](https://github.com/cozy/cozy-libs/commit/f140c9d216566d0ae4b00cc64b2e33c158cd3d3c))
+
 ## [5.9.3](https://github.com/cozy/cozy-libs/compare/cozy-realtime@5.9.2...cozy-realtime@5.9.3) (2026-07-16)
 
 ### Bug Fixes

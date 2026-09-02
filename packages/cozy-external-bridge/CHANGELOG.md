@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@1.2.3...cozy-external-bridge@1.3.0) (2026-09-02)
+
+### Features
+
+- Expose fetchJSON in bridge ([4d9100e](https://github.com/cozy/cozy-libs/commit/4d9100eceeb0a3c91863c89ec331b28a00ac546f))
+
 ## [1.2.3](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@1.2.2...cozy-external-bridge@1.2.3) (2026-03-16)
 
 **Note:** Version bump only for package cozy-external-bridge
