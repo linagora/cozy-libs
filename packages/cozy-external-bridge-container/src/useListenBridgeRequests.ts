@@ -48,6 +48,24 @@ export const useListenBridgeRequests = (
 
         return lang
       },
+      fetchJSON: async ({
+        method,
+        path,
+        body
+      }: {
+        method: string
+        path: string
+        body: object
+      }): Promise<object> => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        const data = (await client.stackClient.fetchJSON(
+          method,
+          path,
+          body
+        )) as Promise<object>
+
+        return data
+      },
       createDocs: async ({
         dirId,
         externalId
