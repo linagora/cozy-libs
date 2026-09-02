@@ -21,6 +21,7 @@ window._cozyBridge = {
         getContacts: legacyBridge.getContacts,
         getLang: legacyBridge.getLang,
         getFlag: legacyBridge.getFlag,
+        fetchJSON: legacyBridge.fetchJSON,
         createDocs: legacyBridge.createDocs,
         updateDocs: legacyBridge.updateDocs,
         requestNotificationPermission:

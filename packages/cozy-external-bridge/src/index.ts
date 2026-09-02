@@ -9,6 +9,7 @@ export class CozyBridge {
     getContacts: () => Promise<IOCozyContact[]>
     getLang: () => Promise<string>
     getFlag: (key: string) => Promise<string | boolean>
+    fetchJSON: (data: object) => Promise<object>
     createDocs: (data: object) => Promise<object>
     updateDocs: (data: object) => Promise<object>
     requestNotificationPermission: () => Promise<NotificationPermission>
@@ -84,6 +85,16 @@ export class CozyBridge {
     const flag = await this.availableMethods.getFlag(key)
     console.log('🟣 Twake received flag...', flag)
     return flag
+  }
+
+  fetchJSON = async (data: object): Promise<object> => {
+    if (!this.availableMethods) {
+      throw new Error('Bridge not setup')
+    }
+    console.log('🟣 Fetching JSON...')
+    const res = await this.availableMethods.fetchJSON(data)
+    console.log('🟣 Twake received JSON')
+    return res
   }
 
   createDocs = async (data: object): Promise<object> => {

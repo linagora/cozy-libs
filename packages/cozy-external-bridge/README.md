@@ -252,6 +252,13 @@ interface CozyBridge {
   getFlag(key: string): Promise<string | boolean>
 
   /**
+   * Fetch JSON in parent window
+   * @param data - document data
+   * @returns Promise<object> - data
+   */
+  fetchJSON(data: object): Promise<object>
+
+  /**
    * Create documents in parent window
    * @param data - document data
    * @returns Promise<object> - created documents
