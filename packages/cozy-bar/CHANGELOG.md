@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.3.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.2.22...cozy-bar@35.3.0) (2026-09-02)
+
+### Features
+
+- **cozy-bar:** Render the io.cozy.banners platform banners ([981132b](https://github.com/cozy/cozy-libs/commit/981132ba9ef15e6a78b0870be40896cc1e49d702))
+
 ## [35.2.22](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.2.21...cozy-bar@35.2.22) (2026-09-01)
 
 **Note:** Version bump only for package cozy-bar
