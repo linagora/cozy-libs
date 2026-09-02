@@ -19,7 +19,7 @@ interface UseListenBridgeRequestsReturnType {
 }
 
 export const useListenBridgeRequests = (
-  origin: string
+  url: string
 ): UseListenBridgeRequestsReturnType => {
   const client = useClient()
   const dataProxy = useDataProxy() as {
@@ -27,6 +27,7 @@ export const useListenBridgeRequests = (
   }
   const navigate = useNavigate()
   const [isReady, setIsReady] = useState<boolean>(false)
+  const targetOrigin = new URL(url).origin
 
   useEffect(() => {
     if (isReady) return
@@ -157,15 +158,16 @@ export const useListenBridgeRequests = (
       Comlink.windowEndpoint(
         getIframe().contentWindow as PostMessageWithOrigin,
         self,
-        origin
-      )
+        targetOrigin
+      ),
+      [targetOrigin]
     )
 
     log.debug('Listening to bridge requests')
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsReady(true)
-  }, [navigate, client, origin])
+  }, [navigate, client, targetOrigin])
 
   return { isReady }
 }
