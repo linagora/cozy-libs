@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.9](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge-container@1.2.8...cozy-external-bridge-container@1.2.9) (2026-09-02)
+
+### Bug Fixes
+
+- **cozy-external-bridge-container:** Restrict bridge messages by origin ([e69ec18](https://github.com/cozy/cozy-libs/commit/e69ec184197aebf3e37ad7d00272759bb4c2600d))
+
 ## [1.2.8](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge-container@1.2.7...cozy-external-bridge-container@1.2.8) (2026-07-23)
 
 **Note:** Version bump only for package cozy-external-bridge-container
