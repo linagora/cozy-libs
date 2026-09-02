@@ -36,6 +36,10 @@ const EmailSourceItem = ({ email }) => {
     ? new Date(email['datetime']).toISOString().slice(0, 10)
     : ''
 
+  const primary = [emailDate, email['email.subject']]
+    .filter(Boolean)
+    .join(' - ')
+
   return (
     <ListItem
       className={styles['sourcesItem']}
@@ -49,8 +53,8 @@ const EmailSourceItem = ({ email }) => {
         <Icon icon={Mail} size={32} />
       </ListItemIcon>
       <ListItemText
-        primary={`${emailDate} - ${email['email.subject']}`}
-        secondary={`${email['email.preview']}`}
+        primary={primary || undefined}
+        secondary={email['email.preview'] || undefined}
       />
     </ListItem>
   )
