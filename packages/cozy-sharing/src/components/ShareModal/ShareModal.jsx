@@ -6,10 +6,10 @@ import { useLocation } from 'react-router'
 import flag from 'cozy-flags'
 
 import EditableSharingModal from './EditableSharingModal'
-import { SharingDetailsModal } from './SharingDetailsModal'
+import SharingDetailsModal from './SharingDetailsModal'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
-import { FederatedFolderModal } from '../FederatedFolder/FederatedFolderModal'
+import FederatedFolderModal from '../FederatedFolder/FederatedFolderModal'
 
 export const ShareModal = withLocales(props => {
   const location = useLocation?.()
