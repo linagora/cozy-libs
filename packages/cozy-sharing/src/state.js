@@ -13,6 +13,9 @@ const ADD_SHARING_LINK = 'ADD_SHARING_LINK'
 const UPDATE_SHARING_LINK = 'UPDATE_SHARING_LINK'
 const REVOKE_SHARING_LINK = 'REVOKE_SHARING_LINK'
 const RECEIVE_PATHS = 'RECEIVE_PATHS'
+const RECEIVE_EFFECTIVE_RECIPIENTS = 'RECEIVE_EFFECTIVE_RECIPIENTS'
+const UPDATE_EFFECTIVE_RECIPIENT = 'UPDATE_EFFECTIVE_RECIPIENT'
+const INVALIDATE_EFFECTIVE_RECIPIENTS = 'INVALIDATE_EFFECTIVE_RECIPIENTS'
 export const SHARING_TYPE = {
   TWO_WAY: 'two-way',
   ONE_WAY: 'one-way'
@@ -101,6 +104,21 @@ export const revokeSharingLink = permissions => ({
   permissions
 })
 export const receivePaths = paths => ({ type: RECEIVE_PATHS, paths })
+export const receiveEffectiveRecipients = (docId, recipients) => ({
+  type: RECEIVE_EFFECTIVE_RECIPIENTS,
+  docId,
+  recipients
+})
+export const updateEffectiveRecipient = (sharingId, memberIndex, readOnly) => ({
+  type: UPDATE_EFFECTIVE_RECIPIENT,
+  sharingId,
+  memberIndex,
+  readOnly
+})
+export const invalidateEffectiveRecipients = docId => ({
+  type: INVALIDATE_EFFECTIVE_RECIPIENTS,
+  docId
+})
 export const matchingInstanceName =
   (instanceUri = '') =>
   shareMember =>
@@ -281,11 +299,41 @@ const sharedPaths = (state = [], action) => {
   }
 }
 
+const effectiveRecipients = (state = {}, action) => {
+  switch (action.type) {
+    case RECEIVE_EFFECTIVE_RECIPIENTS:
+      return { ...state, [action.docId]: action.recipients }
+    case UPDATE_EFFECTIVE_RECIPIENT:
+      return Object.fromEntries(
+        Object.entries(state).map(([docId, recipients]) => [
+          docId,
+          recipients.map(r =>
+            r.sharingId === action.sharingId &&
+            r.memberIndex === action.memberIndex
+              ? {
+                  ...r,
+                  read_only: action.readOnly,
+                  type: action.readOnly ? 'one-way' : 'two-way'
+                }
+              : r
+          )
+        ])
+      )
+    case INVALIDATE_EFFECTIVE_RECIPIENTS: {
+      const { [action.docId]: _, ...rest } = state
+      return rest
+    }
+    default:
+      return state
+  }
+}
+
 const reducer = (state = {}, action = {}) => ({
   byDocId: byDocId(state.byDocId, action),
   sharings: sharings(state.sharings, action),
   permissions: permissions(state.permissions, action),
-  sharedPaths: sharedPaths(state.sharedPaths, action)
+  sharedPaths: sharedPaths(state.sharedPaths, action),
+  effectiveRecipients: effectiveRecipients(state.effectiveRecipients, action)
 })
 export default reducer
 
@@ -526,6 +574,9 @@ export const getSharedParentPath = (state, documentPath) => {
   }
   return null
 }
+
+export const getEffectiveRecipients = (state, docId) =>
+  state.effectiveRecipients?.[docId] || []
 
 // helpers
 export const getSharedDocIds = doc =>

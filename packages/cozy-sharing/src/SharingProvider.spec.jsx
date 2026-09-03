@@ -533,7 +533,8 @@ describe('shared drive recipient revocation', () => {
     sharingCol = {
       addRecipients: jest.fn(),
       create: jest.fn().mockResolvedValue({ data: NEW_SHARING }),
-      revokeRecipient: jest.fn().mockResolvedValue({})
+      revokeRecipient: jest.fn().mockResolvedValue({}),
+      fetchEffectiveRecipients: jest.fn().mockResolvedValue({ data: [] })
     }
     provider.sharingCol = sharingCol
   })
@@ -792,7 +793,8 @@ describe('updateSharingMemberType', () => {
     )
     instance.sharingCol = {
       setReadOnly: jest.fn().mockResolvedValue({}),
-      setReadWrite: jest.fn().mockResolvedValue({})
+      setReadWrite: jest.fn().mockResolvedValue({}),
+      fetchEffectiveRecipients: jest.fn().mockResolvedValue({ data: [] })
     }
   })
 
@@ -913,6 +915,12 @@ describe('updateSharingMemberType', () => {
       }
     })
     expect(instance.dispatch).toHaveBeenNthCalledWith(2, {
+      type: 'UPDATE_EFFECTIVE_RECIPIENT',
+      sharingId: 'sharing-123',
+      memberIndex: 1,
+      readOnly: true
+    })
+    expect(instance.dispatch).toHaveBeenNthCalledWith(3, {
       type: 'UPDATE_SHARING',
       sharing: {
         ...mockSharing,
@@ -927,6 +935,12 @@ describe('updateSharingMemberType', () => {
           ]
         }
       }
+    })
+    expect(instance.dispatch).toHaveBeenNthCalledWith(4, {
+      type: 'UPDATE_EFFECTIVE_RECIPIENT',
+      sharingId: 'sharing-123',
+      memberIndex: 1,
+      readOnly: false
     })
   })
 
@@ -964,6 +978,12 @@ describe('updateSharingMemberType', () => {
     ).rejects.toThrow('Network error')
 
     expect(instance.dispatch).toHaveBeenNthCalledWith(2, {
+      type: 'UPDATE_EFFECTIVE_RECIPIENT',
+      sharingId: 'sharing-123',
+      memberIndex: 1,
+      readOnly: true
+    })
+    expect(instance.dispatch).toHaveBeenNthCalledWith(3, {
       type: 'UPDATE_SHARING',
       sharing: {
         ...realtimeSharing,
@@ -978,6 +998,12 @@ describe('updateSharingMemberType', () => {
           ]
         }
       }
+    })
+    expect(instance.dispatch).toHaveBeenNthCalledWith(4, {
+      type: 'UPDATE_EFFECTIVE_RECIPIENT',
+      sharingId: 'sharing-123',
+      memberIndex: 1,
+      readOnly: false
     })
   })
 })
