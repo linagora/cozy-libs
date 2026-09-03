@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.25](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.24...cozy-search@2.2.25) (2026-09-03)
+
+### Bug Fixes
+
+- **cozy-search:** Avoid rendering undefined in email sources ([8e738cc](https://github.com/cozy/cozy-libs/commit/8e738cca86b04528f33d6316d98b7f2a99675166))
+
 ## [2.2.24](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.23...cozy-search@2.2.24) (2026-09-02)
 
 **Note:** Version bump only for package cozy-search
