@@ -171,7 +171,8 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Condition | Rule | Source |
 |-----------|------|--------|
 | Who can share | Owner or Editor (`canReshare`) | `SharingProvider.jsx` |
-| **Core constraint** | Disabled if `hasSharedParent` OR `hasSharedChild` — a subfolder of an email-shared folder cannot be shared by email independently | `ShareModal.jsx:32`, `state.js:508-523` |
+| Nested sharing | When `drive.federated-shared-folder.enabled` is on, the `hasSharedParent` / `hasSharedChild` gates are removed so a folder can be shared by email even inside a shared parent or containing a shared child. When the flag is off, the gates remain active (behavior unchanged). | `ShareModal.jsx`, `FederatedFolderModal.jsx` |
+| Effective recipients | When `drive.federated-shared-folder.enabled` is on, the Share modal shows the combined list of direct and inherited recipients via `client.collection('io.cozy.sharings').fetchEffectiveRecipients(fileId, { driveId })`, stored in the SharingProvider redux store. All recipients are rendered with the same actions (revoke, RO/RW). When the flag is off, recipients come from the store's direct sharings as before. | `SharingProvider.jsx`, `helpers/effectiveRecipients.js`, `EditableSharingModal.jsx`, `FederatedFolderModal.jsx` |
 | Recipients limit | Default 100; overridable via `sharing.recipients-limit` flag | `helpers/recipients.js:33` |
 | Recipient display mode | `sharing.show-recipient-groups` flag: `true` = groups as units, `false` = spread group members | `ShareByEmail.jsx:31` |
 | Read-only sharing | If the existing sharing is read-only, only the `readOnly` option is offered | `ShareByEmail.jsx:46-57` |
@@ -186,7 +187,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | `canLeave` | `false` for org shared drives | `state.js:335` |
 | `canReshare` | `!org_drive && !read_only` for drives; `open_sharing && !read_only` for folders | `state.js:342` |
 | Federated folder modal | Enabled by `drive.federated-shared-folder.enabled` flag and `document.driveId` | `ShareModal.jsx:39` |
-| Email sharing in federated folder | Disabled for files inside a federated shared folder (has `driveId` but is not the root) | `FederatedFolderModal.jsx:122-126` |
+| Email sharing in federated folder | Disabled for files inside a shared drive (has `driveId` but is not the root) | `FederatedFolderModal.jsx` |
 | Link sharing in federated folder | Uses `getFederatedShareLink` which resolves the owner's instance URL | `FederatedFolderModal.jsx:108-110` |
 | Member view inside shared drive | Subfolder members see link management only (no member cross/perm). Root members with `canReshare` see full member management; read-only root members see link management only. | `FederatedFolderModal.jsx:118-133`, `SharingDetailsModal.jsx:38-39` |
 
