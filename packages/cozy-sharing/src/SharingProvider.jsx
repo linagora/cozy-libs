@@ -9,6 +9,7 @@ import {
 } from './components/ShareRestrictionModal/helpers'
 import SharingContext from './context'
 import { fetchNextPermissions } from './fetchNextPermissions'
+import { mapEffectiveRecipients } from './helpers/effectiveRecipients'
 import { fetchFilesPaths } from './helpers/files'
 import {
   getSharingObject,
@@ -28,6 +29,10 @@ import reducer, {
   revokeGroup as revokeGroupFromState,
   revokeSelf,
   receivePaths,
+  receiveEffectiveRecipients,
+  updateEffectiveRecipient,
+  invalidateEffectiveRecipients,
+  getEffectiveRecipients,
   isOwner,
   isSharedDrive,
   isOrgSharedDrive,
@@ -109,7 +114,11 @@ export class SharingProvider extends Component {
       refresh: this.fetchAllSharings,
       hasWriteAccess: this.hasWriteAccess,
       renameSharedDrive: this.renameSharedDrive,
-      updateSharingMemberType: this.updateSharingMemberType
+      updateSharingMemberType: this.updateSharingMemberType,
+      getEffectiveRecipients: docId =>
+        getEffectiveRecipients(this.state, docId),
+      fetchEffectiveRecipients: this.fetchEffectiveRecipients,
+      invalidateEffectiveRecipients: this.invalidateEffectiveRecipients
     }
     this.isPublic = props.isPublic ?? false
     this.realtime = null
@@ -261,6 +270,11 @@ export class SharingProvider extends Component {
 
       await this.state.onShared({ document, recipients, readOnlyRecipients })
 
+      await this.fetchEffectiveRecipients(
+        getDocumentId(document),
+        document.driveId
+      )
+
       return sharingResult
     }
 
@@ -284,6 +298,10 @@ export class SharingProvider extends Component {
     )
 
     await this.state.onShared({ document, recipients, readOnlyRecipients })
+    await this.fetchEffectiveRecipients(
+      getDocumentId(document),
+      document.driveId
+    )
     return data
   }
 
@@ -318,6 +336,10 @@ export class SharingProvider extends Component {
         )
       )
     })
+    await this.fetchEffectiveRecipients(
+      getDocumentId(document),
+      document.driveId
+    )
   }
 
   revoke = async (document, sharingId, recipientIndex) => {
@@ -330,6 +352,10 @@ export class SharingProvider extends Component {
         recipientIndex,
         document.path || (await fetchFilesPaths(client, doctype, [document]))
       )
+    )
+    await this.fetchEffectiveRecipients(
+      getDocumentId(document),
+      document.driveId
     )
   }
 
@@ -350,6 +376,10 @@ export class SharingProvider extends Component {
     const sharing = getSharingForSelf(this.state, document.id)
     await this.sharingCol.revokeSelf(sharing)
     this.dispatch(revokeSelf(sharing))
+    await this.fetchEffectiveRecipients(
+      getDocumentId(document),
+      document.driveId
+    )
   }
 
   /**
@@ -386,6 +416,9 @@ export class SharingProvider extends Component {
     }
 
     this.dispatch(updateSharing(optimisticSharing))
+    this.dispatch(
+      updateEffectiveRecipient(sharingId, memberIndex, makeReadOnly)
+    )
 
     try {
       if (makeReadOnly) {
@@ -411,12 +444,39 @@ export class SharingProvider extends Component {
       }
 
       this.dispatch(updateSharing(rollbackSharing))
+      this.dispatch(
+        updateEffectiveRecipient(sharingId, memberIndex, !makeReadOnly)
+      )
       log.error(
         `Failed to change member ${member.email} permission type to ${newType}`,
         error
       )
       throw error
     }
+
+    const docId = Object.keys(this.state.byDocId).find(id =>
+      this.state.byDocId[id].sharings?.includes(sharingId)
+    )
+    if (docId) {
+      const driveId = this.state.byDocId[docId].driveId
+      await this.fetchEffectiveRecipients(docId, driveId)
+    }
+  }
+
+  fetchEffectiveRecipients = async (fileId, driveId) => {
+    const resp = await this.sharingCol.fetchEffectiveRecipients(fileId, {
+      driveId
+    })
+    this.dispatch(
+      receiveEffectiveRecipients(
+        fileId,
+        mapEffectiveRecipients(resp?.data || [])
+      )
+    )
+  }
+
+  invalidateEffectiveRecipients = docId => {
+    this.dispatch(invalidateEffectiveRecipients(docId))
   }
 
   shareByLink = async (document, options) => {

@@ -42,7 +42,8 @@ describe('Sharing state', () => {
       byDocId: {},
       sharings: [],
       permissions: [],
-      sharedPaths: []
+      sharedPaths: [],
+      effectiveRecipients: {}
     })
   })
 
