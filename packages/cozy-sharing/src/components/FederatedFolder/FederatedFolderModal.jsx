@@ -16,7 +16,6 @@ import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
-import { getRecipientsFromSharing } from '../../state'
 import styles from '../../styles/share.styl'
 import AntivirusAlert from '../AntivirusAlert'
 import { default as DumbShareByEmail } from '../ShareByEmail'
@@ -29,6 +28,7 @@ const FederatedFolderModalContent = ({
   onClose,
   onRevokeSuccess,
   document: existingDocument,
+  recipients,
   autoOpenShareRestriction,
   showGenerateLinkButton
 }) => {
@@ -48,10 +48,6 @@ const FederatedFolderModalContent = ({
     getFederatedShareLink,
     getDocumentPermissions,
     fetchSharedDriveSharingLinks,
-    getRecipients,
-    getSharedParentPath,
-    hasSharedChild,
-    hasSharedParent,
     isOwner,
     revoke,
     revokeSelf
@@ -70,11 +66,9 @@ const FederatedFolderModalContent = ({
     useState(null)
   const [frozenDoc, setFrozenDoc] = useState(null)
   const [frozenRecipients, setFrozenRecipients] = useState(null)
-  const [sharedParentFolder, setSharedParentFolder] = useState(null)
 
   const documentId = existingDocument?._id || existingDocument?.id
   const folderName = existingDocument?.name || ''
-  const documentPath = existingDocument?.path
   const sharedDriveSharing = existingDocument?.driveId
     ? getSharingById(existingDocument.driveId)
     : null
@@ -83,25 +77,7 @@ const FederatedFolderModalContent = ({
       (ids, rule) => ids.concat(rule.values || []),
       []
     ) || []
-  // Owner case: when document is inside a shared folder (via path) but has no driveId,
-  // find the parent shared folder to use its _id for recipient/permission lookups.
-  const hasSharedParentByPath = Boolean(
-    documentPath && hasSharedParent(documentPath)
-  )
-  const sharedParentPath =
-    !sharedDriveSharing && hasSharedParentByPath && documentPath
-      ? getSharedParentPath(documentPath)
-      : null
-  const sharingReferenceId =
-    !sharedDriveSharing && sharedParentFolder?._id
-      ? sharedParentFolder._id
-      : documentId
-  const existingRecipients =
-    sharedDriveSharing?.attributes?.members && documentId
-      ? getRecipientsFromSharing(sharedDriveSharing, documentId)
-      : sharingReferenceId
-        ? getRecipients(sharingReferenceId)
-        : []
+
   const documentPermissions = documentId
     ? getDocumentPermissions(documentId)
     : []
@@ -124,11 +100,6 @@ const FederatedFolderModalContent = ({
       ? isOwner(documentId)
       : false
   const isMemberReadOnly = isInsideSharedDrive && !isCurrentUserOwner
-  const hasParentRestriction = isInsideSharedDrive || hasSharedParentByPath
-  const hasChildRestriction = Boolean(
-    documentPath && hasSharedChild(documentPath)
-  )
-  const canShareByEmail = !hasParentRestriction && !hasChildRestriction
   const canManageSharing =
     isCurrentUserOwner || (documentId ? canReshare(documentId) : false)
 
@@ -181,7 +152,7 @@ const FederatedFolderModalContent = ({
 
     setIsSending(true)
     setFrozenDoc(existingDocument)
-    setFrozenRecipients(existingRecipients)
+    setFrozenRecipients(recipients)
 
     try {
       const contacts = await getOrCreateFromArray(
@@ -218,21 +189,6 @@ const FederatedFolderModalContent = ({
       setIsSending(false)
     }
   }
-
-  useEffect(() => {
-    if (!sharedParentPath) return
-    const fetchParentFolder = async () => {
-      try {
-        const res = await client
-          .collection('io.cozy.files')
-          .statByPath(sharedParentPath)
-        if (res.data) setSharedParentFolder(res.data)
-      } catch (err) {
-        log.error('Failed to fetch shared parent folder', err)
-      }
-    }
-    fetchParentFolder()
-  }, [sharedParentPath, client])
 
   useEffect(() => {
     if (!existingDocument?.driveId) return
@@ -283,7 +239,7 @@ const FederatedFolderModalContent = ({
             <AntivirusAlert
               document={isSending ? frozenDoc : existingDocument}
             />
-            {!canShareByEmail && (
+            {isInsideSharedDrive ? (
               <div className={styles['share-byemail-onlybylink']}>
                 {t('Files.share.shareByEmail.onlyByLink', {
                   type: t(
@@ -292,26 +248,15 @@ const FederatedFolderModalContent = ({
                     }`
                   )
                 })}{' '}
-                <strong>
-                  {t(
-                    `Files.share.shareByEmail.${
-                      hasParentRestriction
-                        ? 'hasSharedParent'
-                        : 'hasSharedChild'
-                    }`
-                  )}
-                </strong>
+                <strong>{t('Files.share.shareByEmail.hasSharedParent')}</strong>
               </div>
-            )}
-            {canShareByEmail && (
+            ) : (
               <>
                 <Typography variant="h6" className="u-mt-1-half u-mb-half">
                   {t('Share.contacts.addUsers')}
                 </Typography>
                 <DumbShareByEmail
-                  currentRecipients={
-                    isSending ? frozenRecipients : existingRecipients
-                  }
+                  currentRecipients={isSending ? frozenRecipients : recipients}
                   document={isSending ? frozenDoc : existingDocument}
                   documentType="Files"
                   pendingRecipients={pendingRecipients}
@@ -329,7 +274,7 @@ const FederatedFolderModalContent = ({
             isSharedDrive
             canManageMembers={!isMemberReadOnly}
             canManageLink={true}
-            recipients={isSending ? frozenRecipients : existingRecipients}
+            recipients={isSending ? frozenRecipients : recipients}
             document={isSending ? frozenDoc : existingDocument}
             documentType="Files"
             className={styles['share-dialog-members']}
@@ -348,7 +293,7 @@ const FederatedFolderModalContent = ({
             showGenerateLinkButton={showGenerateLinkButton}
             autoOpenShareRestriction={autoOpenShareRestriction}
           />
-          {canShareByEmail && (
+          {!isInsideSharedDrive && (
             <Button
               variant="primary"
               label={t('FederatedFolder.share')}
@@ -362,9 +307,49 @@ const FederatedFolderModalContent = ({
   )
 }
 
+FederatedFolderModalContent.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  onRevokeSuccess: PropTypes.func,
+  document: PropTypes.object.isRequired,
+  recipients: PropTypes.array,
+  autoOpenShareRestriction: PropTypes.bool,
+  showGenerateLinkButton: PropTypes.bool
+}
+
+const FederatedFolderModalWrapper = ({ document, ...props }) => {
+  const fileId = document._id || document.id
+  const {
+    getEffectiveRecipients,
+    fetchEffectiveRecipients,
+    invalidateEffectiveRecipients
+  } = useSharingContext()
+
+  useEffect(() => {
+    fetchEffectiveRecipients(fileId, document.driveId).catch(log.error)
+    return () => {
+      invalidateEffectiveRecipients(fileId)
+    }
+  }, [
+    fileId,
+    document.driveId,
+    fetchEffectiveRecipients,
+    invalidateEffectiveRecipients
+  ])
+
+  const recipients = getEffectiveRecipients(fileId)
+
+  return (
+    <FederatedFolderModalContent
+      document={document}
+      recipients={recipients}
+      {...props}
+    />
+  )
+}
+
 export const FederatedFolderModal = withLocales(props => (
   <ConfirmDialogProvider>
-    <FederatedFolderModalContent {...props} />
+    <FederatedFolderModalWrapper {...props} />
   </ConfirmDialogProvider>
 ))
 

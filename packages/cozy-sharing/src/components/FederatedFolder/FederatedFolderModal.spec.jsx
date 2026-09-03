@@ -16,7 +16,6 @@ const mockIsOwner = jest.fn()
 const mockCanReshare = jest.fn()
 const mockGetSharingLink = jest.fn()
 const mockGetFederatedShareLink = jest.fn()
-const mockGetRecipients = jest.fn().mockReturnValue([])
 const mockGetSharingById = jest.fn()
 const mockHasSharedChild = jest.fn()
 const mockHasSharedParent = jest.fn()
@@ -24,6 +23,8 @@ const mockFetchSharedDriveSharingLinks = jest.fn()
 const mockGetDocumentPermissions = jest.fn().mockReturnValue([])
 const mockShowAlert = jest.fn()
 const mockOnClose = jest.fn()
+
+const mockGetEffectiveRecipients = jest.fn(() => [])
 
 jest.mock('../../hooks/useSharingContext', () => ({
   useSharingContext: () => ({
@@ -38,12 +39,14 @@ jest.mock('../../hooks/useSharingContext', () => ({
     getDocumentPermissions: mockGetDocumentPermissions,
     fetchSharedDriveSharingLinks: mockFetchSharedDriveSharingLinks,
     getOwner: jest.fn(),
-    getRecipients: mockGetRecipients,
     getSharedParentPath: jest.fn().mockReturnValue(null),
     getSharingById: mockGetSharingById,
     hasSharedChild: mockHasSharedChild,
     hasSharedParent: mockHasSharedParent,
-    isOrgSharedDrive: jest.fn(() => false)
+    isOrgSharedDrive: jest.fn(() => false),
+    getEffectiveRecipients: (...args) => mockGetEffectiveRecipients(...args),
+    fetchEffectiveRecipients: jest.fn().mockResolvedValue(),
+    invalidateEffectiveRecipients: jest.fn()
   })
 }))
 
@@ -118,7 +121,6 @@ describe('FederatedFolderModal', () => {
     mockGetFederatedShareLink.mockReturnValue(
       'https://example.com/share/federated-abc123'
     )
-    mockGetRecipients.mockReturnValue([])
     mockGetSharingById.mockReturnValue(null)
     mockHasSharedChild.mockReturnValue(false)
     mockHasSharedParent.mockReturnValue(false)
@@ -458,12 +460,15 @@ describe('FederatedFolderModal', () => {
       instance: 'https://me.mycozy.cloud',
       memberIndex: 1,
       sharingId: 'sharing-id',
-      type: 'two-way'
+      type: 'two-way',
+      status: 'ready',
+      name: 'Me',
+      email: 'me@test.com'
     }
 
     it('should call onRevokeSelf and onRevokeSuccess when the current user is revoked', async () => {
       const onRevokeSuccess = jest.fn()
-      mockGetRecipients.mockReturnValue([currentUserRecipient])
+      mockGetEffectiveRecipients.mockReturnValue([currentUserRecipient])
 
       const { findByLabelText } = setup({ onRevokeSuccess })
 
@@ -481,10 +486,13 @@ describe('FederatedFolderModal', () => {
         instance: 'https://other.mycozy.cloud',
         memberIndex: 2,
         sharingId: 'sharing-id',
-        type: 'two-way'
+        type: 'two-way',
+        status: 'ready',
+        name: 'Other',
+        email: 'other@test.com'
       }
       mockCanReshare.mockReturnValue(true)
-      mockGetRecipients.mockReturnValue([otherRecipient])
+      mockGetEffectiveRecipients.mockReturnValue([otherRecipient])
 
       const { findByLabelText } = setup()
 
