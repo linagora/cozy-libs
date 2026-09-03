@@ -48,7 +48,8 @@
     "typescript": "5.5.2"
   },
   "files": [
-    "dist"
+    "dist",
+    "ai-chat-ui"
   ],
   "homepage": "https://github.com/cozy/cozy-libs/packages/cozy-search",
   "keywords": [
@@ -59,6 +60,10 @@
   "main": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
+    "./ai-chat-ui": {
+      "types": "./dist/ai-chat-ui.d.ts",
+      "default": "./dist/ai-chat-ui.js"
+    },
     "./dist/stylesheet.css": "./dist/stylesheet.css"
   },
   "peerDependencies": {

@@ -11,7 +11,7 @@ module.exports = {
       'css-modules-transform',
       {
         extensions: ['.styl'],
-        preprocessCss: './preprocess',
+        preprocessCss: require.resolve('./preprocess'),
         extractCss: './dist/stylesheet.css',
         generateScopedName:
           process.env['NODE_ENV'] == 'test'

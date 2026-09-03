@@ -8,8 +8,8 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
-import ConversationActions from './ConversationActions'
 import styles from './styles.styl'
+import { useChatComponents } from '../../contexts/ChatComponentsContext'
 import AssistantAvatar from '../Assistant/AssistantAvatar'
 import {
   formatConversationDate,
@@ -26,6 +26,7 @@ const ConversationListItemWider = ({
 }) => {
   const { t, lang } = useI18n()
   const { type: theme } = useCozyTheme()
+  const { ConversationActions } = useChatComponents()
 
   return (
     <ListItem
