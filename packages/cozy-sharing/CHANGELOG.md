@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.5.5...cozy-sharing@37.6.0) (2026-09-07)
+
+### Features
+
+- **cozy-sharing:** Add tools to get and manager effective recipients ([d1bacbf](https://github.com/cozy/cozy-libs/commit/d1bacbf2d13cefd1863677d13a420964796a3d03))
+- **cozy-sharing:** Show effective recipients in share modals ([e4f36aa](https://github.com/cozy/cozy-libs/commit/e4f36aa619762b5dfb2d64d3acdec38c011553b1))
+
 ## [37.5.5](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.5.4...cozy-sharing@37.5.5) (2026-09-01)
 
 **Note:** Version bump only for package cozy-sharing
