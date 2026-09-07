@@ -1,6 +1,6 @@
-import { Icon, Mail } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon, Mail } from '@linagora/twake-icons'
 import { useClient, generateWebLink } from 'cozy-client'
 import logger from 'cozy-logger'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -32,13 +32,12 @@ const EmailSourceItem = ({ email }) => {
     hash: `/bridge/dashboard/${emailId}`
   })
 
-  const emailDate = email['datetime']
-    ? new Date(email['datetime']).toISOString().slice(0, 10)
-    : ''
+  const emailDate =
+    email.datetime && new Date(email.datetime).toISOString().slice(0, 10)
 
-  const primary = [emailDate, email['email.subject']]
-    .filter(Boolean)
-    .join(' - ')
+  // ListItemText renders an empty line for '', but nothing for undefined
+  const primary =
+    [emailDate, email['email.subject']].filter(Boolean).join(' - ') || undefined
 
   return (
     <ListItem
@@ -53,7 +52,7 @@ const EmailSourceItem = ({ email }) => {
         <Icon icon={Mail} size={32} />
       </ListItemIcon>
       <ListItemText
-        primary={primary || undefined}
+        primary={primary}
         secondary={email['email.preview'] || undefined}
       />
     </ListItem>
