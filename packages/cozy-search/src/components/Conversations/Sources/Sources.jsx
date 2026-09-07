@@ -1,6 +1,7 @@
-import { Icon, MultiFiles, Right } from '@linagora/twake-icons'
+import uniqBy from 'lodash/uniqBy'
 import React, { useState, useRef, useEffect } from 'react'
 
+import { Icon, MultiFiles, Right } from '@linagora/twake-icons'
 import { useQuery, isQueryLoading } from 'cozy-client'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Chip from 'cozy-ui/transpiled/react/Chips'
@@ -10,9 +11,31 @@ import { useI18n } from 'twake-i18n'
 import EmailSourceItem from './EmailSourceItem'
 import FileSourcesItem from './FileSourcesItem'
 import WebSourceItem from './WebSourceItem'
-import { EMAIL_DOCTYPE, buildFilesByIds } from '../../queries'
+import { EMAIL_DOCTYPE, FILES_DOCTYPE, buildFilesByIds } from '../../queries'
 
 const WEB_SOURCE_TYPE = 'web'
+
+// Web sources have no doctype, other sources are identified by theirs
+const getSourceType = source => {
+  if (source.sourceType === WEB_SOURCE_TYPE) return WEB_SOURCE_TYPE
+  if (source.doctype === EMAIL_DOCTYPE) return EMAIL_DOCTYPE
+  return FILES_DOCTYPE
+}
+
+const getSourceKey = source => {
+  const type = getSourceType(source)
+  const identity = type === WEB_SOURCE_TYPE ? source.url : source.id
+  return identity ? `${type}:${identity}` : null
+}
+
+/**
+ * A same document can be returned several times by the RAG, typically when
+ * several chunks of the same file or email are relevant. We only want to
+ * display it once. Sources without any identity are all kept, as we can't
+ * tell them apart.
+ */
+const dedupeSources = sources =>
+  uniqBy(sources, source => getSourceKey(source) ?? source)
 
 const Sources = ({ messageId, files, emails, urls }) => {
   const [showSources, setShowSources] = useState(false)
@@ -88,17 +111,17 @@ const SourcesWithFilesQuery = ({ messageId, sources }) => {
   const fileIds = []
   const emails = []
   const urls = []
-  let files
-  sources.map(source => {
-    if (source.sourceType === WEB_SOURCE_TYPE) {
+  dedupeSources(sources).forEach(source => {
+    const type = getSourceType(source)
+    if (type === WEB_SOURCE_TYPE) {
       urls.push(source)
-    } else if (source.doctype === EMAIL_DOCTYPE) {
+    } else if (type === EMAIL_DOCTYPE) {
       emails.push(source)
     } else {
       fileIds.push(source.id)
     }
   })
-  const enabled = fileIds && fileIds.length > 0
+  const enabled = fileIds.length > 0
   const filesByIds = buildFilesByIds(fileIds, enabled)
   const { data: fetchedFiles, ...queryResult } = useQuery(
     filesByIds.definition,
@@ -106,7 +129,7 @@ const SourcesWithFilesQuery = ({ messageId, sources }) => {
   )
 
   const isLoading = isQueryLoading(queryResult)
-  files = fetchedFiles || []
+  const files = fetchedFiles || []
 
   if (
     (isLoading && enabled) ||
