@@ -85,13 +85,6 @@ function getRsbuildConfig({
       // We enable old API polyfill to keep compatibility with old browsers
       polyfill: 'usage'
     },
-    performance: {
-      chunkSplit: {
-        forceSplitting: {
-          cozy: /node_modules[\\/]cozy*/
-        }
-      }
-    },
     html: {
       title
     },
@@ -224,6 +217,9 @@ function getRsbuildConfig({
           },
           output: {
             target: 'node',
+            // cozy-stack loads services as CommonJS
+            module: false,
+            minify: true,
             distPath: {
               root: 'build/services'
             }
