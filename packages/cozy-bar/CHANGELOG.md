@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.4.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.3.2...cozy-bar@35.4.0) (2026-09-08)
+
+### Features
+
+- **cozy-bar:** Update the platform banners over realtime ([c7ca124](https://github.com/cozy/cozy-libs/commit/c7ca12444df65d63a2b45667f8ef823448d67f7a))
+
 ## [35.3.2](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.3.1...cozy-bar@35.3.2) (2026-09-07)
 
 **Note:** Version bump only for package cozy-bar
