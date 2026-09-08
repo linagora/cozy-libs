@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.27](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.26...cozy-search@2.2.27) (2026-09-08)
+
+### Bug Fixes
+
+- **cozy-search:** Display each RAG source only once ([2918db9](https://github.com/cozy/cozy-libs/commit/2918db9cb3e40730f845edc361486b1979aa3852))
+
 ## [2.2.26](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.25...cozy-search@2.2.26) (2026-09-07)
 
 **Note:** Version bump only for package cozy-search
