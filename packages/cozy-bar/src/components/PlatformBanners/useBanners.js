@@ -1,10 +1,13 @@
+import logger from 'lib/logger'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import {
+  BANNERS_DOCTYPE,
   getActiveBanners,
   dismiss as dismissBanner
 } from 'cozy-client/dist/models/banner'
+import useRealtime from 'cozy-realtime/dist/useRealtime'
 
 const POLL_INTERVAL_MS = 5 * 60 * 1000
 
@@ -26,10 +29,15 @@ export const useBanners = () => {
       const next = await getActiveBanners(client)
       if (generation.current === startedAt) setBanners(next)
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.warn('[cozy-bar] could not read the platform banners', error)
+      logger.warn('could not read the platform banners', error)
     }
   }, [client])
+
+  useRealtime(
+    client ?? {},
+    { [BANNERS_DOCTYPE]: { created: read, updated: read, deleted: read } },
+    [read]
+  )
 
   useEffect(() => {
     const readIfVisible = () => {
@@ -57,8 +65,7 @@ export const useBanners = () => {
       try {
         await dismissBanner(client, banner)
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.warn('[cozy-bar] could not record the dismissal', error)
+        logger.warn('could not record the dismissal', error)
         read()
       }
     },
