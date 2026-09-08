@@ -1,0 +1,4 @@
+{
+  "main": "../dist/ai-chat-ui.js",
+  "types": "../dist/ai-chat-ui.d.ts"
+}

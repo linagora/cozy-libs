@@ -1,36 +1,18 @@
 import { Icon, Mail } from '@linagora/twake-icons'
 import React from 'react'
 
-import { useClient, generateWebLink } from 'cozy-client'
-import logger from 'cozy-logger'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import styles from './styles.styl'
 
-const EmailSourceItem = ({ email }) => {
-  const client = useClient()
-
-  if (!client) {
-    logger.info('Client not available for EmailSourceItem')
-    return null
-  }
-
-  // FIXME: This prefix removal is a temporary workaround for tmail indexing.
-  // The tmail_ prefix have to be removed from tmail indexing
-
-  const TMAIL_PREFIX = 'tmail_'
-  const emailId = email.id.startsWith(TMAIL_PREFIX)
-    ? email.id.slice(TMAIL_PREFIX.length)
-    : email.id
-
-  const docUrl = generateWebLink({
-    slug: 'mail',
-    cozyUrl: client.getStackClient().uri,
-    subDomainType: client.getInstanceOptions().subdomain,
-    hash: `/bridge/dashboard/${emailId}`
-  })
+/**
+ * Presentational email source. The link is resolved by the backend adapter
+ * and handed over as `url`, so this component stays backend-agnostic.
+ */
+const EmailSourceItem = ({ email, url }) => {
+  if (!url) return null
 
   const emailDate = email['datetime']
     ? new Date(email['datetime']).toISOString().slice(0, 10)
@@ -44,7 +26,7 @@ const EmailSourceItem = ({ email }) => {
     <ListItem
       className={styles['sourcesItem']}
       component="a"
-      href={docUrl}
+      href={url}
       target="_blank"
       rel="noopener noreferrer"
       button

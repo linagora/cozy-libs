@@ -2,54 +2,45 @@ import { Icon, Dropdown, LinkOut, Pen } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useRef, useState } from 'react'
 
-import { useClient, generateWebLink } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import FolderPickerDialog from './FolderPickerDialog'
-import TDrive from '../../assets/tdrive.png'
-
 /**
  * Composer chip showing the selected assistant's knowledge-base folder,
  * rendered in the "selected source" style (like the email source chip).
  *
  * Clicking stays in-app: it opens a small menu with explicit actions —
- * open the folder in Drive (new tab) or change the knowledge base through
- * the Drive folder picker (persisted on the assistant immediately).
+ * open the folder (new tab, at `folderUrl`) or change the knowledge base,
+ * which delegates to `onChangeFolder` so the backend adapter owns the picker.
+ *
+ * Presentational: `folderUrl` and `icon` are resolved by the caller, so this
+ * component is backend-agnostic.
  */
 const KnowledgeBaseChip = ({
-  dirId,
-  folder,
+  icon,
+  folderName,
+  folderUrl,
   isUnavailable,
   isLast,
   onChangeFolder
 }) => {
   const { t } = useI18n()
-  const client = useClient()
   const chipRef = useRef(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isPickerOpen, setIsPickerOpen] = useState(false)
 
   const closeMenu = () => setIsMenuOpen(false)
 
   const handleChangeFolder = () => {
     closeMenu()
-    setIsPickerOpen(true)
+    onChangeFolder?.()
   }
-
-  const folderUrl = generateWebLink({
-    slug: 'drive',
-    cozyUrl: client?.getStackClient().uri,
-    subDomainType: client?.getInstanceOptions().subdomain,
-    hash: `/folder/${dirId}`
-  })
 
   const label = isUnavailable
     ? t('assistant.knowledge_base.unavailable')
-    : (folder?.name ?? '…')
+    : (folderName ?? '…')
 
   return (
     <>
@@ -59,7 +50,7 @@ const KnowledgeBaseChip = ({
             <img
               alt=""
               aria-hidden="true"
-              src={TDrive}
+              src={icon}
               width={16}
               className="u-m-0"
             />
@@ -109,13 +100,6 @@ const KnowledgeBaseChip = ({
             </div>
           </ActionsMenuItem>
         </ActionsMenu>
-      )}
-      {isPickerOpen && (
-        <FolderPickerDialog
-          open={isPickerOpen}
-          onClose={() => setIsPickerOpen(false)}
-          onSelect={onChangeFolder}
-        />
       )}
     </>
   )

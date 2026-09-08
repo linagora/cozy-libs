@@ -3,8 +3,8 @@ import React from 'react'
 
 import flag from 'cozy-flags'
 
-import { useAssistant } from '../AssistantProvider'
 import styles from './styles.styl'
+import { useChatUIState } from '../../contexts/ChatUIStateContext'
 import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import Conversation from '../Conversations/Conversation'
 import CozyAssistantRuntimeProviderWithErrorBoundary from '../CozyAssistantRuntimeProvider'
@@ -12,7 +12,7 @@ import SearchConversation from '../Search/SearchConversation'
 import Sidebar from '../Sidebar'
 
 const AssistantContainer = () => {
-  const { isOpenSearchConversation } = useAssistant()
+  const { isOpenSearchConversation } = useChatUIState()
 
   return (
     <div

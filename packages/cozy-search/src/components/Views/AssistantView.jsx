@@ -4,11 +4,18 @@ import React from 'react'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
-import AssistantProvider, { useAssistant } from '../AssistantProvider'
 import CreateAssistantDialog from './CreateAssistantDialog'
 import DeleteAssistantDialog from './DeleteAssistantDialog'
 import EditAssistantDialog from './EditAssistantDialog'
+import { ChatComponentsProvider } from '../../contexts/ChatComponentsContext'
+import CozyConversationStoreProvider from '../../contexts/cozy/CozyConversationStoreProvider'
+import { useCozySearchConversationEnabled } from '../../contexts/cozy/useCozySearchConversationEnabled'
 import AssistantContainer from '../Assistant/AssistantContainer'
+import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
+import AssistantProvider, { useAssistant } from '../AssistantProvider'
+import ConversationActions from '../Conversations/ConversationActions'
+import CozyComposerExtras from '../Conversations/CozyComposerExtras'
+import CozySourcesWithFilesQuery from '../Conversations/Sources/CozySourcesWithFilesQuery'
 import styles from '../styles.styl'
 
 const AssistantView = () => {
@@ -64,7 +71,19 @@ const AssistantViewWithProviders = () => {
   return (
     <CozyTheme variant="normal">
       <AssistantProvider>
-        <AssistantView />
+        <ChatComponentsProvider
+          components={{
+            SourcesRenderer: CozySourcesWithFilesQuery,
+            ComposerExtras: CozyComposerExtras,
+            ConversationActions,
+            AssistantIcon: TwakeAssistantIcon,
+            useSearchConversationEnabled: useCozySearchConversationEnabled
+          }}
+        >
+          <CozyConversationStoreProvider>
+            <AssistantView />
+          </CozyConversationStoreProvider>
+        </ChatComponentsProvider>
       </AssistantProvider>
     </CozyTheme>
   )

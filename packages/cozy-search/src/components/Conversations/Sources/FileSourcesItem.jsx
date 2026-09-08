@@ -1,65 +1,33 @@
 import { Icon } from '@linagora/twake-icons'
 import React from 'react'
 
-import { useClient, generateWebLink } from 'cozy-client'
-import { isNote, isDocs } from 'cozy-client/dist/models/file'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import styles from './styles.styl'
-import { getDriveMimeTypeIcon } from '../../Search/getIconForSearchResult'
 
-const getSlug = file => {
-  if (isNote(file)) {
-    return 'notes'
-  }
-  if (isDocs(file)) {
-    return 'docs'
-  }
-  return 'drive'
-}
-
-const getHash = (file, slug) => {
-  if (slug === 'notes') {
-    return `/n/${file._id}`
-  }
-  if (slug === 'docs') {
-    return `/bridge/docs/${file.metadata.externalId}`
-  }
-  return `/folder/${file.dir_id}/file/${file._id}`
-}
-
-const FileSourcesItem = ({ file }) => {
-  const client = useClient()
-
-  const slug = getSlug(file)
-  const hash = getHash(file, slug)
-
-  const docUrl = generateWebLink({
-    slug: slug,
-    cozyUrl: client?.getStackClient().uri,
-    subDomainType: client?.getInstanceOptions().subdomain,
-    hash: hash
-  })
-
-  return (
-    <ListItem
-      className={styles['sourcesItem']}
-      component="a"
-      href={docUrl}
-      target="_blank"
-      button
-    >
-      <ListItemIcon>
-        <Icon icon={getDriveMimeTypeIcon(file)} size={32} />
-      </ListItemIcon>
-      <ListItemText
-        primary={file.name}
-        secondary={file.path.replace(file.name, '')}
-      />
-    </ListItem>
-  )
-}
+/**
+ * Presentational file source. Both the link and the mime-type icon are
+ * resolved by the backend adapter and handed over as props, so this
+ * component stays backend-agnostic.
+ */
+const FileSourcesItem = ({ file, url, icon }) => (
+  <ListItem
+    className={styles['sourcesItem']}
+    component="a"
+    href={url}
+    target="_blank"
+    button
+  >
+    <ListItemIcon>
+      <Icon icon={icon} size={32} />
+    </ListItemIcon>
+    <ListItemText
+      primary={file.name}
+      secondary={file.path?.replace(file.name, '')}
+    />
+  </ListItem>
+)
 
 export default FileSourcesItem

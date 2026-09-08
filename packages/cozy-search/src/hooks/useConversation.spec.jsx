@@ -12,17 +12,17 @@ const mockSetIsOpenSearchConversation = jest.fn()
 
 // Mock the modules
 jest.mock('react-router-dom')
-jest.mock('../components/AssistantProvider')
+jest.mock('../contexts/ChatUIStateContext')
 jest.mock('../components/helpers')
 
 // Set up mock implementations
 import * as routerModule from 'react-router-dom'
-import * as assistantModule from '../components/AssistantProvider'
+import * as chatUIStateModule from '../contexts/ChatUIStateContext'
 import * as helpersModule from '../components/helpers'
 
 routerModule.useNavigate.mockImplementation(() => mockNavigate)
 routerModule.useLocation.mockImplementation(() => mockLocation)
-assistantModule.useAssistant.mockImplementation(() => ({
+chatUIStateModule.useChatUIState.mockImplementation(() => ({
   setIsOpenSearchConversation: mockSetIsOpenSearchConversation
 }))
 helpersModule.makeConversationId.mockImplementation(() => 'mock-id-123')

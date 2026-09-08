@@ -1,6 +1,7 @@
 import React, { useMemo, useContext, useState } from 'react'
 
 import { DEFAULT_ASSISTANT } from './constants'
+import { ChatUIStateProvider } from '../contexts/ChatUIStateContext'
 
 export const AssistantContext = React.createContext()
 
@@ -16,6 +17,11 @@ export const useAssistant = () => {
   return context
 }
 
+/**
+ * Twake-specific provider: it owns the "assistants" feature (selection,
+ * create/edit/delete dialogs, websearch). It also mounts the reusable
+ * ChatUIStateProvider so the shared chat views get their UI state.
+ */
 const AssistantProvider = ({ children }) => {
   const [isOpenCreateAssistant, setIsOpenCreateAssistant] = useState(false)
   const [isOpenDeleteAssistant, setIsOpenDeleteAssistant] = useState(false)
@@ -24,8 +30,6 @@ const AssistantProvider = ({ children }) => {
   const [selectedAssistantId, setSelectedAssistantId] = useState(
     DEFAULT_ASSISTANT._id
   )
-  const [isOpenSearchConversation, setIsOpenSearchConversation] =
-    useState(false)
   const [websearchEnabled, setWebsearchEnabled] = useState(false)
 
   const value = useMemo(
@@ -35,13 +39,11 @@ const AssistantProvider = ({ children }) => {
       isOpenEditAssistant,
       assistantIdInAction,
       selectedAssistantId,
-      isOpenSearchConversation,
       setAssistantIdInAction,
       setIsOpenDeleteAssistant,
       setIsOpenCreateAssistant,
       setIsOpenEditAssistant,
       setSelectedAssistantId,
-      setIsOpenSearchConversation,
       websearchEnabled,
       setWebsearchEnabled
     }),
@@ -51,14 +53,13 @@ const AssistantProvider = ({ children }) => {
       isOpenEditAssistant,
       assistantIdInAction,
       selectedAssistantId,
-      isOpenSearchConversation,
       websearchEnabled
     ]
   )
 
   return (
     <AssistantContext.Provider value={value}>
-      {children}
+      <ChatUIStateProvider>{children}</ChatUIStateProvider>
     </AssistantContext.Provider>
   )
 }

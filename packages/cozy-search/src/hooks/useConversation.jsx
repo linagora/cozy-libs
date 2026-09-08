@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { useAssistant } from '../components/AssistantProvider'
 import { makeConversationId } from '../components/helpers'
+import { useChatUIState } from '../contexts/ChatUIStateContext'
 
 const useConversation = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { setIsOpenSearchConversation } = useAssistant()
+  const { setIsOpenSearchConversation } = useChatUIState()
 
   // `useNavigate()` returns a new function whenever the location changes, and
   // `location` itself changes on every navigation. Keep both in refs so

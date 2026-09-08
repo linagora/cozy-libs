@@ -8,8 +8,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import MarkdownText from './MarkdownText'
-import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
-import Sources from '../Conversations/Sources/Sources'
+import { useChatComponents } from '../../contexts/ChatComponentsContext'
 
 const useIsErrorMessage = () => {
   return useMessage(s => s.metadata?.custom?.isError === true)
@@ -22,17 +21,20 @@ const AssistantMessage = () => {
   const isError = useIsErrorMessage()
   const messageId = useMessage(s => s.id)
   const sources = useMessage(s => s.metadata?.custom?.sources)
+  const { SourcesRenderer, AssistantIcon } = useChatComponents()
 
   return (
     <MessagePrimitive.Root className="u-mt-1-half">
       {isThinking && (
         <Box display="flex" alignItems="center" gridGap={12}>
-          <Icon
-            icon={TwakeAssistantIcon}
-            size={24}
-            className="u-mh-half"
-            color="var(--primaryColor)"
-          />
+          {AssistantIcon && (
+            <Icon
+              icon={AssistantIcon}
+              size={24}
+              className="u-mh-half"
+              color="var(--primaryColor)"
+            />
+          )}
           <Typography variant="h6" display="inline">
             {t('assistant.message.running')}
           </Typography>
@@ -48,7 +50,7 @@ const AssistantMessage = () => {
         />
       )}
       {sources?.length > 0 && (
-        <Sources messageId={messageId} sources={sources} />
+        <SourcesRenderer messageId={messageId} sources={sources} />
       )}
     </MessagePrimitive.Root>
   )

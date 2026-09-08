@@ -9,7 +9,7 @@ import TwakeKnowledgeChip from './TwakeKnowledgeChip'
 import WebSearchChip from './WebSearchChip'
 import TDrive from '../../assets/tdrive.png'
 import TMail from '../../assets/tmail.png'
-import KnowledgeBaseChip from '../KnowledgeBase/KnowledgeBaseChip'
+import CozyKnowledgeBaseChip from '../KnowledgeBase/CozyKnowledgeBaseChip'
 import { useSelectedAssistantKnowledgeBase } from '../KnowledgeBase/useSelectedAssistantKnowledgeBase'
 
 const TwakeKnowledgeSelector = ({
@@ -69,7 +69,7 @@ const TwakeKnowledgeSelector = ({
         />
       )}
       {hasKnowledgeBase ? (
-        <KnowledgeBaseChip
+        <CozyKnowledgeBaseChip
           dirId={dirId}
           folder={folder}
           isUnavailable={isUnavailable}
