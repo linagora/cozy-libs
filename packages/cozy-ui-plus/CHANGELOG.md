@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@12.3.15...cozy-ui-plus@13.0.0) (2026-09-10)
+
+### chore
+
+- **cozy-ui-plus:** Remove unused components ([a8e00f0](https://github.com/cozy/cozy-libs/commit/a8e00f03d886a67325c3ba1e126453d7584b44fe))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** The following entry points are removed. There is no
+  replacement, they were never consumed.
+
+* cozy-ui-plus/dist/ListItem/ListItemBase
+* cozy-ui-plus/dist/ListItem/ListItemByDoc
+* cozy-ui-plus/dist/ListItem/ListItemContact
+* cozy-ui-plus/dist/ListItem/ListItemFile
+* cozy-ui-plus/dist/ListItem/ExpandedAttributes
+* cozy-ui-plus/dist/ListItem/hoc/withListItemLocales
+* cozy-ui-plus/dist/Qualification/QualificationGrid
+* cozy-ui-plus/dist/Qualification/QualificationItem
+* cozy-ui-plus/dist/providers/Intent
+
+Use cozy-ui/transpiled/react/ListItem for plain list items.
+
 ## [12.3.15](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@12.3.14...cozy-ui-plus@12.3.15) (2026-09-07)
 
 **Note:** Version bump only for package cozy-ui-plus
