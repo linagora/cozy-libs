@@ -4,7 +4,7 @@ import CozyClient, { defaultPerformanceApi } from 'cozy-client'
 import type { PerformanceAPI } from 'cozy-client/types/performances/types'
 import { IOCozyFile } from 'cozy-client/types/types'
 import Minilog from 'cozy-minilog'
-import { RealtimePlugin } from 'cozy-realtime'
+import { RealtimePlugin, HandshakeQueue } from 'cozy-realtime'
 import CozyRealtime from 'cozy-realtime'
 
 import { SHARED_DRIVE_FILES_DOCTYPE } from './consts'
@@ -73,6 +73,7 @@ export class SearchEngine {
   performanceApi: PerformanceAPI
   engineOptions: EngineOptions
   sharedDrivesRealtimes: Record<string, CozyRealtime>
+  sharedDrivesHandshakes: HandshakeQueue
 
   constructor(
     client: CozyClient,
@@ -86,6 +87,11 @@ export class SearchEngine {
     this.performanceApi = performanceApi ?? defaultPerformanceApi
     this.engineOptions = { shouldInit: true, ...engineOptions }
     this.sharedDrivesRealtimes = {}
+    // One connection per shared drive means a single network change makes them
+    // all reconnect at once, and a handshake that never completes holds a slot
+    // in the browser WebSocket budget until the browser times it out. They
+    // share one queue so only a few of them handshake at a time.
+    this.sharedDrivesHandshakes = new HandshakeQueue()
 
     this.isLocalSearch = !!getPouchLink(this.client)
     log.info('Use local data on trusted device: ', this.isLocalSearch)
@@ -286,7 +292,8 @@ export class SearchEngine {
     const realtime = new CozyRealtime({
       client: this.client,
       sharedDriveId,
-      background: true
+      background: true,
+      handshakeQueue: this.sharedDrivesHandshakes
     })
     this.subscribeDoctype(this.client, FILES_DOCTYPE, realtime, sharedDriveId)
     this.sharedDrivesRealtimes[sharedDriveId] = realtime

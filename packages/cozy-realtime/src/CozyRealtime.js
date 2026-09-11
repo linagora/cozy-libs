@@ -1,6 +1,5 @@
 import MicroEE from 'microee'
 
-import HandshakeQueue from './HandshakeQueue'
 import RetryManager from './RetryManager'
 import SubscriptionList from './SubscriptionList'
 import {
@@ -9,8 +8,6 @@ import {
   baseWaitAfterFirstFailure,
   maxWaitBetweenRetries,
   maxBackgroundConnectionAttempts,
-  maxConcurrentBackgroundHandshakes,
-  backgroundHandshakeSlotTimeout,
   heartbeatInterval,
   heartbeatTimeout,
   heartbeatProbeDoctype
@@ -32,19 +29,6 @@ import {
  */
 
 /**
- * Shared by every background connection of the tab.
- *
- * Background connections are opened one per shared drive by the indexer, so
- * they are the ones that can exhaust the browser's WebSocket budget when they
- * all reconnect at once. User-facing connections are few and latency matters
- * for them, so they are not queued.
- */
-const backgroundHandshakeQueue = new HandshakeQueue({
-  maxConcurrent: maxConcurrentBackgroundHandshakes,
-  slotTimeout: backgroundHandshakeSlotTimeout
-})
-
-/**
  * Manage the realtime interactions with a cozy stack
  */
 class CozyRealtime {
@@ -57,6 +41,7 @@ class CozyRealtime {
    * @param {string} [options.sharedDriveId] - The ID of the shared drive to connect to
    * @param {boolean} [options.background] - Whether the shared drive connection is made by a background service rather than the user viewing the drive, so the stack does not mark the sharing as seen
    * @param {number} [options.maxReconnectionAttempts] - Give up reconnecting after this many failed attempts (defaults to unlimited, or a finite cap for background connections)
+   * @param {HandshakeQueue} [options.handshakeQueue] - Limits how many of a group of connections may handshake at once. Whoever opens the group owns the queue and passes the same one to each connection.
    */
   constructor(options) {
     this.sharedDriveId = options.sharedDriveId
@@ -64,9 +49,7 @@ class CozyRealtime {
     this.maxReconnectionAttempts =
       options.maxReconnectionAttempts ??
       (this.background ? maxBackgroundConnectionAttempts : null)
-    this.handshakeQueue =
-      options.handshakeQueue ??
-      (this.background ? backgroundHandshakeQueue : null)
+    this.handshakeQueue = options.handshakeQueue ?? null
     this.handshakeSlot = null
     this.heartbeatInterval = options.heartbeatInterval ?? heartbeatInterval
     this.heartbeatTimeout = options.heartbeatTimeout ?? heartbeatTimeout

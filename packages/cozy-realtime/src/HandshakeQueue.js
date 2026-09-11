@@ -1,3 +1,7 @@
+import {
+  maxConcurrentBackgroundHandshakes,
+  backgroundHandshakeSlotTimeout
+} from './config'
 import defaultLogger from './logger'
 
 /**
@@ -13,18 +17,21 @@ import defaultLogger from './logger'
  * milliseconds, so the queue is effectively invisible. It only starts holding
  * connections back once handshakes stop completing, which is exactly the
  * situation where opening more of them makes things worse.
+ *
+ * A queue only limits the connections it is given to, so whoever opens a group
+ * of connections owns one queue and passes it to each of them.
  */
 class HandshakeQueue {
   /**
    * @constructor
    * @param {object} options
-   * @param {number} options.maxConcurrent - How many handshakes may run at once
-   * @param {number} options.slotTimeout - How long to keep waiting on a handshake before letting the next queued one start
+   * @param {number} [options.maxConcurrent] - How many handshakes may run at once
+   * @param {number} [options.slotTimeout] - How long to keep waiting on a handshake before letting the next queued one start
    * @param {object} [options.logger] - A custom logger
    */
   constructor({ maxConcurrent, slotTimeout, logger } = {}) {
-    this.maxConcurrent = maxConcurrent
-    this.slotTimeout = slotTimeout
+    this.maxConcurrent = maxConcurrent ?? maxConcurrentBackgroundHandshakes
+    this.slotTimeout = slotTimeout ?? backgroundHandshakeSlotTimeout
     this.logger = logger || defaultLogger
     this.inFlight = 0
     this.waiting = []
