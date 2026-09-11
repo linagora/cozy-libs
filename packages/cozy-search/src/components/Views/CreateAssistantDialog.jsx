@@ -78,13 +78,11 @@ const CreateAssistantDialog = ({ open, onClose }) => {
       providerName: getProviderNameById(selectedProvider.id, t)
     })
     if (savedAssistant?._id) {
-      if (formData.knowledgeBase?.length > 0) {
-        await saveKnowledgeBase(
-          client,
-          savedAssistant._id,
-          formData.knowledgeBase
-        )
-      }
+      await saveKnowledgeBase(
+        client,
+        savedAssistant._id,
+        formData.knowledgeBase || []
+      )
       setSelectedAssistantId(savedAssistant._id)
     }
     showAlert({ message: t('assistant_create.success'), severity: 'success' })
