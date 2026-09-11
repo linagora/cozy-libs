@@ -7,14 +7,19 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'twake-i18n'
 
-import { Contact, Group, getDisplayName } from '../models'
+import {
+  DOCTYPE_GROUPS,
+  contactPropType,
+  groupPropType,
+  getDisplayName
+} from '../models'
 import { GroupAvatar } from './Avatar/GroupAvatar'
 import { MemberAvatar } from './Avatar/MemberAvatar'
 
 export const ContactSuggestion = ({ contactOrGroup }) => {
   const { t } = useI18n()
 
-  if (contactOrGroup._type === Group.doctype) {
+  if (contactOrGroup._type === DOCTYPE_GROUPS) {
     return (
       <ListItem button>
         <ListItemIcon>
@@ -50,11 +55,11 @@ const newUnknownContactProptypes = PropTypes.shape({
 
 ContactSuggestion.propTypes = {
   contactOrGroup: PropTypes.oneOfType([
-    Contact.propType,
-    Group.propType,
+    contactPropType,
+    groupPropType,
     newUnknownContactProptypes
   ]).isRequired,
-  contacts: PropTypes.arrayOf(Contact.propType)
+  contacts: PropTypes.arrayOf(contactPropType)
 }
 
 export default ContactSuggestion

@@ -7,7 +7,7 @@ import minilog from 'cozy-minilog'
 
 import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
 import { useSharingContext } from '../../hooks/useSharingContext'
-import { Contact } from '../../models'
+import { DOCTYPE_CONTACTS } from '../../models'
 import { ShareModal } from '../ShareModal'
 
 export const EditableSharingModal = ({ document, recipients, ...rest }) => {
@@ -30,7 +30,7 @@ export const EditableSharingModal = ({ document, recipients, ...rest }) => {
 
   return (
     <ShareModal
-      createContact={contact => client.create(Contact.doctype, contact)}
+      createContact={contact => client.create(DOCTYPE_CONTACTS, contact)}
       document={document}
       documentType={documentType}
       hasSharedChild={

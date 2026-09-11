@@ -4,7 +4,7 @@ import { useClient } from 'cozy-client'
 
 import { getOrCreateFromArray } from '../../helpers/contacts'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
-import { Contact } from '../../models'
+import { DOCTYPE_CONTACTS } from '../../models'
 
 export const useSharedDrive = () => {
   const client = useClient()
@@ -21,7 +21,7 @@ export const useSharedDrive = () => {
     setSharedDriveName(event.target.value)
   }
 
-  const createContact = contact => client.create(Contact.doctype, contact)
+  const createContact = contact => client.create(DOCTYPE_CONTACTS, contact)
 
   const onCreate = async () => {
     const contacts = await getOrCreateFromArray(

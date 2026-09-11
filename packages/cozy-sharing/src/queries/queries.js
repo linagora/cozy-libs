@@ -1,6 +1,6 @@
 import { Q, fetchPolicies } from 'cozy-client'
 
-import { Contact, Group } from '../models'
+import { DOCTYPE_CONTACTS, DOCTYPE_GROUPS } from '../models'
 
 const DEFAULT_CACHE_TIMEOUT_QUERIES = 9 * 60 * 1000
 
@@ -17,7 +17,7 @@ export const buildSharingsByIdQuery = sharingId => ({
 })
 
 export const buildReachableContactsQuery = () => ({
-  definition: Q(Contact.doctype)
+  definition: Q(DOCTYPE_CONTACTS)
     .where({
       _id: {
         $gt: null
@@ -52,7 +52,7 @@ export const buildReachableContactsQuery = () => ({
 })
 
 export const buildContactGroupsQuery = () => ({
-  definition: Q(Group.doctype),
+  definition: Q(DOCTYPE_GROUPS),
   options: {
     as: `io.cozy.contacts.groups`,
     fetchPolicy: defaultFetchPolicy
@@ -60,7 +60,7 @@ export const buildContactGroupsQuery = () => ({
 })
 
 export const buildUnreachableContactsWithGroupsQuery = () => ({
-  definition: Q(Contact.doctype)
+  definition: Q(DOCTYPE_CONTACTS)
     .where({
       _id: {
         $gt: null

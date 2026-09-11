@@ -1,4 +1,4 @@
-import { Group } from 'cozy-doctypes'
+import { DOCTYPE_GROUPS } from './models'
 
 let removeDiacritics
 try {
@@ -36,7 +36,7 @@ const cozyUrlMatch = (input, contact) => {
 }
 
 const groupNameMatch = (input, contactOrGroup) => {
-  if (contactOrGroup._type !== Group.doctype) return false
+  if (contactOrGroup._type !== DOCTYPE_GROUPS) return false
   const normalizedInput = normalizeLowercase(input)
   return normalizeLowercase(contactOrGroup.name).includes(normalizedInput)
 }

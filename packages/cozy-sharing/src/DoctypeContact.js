@@ -2,9 +2,8 @@ import {
   getInitials as clientGetInitials,
   getDisplayName as clientGetDisplayName
 } from 'cozy-client/dist/models/contact'
-import { Contact as DoctypeContact } from 'cozy-doctypes'
 
-const isContact = candidate => {
+export const isContact = candidate => {
   return candidate._type === 'io.cozy.contacts'
 }
 export const getInitials = (contactOrRecipient, defaultValue = '') => {
@@ -43,5 +42,3 @@ export const getDisplayName = (contact, defaultValue = '') => {
     )
   }
 }
-
-export default DoctypeContact
