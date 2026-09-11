@@ -43,6 +43,23 @@ import 'cozy-search/dist/stylesheet.css'
 <RealTimeQueries doctype="io.cozy.ai.chat.conversations" />
 ```
 
+### RAG indexing setup
+
+Call `setupRagIndexing(client)` once per session at startup (before
+`ensureProvisionedAssistants` if your app provisions assistants from the
+`rag.assistants.autoprovision` flag). It makes sure the instance's two
+`rag-index` triggers exist (one on `io.cozy.files`, one on
+`io.cozy.ai.chat.assistants`) and gives the root folder to any assistant
+that has no knowledge base folder yet — the stack's `rag-index` worker
+reads the assistants to know what to index, cozy-search only has to keep
+the triggers and the assistants' `knowledgeBase` in shape.
+
+It needs the following permissions: `io.cozy.triggers` and `io.cozy.jobs`
+(to create and launch the triggers), `io.cozy.ai.chat.assistants` and
+`io.cozy.files` (to read and migrate the assistants). It is idempotent and
+never throws: on a stack whose `rag-index` worker is still reserved, the
+403 is logged and the app keeps working.
+
 ### On desktop
 
 You can add the search bar like this :
