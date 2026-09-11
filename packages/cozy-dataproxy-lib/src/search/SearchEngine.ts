@@ -73,7 +73,7 @@ export class SearchEngine {
   performanceApi: PerformanceAPI
   engineOptions: EngineOptions
   sharedDrivesRealtimes: Record<string, CozyRealtime>
-  sharedDrivesHandshakes: HandshakeQueue
+  sharedDrivesHandshakes: InstanceType<typeof HandshakeQueue>
 
   constructor(
     client: CozyClient,
