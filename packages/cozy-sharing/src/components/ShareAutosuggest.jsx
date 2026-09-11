@@ -10,7 +10,7 @@ import { MemberAvatar } from './Avatar/MemberAvatar'
 import ContactSuggestion from './ContactSuggestion'
 import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
-import { getDisplayName, Contact, Group } from '../models'
+import { getDisplayName, DOCTYPE_CONTACTS, DOCTYPE_GROUPS } from '../models'
 import styles from '../styles/autosuggest.styl'
 import { contactOrGroupMatch } from '../suggestionMatchers'
 
@@ -53,7 +53,7 @@ const ShareAutosuggest = ({
       setSuggestions([
         {
           email: value,
-          _type: Contact.doctype
+          _type: DOCTYPE_CONTACTS
         }
       ])
     } else {
@@ -152,7 +152,7 @@ const ShareAutosuggest = ({
   const renderInput = inputProps => (
     <div className={styles['recipientsContainer']}>
       {recipients.map((recipient, idx) => {
-        const isContactGroup = recipient._type === Group.doctype
+        const isContactGroup = recipient._type === DOCTYPE_GROUPS
         const name = getDisplayName(recipient)
         return (
           <Chip

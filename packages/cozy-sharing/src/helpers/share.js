@@ -1,10 +1,15 @@
 import { models } from 'cozy-client'
 
-import { Contact, Group, getDisplayName } from '../models'
+import {
+  DOCTYPE_CONTACTS,
+  DOCTYPE_GROUPS,
+  isContact,
+  getDisplayName
+} from '../models'
 
 export const countNewRecipients = (currentRecipients, newRecipients) => {
   const newRecipientsNotAlreadyIncluded = newRecipients.filter(recipient => {
-    if (Contact.isContact(recipient)) {
+    if (isContact(recipient)) {
       const email = models.contact.getPrimaryEmail(recipient)
       const cozyUrl = models.contact.getPrimaryCozy(recipient)
       return !currentRecipients.find(
@@ -18,7 +23,7 @@ export const countNewRecipients = (currentRecipients, newRecipients) => {
 
   return newRecipientsNotAlreadyIncluded.reduce(
     (acc, recipient) => {
-      if (recipient._type === Group.doctype) {
+      if (recipient._type === DOCTYPE_GROUPS) {
         return {
           ...acc,
           group: acc.group + 1
@@ -44,11 +49,11 @@ export const getSuccessMessage = (
 ) => {
   if (recipientsAfter.length === 1) {
     const recipient = recipientsAfter[0]
-    const email = Contact.isContact(recipient)
+    const email = isContact(recipient)
       ? models.contact.getPrimaryEmail(recipient)
       : recipient.email
     const cozyUrl = models.contact.getPrimaryCozy(recipient)
-    const isContactGroup = recipient._type === Group.doctype
+    const isContactGroup = recipient._type === DOCTYPE_GROUPS
 
     if (isContactGroup) {
       return [
@@ -125,7 +130,7 @@ export const getErrorMessage = ({
         }`
       )
 
-      if (recipients.length === 1 && recipients[0]._type === Contact.doctype) {
+      if (recipients.length === 1 && recipients[0]._type === DOCTYPE_CONTACTS) {
         return [
           'Share.errors.contactAlreadyInSharing',
           {

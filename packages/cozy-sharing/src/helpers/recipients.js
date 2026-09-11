@@ -1,6 +1,6 @@
 import flag from 'cozy-flags'
 
-import { Group } from '../models'
+import { DOCTYPE_GROUPS } from '../models'
 
 export const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
@@ -60,7 +60,7 @@ export const hasReachRecipientsLimit = (current, next) => {
  */
 export const spreadGroupAndMergeRecipients = (recipients, newRecipient) => {
   let contactsToAdd
-  if (newRecipient._type === Group.doctype) {
+  if (newRecipient._type === DOCTYPE_GROUPS) {
     contactsToAdd = newRecipient.members
   } else {
     contactsToAdd = [newRecipient]

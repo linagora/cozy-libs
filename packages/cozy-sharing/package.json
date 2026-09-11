@@ -30,7 +30,6 @@
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
     "classnames": "^2.5.1",
-    "cozy-doctypes": "^1.99.1",
     "date-fns": "2.30.0",
     "lodash": "^4.17.21",
     "react-autosuggest": "^10.1.0",

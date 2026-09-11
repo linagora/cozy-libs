@@ -18008,7 +18008,6 @@ __metadata:
     classnames: "npm:^2.5.1"
     cozy-client: "npm:^60.28.0"
     cozy-device-helper: "npm:^4.0.0"
-    cozy-doctypes: "npm:^1.99.1"
     cozy-intent: "npm:^2.31.1"
     cozy-minilog: "npm:^3.10.1"
     cozy-ui: "npm:^140.5.0"
