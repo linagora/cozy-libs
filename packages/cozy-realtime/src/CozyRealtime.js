@@ -1,5 +1,6 @@
 import MicroEE from 'microee'
 
+import HandshakeQueue from './HandshakeQueue'
 import RetryManager from './RetryManager'
 import SubscriptionList from './SubscriptionList'
 import {
@@ -7,7 +8,9 @@ import {
   timeBeforeSuccessful,
   baseWaitAfterFirstFailure,
   maxWaitBetweenRetries,
-  maxBackgroundConnectionAttempts
+  maxBackgroundConnectionAttempts,
+  maxConcurrentBackgroundHandshakes,
+  backgroundHandshakeSlotTimeout
 } from './config'
 import defaultLogger from './logger'
 import {
@@ -24,6 +27,19 @@ import {
  * A cozy-client instance.
  * @typedef {import("cozy-client/dist/index").CozyClient} CozyClient
  */
+
+/**
+ * Shared by every background connection of the tab.
+ *
+ * Background connections are opened one per shared drive by the indexer, so
+ * they are the ones that can exhaust the browser's WebSocket budget when they
+ * all reconnect at once. User-facing connections are few and latency matters
+ * for them, so they are not queued.
+ */
+const backgroundHandshakeQueue = new HandshakeQueue({
+  maxConcurrent: maxConcurrentBackgroundHandshakes,
+  slotTimeout: backgroundHandshakeSlotTimeout
+})
 
 /**
  * Manage the realtime interactions with a cozy stack
@@ -45,6 +61,10 @@ class CozyRealtime {
     this.maxReconnectionAttempts =
       options.maxReconnectionAttempts ??
       (this.background ? maxBackgroundConnectionAttempts : null)
+    this.handshakeQueue =
+      options.handshakeQueue ??
+      (this.background ? backgroundHandshakeQueue : null)
+    this.handshakeSlot = null
     this.client = getCozyClientFromOptions(options)
     this.createWebSocket = options.createWebSocket || createWebSocket
     this.logger = options.logger || defaultLogger
@@ -120,6 +140,15 @@ class CozyRealtime {
       try {
         this.waitingForConnect = true
         if (!immediate) await this.retryManager.waitBeforeNextAttempt()
+        // `stop()` may have been called while we were waiting. It cannot
+        // cancel this pending connection - there is no socket to revoke yet -
+        // so a stopped instance would otherwise still open a socket that
+        // nobody holds a reference to, and nobody will ever close.
+        if (!this.isStarted) return
+        if (this.handshakeQueue) {
+          this.handshakeSlot = await this.handshakeQueue.acquire()
+          if (!this.isStarted) return this.releaseHandshakeSlot()
+        }
         this.createSocket()
       } finally {
         this.waitingForConnect = false
@@ -148,10 +177,37 @@ class CozyRealtime {
   }
 
   /**
+   * Gives back the handshake queue slot held by this instance, if any.
+   */
+  releaseHandshakeSlot() {
+    if (this.handshakeSlot) {
+      this.handshakeSlot.release()
+      this.handshakeSlot = null
+    }
+  }
+
+  /**
+   * Whether this instance already has a usable connection, either open or
+   * still being established.
+   *
+   * Callers use this to avoid tearing down a connection that is doing fine.
+   * It reports true during a reconnection backoff too: there is no socket then,
+   * but a connection attempt is pending and stopping it would orphan it.
+   *
+   * @returns {boolean}
+   */
+  isAlive() {
+    return Boolean(
+      this.isStarted && (this.hasWebSocket() || this.waitingForConnect)
+    )
+  }
+
+  /**
    * Removes all handlers on a websocket to avoid callbacks from an old rejected socket
    */
   revokeWebSocket() {
     this.emit('disconnected')
+    this.releaseHandshakeSlot()
     if (this.hasWebSocket()) {
       this.logger.info('trashing the previous websocket…')
       this.websocket.onmessage = null
@@ -185,6 +241,7 @@ class CozyRealtime {
       this.logger.info('stopped')
       this.unsubscribeGlobalEvents()
       this.unsubscribeClientEvents()
+      this.releaseHandshakeSlot()
       if (this.hasWebSocket()) {
         this.revokeWebSocket()
       }
@@ -494,6 +551,7 @@ class CozyRealtime {
    */
   onWebSocketError(error) {
     this.logger.info('An error was raised on the websocket', error)
+    this.releaseHandshakeSlot()
     this.retryManager.onFailure(error)
     this.reconnect()
   }
@@ -503,6 +561,7 @@ class CozyRealtime {
    * @private
    */
   onWebSocketOpen() {
+    this.releaseHandshakeSlot()
     this.retryManager.onSuccess()
     this.authenticate()
     this.sendSubscriptions()
@@ -515,6 +574,7 @@ class CozyRealtime {
    */
   onWebSocketClose(event) {
     this.logger.info('The current websocket was closed by a third party', event)
+    this.releaseHandshakeSlot()
     this.retryManager.onFailure(event)
     this.reconnect()
   }
