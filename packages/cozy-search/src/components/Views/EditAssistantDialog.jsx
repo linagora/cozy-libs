@@ -1,7 +1,7 @@
-import { Icon, Cross } from '@linagora/twake-icons'
 import React, { useEffect } from 'react'
 
-import { useClient, Q } from 'cozy-client'
+import { Icon, Cross } from '@linagora/twake-icons'
+import { useClient } from 'cozy-client'
 import { editAssistant } from 'cozy-client/dist/models/assistant'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
@@ -28,6 +28,7 @@ import {
   STEPS
 } from '../CreateAssistantSteps/useAssistantDialog'
 import { saveKnowledgeBase } from '../KnowledgeBase/knowledgeBase'
+import { buildAssistantByIdQuery } from '../queries'
 
 const EditAssistantDialog = ({ open, onClose }) => {
   useExtendI18n(locales)
@@ -57,11 +58,9 @@ const EditAssistantDialog = ({ open, onClose }) => {
     if (!open || !assistantIdInAction) return
 
     const fetchAssistant = async () => {
-      const response = await client.query(
-        Q('io.cozy.ai.chat.assistants')
-          .getById(assistantIdInAction)
-          .include(['provider'])
-      )
+      const { definition, options } =
+        buildAssistantByIdQuery(assistantIdInAction)
+      const response = await client.query(definition(), { as: options.as })
       const assistant = response.data
       const provider = response.included[0]
       const providerId =
