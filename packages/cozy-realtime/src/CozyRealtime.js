@@ -10,7 +10,10 @@ import {
   maxWaitBetweenRetries,
   maxBackgroundConnectionAttempts,
   maxConcurrentBackgroundHandshakes,
-  backgroundHandshakeSlotTimeout
+  backgroundHandshakeSlotTimeout,
+  heartbeatInterval,
+  heartbeatTimeout,
+  heartbeatProbeDoctype
 } from './config'
 import defaultLogger from './logger'
 import {
@@ -65,6 +68,14 @@ class CozyRealtime {
       options.handshakeQueue ??
       (this.background ? backgroundHandshakeQueue : null)
     this.handshakeSlot = null
+    this.heartbeatInterval = options.heartbeatInterval ?? heartbeatInterval
+    this.heartbeatTimeout = options.heartbeatTimeout ?? heartbeatTimeout
+    this.heartbeatProbeDoctype =
+      options.heartbeatProbeDoctype ?? heartbeatProbeDoctype
+    this.heartbeatTimer = null
+    this.heartbeatDeadline = null
+    this.heartbeatProven = false
+    this.lastMessageAt = null
     this.client = getCozyClientFromOptions(options)
     this.createWebSocket = options.createWebSocket || createWebSocket
     this.logger = options.logger || defaultLogger
@@ -208,6 +219,7 @@ class CozyRealtime {
   revokeWebSocket() {
     this.emit('disconnected')
     this.releaseHandshakeSlot()
+    this.stopHeartbeat()
     if (this.hasWebSocket()) {
       this.logger.info('trashing the previous websocket…')
       this.websocket.onmessage = null
@@ -242,6 +254,7 @@ class CozyRealtime {
       this.unsubscribeGlobalEvents()
       this.unsubscribeClientEvents()
       this.releaseHandshakeSlot()
+      this.stopHeartbeat()
       if (this.hasWebSocket()) {
         this.revokeWebSocket()
       }
@@ -525,6 +538,12 @@ class CozyRealtime {
    */
   onWebSocketMessage(message) {
     const { event, payload } = JSON.parse(message.data)
+    // Any message proves the stack is still on the other end.
+    this.lastMessageAt = Date.now()
+    if (this.isHeartbeatAnswer(event, payload)) {
+      this.logger.debug('liveness probe answered')
+      return
+    }
     this.logger.info('receive message from server', { event, payload })
     const handlers = this.subscriptions.getAllHandlersForEvent(
       event,
@@ -543,6 +562,85 @@ class CozyRealtime {
     if (event === 'error') {
       this.logger.warn('Stack returned an error', payload)
     }
+  }
+
+  /**
+   * Whether a server message is the refusal of our liveness probe.
+   *
+   * @private
+   * @param {string} event
+   * @param {object} payload
+   * @returns {boolean}
+   */
+  isHeartbeatAnswer(event, payload) {
+    return (
+      event === 'error' &&
+      payload &&
+      payload.source &&
+      payload.source.payload &&
+      payload.source.payload.type === this.heartbeatProbeDoctype
+    )
+  }
+
+  /**
+   * Asks the stack whether it is still on the other end.
+   *
+   * The protocol has no PING method and stays silent on a valid SUBSCRIBE, so
+   * we subscribe to a doctype nobody has permission on: the refusal it sends
+   * back is the only reply the protocol guarantees.
+   *
+   * @private
+   */
+  sendHeartbeat() {
+    if (!this.isWebSocketOpen()) return
+    const sentAt = Date.now()
+    this.sendWebSocketMessage('SUBSCRIBE', {
+      type: this.heartbeatProbeDoctype
+    })
+    global.clearTimeout(this.heartbeatDeadline)
+    this.heartbeatDeadline = global.setTimeout(() => {
+      if (this.lastMessageAt && this.lastMessageAt >= sentAt) {
+        this.heartbeatProven = true
+        return
+      }
+      if (!this.heartbeatProven) {
+        // The probe has never been answered on this connection, so its silence
+        // tells us nothing. Dropping a connection on a signal we have never
+        // seen work would be worse than not checking at all.
+        this.logger.warn(
+          'the liveness probe was never answered on this connection, disabling the heartbeat'
+        )
+        this.stopHeartbeat()
+        return
+      }
+      this.logger.warn('no answer to the liveness probe, the socket looks dead')
+      this.emit('dead')
+      this.retryManager.onFailure(new Error('liveness probe timed out'))
+      this.reconnect()
+    }, this.heartbeatTimeout)
+  }
+
+  /**
+   * @private
+   */
+  startHeartbeat() {
+    this.stopHeartbeat()
+    this.heartbeatProven = false
+    this.sendHeartbeat()
+    this.heartbeatTimer = global.setInterval(
+      () => this.sendHeartbeat(),
+      this.heartbeatInterval
+    )
+  }
+
+  /**
+   * @private
+   */
+  stopHeartbeat() {
+    global.clearInterval(this.heartbeatTimer)
+    global.clearTimeout(this.heartbeatDeadline)
+    this.heartbeatTimer = null
+    this.heartbeatDeadline = null
   }
 
   /**
@@ -565,6 +663,7 @@ class CozyRealtime {
     this.retryManager.onSuccess()
     this.authenticate()
     this.sendSubscriptions()
+    this.startHeartbeat()
     this.emit('ready')
   }
 

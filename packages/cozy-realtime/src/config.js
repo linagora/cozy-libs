@@ -90,6 +90,36 @@ export const backgroundHandshakeSlotTimeout = 10 * sec
 export const retryJitterRatio = 0.3
 
 /**
+ * How often a connection checks that the stack is still on the other end.
+ *
+ * @type {integer} time in millisecond
+ * @private
+ */
+export const heartbeatInterval = 30 * sec
+
+/**
+ * How long we wait for the stack to answer a liveness probe before considering
+ * the connection dead.
+ *
+ * @type {integer} time in millisecond
+ * @private
+ */
+export const heartbeatTimeout = 10 * sec
+
+/**
+ * The doctype used to probe that the connection is still alive.
+ *
+ * The realtime protocol has no PING method and stays silent on a valid
+ * SUBSCRIBE, so the only reply it guarantees is the refusal sent when an
+ * application subscribes to a doctype it has no permission on. This doctype is
+ * meant to never be granted to anyone, so the refusal is the answer.
+ *
+ * @type {string}
+ * @private
+ */
+export const heartbeatProbeDoctype = 'io.cozy.realtime.liveness.probe'
+
+/**
  * If one subscribe multiple times to the exact same event with the exact
  * same handler, should we call the handler multiple times for each event?
  * eventWhat to do if someone ask multiple times for the same subscription?
