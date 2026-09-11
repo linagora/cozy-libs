@@ -30,9 +30,10 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from './AssistantProvider'
+import { resolveConversationAssistantId } from './KnowledgeBase/conversationAssistant'
+import { useDefaultAssistantId } from './KnowledgeBase/useDefaultAssistantId'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
-import { DEFAULT_ASSISTANT } from './constants'
 import { formatAnswer } from './helpers'
 import {
   CHAT_EVENTS_DOCTYPE,
@@ -104,22 +105,29 @@ const ConversationLoader = ({
   ) as { data: Conversation | undefined; fetchStatus: string }
   const conversation = queryResult.data
   const isLoading = isQueryLoading(queryResult)
+  const boundId = conversation?.relationships?.assistant?.data?._id
+  const defaultId = useDefaultAssistantId()
 
   const initialMessages = useMemo(
     () => convertMessagesToThreadMessages(conversation?.messages, t),
     [conversation?.messages, t]
   )
 
-  useEffect(() => {
-    setSelectedAssistantId(
-      conversation?.relationships?.assistant?.data?._id || DEFAULT_ASSISTANT._id
-    )
-  }, [
-    conversation?.relationships?.assistant?.data?._id,
-    setSelectedAssistantId
-  ])
+  // Undefined until the conversation, and the default a new one starts
+  // on, are known: the runtime waits, or a message could go to the
+  // sentinel assistant before the configured default is selected.
+  const resolvedAssistantId = resolveConversationAssistantId({
+    boundId,
+    conversation,
+    isLoading,
+    defaultId
+  })
 
-  if (isLoading) {
+  useEffect(() => {
+    if (resolvedAssistantId) setSelectedAssistantId(resolvedAssistantId)
+  }, [resolvedAssistantId, setSelectedAssistantId])
+
+  if (resolvedAssistantId === undefined) {
     return (
       <div className="u-flex u-flex-items-center u-flex-justify-center u-h-100 u-w-100">
         <Spinner size="xxlarge" />

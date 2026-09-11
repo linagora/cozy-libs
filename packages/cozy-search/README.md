@@ -34,8 +34,22 @@ import 'cozy-search/dist/stylesheet.css'
   "description": "Required by the cozy Assistant",
   "type": "io.cozy.ai.chat.events",
   "verbs": ["GET"]
+},
+"chatAssistants": {
+  "description": "Required by the cozy Assistant",
+  "type": "io.cozy.ai.chat.assistants",
+  "verbs": ["GET", "POST", "PUT", "DELETE"]
+},
+"accounts": {
+  "description": "Required by the cozy Assistant (provider accounts)",
+  "type": "io.cozy.accounts",
+  "verbs": ["GET", "POST", "PUT", "DELETE"]
 }
 ```
+
+The assistants and their provider accounts are created, edited and
+deleted from the library's dialogs, so the host app declares the full set
+of verbs (cozy-home and cozy-drive use `ALL`).
 
 2. Add realtime queries for chat conversations in your tree :
 
@@ -61,6 +75,17 @@ never throws: on a stack whose `rag-index` worker is still reserved, the
 403 is logged and the app keeps working. `ensureProvisionedAssistants`
 additionally creates one `io.cozy.accounts` document per provisioned
 assistant, and the `dirName` folder in `io.cozy.files`.
+
+An entry of `rag.assistants.autoprovision` can carry `"default": true`
+(the first flagged entry wins if there are several). Every NEW
+conversation then starts on that assistant once its document exists —
+from the session after it was provisioned onward. Existing conversations
+are unaffected: they keep their own assistant, or stay unscoped if they
+had none.
+
+```json
+{ "name": "Mes documents", "dirName": "Documents", "default": true }
+```
 
 ### On desktop
 
