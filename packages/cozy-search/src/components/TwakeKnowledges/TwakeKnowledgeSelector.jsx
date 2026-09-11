@@ -21,6 +21,7 @@ const TwakeKnowledgeSelector = ({
   const {
     dirId,
     folder,
+    isRoot,
     isUnavailable,
     setKnowledgeBaseFolder,
     isRealAssistant,
@@ -72,6 +73,7 @@ const TwakeKnowledgeSelector = ({
         <KnowledgeBaseChip
           dirId={dirId}
           folder={folder}
+          isRoot={isRoot}
           isUnavailable={isUnavailable}
           isLast={!showSourceChips}
           onChangeFolder={setKnowledgeBaseFolder}

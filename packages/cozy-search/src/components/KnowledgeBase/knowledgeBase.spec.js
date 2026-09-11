@@ -5,6 +5,9 @@ import {
   withKnowledgeBaseEntry,
   withoutKnowledgeBaseDoctype,
   getKnowledgeBaseDirId,
+  ROOT_DIR_ID,
+  isRootDirId,
+  withRootFolderIfMissing,
   saveKnowledgeBase
 } from './knowledgeBase'
 
@@ -125,6 +128,38 @@ describe('getKnowledgeBaseDirId', () => {
   })
 })
 
+describe('withRootFolderIfMissing', () => {
+  it('appends the root entry when there is no files entry', () => {
+    expect(withRootFolderIfMissing([{ doctype: 'io.cozy.email' }])).toEqual([
+      { doctype: 'io.cozy.email' },
+      { doctype: 'io.cozy.files', dirId: ROOT_DIR_ID }
+    ])
+    expect(withRootFolderIfMissing()).toEqual([
+      { doctype: 'io.cozy.files', dirId: ROOT_DIR_ID }
+    ])
+  })
+
+  it('returns the same array when a files entry exists', () => {
+    const kb = [{ doctype: 'io.cozy.files', dirId: 'folder-1' }]
+    expect(withRootFolderIfMissing(kb)).toBe(kb)
+  })
+
+  it('does not count a files entry without dirId', () => {
+    expect(withRootFolderIfMissing([{ doctype: 'io.cozy.files' }])).toEqual([
+      { doctype: 'io.cozy.files' },
+      { doctype: 'io.cozy.files', dirId: ROOT_DIR_ID }
+    ])
+  })
+})
+
+describe('isRootDirId', () => {
+  it('recognizes the root folder id only', () => {
+    expect(isRootDirId(ROOT_DIR_ID)).toBe(true)
+    expect(isRootDirId('folder-1')).toBe(false)
+    expect(isRootDirId(null)).toBe(false)
+  })
+})
+
 describe('saveKnowledgeBase', () => {
   it('refetches the assistant and saves it with the new knowledgeBase', async () => {
     const assistantDoc = {
@@ -173,5 +208,57 @@ describe('saveKnowledgeBase', () => {
         { doctype: 'com.linagora.email' }
       ]
     })
+  })
+
+  it('saves the root entry when the knowledge base has no folder', async () => {
+    const assistantDoc = {
+      _id: 'assistant-1',
+      _type: 'io.cozy.ai.chat.assistants'
+    }
+    const client = {
+      query: jest.fn().mockResolvedValue({ data: assistantDoc }),
+      save: jest.fn().mockResolvedValue({ data: assistantDoc })
+    }
+
+    await saveKnowledgeBase(client, 'assistant-1', [
+      { doctype: 'io.cozy.email' }
+    ])
+
+    expect(client.save).toHaveBeenCalledWith({
+      ...assistantDoc,
+      knowledgeBase: [
+        { doctype: 'io.cozy.email' },
+        { doctype: 'io.cozy.files', dirId: ROOT_DIR_ID }
+      ]
+    })
+  })
+
+  it('applies the root invariant to the updater result too', async () => {
+    const assistantDoc = {
+      _id: 'assistant-1',
+      _type: 'io.cozy.ai.chat.assistants',
+      knowledgeBase: [{ doctype: 'io.cozy.files', dirId: 'folder-1' }]
+    }
+    const client = {
+      query: jest.fn().mockResolvedValue({ data: assistantDoc }),
+      save: jest.fn().mockResolvedValue({ data: assistantDoc })
+    }
+
+    await saveKnowledgeBase(client, 'assistant-1', () => [])
+
+    expect(client.save).toHaveBeenCalledWith({
+      ...assistantDoc,
+      knowledgeBase: [{ doctype: 'io.cozy.files', dirId: ROOT_DIR_ID }]
+    })
+  })
+
+  it('propagates a save failure', async () => {
+    const client = {
+      query: jest.fn().mockResolvedValue({ data: { _id: 'assistant-1' } }),
+      save: jest.fn().mockRejectedValue(new Error('boom'))
+    }
+    await expect(saveKnowledgeBase(client, 'assistant-1', [])).rejects.toThrow(
+      'boom'
+    )
   })
 })
