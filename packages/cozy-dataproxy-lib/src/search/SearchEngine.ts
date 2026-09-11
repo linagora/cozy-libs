@@ -272,7 +272,15 @@ export class SearchEngine {
   }
 
   private addSharedDriveRealtime(sharedDriveId: string): void {
-    this.sharedDrivesRealtimes[sharedDriveId]?.stop()
+    const existing = this.sharedDrivesRealtimes[sharedDriveId]
+    if (existing?.isAlive()) {
+      // Nothing to do: the drive is already connected, or its connection is
+      // being established. Replacing it would drop a working socket, and
+      // replacing one that is waiting on a reconnection backoff would leave
+      // its pending connection attempt orphaned.
+      return
+    }
+    existing?.stop()
     // background: the indexer watches the drive without the user looking at
     // it, so the stack must not mark the sharing as seen
     const realtime = new CozyRealtime({
