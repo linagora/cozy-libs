@@ -1,8 +1,37 @@
-import { Q } from 'cozy-client'
+import {
+  buildAssistantByIdQuery,
+  EMAIL_DOCTYPE,
+  FILES_DOCTYPE
+} from '../queries'
 
-import { EMAIL_DOCTYPE, FILES_DOCTYPE } from '../queries'
+/** The root folder of the instance: the assistant covers the whole Drive. */
+export const ROOT_DIR_ID = 'io.cozy.files.root-dir'
 
-const ASSISTANTS_DOCTYPE = 'io.cozy.ai.chat.assistants'
+export const isRootDirId = dirId => dirId === ROOT_DIR_ID
+
+export const makeRootKnowledgeBaseEntry = () => ({
+  doctype: FILES_DOCTYPE,
+  dirId: ROOT_DIR_ID
+})
+
+const isFolderEntry = entry => entry.doctype === FILES_DOCTYPE && !!entry.dirId
+
+const hasFolderEntry = knowledgeBase =>
+  (knowledgeBase || []).some(isFolderEntry)
+
+/**
+ * An assistant always has a knowledge base folder: without one, it covers
+ * the whole Drive. Adds the root entry when no folder entry exists,
+ * replacing a files entry without dirId (getKnowledgeBaseDirId would find
+ * that one first); returns the very same array otherwise.
+ */
+export const withRootFolderIfMissing = (knowledgeBase = []) =>
+  hasFolderEntry(knowledgeBase)
+    ? knowledgeBase
+    : [
+        ...knowledgeBase.filter(entry => entry.doctype !== FILES_DOCTYPE),
+        makeRootKnowledgeBaseEntry()
+      ]
 
 export const makeKnowledgeBaseEntry = pickedFolder => ({
   doctype: FILES_DOCTYPE,
@@ -36,18 +65,26 @@ export const getKnowledgeBaseDirId = assistant =>
  * applied to the freshly fetched doc's knowledgeBase. Computing the update
  * from the fresh doc rather than a value the caller may have cached avoids
  * dropping concurrent changes (stale-read race).
+ *
+ * The saved knowledge base always has a folder entry (the root when none
+ * was chosen): the stack's rag-index worker reads the assistants to know
+ * what to index, there is nothing else to do here.
  */
 export const saveKnowledgeBase = async (
   client,
   assistantId,
   knowledgeBaseOrUpdater
 ) => {
-  const { data: assistant } = await client.query(
-    Q(ASSISTANTS_DOCTYPE).getById(assistantId)
-  )
+  const { definition, options } = buildAssistantByIdQuery(assistantId)
+  const { data: assistant } = await client.query(definition(), {
+    as: options.as
+  })
   const knowledgeBase =
     typeof knowledgeBaseOrUpdater === 'function'
       ? knowledgeBaseOrUpdater(assistant?.knowledgeBase)
       : knowledgeBaseOrUpdater
-  await client.save({ ...assistant, knowledgeBase })
+  await client.save({
+    ...assistant,
+    knowledgeBase: withRootFolderIfMissing(knowledgeBase)
+  })
 }
