@@ -14,3 +14,4 @@ export {
   createCozyRealtimeChatAdapter
 } from './components/adapters'
 export { default as AssistantView } from './components/Views/AssistantView'
+export { setupRagIndexing } from './components/KnowledgeBase/ragIndexing'
