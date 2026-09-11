@@ -1,7 +1,7 @@
 import omit from 'lodash/omit'
 import React from 'react'
 
-import { I18n, translate } from '.'
+import { I18n, translate, i18nPropTypes } from '.'
 
 /**
  *
@@ -23,7 +23,7 @@ const withLocales = localesOrRequire => Component => {
       const { lang } = this.props
       // Do not pass translate props downwards
       // since the component is already augmented with translate()
-      const wrappedProps = omit(this.props, Object.keys(I18n.childContextTypes))
+      const wrappedProps = omit(this.props, Object.keys(i18nPropTypes))
       return (
         <I18n dictRequire={requireLocale} lang={lang}>
           <Translated {...wrappedProps} />
@@ -33,7 +33,7 @@ const withLocales = localesOrRequire => Component => {
   }
   Wrapped.propTypes = {
     ...(Component.propTypes || {}),
-    ...I18n.childContextTypes
+    ...i18nPropTypes
   }
 
   Wrapped.displayName = `withLocales(${

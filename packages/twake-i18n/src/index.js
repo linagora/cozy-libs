@@ -1,7 +1,13 @@
 export { default as createUseI18n } from './createUseI18n'
 export { initFormat, formatLocallyDistanceToNow } from './format'
 export { getI18n } from './helpers'
-export { default as I18n, useI18n, I18nContext, DEFAULT_LANG } from './I18n'
+export {
+  default as I18n,
+  useI18n,
+  I18nContext,
+  i18nPropTypes,
+  DEFAULT_LANG
+} from './I18n'
 export { default } from './I18n'
 export { default as translate } from './translate'
 export { initTranslation, extend, _polyglot } from './translation'
