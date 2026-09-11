@@ -5,7 +5,7 @@
 'use strict'
 
 import PropTypes from 'prop-types'
-import React, { Component, useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { initFormat } from './format'
 import { initTranslation } from './translation'
@@ -13,6 +13,13 @@ import { initTranslation } from './translation'
 export const DEFAULT_LANG = 'en'
 
 export const I18nContext = React.createContext()
+
+export const i18nPropTypes = {
+  t: PropTypes.func,
+  f: PropTypes.func,
+  polyglot: PropTypes.object,
+  lang: PropTypes.string
+}
 
 /**
  * @typedef useI18nReturnTypes
@@ -37,47 +44,35 @@ export const useI18n = () => {
 }
 
 // Provider root component
-class I18n extends Component {
-  constructor(props) {
-    super(props)
-    this.init(this.props)
-  }
-
-  init(props) {
-    const { polyglot, lang, dictRequire, context, defaultLang } = props
-    this.translator =
+const I18n = ({
+  lang,
+  polyglot,
+  dictRequire,
+  context,
+  defaultLang = DEFAULT_LANG,
+  children
+}) => {
+  const init = () => {
+    const translator =
       polyglot || initTranslation(lang, dictRequire, context, defaultLang)
-    this.format = initFormat(lang, defaultLang)
-    this.t = this.translator.t.bind(this.translator)
-    this.contextValue = this.getContextValue(props)
-  }
 
-  getContextValue(props) {
     return {
-      t: this.t,
-      f: this.format,
-      polyglot: (props || this.props).polyglot || this.translator,
-      lang: (props || this.props).lang
+      t: translator.t.bind(translator),
+      f: initFormat(lang, defaultLang),
+      polyglot: translator,
+      lang
     }
   }
 
-  getChildContext() {
-    return this.contextValue
+  const [contextValue, setContextValue] = useState(init)
+
+  if (contextValue.lang !== lang) {
+    setContextValue(init())
   }
 
-  UNSAFE_componentWillReceiveProps = nextProps => {
-    if (nextProps.lang !== this.props.lang) {
-      this.init(nextProps)
-    }
-  }
-
-  render() {
-    return (
-      <I18nContext.Provider value={this.contextValue}>
-        {this.props.children}
-      </I18nContext.Provider>
-    )
-  }
+  return (
+    <I18nContext.Provider value={contextValue}>{children}</I18nContext.Provider>
+  )
 }
 
 I18n.propTypes = {
@@ -86,17 +81,6 @@ I18n.propTypes = {
   dictRequire: PropTypes.func, // A callback to load locales.
   context: PropTypes.string, // current context.
   defaultLang: PropTypes.string // default language. By default is 'en'
-}
-
-I18n.defaultProps = {
-  defaultLang: DEFAULT_LANG
-}
-
-I18n.childContextTypes = {
-  t: PropTypes.func,
-  f: PropTypes.func,
-  polyglot: PropTypes.object,
-  lang: PropTypes.string
 }
 
 export default I18n
