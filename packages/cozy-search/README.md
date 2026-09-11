@@ -58,7 +58,9 @@ It needs the following permissions: `io.cozy.triggers` and `io.cozy.jobs`
 (to create and launch the triggers), `io.cozy.ai.chat.assistants` and
 `io.cozy.files` (to read and migrate the assistants). It is idempotent and
 never throws: on a stack whose `rag-index` worker is still reserved, the
-403 is logged and the app keeps working.
+403 is logged and the app keeps working. `ensureProvisionedAssistants`
+additionally creates one `io.cozy.accounts` document per provisioned
+assistant, and the `dirName` folder in `io.cozy.files`.
 
 ### On desktop
 
