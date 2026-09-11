@@ -2,6 +2,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import ReactTooltip from 'react-tooltip'
 
+import { useI18n } from 'twake-i18n'
+
 import styles from '../styles/tooltip.styl'
 
 export const SharingTooltip = props => (
@@ -16,29 +18,23 @@ export const SharingTooltip = props => (
 )
 // accepts all the props from https://github.com/wwayne/react-tooltip#options
 
-export class TooltipRecipientList extends React.Component {
-  static contextTypes = {
-    t: PropTypes.func.isRequired
-  }
-  render() {
-    const { t } = this.context
-    const { recipientNames, cutoff = 4 } = this.props
+export const TooltipRecipientList = ({ recipientNames, cutoff }) => {
+  const { t } = useI18n()
 
-    return (
-      <ul className={styles['shared-tooltip-list']}>
-        {recipientNames.slice(0, cutoff).map((name, i) => (
-          <li key={`key_name_${name}_${i}`}>{name}</li>
-        ))}
-        {recipientNames.length > cutoff && (
-          <li>
-            {t('Share.members.others', {
-              smart_count: recipientNames.slice(cutoff).length
-            })}
-          </li>
-        )}
-      </ul>
-    )
-  }
+  return (
+    <ul className={styles['shared-tooltip-list']}>
+      {recipientNames.slice(0, cutoff).map((name, i) => (
+        <li key={`key_name_${name}_${i}`}>{name}</li>
+      ))}
+      {recipientNames.length > cutoff && (
+        <li>
+          {t('Share.members.others', {
+            smart_count: recipientNames.slice(cutoff).length
+          })}
+        </li>
+      )}
+    </ul>
+  )
 }
 
 TooltipRecipientList.propTypes = {
