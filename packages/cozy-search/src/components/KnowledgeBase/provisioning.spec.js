@@ -1,8 +1,10 @@
 import { models } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import {
   assistantIdFromName,
   ensureProvisionedAssistants,
+  getDefaultProvisionedAssistantId,
   isMagicFolderId,
   resolveProvisionedFolder
 } from './provisioning'
@@ -14,6 +16,8 @@ jest.mock('cozy-client', () => ({
     folder: { getReferencedFolder: jest.fn() }
   }
 }))
+
+jest.mock('cozy-flags', () => jest.fn())
 
 const notFound = () => Object.assign(new Error('not_found'), { status: 404 })
 const conflict = () => Object.assign(new Error('conflict'), { status: 409 })
@@ -430,5 +434,28 @@ describe('ensureProvisionedAssistants', () => {
       ensured: [],
       skipped: []
     })
+  })
+})
+
+describe('getDefaultProvisionedAssistantId', () => {
+  beforeEach(() => flag.mockReset())
+
+  it('returns null without the flag or without a default entry', () => {
+    flag.mockReturnValue(null)
+    expect(getDefaultProvisionedAssistantId()).toBeNull()
+    flag.mockReturnValue('not-an-array')
+    expect(getDefaultProvisionedAssistantId()).toBeNull()
+    flag.mockReturnValue([{ name: 'Docs', dirName: 'Docs' }])
+    expect(getDefaultProvisionedAssistantId()).toBeNull()
+  })
+
+  it('derives the id of the first default entry with a valid name', () => {
+    flag.mockReturnValue([
+      { name: '!!!', dirName: 'X', default: true },
+      { name: 'Mes documents', dirName: 'Docs', default: true },
+      { name: 'Autre', dirName: 'Autre', default: true }
+    ])
+    expect(getDefaultProvisionedAssistantId()).toBe('mes-documents')
+    expect(flag).toHaveBeenCalledWith('rag.assistants.autoprovision')
   })
 })
