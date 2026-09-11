@@ -7,6 +7,7 @@ import { useI18n } from 'twake-i18n'
 import {
   getKnowledgeBaseDirId,
   hasEmailKnowledgeBase,
+  isRootDirId,
   makeKnowledgeBaseEntry,
   saveKnowledgeBase,
   withKnowledgeBaseEntry
@@ -43,6 +44,13 @@ export const useSelectedAssistantKnowledgeBase = () => {
 
   const hasEmail = hasEmailKnowledgeBase(assistant)
 
+  // The folder is gone (or unreadable): its knowledge base cannot be used.
+  const isUnavailable =
+    !!dirId &&
+    (fetchStatus === 'failed' ||
+      !!folder?.trashed ||
+      !!folder?.path?.startsWith('/.cozy_trash'))
+
   const setKnowledgeBaseFolder = useCallback(
     async pickedFolder => {
       if (!realAssistantId || !pickedFolder) return
@@ -50,21 +58,20 @@ export const useSelectedAssistantKnowledgeBase = () => {
         await saveKnowledgeBase(client, realAssistantId, kb =>
           withKnowledgeBaseEntry(kb, makeKnowledgeBaseEntry(pickedFolder))
         )
-      } catch {
+      } catch (_error) {
         showAlert({ message: t('assistant.default_error'), severity: 'error' })
       }
     },
     [client, realAssistantId, showAlert, t]
   )
 
+  const isRoot = isRootDirId(dirId)
+
   return {
     dirId,
     folder: folder ?? null,
-    isUnavailable:
-      !!dirId &&
-      (fetchStatus === 'failed' ||
-        !!folder?.trashed ||
-        !!folder?.path?.startsWith('/.cozy_trash')),
+    isRoot,
+    isUnavailable,
     setKnowledgeBaseFolder,
     isRealAssistant: !!realAssistantId,
     hasEmail

@@ -23,6 +23,7 @@ import TDrive from '../../assets/tdrive.png'
 const KnowledgeBaseChip = ({
   dirId,
   folder,
+  isRoot,
   isUnavailable,
   isLast,
   onChangeFolder
@@ -49,7 +50,9 @@ const KnowledgeBaseChip = ({
 
   const label = isUnavailable
     ? t('assistant.knowledge_base.unavailable')
-    : (folder?.name ?? '…')
+    : isRoot
+      ? t('assistant.twake_knowledges.drive')
+      : (folder?.name ?? '…')
 
   return (
     <>

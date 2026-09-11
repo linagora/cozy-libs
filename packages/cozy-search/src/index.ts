@@ -14,3 +14,10 @@ export {
   createCozyRealtimeChatAdapter
 } from './components/adapters'
 export { default as AssistantView } from './components/Views/AssistantView'
+export {
+  assistantIdFromName,
+  AUTOPROVISION_FLAG,
+  ensureProvisionedAssistants,
+  getDefaultProvisionedAssistantId
+} from './components/KnowledgeBase/provisioning'
+export { setupRagIndexing } from './components/KnowledgeBase/ragIndexing'

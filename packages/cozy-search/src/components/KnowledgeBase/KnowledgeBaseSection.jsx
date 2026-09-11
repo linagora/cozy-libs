@@ -12,6 +12,7 @@ import FolderPickerDialog from './FolderPickerDialog'
 import {
   getKnowledgeBaseDirId,
   hasEmailKnowledgeBase,
+  isRootDirId,
   makeEmailKnowledgeBaseEntry,
   makeKnowledgeBaseEntry,
   withKnowledgeBaseEntry,
@@ -71,7 +72,9 @@ const KnowledgeBaseSection = ({ knowledgeBase = [], onChange }) => {
             label={
               isUnavailable
                 ? t('assistant.knowledge_base.unavailable')
-                : (folder?.name ?? '…')
+                : isRootDirId(dirId)
+                  ? t('assistant.twake_knowledges.drive')
+                  : (folder?.name ?? '…')
             }
             deleteIcon={
               <Icon

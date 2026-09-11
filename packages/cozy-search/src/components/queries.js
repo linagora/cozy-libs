@@ -6,6 +6,8 @@ const CONTACTS_DOCTYPE = 'io.cozy.contacts'
 export const CHAT_CONVERSATIONS_DOCTYPE = 'io.cozy.ai.chat.conversations'
 export const CHAT_EVENTS_DOCTYPE = 'io.cozy.ai.chat.events'
 export const FILES_DOCTYPE = 'io.cozy.files'
+export const ASSISTANTS_DOCTYPE = 'io.cozy.ai.chat.assistants'
+export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 export const EMAIL_DOCTYPE = 'com.linagora.email'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(86400) // 24 hours
@@ -92,3 +94,18 @@ export const buildChatConversationsQuery = () => {
     })
   }
 }
+
+/** Every assistant of the instance, paged by 1000. */
+export const buildAllAssistantsQuery = () => ({
+  definition: () => Q(ASSISTANTS_DOCTYPE).limitBy(1000),
+  options: { as: `${ASSISTANTS_DOCTYPE}/all` }
+})
+
+/** The provider accounts of one assistant provider (openrag, ...). */
+export const buildProviderAccountsQuery = providerId => ({
+  definition: () =>
+    Q(ACCOUNTS_DOCTYPE)
+      .where({ account_type: providerId })
+      .indexFields(['account_type']),
+  options: { as: `${ACCOUNTS_DOCTYPE}/${providerId}` }
+})

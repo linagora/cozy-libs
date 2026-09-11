@@ -34,6 +34,11 @@ import 'cozy-search/dist/stylesheet.css'
   "description": "Required by the cozy Assistant",
   "type": "io.cozy.ai.chat.events",
   "verbs": ["GET"]
+},
+"chatAssistants": {
+  "description": "Required by the cozy Assistant",
+  "type": "io.cozy.ai.chat.assistants",
+  "verbs": ["GET"]
 }
 ```
 
@@ -41,6 +46,34 @@ import 'cozy-search/dist/stylesheet.css'
 
 ```jsx
 <RealTimeQueries doctype="io.cozy.ai.chat.conversations" />
+```
+
+### RAG indexing setup
+
+Call `setupRagIndexing(client)` once per session at startup (before
+`ensureProvisionedAssistants` if your app provisions assistants from the
+`rag.assistants.autoprovision` flag). It makes sure the instance's two
+`rag-index` triggers exist (one on `io.cozy.files`, one on
+`io.cozy.ai.chat.assistants`) and gives the root folder to any assistant
+that has no knowledge base folder yet — the stack's `rag-index` worker
+reads the assistants to know what to index, cozy-search only has to keep
+the triggers and the assistants' `knowledgeBase` in shape.
+
+It needs the following permissions: `io.cozy.triggers` and `io.cozy.jobs`
+(to create and launch the triggers), `io.cozy.ai.chat.assistants` and
+`io.cozy.files` (to read and migrate the assistants). It is idempotent and
+never throws: on a stack whose `rag-index` worker is still reserved, the
+403 is logged and the app keeps working.
+
+An entry of `rag.assistants.autoprovision` can carry `"default": true`
+(the first flagged entry wins if there are several). Every NEW
+conversation then starts on that assistant once its document exists —
+from the session after it was provisioned onward. Existing conversations
+are unaffected: they keep their own assistant, or stay unscoped if they
+had none.
+
+```json
+{ "name": "Mes documents", "dirName": "Documents", "default": true }
 ```
 
 ### On desktop

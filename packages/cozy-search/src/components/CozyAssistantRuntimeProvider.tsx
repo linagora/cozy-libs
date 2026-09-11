@@ -30,9 +30,10 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { useAssistant } from './AssistantProvider'
+import { resolveConversationAssistantId } from './KnowledgeBase/conversationAssistant'
+import { useDefaultAssistantId } from './KnowledgeBase/useDefaultAssistantId'
 import { createCozyRealtimeChatAdapter } from './adapters/CozyRealtimeChatAdapter'
 import { StreamBridge } from './adapters/StreamBridge'
-import { DEFAULT_ASSISTANT } from './constants'
 import { formatAnswer } from './helpers'
 import {
   CHAT_EVENTS_DOCTYPE,
@@ -104,6 +105,8 @@ const ConversationLoader = ({
   ) as { data: Conversation | undefined; fetchStatus: string }
   const conversation = queryResult.data
   const isLoading = isQueryLoading(queryResult)
+  const boundId = conversation?.relationships?.assistant?.data?._id
+  const defaultId = useDefaultAssistantId()
 
   const initialMessages = useMemo(
     () => convertMessagesToThreadMessages(conversation?.messages, t),
@@ -111,13 +114,14 @@ const ConversationLoader = ({
   )
 
   useEffect(() => {
-    setSelectedAssistantId(
-      conversation?.relationships?.assistant?.data?._id || DEFAULT_ASSISTANT._id
-    )
-  }, [
-    conversation?.relationships?.assistant?.data?._id,
-    setSelectedAssistantId
-  ])
+    const next = resolveConversationAssistantId({
+      boundId,
+      conversation,
+      isLoading,
+      defaultId
+    })
+    if (next) setSelectedAssistantId(next)
+  }, [boundId, conversation, isLoading, defaultId, setSelectedAssistantId])
 
   if (isLoading) {
     return (
