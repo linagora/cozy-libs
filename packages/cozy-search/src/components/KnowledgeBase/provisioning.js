@@ -1,4 +1,5 @@
 import { models } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import {
   getKnowledgeBaseDirId,
@@ -11,6 +12,8 @@ import {
   buildAssistantByIdQuery,
   FILES_DOCTYPE
 } from '../queries'
+
+export const AUTOPROVISION_FLAG = 'rag.assistants.autoprovision'
 
 const ASSISTANTS_DOCTYPE = 'io.cozy.ai.chat.assistants'
 const APPS_DOCTYPE = 'io.cozy.apps'
@@ -29,6 +32,23 @@ export const assistantIdFromName = name =>
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
+
+/**
+ * The assistant new conversations start on: the first entry of the
+ * autoprovision flag marked `default: true`, by its derived id. Null when
+ * none is configured; the sentinel assistant is used then.
+ * @returns {string|null}
+ */
+export const getDefaultProvisionedAssistantId = () => {
+  const entries = flag(AUTOPROVISION_FLAG)
+  if (!Array.isArray(entries)) return null
+  for (const entry of entries) {
+    if (entry?.default !== true) continue
+    const id = assistantIdFromName(entry.name)
+    if (id) return id
+  }
+  return null
+}
 
 export const isMagicFolderId = dirId =>
   MAGIC_FOLDER_ID.test(String(dirId || ''))
@@ -153,7 +173,7 @@ const validate = entry => {
  * names derive to the same id would fight over one assistant: the second
  * one is skipped.
  * @param {import('cozy-client').CozyClient} client - The cozy client.
- * @param {Array<{name: string, dirName?: string, dirId?: string, prompt?: string, icon?: string|null}>} configs - The flag entries.
+ * @param {Array<{name: string, dirName?: string, dirId?: string, prompt?: string, icon?: string|null, default?: boolean}>} configs - The flag entries.
  * @returns {Promise<{created: string[], ensured: string[], skipped: {id: string, reason: string}[]}>} What was created, ensured and skipped.
  */
 export const ensureProvisionedAssistants = async (client, configs) => {

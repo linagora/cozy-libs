@@ -121,7 +121,7 @@ const AssistantSelection = ({ className, disabled }) => {
           <AssistantSelectionItem
             assistant={DEFAULT_ASSISTANT}
             onClose={handleClose}
-            onSelect={() => setSelectedAssistantId(DEFAULT_ASSISTANT.id)}
+            onSelect={() => setSelectedAssistantId(DEFAULT_ASSISTANT._id)}
             selectedAssistant={selectedAssistant}
             disableActions={true}
           />

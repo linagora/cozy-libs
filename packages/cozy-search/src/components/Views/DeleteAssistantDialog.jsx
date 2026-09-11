@@ -16,13 +16,19 @@ import { useI18n, useExtendI18n } from 'twake-i18n'
 import { locales } from '../../locales'
 import { useAssistant } from '../AssistantProvider'
 import styles from '../CreateAssistantSteps/styles.styl'
+import { DEFAULT_ASSISTANT } from '../constants'
 import { buildAssistantByIdQuery } from '../queries'
 
 const DeleteAssistantDialog = ({ open, onClose }) => {
   useExtendI18n(locales)
   const { t } = useI18n()
   const client = useClient()
-  const { assistantIdInAction, setAssistantIdInAction } = useAssistant()
+  const {
+    assistantIdInAction,
+    setAssistantIdInAction,
+    selectedAssistantId,
+    setSelectedAssistantId
+  } = useAssistant()
   const { showAlert } = useAlert()
   const [isDeleting, setIsDeleting] = useState(false)
 
@@ -42,6 +48,9 @@ const DeleteAssistantDialog = ({ open, onClose }) => {
         assistantQuery.definition()
       )
       await client.destroy(assistantDoc)
+      if (selectedAssistantId === assistantDoc._id) {
+        setSelectedAssistantId(DEFAULT_ASSISTANT._id)
+      }
       const provider = included?.[0]
       if (provider) {
         await client.destroy(provider)
