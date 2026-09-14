@@ -1,15 +1,9 @@
 'use strict'
 
-import { I18n } from 'twake-i18n'
+import { getI18n } from 'twake-i18n'
 
-const I18nComponent = new I18n({
-  lang: 'en',
-  defaultLang: 'en',
-  dictRequire: lang => require(`../../src/locales/${lang}`)
-})
+const { t, f } = getI18n('en', lang => require(`../../src/locales/${lang}`))
 
-const context = I18nComponent.getChildContext()
+export const tMock = t
 
-export const tMock = context.t
-
-export const fMock = context.f
+export const fMock = f
