@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.4.1...twake-i18n@0.5.0) (2026-09-14)
+
+### Code Refactoring
+
+- Drop usage of deprecated API ([4cd765f](https://github.com/cozy/cozy-libs/commit/4cd765f687bd3c63df8a1cffd9e8142cc842ed67))
+
+### BREAKING CHANGES
+
+- I18n is now a function component and no longer
+  provides the legacy React context. Components reading `t`, `f`,
+  `polyglot` or `lang` through `contextTypes` must use `useI18n()` or
+  `translate()` instead. Code building a translator with `new I18n(...)`
+  followed by `getChildContext()` or `getContextValue()` must use
+  `getI18n()` instead.
+
 ## [0.4.1](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.4.0...twake-i18n@0.4.1) (2026-03-17)
 
 **Note:** Version bump only for package twake-i18n

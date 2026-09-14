@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [39.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@39.0.42...cozy-harvest-lib@39.1.0) (2026-09-14)
+
+### Features
+
+- Remove unused internal export ([fbd6b37](https://github.com/cozy/cozy-libs/commit/fbd6b3730a931c4e2f167c557b8f24784ea354fd))
+
 ## [39.0.42](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@39.0.41...cozy-harvest-lib@39.0.42) (2026-09-10)
 
 **Note:** Version bump only for package cozy-harvest-lib
