@@ -7,10 +7,14 @@ import { PermissionTypeMenu } from './PermissionTypeMenu'
 import AppLike from '../../../test/AppLike'
 
 const mockUpdateSharingMemberType = jest.fn()
+const mockHasSharedParent = jest.fn()
+const mockGetSharedParentPath = jest.fn()
 const mockShowAlert = jest.fn()
 
 jest.mock('../../hooks/useSharingContext', () => ({
   useSharingContext: () => ({
+    hasSharedParent: mockHasSharedParent,
+    getSharedParentPath: mockGetSharedParentPath,
     updateSharingMemberType: mockUpdateSharingMemberType
   })
 }))
@@ -32,7 +36,8 @@ describe('PermissionTypeMenu component', () => {
   const defaultProps = {
     sharingId: 'sharing-123',
     memberIndex: 1,
-    type: 'two-way'
+    type: 'two-way',
+    recipient: { name: 'Alice' }
   }
 
   beforeEach(() => {
@@ -127,5 +132,84 @@ describe('PermissionTypeMenu component', () => {
     fireEvent.click(getByRole('menuitem', { name: 'Editor' }))
 
     expect(mockUpdateSharingMemberType).not.toHaveBeenCalled()
+  })
+
+  describe('when downgrading to viewer on a folder with a shared parent', () => {
+    const folderDocument = {
+      _id: 'doc-1',
+      type: 'directory',
+      path: '/parent/child'
+    }
+
+    beforeEach(() => {
+      mockHasSharedParent.mockReturnValue(true)
+    })
+
+    it('should ask for confirmation instead of updating directly', () => {
+      const { getByRole } = setup({
+        type: 'two-way',
+        document: folderDocument
+      })
+
+      fireEvent.click(getByRole('button', { name: 'Editor' }))
+      fireEvent.click(getByRole('menuitem', { name: 'Viewer' }))
+
+      expect(mockUpdateSharingMemberType).not.toHaveBeenCalled()
+      expect(getByRole('button', { name: 'Update parent' })).toBeInTheDocument()
+    })
+
+    it('should call updateSharingMemberType when confirming', async () => {
+      mockUpdateSharingMemberType.mockResolvedValue(undefined)
+
+      const { getByRole } = setup({
+        type: 'two-way',
+        document: folderDocument
+      })
+
+      fireEvent.click(getByRole('button', { name: 'Editor' }))
+      fireEvent.click(getByRole('menuitem', { name: 'Viewer' }))
+      fireEvent.click(getByRole('button', { name: 'Update parent' }))
+
+      await waitFor(() => {
+        expect(mockUpdateSharingMemberType).toHaveBeenCalledWith(
+          'sharing-123',
+          1,
+          'one-way'
+        )
+      })
+    })
+
+    it('should not call updateSharingMemberType when cancelling', () => {
+      const { getByRole, queryByRole } = setup({
+        type: 'two-way',
+        document: folderDocument
+      })
+
+      fireEvent.click(getByRole('button', { name: 'Editor' }))
+      fireEvent.click(getByRole('menuitem', { name: 'Viewer' }))
+      fireEvent.click(getByRole('button', { name: 'Cancel' }))
+
+      expect(mockUpdateSharingMemberType).not.toHaveBeenCalled()
+      expect(queryByRole('button', { name: 'Update parent' })).toBe(null)
+    })
+
+    it('should update directly when the folder has no shared parent', () => {
+      mockHasSharedParent.mockReturnValue(false)
+
+      const { getByRole, queryByRole } = setup({
+        type: 'two-way',
+        document: folderDocument
+      })
+
+      fireEvent.click(getByRole('button', { name: 'Editor' }))
+      fireEvent.click(getByRole('menuitem', { name: 'Viewer' }))
+
+      expect(mockUpdateSharingMemberType).toHaveBeenCalledWith(
+        'sharing-123',
+        1,
+        'one-way'
+      )
+      expect(queryByRole('button', { name: 'Update parent' })).toBe(null)
+    })
   })
 })

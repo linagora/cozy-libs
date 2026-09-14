@@ -4,11 +4,13 @@ import { fetchFilesPaths } from '../helpers/files'
 
 export const useFetchDocumentPath = (client, document) => {
   const [documentPath, setDocumentPath] = useState(
-    document.path ? document.path : null
+    document?.path ? document.path : null
   )
   useEffect(() => {
     ;(async () => {
       try {
+        if (!document) return setDocumentPath(null)
+
         const isDirectory = document.type === 'directory'
 
         if (isDirectory) return setDocumentPath(document.path)

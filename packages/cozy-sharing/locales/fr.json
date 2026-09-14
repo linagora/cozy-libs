@@ -384,6 +384,12 @@
     "cancel": "Annuler",
     "discard": "Abandonner"
   },
+  "DowngradePermissionConfirmDialog": {
+    "title": "Modifier le rôle du dossier parent ?",
+    "content": "Modifier les permissions de **%{contactName}** sur cet élément modifiera également les permissions sur un dossier parent. Vous pouvez aussi appliquer un accès limité à ce dossier.",
+    "cancel": "Annuler",
+    "confirm": "Mettre à jour le parent"
+  },
   "GroupRecipient": {
     "secondary": "%{memberCount} membre |||| %{memberCount} membres",
     "secondary_you": "dont vous"

@@ -47,7 +47,12 @@ const MemberRecipient = props => {
       verifyRecipient={verifyRecipient}
     />
   ) : (
-    <MemberRecipientPermissions {...props} />
+    <MemberRecipientPermissions
+      {...rest}
+      instance={instance}
+      isOwner={isOwner}
+      status={status}
+    />
   )
 
   return (

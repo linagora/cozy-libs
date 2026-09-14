@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react'
 
+import { useClient } from 'cozy-client'
 import minilog from 'cozy-minilog'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
@@ -7,51 +8,82 @@ import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
+import DowngradePermissionConfirmDialog from './DowngradePermissionConfirmDialog'
 import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
 import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
 import withLocales from '../../hoc/withLocales'
+import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
 import { useSharingContext } from '../../hooks/useSharingContext'
 
 const log = minilog('PermissionTypeMenu')
 
-const PermissionTypeMenuComponent = ({ sharingId, memberIndex, type }) => {
+const PermissionTypeMenuComponent = ({
+  sharingId,
+  memberIndex,
+  type,
+  document,
+  recipient
+}) => {
   const { t } = useI18n()
+  const client = useClient()
   const buttonRef = useRef()
-  const { updateSharingMemberType } = useSharingContext()
+  const { hasSharedParent, updateSharingMemberType } = useSharingContext()
   const { showAlert } = useAlert()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
+  const [pendingType, setPendingType] = useState(null)
+
+  const documentPath = useFetchDocumentPath(client, document)
 
   const hideMenu = useCallback(() => {
     setMenuDisplayed(false)
   }, [])
 
-  const setType = useCallback(
+  const applyType = useCallback(
     async newType => {
-      hideMenu()
-      if (newType !== type) {
-        try {
-          await updateSharingMemberType(sharingId, memberIndex, newType)
-        } catch (error) {
-          log.error('Failed to change member permission type', error)
-          showAlert({
-            message: t('Share.members.error.changePermission'),
-            severity: 'error',
-            variant: 'filled'
-          })
-        }
+      try {
+        await updateSharingMemberType(sharingId, memberIndex, newType)
+      } catch (error) {
+        log.error('Failed to change member permission type', error)
+        showAlert({
+          message: t('Share.members.error.changePermission'),
+          severity: 'error',
+          variant: 'filled'
+        })
       }
     },
-    [
-      hideMenu,
-      memberIndex,
-      sharingId,
-      showAlert,
-      t,
-      type,
-      updateSharingMemberType
-    ]
+    [memberIndex, sharingId, showAlert, t, updateSharingMemberType]
   )
+
+  // Downgrading to viewer on a folder inside a shared parent also reduces
+  // the member's rights on the parent: require explicit confirmation first.
+  const shouldConfirmDowngrade =
+    type === 'two-way' &&
+    Boolean(documentPath) &&
+    hasSharedParent?.(documentPath)
+
+  const setType = useCallback(
+    newType => {
+      hideMenu()
+      if (newType === type) return
+      if (newType === 'one-way' && shouldConfirmDowngrade) {
+        setPendingType(newType)
+        return
+      }
+      applyType(newType)
+    },
+    [applyType, hideMenu, shouldConfirmDowngrade, type]
+  )
+
+  const handleConfirmDowngrade = useCallback(() => {
+    const newType = pendingType
+    setPendingType(null)
+    if (newType) applyType(newType)
+  }, [applyType, pendingType])
+
+  const handleCancelDowngrade = useCallback(() => {
+    setPendingType(null)
+  }, [])
 
   const actions = makeActions(
     [setReadOnlySharedPermission, setReadWriteSharedPermission],
@@ -80,6 +112,14 @@ const PermissionTypeMenuComponent = ({ sharingId, memberIndex, type }) => {
         autoClose
         onClose={hideMenu}
       />
+      {pendingType && (
+        <DowngradePermissionConfirmDialog
+          document={document}
+          recipient={recipient}
+          onCancel={handleCancelDowngrade}
+          onConfirm={handleConfirmDowngrade}
+        />
+      )}
     </>
   )
 }

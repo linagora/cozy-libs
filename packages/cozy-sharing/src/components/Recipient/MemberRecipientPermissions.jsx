@@ -20,7 +20,8 @@ const MemberRecipientPermissions = ({
   onRevoke,
   onRevokeSelf,
   sharingId,
-  memberIndex
+  memberIndex,
+  ...recipient
 }) => {
   const { t } = useI18n()
   const client = useClient()
@@ -73,6 +74,8 @@ const MemberRecipientPermissions = ({
             sharingId={sharingId}
             memberIndex={memberIndex}
             type={type ?? 'one-way'}
+            document={document}
+            recipient={recipient}
           />
           <IconButton
             onClick={handleRevocation}

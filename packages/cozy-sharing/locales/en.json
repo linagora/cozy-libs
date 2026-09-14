@@ -386,6 +386,12 @@
     "cancel": "Cancel",
     "discard": "Discard"
   },
+  "DowngradePermissionConfirmDialog": {
+    "title": "Update role for parent folder?",
+    "content": "Changing **%{contactName}** permissions on this item will aslo change permissions on a parent folder. Alternatively, apply limited access to this folder.",
+    "cancel": "Cancel",
+    "confirm": "Update parent"
+  },
   "GroupRecipient": {
     "secondary": "%{memberCount} member |||| %{memberCount} members",
     "secondary_you": "including you"
