@@ -1,13 +1,6 @@
 'use strict'
 
-import I18n from 'twake-i18n'
+import { getI18n } from 'twake-i18n'
 
-export const I18nContext = options => {
-  const I18nComponent = new I18n({
-    lang: options.lang,
-    defaultLang: options.defaultLang,
-    dictRequire: () => options.locale
-  })
-
-  return I18nComponent.getContextValue()
-}
+export const I18nContext = options =>
+  getI18n(options.lang, () => options.locale, undefined, options.defaultLang)

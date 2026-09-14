@@ -1,5 +1,5 @@
 import { createMockClient } from 'cozy-client'
-import { I18n } from 'twake-i18n'
+import { getI18n } from 'twake-i18n'
 
 import konnectorBlock from './konnectorBlock'
 
@@ -9,12 +9,7 @@ client.fetchJSON = jest.fn()
 client.query = jest.fn()
 client.getQueryFromState = jest.fn()
 
-const I18nComponent = new I18n({
-  lang: 'en',
-  dictRequire: lang => require(`../locales/${lang}`)
-})
-
-const mockT = I18nComponent.getChildContext().t
+const { t: mockT } = getI18n('en', lang => require(`../locales/${lang}`))
 
 const setup = async ({
   isAccountConnected = true,
