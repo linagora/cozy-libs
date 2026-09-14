@@ -570,7 +570,7 @@ export const hasSharedChild = (state, documentPath) => {
  */
 export const getSharedParentPath = (state, documentPath) => {
   if (hasSharedParent(state, documentPath)) {
-    return state.sharedPaths.find(path => documentPath.startsWith(path))
+    return state.sharedPaths.find(path => documentPath.startsWith(`${path}/`))
   }
   return null
 }
