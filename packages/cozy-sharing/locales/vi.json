@@ -386,6 +386,12 @@
     "cancel": "Hủy",
     "discard": "Bỏ"
   },
+  "DowngradePermissionConfirmDialog": {
+    "title": "Cập nhật vai trò cho thư mục cha?",
+    "content": "Việc thay đổi quyền của **%{contactName}** trên mục này cũng sẽ thay đổi quyền trên thư mục cha. Ngoài ra, bạn có thể áp dụng quyền truy cập giới hạn cho thư mục này.",
+    "cancel": "Hủy",
+    "confirm": "Cập nhật thư mục cha"
+  },
   "GroupRecipient": {
     "secondary": "%{memberCount} thành viên |||| %{memberCount} thành viên",
     "secondary_you": "bao gồm cả bạn"

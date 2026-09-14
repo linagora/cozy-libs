@@ -178,6 +178,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Read-only sharing | If the existing sharing is read-only, only the `readOnly` option is offered | `ShareByEmail.jsx:46-57` |
 | Contacts shown | Only contacts with a defined `email` or `cozy` URL | `helpers/recipients.js:72-73` |
 | Group sharing | All members get the same permission; dynamic membership (add/remove) propagates | `state.js:414-451` |
+| Downgrade confirmation | Switching a member from `two-way` (editor) to `one-way` (viewer) on a folder with a shared parent first opens `DowngradePermissionConfirmDialog`: the change is applied only on confirm, cancel keeps the editor permission (the downgrade also reduces the member's rights on the parent folder) | `Recipient/PermissionTypeMenu.jsx`, `Recipient/DowngradePermissionConfirmDialog.jsx` |
 
 ### Shared drives & federated folders
 
