@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.30...cozy-search@2.3.0) (2026-09-15)
+
+### Features
+
+- **cozy-search:** Ensure root folder in every knowledge base ([03c1165](https://github.com/cozy/cozy-libs/commit/03c11650779fff77086c575e5fabb1389cb0dc21))
+- **cozy-search:** Provision flag-defined assistants ([4cda68d](https://github.com/cozy/cozy-libs/commit/4cda68d4fc2b596f2a11485126365f5fffb78e55))
+- **cozy-search:** Set up instance-wide rag-index triggers at startup ([7390c8c](https://github.com/cozy/cozy-libs/commit/7390c8c29cd88591b99d59539a4626ad87f40304))
+- **cozy-search:** Start conversations on the flagged default assistant ([225f3df](https://github.com/cozy/cozy-libs/commit/225f3df54d664cc928e59202b6907198cf50a493))
+
 ## [2.2.30](https://github.com/cozy/cozy-libs/compare/cozy-search@2.2.29...cozy-search@2.2.30) (2026-09-15)
 
 **Note:** Version bump only for package cozy-search
