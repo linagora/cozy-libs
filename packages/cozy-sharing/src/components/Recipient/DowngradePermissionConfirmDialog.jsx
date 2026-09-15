@@ -58,7 +58,11 @@ const DowngradePermissionConfirmDialog = ({
               <TimelineSeparator>
                 <TimelineDot className="u-bg-transparent u-bdw-0 u-elevation-0 u-p-0">
                   <div className="u-w-1-half u-flex u-flex-justify-center">
-                    <Icon icon={FolderOutlined} size={24} />
+                    <Icon
+                      color="var(--iconTextColor)"
+                      icon={FolderOutlined}
+                      size={24}
+                    />
                   </div>
                 </TimelineDot>
                 <TimelineConnector />
@@ -89,7 +93,11 @@ const DowngradePermissionConfirmDialog = ({
               <TimelineSeparator>
                 <TimelineDot className="u-bg-transparent u-bdw-0 u-elevation-0 u-p-0">
                   <div className="u-w-1-half u-flex u-flex-justify-center">
-                    <Icon icon={FolderOutlined} size={16} />
+                    <Icon
+                      color="var(--iconTextColor)"
+                      icon={FolderOutlined}
+                      size={16}
+                    />
                   </div>
                 </TimelineDot>
               </TimelineSeparator>
