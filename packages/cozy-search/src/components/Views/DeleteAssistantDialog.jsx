@@ -17,7 +17,7 @@ import { locales } from '../../locales'
 import { useAssistant } from '../AssistantProvider'
 import styles from '../CreateAssistantSteps/styles.styl'
 import { DEFAULT_ASSISTANT } from '../constants'
-import { buildAssistantByIdQuery } from '../queries'
+import { buildAssistantByIdWithProviderQuery } from '../queries'
 
 const DeleteAssistantDialog = ({ open, onClose }) => {
   useExtendI18n(locales)
@@ -32,7 +32,8 @@ const DeleteAssistantDialog = ({ open, onClose }) => {
   const { showAlert } = useAlert()
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const assistantQuery = buildAssistantByIdQuery(assistantIdInAction)
+  const assistantQuery =
+    buildAssistantByIdWithProviderQuery(assistantIdInAction)
   const { data: assistant, fetchStatus } =
     useQuery(assistantQuery.definition, assistantQuery.options) || {}
 
