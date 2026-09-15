@@ -6620,7 +6620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@linagora/twake-icons@npm:^2.10.0":
+"@linagora/twake-icons@npm:^2.10.0, @linagora/twake-icons@npm:^2.9.0":
   version: 2.10.0
   resolution: "@linagora/twake-icons@npm:2.10.0"
   dependencies:
@@ -17900,7 +17900,7 @@ __metadata:
     "@babel/cli": "npm:7.16.8"
     "@babel/core": "npm:7.16.12"
     "@cozy/minilog": "npm:^1.0.0"
-    "@linagora/twake-icons": "npm:^2.6.6"
+    "@linagora/twake-icons": "npm:^2.9.0"
     "@storybook/addon-essentials": "npm:7.6.0"
     "@storybook/addon-interactions": "npm:7.6.0"
     "@storybook/addon-links": "npm:7.6.0"
@@ -17935,7 +17935,7 @@ __metadata:
     storybook: "npm:7.6.0"
     twake-i18n: "npm:^0.5.0"
   peerDependencies:
-    "@linagora/twake-icons": ">=2.6.6"
+    "@linagora/twake-icons": ">=2.9.0"
     cozy-client: ">=60.28.0"
     cozy-device-helper: ">=4.0.0"
     cozy-flags: ">=4.8.1"
