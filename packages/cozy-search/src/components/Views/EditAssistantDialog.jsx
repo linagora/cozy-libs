@@ -28,7 +28,7 @@ import {
   STEPS
 } from '../CreateAssistantSteps/useAssistantDialog'
 import { saveKnowledgeBase } from '../KnowledgeBase/knowledgeBase'
-import { buildAssistantByIdQuery } from '../queries'
+import { buildAssistantByIdWithProviderQuery } from '../queries'
 
 const EditAssistantDialog = ({ open, onClose }) => {
   useExtendI18n(locales)
@@ -59,7 +59,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
 
     const fetchAssistant = async () => {
       const { definition, options } =
-        buildAssistantByIdQuery(assistantIdInAction)
+        buildAssistantByIdWithProviderQuery(assistantIdInAction)
       const response = await client.query(definition(), { as: options.as })
       const assistant = response.data
       const provider = response.included[0]

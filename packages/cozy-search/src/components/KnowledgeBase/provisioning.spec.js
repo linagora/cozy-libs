@@ -42,7 +42,8 @@ const makeClient = ({
     query: jest.fn(async definition => {
       if (definition.doctype === 'io.cozy.ai.chat.assistants') {
         const doc = assistants[definition.id]
-        if (!doc) throw notFound()
+        // cozy-client answers a 404 on getById with a null document.
+        if (!doc) return { data: null }
         return { data: doc }
       }
       throw new Error(`unexpected query ${definition.doctype}`)
@@ -398,7 +399,7 @@ describe('ensureProvisionedAssistants', () => {
     client.query.mockImplementation(async definition => {
       if (definition.doctype === 'io.cozy.ai.chat.assistants') {
         queries += 1
-        if (queries === 1) throw notFound()
+        if (queries === 1) return { data: null }
         return {
           data: {
             _id: 'docs',

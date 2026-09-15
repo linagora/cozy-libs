@@ -57,11 +57,26 @@ export const buildAssistantsQuery = () => ({
   }
 })
 
+// The bare assistant document. On a missing id cozy-client resolves to
+// `{ data: null }` rather than throwing, which callers can rely on.
 export const buildAssistantByIdQuery = id => ({
+  definition: () => Q('io.cozy.ai.chat.assistants').getById(id),
+  options: {
+    as: 'io.cozy.ai.chat.assistants/' + id,
+    fetchPolicy: defaultFetchPolicy,
+    singleDocData: true,
+    enabled: !!id
+  }
+})
+
+// The assistant with its provider account in `included`. Only for ids known
+// to exist: resolving the include on a missing document throws a TypeError
+// in cozy-client instead of yielding a null document.
+export const buildAssistantByIdWithProviderQuery = id => ({
   definition: () =>
     Q('io.cozy.ai.chat.assistants').getById(id).include(['provider']),
   options: {
-    as: 'io.cozy.ai.chat.assistants/' + id,
+    as: 'io.cozy.ai.chat.assistants/' + id + '/with-provider',
     fetchPolicy: defaultFetchPolicy,
     singleDocData: true,
     enabled: !!id
