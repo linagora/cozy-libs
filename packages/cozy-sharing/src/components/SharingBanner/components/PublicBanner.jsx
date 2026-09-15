@@ -115,7 +115,7 @@ const SharingBannerByLinkText = () => {
   )
 }
 
-const SharingBannerByLink = ({ onClose }) => {
+const SharingBannerByLink = ({ onClose, hideCreateCozyAction }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
 
@@ -135,13 +135,15 @@ const SharingBannerByLink = ({ onClose }) => {
       block={isMobile}
       action={
         <>
-          <Button
-            component="a"
-            variant="text"
-            label={t('Share.create-cozy', { smart_count: 2 })}
-            startIcon={<Icon icon={CozyHomeLinkIcon} />}
-            href={HOME_LINK_HREF}
-          />
+          {!hideCreateCozyAction && (
+            <Button
+              component="a"
+              variant="text"
+              label={t('Share.create-cozy', { smart_count: 2 })}
+              startIcon={<Icon icon={CozyHomeLinkIcon} />}
+              href={HOME_LINK_HREF}
+            />
+          )}
           <Button
             variant="text"
             label={t('Share.banner.close')}
@@ -153,6 +155,10 @@ const SharingBannerByLink = ({ onClose }) => {
       <SharingBannerByLinkText />
     </Alert>
   )
+}
+SharingBannerByLink.propTypes = {
+  onClose: PropTypes.func,
+  hideCreateCozyAction: PropTypes.bool
 }
 SharingBannerCozyToCozy.propTypes = {
   sharing: PropTypes.object.isRequired,

@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react'
 
 import { SharingBannerByLink, SharingBannerCozyToCozy } from './PublicBanner'
 
-export const SharingBanner = ({ sharingInfos }) => {
+export const SharingBanner = ({ sharingInfos, hideCreateCozyAction }) => {
   const [isOpened, setIsOpened] = useState(true)
   const onClose = useCallback(() => setIsOpened(false), [setIsOpened])
 
@@ -14,7 +14,10 @@ export const SharingBanner = ({ sharingInfos }) => {
   return (
     isOpened &&
     (!addSharingLink ? (
-      <SharingBannerByLink onClose={onClose} />
+      <SharingBannerByLink
+        onClose={onClose}
+        hideCreateCozyAction={hideCreateCozyAction}
+      />
     ) : (
       <SharingBannerCozyToCozy
         isSharingShortcutCreated={isSharingShortcutCreated}
@@ -27,7 +30,8 @@ export const SharingBanner = ({ sharingInfos }) => {
 }
 
 SharingBanner.propTypes = {
-  sharingInfos: PropTypes.object
+  sharingInfos: PropTypes.object,
+  hideCreateCozyAction: PropTypes.bool
 }
 
 export default SharingBanner
