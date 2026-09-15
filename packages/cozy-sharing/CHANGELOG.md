@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.6.2...cozy-sharing@37.7.0) (2026-09-15)
+
+### Bug Fixes
+
+- **cozy-sharing:** Stop getSharedParentPath self-matching ([54c6bfe](https://github.com/cozy/cozy-libs/commit/54c6bfe7874ebdfd8174905e749e9a0b584457a1))
+
+### Features
+
+- **cozy-sharing:** Confirm downgrade affecting a shared parent folder ([7a57bd9](https://github.com/cozy/cozy-libs/commit/7a57bd9b34ae93a0a394e69fc3f272a3ca4969d6))
+
 ## [37.6.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.6.1...cozy-sharing@37.6.2) (2026-09-14)
 
 **Note:** Version bump only for package cozy-sharing
