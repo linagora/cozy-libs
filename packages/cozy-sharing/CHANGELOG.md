@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [38.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.7.0...cozy-sharing@38.0.0) (2026-09-16)
+
+### Bug Fixes
+
+- **cozy-sharing:** Fix invisible folder icons in downgrade dialog ([6908d83](https://github.com/cozy/cozy-libs/commit/6908d83421ad65e5d4bd34659b9a24929609e5b5))
+- **cozy-sharing:** Upgrade packages ([e632bc8](https://github.com/cozy/cozy-libs/commit/e632bc894af136e071e8315eb25ba2c276952249))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** you must have `@linagora/twake-icons >= 2.9.0`
+
 # [37.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.6.2...cozy-sharing@37.7.0) (2026-09-15)
 
 ### Bug Fixes
