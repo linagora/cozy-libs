@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [38.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.0.0...cozy-sharing@38.1.0) (2026-09-16)
+
+### Features
+
+- **sharing:** Add hideCreateCozyAction prop to SharingBannerPlugin ([946fcb7](https://github.com/cozy/cozy-libs/commit/946fcb73ce27fca02511a2b03b34affdc0584d3b))
+
 # [38.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@37.7.0...cozy-sharing@38.0.0) (2026-09-16)
 
 ### Bug Fixes
