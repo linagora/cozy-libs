@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.8.0...rsbuild-config-cozy-app@0.9.0) (2026-09-17)
+
+### Features
+
+- Do not force a cozy chunk ([ca807fa](https://github.com/cozy/cozy-libs/commit/ca807fa5645b75feaae23a8505e85aeb25fd8d88))
+- Update to rsbuild 2.2.7 ([8bed013](https://github.com/cozy/cozy-libs/commit/8bed013304b7050240056338c0212ce5a45a3eb4))
+
+### BREAKING CHANGES
+
+- Update "@rsbuild/core": ">= 2.2.7" and add "core-js": ">= 3.50.0"
+
 # [0.8.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.7.3...rsbuild-config-cozy-app@0.8.0) (2026-07-16)
 
 ### Features
