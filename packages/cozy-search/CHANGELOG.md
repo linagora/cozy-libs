@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.3](https://github.com/cozy/cozy-libs/compare/cozy-search@2.3.2...cozy-search@2.3.3) (2026-09-17)
+
+### Bug Fixes
+
+- **cozy-search:** Query the assistant without include in provisioning ([83dcc31](https://github.com/cozy/cozy-libs/commit/83dcc31e4839fd5617bacf12c85ce34afe5d3f8d))
+
 ## [2.3.2](https://github.com/cozy/cozy-libs/compare/cozy-search@2.3.1...cozy-search@2.3.2) (2026-09-16)
 
 **Note:** Version bump only for package cozy-search
