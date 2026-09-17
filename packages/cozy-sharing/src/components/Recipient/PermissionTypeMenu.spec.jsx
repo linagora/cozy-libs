@@ -2,6 +2,7 @@ import { render, fireEvent, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 
 import { createMockClient } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import { PermissionTypeMenu } from './PermissionTypeMenu'
 import AppLike from '../../../test/AppLike'
@@ -10,12 +11,18 @@ const mockUpdateSharingMemberType = jest.fn()
 const mockHasSharedParent = jest.fn()
 const mockGetSharedParentPath = jest.fn()
 const mockShowAlert = jest.fn()
+const mockShare = jest.fn()
+const mockGetSharingById = jest.fn()
+
+jest.mock('cozy-flags')
 
 jest.mock('../../hooks/useSharingContext', () => ({
   useSharingContext: () => ({
     hasSharedParent: mockHasSharedParent,
     getSharedParentPath: mockGetSharedParentPath,
-    updateSharingMemberType: mockUpdateSharingMemberType
+    updateSharingMemberType: mockUpdateSharingMemberType,
+    share: mockShare,
+    getSharingById: mockGetSharingById
   })
 }))
 
@@ -41,7 +48,9 @@ describe('PermissionTypeMenu component', () => {
   }
 
   beforeEach(() => {
+    jest.restoreAllMocks()
     jest.clearAllMocks()
+    flag.mockReturnValue(false)
   })
 
   const setup = props => {
@@ -132,6 +141,61 @@ describe('PermissionTypeMenu component', () => {
     fireEvent.click(getByRole('menuitem', { name: 'Editor' }))
 
     expect(mockUpdateSharingMemberType).not.toHaveBeenCalled()
+  })
+
+  describe('when upgrading an inherited viewer', () => {
+    const child = {
+      _id: 'child-id',
+      id: 'child-id',
+      type: 'directory',
+      name: 'Child',
+      path: '/parent/child'
+    }
+    const contact = {
+      _id: 'bob-contact',
+      _type: 'io.cozy.contacts',
+      email: [{ address: 'bob@example.org' }]
+    }
+
+    beforeEach(() => {
+      flag.mockReturnValue(true)
+      mockHasSharedParent.mockReturnValue(true)
+      mockGetSharingById.mockReturnValue({
+        id: 'sharing-123',
+        type: 'io.cozy.sharings',
+        attributes: { rules: [{ values: ['parent-id'] }] }
+      })
+      jest.spyOn(client, 'collection').mockReturnValue({
+        find: jest.fn().mockResolvedValue({ data: [contact] })
+      })
+      mockShare.mockResolvedValue(undefined)
+    })
+
+    it('shares the child as editor without changing the parent', async () => {
+      setup({
+        type: 'one-way',
+        document: child,
+        recipient: { name: 'Bob', email: 'bob@example.org' }
+      })
+
+      fireEvent.click(screen.getByRole('button', { name: 'Viewer' }))
+      fireEvent.click(screen.getByRole('menuitem', { name: 'Editor' }))
+
+      await waitFor(() => {
+        expect(mockShare).toHaveBeenCalledWith({
+          document: child,
+          description: 'Child',
+          recipients: [contact],
+          readOnlyRecipients: [],
+          sharedDrive: true,
+          openSharing: false
+        })
+      })
+      expect(mockUpdateSharingMemberType).not.toHaveBeenCalled()
+      expect(
+        screen.queryByRole('button', { name: 'Update parent' })
+      ).not.toBeInTheDocument()
+    })
   })
 
   describe('when downgrading to viewer on a folder with a shared parent', () => {
