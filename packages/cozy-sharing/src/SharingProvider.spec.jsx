@@ -571,6 +571,274 @@ describe('shared drive recipient revocation', () => {
   })
 })
 
+describe('share flow reused by PermissionTypeMenu upgrade', () => {
+  const PARENT_SHARING = {
+    _id: 'parent_sharing',
+    id: 'parent_sharing',
+    type: 'io.cozy.sharings',
+    attributes: {
+      drive: true,
+      owner: true,
+      description: 'Shared folder',
+      rules: [
+        {
+          title: 'Shared folder',
+          doctype: 'io.cozy.files',
+          values: ['folder_parent'],
+          add: 'none',
+          update: 'sync',
+          remove: 'sync'
+        }
+      ],
+      members: [
+        {
+          status: 'owner',
+          email: 'owner@cozy.local',
+          instance: 'http://cozy.local'
+        },
+        {
+          status: 'ready',
+          email: 'bob@bob.cozy',
+          instance: 'http://bob.cozy.local',
+          read_only: true
+        }
+      ]
+    }
+  }
+  const CHILD_SHARING_BASE = {
+    _id: 'child_sharing',
+    id: 'child_sharing',
+    type: 'io.cozy.sharings',
+    attributes: {
+      drive: true,
+      owner: true,
+      description: 'child',
+      rules: [
+        {
+          title: 'child',
+          doctype: 'io.cozy.files',
+          values: ['folder_child'],
+          add: 'none',
+          update: 'sync',
+          remove: 'sync'
+        }
+      ],
+      members: [
+        {
+          status: 'owner',
+          email: 'owner@cozy.local',
+          instance: 'http://cozy.local'
+        },
+        {
+          status: 'ready',
+          email: 'bob@bob.cozy',
+          instance: 'http://bob.cozy.local',
+          read_only: false
+        }
+      ]
+    }
+  }
+  const childDocument = {
+    _id: 'folder_child',
+    id: 'folder_child',
+    name: 'child',
+    path: '/Shared folder/child'
+  }
+  const bobContact = {
+    _id: 'contact_bob',
+    id: 'contact_bob',
+    _type: 'io.cozy.contacts',
+    email: 'bob@bob.cozy'
+  }
+  const effectiveBob = {
+    name: 'Bob',
+    email: 'bob@bob.cozy',
+    instance: 'http://bob.cozy.local',
+    status: 'ready',
+    read_only: false,
+    sources: [{ sharing_id: 'child_sharing', member_index: 1, kind: 'self' }]
+  }
+
+  const setupWithParent = (sharings = [PARENT_SHARING]) => {
+    const mockClient = createMockClient({})
+    mockClient.getStackClient = () => ({ uri: 'http://cozy.local' })
+    mockClient.collection = jest.fn().mockReturnValue({})
+
+    const provider = setupProvider(
+      mockClient,
+      {},
+      reducer(undefined, receiveSharings({ sharings }))
+    )
+    provider.sharingCol = {
+      addRecipients: jest.fn().mockResolvedValue({ data: CHILD_SHARING_BASE }),
+      create: jest.fn().mockResolvedValue({ data: CHILD_SHARING_BASE }),
+      setReadOnly: jest.fn().mockResolvedValue({}),
+      setReadWrite: jest.fn().mockResolvedValue({}),
+      fetchEffectiveRecipients: jest
+        .fn()
+        .mockResolvedValue({ data: [effectiveBob] })
+    }
+    return provider
+  }
+
+  it('creates a child sharing when the child has no direct sharing', async () => {
+    const provider = setupWithParent()
+
+    await provider.share({
+      document: childDocument,
+      recipients: [bobContact],
+      readOnlyRecipients: [],
+      description: 'child',
+      sharedDrive: true,
+      openSharing: false
+    })
+
+    expect(provider.sharingCol.create).toHaveBeenCalledWith({
+      document: childDocument,
+      recipients: [bobContact],
+      readOnlyRecipients: [],
+      description: 'child',
+      previewPath: '/preview',
+      openSharing: false,
+      sharedDrive: true
+    })
+    expect(provider.sharingCol.addRecipients).not.toHaveBeenCalled()
+    expect(provider.sharingCol.setReadWrite).not.toHaveBeenCalled()
+    expect(provider.sharingCol.setReadOnly).not.toHaveBeenCalled()
+  })
+
+  it('refreshes the child effective recipients as two-way and leaves the parent unchanged', async () => {
+    const provider = setupWithParent()
+
+    await provider.share({
+      document: childDocument,
+      recipients: [bobContact],
+      readOnlyRecipients: [],
+      description: 'child',
+      sharedDrive: true,
+      openSharing: false
+    })
+
+    expect(provider.sharingCol.fetchEffectiveRecipients).toHaveBeenCalledWith(
+      'folder_child',
+      { driveId: undefined }
+    )
+    const effectiveRecipients =
+      provider.state.effectiveRecipients['folder_child']
+    expect(effectiveRecipients).toHaveLength(1)
+    expect(effectiveRecipients[0].email).toBe('bob@bob.cozy')
+    expect(effectiveRecipients[0].read_only).toBe(false)
+    expect(effectiveRecipients[0].type).toBe('two-way')
+    expect(effectiveRecipients[0].sharingId).toBe('child_sharing')
+    expect(effectiveRecipients[0].memberIndex).toBe(1)
+
+    const parentSharing = getDocumentSharing(provider.state, 'folder_parent')
+    expect(parentSharing.id).toBe('parent_sharing')
+    expect(parentSharing.attributes.members[1].read_only).toBe(true)
+    expect(getDocumentSharing(provider.state, 'folder_child').id).toBe(
+      'child_sharing'
+    )
+  })
+
+  it('adds the recipient to an existing child sharing and preserves the other member', async () => {
+    const otherMember = {
+      status: 'ready',
+      email: 'other@cozy.local',
+      instance: 'http://other.cozy.local',
+      read_only: false
+    }
+    const childSharing = {
+      ...CHILD_SHARING_BASE,
+      attributes: {
+        ...CHILD_SHARING_BASE.attributes,
+        members: [CHILD_SHARING_BASE.attributes.members[0], otherMember]
+      }
+    }
+    const updatedSharing = {
+      ...childSharing,
+      attributes: {
+        ...childSharing.attributes,
+        members: [
+          childSharing.attributes.members[0],
+          otherMember,
+          {
+            status: 'seen',
+            email: 'bob@bob.cozy',
+            instance: 'http://bob.cozy.local',
+            read_only: false
+          }
+        ]
+      }
+    }
+    const provider = setupWithParent([PARENT_SHARING, childSharing])
+    provider.sharingCol.addRecipients = jest
+      .fn()
+      .mockResolvedValue({ data: updatedSharing })
+
+    await provider.share({
+      document: childDocument,
+      recipients: [bobContact],
+      readOnlyRecipients: [],
+      description: 'child',
+      sharedDrive: true,
+      openSharing: false
+    })
+
+    expect(provider.sharingCol.addRecipients).toHaveBeenCalledWith({
+      document: childSharing,
+      recipients: [bobContact],
+      readOnlyRecipients: []
+    })
+    expect(provider.sharingCol.create).not.toHaveBeenCalled()
+    expect(provider.sharingCol.setReadWrite).not.toHaveBeenCalled()
+
+    const childSharingInState = getDocumentSharing(
+      provider.state,
+      'folder_child'
+    )
+    expect(childSharingInState.attributes.members.map(m => m.email)).toEqual([
+      'owner@cozy.local',
+      'other@cozy.local',
+      'bob@bob.cozy'
+    ])
+    expect(provider.sharingCol.fetchEffectiveRecipients).toHaveBeenCalledWith(
+      'folder_child',
+      { driveId: undefined }
+    )
+
+    const parentSharing = getDocumentSharing(provider.state, 'folder_parent')
+    expect(parentSharing.attributes.members).toHaveLength(2)
+    expect(parentSharing.attributes.members[1].read_only).toBe(true)
+  })
+
+  it('leaves the parent unchanged and does not refresh when the child sharing creation fails', async () => {
+    const provider = setupWithParent()
+    provider.sharingCol.create = jest
+      .fn()
+      .mockRejectedValue(new Error('Network error'))
+
+    await expect(
+      provider.share({
+        document: childDocument,
+        recipients: [bobContact],
+        readOnlyRecipients: [],
+        description: 'child',
+        sharedDrive: true,
+        openSharing: false
+      })
+    ).rejects.toThrow('Network error')
+
+    expect(provider.sharingCol.fetchEffectiveRecipients).not.toHaveBeenCalled()
+    expect(provider.sharingCol.setReadWrite).not.toHaveBeenCalled()
+    expect(provider.dispatch).not.toHaveBeenCalled()
+
+    const parentSharing = getDocumentSharing(provider.state, 'folder_parent')
+    expect(parentSharing.id).toBe('parent_sharing')
+    expect(parentSharing.attributes.members[1].read_only).toBe(true)
+    expect(getDocumentSharing(provider.state, 'folder_child')).toBeNull()
+  })
+})
+
 describe('fetchSharedDriveSharingLinks', () => {
   const PERM_DRIVE_FILE = {
     type: 'io.cozy.permissions',
