@@ -42,6 +42,7 @@ const FederatedFolderModalContent = ({
   const { t } = useI18n()
   const {
     canReshare,
+    hasWriteAccess,
     share,
     getSharingById,
     getSharingLink,
@@ -99,7 +100,10 @@ const FederatedFolderModalContent = ({
     : documentId
       ? isOwner(documentId)
       : false
-  const isMemberReadOnly = isInsideSharedDrive && !isCurrentUserOwner
+  const isMemberReadOnly =
+    isInsideSharedDrive &&
+    !isCurrentUserOwner &&
+    !hasWriteAccess(documentId, existingDocument?.driveId)
   const canManageSharing =
     isCurrentUserOwner || (documentId ? canReshare(documentId) : false)
 
@@ -239,7 +243,7 @@ const FederatedFolderModalContent = ({
             <AntivirusAlert
               document={isSending ? frozenDoc : existingDocument}
             />
-            {isInsideSharedDrive ? (
+            {isMemberReadOnly ? (
               <div className={styles['share-byemail-onlybylink']}>
                 {t('Files.share.shareByEmail.onlyByLink', {
                   type: t(
@@ -293,7 +297,7 @@ const FederatedFolderModalContent = ({
             showGenerateLinkButton={showGenerateLinkButton}
             autoOpenShareRestriction={autoOpenShareRestriction}
           />
-          {!isInsideSharedDrive && (
+          {!isMemberReadOnly && (
             <Button
               variant="primary"
               label={t('FederatedFolder.share')}
