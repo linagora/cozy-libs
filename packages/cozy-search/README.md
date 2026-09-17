@@ -59,9 +59,16 @@ of verbs (cozy-home and cozy-drive use `ALL`).
 
 ### RAG indexing setup
 
-Call `setupRagIndexing(client)` once per session at startup (before
-`ensureProvisionedAssistants` if your app provisions assistants from the
-`cozy.assistant.autoprovision` flag). It makes sure the instance's two
+Opening the assistant (`AssistantView` or `AssistantDialog`) calls
+`autoprovisionAssistants(client)` once per session: when the
+`cozy.assistant.autoprovision` flag lists assistants, it runs
+`setupRagIndexing(client)` then `ensureProvisionedAssistants(client, entries)`.
+A host app that wants this done at startup, before the assistant is
+opened, can call `autoprovisionAssistants(client)` itself (or the
+`useAssistantsAutoprovision` hook): every call shares the first one's
+promise, so the two never race.
+
+`setupRagIndexing(client)` makes sure the instance's two
 `rag-index` triggers exist (one on `io.cozy.files`, one on
 `io.cozy.ai.chat.assistants`) and gives the root folder to any assistant
 that has no knowledge base folder yet — the stack's `rag-index` worker
