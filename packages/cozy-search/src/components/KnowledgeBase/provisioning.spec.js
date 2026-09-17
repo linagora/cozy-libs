@@ -485,6 +485,6 @@ describe('getDefaultProvisionedAssistantId', () => {
       { name: 'Autre', dirName: 'Autre', default: true }
     ])
     expect(getDefaultProvisionedAssistantId()).toBe('mes-documents')
-    expect(flag).toHaveBeenCalledWith('rag.assistants.autoprovision')
+    expect(flag).toHaveBeenCalledWith('cozy.assistant.autoprovision')
   })
 })

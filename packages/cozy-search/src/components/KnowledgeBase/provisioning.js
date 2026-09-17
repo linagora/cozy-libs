@@ -13,7 +13,7 @@ import {
   FILES_DOCTYPE
 } from '../queries'
 
-export const AUTOPROVISION_FLAG = 'rag.assistants.autoprovision'
+export const AUTOPROVISION_FLAG = 'cozy.assistant.autoprovision'
 
 const ASSISTANTS_DOCTYPE = 'io.cozy.ai.chat.assistants'
 const APPS_DOCTYPE = 'io.cozy.apps'
@@ -167,7 +167,7 @@ const validate = entry => {
 }
 
 /**
- * Provisions the assistants described by the rag.assistants.autoprovision
+ * Provisions the assistants described by the cozy.assistant.autoprovision
  * flag. Idempotent: an existing assistant is left alone, or gets the flag's
  * folder back when it lost it or fell back to the root. Two entries whose
  * names derive to the same id would fight over one assistant: the second
