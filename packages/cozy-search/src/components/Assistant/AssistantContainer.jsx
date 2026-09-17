@@ -8,11 +8,13 @@ import styles from './styles.styl'
 import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import Conversation from '../Conversations/Conversation'
 import CozyAssistantRuntimeProviderWithErrorBoundary from '../CozyAssistantRuntimeProvider'
+import { useAssistantsAutoprovision } from '../KnowledgeBase/useAssistantsAutoprovision'
 import SearchConversation from '../Search/SearchConversation'
 import Sidebar from '../Sidebar'
 
 const AssistantContainer = () => {
   const { isOpenSearchConversation } = useAssistant()
+  useAssistantsAutoprovision()
 
   return (
     <div

@@ -21,3 +21,5 @@ export {
   getDefaultProvisionedAssistantId
 } from './components/KnowledgeBase/provisioning'
 export { setupRagIndexing } from './components/KnowledgeBase/ragIndexing'
+export { autoprovisionAssistants } from './components/KnowledgeBase/autoprovision'
+export { useAssistantsAutoprovision } from './components/KnowledgeBase/useAssistantsAutoprovision'
