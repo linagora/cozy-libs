@@ -3,6 +3,8 @@ import { Q } from 'cozy-client'
 import { ROOT_DIR_ID } from './knowledgeBase'
 import {
   RAG_INDEX_FILES_DEBOUNCE,
+  createRagIndexTriggers,
+  fetchAssistants,
   findRagIndexTriggers,
   makeRagIndexTriggerAttributes,
   migrateAssistantsWithoutFolder,
@@ -264,5 +266,54 @@ describe('setupRagIndexing', () => {
     expect(result.migrated).toEqual([])
     expect(result.errors.map(e => e.message)).toEqual(['down'])
     expect(triggersCollection.create).not.toHaveBeenCalled()
+  })
+})
+
+describe('createRagIndexTriggers', () => {
+  it('creates the missing triggers and launches the files one', async () => {
+    const { client, triggersCollection } = makeClient()
+    await expect(createRagIndexTriggers(client)).resolves.toEqual([
+      ASSISTANTS,
+      FILES
+    ])
+    expect(triggersCollection.create).toHaveBeenCalledTimes(2)
+    expect(triggersCollection.launch).toHaveBeenCalledTimes(1)
+  })
+
+  it('creates nothing when both triggers exist', async () => {
+    const { client, triggersCollection } = makeClient({
+      triggers: [filesTrigger, assistantsTrigger]
+    })
+    await expect(createRagIndexTriggers(client)).resolves.toEqual([])
+    expect(triggersCollection.create).not.toHaveBeenCalled()
+    expect(triggersCollection.launch).not.toHaveBeenCalled()
+  })
+})
+
+describe('fetchAssistants', () => {
+  it('lists every assistant', async () => {
+    const assistants = [{ _id: 'a' }, { _id: 'b' }]
+    const { client } = makeClient({ assistants })
+    await expect(fetchAssistants(client)).resolves.toEqual(assistants)
+    expect(client.queryAll).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('migrateAssistantsWithoutFolder with the assistants given', () => {
+  it('does not query them again', async () => {
+    const { client } = makeClient()
+    const assistants = [
+      { _id: 'bare', _type: ASSISTANTS },
+      {
+        _id: 'ok',
+        _type: ASSISTANTS,
+        knowledgeBase: [{ doctype: FILES, dirId: 'dir-1' }]
+      }
+    ]
+    await expect(
+      migrateAssistantsWithoutFolder(client, assistants)
+    ).resolves.toEqual(['bare'])
+    expect(client.queryAll).not.toHaveBeenCalled()
+    expect(client.save).toHaveBeenCalledTimes(1)
   })
 })

@@ -47,17 +47,22 @@ export const findRagIndexTriggers = async client => {
   return found
 }
 
+export const fetchAssistants = client => {
+  const { definition, options } = buildAllAssistantsQuery()
+  return client.queryAll(definition(), options)
+}
+
 /**
  * Gives the root folder to every assistant without a knowledge base
  * folder (the rule is permanent: an assistant always has one). A conflict
  * on one assistant means another session did it: skipped.
+ * @param {import('cozy-client').CozyClient} client - The cozy client.
+ * @param {Array<object>} [assistants] - The assistants, when already fetched.
  * @returns {Promise<string[]>} The ids of the migrated assistants.
  */
-export const migrateAssistantsWithoutFolder = async client => {
+export const migrateAssistantsWithoutFolder = async (client, assistants) => {
   const migrated = []
-  const { definition, options } = buildAllAssistantsQuery()
-  const assistants = await client.queryAll(definition(), options)
-  for (const assistant of assistants) {
+  for (const assistant of assistants || (await fetchAssistants(client))) {
     const knowledgeBase = withRootFolderIfMissing(assistant.knowledgeBase)
     if (knowledgeBase === assistant.knowledgeBase) continue
     try {
@@ -97,6 +102,18 @@ const ensureTriggers = async (client, created) => {
     }
     created.push(FILES_DOCTYPE)
   }
+}
+
+/**
+ * Creates the rag-index triggers the instance lacks, and launches the
+ * files one when it is created.
+ * @param {import('cozy-client').CozyClient} client - The cozy client.
+ * @returns {Promise<string[]>} The `arguments` of the triggers created.
+ */
+export const createRagIndexTriggers = async client => {
+  const created = []
+  await ensureTriggers(client, created)
+  return created
 }
 
 /**

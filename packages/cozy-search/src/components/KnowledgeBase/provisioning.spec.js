@@ -364,6 +364,58 @@ describe('ensureProvisionedAssistants', () => {
     expect(client.save).not.toHaveBeenCalled()
   })
 
+  it('skips the folder lookup when the base already matches the flag dirId', async () => {
+    const { client, filesCollection } = makeClient({
+      assistants: {
+        docs: {
+          _id: 'docs',
+          _type: 'io.cozy.ai.chat.assistants',
+          knowledgeBase: [{ doctype: 'io.cozy.files', dirId: 'dir-1' }]
+        }
+      }
+    })
+
+    const result = await ensureProvisionedAssistants(client, [
+      { name: 'Docs', dirId: 'dir-1' }
+    ])
+
+    expect(result.ensured).toEqual(['docs'])
+    expect(filesCollection.statById).not.toHaveBeenCalled()
+    expect(client.save).not.toHaveBeenCalled()
+  })
+
+  it('uses the given assistants instead of querying them', async () => {
+    const docs = {
+      _id: 'docs',
+      _type: 'io.cozy.ai.chat.assistants',
+      knowledgeBase: [{ doctype: 'io.cozy.files', dirId: 'dir-1' }]
+    }
+    const { client } = makeClient()
+
+    const result = await ensureProvisionedAssistants(
+      client,
+      [{ name: 'Docs', dirId: 'dir-1' }],
+      { assistants: [docs] }
+    )
+
+    expect(result.ensured).toEqual(['docs'])
+    expect(client.query).not.toHaveBeenCalled()
+  })
+
+  it('creates the assistants missing from the given assistants', async () => {
+    const { client } = makeClient({
+      files: { 'dir-1': { _id: 'dir-1', type: 'directory', trashed: false } }
+    })
+
+    const result = await ensureProvisionedAssistants(
+      client,
+      [{ name: 'Docs', dirId: 'dir-1' }],
+      { assistants: [] }
+    )
+
+    expect(result.created).toEqual(['docs'])
+  })
+
   it('skips an existing assistant whose folder is trashed', async () => {
     const { client } = makeClient({
       assistants: {
