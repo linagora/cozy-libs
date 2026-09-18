@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.4.0...cozy-search@2.5.0) (2026-09-18)
+
+### Features
+
+- **cozy-search:** Ensure only the rag-index triggers at startup ([c1ee201](https://github.com/cozy/cozy-libs/commit/c1ee201b4548ffa82f9e8ecd194ebca9ec71753f))
+
 # [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.3.3...cozy-search@2.4.0) (2026-09-18)
 
 ### Bug Fixes
