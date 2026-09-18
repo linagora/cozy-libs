@@ -10,7 +10,7 @@ export const ASSISTANTS_DOCTYPE = 'io.cozy.ai.chat.assistants'
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 export const EMAIL_DOCTYPE = 'com.linagora.email'
 
-const defaultFetchPolicy = fetchPolicies.olderThan(86400) // 24 hours
+const defaultFetchPolicy = fetchPolicies.olderThan(5 * 60 * 1000)
 
 export const buildFilesByIds = (ids, enabled) => {
   return {
