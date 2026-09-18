@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.3.3...cozy-search@2.4.0) (2026-09-18)
+
+### Bug Fixes
+
+- **cozy-search:** Refetch the queries after 5 minutes ([b4b5139](https://github.com/cozy/cozy-libs/commit/b4b5139c4bf9626e13ea3664bc2eff773abd08b2))
+
+### Features
+
+- **cozy-search:** Provision the flagged assistants on assistant open ([817d85f](https://github.com/cozy/cozy-libs/commit/817d85f55c7113fca6eb936eab15b93f24d31cc2))
+- **cozy-search:** Rename the autoprovision flag to cozy.assistant.\* ([6bc3c2e](https://github.com/cozy/cozy-libs/commit/6bc3c2e37458bf424886e493fab25175eeb7e8e5))
+
 ## [2.3.3](https://github.com/cozy/cozy-libs/compare/cozy-search@2.3.2...cozy-search@2.3.3) (2026-09-17)
 
 ### Bug Fixes
