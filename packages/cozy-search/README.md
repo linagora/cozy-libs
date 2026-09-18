@@ -61,12 +61,19 @@ of verbs (cozy-home and cozy-drive use `ALL`).
 
 Opening the assistant (`AssistantView` or `AssistantDialog`) calls
 `autoprovisionAssistants(client)` once per session: when the
-`cozy.assistant.autoprovision` flag lists assistants, it runs
-`setupRagIndexing(client)` then `ensureProvisionedAssistants(client, entries)`.
-A host app that wants this done at startup, before the assistant is
-opened, can call `autoprovisionAssistants(client)` itself (or the
-`useAssistantsAutoprovision` hook): every call shares the first one's
-promise, so the two never race.
+`cozy.assistant.autoprovision` flag lists assistants, it makes sure the
+`rag-index` triggers exist, gives the root folder to the assistants that
+have no knowledge base folder, then runs
+`ensureProvisionedAssistants(client, entries)`.
+
+A host app should only call the `useRagIndexTriggers` hook (or
+`ensureRagIndexTriggers(client)`) at startup: one request when the
+triggers already exist, and the knowledge base folders get indexed as
+they change before the assistant is ever opened. The assistants are
+provisioned when the assistant opens; a host app that wants that earlier
+can call `autoprovisionAssistants(client)` or the
+`useAssistantsAutoprovision` hook. Every call shares the first one's
+promise, the triggers step included, so nothing runs twice.
 
 `setupRagIndexing(client)` makes sure the instance's two
 `rag-index` triggers exist (one on `io.cozy.files`, one on

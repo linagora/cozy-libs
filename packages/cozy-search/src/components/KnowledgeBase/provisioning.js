@@ -116,7 +116,8 @@ export const createOpenragAccount = async client => {
   return account
 }
 
-const getAssistant = async (client, id) => {
+const getAssistant = async (client, id, known) => {
+  if (known) return known.get(id) || null
   try {
     const { definition, options } = buildAssistantByIdQuery(id)
     const { data } = await client.query(definition(), { as: options.as })
@@ -174,11 +175,20 @@ const validate = entry => {
  * one is skipped.
  * @param {import('cozy-client').CozyClient} client - The cozy client.
  * @param {Array<{name: string, dirName?: string, dirId?: string, prompt?: string, icon?: string|null, default?: boolean}>} configs - The flag entries.
+ * @param {object} [options] - Options.
+ * @param {Array<object>} [options.assistants] - Every assistant of the instance, when already fetched: spares one query per entry.
  * @returns {Promise<{created: string[], ensured: string[], skipped: {id: string, reason: string}[]}>} What was created, ensured and skipped.
  */
-export const ensureProvisionedAssistants = async (client, configs) => {
+export const ensureProvisionedAssistants = async (
+  client,
+  configs,
+  { assistants } = {}
+) => {
   const result = { created: [], ensured: [], skipped: [] }
   if (!Array.isArray(configs) || configs.length === 0) return result
+  const known = assistants
+    ? new Map(assistants.map(assistant => [assistant._id, assistant]))
+    : null
 
   const seen = new Set()
   for (const entry of configs) {
@@ -193,7 +203,7 @@ export const ensureProvisionedAssistants = async (client, configs) => {
     }
     seen.add(id)
     try {
-      let assistant = await getAssistant(client, id)
+      let assistant = await getAssistant(client, id, known)
       let created = false
       if (!assistant) {
         const dirId = await resolveProvisionedFolder(client, entry)
@@ -212,6 +222,12 @@ export const ensureProvisionedAssistants = async (client, configs) => {
         result.created.push(id)
         continue
       }
+      const current = getKnowledgeBaseDirId(assistant)
+      if (entry.dirId && current === entry.dirId) {
+        // The stack's rag-index worker skips a trashed folder by itself.
+        result.ensured.push(id)
+        continue
+      }
       // The flag wins for provisioned assistants: resolve it first so we
       // can tell a deliberate root fallback from one the flag disagrees
       // with.
@@ -220,7 +236,6 @@ export const ensureProvisionedAssistants = async (client, configs) => {
         result.skipped.push({ id, reason: 'folder could not be resolved' })
         continue
       }
-      const current = getKnowledgeBaseDirId(assistant)
       if (current === null || (isRootDirId(current) && !isRootDirId(wanted))) {
         // Self-heal: an earlier run saved the assistant but not its
         // knowledge base, the user detached the folder, or it fell back to
