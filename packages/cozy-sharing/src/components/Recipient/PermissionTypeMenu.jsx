@@ -1,6 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import minilog from 'cozy-minilog'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
@@ -11,9 +12,11 @@ import { useI18n } from 'twake-i18n'
 import DowngradePermissionConfirmDialog from './DowngradePermissionConfirmDialog'
 import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
 import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
+import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { getSharingDocIds } from '../../state'
 
 const log = minilog('PermissionTypeMenu')
 
@@ -27,7 +30,8 @@ const PermissionTypeMenuComponent = ({
   const { t } = useI18n()
   const client = useClient()
   const buttonRef = useRef()
-  const { hasSharedParent, updateSharingMemberType } = useSharingContext()
+  const { hasSharedParent, updateSharingMemberType, getSharingById, share } =
+    useSharingContext()
   const { showAlert } = useAlert()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
@@ -42,6 +46,35 @@ const PermissionTypeMenuComponent = ({
   const applyType = useCallback(
     async newType => {
       try {
+        const documentId = document?._id || document?.id
+        if (
+          flag('drive.federated-shared-folder.enabled') &&
+          type === 'one-way' &&
+          newType === 'two-way' &&
+          documentId
+        ) {
+          const sourceSharing = getSharingById(sharingId)
+          if (
+            sourceSharing &&
+            !getSharingDocIds(sourceSharing).includes(documentId)
+          ) {
+            const contacts = await getOrCreateFromArray(
+              client,
+              [recipient],
+              contact => client.create('io.cozy.contacts', contact)
+            )
+            if (!contacts[0]) throw new Error('Recipient contact not found')
+            await share({
+              document: { ...document, id: documentId },
+              description: document.name,
+              recipients: contacts,
+              readOnlyRecipients: [],
+              sharedDrive: true,
+              openSharing: false
+            })
+            return
+          }
+        }
         await updateSharingMemberType(sharingId, memberIndex, newType)
       } catch (error) {
         log.error('Failed to change member permission type', error)
@@ -52,7 +85,19 @@ const PermissionTypeMenuComponent = ({
         })
       }
     },
-    [memberIndex, sharingId, showAlert, t, updateSharingMemberType]
+    [
+      client,
+      document,
+      getSharingById,
+      memberIndex,
+      recipient,
+      share,
+      sharingId,
+      showAlert,
+      t,
+      type,
+      updateSharingMemberType
+    ]
   )
 
   // Downgrading to viewer on a folder inside a shared parent also reduces
