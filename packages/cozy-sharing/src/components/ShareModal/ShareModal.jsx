@@ -20,7 +20,7 @@ export const ShareModal = withLocales(props => {
   const {
     byDocId,
     isOwner,
-    canReshare,
+    hasWriteAccess,
     documentType,
     getRecipients,
     revokeSelf,
@@ -33,7 +33,9 @@ export const ShareModal = withLocales(props => {
   }
 
   const isEditable =
-    !byDocId[document.id] || isOwner(document.id) || canReshare(document.id)
+    !byDocId[document.id] ||
+    isOwner(document.id) ||
+    hasWriteAccess(document.id, document.driveId)
 
   if (isEditable) {
     const isFederatedMode = flag('drive.federated-shared-folder.enabled')

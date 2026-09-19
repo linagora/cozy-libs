@@ -14,6 +14,7 @@ const mockRevoke = jest.fn()
 const mockRevokeSelf = jest.fn()
 const mockIsOwner = jest.fn()
 const mockCanReshare = jest.fn()
+const mockHasWriteAccess = jest.fn()
 const mockGetSharingLink = jest.fn()
 const mockGetFederatedShareLink = jest.fn()
 const mockGetSharingById = jest.fn()
@@ -34,6 +35,7 @@ jest.mock('../../hooks/useSharingContext', () => ({
     revokeSelf: mockRevokeSelf,
     isOwner: mockIsOwner,
     canReshare: mockCanReshare,
+    hasWriteAccess: mockHasWriteAccess,
     getSharingLink: mockGetSharingLink,
     getFederatedShareLink: mockGetFederatedShareLink,
     getDocumentPermissions: mockGetDocumentPermissions,
@@ -115,6 +117,7 @@ describe('FederatedFolderModal', () => {
     mockRevokeSelf.mockResolvedValue()
     mockIsOwner.mockReturnValue(false)
     mockCanReshare.mockReturnValue(false)
+    mockHasWriteAccess.mockReturnValue(false)
     mockGetDocumentPermissions.mockReturnValue([])
     mockFetchSharedDriveSharingLinks.mockResolvedValue([])
     mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
@@ -222,6 +225,25 @@ describe('FederatedFolderModal', () => {
 
       await findByText('This folder can only be shared by link, because')
       await findByText('it has a shared parent')
+    })
+
+    it('should allow share by email when the current user has write access, even inside a federated shared folder', async () => {
+      mockHasWriteAccess.mockReturnValue(true)
+
+      const { findByText, queryByText } = setup({
+        document: {
+          ...mockDocument,
+          driveId: 'federated-folder-id',
+          type: 'directory'
+        }
+      })
+
+      await findByText('Add users')
+      await findByText('Done')
+
+      expect(
+        queryByText('This folder can only be shared by link, because')
+      ).toBe(null)
     })
 
     it('should allow share by email when document is the federated shared folder root', async () => {
