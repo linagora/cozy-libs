@@ -2,15 +2,49 @@
 
 .composerContainer
     position relative
-    border 1px solid var(--borderMainColor)
-    border-radius 20px
-    padding 8px 8px 8px 16px
+    border 1px solid var(--borderGhostDisabledColor)
+    border-radius 16px
+    padding 12px 12px 12px 16px
     background-color var(--paperBackgroundColor)
+    box-shadow 0 1px 2px 0 rgba(0, 0, 0, 0.05)
     z-index calc(var(--zIndex-modal) + 15)
 
+    &--mobile
+        border-color var(--borderMainColor)
+        border-radius 20px
+        padding-bottom 8px
+
 .composerActions
-    margin-top 16px
+    margin-top 12px
     gap 8px
+
+.welcome
+    // Room for the halo, which is larger than the title
+    min-height 166px
+
+.welcome-halo
+    // The blurred pastel gradient behind the welcome title. Purely
+    // decorative, so its colors are the design's, not theme tokens; in the
+    // dark theme it is dimmed to a soft glow.
+    position absolute
+    top 50%
+    left 50%
+    width 100%
+    max-width 629px
+    height 166px
+    transform translate(-50%, -50%)
+    border-radius 9999px
+    opacity 0.5
+    filter blur(62.5px)
+    background linear-gradient(270deg, #c5ccfd 0%, #f0c7fc 21%, #f7bbe1 39%, #f5c7d2 62%, #fbe3b9 82%, #fcd8a4 100%)
+    pointer-events none
+
+    &--dark
+        opacity 0.2
+
+.welcome-title
+    font-size 32px
+    line-height 40px
 
 .conversationBar
     flex 1
@@ -105,8 +139,13 @@
   hyphens auto
 
 .conversation-list-item
+  // A sidebar item of the design: 8px gutter, 5px vertical padding,
+  // 36px min height, 8px radius, selected on the action-selected color
   border-radius 8px !important
-  align-items stretch !important
+  align-items center !important
+  min-height 36px !important
+  padding-top 5px !important
+  padding-bottom 5px !important
   // force 0 gap to override cozy-ui gap 16px on .MuiListItem-root
   gap: 0 !important
 
@@ -116,43 +155,45 @@
     pointer-events auto
 
   &--selected
-    &--light
-      background var(--primaryColorLightest) !important
-    &--dark
-      background var(--grey900) !important
+    background var(--actionColorSelected) !important
+
+    .conversation-list-item-action
+      opacity 1
+      pointer-events auto
 
   &--wider
     align-items center !important
 
-.conversation-list-item-divider
-  // Counteract the item's 16px horizontal padding so the divider spans the
-  // full width and sits flush with the bottom edge of the selected highlight
-  margin 8px -16px -8px -16px !important
-
 .conversation-list-item-action
   position absolute !important
-  top 8px
-  right 8px
+  top 50%
+  right 4px
+  transform translateY(-50%)
   opacity 0
   pointer-events none
 
 .conversation-list-item-text
-  line-height 16px
   overflow hidden
-  margin-right 28px !important
+  margin-right 24px !important
 
 .conversation-list-item-title
   color var(--primaryTextColor)
   font-size 14px
+  font-weight 500
+  line-height 18px
+  letter-spacing 0.25px
+
+.conversation-list-item-subtitle
+  color var(--secondaryTextColor)
+  font-size 12px
   font-weight 500
   line-height 16px
   letter-spacing 0.5px
 
 .conversation-list-item-meta
   gap 4px
-
-.conversation-list-item-subtitle
-  color var(--secondaryTextColor)
+  color var(--primaryTextColor)
   font-size 11px
   font-weight 400
   line-height 16px
+  letter-spacing 0

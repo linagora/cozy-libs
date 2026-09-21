@@ -7,7 +7,7 @@ import {
 import cx from 'classnames'
 import React, { useCallback } from 'react'
 
-import { Icon, Paperplane, Stop } from '@linagora/twake-icons'
+import { Icon, ArrowUp, Stop } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -57,11 +57,33 @@ const ConversationComposer = () => {
     setWebsearchEnabled(prev => !prev)
   }, [isRunning, setWebsearchEnabled])
 
+  const sendButton = (
+    <Button
+      size="small"
+      className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle u-flex-shrink-0"
+      classes={{ label: 'u-flex u-w-auto' }}
+      {...(isRunning
+        ? {
+            label: <Icon icon={Stop} size={12} />,
+            onClick: handleCancel
+          }
+        : {
+            variant: 'primary',
+            label: <Icon icon={ArrowUp} size={16} />,
+            onClick: handleSend
+          })}
+    />
+  )
+
+  // On mobile the send button sits by the text, the sources are icons and
+  // the assistant chip picks the assistant; on desktop the send button ends
+  // the chips row and the assistant is picked from the sidebar.
   return (
     <ComposerPrimitive.Root
       className={cx(
         'u-w-100 u-maw-7 u-mh-auto u-bxz',
-        styles['composerContainer']
+        styles['composerContainer'],
+        { [styles['composerContainer--mobile']]: isMobile }
       )}
     >
       <div className="u-flex u-flex-items-start u-flex-justify-between">
@@ -70,23 +92,11 @@ const ConversationComposer = () => {
           isEmpty={isEmpty}
           onKeyDown={handleKeyDown}
         />
-        <div className="u-flex u-flex-items-center u-flex-shrink-0">
-          <Button
-            size="small"
-            className="u-miw-auto u-w-2 u-h-2 u-bdrs-circle u-flex-shrink-0"
-            classes={{ label: 'u-flex u-w-auto' }}
-            {...(isRunning
-              ? {
-                  label: <Icon icon={Stop} size={12} />,
-                  onClick: handleCancel
-                }
-              : {
-                  variant: 'primary',
-                  label: <Icon icon={Paperplane} size={12} rotate={-45} />,
-                  onClick: handleSend
-                })}
-          />
-        </div>
+        {isMobile && (
+          <div className="u-flex u-flex-items-center u-flex-shrink-0">
+            {sendButton}
+          </div>
+        )}
       </div>
 
       <div
@@ -95,14 +105,31 @@ const ConversationComposer = () => {
           styles['composerActions']
         )}
       >
-        {flag('cozy.assistant.create-assistant.enabled') && (
-          <AssistantSelection disabled={!isThreadEmpty} />
+        <div className="u-flex u-flex-items-center u-flex-wrap">
+          {flag('cozy.assistant.create-assistant.enabled') && (
+            <AssistantSelection
+              disabled={!isThreadEmpty}
+              selectable={isMobile}
+              borderless={isMobile}
+              className="u-mr-half"
+            />
+          )}
+          {!isMobile && (
+            <TwakeKnowledgeSelector
+              websearchEnabled={websearchEnabled}
+              onToggleWebsearch={handleToggleWebsearch}
+            />
+          )}
+        </div>
+        {isMobile ? (
+          <TwakeKnowledgeSelector
+            className="u-ml-auto"
+            websearchEnabled={websearchEnabled}
+            onToggleWebsearch={handleToggleWebsearch}
+          />
+        ) : (
+          sendButton
         )}
-        <TwakeKnowledgeSelector
-          className="u-ml-auto"
-          websearchEnabled={websearchEnabled}
-          onToggleWebsearch={handleToggleWebsearch}
-        />
       </div>
     </ComposerPrimitive.Root>
   )
