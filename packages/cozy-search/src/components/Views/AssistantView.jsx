@@ -28,7 +28,7 @@ const AssistantView = () => {
         'u-w-100 u-flex u-flex-column u-ov-hidden',
         styles['assistantWrapper'],
         {
-          'u-ph-1-t u-pb-1-t u-bxz': isMobile
+          'u-pb-1-t u-bxz': isMobile
         }
       )}
     >

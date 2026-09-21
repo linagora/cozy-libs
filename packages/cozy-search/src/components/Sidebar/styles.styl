@@ -3,7 +3,7 @@
 .sidebar-container
   width 236px
   min-width 236px
-  background-color var(--paperBackgroundColor)
+  background-color var(--defaultBackgroundColor)
   z-index calc(var(--zIndex-modal) + 30)
 
   +mobile()
@@ -30,3 +30,4 @@
   // unquote() keeps Stylus from parsing `in` as an operator.
   background-color unquote('color-mix(in srgb, var(--paperBackgroundColor) 60%, transparent)')
   box-shadow 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15)
+

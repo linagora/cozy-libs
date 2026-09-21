@@ -1,23 +1,33 @@
 import cx from 'classnames'
 import React from 'react'
 
+import { Drive, Globe, Icon, Mail } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
-import Typography from 'cozy-ui/transpiled/react/Typography'
+import Chip from 'cozy-ui/transpiled/react/Chips'
+import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import TwakeKnowledgeChip from './TwakeKnowledgeChip'
-import WebSearchChip from './WebSearchChip'
-import TDrive from '../../assets/tdrive.png'
-import TMail from '../../assets/tmail.png'
+import SourceButton, { CHIP_CLASSES } from './SourceButton'
+import styles from './styles.styl'
 import KnowledgeBaseChip from '../KnowledgeBase/KnowledgeBaseChip'
 import { useSelectedAssistantKnowledgeBase } from '../KnowledgeBase/useSelectedAssistantKnowledgeBase'
 
+/**
+ * The knowledge sources of the composer. The Drive source is always on:
+ * on desktop it is a chip named after the knowledge base folder (the
+ * whole Drive without one), whose menu opens the folder or changes it;
+ * on mobile it is an icon button. Web search (a toggle) and emails are
+ * icon buttons behind their flags: emails show on the default assistant
+ * always, on a custom assistant once enabled in the wizard. Sources are
+ * enabled/disabled from the wizard, never from the composer.
+ */
 const TwakeKnowledgeSelector = ({
   className,
   websearchEnabled,
   onToggleWebsearch
 }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
   const {
     dirId,
     folder,
@@ -32,73 +42,68 @@ const TwakeKnowledgeSelector = ({
   const mailSourceEnabledFlag = flag(
     'cozy.assistant.source-knowledge.mail.enabled'
   )
-  const hasKnowledgeBase = !!dirId
+  const showMail = mailSourceEnabledFlag && (!isRealAssistant || hasEmail)
 
-  // The Drive source is always on and cannot be disabled: a knowledge-base
-  // folder is rendered as KnowledgeBaseChip (with its own menu); otherwise
-  // (default assistant, or no folder configured) a static Drive chip stands
-  // for the whole Drive. The email source (behind its own flag) is shown on
-  // the default assistant always, and on a custom assistant only once the
-  // user enabled it in the wizard. The chips are static indicators: sources
-  // are enabled/disabled from the wizard, never from the composer.
-  const twakeKnowledges = [
-    {
-      id: 'mail',
-      label: t('assistant.twake_knowledges.mail'),
-      display: mailSourceEnabledFlag && (!isRealAssistant || hasEmail),
-      icon: TMail,
-      isSelected: true
+  // Pointer activation leaves the focus on the button, whose focus style
+  // would then differ from the sibling sources until something else takes
+  // it. Drop it for pointer activation only (`detail > 0`), so keyboard
+  // users keep their focus ring.
+  const handleToggleWebsearch = event => {
+    if (event.detail > 0) {
+      event.currentTarget.blur()
     }
-  ].filter(twakeKnowledge => twakeKnowledge.display)
+    onToggleWebsearch(event)
+  }
 
-  const showSourceChips = twakeKnowledges.length > 0
+  const driveSource = dirId ? (
+    <KnowledgeBaseChip
+      variant={isMobile ? 'icon' : 'chip'}
+      dirId={dirId}
+      folder={folder}
+      isRoot={isRoot}
+      isUnavailable={isUnavailable}
+      onChangeFolder={setKnowledgeBaseFolder}
+    />
+  ) : isMobile ? (
+    <SourceButton
+      icon={Drive}
+      preserveColor
+      label={t('assistant.twake_knowledges.drive')}
+    />
+  ) : (
+    <Chip
+      icon={<Icon icon={Drive} size={16} preserveColor />}
+      label={t('assistant.twake_knowledges.drive')}
+      className={styles['source-chip']}
+      classes={CHIP_CLASSES}
+    />
+  )
 
   return (
     <div
-      className={cx(
-        'u-flex u-flex-row u-flex-wrap u-flex-items-center u-flex-justify-end',
-        className
-      )}
+      role="group"
+      aria-label={t('assistant.twake_knowledges.search_in')}
+      className={cx('u-flex u-flex-items-center', className)}
     >
-      <Typography className="u-mr-half u-fz-tiny u-coolGrey">
-        {t('assistant.twake_knowledges.search_in')}
-      </Typography>
+      {driveSource}
       {websearchEnabledFlag && (
-        <WebSearchChip
-          websearchEnabled={websearchEnabled}
-          onToggleWebsearch={onToggleWebsearch}
+        <SourceButton
+          icon={Globe}
+          label={t('assistant.websearch.label')}
+          isActive={websearchEnabled}
+          aria-pressed={websearchEnabled}
+          onClick={handleToggleWebsearch}
+          className="u-ml-half"
         />
       )}
-      {hasKnowledgeBase ? (
-        <KnowledgeBaseChip
-          dirId={dirId}
-          folder={folder}
-          isRoot={isRoot}
-          isUnavailable={isUnavailable}
-          isLast={!showSourceChips}
-          onChangeFolder={setKnowledgeBaseFolder}
-        />
-      ) : (
-        <TwakeKnowledgeChip
-          twakeKnowledge={{
-            id: 'drive',
-            label: t('assistant.twake_knowledges.drive'),
-            icon: TDrive
-          }}
-          isSelected
-          isLast={!showSourceChips}
+      {showMail && (
+        <SourceButton
+          icon={Mail}
+          preserveColor
+          label={t('assistant.twake_knowledges.mail')}
+          className="u-ml-half"
         />
       )}
-      {showSourceChips &&
-        twakeKnowledges.map((twakeKnowledge, index) => (
-          <TwakeKnowledgeChip
-            key={twakeKnowledge.id}
-            twakeKnowledge={twakeKnowledge}
-            isSelected={twakeKnowledge.isSelected}
-            onToggle={twakeKnowledge.onToggle}
-            isLast={index === twakeKnowledges.length - 1}
-          />
-        ))}
     </div>
   )
 }

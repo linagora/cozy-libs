@@ -1,7 +1,6 @@
-import { Icon, Dropdown, LinkOut, Pen } from '@linagora/twake-icons'
-import cx from 'classnames'
 import React, { useRef, useState } from 'react'
 
+import { Drive, Icon, LinkOut, Pen } from '@linagora/twake-icons'
 import { useClient, generateWebLink } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
@@ -10,23 +9,26 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import FolderPickerDialog from './FolderPickerDialog'
-import TDrive from '../../assets/tdrive.png'
+import SourceButton, { CHIP_CLASSES } from '../TwakeKnowledges/SourceButton'
+import sourceStyles from '../TwakeKnowledges/styles.styl'
 
 /**
- * Composer chip showing the selected assistant's knowledge-base folder,
- * rendered in the "selected source" style (like the email source chip).
+ * The Drive source of the composer when the selected assistant has a
+ * knowledge-base folder: a chip named after the folder (`variant="chip"`,
+ * desktop) or an icon button (`variant="icon"`, mobile).
  *
  * Clicking stays in-app: it opens a small menu with explicit actions —
  * open the folder in Drive (new tab) or change the knowledge base through
- * the Drive folder picker (persisted on the assistant immediately).
+ * the Drive folder picker (persisted on the assistant immediately). The
+ * menu starts with the folder name, which the icon button does not show.
  */
 const KnowledgeBaseChip = ({
   dirId,
   folder,
   isRoot,
   isUnavailable,
-  isLast,
-  onChangeFolder
+  onChangeFolder,
+  variant = 'chip'
 }) => {
   const { t } = useI18n()
   const client = useClient()
@@ -56,29 +58,31 @@ const KnowledgeBaseChip = ({
 
   return (
     <>
-      <div ref={chipRef} className={cx({ 'u-mr-half': !isLast })}>
-        <Chip
-          icon={
-            <img
-              alt=""
-              aria-hidden="true"
-              src={TDrive}
-              width={16}
-              className="u-m-0"
-            />
-          }
-          label={
-            <span className="u-flex u-flex-items-center">
-              {label}
-              <Icon icon={Dropdown} size={16} className="u-ml-half" />
-            </span>
-          }
-          variant="ghost"
-          clickable
+      {variant === 'icon' ? (
+        <SourceButton
+          ref={chipRef}
+          icon={Drive}
+          preserveColor
+          label={label}
+          isActive={!isUnavailable}
+          aria-haspopup="menu"
+          aria-expanded={isMenuOpen}
           onClick={() => setIsMenuOpen(true)}
-          className="u-w-auto u-ph-half u-mr-0"
         />
-      </div>
+      ) : (
+        <div ref={chipRef}>
+          <Chip
+            icon={<Icon icon={Drive} size={16} preserveColor />}
+            label={label}
+            clickable
+            aria-haspopup="menu"
+            aria-expanded={isMenuOpen}
+            onClick={() => setIsMenuOpen(true)}
+            className={sourceStyles['source-chip']}
+            classes={CHIP_CLASSES}
+          />
+        </div>
+      )}
       {isMenuOpen && (
         <ActionsMenu
           open
@@ -87,6 +91,15 @@ const KnowledgeBaseChip = ({
           actions={[]}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         >
+          {variant === 'icon' && (
+            <Typography
+              variant="body2"
+              className="u-ph-1 u-pb-half u-ellipsis"
+              component="div"
+            >
+              {label}
+            </Typography>
+          )}
           {!isUnavailable && (
             <ActionsMenuItem
               component="a"
