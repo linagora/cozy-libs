@@ -3,13 +3,14 @@ import flag from 'cozy-flags'
 import {
   autoprovisionAssistants,
   autoprovisionEntries,
-  ensureRagIndexTriggers,
+  ensureAssistantsSetup,
   resetAutoprovisionForTests
 } from './autoprovision'
 import { ensureProvisionedAssistants } from './provisioning'
 import {
   createRagIndexTriggers,
   fetchAssistants,
+  findRagIndexTriggers,
   migrateAssistantsWithoutFolder
 } from './ragIndexing'
 
@@ -21,6 +22,7 @@ jest.mock('./provisioning', () => ({
 jest.mock('./ragIndexing', () => ({
   createRagIndexTriggers: jest.fn(),
   fetchAssistants: jest.fn(),
+  findRagIndexTriggers: jest.fn(),
   migrateAssistantsWithoutFolder: jest.fn()
 }))
 
@@ -35,6 +37,9 @@ beforeEach(() => {
   warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
   createRagIndexTriggers.mockReset().mockResolvedValue(['io.cozy.files'])
   fetchAssistants.mockReset().mockResolvedValue(assistants)
+  findRagIndexTriggers
+    .mockReset()
+    .mockResolvedValue({ files: null, assistants: null })
   migrateAssistantsWithoutFolder.mockReset().mockResolvedValue([])
   ensureProvisionedAssistants
     .mockReset()
@@ -55,35 +60,6 @@ describe('autoprovisionEntries', () => {
   it.each([null, undefined, [], 'docs', {}])('returns null for %p', value => {
     flag.mockReturnValue(value)
     expect(autoprovisionEntries()).toBeNull()
-  })
-})
-
-describe('ensureRagIndexTriggers', () => {
-  it('creates the missing triggers once per session', async () => {
-    const first = ensureRagIndexTriggers(client)
-    expect(ensureRagIndexTriggers(client)).toBe(first)
-    await expect(first).resolves.toEqual({
-      triggers: ['io.cozy.files'],
-      error: null
-    })
-    await ensureRagIndexTriggers(client)
-
-    expect(createRagIndexTriggers).toHaveBeenCalledTimes(1)
-    expect(createRagIndexTriggers).toHaveBeenCalledWith(client)
-  })
-
-  it('reports a failure without rejecting', async () => {
-    const error = new Error('forbidden')
-    createRagIndexTriggers.mockRejectedValue(error)
-    await expect(ensureRagIndexTriggers(client)).resolves.toEqual({
-      triggers: [],
-      error
-    })
-    expect(warnSpy).toHaveBeenCalledWith(
-      'cozy-search autoprovision:',
-      'cannot set up the rag-index triggers',
-      error
-    )
   })
 })
 
@@ -109,7 +85,7 @@ describe('autoprovisionAssistants', () => {
     expect(result.setup.errors.map(e => e.message)).toEqual(['nope'])
   })
 
-  it('ensures the triggers, migrates, then provisions the flag entries', async () => {
+  it('migrates, provisions the flag entries, then ensures the triggers', async () => {
     flag.mockReturnValue(entries)
     migrateAssistantsWithoutFolder.mockResolvedValue(['legacy'])
     const result = await autoprovisionAssistants(client)
@@ -124,9 +100,9 @@ describe('autoprovisionAssistants', () => {
       assistants
     })
     const order = [
-      createRagIndexTriggers,
       migrateAssistantsWithoutFolder,
-      ensureProvisionedAssistants
+      ensureProvisionedAssistants,
+      createRagIndexTriggers
     ].map(fn => fn.mock.invocationCallOrder[0])
     expect(order).toEqual([...order].sort((a, b) => a - b))
     expect(result).toEqual({
@@ -148,15 +124,6 @@ describe('autoprovisionAssistants', () => {
     expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(1)
   })
 
-  it('shares the triggers step with ensureRagIndexTriggers', async () => {
-    flag.mockReturnValue(entries)
-    await ensureRagIndexTriggers(client)
-    await autoprovisionAssistants(client)
-
-    expect(createRagIndexTriggers).toHaveBeenCalledTimes(1)
-    expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(1)
-  })
-
   it('still provisions when the setup steps failed', async () => {
     flag.mockReturnValue(entries)
     createRagIndexTriggers.mockRejectedValue(new Error('forbidden'))
@@ -165,8 +132,8 @@ describe('autoprovisionAssistants', () => {
 
     expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(1)
     expect(result.setup.errors.map(e => e.message)).toEqual([
-      'forbidden',
-      'nope'
+      'nope',
+      'forbidden'
     ])
   })
 
@@ -193,6 +160,64 @@ describe('autoprovisionAssistants', () => {
     expect(warnSpy).toHaveBeenCalledWith(
       'cozy-search autoprovision:',
       'failed',
+      expect.any(Error)
+    )
+  })
+})
+
+describe('ensureAssistantsSetup', () => {
+  it('does nothing without flag entries', async () => {
+    flag.mockReturnValue(null)
+    await expect(ensureAssistantsSetup(client)).resolves.toBeNull()
+    expect(findRagIndexTriggers).not.toHaveBeenCalled()
+  })
+
+  it('stops at the triggers when both exist', async () => {
+    flag.mockReturnValue(entries)
+    findRagIndexTriggers.mockResolvedValue({
+      files: { _id: 'files' },
+      assistants: { _id: 'assistants' }
+    })
+    await expect(ensureAssistantsSetup(client)).resolves.toBeNull()
+
+    expect(findRagIndexTriggers).toHaveBeenCalledWith(client)
+    expect(fetchAssistants).not.toHaveBeenCalled()
+    expect(ensureProvisionedAssistants).not.toHaveBeenCalled()
+    expect(createRagIndexTriggers).not.toHaveBeenCalled()
+  })
+
+  it.each([
+    ['none', { files: null, assistants: null }],
+    ['only the files one', { files: { _id: 'files' }, assistants: null }],
+    ['only the assistants one', { files: null, assistants: { _id: 'a' } }]
+  ])('runs the whole setup with %s', async (_label, found) => {
+    flag.mockReturnValue(entries)
+    findRagIndexTriggers.mockResolvedValue(found)
+    const result = await ensureAssistantsSetup(client)
+
+    expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(1)
+    expect(createRagIndexTriggers).toHaveBeenCalledTimes(1)
+    expect(result.created).toEqual(['docs'])
+  })
+
+  it('runs once per session and shares the setup with the assistant', async () => {
+    flag.mockReturnValue(entries)
+    const first = ensureAssistantsSetup(client)
+    expect(ensureAssistantsSetup(client)).toBe(first)
+    await first
+    await autoprovisionAssistants(client)
+
+    expect(findRagIndexTriggers).toHaveBeenCalledTimes(1)
+    expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(1)
+  })
+
+  it('never rejects', async () => {
+    flag.mockReturnValue(entries)
+    findRagIndexTriggers.mockRejectedValue(new Error('offline'))
+    await expect(ensureAssistantsSetup(client)).resolves.toBeNull()
+    expect(warnSpy).toHaveBeenCalledWith(
+      'cozy-search autoprovision:',
+      'cannot check the rag-index triggers',
       expect.any(Error)
     )
   })

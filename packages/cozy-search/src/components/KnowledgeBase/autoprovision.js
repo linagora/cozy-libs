@@ -4,6 +4,7 @@ import { AUTOPROVISION_FLAG, ensureProvisionedAssistants } from './provisioning'
 import {
   createRagIndexTriggers,
   fetchAssistants,
+  findRagIndexTriggers,
   migrateAssistantsWithoutFolder
 } from './ragIndexing'
 
@@ -12,12 +13,12 @@ const warn = (...args) => {
   console.warn('cozy-search autoprovision:', ...args)
 }
 
-let triggersPending = null
 let pending = null
+let setupPending = null
 
 export const resetAutoprovisionForTests = () => {
-  triggersPending = null
   pending = null
+  setupPending = null
 }
 
 /**
@@ -29,35 +30,10 @@ export const autoprovisionEntries = () => {
   return Array.isArray(entries) && entries.length > 0 ? entries : null
 }
 
-/**
- * Makes sure the instance has its rag-index triggers, so the files of the
- * knowledge base folders get indexed as they change. Runs once per session
- * and never rejects: a host app can call it at startup, it costs a single
- * request when the triggers already exist.
- * @param {import('cozy-client').CozyClient} client - The cozy client.
- * @returns {Promise<{triggers: string[], error: Error|null}>} The
- * `arguments` of the triggers created, and the failure if any.
- */
-export const ensureRagIndexTriggers = client => {
-  if (!triggersPending) {
-    triggersPending = createRagIndexTriggers(client).then(
-      triggers => ({ triggers, error: null }),
-      error => {
-        warn('cannot set up the rag-index triggers', error)
-        return { triggers: [], error }
-      }
-    )
-  }
-  return triggersPending
-}
-
 const run = async client => {
   const entries = autoprovisionEntries()
   if (!entries) return null
   const setup = { triggers: [], migrated: [], errors: [] }
-  const { triggers, error } = await ensureRagIndexTriggers(client)
-  setup.triggers = triggers
-  if (error) setup.errors.push(error)
   let assistants = null
   try {
     assistants = await fetchAssistants(client)
@@ -72,16 +48,22 @@ const run = async client => {
   if (result.skipped.length > 0) {
     warn('skipped entries', result.skipped)
   }
+  // Last: the triggers tell ensureAssistantsSetup that the setup completed,
+  // and the launch of the files one indexes the folders just provisioned.
+  try {
+    setup.triggers = await createRagIndexTriggers(client)
+  } catch (error) {
+    warn('cannot set up the rag-index triggers', error)
+    setup.errors.push(error)
+  }
   return { setup, ...result }
 }
 
 /**
- * Sets up the rag-index triggers, gives a folder to the assistants that
- * lack one, then provisions the assistants listed in the autoprovision
- * flag. Runs once per session: every call shares the first one's promise,
- * and the triggers step is shared with ensureRagIndexTriggers, so a host
- * app that ensured them at startup does not pay for them twice. Never
- * rejects.
+ * Gives a folder to the assistants that lack one, provisions the
+ * assistants listed in the autoprovision flag, then sets up the rag-index
+ * triggers. Runs once per session: every call shares the first one's
+ * promise. Never rejects.
  * @param {import('cozy-client').CozyClient} client - The cozy client.
  * @returns {Promise<null|{setup: object, created: string[], ensured: string[], skipped: {id: string, reason: string}[]}>} Null when the flag lists nothing.
  */
@@ -93,4 +75,29 @@ export const autoprovisionAssistants = client => {
     })
   }
   return pending
+}
+
+/**
+ * The startup entry point of a host app: one request when the instance is
+ * already set up. The rag-index triggers are created last by
+ * autoprovisionAssistants, so finding both means an earlier session went
+ * through; anything changed since is caught when the assistant opens.
+ * Runs once per session, never rejects.
+ * @param {import('cozy-client').CozyClient} client - The cozy client.
+ * @returns {Promise<null|object>} Null when there was nothing to do, the
+ * result of autoprovisionAssistants otherwise.
+ */
+export const ensureAssistantsSetup = client => {
+  if (!setupPending) {
+    setupPending = (async () => {
+      if (!autoprovisionEntries()) return null
+      const { files, assistants } = await findRagIndexTriggers(client)
+      if (files && assistants) return null
+      return autoprovisionAssistants(client)
+    })().catch(error => {
+      warn('cannot check the rag-index triggers', error)
+      return null
+    })
+  }
+  return setupPending
 }

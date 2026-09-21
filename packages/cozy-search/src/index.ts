@@ -23,7 +23,7 @@ export {
 export { setupRagIndexing } from './components/KnowledgeBase/ragIndexing'
 export {
   autoprovisionAssistants,
-  ensureRagIndexTriggers
+  ensureAssistantsSetup
 } from './components/KnowledgeBase/autoprovision'
-export { useRagIndexTriggers } from './components/KnowledgeBase/useRagIndexTriggers'
+export { useAssistantsSetup } from './components/KnowledgeBase/useAssistantsSetup'
 export { useAssistantsAutoprovision } from './components/KnowledgeBase/useAssistantsAutoprovision'
