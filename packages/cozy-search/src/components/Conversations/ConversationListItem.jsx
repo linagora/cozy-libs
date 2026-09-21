@@ -1,40 +1,29 @@
 import cx from 'classnames'
 import React from 'react'
 
-import Divider from 'cozy-ui/transpiled/react/Divider'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
-import { useI18n } from 'twake-i18n'
 
 import ConversationActions from './ConversationActions'
 import styles from './styles.styl'
-import AssistantAvatar from '../Assistant/AssistantAvatar'
-import {
-  formatConversationDate,
-  getDescriptionOfConversation,
-  getNameOfConversation
-} from '../helpers'
+import { getNameOfConversation } from '../helpers'
 
+/**
+ * A conversation of the sidebar: its name on one line, with its actions
+ * on hover.
+ */
 const ConversationListItem = ({
   conversation,
   selected,
   onOpenConversation
 }) => {
-  const { t, lang } = useI18n()
-  const { type: theme } = useCozyTheme()
-
   return (
     <ListItem
       button
       onClick={() => onOpenConversation(conversation._id)}
-      className={cx(
-        'u-ov-hidden u-flex-column u-pv-half u-ph-1',
-        styles['conversation-list-item'],
-        {
-          [styles[`conversation-list-item--selected--${theme}`]]: selected
-        }
-      )}
+      className={cx('u-ov-hidden u-ph-half', styles['conversation-list-item'], {
+        [styles['conversation-list-item--selected']]: selected
+      })}
       selected={selected}
     >
       <ConversationActions
@@ -47,48 +36,17 @@ const ConversationListItem = ({
           component: 'div',
           className: styles['conversation-list-item-text']
         }}
-        secondaryTypographyProps={{
-          component: 'div',
-          className: styles['conversation-list-item-text']
-        }}
         primary={
           <span
             className={cx(
-              'u-ellipsis u-db u-pb-half',
+              'u-ellipsis u-db',
               styles['conversation-list-item-title']
             )}
           >
             {getNameOfConversation(conversation)}
           </span>
         }
-        secondary={
-          <>
-            <span
-              className={cx(
-                'u-db u-ellipsis',
-                styles['conversation-list-item-subtitle']
-              )}
-            >
-              {getDescriptionOfConversation(conversation, t)}
-            </span>
-            <span
-              className={cx(
-                'u-flex u-flex-items-center',
-                styles['conversation-list-item-subtitle'],
-                styles['conversation-list-item-meta']
-              )}
-            >
-              <AssistantAvatar assistant={conversation.assistant} isSmall />
-              {formatConversationDate(
-                conversation.cozyMetadata?.updatedAt,
-                t,
-                lang
-              )}
-            </span>
-          </>
-        }
       />
-      <Divider className={styles['conversation-list-item-divider']} />
     </ListItem>
   )
 }
