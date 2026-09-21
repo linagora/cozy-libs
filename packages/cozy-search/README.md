@@ -59,47 +59,71 @@ of verbs (cozy-home and cozy-drive use `ALL`).
 
 ### RAG indexing setup
 
-Opening the assistant (`AssistantView` or `AssistantDialog`) calls
-`autoprovisionAssistants(client)` once per session: when the
-`cozy.assistant.autoprovision` flag lists assistants, it makes sure the
-`rag-index` triggers exist, gives the root folder to the assistants that
-have no knowledge base folder, then runs
-`ensureProvisionedAssistants(client, entries)`.
+The stack's `rag-index` worker indexes the files of the assistants'
+knowledge base folders. For that an instance needs two things: its two
+`rag-index` triggers (one on `io.cozy.files`, one on
+`io.cozy.ai.chat.assistants`), and assistants that carry a knowledge base
+folder. cozy-search sets both up when the `cozy.assistant.autoprovision`
+flag lists assistants. Without the flag, it does nothing.
 
-A host app should only call the `useRagIndexTriggers` hook (or
-`ensureRagIndexTriggers(client)`) at startup: one request when the
-triggers already exist, and the knowledge base folders get indexed as
-they change before the assistant is ever opened. The assistants are
-provisioned when the assistant opens; a host app that wants that earlier
-can call `autoprovisionAssistants(client)` or the
-`useAssistantsAutoprovision` hook. Every call shares the first one's
-promise, the triggers step included, so nothing runs twice.
+#### The flag
 
-`setupRagIndexing(client)` makes sure the instance's two
-`rag-index` triggers exist (one on `io.cozy.files`, one on
-`io.cozy.ai.chat.assistants`) and gives the root folder to any assistant
-that has no knowledge base folder yet — the stack's `rag-index` worker
-reads the assistants to know what to index, cozy-search only has to keep
-the triggers and the assistants' `knowledgeBase` in shape.
-
-It needs the following permissions: `io.cozy.triggers` and `io.cozy.jobs`
-(to create and launch the triggers), `io.cozy.ai.chat.assistants` and
-`io.cozy.files` (to read and migrate the assistants). It is idempotent and
-never throws: on a stack whose `rag-index` worker is still reserved, the
-403 is logged and the app keeps working. `ensureProvisionedAssistants`
-additionally creates one `io.cozy.accounts` document per provisioned
-assistant, and the `dirName` folder in `io.cozy.files`.
-
-An entry of `cozy.assistant.autoprovision` can carry `"default": true`
-(the first flagged entry wins if there are several). Every NEW
-conversation then starts on that assistant once its document exists —
-from the session after it was provisioned onward. Existing conversations
-are unaffected: they keep their own assistant, or stay unscoped if they
-had none.
+A list of assistants to create, one entry each:
 
 ```json
-{ "name": "Mes documents", "dirName": "Documents", "default": true }
+[{ "name": "Mes documents", "dirName": "Documents", "default": true }]
 ```
+
+- `name`: the name of the assistant. Its id is derived from it.
+- `dirId` or `dirName`: its knowledge base folder. `dirId` wins; it can be
+  the root folder or a magic folder (`io.cozy.apps/<slug>`). `dirName` is
+  a folder at the root of the Drive, created when it does not exist.
+- `prompt`, `icon`: optional.
+- `default`: new conversations start on this assistant once it exists
+  (the first entry flagged so wins). Existing conversations keep their
+  own assistant.
+
+#### Normal behaviour
+
+A host app calls `ensureAssistantsSetup(client)` at startup (or its
+`useAssistantsSetup` hook):
+
+1. It fetches the `rag-index` triggers. When both exist, an earlier
+   session went through the setup and it stops there: one request.
+2. Otherwise it runs the whole setup, `autoprovisionAssistants(client)`:
+   each entry of the flag gets its `io.cozy.accounts` document, its
+   assistant and its knowledge base folder, then the two triggers are
+   created and the files one is launched, which starts the indexing of
+   the folders. The triggers come last so that their presence means the
+   setup completed.
+
+cozy-search also runs `autoprovisionAssistants(client)` itself when the
+assistant is opened. On an instance already set up it only lists the
+assistants; it is there to catch a flag changed since the setup, and to
+give its folder back to a provisioned assistant that lost it.
+
+Both run once per session and share their work, so nothing runs twice.
+They never throw: on a stack whose `rag-index` worker is still reserved,
+the 403 on the triggers is logged and the app keeps working.
+
+#### Migration of the existing assistants
+
+Assistants created before a knowledge base folder became mandatory have
+none, and the worker indexes nothing for them. The setup gives them the
+root folder, that is the whole Drive. This is a one-off data migration,
+unrelated to the entries of the flag: once every assistant has a folder,
+it finds nothing to do.
+
+An app that manages its assistants itself, without the flag, can call
+`setupRagIndexing(client)`: the triggers and this migration, no
+provisioning.
+
+#### Permissions
+
+`io.cozy.triggers` and `io.cozy.jobs` (to create and launch the
+triggers), `io.cozy.ai.chat.assistants` and `io.cozy.files` (to read,
+migrate and provision the assistants and their folders), and
+`io.cozy.accounts` (one document per provisioned assistant).
 
 ### On desktop
 
