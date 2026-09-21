@@ -10,6 +10,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import FolderPickerDialog from './FolderPickerDialog'
+import { useWorkspaceFileCount } from './workspaceFiles'
 import TDrive from '../../assets/tdrive.png'
 
 /**
@@ -18,7 +19,9 @@ import TDrive from '../../assets/tdrive.png'
  *
  * Clicking stays in-app: it opens a small menu with explicit actions —
  * open the folder in Drive (new tab) or change the knowledge base through
- * the Drive folder picker (persisted on the assistant immediately).
+ * the Drive folder picker (persisted on the assistant immediately). The
+ * menu also tells how many files of the folder are indexed, fetched each
+ * time it opens so the number follows the indexing.
  */
 const KnowledgeBaseChip = ({
   dirId,
@@ -33,6 +36,9 @@ const KnowledgeBaseChip = ({
   const chipRef = useRef(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isPickerOpen, setIsPickerOpen] = useState(false)
+  const { fileCount, fetchStatus } = useWorkspaceFileCount(
+    isMenuOpen && !isUnavailable ? dirId : null
+  )
 
   const closeMenu = () => setIsMenuOpen(false)
 
@@ -53,6 +59,13 @@ const KnowledgeBaseChip = ({
     : isRoot
       ? t('assistant.twake_knowledges.drive')
       : (folder?.name ?? '…')
+
+  const indexedLabel =
+    fetchStatus !== 'loaded'
+      ? null
+      : fileCount === null
+        ? t('assistant.knowledge_base.not_indexed')
+        : t('assistant.knowledge_base.indexed_files', fileCount)
 
   return (
     <>
@@ -87,6 +100,17 @@ const KnowledgeBaseChip = ({
           actions={[]}
           anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         >
+          {indexedLabel && (
+            <Typography
+              variant="caption"
+              color="textSecondary"
+              className="u-ph-1 u-pb-half"
+              component="div"
+              data-testid="knowledge-base-indexed-files"
+            >
+              {indexedLabel}
+            </Typography>
+          )}
           {!isUnavailable && (
             <ActionsMenuItem
               component="a"

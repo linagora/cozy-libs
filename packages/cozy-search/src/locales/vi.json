@@ -85,6 +85,8 @@
     "knowledge_base": {
       "change_folder": "Thay đổi thư mục…",
       "emails": "Email",
+      "indexed_files": "%{smart_count} tệp đã được lập chỉ mục |||| %{smart_count} tệp đã được lập chỉ mục",
+      "not_indexed": "Chưa được lập chỉ mục",
       "open_folder": "Mở trong Drive",
       "picker_error": "Không thể mở bộ chọn thư mục Drive. Vui lòng thử lại.",
       "remove": "Gỡ thư mục",

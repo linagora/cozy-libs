@@ -71,6 +71,8 @@
     "knowledge_base": {
       "change_folder": "Change folder…",
       "emails": "Emails",
+      "indexed_files": "%{smart_count} file indexed |||| %{smart_count} files indexed",
+      "not_indexed": "Not indexed yet",
       "open_folder": "Open in Drive",
       "picker_error": "Unable to open the Drive folder picker. Please try again.",
       "remove": "Remove folder",

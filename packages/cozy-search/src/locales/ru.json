@@ -85,6 +85,8 @@
     "knowledge_base": {
       "change_folder": "Изменить папку…",
       "emails": "Письма",
+      "indexed_files": "%{smart_count} файл проиндексирован |||| %{smart_count} файла проиндексировано |||| %{smart_count} файлов проиндексировано",
+      "not_indexed": "Ещё не проиндексировано",
       "open_folder": "Открыть в Drive",
       "picker_error": "Не удалось открыть выбор папки Drive. Пожалуйста, попробуйте ещё раз.",
       "remove": "Убрать папку",
