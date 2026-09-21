@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [38.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.0...cozy-sharing@38.1.1) (2026-09-21)
+
+### Bug Fixes
+
+- **sharing:** Keep full share modal for nested-folder editors ([014c848](https://github.com/cozy/cozy-libs/commit/014c848bb46699cee47eb4baf8bb7a365edaf2f1))
+- **sharing:** Show editable share modal for members with write access ([cba3a13](https://github.com/cozy/cozy-libs/commit/cba3a13185d1fe088136c3a758ec94f0d3472b69))
+
 # [38.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.0.0...cozy-sharing@38.1.0) (2026-09-16)
 
 ### Features
