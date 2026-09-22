@@ -1,9 +1,9 @@
-import { Icon, Cross, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import debounce from 'lodash/debounce'
 import escapeRegExp from 'lodash/escapeRegExp'
 import React, { useEffect, useMemo, useState } from 'react'
 
+import { Icon, Cross, Plus } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -88,16 +88,15 @@ const SearchConversation = () => {
     <SearchConversationContainer isMobile={isMobile}>
       <div
         className={cx(
-          'u-h-100 u-flex u-flex-column u-flex-items-start u-ov-hidden',
+          'u-h-100 u-flex u-flex-column u-flex-items-start u-ov-hidden u-w-100',
           {
-            'u-w-7 u-mh-half': !isMobile,
-            'u-w-100': isMobile
+            'u-maw-7': !isMobile
           }
         )}
       >
         <div
           className={cx('u-w-100 u-bxz', {
-            'u-mv-2': !isMobile,
+            'u-mt-1-half u-mb-2': !isMobile,
             'u-p-1': isMobile
           })}
         >
@@ -110,7 +109,7 @@ const SearchConversation = () => {
                 'u-mb-2': !isMobile
               })}
               placeholder={t('assistant.search_conversation.placeholder')}
-              size="medium"
+              size={isMobile ? 'medium' : 'small'}
               value={searchStr}
               onChange={handleSearchChange}
             />
@@ -133,9 +132,8 @@ const SearchConversation = () => {
             startIcon={<Icon icon={Plus} />}
             onClick={createNewConversation}
             size="large"
-            className={cx({
-              'u-ml-half-t u-bdrs-6': !isMobile,
-              'u-mt-1 u-bdrs-7 u-bdw-1': isMobile
+            className={cx('u-bdrs-6', {
+              'u-mt-1 u-bdw-1': isMobile
             })}
           />
         </div>

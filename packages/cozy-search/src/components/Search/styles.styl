@@ -12,3 +12,8 @@
 .search-bar--mobile
   border-radius 24px !important
   height 48px
+
+.not-found-icon
+  // The primary color at its hover opacity, as the design's token. unquote()
+  // keeps Stylus from parsing `in` as an operator.
+  background-color unquote('color-mix(in srgb, var(--primaryColor) 8%, transparent)')
