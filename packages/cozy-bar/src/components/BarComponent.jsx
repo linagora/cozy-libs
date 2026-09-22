@@ -134,7 +134,11 @@ const BarComponent = ({
           />
         </CozyTheme>
       </ReactPortal>
-      {!options.isPublic && <PlatformBanners />}
+      {!options.isPublic && (
+        <CozyTheme {...cozyThemeProps}>
+          <PlatformBanners />
+        </CozyTheme>
+      )}
     </>
   )
 }

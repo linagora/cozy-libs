@@ -1,5 +1,7 @@
-import { useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+
+import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
 import { APP_SELECTOR } from '../../dom'
 
@@ -16,6 +18,7 @@ const ACTIVE_CLASS = 'has-platform-banners'
  */
 export const PlatformBannersPortal = ({ children }) => {
   const [container, setContainer] = useState(null)
+  const { type } = useCozyTheme()
 
   useLayoutEffect(() => {
     const appNode = document.querySelector(APP_SELECTOR)
@@ -43,5 +46,10 @@ export const PlatformBannersPortal = ({ children }) => {
   }, [])
 
   if (!container) return null
-  return createPortal(children, container)
+  return createPortal(
+    <div className={`coz-platform-banners TwakeTheme--${type}`}>
+      {children}
+    </div>,
+    container
+  )
 }

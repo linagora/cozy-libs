@@ -79,15 +79,19 @@
   min-height: 0;
 }
 
-/* Inset and stacked per the design. Fixed basis, or a tall application
-   squashes the stack into a sliver. */
+/* Fixed basis, or a tall application squashes the stack into a sliver. */
 #cozy-platform-banners {
   flex: 0 0 auto;
   min-height: auto;
+}
+
+/* Inset and stacked per the design. */
+.coz-platform-banners {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
+  background-color: var(--defaultBackgroundColor);
 }
 
 #cozy-platform-banners:empty {
