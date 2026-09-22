@@ -12,3 +12,23 @@
 .search-bar--mobile
   border-radius 24px !important
   height 48px
+
+.search-conversation
+  // The column of the design: 672px, centered
+  max-width 672px
+
+.search-bar
+  // The search bar of the design: a 40px pill on the default background,
+  // with a soft shadow
+  height 40px
+  border-radius 100px !important
+  background-color var(--defaultBackgroundColor) !important
+  box-shadow 0 1px 3px 1px rgba(0, 0, 0, 0.15), 0 1px 80px 0 rgba(0, 0, 0, 0.08) !important
+
+.not-found-icon
+  // The primary color at its hover opacity, as the design's token. unquote()
+  // keeps Stylus from parsing `in` as an operator.
+  background-color unquote('color-mix(in srgb, var(--primaryColor) 8%, transparent)')
+
+.not-found-desc
+  max-width 396px
