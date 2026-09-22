@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [35.4.7](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.4.6...cozy-bar@35.4.7) (2026-09-22)
+
+### Bug Fixes
+
+- **cozy-bar:** Use uniform platform banner padding ([ab33906](https://github.com/cozy/cozy-libs/commit/ab33906b687e1c84a3395cd6652b9f5ba5000031))
+
 ## [35.4.6](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.4.5...cozy-bar@35.4.6) (2026-09-21)
 
 **Note:** Version bump only for package cozy-bar
