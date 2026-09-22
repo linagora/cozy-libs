@@ -260,7 +260,10 @@ export class SharingProvider extends Component {
     sharedDrive
   }) => {
     const { client, doctype } = this.props
-    const sharing = getDocumentSharing(this.state, document.id)
+    // Documents nested in a shared drive have no sharing of their own
+    const sharing =
+      getDocumentSharing(this.state, document.id) ||
+      (document.driveId ? getSharingById(this.state, document.driveId) : null)
     if (sharing) {
       const sharingResult = await this.addRecipients({
         document: sharing,
