@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [35.4.8](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.4.7...cozy-bar@35.4.8) (2026-09-22)
+
+### Bug Fixes
+
+- **cozy-bar:** Give platform banners the theme background ([970669b](https://github.com/cozy/cozy-libs/commit/970669bfd8122e56998ba469ef9e41c53bff0012))
+
 ## [35.4.7](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.4.6...cozy-bar@35.4.7) (2026-09-22)
 
 ### Bug Fixes
