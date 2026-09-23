@@ -40,8 +40,22 @@ const PermissionTypeMenuComponent = ({
   }, [])
 
   const applyType = useCallback(
-    async newType => {
+    async (newType, { withAncestors = false } = {}) => {
       try {
+        if (withAncestors) {
+          // Ancestors first: only the target's own update refetches its
+          // effective recipients, which must already see them downgraded.
+          const ancestors = (recipient?.sources || []).filter(
+            s => s.kind === 'ancestor' && !s.read_only
+          )
+          for (const ancestor of ancestors) {
+            await updateSharingMemberType(
+              ancestor.sharing_id,
+              ancestor.member_index,
+              newType
+            )
+          }
+        }
         await updateSharingMemberType(sharingId, memberIndex, newType)
       } catch (error) {
         log.error('Failed to change member permission type', error)
@@ -52,7 +66,7 @@ const PermissionTypeMenuComponent = ({
         })
       }
     },
-    [memberIndex, sharingId, showAlert, t, updateSharingMemberType]
+    [memberIndex, recipient, sharingId, showAlert, t, updateSharingMemberType]
   )
 
   // Downgrading to viewer on a folder inside a shared parent also reduces
@@ -78,7 +92,7 @@ const PermissionTypeMenuComponent = ({
   const handleConfirmDowngrade = useCallback(() => {
     const newType = pendingType
     setPendingType(null)
-    if (newType) applyType(newType)
+    if (newType) applyType(newType, { withAncestors: true })
   }, [applyType, pendingType])
 
   const handleCancelDowngrade = useCallback(() => {
