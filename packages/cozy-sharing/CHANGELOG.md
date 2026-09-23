@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [38.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.1...cozy-sharing@38.1.2) (2026-09-23)
+
+### Bug Fixes
+
+- **sharing:** Reuse the ancestor drive sharing for nested documents ([698048c](https://github.com/cozy/cozy-libs/commit/698048c808fc5f244a57ced6498cb0a9f6562df0))
+
 ## [38.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.0...cozy-sharing@38.1.1) (2026-09-21)
 
 ### Bug Fixes
