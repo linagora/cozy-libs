@@ -54,7 +54,7 @@
     "show": "Show",
     "search_conversation": {
       "placeholder": "Search in your conversations...",
-      "new_chat": "New Chat",
+      "new_chat": "New conversation",
       "recent": "Recent Conversations",
       "older": "Older",
       "not_found_title": "No conversations found",
