@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [38.1.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.2...cozy-sharing@38.1.3) (2026-09-23)
+
+### Bug Fixes
+
+- **sharing:** Downgrade member on shared parents when confirming ([3602a68](https://github.com/cozy/cozy-libs/commit/3602a6879e6a7c585f9233d2336812ee9972e612))
+
 ## [38.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.1...cozy-sharing@38.1.2) (2026-09-23)
 
 ### Bug Fixes
