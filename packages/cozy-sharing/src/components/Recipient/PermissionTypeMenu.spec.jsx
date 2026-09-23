@@ -179,6 +179,44 @@ describe('PermissionTypeMenu component', () => {
       })
     })
 
+    it('should also downgrade the member on read-write ancestor shares when confirming', async () => {
+      mockUpdateSharingMemberType.mockResolvedValue(undefined)
+
+      const { getByRole } = setup({
+        type: 'two-way',
+        document: folderDocument,
+        recipient: {
+          name: 'Bob',
+          sources: [
+            { kind: 'self', sharing_id: 'sharing-123', member_index: 1 },
+            {
+              kind: 'ancestor',
+              sharing_id: 'sharing-parent',
+              member_index: 2,
+              read_only: false
+            },
+            {
+              kind: 'ancestor',
+              sharing_id: 'sharing-grandparent',
+              member_index: 3,
+              read_only: true
+            }
+          ]
+        }
+      })
+
+      fireEvent.click(getByRole('button', { name: 'Editor' }))
+      fireEvent.click(getByRole('menuitem', { name: 'Viewer' }))
+      fireEvent.click(getByRole('button', { name: 'Update parent' }))
+
+      await waitFor(() => {
+        expect(mockUpdateSharingMemberType.mock.calls).toEqual([
+          ['sharing-parent', 2, 'one-way'],
+          ['sharing-123', 1, 'one-way']
+        ])
+      })
+    })
+
     it('should not call updateSharingMemberType when cancelling', () => {
       const { getByRole, queryByRole } = setup({
         type: 'two-way',

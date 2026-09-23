@@ -24,7 +24,8 @@ const mapToRecipient = (effectiveRecipient, source) => ({
   sharingId: source.sharing_id,
   memberIndex: source.member_index,
   avatarPath: `/sharings/${source.sharing_id}/recipients/${source.member_index}/avatar`,
-  type: effectiveRecipient.read_only ? 'one-way' : 'two-way'
+  type: effectiveRecipient.read_only ? 'one-way' : 'two-way',
+  sources: effectiveRecipient.sources
 })
 
 export const mapEffectiveRecipients = effectiveRecipients =>
