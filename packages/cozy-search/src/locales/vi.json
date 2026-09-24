@@ -104,6 +104,7 @@
       "basic_info": {
         "description": "Tùy chỉnh tác nhân của bạn. Chọn cơ sở tri thức, sau đó là mô hình AI.",
         "avatar": "Ảnh đại diện (tùy chọn)",
+        "upload_photo": "Tải ảnh lên",
         "name": "Tên",
         "name_placeholder": "Đặt tên cho tác nhân của bạn",
         "description_label": "Mô tả",
