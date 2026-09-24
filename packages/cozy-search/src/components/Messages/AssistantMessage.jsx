@@ -1,14 +1,11 @@
 import { MessagePrimitive, useMessage } from '@assistant-ui/react'
-import { Icon } from '@linagora/twake-icons'
 import React from 'react'
 
 import Alert from 'cozy-ui/transpiled/react/Alert'
-import Box from 'cozy-ui/transpiled/react/Box'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import MarkdownText from './MarkdownText'
-import { TwakeAssistantIcon } from '../AssistantIcon/TwakeAssistantIcon'
+import styles from './styles.styl'
 import Sources from '../Conversations/Sources/Sources'
 
 const useIsErrorMessage = () => {
@@ -26,17 +23,18 @@ const AssistantMessage = () => {
   return (
     <MessagePrimitive.Root className="u-mt-1-half">
       {isThinking && (
-        <Box display="flex" alignItems="center" gridGap={12}>
-          <Icon
-            icon={TwakeAssistantIcon}
-            size={24}
-            className="u-mh-half"
-            color="var(--primaryColor)"
-          />
-          <Typography variant="h6" display="inline">
-            {t('assistant.message.running')}
-          </Typography>
-        </Box>
+        // Three dots bouncing one after the other while the answer is
+        // awaited (the design's "icon animation"); the label is for
+        // screen readers only.
+        <div
+          role="status"
+          aria-label={t('assistant.message.running')}
+          className={styles['thinking-dots']}
+        >
+          <span className={styles['thinking-dot']} />
+          <span className={styles['thinking-dot']} />
+          <span className={styles['thinking-dot']} />
+        </div>
       )}
       {isError ? (
         <Alert severity="error">{t('assistant.default_error')}</Alert>
