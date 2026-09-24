@@ -87,6 +87,7 @@
       "basic_info": {
         "description": "Personnalisez votre agent. Choisissez la base de connaissances, puis son modèle d'IA.",
         "avatar": "Avatar (optionnel)",
+        "upload_photo": "Importer une photo",
         "name": "Nom",
         "name_placeholder": "Nommez votre agent",
         "description_label": "Description",

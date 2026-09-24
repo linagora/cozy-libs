@@ -87,6 +87,7 @@
       "basic_info": {
         "description": "Customize your agent. Choose its knowledge base, then its AI model.",
         "avatar": "Avatar (optional)",
+        "upload_photo": "Upload a photo",
         "name": "Name",
         "name_placeholder": "Name your agent",
         "description_label": "Description",

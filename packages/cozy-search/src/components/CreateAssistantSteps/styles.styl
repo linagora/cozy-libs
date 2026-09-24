@@ -11,6 +11,20 @@
   & .file-input
     display none
 
+// The "Upload a photo" hint of the avatar: a small light tooltip with the
+// design's elevation, not the dark default one. Doubled to outweigh the
+// theme's tooltip rule, injected after this stylesheet.
+.avatar-tooltip.avatar-tooltip
+  padding 8px
+  border-radius 8px
+  background-color var(--paperBackgroundColor)
+  color var(--primaryTextColor)
+  font-size 12px
+  font-weight 500
+  line-height 20px
+  letter-spacing 0.1px
+  box-shadow 0 2px 3px rgba(0, 0, 0, 0.15), 0 1px 1px rgba(0, 0, 0, 0.3)
+
 .ModelSelectionStep
   & .grid-container
     display grid
