@@ -2,7 +2,9 @@ import { Icon, Plus } from '@linagora/twake-icons'
 import React, { useRef } from 'react'
 
 import TextField from 'cozy-ui/transpiled/react/TextField'
+import Tooltip from 'cozy-ui/transpiled/react/Tooltip'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
@@ -18,6 +20,7 @@ const BasicInfoStep = ({
   onKnowledgeBaseChange
 }) => {
   const { t } = useI18n()
+  const { type } = useCozyTheme()
   const fileInputRef = useRef(null)
 
   const handleAvatarClick = () => {
@@ -46,23 +49,46 @@ const BasicInfoStep = ({
           {t('assistant_create.steps.basic_info.avatar')}
         </Typography>
         <div className="u-flex u-flex-items-center u-flex-justify-center">
-          <div
-            role="button"
-            tabIndex={0}
-            aria-label={t('assistant_create.steps.basic_info.avatar')}
-            className={`u-w-3 u-h-3 u-flex u-flex-justify-center u-flex-items-center u-c-pointer u-bd-1 u-bd-coolGrey u-ov-hidden ${styles['avatar-container']}`}
-            onClick={handleAvatarClick}
+          <Tooltip
+            title={t('assistant_create.steps.basic_info.upload_photo')}
+            placement="bottom-start"
+            arrow={false}
+            classes={{
+              tooltip: styles['avatar-tooltip'],
+              // Rendered outside the themed tree: the theme class brings
+              // the dark colors when needed
+              popper: `TwakeTheme--${type}`
+            }}
+            // Sits at the lower right of the avatar, next to the pointer,
+            // as a native tooltip would (the design): shifted from the
+            // bottom-left corner by half the 64px avatar plus (9px, 7px),
+            // and never flipped away from it
+            PopperProps={{
+              modifiers: {
+                offset: { enabled: true, offset: '41, -25' },
+                flip: { enabled: false },
+                preventOverflow: { enabled: false }
+              }
+            }}
           >
-            {icon ? (
-              <img
-                src={icon}
-                alt="Avatar"
-                className={`u-w-100 u-h-100 u-obj-cover ${styles['avatar-image']}`}
-              />
-            ) : (
-              <Icon icon={Plus} />
-            )}
-          </div>
+            <div
+              role="button"
+              tabIndex={0}
+              aria-label={t('assistant_create.steps.basic_info.avatar')}
+              className={`u-w-3 u-h-3 u-flex u-flex-justify-center u-flex-items-center u-c-pointer u-bd-1 u-bd-coolGrey u-ov-hidden ${styles['avatar-container']}`}
+              onClick={handleAvatarClick}
+            >
+              {icon ? (
+                <img
+                  src={icon}
+                  alt="Avatar"
+                  className={`u-w-100 u-h-100 u-obj-cover ${styles['avatar-image']}`}
+                />
+              ) : (
+                <Icon icon={Plus} />
+              )}
+            </div>
+          </Tooltip>
           <input
             type="file"
             ref={fileInputRef}

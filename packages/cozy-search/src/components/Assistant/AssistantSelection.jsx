@@ -1,35 +1,32 @@
-import { Icon, Dropdown, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useState, useRef, useEffect } from 'react'
 
-import { useQuery } from 'cozy-client'
-import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
-import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
+import { Icon, Dropdown } from '@linagora/twake-icons'
 import Chips from 'cozy-ui/transpiled/react/Chips'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
-import { useI18n } from 'twake-i18n'
 
-import styles from './styles.styl'
-import { useAssistant } from '../AssistantProvider'
-import { DEFAULT_ASSISTANT } from '../constants'
-import { buildAssistantsQuery } from '../queries'
 import AssistantAvatar from './AssistantAvatar'
-import AssistantSelectionItem from './AssistantSelectionItem'
+import AssistantMenu, { useSelectedAssistant } from './AssistantMenu'
+import styles from './styles.styl'
+import { CHIP_CLASSES } from '../TwakeKnowledges/SourceButton'
+import sourceStyles from '../TwakeKnowledges/styles.styl'
 
-const AssistantSelection = ({ className, disabled }) => {
-  const { t } = useI18n()
-  const { isMobile } = useBreakpoints()
+/**
+ * The chip naming the assistant of the conversation. With `selectable`
+ * it opens the assistant menu (the mobile header); otherwise it is an
+ * indicator, the assistant being picked from the sidebar. `disabled` is
+ * for a conversation that already started: its assistant cannot change.
+ * `borderless` drops the chip border (the mobile header and composer).
+ */
+const AssistantSelection = ({
+  className,
+  disabled,
+  selectable = true,
+  borderless = false
+}) => {
   const buttonRef = useRef(null)
   const [open, setOpen] = useState(false)
-  const {
-    setIsOpenCreateAssistant,
-    setAssistantIdInAction,
-    setIsOpenDeleteAssistant,
-    setIsOpenEditAssistant,
-    selectedAssistantId,
-    setSelectedAssistantId
-  } = useAssistant()
+  const { selectedAssistant } = useSelectedAssistant()
+  const isClickable = selectable && !disabled
 
   useEffect(() => {
     if (disabled) {
@@ -38,108 +35,47 @@ const AssistantSelection = ({ className, disabled }) => {
     }
   }, [disabled])
 
-  const assistantsQuery = buildAssistantsQuery()
-  const assistants =
-    useQuery(assistantsQuery.definition, assistantsQuery.options)?.data || []
-
-  const handleClick = () => {
-    if (disabled) return
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const handleCreate = () => {
-    setIsOpenCreateAssistant(true)
-    handleClose()
-  }
-
-  const selectedAssistant =
-    assistants.find(assistant => assistant._id === selectedAssistantId) ||
-    DEFAULT_ASSISTANT
-
   return (
     <>
       <div className={className} ref={buttonRef}>
-        {disabled && isMobile ? (
-          <AssistantAvatar assistant={selectedAssistant} />
-        ) : (
-          <Chips
-            icon={
-              <AssistantAvatar
-                className={styles['assistant-icon--composer']}
-                assistant={selectedAssistant}
-              />
-            }
-            label={
-              isMobile ? (
-                <Icon icon={Dropdown} size={16} />
-              ) : (
-                <span className="u-flex u-flex-items-center">
-                  {selectedAssistant.name}
-                  {!disabled && (
-                    <Icon
-                      icon={Dropdown}
-                      size={16}
-                      className="u-ml-half u-flex-shrink-0"
-                    />
-                  )}
-                </span>
-              )
-            }
-            {...(disabled
-              ? { className: styles['chip'], 'aria-disabled': true }
-              : { clickable: true, onClick: handleClick })}
-          />
-        )}
-      </div>
-      {open && (
-        <ActionsMenu
-          open
-          ref={buttonRef}
-          onClose={handleClose}
-          actions={[]}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left'
-          }}
-        >
-          {assistants.map(assistant => (
-            <AssistantSelectionItem
-              key={assistant._id}
-              assistant={assistant}
-              onClose={handleClose}
-              onSelect={() => setSelectedAssistantId(assistant._id)}
-              selectedAssistant={selectedAssistant}
-              setIsOpenDeleteAssistant={setIsOpenDeleteAssistant}
-              setAssistantIdInAction={setAssistantIdInAction}
-              setIsOpenEditAssistant={setIsOpenEditAssistant}
+        <Chips
+          icon={
+            <AssistantAvatar
+              className={styles['assistant-icon--composer']}
+              assistant={selectedAssistant}
             />
-          ))}
-          <AssistantSelectionItem
-            assistant={DEFAULT_ASSISTANT}
-            onClose={handleClose}
-            onSelect={() => setSelectedAssistantId(DEFAULT_ASSISTANT._id)}
-            selectedAssistant={selectedAssistant}
-            disableActions={true}
-          />
-          <ActionsMenuItem
-            onClick={handleCreate}
-            className={cx(styles['menu-item'], styles['create-item'])}
-          >
-            <div className="u-flex u-flex-items-center">
-              <div className="u-flex u-flex-justify-center u-w-1-half u-mr-half">
-                <Icon icon={Plus} size={16} />
-              </div>
-              <Typography variant="body1">
-                {t('assistant_create.title')}
-              </Typography>
-            </div>
-          </ActionsMenuItem>
-        </ActionsMenu>
-      )}
+          }
+          label={
+            <span className="u-flex u-flex-items-center">
+              {selectedAssistant.name}
+              {isClickable && (
+                <Icon
+                  icon={Dropdown}
+                  size={16}
+                  className="u-ml-half u-flex-shrink-0"
+                />
+              )}
+            </span>
+          }
+          className={cx(sourceStyles['source-chip'], {
+            [styles['chip']]: borderless
+          })}
+          classes={CHIP_CLASSES}
+          {...(isClickable
+            ? {
+                clickable: true,
+                onClick: () => setOpen(true),
+                'aria-haspopup': 'menu',
+                'aria-expanded': open
+              }
+            : { 'aria-disabled': !!disabled })}
+        />
+      </div>
+      <AssistantMenu
+        anchorRef={buttonRef}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
     </>
   )
 }

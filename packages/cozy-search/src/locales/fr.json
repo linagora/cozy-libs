@@ -28,11 +28,12 @@
       "edited": "Message enregistré"
     },
     "sidebar": {
-      "create_new": "Créer",
+      "create_new": "Nouveau chat",
       "toggle_sidebar": "Basculer la barre latérale",
       "toggle_search": "Basculer la recherche",
       "close_sidebar": "Fermer la barre latérale",
-      "recent_chats": "Récent",
+      "assistant": "Assistant",
+      "recent_chats": "Récents",
       "conversation": {
         "actions": {
           "delete": "Supprimer",
@@ -47,6 +48,7 @@
       "yesterday": "Hier"
     },
     "default_error": "Une erreur est survenue lors de la génération de la réponse. Veuillez réessayer",
+    "disclaimer": "Twake AI peut faire des erreurs. Vérifiez les informations importantes.",
     "default_empty_response": "Je n'ai pas trouvé de réponse à votre demande. Essayez de reformuler votre question",
     "hide": "Masquer",
     "show": "Afficher",
@@ -85,6 +87,7 @@
       "basic_info": {
         "description": "Personnalisez votre agent. Choisissez la base de connaissances, puis son modèle d'IA.",
         "avatar": "Avatar (optionnel)",
+        "upload_photo": "Importer une photo",
         "name": "Nom",
         "name_placeholder": "Nommez votre agent",
         "description_label": "Description",

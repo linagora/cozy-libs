@@ -25,10 +25,11 @@
       "edited": "Đã lưu tin nhắn"
     },
     "sidebar": {
-      "create_new": "Tạo mới",
+      "create_new": "Cuộc trò chuyện mới",
       "toggle_sidebar": "Bật/tắt thanh bên",
       "toggle_search": "Bật/tắt tìm kiếm",
       "close_sidebar": "Đóng thanh bên",
+      "assistant": "Trợ lý",
       "recent_chats": "Gần đây",
       "conversation": {
         "actions": {
@@ -44,6 +45,7 @@
       "yesterday": "Hôm qua"
     },
     "default_error": "Đã xảy ra lỗi, vui lòng thử lại",
+    "disclaimer": "Twake AI có thể mắc lỗi. Hãy kiểm tra lại các thông tin quan trọng.",
     "default_empty_response": "Tôi không tìm thấy câu trả lời cho yêu cầu của bạn. Vui lòng thử diễn đạt lại",
     "hide": "Ẩn",
     "show": "Hiện",
@@ -102,6 +104,7 @@
       "basic_info": {
         "description": "Tùy chỉnh tác nhân của bạn. Chọn cơ sở tri thức, sau đó là mô hình AI.",
         "avatar": "Ảnh đại diện (tùy chọn)",
+        "upload_photo": "Tải ảnh lên",
         "name": "Tên",
         "name_placeholder": "Đặt tên cho tác nhân của bạn",
         "description_label": "Mô tả",

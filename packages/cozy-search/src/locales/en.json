@@ -28,10 +28,11 @@
       "edited": "Message saved"
     },
     "sidebar": {
-      "create_new": "Create",
+      "create_new": "New chat",
       "toggle_sidebar": "Toggle sidebar",
       "toggle_search": "Toggle search",
       "close_sidebar": "Close sidebar",
+      "assistant": "Assistant",
       "recent_chats": "Recent",
       "conversation": {
         "actions": {
@@ -47,6 +48,7 @@
       "yesterday": "Yesterday"
     },
     "default_error": "An error occurred during response generation. Please try again",
+    "disclaimer": "Twake AI can make mistakes. Please verify important information.",
     "default_empty_response": "I could not find an answer to your request. Please try rephrasing it",
     "hide": "Hide",
     "show": "Show",
@@ -85,6 +87,7 @@
       "basic_info": {
         "description": "Customize your agent. Choose its knowledge base, then its AI model.",
         "avatar": "Avatar (optional)",
+        "upload_photo": "Upload a photo",
         "name": "Name",
         "name_placeholder": "Name your agent",
         "description_label": "Description",

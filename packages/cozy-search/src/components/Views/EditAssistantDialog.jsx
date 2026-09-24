@@ -125,7 +125,8 @@ const EditAssistantDialog = ({ open, onClose }) => {
     <Dialog
       open={open}
       onClose={onClose}
-      maxWidth="lg"
+      maxWidth="md"
+      classes={{ paper: 'large' }}
       fullScreen={!!isMobile}
       className={styles.CreateAssistantDialog}
     >

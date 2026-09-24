@@ -1,8 +1,8 @@
-import { Icon, CrossSmall, Magnifier, Menu, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { Icon, CrossSmall, Magnifier, Menu, Plus } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Divider from 'cozy-ui/transpiled/react/Divider'
@@ -15,6 +15,8 @@ import { useI18n } from 'twake-i18n'
 import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
+import AssistantSelection from '../Assistant/AssistantSelection'
+import AssistantSidebarItem from '../Assistant/AssistantSidebarItem'
 import { useAssistant } from '../AssistantProvider'
 import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import ConversationList from '../Conversations/ConversationList'
@@ -34,6 +36,9 @@ const Sidebar = ({ className }) => {
   // conversation and must read as a distinct floating button, not blend into
   // the text behind it.
   const isFloatingToggle = !sidebarOpen && isMobile
+  // Closed on desktop, the sidebar is a narrow rail with the toggle and the
+  // new-chat button centered in it.
+  const isRail = !sidebarOpen && !isMobile
 
   const onToggleSidebar = () => {
     setSidebarOpen(!sidebarOpen)
@@ -59,10 +64,18 @@ const Sidebar = ({ className }) => {
         className={cx('u-flex u-flex-column u-h-100 u-bdw-1', className, {
           'u-w-auto': !sidebarOpen,
           [styles['sidebar-container']]: sidebarOpen,
+          [styles['sidebar-rail']]: isRail,
           'u-left-0 u-pos-absolute': isMobile
         })}
       >
-        <div className="u-flex u-flex-items-center u-flex-justify-between u-ph-1 u-pv-1">
+        <div
+          className={cx('u-flex u-flex-items-center u-pv-1', {
+            'u-ph-1-half u-flex-justify-between': sidebarOpen,
+            'u-ph-1': !sidebarOpen,
+            'u-flex-justify-between': isFloatingToggle,
+            'u-flex-justify-center': isRail
+          })}
+        >
           <div
             className={cx('u-flex', {
               'u-bdrs-circle': isFloatingToggle,
@@ -70,41 +83,44 @@ const Sidebar = ({ className }) => {
             })}
           >
             <IconButton
-              size="medium"
-              edge="start"
-              className="u-bdrs-6"
+              size="small"
               onClick={onToggleSidebar}
               aria-label={t('assistant.sidebar.toggle_sidebar')}
             >
-              <Icon icon={Menu} aria-hidden="true" />
+              <Icon icon={Menu} size={16} aria-hidden="true" />
             </IconButton>
           </div>
+          {isFloatingToggle &&
+            flag('cozy.assistant.create-assistant.enabled') && (
+              <AssistantSelection borderless className="u-ml-half" />
+            )}
           <div>
             {sidebarOpen &&
               flag('cozy.assistant.search-conversation.enabled') && (
                 <IconButton
-                  size="medium"
-                  edge="end"
-                  className="u-bdrs-6"
+                  size="small"
                   onClick={onToggleSearch}
                   aria-label={t('assistant.sidebar.toggle_search')}
                 >
-                  <Icon icon={Magnifier} aria-hidden="true" />
+                  <Icon icon={Magnifier} size={16} aria-hidden="true" />
                 </IconButton>
               )}
             {sidebarOpen && isMobile && (
               <IconButton
-                size="medium"
-                className="u-bdrs-6"
+                size="small"
                 onClick={onToggleSidebar}
                 aria-label={t('assistant.sidebar.close_sidebar')}
               >
-                <Icon icon={CrossSmall} aria-hidden="true" />
+                <Icon icon={CrossSmall} size={16} aria-hidden="true" />
               </IconButton>
             )}
           </div>
         </div>
-        <div className="u-ph-1 u-pb-half">
+        <div
+          className={cx('u-ph-1 u-pb-half', {
+            'u-flex u-flex-justify-center': isRail
+          })}
+        >
           {sidebarOpen ? (
             <Button
               className="u-w-100 u-bdrs-6"
@@ -128,10 +144,20 @@ const Sidebar = ({ className }) => {
 
         {sidebarOpen && (
           <>
-            <Typography variant="h6" className="u-ph-1 u-pv-half">
+            {flag('cozy.assistant.create-assistant.enabled') && (
+              <div className="u-ph-1 u-mt-1">
+                <AssistantSidebarItem />
+              </div>
+            )}
+            <Typography
+              variant="caption"
+              color="textSecondary"
+              component="h2"
+              className="u-ph-1 u-mt-1 u-mb-half"
+            >
               {t('assistant.sidebar.recent_chats')}
             </Typography>
-            <PrettyScrollbar className="u-flex-auto u-ov-auto u-pb-half">
+            <PrettyScrollbar className="u-flex-auto u-ov-auto u-ph-1 u-pb-half">
               <ConversationList
                 conversations={conversations}
                 currentConversationId={currentConversationId}
