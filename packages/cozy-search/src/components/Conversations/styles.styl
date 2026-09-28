@@ -10,9 +10,26 @@
     z-index calc(var(--zIndex-modal) + 15)
 
     &--mobile
-        border-color var(--borderMainColor)
-        border-radius 20px
+        // The design's "Overlay+Shadow": a 1px ring and two soft shadows
+        // instead of a border
+        border-color transparent
+        border-radius 28px
         padding-bottom 8px
+        box-shadow 0 0 0 1px rgba(0, 0, 0, 0.04), 0 2px 8px 0 rgba(0, 0, 0, 0.04), 0 4px 40px 8px rgba(0, 0, 0, 0.02)
+
+    &--mobile-dark
+        // The shadows vanish on a dark background: keep a border there
+        border-color var(--borderMainColor)
+
+.composer-dock--mobile
+    // The composer and the disclaimer sit on a fade: the conversation runs
+    // under them and dissolves into the background over the 32px above the
+    // composer (the design's gradient background)
+    position relative
+    z-index calc(var(--zIndex-modal) + 15)
+    margin-top -32px
+    padding-top 32px
+    background linear-gradient(to top, var(--paperBackgroundColor) calc(100% - 32px), transparent)
 
 .composerActions
     margin-top 12px
@@ -65,8 +82,10 @@
   +mobile()
     // Small symmetric gutter so the LLM response uses nearly the full
     // mobile width. The top padding is the height of the sidebar bar over
-    // the conversation: the text starts below the bar and scrolls under it.
-    padding 48px 8px 0
+    // the conversation, the bottom one the fade under the composer: the
+    // text starts below the bar and can scroll clear of the fade, and
+    // runs under both in between.
+    padding 48px 8px 32px
 
 
 .conversationBar-input

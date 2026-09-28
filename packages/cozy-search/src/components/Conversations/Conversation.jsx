@@ -60,13 +60,10 @@ const Conversation = ({ className }) => {
       </ThreadPrimitive.Empty>
       <ThreadPrimitive.Viewport
         autoScroll
-        className={cx(
-          'u-w-100 u-bxz u-ov-auto u-mb-1',
-          styles.conversationViewport,
-          {
-            'u-flex-auto': !isThreadEmpty
-          }
-        )}
+        className={cx('u-w-100 u-bxz u-ov-auto', styles.conversationViewport, {
+          'u-flex-auto': !isThreadEmpty,
+          'u-mb-1': !isMobile
+        })}
       >
         <div className="u-maw-7 u-mh-auto">
           <ThreadPrimitive.Messages
@@ -77,15 +74,21 @@ const Conversation = ({ className }) => {
           />
         </div>
       </ThreadPrimitive.Viewport>
-      <ConversationComposer />
-      <Typography
-        variant="caption"
-        color="textSecondary"
-        component="p"
-        className="u-w-100 u-maw-7 u-mh-auto u-mt-half u-mb-0 u-ta-center"
+      <div
+        className={cx('u-w-100', {
+          [styles['composer-dock--mobile']]: isMobile && !isThreadEmpty
+        })}
       >
-        {t('assistant.disclaimer')}
-      </Typography>
+        <ConversationComposer />
+        <Typography
+          variant="caption"
+          color="textSecondary"
+          component="p"
+          className="u-w-100 u-maw-7 u-mh-auto u-mt-half u-mb-0 u-ta-center"
+        >
+          {t('assistant.disclaimer')}
+        </Typography>
+      </div>
     </ThreadPrimitive.Root>
   )
 }
