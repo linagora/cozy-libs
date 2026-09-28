@@ -21,7 +21,7 @@
         // The shadows vanish on a dark background: keep a border there
         border-color var(--borderMainColor)
 
-.composer-dock--mobile
+.composer-dock
     // The composer and the disclaimer sit on a fade: the conversation runs
     // under them and dissolves into the background over the 32px above the
     // composer (the design's gradient background)
@@ -79,14 +79,18 @@
       border-color transparent !important
 
 .conversationViewport
+  // The bottom padding is the fade under the composer: the last lines can
+  // scroll clear of it
+  padding-bottom 32px
+
   +mobile()
     // Small symmetric gutter so the LLM response uses nearly the full
     // mobile width. The top padding puts the first message 8px below the
     // 48px sidebar bar over the conversation (the message brings its own
-    // 16px margin); the text then scrolls under the bar. The bottom one
-    // is the fade under the composer, the last lines can scroll clear
-    // of it.
-    padding 40px 8px 32px
+    // 16px margin); the text then scrolls under the bar.
+    padding-top 40px
+    padding-left 8px
+    padding-right 8px
 
 
 .conversationBar-input
