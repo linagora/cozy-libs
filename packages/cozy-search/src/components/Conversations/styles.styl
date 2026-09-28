@@ -81,11 +81,12 @@
 .conversationViewport
   +mobile()
     // Small symmetric gutter so the LLM response uses nearly the full
-    // mobile width. The top padding is the height of the sidebar bar over
-    // the conversation, the bottom one the fade under the composer: the
-    // text starts below the bar and can scroll clear of the fade, and
-    // runs under both in between.
-    padding 48px 8px 32px
+    // mobile width. The top padding puts the first message 8px below the
+    // 48px sidebar bar over the conversation (the message brings its own
+    // 16px margin); the text then scrolls under the bar. The bottom one
+    // is the fade under the composer, the last lines can scroll clear
+    // of it.
+    padding 40px 8px 32px
 
 
 .conversationBar-input
