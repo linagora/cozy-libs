@@ -1,6 +1,6 @@
 import { ThreadPrimitive, useThread } from '@assistant-ui/react'
 import cx from 'classnames'
-import React from 'react'
+import React, { useState } from 'react'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -18,13 +18,17 @@ const Conversation = ({ className }) => {
   const { isMobile } = useBreakpoints()
 
   const isThreadEmpty = useThread(state => state.messages.length === 0)
+  // On mobile the conversation scrolls under the sidebar bar: once it has,
+  // a fade below the bar dissolves the text instead of cutting it (at the
+  // top of the scroll, the first message sits clear of the bar).
+  const [isScrolled, setIsScrolled] = useState(false)
 
   return (
     <ThreadPrimitive.Root
       // The gutters: the messages and the composer are centered up to a max
       // width, and keep a margin from the edges when the screen is narrower
       className={cx(
-        'u-flex u-flex-column u-flex-items-center u-h-100 u-bxz',
+        'u-flex u-flex-column u-flex-items-center u-h-100 u-bxz u-pos-relative',
         isMobile ? 'u-ph-1' : 'u-ph-2',
         className,
         {
@@ -58,8 +62,17 @@ const Conversation = ({ className }) => {
           </Typography>
         </div>
       </ThreadPrimitive.Empty>
+      {isMobile && !isThreadEmpty && (
+        <div
+          aria-hidden="true"
+          className={cx(styles['viewport-fade-top'], {
+            [styles['viewport-fade-top--visible']]: isScrolled
+          })}
+        />
+      )}
       <ThreadPrimitive.Viewport
         autoScroll
+        onScroll={event => setIsScrolled(event.currentTarget.scrollTop > 0)}
         className={cx('u-w-100 u-bxz u-ov-auto', styles.conversationViewport, {
           'u-flex-auto': !isThreadEmpty
         })}

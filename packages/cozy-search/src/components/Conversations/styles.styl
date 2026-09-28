@@ -78,6 +78,24 @@
       background-color transparent !important
       border-color transparent !important
 
+.viewport-fade-top
+    // Under the 48px sidebar bar of mobile: the text scrolled under the bar
+    // dissolves over 24px instead of being cut at its edge. Hidden while
+    // the conversation is at the top of its scroll.
+    position absolute
+    top 48px
+    left 0
+    right 0
+    height 24px
+    background linear-gradient(to bottom, var(--paperBackgroundColor), transparent)
+    opacity 0
+    transition opacity 150ms
+    pointer-events none
+    z-index calc(var(--zIndex-modal) + 15)
+
+    &--visible
+        opacity 1
+
 .conversationViewport
   // The bottom padding is the fade under the composer: the last lines can
   // scroll clear of it
