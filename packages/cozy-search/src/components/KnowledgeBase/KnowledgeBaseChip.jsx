@@ -5,10 +5,12 @@ import { useClient, generateWebLink } from 'cozy-client'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Chip from 'cozy-ui/transpiled/react/Chips'
+import Tooltip from 'cozy-ui/transpiled/react/Tooltip'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import FolderPickerDialog from './FolderPickerDialog'
+import styles from './styles.styl'
 import SourceButton, { CHIP_CLASSES } from '../TwakeKnowledges/SourceButton'
 import sourceStyles from '../TwakeKnowledges/styles.styl'
 
@@ -70,18 +72,29 @@ const KnowledgeBaseChip = ({
           onClick={() => setIsMenuOpen(true)}
         />
       ) : (
-        <div ref={chipRef}>
-          <Chip
-            icon={<Icon icon={Drive} size={16} preserveColor />}
-            label={label}
-            clickable
-            aria-haspopup="menu"
-            aria-expanded={isMenuOpen}
-            onClick={() => setIsMenuOpen(true)}
-            className={sourceStyles['source-chip']}
-            classes={CHIP_CLASSES}
-          />
-        </div>
+        // Hovering the chip tells what the folder is for (the design's
+        // tooltip); nothing to tell when the folder is gone
+        <Tooltip
+          title={isUnavailable ? '' : t('assistant.knowledge_base.folder_hint')}
+          placement="top"
+          classes={{
+            tooltip: styles['folder-tooltip'],
+            arrow: styles['folder-tooltip-arrow']
+          }}
+        >
+          <div ref={chipRef}>
+            <Chip
+              icon={<Icon icon={Drive} size={16} preserveColor />}
+              label={label}
+              clickable
+              aria-haspopup="menu"
+              aria-expanded={isMenuOpen}
+              onClick={() => setIsMenuOpen(true)}
+              className={sourceStyles['source-chip']}
+              classes={CHIP_CLASSES}
+            />
+          </div>
+        </Tooltip>
       )}
       {isMenuOpen && (
         <ActionsMenu
