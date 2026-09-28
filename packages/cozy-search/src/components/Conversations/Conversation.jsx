@@ -61,8 +61,7 @@ const Conversation = ({ className }) => {
       <ThreadPrimitive.Viewport
         autoScroll
         className={cx('u-w-100 u-bxz u-ov-auto', styles.conversationViewport, {
-          'u-flex-auto': !isThreadEmpty,
-          'u-mb-1': !isMobile
+          'u-flex-auto': !isThreadEmpty
         })}
       >
         <div className="u-maw-7 u-mh-auto">
@@ -76,7 +75,7 @@ const Conversation = ({ className }) => {
       </ThreadPrimitive.Viewport>
       <div
         className={cx('u-w-100', {
-          [styles['composer-dock--mobile']]: isMobile && !isThreadEmpty
+          [styles['composer-dock']]: !isThreadEmpty
         })}
       >
         <ConversationComposer />
