@@ -32,10 +32,10 @@ const Sidebar = ({ className }) => {
 
   const { conversations, hasMore, fetchMore } = useFetchConversations()
 
-  // When the sidebar is closed on mobile, the toggle sits over the scrolling
-  // conversation and must read as a distinct floating button, not blend into
-  // the text behind it.
-  const isFloatingToggle = !sidebarOpen && isMobile
+  // Closed on mobile, the sidebar shrinks to an opaque bar over the top of
+  // the conversation (the toggle and the assistant chip), the text
+  // scrolling under it.
+  const isMobileBar = !sidebarOpen && isMobile
   // Closed on desktop, the sidebar is a narrow rail with the toggle and the
   // new-chat button centered in it.
   const isRail = !sidebarOpen && !isMobile
@@ -61,27 +61,23 @@ const Sidebar = ({ className }) => {
   return (
     <>
       <div
-        className={cx('u-flex u-flex-column u-h-100 u-bdw-1', className, {
-          'u-w-auto': !sidebarOpen,
+        className={cx('u-flex u-flex-column u-bdw-1', className, {
+          'u-h-100': !isMobileBar,
+          'u-w-100': isMobileBar,
           [styles['sidebar-container']]: sidebarOpen,
           [styles['sidebar-rail']]: isRail,
+          [styles['sidebar-bar--mobile']]: isMobileBar,
           'u-left-0 u-pos-absolute': isMobile
         })}
       >
         <div
-          className={cx('u-flex u-flex-items-center u-pv-1', {
-            'u-ph-1-half u-flex-justify-between': sidebarOpen,
-            'u-ph-1': !sidebarOpen,
-            'u-flex-justify-between': isFloatingToggle,
-            'u-flex-justify-center': isRail
+          className={cx('u-flex u-flex-items-center', {
+            'u-ph-1-half u-pv-1 u-flex-justify-between': sidebarOpen,
+            'u-ph-1 u-pv-1 u-flex-justify-center': isRail,
+            'u-ph-1 u-pv-half u-flex-justify-between': isMobileBar
           })}
         >
-          <div
-            className={cx('u-flex', {
-              'u-bdrs-circle': isFloatingToggle,
-              [styles['menu-toggle-floating']]: isFloatingToggle
-            })}
-          >
+          <div className="u-flex u-flex-items-center">
             <IconButton
               size="small"
               onClick={onToggleSidebar}
@@ -89,11 +85,10 @@ const Sidebar = ({ className }) => {
             >
               <Icon icon={Menu} size={16} aria-hidden="true" />
             </IconButton>
-          </div>
-          {isFloatingToggle &&
-            flag('cozy.assistant.create-assistant.enabled') && (
+            {isMobileBar && flag('cozy.assistant.create-assistant.enabled') && (
               <AssistantSelection borderless className="u-ml-half" />
             )}
+          </div>
           <div>
             {sidebarOpen &&
               flag('cozy.assistant.search-conversation.enabled') && (
