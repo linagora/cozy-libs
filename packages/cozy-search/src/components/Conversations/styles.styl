@@ -64,10 +64,9 @@
 .conversationViewport
   +mobile()
     // Small symmetric gutter so the LLM response uses nearly the full
-    // mobile width. The floating sidebar-toggle button sits on an opaque
-    // tile, so text scrolling beneath it stays visually covered.
-    padding-left 8px
-    padding-right 8px
+    // mobile width. The top padding is the height of the sidebar bar over
+    // the conversation: the text starts below the bar and scrolls under it.
+    padding 48px 8px 0
 
 
 .conversationBar-input
