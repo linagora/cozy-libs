@@ -72,6 +72,7 @@
     },
     "knowledge_base": {
       "change_folder": "Modifier le dossier…",
+      "folder_hint": "L'assistant peut accéder à tous les fichiers stockés dans ce dossier Drive",
       "emails": "Emails",
       "open_folder": "Ouvrir dans Drive",
       "picker_error": "Impossible d'ouvrir le sélecteur de dossier Drive. Veuillez réessayer.",

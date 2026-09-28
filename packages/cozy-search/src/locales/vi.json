@@ -86,6 +86,7 @@
     },
     "knowledge_base": {
       "change_folder": "Thay đổi thư mục…",
+      "folder_hint": "Trợ lý có thể truy cập tất cả các tệp được lưu trong thư mục Drive này",
       "emails": "Email",
       "open_folder": "Mở trong Drive",
       "picker_error": "Không thể mở bộ chọn thư mục Drive. Vui lòng thử lại.",
