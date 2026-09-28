@@ -11,6 +11,7 @@ import { Icon, ArrowUp, Stop } from '@linagora/twake-icons'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
+import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
 import ConversationBar from './ConversationBar'
 import styles from './styles.styl'
@@ -20,6 +21,7 @@ import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
 
 const ConversationComposer = () => {
   const { isMobile } = useBreakpoints()
+  const { isLight } = useCozyTheme()
   const composerRuntime = useComposerRuntime()
   const isRunning = useThread(state => state.isRunning)
   const isThreadEmpty = useThread(state => state.messages.length === 0)
@@ -83,7 +85,10 @@ const ConversationComposer = () => {
       className={cx(
         'u-w-100 u-maw-7 u-mh-auto u-bxz',
         styles['composerContainer'],
-        { [styles['composerContainer--mobile']]: isMobile }
+        {
+          [styles['composerContainer--mobile']]: isMobile,
+          [styles['composerContainer--mobile-dark']]: isMobile && !isLight
+        }
       )}
     >
       <div className="u-flex u-flex-items-start u-flex-justify-between">
