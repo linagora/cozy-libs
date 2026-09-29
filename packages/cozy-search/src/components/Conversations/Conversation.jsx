@@ -74,7 +74,9 @@ const Conversation = ({ className }) => {
         autoScroll
         onScroll={event => setIsScrolled(event.currentTarget.scrollTop > 0)}
         className={cx('u-w-100 u-bxz u-ov-auto', styles.conversationViewport, {
-          'u-flex-auto': !isThreadEmpty
+          'u-flex-auto': !isThreadEmpty,
+          [styles['conversationViewport--filled']]: !isThreadEmpty,
+          'u-mb-1': isThreadEmpty
         })}
       >
         <div className="u-maw-7 u-mh-auto">

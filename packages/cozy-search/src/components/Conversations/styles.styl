@@ -97,18 +97,23 @@
         opacity 1
 
 .conversationViewport
-  // The bottom padding is the fade under the composer: the last lines can
-  // scroll clear of it
-  padding-bottom 32px
-
   +mobile()
     // Small symmetric gutter so the LLM response uses nearly the full
-    // mobile width. The top padding puts the first message 8px below the
-    // 48px sidebar bar over the conversation (the message brings its own
-    // 16px margin); the text then scrolls under the bar.
-    padding-top 40px
+    // mobile width
     padding-left 8px
     padding-right 8px
+
+  // With messages only, so the welcome screen keeps its spacing
+  &--filled
+    // The bottom padding is the fade under the composer: the last lines
+    // can scroll clear of it
+    padding-bottom 32px
+
+    +mobile()
+      // The first message sits 8px below the 48px sidebar bar over the
+      // conversation (the message brings its own 16px margin); the text
+      // then scrolls under the bar
+      padding-top 40px
 
 
 .conversationBar-input
