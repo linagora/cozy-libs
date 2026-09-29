@@ -19,7 +19,7 @@ import React, {
   ReactNode,
   useCallback
 } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 
 import { useClient, useQuery, isQueryLoading } from 'cozy-client'
 import Minilog from 'cozy-minilog'
@@ -107,6 +107,12 @@ const ConversationLoader = ({
   const isLoading = isQueryLoading(queryResult)
   const boundId = conversation?.relationships?.assistant?.data?._id
   const defaultId = useDefaultAssistantId()
+  // The assistant picked to start this conversation on, set by
+  // useConversation when navigating here
+  const { state: locationState } = useLocation() as {
+    state: { assistantId?: string } | null
+  }
+  const requestedId = locationState?.assistantId
 
   const initialMessages = useMemo(
     () => convertMessagesToThreadMessages(conversation?.messages, t),
@@ -120,7 +126,8 @@ const ConversationLoader = ({
     boundId,
     conversation,
     isLoading,
-    defaultId
+    defaultId,
+    requestedId
   })
 
   useEffect(() => {

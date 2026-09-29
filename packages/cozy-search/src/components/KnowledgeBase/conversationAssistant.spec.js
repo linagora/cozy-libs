@@ -56,6 +56,30 @@ describe('resolveConversationAssistantId', () => {
     ).toBe('docs')
   })
 
+  it('selects the requested assistant for a new conversation, over the default', () => {
+    expect(
+      resolveConversationAssistantId({
+        boundId: undefined,
+        conversation: undefined,
+        isLoading: false,
+        defaultId: 'docs',
+        requestedId: 'meeting'
+      })
+    ).toBe('meeting')
+  })
+
+  it('selects the requested assistant for a new conversation without waiting for the default', () => {
+    expect(
+      resolveConversationAssistantId({
+        boundId: undefined,
+        conversation: undefined,
+        isLoading: false,
+        defaultId: undefined,
+        requestedId: 'meeting'
+      })
+    ).toBe('meeting')
+  })
+
   it('selects the sentinel for a new conversation without a configured default', () => {
     expect(
       resolveConversationAssistantId({

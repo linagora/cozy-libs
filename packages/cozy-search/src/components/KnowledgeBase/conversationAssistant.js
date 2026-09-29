@@ -14,17 +14,22 @@ import { DEFAULT_ASSISTANT } from '../constants'
  * @param {string|null|undefined} params.defaultId - The configured default
  * assistant id, only when its document is known to exist; undefined while
  * that is being checked.
+ * @param {string|undefined} [params.requestedId] - The assistant the user
+ * picked to start this new conversation on (the history state of the
+ * navigation), which wins over the default.
  * @returns {string|undefined}
  */
 export const resolveConversationAssistantId = ({
   boundId,
   conversation,
   isLoading,
-  defaultId
+  defaultId,
+  requestedId
 }) => {
   if (boundId) return boundId
   if (isLoading) return undefined
   if (!conversation) {
+    if (requestedId) return requestedId
     if (defaultId === undefined) return undefined
     return defaultId || DEFAULT_ASSISTANT._id
   }
