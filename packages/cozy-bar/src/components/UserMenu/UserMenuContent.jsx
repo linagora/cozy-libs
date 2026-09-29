@@ -128,6 +128,7 @@ const UserMenuContent = ({
           gutters={gutters}
           size="small"
           onClick={() => logOut({ client, webviewIntent, onLogOut })}
+          data-testid="user-menu-logout"
         >
           <ListItemIcon>
             <Icon icon={Logout} />

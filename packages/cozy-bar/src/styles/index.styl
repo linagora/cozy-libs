@@ -10,6 +10,15 @@
 @import './user-menu.styl'
 @import './apps-menu.styl'
 
+.coz-bar-skeleton-avatar
+  width 2rem
+  height 2rem
+  border-radius 50%
+  background-color rgba(0, 0, 0, 0.12)
+  margin 0 0.5rem
+  flex-shrink 0
+  animation coz-bar-skeleton-pulse 1.2s ease-in-out infinite
+
 .coz-bar-app-icon
   width 32px
   height 32px
@@ -19,3 +28,11 @@
 .coz-bar-app-text-icon
   width auto
   height 22px
+
+@keyframes coz-bar-skeleton-pulse
+  0%
+    opacity 1
+  50%
+    opacity 0.4
+  100%
+    opacity 1
