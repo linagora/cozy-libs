@@ -17,6 +17,8 @@ jest.mock('../components/helpers')
 
 // Set up mock implementations
 import * as routerModule from 'react-router-dom'
+
+import useConversation from './useConversation'
 import * as assistantModule from '../components/AssistantProvider'
 import * as helpersModule from '../components/helpers'
 
@@ -28,7 +30,6 @@ assistantModule.useAssistant.mockImplementation(() => ({
 helpersModule.makeConversationId.mockImplementation(() => 'mock-id-123')
 
 // Now import the hook after setting up mocks
-import useConversation from './useConversation'
 
 describe('useConversation', () => {
   beforeEach(() => {
@@ -143,6 +144,25 @@ describe('useConversation', () => {
         search: '',
         hash: ''
       })
+    })
+
+    it('carries the picked assistant in the history state', () => {
+      mockLocation.pathname = '/docs'
+      routerModule.useLocation.mockImplementation(() => mockLocation)
+      const { result } = renderHook(() => useConversation())
+
+      act(() => {
+        result.current.createNewConversation('meeting')
+      })
+
+      expect(mockNavigate).toHaveBeenCalledWith(
+        {
+          pathname: '/docs/assistant/mock-id-123',
+          search: '',
+          hash: ''
+        },
+        { state: { assistantId: 'meeting' } }
+      )
     })
   })
 })

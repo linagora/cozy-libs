@@ -21,8 +21,13 @@ const useConversation = () => {
     locationRef.current = location
   }, [navigate, location])
 
+  /**
+   * Opens a conversation. `assistantId` is the assistant a new conversation
+   * starts on, carried in the history state: without it, a new conversation
+   * starts on the configured default.
+   */
   const goToConversation = useCallback(
-    conversationId => {
+    (conversationId, { assistantId } = {}) => {
       const loc = locationRef.current
       // Extract base path safely by identifying the start of '/assistant' if it exists.
       const match = loc.pathname.match(/^(.*?)(\/assistant(\/|$).*|$)/)
@@ -31,18 +36,28 @@ const useConversation = () => {
 
       setIsOpenSearchConversation(false)
 
-      navigateRef.current({
+      const to = {
         pathname: newPathname,
         search: loc.search,
         hash: loc.hash
-      })
+      }
+      if (assistantId) {
+        navigateRef.current(to, { state: { assistantId } })
+      } else {
+        navigateRef.current(to)
+      }
     },
     [setIsOpenSearchConversation]
   )
 
-  const createNewConversation = useCallback(() => {
-    goToConversation(makeConversationId())
-  }, [goToConversation])
+  const createNewConversation = useCallback(
+    assistantId => {
+      goToConversation(makeConversationId(), {
+        assistantId: typeof assistantId === 'string' ? assistantId : undefined
+      })
+    },
+    [goToConversation]
+  )
 
   return {
     goToConversation,
