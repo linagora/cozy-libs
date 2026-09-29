@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.6.2...cozy-search@2.7.0) (2026-09-29)
+
+### Bug Fixes
+
+- **cozy-search:** Center the buttons of the collapsed sidebar ([2190407](https://github.com/cozy/cozy-libs/commit/2190407aa3127061844bfb26ef17a0e54c5373b0))
+- **cozy-search:** Fade the conversation under the composer on desktop ([8a2fa38](https://github.com/cozy/cozy-libs/commit/8a2fa38cc1a8dbded6b5b65f190c056e77d67aa4))
+- **cozy-search:** Fade the mobile conversation under the composer ([6c32edf](https://github.com/cozy/cozy-libs/commit/6c32edff0f10d4e01f62825dabef740661d14594))
+- **cozy-search:** Fade the mobile conversation under the sidebar bar ([2887a5c](https://github.com/cozy/cozy-libs/commit/2887a5cbfc5e58dc463fe9607b5b0bb3e5a96615))
+- **cozy-search:** Keep the mobile sidebar bar at 48px ([51dae4f](https://github.com/cozy/cozy-libs/commit/51dae4f7dc331ba9548f24a15131c872c6e079ea))
+- **cozy-search:** Keep the welcome screen spacing ([4b0dc64](https://github.com/cozy/cozy-libs/commit/4b0dc641e966a6f7eae5217526ca2890e1d21e3b))
+- **cozy-search:** Narrow the assistant dialog and hint the avatar upload ([ddcc62e](https://github.com/cozy/cozy-libs/commit/ddcc62e88a1dc0ab4bafb373d2d3e882bb2d045d))
+- **cozy-search:** Put the mobile sidebar bar on an opaque background ([d63ad0a](https://github.com/cozy/cozy-libs/commit/d63ad0af677a1752d62a6009d22937d2bb3d1d1e))
+- **cozy-search:** Register the translations on the assistant view ([8a1c8d5](https://github.com/cozy/cozy-libs/commit/8a1c8d5f5444cce8e4ec2e1b23433e1c025696c5))
+- **cozy-search:** Show bouncing dots while the answer is awaited ([de51c7c](https://github.com/cozy/cozy-libs/commit/de51c7c9495abc9180faea94ab98f12e04eba386))
+- **cozy-search:** Start a new conversation from the mobile bar chip ([4672540](https://github.com/cozy/cozy-libs/commit/46725403bb4552ac1e3dc899656eaa6d5e07e679))
+- **cozy-search:** Start the new conversation on the picked assistant ([478af8e](https://github.com/cozy/cozy-libs/commit/478af8e4d8b46d6b530fb52cc9eb5cb1b65703af))
+- **cozy-search:** Tighten the gap under the mobile sidebar bar ([0497d48](https://github.com/cozy/cozy-libs/commit/0497d48bc01e00de9f970e2c979da9522082d227))
+
+### Features
+
+- **cozy-search:** Hint what the knowledge base folder is for ([bee1383](https://github.com/cozy/cozy-libs/commit/bee13834ae677b109f3b6885882d66890102d69b))
+- **cozy-search:** Restyle the assistant screen after the new design ([b05d766](https://github.com/cozy/cozy-libs/commit/b05d766d244666f80533d2fea109e1a86c762a1f))
+
 ## [2.6.2](https://github.com/cozy/cozy-libs/compare/cozy-search@2.6.1...cozy-search@2.6.2) (2026-09-23)
 
 **Note:** Version bump only for package cozy-search
