@@ -92,7 +92,13 @@ const Sidebar = ({ className }) => {
               <Icon icon={Menu} size={16} aria-hidden="true" />
             </IconButton>
             {isMobileBar && flag('cozy.assistant.create-assistant.enabled') && (
-              <AssistantSelection borderless className="u-ml-half" />
+              // A conversation keeps the assistant it started with: picking
+              // another one starts a new conversation, as from the sidebar
+              <AssistantSelection
+                borderless
+                className="u-ml-half"
+                onSelect={createNewConversation}
+              />
             )}
           </div>
           <div>
