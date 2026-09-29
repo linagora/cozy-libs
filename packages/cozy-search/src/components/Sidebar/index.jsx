@@ -61,14 +61,20 @@ const Sidebar = ({ className }) => {
   return (
     <>
       <div
-        className={cx('u-flex u-flex-column u-bdw-1', className, {
-          'u-h-100': !isMobileBar,
-          'u-w-100': isMobileBar,
-          [styles['sidebar-container']]: sidebarOpen,
-          [styles['sidebar-rail']]: isRail,
-          [styles['sidebar-bar--mobile']]: isMobileBar,
-          'u-left-0 u-pos-absolute': isMobile
-        })}
+        // The host's bottom padding of the sidebar is not for the bar, which
+        // must be exactly 48px: the conversation is padded for that height
+        className={cx(
+          'u-flex u-flex-column u-bdw-1',
+          !isMobileBar && className,
+          {
+            'u-h-100': !isMobileBar,
+            'u-w-100': isMobileBar,
+            [styles['sidebar-container']]: sidebarOpen,
+            [styles['sidebar-rail']]: isRail,
+            [styles['sidebar-bar--mobile']]: isMobileBar,
+            'u-left-0 u-pos-absolute': isMobile
+          }
+        )}
       >
         <div
           className={cx('u-flex u-flex-items-center', {
@@ -111,31 +117,33 @@ const Sidebar = ({ className }) => {
             )}
           </div>
         </div>
-        <div
-          className={cx('u-ph-1 u-pb-half', {
-            'u-flex u-flex-justify-center': isRail
-          })}
-        >
-          {sidebarOpen ? (
-            <Button
-              className="u-w-100 u-bdrs-6"
-              label={t('assistant.sidebar.create_new')}
-              startIcon={<Icon icon={Plus} />}
-              fullWidth
-              variant="primary"
-              onClick={onCreateNewConversation}
-            />
-          ) : isMobile ? null : (
-            <IconButton
-              size="medium"
-              className="u-bg-primaryColor u-white u-bdrs-6"
-              onClick={onCreateNewConversation}
-              aria-label={t('assistant.sidebar.create_new')}
-            >
-              <Icon icon={Plus} aria-hidden="true" />
-            </IconButton>
-          )}
-        </div>
+        {!isMobileBar && (
+          <div
+            className={cx('u-ph-1 u-pb-half', {
+              'u-flex u-flex-justify-center': isRail
+            })}
+          >
+            {sidebarOpen ? (
+              <Button
+                className="u-w-100 u-bdrs-6"
+                label={t('assistant.sidebar.create_new')}
+                startIcon={<Icon icon={Plus} />}
+                fullWidth
+                variant="primary"
+                onClick={onCreateNewConversation}
+              />
+            ) : (
+              <IconButton
+                size="medium"
+                className="u-bg-primaryColor u-white u-bdrs-6"
+                onClick={onCreateNewConversation}
+                aria-label={t('assistant.sidebar.create_new')}
+              >
+                <Icon icon={Plus} aria-hidden="true" />
+              </IconButton>
+            )}
+          </div>
+        )}
 
         {sidebarOpen && (
           <>
