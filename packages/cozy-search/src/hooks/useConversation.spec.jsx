@@ -29,8 +29,6 @@ assistantModule.useAssistant.mockImplementation(() => ({
 }))
 helpersModule.makeConversationId.mockImplementation(() => 'mock-id-123')
 
-// Now import the hook after setting up mocks
-
 describe('useConversation', () => {
   beforeEach(() => {
     jest.clearAllMocks()
