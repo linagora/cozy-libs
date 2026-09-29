@@ -8,6 +8,7 @@ import {
   findRagIndexTriggers,
   makeRagIndexTriggerAttributes,
   migrateAssistantsWithoutFolder,
+  removeDuplicateRagIndexTriggers,
   setupRagIndexing
 } from './ragIndexing'
 
@@ -105,6 +106,67 @@ describe('findRagIndexTriggers', () => {
     const found = await findRagIndexTriggers(client)
     expect(found.files).toBeNull()
     expect(found.assistants).toBeNull()
+  })
+
+  it('returns the trigger with the smallest id when there are several', async () => {
+    const olderFilesTrigger = { ...filesTrigger, _id: 'a-trigger-files' }
+    const { client } = makeClient({
+      triggers: [filesTrigger, olderFilesTrigger]
+    })
+    const found = await findRagIndexTriggers(client)
+    expect(found.files).toBe(olderFilesTrigger)
+  })
+})
+
+describe('removeDuplicateRagIndexTriggers', () => {
+  const duplicateFiles = { ...filesTrigger, _id: 'z-trigger-files' }
+  const duplicateAssistants = { ...assistantsTrigger, _id: 'z-trigger-a' }
+
+  it('keeps the trigger with the smallest id of each kind', async () => {
+    const { client, triggersCollection } = makeClient({
+      triggers: [
+        duplicateFiles,
+        filesTrigger,
+        assistantsTrigger,
+        duplicateAssistants,
+        cronFilesTrigger
+      ]
+    })
+    await expect(removeDuplicateRagIndexTriggers(client)).resolves.toEqual([
+      'z-trigger-files',
+      'z-trigger-a'
+    ])
+    expect(triggersCollection.destroy).toHaveBeenCalledTimes(2)
+    expect(triggersCollection.destroy).toHaveBeenCalledWith(duplicateFiles)
+    expect(triggersCollection.destroy).toHaveBeenCalledWith(duplicateAssistants)
+  })
+
+  it('removes nothing without duplicates', async () => {
+    const { client, triggersCollection } = makeClient({
+      triggers: [filesTrigger, assistantsTrigger]
+    })
+    await expect(removeDuplicateRagIndexTriggers(client)).resolves.toEqual([])
+    expect(triggersCollection.destroy).not.toHaveBeenCalled()
+  })
+
+  it('skips a duplicate another session already removed', async () => {
+    const { client, triggersCollection } = makeClient({
+      triggers: [filesTrigger, duplicateFiles]
+    })
+    triggersCollection.destroy.mockRejectedValue(
+      Object.assign(new Error('not found'), { status: 404 })
+    )
+    await expect(removeDuplicateRagIndexTriggers(client)).resolves.toEqual([])
+  })
+
+  it('throws on any other failure', async () => {
+    const { client, triggersCollection } = makeClient({
+      triggers: [filesTrigger, duplicateFiles]
+    })
+    triggersCollection.destroy.mockRejectedValue(new Error('down'))
+    await expect(removeDuplicateRagIndexTriggers(client)).rejects.toThrow(
+      'down'
+    )
   })
 })
 
@@ -287,6 +349,43 @@ describe('createRagIndexTriggers', () => {
     await expect(createRagIndexTriggers(client)).resolves.toEqual([])
     expect(triggersCollection.create).not.toHaveBeenCalled()
     expect(triggersCollection.launch).not.toHaveBeenCalled()
+    expect(triggersCollection.find).toHaveBeenCalledTimes(1)
+  })
+
+  it('removes the duplicates a concurrent session created meanwhile', async () => {
+    const { client, triggersCollection } = makeClient()
+    const ours = {
+      ...filesTrigger,
+      _id: 'created-io.cozy.files'
+    }
+    const theirs = { ...filesTrigger, _id: 'a-trigger-files' }
+    triggersCollection.find
+      .mockResolvedValueOnce({ data: [] })
+      .mockResolvedValueOnce({ data: [ours, theirs, assistantsTrigger] })
+    await expect(createRagIndexTriggers(client)).resolves.toEqual([
+      ASSISTANTS,
+      FILES
+    ])
+    expect(triggersCollection.destroy).toHaveBeenCalledTimes(1)
+    expect(triggersCollection.destroy).toHaveBeenCalledWith(ours)
+  })
+
+  it('logs a failed deduplication and still reports the triggers', async () => {
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const { client, triggersCollection } = makeClient()
+    triggersCollection.find
+      .mockResolvedValueOnce({ data: [] })
+      .mockRejectedValueOnce(new Error('down'))
+    await expect(createRagIndexTriggers(client)).resolves.toEqual([
+      ASSISTANTS,
+      FILES
+    ])
+    expect(warn).toHaveBeenCalledWith(
+      'cozy-search rag indexing:',
+      'cannot remove the duplicate rag-index triggers',
+      expect.any(Error)
+    )
+    warn.mockRestore()
   })
 })
 

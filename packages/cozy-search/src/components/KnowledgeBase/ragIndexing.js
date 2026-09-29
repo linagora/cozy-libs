@@ -27,24 +27,60 @@ export const makeRagIndexTriggerAttributes = doctype => ({
   message: { doctype: FILES_DOCTYPE }
 })
 
+const byId = (a, b) => (a._id < b._id ? -1 : a._id > b._id ? 1 : 0)
+
 /**
- * Lists the rag-index triggers of the instance by kind.
- * @returns {Promise<{ files: object|null, assistants: object|null }>}
+ * Lists every rag-index trigger of the instance by kind, sorted by id.
+ * @returns {Promise<{ files: object[], assistants: object[] }>}
  */
-export const findRagIndexTriggers = async client => {
+const listRagIndexTriggers = async client => {
   const { data: triggers } = await client
     .collection(TRIGGERS_DOCTYPE)
     .find({ worker: RAG_INDEX_WORKER })
-  const found = { files: null, assistants: null }
+  const found = { files: [], assistants: [] }
   for (const trigger of triggers || []) {
     if (trigger.type !== '@event') continue
-    if (trigger.arguments === FILES_DOCTYPE && !found.files) {
-      found.files = trigger
-    } else if (trigger.arguments === ASSISTANTS_DOCTYPE && !found.assistants) {
-      found.assistants = trigger
+    if (trigger.arguments === FILES_DOCTYPE) {
+      found.files.push(trigger)
+    } else if (trigger.arguments === ASSISTANTS_DOCTYPE) {
+      found.assistants.push(trigger)
     }
   }
+  found.files.sort(byId)
+  found.assistants.sort(byId)
   return found
+}
+
+/**
+ * Lists the rag-index triggers of the instance by kind: the one with the
+ * smallest id when there are several.
+ * @returns {Promise<{ files: object|null, assistants: object|null }>}
+ */
+export const findRagIndexTriggers = async client => {
+  const { files, assistants } = await listRagIndexTriggers(client)
+  return { files: files[0] || null, assistants: assistants[0] || null }
+}
+
+/**
+ * Two sessions that set the instance up at once can both find no trigger
+ * and create one each. Every session that created one keeps, of each kind,
+ * the trigger with the smallest id and removes the others: they all keep
+ * the same one. A trigger another session already removed is skipped.
+ * @returns {Promise<string[]>} The ids of the triggers removed.
+ */
+export const removeDuplicateRagIndexTriggers = async client => {
+  const { files, assistants } = await listRagIndexTriggers(client)
+  const triggers = client.collection(TRIGGERS_DOCTYPE)
+  const removed = []
+  for (const duplicate of [...files.slice(1), ...assistants.slice(1)]) {
+    try {
+      await triggers.destroy(duplicate)
+      removed.push(duplicate._id)
+    } catch (error) {
+      if (error?.status !== 404) throw error
+    }
+  }
+  return removed
 }
 
 export const fetchAssistants = client => {
@@ -102,11 +138,20 @@ const ensureTriggers = async (client, created) => {
     }
     created.push(FILES_DOCTYPE)
   }
+  if (created.length === 0) return
+  // The triggers exist either way: a failure here leaves a duplicate that
+  // the next session creating a trigger removes.
+  try {
+    await removeDuplicateRagIndexTriggers(client)
+  } catch (error) {
+    warn('cannot remove the duplicate rag-index triggers', error)
+  }
 }
 
 /**
  * Creates the rag-index triggers the instance lacks, and launches the
- * files one when it is created.
+ * files one when it is created. Removes the duplicates a concurrent
+ * session may have created meanwhile.
  * @param {import('cozy-client').CozyClient} client - The cozy client.
  * @returns {Promise<string[]>} The `arguments` of the triggers created.
  */

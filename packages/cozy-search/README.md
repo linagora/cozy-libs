@@ -107,6 +107,9 @@ assistants; it is there to catch a flag changed since the setup, and to
 give its folder back to a provisioned assistant that lost it.
 
 Both run once per session and share their work, so nothing runs twice.
+Two apps set up at once may each create the triggers: the one that
+created a trigger then keeps, of each kind, the trigger with the smallest
+id and removes the others, so both keep the same ones.
 They never throw: on a stack whose `rag-index` worker is still reserved,
 the 403 on the triggers is logged and the app keeps working.
 
