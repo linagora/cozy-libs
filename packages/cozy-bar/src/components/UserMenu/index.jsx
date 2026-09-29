@@ -46,6 +46,7 @@ const UserMenu = ({
         onClick={toggleMenu}
         disabled={!isLoaded}
         className="u-p-0 u-ml-half"
+        data-testid="user-menu-button"
       >
         <AvatarMyself size={isMobile ? 's' : 'm'} />
       </IconButton>
