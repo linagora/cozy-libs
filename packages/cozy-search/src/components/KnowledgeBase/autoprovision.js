@@ -15,10 +15,12 @@ const warn = (...args) => {
 
 let pending = null
 let setupPending = null
+let partialSetup = null
 
 export const resetAutoprovisionForTests = () => {
   pending = null
   setupPending = null
+  partialSetup = null
 }
 
 /**
@@ -30,8 +32,13 @@ export const autoprovisionEntries = () => {
   return Array.isArray(entries) && entries.length > 0 ? entries : null
 }
 
-const run = async client => {
-  const entries = autoprovisionEntries()
+/**
+ * Whether the host app sets a flag entry up at startup, which starts the
+ * indexing of its folder. `setupOnStartup` defaults to true.
+ */
+export const isSetupOnStartup = entry => entry?.setupOnStartup !== false
+
+const run = async (client, entries) => {
   if (!entries) return null
   const setup = { triggers: [], migrated: [], errors: [] }
   let assistants = null
@@ -59,6 +66,12 @@ const run = async client => {
   return { setup, ...result }
 }
 
+const provision = (client, entries) =>
+  run(client, entries).catch(error => {
+    warn('failed', error)
+    return null
+  })
+
 /**
  * Gives a folder to the assistants that lack one, provisions the
  * assistants listed in the autoprovision flag, then sets up the rag-index
@@ -69,10 +82,11 @@ const run = async client => {
  */
 export const autoprovisionAssistants = client => {
   if (!pending) {
-    pending = run(client).catch(error => {
-      warn('failed', error)
-      return null
-    })
+    // The startup may be setting its entries up: wait for it,
+    // the two must not create the triggers at the same time.
+    pending = Promise.resolve(partialSetup).then(() =>
+      provision(client, autoprovisionEntries())
+    )
   }
   return pending
 }
@@ -82,7 +96,9 @@ export const autoprovisionAssistants = client => {
  * already set up. The rag-index triggers are created last by
  * autoprovisionAssistants, so finding both means an earlier session went
  * through; anything changed since is caught when the assistant opens.
- * Runs once per session, never rejects.
+ * Only the entries with `setupOnStartup` (true by default) are set up here:
+ * without any, the app does nothing at startup, and the other entries
+ * wait for the assistant to open. Runs once per session, never rejects.
  * @param {import('cozy-client').CozyClient} client - The cozy client.
  * @returns {Promise<null|object>} Null when there was nothing to do, the
  * result of autoprovisionAssistants otherwise.
@@ -90,10 +106,16 @@ export const autoprovisionAssistants = client => {
 export const ensureAssistantsSetup = client => {
   if (!setupPending) {
     setupPending = (async () => {
-      if (!autoprovisionEntries()) return null
+      const entries = autoprovisionEntries()
+      const startupEntries = entries ? entries.filter(isSetupOnStartup) : []
+      if (startupEntries.length === 0) return null
       const { files, assistants } = await findRagIndexTriggers(client)
       if (files && assistants) return null
-      return autoprovisionAssistants(client)
+      if (pending || startupEntries.length === entries.length) {
+        return autoprovisionAssistants(client)
+      }
+      partialSetup = provision(client, startupEntries)
+      return partialSetup
     })().catch(error => {
       warn('cannot check the rag-index triggers', error)
       return null

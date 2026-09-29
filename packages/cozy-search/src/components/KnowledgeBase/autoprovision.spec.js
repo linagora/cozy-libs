@@ -4,6 +4,7 @@ import {
   autoprovisionAssistants,
   autoprovisionEntries,
   ensureAssistantsSetup,
+  isSetupOnStartup,
   resetAutoprovisionForTests
 } from './autoprovision'
 import { ensureProvisionedAssistants } from './provisioning'
@@ -60,6 +61,16 @@ describe('autoprovisionEntries', () => {
   it.each([null, undefined, [], 'docs', {}])('returns null for %p', value => {
     flag.mockReturnValue(value)
     expect(autoprovisionEntries()).toBeNull()
+  })
+})
+
+describe('isSetupOnStartup', () => {
+  it.each([
+    [{ name: 'Docs' }, true],
+    [{ name: 'Docs', setupOnStartup: true }, true],
+    [{ name: 'Docs', setupOnStartup: false }, false]
+  ])('tells %p is set up on startup: %p', (entry, expected) => {
+    expect(isSetupOnStartup(entry)).toBe(expected)
   })
 })
 
@@ -209,6 +220,61 @@ describe('ensureAssistantsSetup', () => {
 
     expect(findRagIndexTriggers).toHaveBeenCalledTimes(1)
     expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(1)
+  })
+
+  it('does nothing when no entry is set up on startup', async () => {
+    flag.mockReturnValue([
+      { name: 'Docs', dirName: 'Docs', setupOnStartup: false }
+    ])
+    await expect(ensureAssistantsSetup(client)).resolves.toBeNull()
+
+    expect(findRagIndexTriggers).not.toHaveBeenCalled()
+    expect(ensureProvisionedAssistants).not.toHaveBeenCalled()
+    expect(createRagIndexTriggers).not.toHaveBeenCalled()
+  })
+
+  it('sets up the startup entries only', async () => {
+    const auto = { name: 'Docs', dirName: 'Docs', setupOnStartup: true }
+    const manual = { name: 'Drive', dirName: 'Drive', setupOnStartup: false }
+    flag.mockReturnValue([auto, manual])
+    const result = await ensureAssistantsSetup(client)
+
+    expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(1)
+    expect(ensureProvisionedAssistants).toHaveBeenCalledWith(client, [auto], {
+      assistants
+    })
+    expect(createRagIndexTriggers).toHaveBeenCalledTimes(1)
+    expect(result.created).toEqual(['docs'])
+  })
+
+  it('lets the assistant provision every entry once the setup is done', async () => {
+    const auto = { name: 'Docs', dirName: 'Docs' }
+    const manual = { name: 'Drive', dirName: 'Drive', setupOnStartup: false }
+    flag.mockReturnValue([auto, manual])
+    let finishSetup
+    ensureProvisionedAssistants.mockImplementationOnce(
+      () =>
+        new Promise(resolve => {
+          finishSetup = () =>
+            resolve({ created: ['docs'], ensured: [], skipped: [] })
+        })
+    )
+    const setup = ensureAssistantsSetup(client)
+    await new Promise(resolve => setTimeout(resolve, 0))
+    const opened = autoprovisionAssistants(client)
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(1)
+    finishSetup()
+    await setup
+    await opened
+
+    expect(ensureProvisionedAssistants).toHaveBeenCalledTimes(2)
+    expect(ensureProvisionedAssistants).toHaveBeenLastCalledWith(
+      client,
+      [auto, manual],
+      { assistants }
+    )
   })
 
   it('never rejects', async () => {
