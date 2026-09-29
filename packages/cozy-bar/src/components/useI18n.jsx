@@ -8,7 +8,7 @@ import viLocale from 'locales/vi.json'
 
 import { createUseI18n } from 'twake-i18n'
 
-const locales = {
+export const locales = {
   de: deLocale,
   en: enLocale,
   es: esLocale,
