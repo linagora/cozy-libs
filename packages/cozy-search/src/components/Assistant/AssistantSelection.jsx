@@ -16,12 +16,14 @@ import sourceStyles from '../TwakeKnowledges/styles.styl'
  * indicator, the assistant being picked from the sidebar. `disabled` is
  * for a conversation that already started: its assistant cannot change.
  * `borderless` drops the chip border (the mobile header and composer).
+ * `onSelect` is called with the id of the picked assistant.
  */
 const AssistantSelection = ({
   className,
   disabled,
   selectable = true,
-  borderless = false
+  borderless = false,
+  onSelect
 }) => {
   const buttonRef = useRef(null)
   const [open, setOpen] = useState(false)
@@ -75,6 +77,7 @@ const AssistantSelection = ({
         anchorRef={buttonRef}
         open={open}
         onClose={() => setOpen(false)}
+        onSelect={onSelect}
       />
     </>
   )
