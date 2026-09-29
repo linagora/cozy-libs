@@ -119,6 +119,46 @@ To hide the AI assistant button in the search bar (e.g. when the assistant is al
 />
 ```
 
+## Standalone bar
+
+`dist/standalone.js` is a self-contained bundle (React and every dependency included) for apps that are not Cozy React apps. Load it with a script tag, it exposes `window.TwakeBar`:
+
+```html
+<script src="standalone.js"></script>
+<script>
+  window.TwakeBar.mount({
+    appSlug: 'mail',
+    appName: 'Twake Mail',
+    appIcon: '/icon.svg', // optional, served by the app
+    appTextIcon: '/icon-text.svg', // optional, served by the app
+    locale: 'fr', // optional, 'en' by default
+    theme: 'dark', // optional, the device theme by default
+    onLogOut: () => myApp.logOut() // required unless public
+  })
+
+  // Once the app has logged in, e.g. with the stack token_exchange
+  window.TwakeBar.setCredentials({
+    accessToken: '…',
+    refreshToken: '…',
+    cozyURL: 'https://alice.mycozy.cloud'
+  })
+
+  // Whenever the app language or theme changes
+  window.TwakeBar.setLocale('en')
+  window.TwakeBar.setTheme('light')
+</script>
+```
+
+- `mount(config)` prepends a `#cozy-bar` element to the body. The app must reserve its space: `3rem` height, full width.
+- `public: true` displays the bar logged out. Otherwise the bar waits for credentials (skeleton avatar) and falls back to logged out after 30 seconds.
+- `setCredentials()` creates the Cozy client and displays the logged in bar. Calling it again only updates the token of the existing client. Tokens are not refreshed by the bar.
+- `setLocale(locale)` re-renders the mounted bar in another language, without recreating the Cozy client. It is ignored before `mount()`. Supported locales are `en`, `fr`, `ru` and `vi`, others fall back to `en`.
+- `setTheme(theme)` does the same with the theme, `light` or `dark`. Locale and theme come from the app, not from `io.cozy.settings`, so the bar always matches it.
+- The log out item of the user menu calls `onLogOut`. It is required unless the page is public, since the app owns the session: `mount()` throws without it.
+- The bar renders in a shadow root so its styles do not leak into the page and the page styles do not leak into the bar. The only globals added to the document head are the cozy-ui theme variables, scoped to hidden `.TwakeTheme--light|dark` nodes, and the Inter font stylesheet of the stack.
+
+Build it with `yarn build:standalone`, it is also built by `yarn build`.
+
 ## License
 
 Cozy Bar is distributed under the MIT license.
