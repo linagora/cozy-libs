@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.7.1...cozy-search@2.8.0) (2026-09-30)
+
+### Features
+
+- **cozy-search:** Restyle the conversation search after the design ([aee8057](https://github.com/cozy/cozy-libs/commit/aee8057e3dd31995dd047615e957b7275b635fd8))
+
 ## [2.7.1](https://github.com/cozy/cozy-libs/compare/cozy-search@2.7.0...cozy-search@2.7.1) (2026-09-30)
 
 **Note:** Version bump only for package cozy-search
