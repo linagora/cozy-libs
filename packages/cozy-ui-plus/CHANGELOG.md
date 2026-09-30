@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.8](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.0.7...cozy-ui-plus@13.0.8) (2026-09-30)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Only extract stylesheet when building ([fe27bbe](https://github.com/cozy/cozy-libs/commit/fe27bbe6562c5cc1e386e334d2d2a09121a5b4bc))
+
 ## [13.0.7](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.0.6...cozy-ui-plus@13.0.7) (2026-09-23)
 
 **Note:** Version bump only for package cozy-ui-plus
