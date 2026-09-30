@@ -9,6 +9,7 @@ export const FILES_DOCTYPE = 'io.cozy.files'
 export const ASSISTANTS_DOCTYPE = 'io.cozy.ai.chat.assistants'
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 export const EMAIL_DOCTYPE = 'com.linagora.email'
+export const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(5 * 60 * 1000)
 
@@ -109,6 +110,13 @@ export const buildChatConversationsQuery = () => {
     })
   }
 }
+
+// The triggers of a worker. No fetch policy: the stack is read at each call,
+// as the rag-index setup must see the triggers another app just created.
+export const buildTriggersByWorkerQuery = worker => ({
+  definition: () => Q(TRIGGERS_DOCTYPE).where({ worker }),
+  options: { as: `${TRIGGERS_DOCTYPE}/worker/${worker}` }
+})
 
 /** Every assistant of the instance, paged by 1000. */
 export const buildAllAssistantsQuery = () => ({

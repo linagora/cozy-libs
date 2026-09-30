@@ -2,12 +2,13 @@ import { withRootFolderIfMissing } from './knowledgeBase'
 import {
   ASSISTANTS_DOCTYPE,
   buildAllAssistantsQuery,
-  FILES_DOCTYPE
+  buildTriggersByWorkerQuery,
+  FILES_DOCTYPE,
+  TRIGGERS_DOCTYPE
 } from '../queries'
 
 export const RAG_INDEX_WORKER = 'rag-index'
 export const RAG_INDEX_FILES_DEBOUNCE = '30s'
-const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 
 const warn = (...args) => {
   // eslint-disable-next-line no-console
@@ -34,9 +35,8 @@ const byId = (a, b) => (a._id < b._id ? -1 : a._id > b._id ? 1 : 0)
  * @returns {Promise<{ files: object[], assistants: object[] }>}
  */
 const listRagIndexTriggers = async client => {
-  const { data: triggers } = await client
-    .collection(TRIGGERS_DOCTYPE)
-    .find({ worker: RAG_INDEX_WORKER })
+  const { definition, options } = buildTriggersByWorkerQuery(RAG_INDEX_WORKER)
+  const { data: triggers } = await client.query(definition(), options)
   const found = { files: [], assistants: [] }
   for (const trigger of triggers || []) {
     if (trigger.type !== '@event') continue
@@ -70,11 +70,10 @@ export const findRagIndexTriggers = async client => {
  */
 export const removeDuplicateRagIndexTriggers = async client => {
   const { files, assistants } = await listRagIndexTriggers(client)
-  const triggers = client.collection(TRIGGERS_DOCTYPE)
   const removed = []
   for (const duplicate of [...files.slice(1), ...assistants.slice(1)]) {
     try {
-      await triggers.destroy(duplicate)
+      await client.destroy(duplicate)
       removed.push(duplicate._id)
     } catch (error) {
       if (error?.status !== 404) throw error
@@ -116,24 +115,29 @@ export const migrateAssistantsWithoutFolder = async (client, assistants) => {
  * created into `created` as it goes (so a failure halfway still reports
  * what exists).
  */
+const saveRagIndexTrigger = (client, doctype) =>
+  client.save({
+    _type: TRIGGERS_DOCTYPE,
+    ...makeRagIndexTriggerAttributes(doctype)
+  })
+
 const ensureTriggers = async (client, created) => {
   const { files, assistants } = await findRagIndexTriggers(client)
-  const triggers = client.collection(TRIGGERS_DOCTYPE)
   if (!assistants) {
-    await triggers.create(makeRagIndexTriggerAttributes(ASSISTANTS_DOCTYPE))
+    await saveRagIndexTrigger(client, ASSISTANTS_DOCTYPE)
     created.push(ASSISTANTS_DOCTYPE)
   }
   if (!files) {
-    const { data: trigger } = await triggers.create(
-      makeRagIndexTriggerAttributes(FILES_DOCTYPE)
-    )
+    const { data: trigger } = await saveRagIndexTrigger(client, FILES_DOCTYPE)
     // The first run: the worker creates the workspaces and indexes. A
     // trigger that could not be launched is removed, so the next setup
     // creates and launches it again instead of finding it and moving on.
+    // Launching is an action, not data: cozy-client only has it on the
+    // collection.
     try {
-      await triggers.launch(trigger)
+      await client.collection(TRIGGERS_DOCTYPE).launch(trigger)
     } catch (error) {
-      await triggers.destroy(trigger).catch(() => {})
+      await client.destroy(trigger).catch(() => {})
       throw error
     }
     created.push(FILES_DOCTYPE)
