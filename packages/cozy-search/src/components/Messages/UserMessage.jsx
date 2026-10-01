@@ -4,24 +4,16 @@ import React from 'react'
 
 import Box from 'cozy-ui/transpiled/react/Box'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useCozyTheme } from 'cozy-ui-plus/dist/providers/CozyTheme'
 
 import styles from './styles.styl'
 
 const UserMessage = () => {
-  const { type: theme } = useCozyTheme()
-
   return (
     <MessagePrimitive.Root className="u-mt-1">
       <Box
-        display="block"
-        border={0}
-        borderRadius={10}
-        padding={0.5}
         className={cx(
-          'u-ml-auto',
-          styles['cozyThread-user-messages'],
-          styles[`cozyThread-user-messages--${theme}`]
+          'u-ml-auto u-pv-1 u-ph-1-half',
+          styles['cozyThread-user-messages']
         )}
       >
         <MessagePrimitive.Parts
