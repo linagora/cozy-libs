@@ -124,11 +124,7 @@ const Sidebar = ({ className }) => {
           </div>
         </div>
         {!isMobileBar && (
-          <div
-            className={cx('u-ph-1 u-pb-half', {
-              'u-flex u-flex-justify-center': isRail
-            })}
-          >
+          <div className={cx('u-pb-half', styles['sidebar-new-chat'])}>
             {sidebarOpen ? (
               <Button
                 className="u-w-100 u-bdrs-6"
