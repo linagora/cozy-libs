@@ -59,7 +59,6 @@ export const Bar = ({
             {...componentsProps?.BarLeft}
             isPublic={isPublic}
             homeApp={homeApp}
-            appSlug={appSlug}
             appIcon={appIcon}
             appTextIcon={appTextIcon}
           />
@@ -101,6 +100,9 @@ Bar.propTypes = {
   componentsProps: PropTypes.shape({
     Wrapper: PropTypes.shape({
       className: PropTypes.string
+    }),
+    BarLeft: PropTypes.shape({
+      noCozyHome: PropTypes.bool
     }),
     BarSearch: PropTypes.shape({
       disabledAssistantButton: PropTypes.bool
