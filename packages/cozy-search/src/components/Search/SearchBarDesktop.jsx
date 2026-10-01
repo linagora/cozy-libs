@@ -19,7 +19,8 @@ const SearchBarDesktop = ({
   size,
   hasHalfBorderRadius,
   className,
-  disabledHover
+  disabledHover,
+  disabledAssistantButton
 }) => {
   const { searchValue, results, selectedIndex, setSelectedIndex } = useSearch()
   const searchRef = useRef()
@@ -95,9 +96,8 @@ const SearchBarDesktop = ({
           componentsProps={{
             inputBase: {
               onKeyDown: handleKeyDown,
-              endAdornment: isAssistantEnabled() && (
-                <AssistantButton size={size} />
-              )
+              endAdornment: isAssistantEnabled() &&
+                !disabledAssistantButton && <AssistantButton size={size} />
             }
           }}
           disabledClear

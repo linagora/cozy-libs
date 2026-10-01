@@ -25,7 +25,8 @@ AssistantDesktop.propTypes = {
       size: PropTypes.string,
       hasHalfBorderRadius: PropTypes.bool,
       className: PropTypes.string,
-      disabledHover: PropTypes.bool
+      disabledHover: PropTypes.bool,
+      disabledAssistantButton: PropTypes.bool
     })
   })
 }
