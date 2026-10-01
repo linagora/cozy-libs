@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [38.1.6](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.5...cozy-sharing@38.1.6) (2026-10-01)
+
+### Bug Fixes
+
+- **cozy-sharing:** Keep an unshared folder shareable by its owner ([d0bdac7](https://github.com/cozy/cozy-libs/commit/d0bdac725d3b854be789def6c67ae31ca8db59bd)), closes [linagora/twake-drive#4264](https://github.com/linagora/twake-drive/issues/4264)
+
 ## [38.1.5](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.4...cozy-sharing@38.1.5) (2026-09-30)
 
 **Note:** Version bump only for package cozy-sharing
