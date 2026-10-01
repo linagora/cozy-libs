@@ -271,6 +271,27 @@ describe('FederatedFolderModal', () => {
       ).toBe(null)
       expect(queryByText('it has a shared parent')).toBe(null)
     })
+
+    it('should allow share by email when the owner revoked the sharing of a folder that still carries a stale driveId', async () => {
+      // Owner revoked the last recipient: stale driveId, sharing gone, but still owner → stays shareable (linagora/twake-drive#4264).
+      mockGetSharingById.mockReturnValue(null)
+      mockIsOwner.mockReturnValue(true)
+
+      const { findByText, queryByText } = setup({
+        document: {
+          ...mockDocument,
+          driveId: 'federated-folder-id',
+          type: 'directory'
+        }
+      })
+
+      await findByText('Add users')
+
+      expect(
+        queryByText('This folder can only be shared by link, because')
+      ).toBe(null)
+      expect(queryByText('it has a shared parent')).toBe(null)
+    })
   })
 
   describe('shared drive link fetch on mount', () => {
