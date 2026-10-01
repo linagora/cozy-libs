@@ -105,6 +105,14 @@ To disable search:
 <BarComponent searchOptions={{ enabled: false }} />
 ```
 
+To hide the AI assistant button in the search bar (e.g. when the assistant is already displayed):
+
+```jsx
+<BarComponent
+  componentsProps={{ BarSearch: { disabledAssistantButton: true } }}
+/>
+```
+
 ## License
 
 Cozy Bar is distributed under the MIT license.

@@ -66,7 +66,12 @@ export const Bar = ({
         )}
         {barCenter}
         <div className="u-flex-grow">
-          {barSearch || <BarSearch isSearchEnabled={isSearchEnabled} />}
+          {barSearch || (
+            <BarSearch
+              {...componentsProps?.BarSearch}
+              isSearchEnabled={isSearchEnabled}
+            />
+          )}
         </div>
         {isSearchEnabled && isMobile ? <SearchButton /> : null}
         {barRight}
@@ -96,6 +101,9 @@ Bar.propTypes = {
   componentsProps: PropTypes.shape({
     Wrapper: PropTypes.shape({
       className: PropTypes.string
+    }),
+    BarSearch: PropTypes.shape({
+      disabledAssistantButton: PropTypes.bool
     }),
     UserMenu: PropTypes.shape({
       showEmailDomainChip: PropTypes.bool
