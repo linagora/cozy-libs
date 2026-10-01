@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [35.5.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.4.13...cozy-bar@35.5.0) (2026-10-01)
+
+### Features
+
+- **cozy-bar:** Forward componentsProps.BarSearch to search bar ([c0c0c4b](https://github.com/cozy/cozy-libs/commit/c0c0c4b0fa7e77605f8237b3346b6b9c1c5c49f4))
+
 ## [35.4.13](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.4.12...cozy-bar@35.4.13) (2026-10-01)
 
 **Note:** Version bump only for package cozy-bar
