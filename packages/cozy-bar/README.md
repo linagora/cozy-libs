@@ -74,6 +74,12 @@ Available slots:
 - `<BarSearch>` — Replaces the default search / AI assistant area
 - `<BarRight>` — Replaces the default help link, apps menu and user menu
 
+To hide the home button and its divider on desktop (e.g. in the home app itself), use `noCozyHome`. On mobile, it shows the app title instead of the home button. In both cases, the app title links to the home app:
+
+```jsx
+<BarComponent componentsProps={{ BarLeft: { noCozyHome: true } }} />
+```
+
 ## Search and AI assistant
 
 Search and AI assistant is now proposed by the cozy-bar. They are enabled by default so you need to:

@@ -8,14 +8,7 @@ import Divider from 'cozy-ui/transpiled/react/Divider'
 import Grid from 'cozy-ui/transpiled/react/Grid'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-const BarLeft = ({
-  isPublic,
-  homeApp,
-  appSlug,
-  appIcon,
-  appTextIcon,
-  noCozyHome
-}) => {
+const BarLeft = ({ isPublic, homeApp, appIcon, appTextIcon, noCozyHome }) => {
   const { isMobile } = useBreakpoints()
 
   if (isFlagshipApp() || flag('flagship.debug')) {
@@ -38,11 +31,9 @@ const BarLeft = ({
     return <ButtonCozyHome homeHref={homeHref} />
   }
 
-  const isHome = appSlug === 'home'
-
   return (
     <Grid container alignItems="center" className="u-w-auto">
-      {!isHome && !noCozyHome && (
+      {!noCozyHome && (
         <>
           <ButtonCozyHome homeHref={homeHref} />
           <Divider orientation="vertical" className="u-mr-half" flexItem />
