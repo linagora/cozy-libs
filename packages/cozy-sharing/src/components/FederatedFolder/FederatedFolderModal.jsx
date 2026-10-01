@@ -92,8 +92,11 @@ const FederatedFolderModalContent = ({
       id => id === existingDocument?._id || id === existingDocument?.id
     )
   )
+  // Ignore a stale driveId left after an owner revokes the last recipient, so their own folder isn't wrongly restricted to link-only (linagora/twake-drive#4264).
   const isInsideSharedDrive = Boolean(
-    existingDocument?.driveId && !isSharedDriveRoot
+    existingDocument?.driveId &&
+    !isSharedDriveRoot &&
+    (sharedDriveSharing || !isOwner(documentId))
   )
   const isCurrentUserOwner = existingDocument?.driveId
     ? Boolean(sharedDriveSharing?.attributes?.owner)
