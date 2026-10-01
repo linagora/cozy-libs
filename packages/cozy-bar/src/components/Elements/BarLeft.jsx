@@ -8,7 +8,38 @@ import Divider from 'cozy-ui/transpiled/react/Divider'
 import Grid from 'cozy-ui/transpiled/react/Grid'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-const BarLeft = ({ isPublic, homeApp, appIcon, appTextIcon, noCozyHome }) => {
+// The standalone bar receives icons as URLs instead of SVG components
+const AppTitleOrIcon = ({ appName, appIcon, appTextIcon }) => {
+  if (typeof appIcon !== 'string') {
+    return <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+  }
+  if (typeof appTextIcon !== 'string') {
+    return (
+      <img src={appIcon} alt={appName ?? ''} className="coz-bar-app-icon" />
+    )
+  }
+  return (
+    <AppTitle
+      appIcon={<img src={appIcon} alt="" className="coz-bar-app-icon" />}
+      appTextIcon={
+        <img
+          src={appTextIcon}
+          alt={appName ?? ''}
+          className="coz-bar-app-text-icon"
+        />
+      }
+    />
+  )
+}
+
+const BarLeft = ({
+  isPublic,
+  homeApp,
+  appName,
+  appIcon,
+  appTextIcon,
+  noCozyHome
+}) => {
   const { isMobile } = useBreakpoints()
 
   if (isFlagshipApp() || flag('flagship.debug')) {
@@ -22,11 +53,21 @@ const BarLeft = ({ isPublic, homeApp, appIcon, appTextIcon, noCozyHome }) => {
       if (homeHref) {
         return (
           <a className="coz-nav-apps-btns-home u-ml-half" href={homeHref}>
-            <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+            <AppTitleOrIcon
+              appName={appName}
+              appIcon={appIcon}
+              appTextIcon={appTextIcon}
+            />
           </a>
         )
       }
-      return <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+      return (
+        <AppTitleOrIcon
+          appName={appName}
+          appIcon={appIcon}
+          appTextIcon={appTextIcon}
+        />
+      )
     }
     return <ButtonCozyHome homeHref={homeHref} />
   }
@@ -41,10 +82,18 @@ const BarLeft = ({ isPublic, homeApp, appIcon, appTextIcon, noCozyHome }) => {
       )}
       {noCozyHome && homeHref ? (
         <a className="coz-nav-apps-btns-home u-ml-half" href={homeHref}>
-          <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+          <AppTitleOrIcon
+            appName={appName}
+            appIcon={appIcon}
+            appTextIcon={appTextIcon}
+          />
         </a>
       ) : (
-        <AppTitle appIcon={appIcon} appTextIcon={appTextIcon} />
+        <AppTitleOrIcon
+          appName={appName}
+          appIcon={appIcon}
+          appTextIcon={appTextIcon}
+        />
       )}
     </Grid>
   )

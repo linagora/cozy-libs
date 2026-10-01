@@ -24,6 +24,7 @@ export const Bar = ({
   appTextIcon,
   searchOptions,
   appSlug,
+  appName,
   componentsProps
 }) => {
   const { isMobile } = useBreakpoints()
@@ -59,6 +60,7 @@ export const Bar = ({
             {...componentsProps?.BarLeft}
             isPublic={isPublic}
             homeApp={homeApp}
+            appName={appName}
             appIcon={appIcon}
             appTextIcon={appTextIcon}
           />
