@@ -51,8 +51,7 @@ const Conversation = ({ className }) => {
             })}
           />
           <Typography
-            variant="h3"
-            component="h2"
+            variant="h2"
             className={cx(
               'u-pos-relative u-fw-normal u-ta-center',
               styles['welcome-title']
