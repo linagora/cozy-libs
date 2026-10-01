@@ -47,6 +47,8 @@
 
 [role=banner] .coz-nav-apps-btns-home {
   height: 2rem;
+  /* Keeps its width while the icon loads, so the app title does not move */
+  min-width: 2rem;
   margin-right: .75rem;
 }
 
@@ -146,7 +148,7 @@
 [role=banner] .coz-nav-apps-item-icon {
   margin-right: .5rem;
   height: 2rem;
-  width: 2rem;
+  min-width: 2rem;
   /* force svg inline to be 2rem */
   min-width: 2rem;
 }
@@ -214,7 +216,7 @@
 
 
 [role=banner] .coz-nav-apps-item-icon.coz-loading-placeholder {
-  width: 2rem;
+  min-width: 2rem;
   height: 2rem;
   margin: 0 1rem;
   display: block;
@@ -231,7 +233,7 @@
 
 [role=banner] .coz-nav-apps-btns-home.coz-loading-placeholder {
   height: 2rem;
-  width: 2rem;
+  min-width: 2rem;
   border-radius: 2rem;
   background-color: var(--defaultBackgroundColor);
   flex-shrink: 0;
