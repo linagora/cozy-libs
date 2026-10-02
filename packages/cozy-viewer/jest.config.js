@@ -9,7 +9,8 @@ module.exports = {
   moduleNameMapper: {
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/__mocks__/fileMock.js',
     '\\.styl$': 'identity-obj-proxy',
-    'react-pdf/dist/esm/entry.webpack': 'react-pdf',
+    // react-pdf needs react/jsx-runtime, missing from the monorepo's React 16.12
+    '^react-pdf$': '<rootDir>/test/__mocks__/react-pdf.js',
     '^cozy-client/src/(.*)$': '<rootDir>/node_modules/cozy-client/dist/$1',
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index',
     '^cozy-client/dist/(.*)$': '<rootDir>/node_modules/cozy-client/dist/$1',

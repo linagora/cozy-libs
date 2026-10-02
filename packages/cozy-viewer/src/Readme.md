@@ -297,41 +297,38 @@ const onFileChange = (file, nextIndex) => setState({ currentIndex: nextIndex, cu
 
 ### Using a worker for pdfjs
 
-For performance reasons, it is important to use a web worker when showing PDF files in the viewer. If you use webpack, you should add the following alias in your configuration :
-
-```diff
-+ resolve: {
-+   alias: {
-+     'react-pdf$' : 'react-pdf/dist/esm/entry.webpack'
-+   }
-+ }
-```
-
-With this alias, a specific JS file for the worker will be created in the build directory. By design, this directory is only accessible (ie. served by the stack) if you are logged in. If you need the viewer on a public page, you must tell webpack to create the worker in a public folder, that will be served by the stack even if the user is not logged in.
-
-One way to do this is to explicitly load the web worker in your application like this:
+The PDF viewer relies on [react-pdf](https://github.com/wojtekmaj/react-pdf), which needs the pdf.js worker to be configured by your application, once, before a PDF is shown:
 
 ```js static
-import createWorker from 'react-pdf/dist/esm/pdf.worker.entry';
-import { pdfjs } from 'react-pdf';
+import { pdfjs } from 'react-pdf'
 
-pdfjs.GlobalWorkerOptions.workerPort = createWorker();
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/legacy/build/pdf.worker.min.mjs',
+  import.meta.url
+).toString()
 ```
 
-And then configure the [webpack worker-loader](https://github.com/webpack-contrib/worker-loader) to output the file in a publicly served directory:
+With Webpack 5 or Rspack, also add this configuration:
 
 ```js static
-{
-  test: /\.worker\.entry\.js$/,
-  issuer: { not: [/node_modules\//] }, // only for the worker loaded by the app, leave the workers created by dependencies alone
-  use: [{
-    loader: 'worker-loader',
-    options: {
-      name: 'public-folder/[name].[hash].worker.js'
-    }
-  }]
+resolve: {
+  alias: {
+    'react-pdf$': 'react-pdf/dist/esm/index.js',
+    'pdfjs-dist$': 'pdfjs-dist/legacy/build/pdf.mjs'
+  }
+},
+module: {
+  rules: [
+    { test: /react-pdf[\\/]dist[\\/]esm[\\/]index\.js$/, sideEffects: true }
+  ]
 }
 ```
+
+- react-pdf resets `workerSrc` to `'pdf.worker.mjs'` when it loads. cozy-viewer requires its CommonJS build while your app imports the ESM one: the `react-pdf$` alias keeps a single build, so it cannot load again after your setup.
+- react-pdf declares no side effects, so the bundler may skip its index when you import `pdfjs` and run it later. The `sideEffects` rule runs it first.
+- The `legacy` build of pdf.js supports browsers without `Promise.withResolvers` (iOS and Safari before 17.4), in the main thread and in the worker.
+
+The worker is emitted as an asset. If the viewer is used on a public page, make sure it is written to a folder served by the stack without authentication (for example with `output.assetModuleFilename: 'static/resource/[hash][ext][query]'`).
 
 ### Only works with React
 

@@ -13,10 +13,9 @@ import { isFileEncrypted } from '../helpers'
 import withFileUrl from '../hoc/withFileUrl'
 
 const MarkdownRenderer = ({ text }) => (
-  <ReactMarkdown
-    className={cx(styles['viewer-textviewer-content'], 'u-p-1')}
-    source={text}
-  />
+  <ReactMarkdown className={cx(styles['viewer-textviewer-content'], 'u-p-1')}>
+    {text}
+  </ReactMarkdown>
 )
 
 const PlainTextRenderer = ({ text }) => (
