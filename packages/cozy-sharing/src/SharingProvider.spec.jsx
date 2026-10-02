@@ -1343,9 +1343,7 @@ describe('hasWriteAccess', () => {
     attributes: {
       owner: false,
       drive: true,
-      members: [
-        { read_only: true, instance: 'http://cozy.tools:8080' }
-      ],
+      members: [{ read_only: true, instance: 'http://cozy.tools:8080' }],
       rules: [{ values: ['parent-folder'] }]
     }
   }
@@ -1356,9 +1354,7 @@ describe('hasWriteAccess', () => {
     attributes: {
       owner: false,
       drive: true,
-      members: [
-        { read_only: false, instance: 'http://cozy.tools:8080' }
-      ],
+      members: [{ read_only: false, instance: 'http://cozy.tools:8080' }],
       rules: [{ values: ['nested-folder'] }]
     }
   }
@@ -1369,9 +1365,7 @@ describe('hasWriteAccess', () => {
     attributes: {
       owner: true,
       drive: true,
-      members: [
-        { read_only: false, instance: 'http://cozy.tools:8080' }
-      ],
+      members: [{ read_only: false, instance: 'http://cozy.tools:8080' }],
       rules: [{ values: ['owner-folder'] }]
     }
   }
@@ -1383,20 +1377,26 @@ describe('hasWriteAccess', () => {
 
   it('returns true when user is owner of the shared document', () => {
     const provider = setupProvider(createClient())
-    provider.dispatch(receiveSharings({ sharings: [ownerSharing], permissions: [] }))
+    provider.dispatch(
+      receiveSharings({ sharings: [ownerSharing], permissions: [] })
+    )
     expect(provider.hasWriteAccess('owner-folder')).toBe(true)
     expect(provider.hasWriteAccess('owner-folder', 'owner-drive')).toBe(true)
   })
 
   it('returns false for viewer of a shared document', () => {
     const provider = setupProvider(createClient())
-    provider.dispatch(receiveSharings({ sharings: [parentSharing], permissions: [] }))
+    provider.dispatch(
+      receiveSharings({ sharings: [parentSharing], permissions: [] })
+    )
     expect(provider.hasWriteAccess('parent-folder')).toBe(false)
   })
 
   it('returns true for editor of a shared document', () => {
     const provider = setupProvider(createClient())
-    provider.dispatch(receiveSharings({ sharings: [nestedSharing], permissions: [] }))
+    provider.dispatch(
+      receiveSharings({ sharings: [nestedSharing], permissions: [] })
+    )
     expect(provider.hasWriteAccess('nested-folder')).toBe(true)
   })
 
