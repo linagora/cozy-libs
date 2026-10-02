@@ -10,6 +10,8 @@ import reducer, {
   addSharingLink,
   getDocumentPermissions,
   getDocumentSharing,
+  getEffectiveRecipients,
+  receiveEffectiveRecipients,
   receiveSharings
 } from './state'
 import AppLike from '../test/AppLike'
@@ -594,6 +596,32 @@ describe('shared drive recipient revocation', () => {
       recipients: [recipient],
       readOnlyRecipients: []
     })
+  })
+
+  it('clears effective recipients when the sharing was deleted (404)', async () => {
+    provider.dispatch(
+      receiveEffectiveRecipients(document.id, [
+        { sharingId: SHARED_DRIVE.id, memberIndex: 1 }
+      ])
+    )
+    sharingCol.fetchEffectiveRecipients.mockRejectedValue(
+      Object.assign(new Error('deleted'), { status: 404 })
+    )
+
+    await expect(
+      provider.fetchEffectiveRecipients(document.id, SHARED_DRIVE.id)
+    ).resolves.toBeUndefined()
+    expect(getEffectiveRecipients(provider.state, document.id)).toEqual([])
+  })
+
+  it('rethrows non-404 errors from fetching effective recipients', async () => {
+    sharingCol.fetchEffectiveRecipients.mockRejectedValue(
+      Object.assign(new Error('boom'), { status: 500 })
+    )
+
+    await expect(
+      provider.fetchEffectiveRecipients(document.id, SHARED_DRIVE.id)
+    ).rejects.toThrow('boom')
   })
 })
 

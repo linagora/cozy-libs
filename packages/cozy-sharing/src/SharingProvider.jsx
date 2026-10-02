@@ -467,15 +467,23 @@ export class SharingProvider extends Component {
   }
 
   fetchEffectiveRecipients = async (fileId, driveId) => {
-    const resp = await this.sharingCol.fetchEffectiveRecipients(fileId, {
-      driveId
-    })
-    this.dispatch(
-      receiveEffectiveRecipients(
-        fileId,
-        mapEffectiveRecipients(resp?.data || [])
+    try {
+      const resp = await this.sharingCol.fetchEffectiveRecipients(fileId, {
+        driveId
+      })
+      this.dispatch(
+        receiveEffectiveRecipients(
+          fileId,
+          mapEffectiveRecipients(resp?.data || [])
+        )
       )
-    )
+    } catch (error) {
+      // The sharing was deleted (e.g. revoking the last recipient removes the
+      // shared drive): clear its recipients instead of leaving a stale list
+      // (linagora/twake-drive#4264).
+      if (error?.status !== 404) throw error
+      this.dispatch(receiveEffectiveRecipients(fileId, []))
+    }
   }
 
   invalidateEffectiveRecipients = docId => {
