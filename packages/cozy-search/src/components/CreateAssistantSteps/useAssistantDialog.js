@@ -34,7 +34,7 @@ export const useAssistantDialog = ({ onClose, initialData = {} }) => {
 
   const [formData, setFormData] = useState({
     name: '',
-    description: '',
+    prompt: '',
     icon: null,
     model: '',
     baseUrl: '',

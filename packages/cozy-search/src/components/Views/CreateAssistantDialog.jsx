@@ -69,7 +69,7 @@ const CreateAssistantDialog = ({ open, onClose }) => {
   const onSubmit = async () => {
     const savedAssistant = await createAssistant(client, {
       name: formData.name,
-      prompt: formData.description,
+      prompt: formData.prompt,
       icon: formData.icon,
       model: formData.model,
       apiKey: formData.apiKey,
