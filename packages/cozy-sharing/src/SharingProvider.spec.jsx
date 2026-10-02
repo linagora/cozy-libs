@@ -1330,88 +1330,107 @@ describe('updateSharingMemberType', () => {
   })
 })
 
-// TODO Convert with react-testing-library
-// describe('hasWriteAccess', () => {
-//   it('tells if a doc is writtable', () => {
-//     const client = createMockClient({})
-//     client.stackClient.uri = 'http://cozy.tools:8080'
+describe('hasWriteAccess', () => {
+  const createClient = () => {
+    const client = createMockClient({})
+    client.getStackClient().uri = 'http://cozy.tools:8080'
+    return client
+  }
 
-//     const component = mount(
-//       <AppWrapper client={client}>
-//         <SharingContext.Consumer>
-//           {({ hasWriteAccess }) => (
-//             <>
-//               <div data-id="no-sharing">
-//                 {hasWriteAccess('no-sharing') ? 'yes' : 'no'}
-//               </div>
-//               <div data-id="owner-doc">
-//                 {hasWriteAccess('owner-doc') ? 'yes' : 'no'}
-//               </div>
-//               <div data-id="synced-doc">
-//                 {hasWriteAccess('synced-doc') ? 'yes' : 'no'}
-//               </div>
-//               <div data-id="read-only-doc">
-//                 {hasWriteAccess('read-only-doc') ? 'yes' : 'no'}
-//               </div>
-//             </>
-//           )}
-//         </SharingContext.Consumer>
-//       </AppWrapper>
-//     )
+  const parentSharing = {
+    id: 'parent-drive',
+    type: 'io.cozy.sharings',
+    attributes: {
+      owner: false,
+      drive: true,
+      members: [
+        { read_only: true, instance: 'http://cozy.tools:8080' }
+      ],
+      rules: [{ values: ['parent-folder'] }]
+    }
+  }
 
-//     expect(component.find('div[data-id="no-sharing"]').text()).toBe('yes')
-//     expect(component.find('div[data-id="owner-doc"]').text()).toBe('yes')
-//     expect(component.find('div[data-id="synced-doc"]').text()).toBe('yes')
-//     expect(component.find('div[data-id="read-only-doc"]').text()).toBe('yes')
+  const nestedSharing = {
+    id: 'nested-drive',
+    type: 'io.cozy.sharings',
+    attributes: {
+      owner: false,
+      drive: true,
+      members: [
+        { read_only: false, instance: 'http://cozy.tools:8080' }
+      ],
+      rules: [{ values: ['nested-folder'] }]
+    }
+  }
 
-//     const provider = component.find(SharingProvider)
-//     provider.instance().dispatch(
-//       receiveSharings({
-//         sharings: [
-//           {
-//             id: '123',
-//             type: 'io.cozy.sharings',
-//             attributes: {
-//               owner: true,
-//               members: [
-//                 { read_only: false, instance: 'http://cozy.tools:8080' }
-//               ],
-//               rules: [{ values: ['owner-doc'] }]
-//             }
-//           },
-//           {
-//             id: '456',
-//             type: 'io.cozy.sharings',
-//             attributes: {
-//               owner: false,
-//               members: [
-//                 { read_only: false, instance: 'http://cozy.tools:8080' }
-//               ],
-//               rules: [
-//                 { values: ['synced-doc'], update: 'sync', remove: 'sync' }
-//               ]
-//             }
-//           },
-//           {
-//             id: '789',
-//             type: 'io.cozy.sharings',
-//             attributes: {
-//               owner: false,
-//               members: [
-//                 { read_only: true, instance: 'http://cozy.tools:8080' }
-//               ],
-//               rules: [{ values: ['read-only-doc'] }]
-//             }
-//           }
-//         ]
-//       })
-//     )
+  const ownerSharing = {
+    id: 'owner-drive',
+    type: 'io.cozy.sharings',
+    attributes: {
+      owner: true,
+      drive: true,
+      members: [
+        { read_only: false, instance: 'http://cozy.tools:8080' }
+      ],
+      rules: [{ values: ['owner-folder'] }]
+    }
+  }
 
-//     component.update()
+  it('returns true when document is not shared and no driveId is provided', () => {
+    const provider = setupProvider(createClient())
+    expect(provider.hasWriteAccess('unshared-doc')).toBe(true)
+  })
 
-//     expect(component.find('div[data-id="no-sharing"]').text()).toBe('yes')
-//     expect(component.find('div[data-id="owner-doc"]').text()).toBe('yes')
-//     expect(component.find('div[data-id="synced-doc"]').text()).toBe('yes')
-//     expect(component.find('div[data-id="read-only-doc"]').text()).toBe('no')
-//   })
-// })
+  it('returns true when user is owner of the shared document', () => {
+    const provider = setupProvider(createClient())
+    provider.dispatch(receiveSharings({ sharings: [ownerSharing], permissions: [] }))
+    expect(provider.hasWriteAccess('owner-folder')).toBe(true)
+    expect(provider.hasWriteAccess('owner-folder', 'owner-drive')).toBe(true)
+  })
+
+  it('returns false for viewer of a shared document', () => {
+    const provider = setupProvider(createClient())
+    provider.dispatch(receiveSharings({ sharings: [parentSharing], permissions: [] }))
+    expect(provider.hasWriteAccess('parent-folder')).toBe(false)
+  })
+
+  it('returns true for editor of a shared document', () => {
+    const provider = setupProvider(createClient())
+    provider.dispatch(receiveSharings({ sharings: [nestedSharing], permissions: [] }))
+    expect(provider.hasWriteAccess('nested-folder')).toBe(true)
+  })
+
+  it('returns drive write access when document has no explicit sharing', () => {
+    const provider = setupProvider(createClient())
+    provider.dispatch(
+      receiveSharings({
+        sharings: [parentSharing, nestedSharing],
+        permissions: []
+      })
+    )
+    expect(provider.hasWriteAccess('child-file', 'parent-drive')).toBe(false)
+    expect(provider.hasWriteAccess('child-file', 'nested-drive')).toBe(true)
+  })
+
+  it('takes nested document permissions into account when driveId is provided (issue linagora/twake-drive#4220)', () => {
+    const provider = setupProvider(createClient())
+    provider.dispatch(
+      receiveSharings({
+        sharings: [parentSharing, nestedSharing],
+        permissions: []
+      })
+    )
+    expect(provider.hasWriteAccess('nested-folder', 'parent-drive')).toBe(true)
+  })
+
+  it('takes nested restricted permissions into account when driveId is editor', () => {
+    const provider = setupProvider(createClient())
+    provider.dispatch(
+      receiveSharings({
+        sharings: [parentSharing, nestedSharing],
+        permissions: []
+      })
+    )
+    expect(provider.hasWriteAccess('parent-folder', 'nested-drive')).toBe(false)
+  })
+})

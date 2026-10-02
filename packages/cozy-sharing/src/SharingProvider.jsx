@@ -718,11 +718,13 @@ export class SharingProvider extends Component {
   hasWriteAccess = (docId, driveId = undefined) => {
     const instanceUri = this.props.client.getStackClient().uri
 
-    /** Split another case for checking sharing type for shared drive
-     * In case of shared drive, we just check if shared drive has write access or not.
-     * All the files / folders inside must follow the sharing rule of shared drive.
-     * `driveId` only exist in files / folders from recipient, so we don't need to check it belong to owner or not.
-     */
+    if (this.state.byDocId?.[docId]) {
+      return (
+        isOwner(this.state, docId) ||
+        getSharingType(this.state, docId, instanceUri) === SHARING_TYPE.TWO_WAY
+      )
+    }
+
     if (driveId) {
       return (
         getSharedDriveSharingType(this.state, driveId, instanceUri) ===
@@ -730,12 +732,7 @@ export class SharingProvider extends Component {
       )
     }
 
-    return (
-      !this.state.byDocId ||
-      !this.state.byDocId[docId] ||
-      isOwner(this.state, docId) ||
-      getSharingType(this.state, docId, instanceUri) === SHARING_TYPE.TWO_WAY
-    )
+    return true
   }
 
   render() {
