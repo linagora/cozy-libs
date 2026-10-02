@@ -19,7 +19,7 @@ const AssistantDialogContent = ({
       return (
         <BasicInfoStep
           name={formData.name}
-          description={formData.description}
+          prompt={formData.prompt}
           icon={formData.icon}
           knowledgeBase={formData.knowledgeBase}
           onChange={onChange}

@@ -12,7 +12,7 @@ import KnowledgeBaseSection from '../KnowledgeBase/KnowledgeBaseSection'
 
 const BasicInfoStep = ({
   name,
-  description,
+  prompt,
   icon,
   knowledgeBase,
   onChange,
@@ -115,17 +115,17 @@ const BasicInfoStep = ({
 
       <div className="u-mb-1">
         <Typography variant="h6" className="u-mb-half">
-          {t('assistant_create.steps.basic_info.description_label')}
+          {t('assistant_create.steps.basic_info.prompt_label')}
         </Typography>
         <TextField
           fullWidth
           multiline
           rows={6}
           placeholder={t(
-            'assistant_create.steps.basic_info.description_placeholder'
+            'assistant_create.steps.basic_info.prompt_placeholder'
           )}
-          value={description}
-          onChange={onChange('description')}
+          value={prompt}
+          onChange={onChange('prompt')}
           variant="outlined"
         />
       </div>

@@ -82,6 +82,10 @@ A list of assistants to create, one entry each:
 - `default`: new conversations start on this assistant once it exists
   (the first entry flagged so wins). Existing conversations keep their
   own assistant.
+- `setupOnStartup`: `true` by default. When `true`, the host app sets the
+  entry up at startup, which starts the indexing of its folder. When
+  `false`, the app does nothing for it at startup: the assistant is only
+  provisioned when it is opened.
 
 #### Normal behaviour
 
@@ -90,8 +94,8 @@ A host app calls `ensureAssistantsSetup(client)` at startup (or its
 
 1. It fetches the `rag-index` triggers. When both exist, an earlier
    session went through the setup and it stops there: one request.
-2. Otherwise it runs the whole setup, `autoprovisionAssistants(client)`:
-   each entry of the flag gets its `io.cozy.accounts` document, its
+2. Otherwise it runs the whole setup for the entries with `setupOnStartup`:
+   each one gets its `io.cozy.accounts` document, its
    assistant and its knowledge base folder, then the two triggers are
    created and the files one is launched, which starts the indexing of
    the folders. The triggers come last so that their presence means the
@@ -103,6 +107,9 @@ assistants; it is there to catch a flag changed since the setup, and to
 give its folder back to a provisioned assistant that lost it.
 
 Both run once per session and share their work, so nothing runs twice.
+Two apps set up at once may each create the triggers: the one that
+created a trigger then keeps, of each kind, the trigger with the smallest
+id and removes the others, so both keep the same ones.
 They never throw: on a stack whose `rag-index` worker is still reserved,
 the 403 on the triggers is logged and the app keeps working.
 

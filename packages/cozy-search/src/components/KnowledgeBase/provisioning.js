@@ -174,7 +174,7 @@ const validate = entry => {
  * names derive to the same id would fight over one assistant: the second
  * one is skipped.
  * @param {import('cozy-client').CozyClient} client - The cozy client.
- * @param {Array<{name: string, dirName?: string, dirId?: string, prompt?: string, icon?: string|null, default?: boolean}>} configs - The flag entries.
+ * @param {Array<{name: string, dirName?: string, dirId?: string, prompt?: string, icon?: string|null, default?: boolean, setupOnStartup?: boolean}>} configs - The flag entries.
  * @param {object} [options] - Options.
  * @param {Array<object>} [options.assistants] - Every assistant of the instance, when already fetched: spares one query per entry.
  * @returns {Promise<{created: string[], ensured: string[], skipped: {id: string, reason: string}[]}>} What was created, ensured and skipped.
