@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [36.0.1](https://github.com/cozy/cozy-libs/compare/cozy-bar@36.0.0...cozy-bar@36.0.1) (2026-10-02)
+
+**Note:** Version bump only for package cozy-bar
+
 # [36.0.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@35.5.0...cozy-bar@36.0.0) (2026-10-01)
 
 - feat(cozy-bar)!: Let the app decide when to hide the home button ([ef22c28](https://github.com/cozy/cozy-libs/commit/ef22c288d1f96e8a77693e5882984b6490150263))

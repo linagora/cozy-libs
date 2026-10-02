@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [38.1.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.6...cozy-sharing@38.1.7) (2026-10-02)
+
+### Bug Fixes
+
+- **cozy-sharing:** Clear effective recipients when the sharing is gone ([24897a7](https://github.com/cozy/cozy-libs/commit/24897a7ed7381a2f9f6bd2c229622689756a23ad)), closes [linagora/twake-drive#4264](https://github.com/linagora/twake-drive/issues/4264)
+
 ## [38.1.6](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.5...cozy-sharing@38.1.6) (2026-10-01)
 
 ### Bug Fixes
