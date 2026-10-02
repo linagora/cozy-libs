@@ -70,7 +70,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
       const model = provider?.data?.model || provider?.auth?.login
       setFormData({
         name: assistant.name || '',
-        description: assistant.prompt || '',
+        prompt: assistant.prompt || '',
         icon: assistant.icon || '',
         model: model || '',
         baseUrl: provider?.data?.baseUrl || '',
@@ -104,7 +104,7 @@ const EditAssistantDialog = ({ open, onClose }) => {
   const onSubmit = async () => {
     await editAssistant(client, assistantIdInAction, {
       name: formData.name,
-      prompt: formData.description,
+      prompt: formData.prompt,
       icon: formData.icon,
       model: formData.model,
       apiKey: formData.apiKey,
