@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [38.1.8](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.7...cozy-sharing@38.1.8) (2026-10-02)
+
+### Bug Fixes
+
+- Share child on inherited viewer upgrade ([97af54e](https://github.com/cozy/cozy-libs/commit/97af54ededf883e6577a33e4b4864167811b4845))
+
 ## [38.1.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.6...cozy-sharing@38.1.7) (2026-10-02)
 
 ### Bug Fixes
