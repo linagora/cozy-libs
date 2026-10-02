@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.8.4...cozy-search@2.9.0) (2026-10-02)
+
+### Features
+
+- **cozy-search:** Add copy and retry buttons to the assistant answers ([68c04d7](https://github.com/cozy/cozy-libs/commit/68c04d7849a50aa3c762e01485bebe43bb0d3184))
+- **cozy-search:** Label the assistant prompt field as instructions ([030b051](https://github.com/cozy/cozy-libs/commit/030b05128aea1723af25c3e475e41c8f114af621))
+
 ## [2.8.4](https://github.com/cozy/cozy-libs/compare/cozy-search@2.8.3...cozy-search@2.8.4) (2026-10-02)
 
 **Note:** Version bump only for package cozy-search
