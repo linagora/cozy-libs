@@ -16828,7 +16828,6 @@ __metadata:
     cozy-ui-plus: "npm:^13.0.13"
     identity-obj-proxy: "npm:3.0.0"
     jest: "npm:30.3.0"
-    lodash.set: "npm:^4.3.2"
     prop-types: "npm:15.7.2"
     react: "npm:18.0.0"
     react-dom: "npm:18.0.0"
@@ -28366,13 +28365,6 @@ __metadata:
   version: 4.0.5
   resolution: "lodash.rest@npm:4.0.5"
   checksum: 10c0/9cce9ee7d60af22282967479146ae994aac1caba9af4c9ea59ae354380b3f9cfc37d8567fa07ee2985f517a246cd1d7e5886564c9da8daf3a5db337e742c8368
-  languageName: node
-  linkType: hard
-
-"lodash.set@npm:^4.3.2":
-  version: 4.3.2
-  resolution: "lodash.set@npm:4.3.2"
-  checksum: 10c0/c641d31905e51df43170dce8a1d11a1cff11356e2e2e75fe2615995408e9687d58c3e1d64c3c284c2df2bc519f79a98af737d2944d382ff82ffd244ff6075c29
   languageName: node
   linkType: hard
 

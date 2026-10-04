@@ -1,9 +1,10 @@
 import _minilog from '@cozy/minilog'
-import set from 'lodash.set'
 
 import flag from 'cozy-flags'
 
-set(window, `cozy.debug.flagship`, () => flag('flagship.debug', true))
+window.cozy = window.cozy || {}
+window.cozy.debug = window.cozy.debug || {}
+window.cozy.debug.flagship = () => flag('flagship.debug', true)
 
 const minilog = window.minilog || _minilog
 const logger = minilog('cozy-bar')
