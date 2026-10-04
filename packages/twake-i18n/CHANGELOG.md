@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.5.0...twake-i18n@0.6.0) (2026-10-04)
+
+### Bug Fixes
+
+- **twake-i18n:** Type I18n return value without global JSX namespace ([6ddc1d5](https://github.com/cozy/cozy-libs/commit/6ddc1d5b81209d4b8f1d1b7515d658b249966c53))
+
+### Features
+
+- **twake-i18n:** Accept React 19 as a peer dependency ([23212d3](https://github.com/cozy/cozy-libs/commit/23212d3c4ef518f062a5b4c47aaa4ad0242069bd))
+
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.4.1...twake-i18n@0.5.0) (2026-09-14)
 
 ### Code Refactoring
