@@ -43,7 +43,11 @@ export const useI18n = () => {
   return context
 }
 
-// Provider root component
+/**
+ * Provider root component
+ *
+ * @returns {React.ReactElement}
+ */
 const I18n = ({
   lang,
   polyglot,
