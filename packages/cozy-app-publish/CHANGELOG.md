@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.44.1...cozy-app-publish@0.44.2) (2026-10-05)
+
+### Bug Fixes
+
+- **cozy-app-publish:** Replace node-fetch with native fetch ([d3215cc](https://github.com/cozy/cozy-libs/commit/d3215cc5627c3af5b73ef95358d296b1481285b5))
+- **cozy-app-publish:** Replace request with fetch ([c39ecb7](https://github.com/cozy/cozy-libs/commit/c39ecb754cdb7de665b02c464a9e8920d75fbbc4))
+- **cozy-app-publish:** Stream archive into shasum ([9584327](https://github.com/cozy/cozy-libs/commit/95843275a95cad4c48f689b4e2fdaa6dd1c9dc2e))
+- **cozy-app-publish:** Upgrade tar to 7.5.22 ([686678a](https://github.com/cozy/cozy-libs/commit/686678ad5561d816f4936b3f61595e99a3c2573f))
+
 ## [0.44.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.44.0...cozy-app-publish@0.44.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-app-publish
