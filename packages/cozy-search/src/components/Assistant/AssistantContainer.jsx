@@ -5,7 +5,6 @@ import flag from 'cozy-flags'
 
 import { useAssistant } from '../AssistantProvider'
 import styles from './styles.styl'
-import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import Conversation from '../Conversations/Conversation'
 import CozyAssistantRuntimeProviderWithErrorBoundary from '../CozyAssistantRuntimeProvider'
 import { useAssistantsAutoprovision } from '../KnowledgeBase/useAssistantsAutoprovision'
@@ -25,7 +24,7 @@ const AssistantContainer = () => {
     >
       <Sidebar className="u-pb-0-t u-pb-1" />
 
-      <PrettyScrollbar className="u-flex-auto u-flex u-flex-column u-pb-0-t u-pb-1 u-ov-hidden">
+      <div className="u-flex-auto u-flex u-flex-column u-pb-0-t u-pb-1 u-ov-hidden">
         {isOpenSearchConversation &&
         flag('cozy.assistant.search-conversation.enabled') ? (
           <SearchConversation />
@@ -34,7 +33,7 @@ const AssistantContainer = () => {
             <Conversation />
           </CozyAssistantRuntimeProviderWithErrorBoundary>
         )}
-      </PrettyScrollbar>
+      </div>
     </div>
   )
 }
