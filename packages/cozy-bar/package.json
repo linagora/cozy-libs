@@ -18,9 +18,10 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "yarn build:clean && babel --extensions .js,.jsx --ignore '**/*.spec.jsx','**/*.spec.js','src/standalone' ./src -d ./dist --copy-files --no-copy-ignored && yarn build:standalone",
+    "build": "yarn build:clean && yarn build:lib && yarn build:standalone",
     "build:clean": "rm -rf ./dist",
-    "build:watch": "yarn build --watch",
+    "build:lib": "babel --extensions .js,.jsx --ignore '**/*.spec.jsx','**/*.spec.js','src/standalone' ./src -d ./dist --copy-files --no-copy-ignored",
+    "build:watch": "yarn build:clean && yarn build:lib --watch",
     "build:standalone": "rspack build --config rspack.config.mjs",
     "prepublishOnly": "yarn build",
     "test": "jest --config=./jest.config.js",
