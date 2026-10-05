@@ -2,6 +2,7 @@ import cozyUiUtilsCss from 'cozy-ui/dist/cozy-ui.utils.min.css'
 import cozyUiCss from 'cozy-ui/transpiled/react/stylesheet.css'
 import cozyUiPlusCss from 'cozy-ui-plus/dist/stylesheet.css'
 
+import { getVariablesRules } from './getVariablesRules'
 import barCss from '../styles/index.styl'
 
 const FONTS_LINK_ID = 'twake-bar-fonts'
@@ -28,19 +29,6 @@ const shadowStyleSheet = [cozyUiCss, cozyUiUtilsCss, cozyUiPlusCss, barCss]
   .join('\n')
 
 const THEME_NODES = ['.TwakeTheme--light', '.TwakeTheme--dark']
-
-// Returns the custom properties declared on `selectors`, in source order
-const getVariablesRules = (css, selectors) =>
-  [...css.matchAll(/(?:^|})([^{}@]+)\{([^{}]*)\}/g)]
-    .filter(([, ruleSelectors]) =>
-      ruleSelectors.split(',').some(s => selectors.includes(s.trim()))
-    )
-    .map(([, , body]) =>
-      body
-        .split(';')
-        .filter(declaration => declaration.trim().startsWith('--'))
-        .join(';')
-    )
 
 /**
  * cozy-ui builds its MUI palette when its modules are evaluated, by reading
