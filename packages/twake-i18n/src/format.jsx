@@ -1,12 +1,10 @@
 import format from 'date-fns/format'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
-import {
-  enGB as enLocale,
-  fr as frLocale,
-  es as esLocale,
-  ru as ruLocale,
-  vi as viLocale
-} from 'date-fns/locale'
+import enLocale from 'date-fns/locale/en-GB'
+import esLocale from 'date-fns/locale/es'
+import frLocale from 'date-fns/locale/fr'
+import ruLocale from 'date-fns/locale/ru'
+import viLocale from 'date-fns/locale/vi'
 
 import { DEFAULT_LANG } from '.'
 
