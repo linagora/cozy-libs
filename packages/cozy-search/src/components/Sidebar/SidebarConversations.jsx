@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -6,10 +7,10 @@ import LoadMore from 'cozy-ui/transpiled/react/LoadMore'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
+import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
 import AssistantSidebarItem from '../Assistant/AssistantSidebarItem'
-import PrettyScrollbar from '../Containers/PrettyScrollbar'
 import ConversationList from '../Conversations/ConversationList'
 
 export const SidebarConversations = () => {
@@ -33,7 +34,12 @@ export const SidebarConversations = () => {
       >
         {t('assistant.sidebar.recent_chats')}
       </Typography>
-      <PrettyScrollbar className="u-flex-auto u-ov-auto u-ph-1 u-pb-half">
+      <div
+        className={cx(
+          'u-flex-auto u-ov-auto u-ph-1 u-pb-half',
+          styles['sidebar-conversations']
+        )}
+      >
         <ConversationList
           conversations={conversations}
           currentConversationId={currentConversationId}
@@ -47,7 +53,7 @@ export const SidebarConversations = () => {
             />
           </div>
         )}
-      </PrettyScrollbar>
+      </div>
     </>
   )
 }
