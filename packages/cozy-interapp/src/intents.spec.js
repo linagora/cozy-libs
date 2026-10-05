@@ -85,6 +85,7 @@ describe('Interapp', () => {
 
   describe('existing service', () => {
     let intent, element, iframe, prom
+    const onResult = jest.fn()
 
     const mkMessage = (type, data, _intent = intent) => {
       const ev = new Event('message')
@@ -113,7 +114,7 @@ describe('Interapp', () => {
         id: 'fileId'
       })
       intent = await promIntent
-      prom = promIntent.start(element, {})
+      prom = promIntent.start(element, { onResult })
       await sleep(1)
       iframe = element.querySelector('iframe')
       iframe.postMessage = jest.fn()
@@ -201,6 +202,17 @@ describe('Interapp', () => {
         await expect(prom).resolves.toEqual({ id: '123' })
       })
 
+      it('handles result messages without ending the intent', async () => {
+        window.dispatchEvent(mkMessage('result', { result: { id: '1' } }))
+        window.dispatchEvent(mkMessage('result', { result: { id: '2' } }))
+        expect(onResult).toHaveBeenNthCalledWith(1, { id: '1' })
+        expect(onResult).toHaveBeenNthCalledWith(2, { id: '2' })
+        expect(element.querySelector('iframe')).not.toBe(null)
+
+        window.dispatchEvent(mkMessage('done', { document: { id: '3' } }))
+        await expect(prom).resolves.toEqual({ id: '3' })
+      })
+
       it('handles exposeFrameRemoval message', async () => {
         window.dispatchEvent(mkMessage('exposeFrameRemoval'))
         const res = await prom
@@ -210,7 +222,7 @@ describe('Interapp', () => {
         expect(element.querySelector('iframe')).toBe(null)
       })
 
-      describe('notifyReadyToUse', () => {
+      describe('service', () => {
         let service
         beforeEach(async () => {
           const freshIntent = {
@@ -243,33 +255,64 @@ describe('Interapp', () => {
           service = await servicePromise
         })
 
-        it('posts readyToUse message to parent', () => {
-          const postSpy = jest.spyOn(window, 'postMessage')
-          postSpy.mockClear()
-          service.notifyReadyToUse()
-          expect(postSpy).toHaveBeenCalledWith(
-            { type: `intent-${service.getIntent()._id}:readyToUse` },
-            service.getIntent().attributes.client
-          )
-          postSpy.mockRestore()
+        describe('notifyReadyToUse', () => {
+          it('posts readyToUse message to parent', () => {
+            const postSpy = jest.spyOn(window, 'postMessage')
+            postSpy.mockClear()
+            service.notifyReadyToUse()
+            expect(postSpy).toHaveBeenCalledWith(
+              { type: `intent-${service.getIntent()._id}:readyToUse` },
+              service.getIntent().attributes.client
+            )
+            postSpy.mockRestore()
+          })
+
+          it('throws on second call', () => {
+            const postSpy = jest.spyOn(window, 'postMessage')
+            postSpy.mockClear()
+            service.notifyReadyToUse()
+            expect(() => service.notifyReadyToUse()).toThrow(
+              'Intent service is already ready to use'
+            )
+            expect(postSpy).toHaveBeenCalledTimes(1)
+            postSpy.mockRestore()
+          })
+
+          it('throws if called after terminate', () => {
+            service.terminate({})
+            expect(() => service.notifyReadyToUse()).toThrow(
+              'Intent service is terminated'
+            )
+          })
         })
 
-        it('throws on second call', () => {
-          const postSpy = jest.spyOn(window, 'postMessage')
-          postSpy.mockClear()
-          service.notifyReadyToUse()
-          expect(() => service.notifyReadyToUse()).toThrow(
-            'Intent service is already ready to use'
-          )
-          expect(postSpy).toHaveBeenCalledTimes(1)
-          postSpy.mockRestore()
-        })
+        describe('sendResult', () => {
+          it('posts result messages to parent', () => {
+            const postSpy = jest.spyOn(window, 'postMessage')
+            postSpy.mockClear()
+            service.sendResult({ id: '1' })
+            service.sendResult({ id: '2' })
+            const type = `intent-${service.getIntent()._id}:result`
+            const client = service.getIntent().attributes.client
+            expect(postSpy).toHaveBeenNthCalledWith(
+              1,
+              { type, result: { id: '1' } },
+              client
+            )
+            expect(postSpy).toHaveBeenNthCalledWith(
+              2,
+              { type, result: { id: '2' } },
+              client
+            )
+            postSpy.mockRestore()
+          })
 
-        it('throws if called after terminate', () => {
-          service.terminate({})
-          expect(() => service.notifyReadyToUse()).toThrow(
-            'Intent service is terminated'
-          )
+          it('throws if called after terminate', () => {
+            service.terminate({})
+            expect(() => service.sendResult({})).toThrow(
+              'Intent service has already been terminated'
+            )
+          })
         })
       })
 

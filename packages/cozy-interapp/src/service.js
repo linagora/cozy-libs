@@ -148,7 +148,12 @@ export const start = request => (intentIdArg, serviceWindowArg) => {
           }
           notifiedReadyToUse = true
           sendMessage({ type: `intent-${intent._id}:readyToUse` })
-        }
+        },
+        sendResult: result =>
+          sendMessage({
+            type: `intent-${intent._id}:result`,
+            result
+          })
       }
     })
   })

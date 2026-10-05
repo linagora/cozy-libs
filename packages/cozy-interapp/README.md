@@ -79,6 +79,7 @@ sequenceDiagram
     Client->>Service: postMessage(data)  (raw intent data, no envelope)
     Service->>Client: postMessage { type: "intent-{id}:readyToUse" }
     Note over Client,Service: Intent is usable (optional messages can happen here)
+    Service->>Client: postMessage { type: "intent-{id}:result", result }  (any number of times)
     Service->>Client: postMessage { type: "intent-{id}:done", document } OR
     Service->>Client: postMessage { type: "intent-{id}:exposeFrameRemoval", document } OR
     Service->>Client: postMessage { type: "intent-{id}:cancel" } OR
@@ -114,6 +115,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 | Service → Client | `intent-{id}:resize` | `dimensions: { width?, height?, maxWidth?, maxHeight?, element? }`, `transition?: string` | Resizes the element that holds the iframe. `element` is measured client-side by the service and converted to `maxWidth` / `maxHeight`. `transition` is applied as a CSS `transition` property. |
 | Service → Client | `intent-{id}:hideCross` | — | Ask the client to hide its close button. Fires `onHideCross`. |
 | Service → Client | `intent-{id}:showCross` | — | Ask the client to show its close button. Fires `onShowCross`. |
+| Service → Client | `intent-{id}:result` | `result` | The service hands a result to the client without ending the intent. Fires `onResult(result)`. May be sent any number of times before the intent terminates. |
 | Service → Client | `intent-{id}:compose` | `action`, `doctype`, `data` | Ask the client to start a nested intent. The client creates it, hides the current service iframe, runs the nested intent, then posts the resulting document back to the service via `postMessage(doc, origin)`. |
 
 ## API reference
@@ -127,6 +129,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 > - `onReady` — called when the intent iframe has finished loading (iframe `onload`). Useful for running client code once the iframe is ready.
 > - `onHideCross` / `onShowCross` — called when the service asks the client to hide/show the close button.
 > - `onReadyToUse` — called when the service signals it is **truly ready** (UI rendered and initial data loaded), via `service.notifyReadyToUse()`. Distinct from `onReady`, which only signals the iframe loaded. See `intents.createService()` below.
+> - `onResult` — called with each result the service hands over with `service.sendResult(result)`, while the intent goes on. For a service that stays open and gives several results, where `terminate(doc)` gives one and ends the intent.
 
 An intent has to be created everytime an app need to perform an action over a doctype for wich it does not have permission. For example, the Cozy Drive app should create an intent to `pick` a `io.cozy.contacts` document. The cozy-stack will determines which app can offer a service to resolve the intent. It's this service's URL that will be passed to the iframe `src` property.
 
@@ -200,6 +203,8 @@ const app = await service.compose('INSTALL', 'io.cozy.apps', { slug: 'drive' })
 - `throw(error)`: throw an error to client and causes the intent promise rejection.
 
 - `notifyReadyToUse()`: tells the client the service UI is rendered and its initial data has loaded. A service may call this only once; a second call is a no-op with a warning. Throws if called after `terminate()`. The client receives it via the `onReadyToUse` option of `start()`.
+
+- `sendResult(result)`: passes a `result` to the client without ending the intent process, any number of times. Throws if called after the service is terminated. The client receives it via the `onResult` option of `start()`.
 
 #### Example
 

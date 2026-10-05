@@ -33,7 +33,8 @@ class Intents {
         onReady: options.onReady,
         onHideCross: options.onHideCross,
         onShowCross: options.onShowCross,
-        onReadyToUse: options.onReadyToUse
+        onReadyToUse: options.onReadyToUse,
+        onResult: options.onResult
       }
 
       delete data.filteredServices
