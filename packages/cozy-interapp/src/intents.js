@@ -25,7 +25,7 @@ class Intents {
     if (!type)
       throw new Error(`Misformed intent, "type" property must be provided`)
 
-    const createPromise = this.request.post(action, type, data, permissions)
+    const createPromise = this.request.post(action, type, permissions)
 
     createPromise.start = (element, options = {}) => {
       const opts = {
