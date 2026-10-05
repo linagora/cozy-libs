@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@30.0.55...cozy-viewer@31.0.0) (2026-10-05)
+
+### Bug Fixes
+
+- **cozy-viewer:** Keep the text viewer scrollbar clickable ([d1a743e](https://github.com/cozy/cozy-libs/commit/d1a743e8428d5f7c15391037d135750ddfd5559c))
+- **cozy-viewer:** Upgrade react-markdown to 6.0.3 ([13cb65f](https://github.com/cozy/cozy-libs/commit/13cb65f912a8fdea6be4a7c1e1fc05bfb066935e))
+
+### Features
+
+- **cozy-viewer:** Upgrade react-pdf to 9.2.1 ([844097e](https://github.com/cozy/cozy-libs/commit/844097ed521349bc1c574da522beca047a7ada43))
+
+### BREAKING CHANGES
+
+- **cozy-viewer:** react-pdf 9 requires React >= 16.14.0 and no longer ships the webpack entries that configured the pdf.js worker. Remove any `react-pdf$` alias and set `pdfjs.GlobalWorkerOptions.workerSrc` in your app, see the cozy-viewer Readme.
+
 ## [30.0.55](https://github.com/cozy/cozy-libs/compare/cozy-viewer@30.0.54...cozy-viewer@30.0.55) (2026-10-05)
 
 **Note:** Version bump only for package cozy-viewer
