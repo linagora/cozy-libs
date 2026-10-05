@@ -53,6 +53,10 @@ export function start(createIntent, intent, element, data, options = {}) {
         if (options.onReadyToUse) options.onReadyToUse()
       },
 
+      onResult: event => {
+        if (options.onResult) options.onResult(event.data.result)
+      },
+
       onDone: event => {
         resolve(event.data.document)
         onComplete()
