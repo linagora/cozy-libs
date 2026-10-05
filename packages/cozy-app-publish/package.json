@@ -23,7 +23,6 @@
     "cross-spawn": "^6.0.5",
     "fs-extra": "^7.0.1",
     "lodash": "^4.17.21",
-    "node-fetch": "^2.6.1",
     "prompt": "^1.0.0",
     "tar": "^7.5.22",
     "verror": "^1.10.1"
