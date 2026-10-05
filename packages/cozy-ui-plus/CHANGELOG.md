@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.15](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.0.14...cozy-ui-plus@13.0.15) (2026-10-05)
+
+**Note:** Version bump only for package cozy-ui-plus
+
 ## [13.0.14](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.0.13...cozy-ui-plus@13.0.14) (2026-10-05)
 
 **Note:** Version bump only for package cozy-ui-plus
