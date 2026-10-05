@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [38.1.10](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.9...cozy-sharing@38.1.10) (2026-10-05)
+
+### Bug Fixes
+
+- **cozy-sharing:** Respect nested permissions in hasWriteAccess ([b04a8aa](https://github.com/cozy/cozy-libs/commit/b04a8aa6bda15e5ef5dfa357c3c75a5fdc040e1a))
+
 ## [38.1.9](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.8...cozy-sharing@38.1.9) (2026-10-04)
 
 **Note:** Version bump only for package cozy-sharing
