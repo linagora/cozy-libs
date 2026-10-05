@@ -1,37 +1,27 @@
-@require 'settings/breakpoints.styl'
+.sidebar-paper
+  overflow-x hidden
+  background-color var(--defaultBackgroundColor) !important
 
-.sidebar-container
-  width 236px
-  min-width 236px
-  background-color var(--defaultBackgroundColor)
-  z-index calc(var(--zIndex-modal) + 30)
+  &--docked
+    position relative !important
+    width 236px
+    z-index calc(var(--zIndex-modal) + 30) !important
+    transition width 225ms cubic-bezier(0.4, 0, 0.6, 1)
 
-  +mobile()
-    // Nearly full-width with a small peek of the underlying conversation on the right
+  &--rail
+    width 80px
+    border-right-color transparent !important
+
+  &--mobile
     width calc(100vw - 48px)
-    min-width calc(100vw - 48px)
 
-.sidebar-rail
-  width 80px
-  min-width 80px
-  background-color var(--defaultBackgroundColor)
+.sidebar-drawer--mobile
+  z-index calc(var(--zIndex-modal) + 30) !important
 
 .sidebar-new-chat
   padding-right 1.25rem
   padding-left 1.25rem
 
-.sidebar-overlay--mobile
-  background-color var(--actionColorActive)
-  position fixed
-  top 0
-  right 0
-  left 0
-  bottom 0
-  z-index calc(var(--zIndex-modal) + 20)
-
-.sidebar-bar--mobile
-  // Closed on mobile: an opaque 48px bar over the top of the conversation,
-  // the text scrolling under it. Above the conversation, below the open
-  // sidebar and its overlay.
+.sidebar-mobile-toolbar
   background-color var(--paperBackgroundColor)
   z-index calc(var(--zIndex-modal) + 15)
