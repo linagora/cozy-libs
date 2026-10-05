@@ -78,8 +78,9 @@ const shasum256FromURL = async url => {
   if (!res.ok) {
     throw new Error(`Cannot download ${url}: ${res.status}`)
   }
-  const buffer = Buffer.from(await res.arrayBuffer())
-  return crypto.createHash('sha256').update(buffer).digest('hex')
+  const hash = crypto.createHash('sha256')
+  for await (const chunk of res.body) hash.update(chunk)
+  return hash.digest('hex')
 }
 
 const shasum = async options => {
