@@ -28,19 +28,15 @@ const Conversation = ({ className }) => {
       // The gutters: the messages and the composer are centered up to a max
       // width, and keep a margin from the edges when the screen is narrower
       className={cx(
-        'u-flex u-flex-column u-flex-items-center u-h-100 u-bxz u-pos-relative',
+        'u-flex u-flex-column u-flex-items-center u-flex-justify-between u-h-100 u-bxz u-pos-relative',
         isMobile ? 'u-ph-1' : 'u-ph-2',
-        className,
-        {
-          'u-flex-justify-between': !isThreadEmpty,
-          'u-flex-justify-center': isThreadEmpty
-        }
+        className
       )}
     >
       <ThreadPrimitive.Empty>
         <div
           className={cx(
-            'u-pos-relative u-w-100 u-maw-7 u-mh-auto u-mb-3 u-flex u-flex-items-center u-flex-justify-center',
+            'u-pos-relative u-w-100 u-maw-7 u-mh-auto u-mb-3 u-flex u-flex-auto u-flex-items-center u-flex-justify-center',
             styles['welcome']
           )}
         >
