@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.9.5...cozy-search@2.10.0) (2026-10-06)
+
+### Features
+
+- **cozy-search:** Add Spanish, German and Italian locales ([450ed0e](https://github.com/cozy/cozy-libs/commit/450ed0e9483fe9e01be8c197c1ae6cb97e4ea423))
+
 ## [2.9.5](https://github.com/cozy/cozy-libs/compare/cozy-search@2.9.4...cozy-search@2.9.5) (2026-10-06)
 
 **Note:** Version bump only for package cozy-search

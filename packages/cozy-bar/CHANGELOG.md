@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.1.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@36.0.8...cozy-bar@36.1.0) (2026-10-06)
+
+### Features
+
+- **cozy-bar:** Add Spanish, German and Italian locales ([3307d77](https://github.com/cozy/cozy-libs/commit/3307d77164f3ce148207fdb40adecff74ce37a58))
+
 ## [36.0.8](https://github.com/cozy/cozy-libs/compare/cozy-bar@36.0.7...cozy-bar@36.0.8) (2026-10-06)
 
 **Note:** Version bump only for package cozy-bar

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.24.1...cozy-notifications@0.25.0) (2026-10-06)
+
+### Features
+
+- **cozy-notifications:** Add Spanish, German and Italian locales ([e94128e](https://github.com/cozy/cozy-libs/commit/e94128e9c18aba2a57f772b727447c03427427b3))
+
 ## [0.24.1](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.24.0...cozy-notifications@0.24.1) (2026-03-17)
 
 **Note:** Version bump only for package cozy-notifications

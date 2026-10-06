@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.20.1...cozy-interapp@0.21.0) (2026-10-06)
+
+### Features
+
+- **cozy-interapp:** Let a client send new data to an open intent ([f4f51ca](https://github.com/cozy/cozy-libs/commit/f4f51cad4cf0660b0d951436f8753b5a6ab05800))
+
 ## [0.20.1](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.20.0...cozy-interapp@0.20.1) (2026-10-06)
 
 ### Bug Fixes

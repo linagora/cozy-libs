@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [31.1.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@31.0.3...cozy-viewer@31.1.0) (2026-10-06)
+
+### Features
+
+- **cozy-viewer:** Add Spanish, German and Italian locales ([396f8ef](https://github.com/cozy/cozy-libs/commit/396f8ef7516799761e3991aa223f9285e3b56f0a))
+
 ## [31.0.3](https://github.com/cozy/cozy-libs/compare/cozy-viewer@31.0.2...cozy-viewer@31.0.3) (2026-10-06)
 
 **Note:** Version bump only for package cozy-viewer

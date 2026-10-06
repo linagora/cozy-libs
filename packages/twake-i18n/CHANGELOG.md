@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.6.1...twake-i18n@0.7.0) (2026-10-06)
+
+### Features
+
+- **twake-i18n:** Add German and Italian date-fns locales ([a21bb10](https://github.com/cozy/cozy-libs/commit/a21bb1055c45cfe5e6ff60ad1693a84ae98dfaa9))
+
 ## [0.6.1](https://github.com/cozy/cozy-libs/compare/twake-i18n@0.6.0...twake-i18n@0.6.1) (2026-10-05)
 
 ### Bug Fixes

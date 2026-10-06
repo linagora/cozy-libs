@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [39.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@39.1.17...cozy-harvest-lib@39.2.0) (2026-10-06)
+
+### Features
+
+- **cozy-harvest-lib:** Add Spanish, German and Italian locales ([7e2c374](https://github.com/cozy/cozy-libs/commit/7e2c3743bd0e943238cde575465cd791c6f66395))
+
 ## [39.1.17](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@39.1.16...cozy-harvest-lib@39.1.17) (2026-10-06)
 
 **Note:** Version bump only for package cozy-harvest-lib

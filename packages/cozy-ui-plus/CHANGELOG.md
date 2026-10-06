@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.0.17...cozy-ui-plus@13.1.0) (2026-10-06)
+
+### Features
+
+- **cozy-ui-plus:** Add Spanish, German and Italian locales ([bcf3e1b](https://github.com/cozy/cozy-libs/commit/bcf3e1b45ca8326e1bd2e25cfc636685b3aa2af9))
+
 ## [13.0.17](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.0.16...cozy-ui-plus@13.0.17) (2026-10-06)
 
 **Note:** Version bump only for package cozy-ui-plus

@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [38.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.13...cozy-sharing@38.2.0) (2026-10-06)
+
+### Bug Fixes
+
+- **cozy-sharing:** Expose es, de and it duplicate-invite errors ([562d67a](https://github.com/cozy/cozy-libs/commit/562d67ac867888b18f30e304dc597c14073135ff))
+
+### Features
+
+- **cozy-sharing:** Add Spanish, German and Italian locales ([727cb18](https://github.com/cozy/cozy-libs/commit/727cb18811efaed89c2bb7d6a8952f30b55d482a))
+
 ## [38.1.13](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.1.12...cozy-sharing@38.1.13) (2026-10-06)
 
 **Note:** Version bump only for package cozy-sharing
