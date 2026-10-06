@@ -40,13 +40,25 @@ class Intents {
       delete data.filteredServices
 
       let intentManager
+      let currentData = data
       const prom = createPromise.then(intent => {
-        intentManager = client.start(this.create, intent, element, data, opts)
+        intentManager = client.start(
+          this.create,
+          intent,
+          element,
+          currentData,
+          opts
+        )
         return intentManager
       })
 
       prom.stop = () => {
         intentManager && intentManager.destroy()
+      }
+
+      prom.sendData = newData => {
+        currentData = newData
+        intentManager && intentManager.sendData(newData)
       }
 
       return prom

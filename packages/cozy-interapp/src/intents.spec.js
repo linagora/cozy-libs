@@ -138,10 +138,30 @@ describe('Interapp', () => {
       )
     })
 
+    it('gives the service the data sent before it is ready', () => {
+      jest.spyOn(window, 'postMessage')
+      prom.sendData({ id: 'otherId' })
+      expect(window.postMessage).not.toHaveBeenCalled()
+
+      window.dispatchEvent(mkMessage('ready', {}))
+      expect(window.postMessage).toHaveBeenCalledWith(
+        { id: 'otherId' },
+        serviceOrigin
+      )
+    })
+
     describe('after handshake', () => {
       beforeEach(() => {
         jest.spyOn(window, 'postMessage')
         window.dispatchEvent(mkMessage('ready', {}))
+      })
+
+      it('sends new data to the service while the intent goes on', () => {
+        prom.sendData({ id: 'otherId' })
+        expect(window.postMessage).toHaveBeenLastCalledWith(
+          { type: `intent-${intent.id}:data`, data: { id: 'otherId' } },
+          serviceOrigin
+        )
       })
 
       it('handles ready message', () => {
@@ -283,6 +303,50 @@ describe('Interapp', () => {
             expect(() => service.notifyReadyToUse()).toThrow(
               'Intent service is terminated'
             )
+          })
+        })
+
+        describe('onData', () => {
+          // The client and the service share the window of the test: the
+          // client of the intent above would take the data for its own
+          beforeEach(() => {
+            prom.stop()
+          })
+
+          const sendData = (data, origin = serviceOrigin) =>
+            window.dispatchEvent(
+              Object.assign(new Event('message'), {
+                data: { type: `intent-${service.getIntent()._id}:data`, data },
+                origin,
+                source: window
+              })
+            )
+
+          it('gives the new data of the client, and getData the last ones', () => {
+            const listener = jest.fn()
+            service.onData(listener)
+            sendData({ id: 'otherId' })
+
+            expect(listener).toHaveBeenCalledWith({ id: 'otherId' })
+            expect(service.getData()).toEqual({ id: 'otherId' })
+          })
+
+          it('ignores the data of another origin', () => {
+            const listener = jest.fn()
+            service.onData(listener)
+            sendData({ id: 'otherId' }, 'https://evil.example')
+
+            expect(listener).not.toHaveBeenCalled()
+            expect(service.getData()).toEqual({ id: 'fileId' })
+          })
+
+          it('stops giving them once unsubscribed', () => {
+            const listener = jest.fn()
+            const unsubscribe = service.onData(listener)
+            unsubscribe()
+            sendData({ id: 'otherId' })
+
+            expect(listener).not.toHaveBeenCalled()
           })
         })
 
