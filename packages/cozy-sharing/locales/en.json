@@ -78,13 +78,11 @@
       "confirm": "OK"
     },
     "errors": {
-      "errors": {
-        "groupMemberAlreadyInSharing": "%{groupName} members have already been invited with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights. |||| Contacts have already been invited with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights.",
-        "contactAlreadyInSharing": "%{contactName} has already been invited in a group with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights. |||| Contacts have already been invited with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights.",
-        "sharingRights": {
-          "readOnly": "read",
-          "readWrite": "write"
-        }
+      "groupMemberAlreadyInSharing": "%{groupName} members have already been invited with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights. |||| Contacts have already been invited with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights.",
+      "contactAlreadyInSharing": "%{contactName} has already been invited in a group with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights. |||| Contacts have already been invited with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights.",
+      "sharingRights": {
+        "readOnly": "read",
+        "readWrite": "write"
       }
     },
     "send": "Send..."
