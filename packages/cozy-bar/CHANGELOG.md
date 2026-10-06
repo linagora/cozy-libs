@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [36.2.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@36.1.4...cozy-bar@36.2.0) (2026-10-06)
+
+### Bug Fixes
+
+- **cozy-bar:** Bundle the Spanish dates in the standalone bar ([bc2d622](https://github.com/cozy/cozy-libs/commit/bc2d6225c8bfcf219a9e72ae04074dbb62841a3d))
+- **cozy-bar:** Keep the home button width while its icon loads ([d123448](https://github.com/cozy/cozy-libs/commit/d123448432a52ed98cde006954277389ff842193))
+- **cozy-bar:** Load the home icon once instead of on every render ([53d82af](https://github.com/cozy/cozy-libs/commit/53d82afc997a819c654d6ceae9973ebc8a0caf11))
+- **cozy-bar:** Read the theme variables of adjacent CSS rules ([b84c4f1](https://github.com/cozy/cozy-libs/commit/b84c4f1a0d77473a6e3aeb52a345445647dc9da9))
+- **cozy-bar:** Watch the library build again ([533b03c](https://github.com/cozy/cozy-libs/commit/533b03cdc8c02ab850513808bc71025b4192075a))
+
+### Features
+
+- **cozy-bar:** Accept app icons as URLs in BarLeft ([986188b](https://github.com/cozy/cozy-libs/commit/986188b3f87219c4342e69fda9759b2f824a67b9))
+- **cozy-bar:** Add standalone bar bundle exposing window.TwakeBar ([6523f74](https://github.com/cozy/cozy-libs/commit/6523f7457952a3859371f8beb58636f2141c0f47))
+- **cozy-bar:** Exchange the id token in the standalone bar ([683b06a](https://github.com/cozy/cozy-libs/commit/683b06a4ed796962a019625badef30fd9d19ccbb))
+- **cozy-bar:** Return a promise from every standalone bar call ([415d3f0](https://github.com/cozy/cozy-libs/commit/415d3f0340e14278e2f9ce0a64906026dd81a0a1))
+
 ## [36.1.4](https://github.com/cozy/cozy-libs/compare/cozy-bar@36.1.3...cozy-bar@36.1.4) (2026-10-06)
 
 **Note:** Version bump only for package cozy-bar
