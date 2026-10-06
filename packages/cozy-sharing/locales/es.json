@@ -1,0 +1,485 @@
+{
+  "loading": {
+    "sharing": "Cargando"
+  },
+  "Share": {
+    "status": {
+      "owner": "Propietario",
+      "pending": "Invitación enviada",
+      "seen": "Invitación vista",
+      "ready": "Aceptada",
+      "refused": "Rechazada",
+      "mail-not-sent": "Enviando el correo de invitación...",
+      "revoked": "Error",
+      "unregistered": "Error"
+    },
+    "type": {
+      "one-way": "Lector",
+      "two-way": "Editor"
+    },
+    "locked-type-file": "Próximamente: podrá cambiar los permisos que concede sobre el archivo.",
+    "locked-type-folder": "Próximamente: podrá cambiar los permisos que concede sobre la carpeta.",
+    "recipients": {
+      "you": "Tú",
+      "anyoneWithTheLink": "Cualquier persona con el enlace",
+      "linkWithPassword": "Cualquier persona con una contraseña",
+      "expires": "Hasta el %{date}"
+    },
+    "create-cozy": "Crear |||| Crear mi Twake",
+    "members": {
+      "count": "%{smart_count} miembro |||| %{smart_count} miembros",
+      "others": "y 1 más… |||| y %{smart_count} más…",
+      "otherContacts": "otro contacto |||| otros contactos",
+      "revoke": "Quitar del uso compartido",
+      "error": {
+        "changePermission": "Se ha producido un error al cambiar los permisos. Inténtelo de nuevo."
+      }
+    },
+    "contacts": {
+      "whoHasAccess": "¿Quién tiene acceso?",
+      "addUsers": "Añadir usuarios",
+      "permissionRequired": {
+        "title": "¿Guardar sus contactos en su Twake?",
+        "desc": "Autorice a la aplicación a acceder a los contactos de su Twake: podrá seleccionarlos la próxima vez.",
+        "action": "Autorizar el acceso",
+        "success": "La aplicación tiene acceso a sus contactos"
+      },
+      "defaultDisplayName": "Anónimo"
+    },
+    "twoStepsConfirmation": {
+      "title": "Confirmar la identidad del contacto",
+      "titleReject": "Rechazar el contacto",
+      "confirm": "Confirmar",
+      "reject": "Rechazar",
+      "cancel": "Cancelar",
+      "verify": "Verificar",
+      "contactAreWaitingForConfirmation": "Algunos contactos esperan su confirmación. Confirme su identidad para que puedan acceder a los elementos que ha compartido con ellos.||||%{smart_count} contactos esperan su confirmación. Confirme su identidad para que puedan acceder a los elementos que ha compartido con ellos.",
+      "confirmRejection": "¿Seguro que desea rechazar el contacto %{userName} (%{userEmail})?"
+    },
+    "loadingError": "Error de carga",
+    "banner": {
+      "shared_from": "Los elementos siguientes se muestran desde el Twake de ![avatar](%{image}) **%{name}**. Puede añadir un enlace a este uso compartido en su Twake",
+      "whats_cozy": "Twake es un hogar digital seguro para todos sus datos, alojado en Francia - ",
+      "know_more": "Más información",
+      "sync_to_mine": "Sincronizar |||| Sincronizar en mi Twake",
+      "add_to_mine": "Añadir |||| Añadir a mi Twake",
+      "close": "Cerrar"
+    },
+    "permissionLink": {
+      "title": "Permitir a cualquier persona con el enlace:",
+      "seeFile": "Ver el archivo",
+      "modifyFile": "Modificar el archivo",
+      "seeFolder": "Ver la carpeta",
+      "modifyFolder": "Modificar la carpeta",
+      "readDescription": "Quienes tengan el enlace solo pueden ver o descargar el contenido.",
+      "writeDescription": "Quienes tengan el enlace pueden modificar y eliminar el contenido.",
+      "deactivate": "Desactivar el enlace",
+      "cancel": "Cancelar",
+      "confirm": "Aceptar"
+    },
+    "errors": {
+      "errors": {
+        "groupMemberAlreadyInSharing": "Los miembros de %{groupName} ya han sido invitados con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes. |||| Ya se ha invitado a algunos contactos con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes.",
+        "contactAlreadyInSharing": "%{contactName} ya ha sido invitado en un grupo con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes. |||| Ya se ha invitado a algunos contactos con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes.",
+        "sharingRights": {
+          "readOnly": "lectura",
+          "readWrite": "escritura"
+        }
+      }
+    },
+    "send": "Enviar..."
+  },
+  "Sharings": {
+    "unavailable": {
+      "title": "¡Conéctese!",
+      "message": "Se necesita una conexión a Internet para mostrar la lista de sus últimos usos compartidos."
+    }
+  },
+  "Files": {
+    "share": {
+      "cta": "Compartir",
+      "title": "Compartir \"%{name}\"",
+      "details": {
+        "title": "Detalles del uso compartido",
+        "createdAt": "Desde el %{date}",
+        "ro": "Lector",
+        "rw": "Editor",
+        "desc": {
+          "ro": "Puede ver, descargar y añadir este contenido a su Twake. Recibirá las actualizaciones del propietario, pero no podrá modificar este contenido usted mismo.",
+          "rw": "Puede ver, modificar, eliminar y añadir este contenido a su Twake. Las modificaciones que haga se verán en los demás Twake."
+        }
+      },
+      "notScannedWarning": "El antivirus aún no ha analizado este archivo. Téngalo en cuenta antes de compartirlo.",
+      "sharedByMe": "Compartido por mí",
+      "shared": "Compartido",
+      "sharedWithMe": "Compartido conmigo",
+      "sharedBy": "Compartido por %{name}",
+      "sharedByLink": "Compartido mediante enlace",
+      "shareByLink": {
+        "create": "Generar un enlace",
+        "send": "Enviar el enlace",
+        "copy": "Copiar el enlace",
+        "copied": "El enlace se ha copiado en el portapapeles",
+        "failed": "No se puede copiar en el portapapeles",
+        "permserror": "Se ha producido un error al cambiar los permisos del enlace. Inténtelo de nuevo.",
+        "shareDescription": "Este es el enlace al documento %{name}:"
+      },
+      "shareByEmail": {
+        "subtitle": "Por correo electrónico",
+        "emailPlaceholder": "Añadir contactos",
+        "send": "Hecho",
+        "singleContactSuccess": "Ha enviado una invitación a %{email}.",
+        "contactSuccess": "Ha enviado una invitación a %{smart_count} contacto. |||| Ha enviado una invitación a %{smart_count} contactos.",
+        "singleGroupSuccess": "Ha enviado una invitación a los miembros del grupo %{groupName}.",
+        "groupSuccess": "Ha enviado una invitación a los miembros de %{smart_count} grupo. |||| Ha enviado una invitación a los miembros de %{smart_count} grupos.",
+        "contactAndGroupSuccess": "Ha enviado una invitación a %{nbContact} contactos y a los miembros de %{nbGroup} grupos.",
+        "comingsoon": "¡Próximamente! Podrá compartir documentos y fotos con un solo clic con su familia, sus amigos e incluso sus compañeros de trabajo. No se preocupe, le avisaremos cuando esté listo.",
+        "onlyByLink": "Solo se puede compartir %{type} mediante un enlace, porque",
+        "type": {
+          "file": "este archivo",
+          "folder": "esta carpeta"
+        },
+        "hasSharedParent": "se encuentra en una carpeta compartida",
+        "hasSharedChild": "contiene un elemento compartido"
+      },
+      "sharingLink": {
+        "title": "Enlace para compartir",
+        "copy": "Copiar",
+        "copied": "Copiado"
+      },
+      "protectedShare": {
+        "title": "¡Próximamente!",
+        "desc": "¡Comparta lo que quiera por correo electrónico con su familia y sus amigos!"
+      },
+      "close": "Cerrar",
+      "gettingLink": "Obteniendo su enlace...",
+      "error": {
+        "generic": "Se ha producido un error al crear el enlace para compartir el archivo. Inténtelo de nuevo.",
+        "revoke": "Vaya, se ha producido un error. Póngase en contacto con nosotros para que podamos solucionar este problema lo antes posible."
+      },
+      "specialCase": {
+        "base": "Solo se puede compartir %{type} mediante un enlace, porque",
+        "isInSharedFolder": "se encuentra en una carpeta compartida",
+        "hasSharedFolder": "contiene una carpeta compartida"
+      }
+    }
+  },
+  "Notes": {
+    "share": {
+      "cta": "Compartir",
+      "title": "Compartir \"%{name}\"",
+      "details": {
+        "title": "Detalles del uso compartido",
+        "createdAt": "Desde el %{date}",
+        "ro": "Lector",
+        "rw": "Editor",
+        "desc": {
+          "ro": "Puede ver, descargar y añadir este contenido a su Twake. Recibirá las actualizaciones del propietario, pero no podrá modificar este contenido usted mismo.",
+          "rw": "Puede ver, modificar, eliminar y añadir este contenido a su Twake. Las modificaciones que haga se verán en los demás Twake."
+        }
+      },
+      "sharedByMe": "Compartido por mí",
+      "shared": "Compartido",
+      "sharedWithMe": "Compartido conmigo",
+      "sharedBy": "Compartido por %{name}",
+      "shareByLink": {
+        "create": "Generar un enlace",
+        "send": "Enviar el enlace",
+        "copy": "Copiar el enlace",
+        "copied": "El enlace se ha copiado en el portapapeles",
+        "failed": "No se puede copiar en el portapapeles",
+        "permserror": "Se ha producido un error al cambiar los permisos del enlace. Inténtelo de nuevo.",
+        "shareDescription": "Este es el enlace al documento %{name}:"
+      },
+      "shareByEmail": {
+        "subtitle": "Por correo electrónico",
+        "email": "Para:",
+        "emailPlaceholder": "Introduzca la dirección de correo electrónico o el nombre del destinatario",
+        "send": "Hecho",
+        "singleContactSuccess": "Ha enviado una invitación a %{email}.",
+        "contactSuccess": "Ha enviado una invitación a %{smart_count} contacto. |||| Ha enviado una invitación a %{smart_count} contactos.",
+        "singleGroupSuccess": "Ha enviado una invitación a los miembros del grupo %{groupName}.",
+        "groupSuccess": "Ha enviado una invitación a los miembros de %{smart_count} grupo. |||| Ha enviado una invitación a los miembros de %{smart_count} grupos.",
+        "contactAndGroupSuccess": "Ha enviado una invitación a %{nbContact} contactos y a los miembros de %{nbGroup} grupos.",
+        "comingsoon": "¡Próximamente! Podrá compartir documentos y fotos con un solo clic con su familia, sus amigos e incluso sus compañeros de trabajo. No se preocupe, le avisaremos cuando esté listo.",
+        "onlyByLink": "Solo se puede compartir %{type} mediante un enlace, porque",
+        "type": {
+          "file": "este archivo",
+          "folder": "esta carpeta",
+          "note": "esta nota"
+        },
+        "hasSharedParent": "se encuentra en una carpeta compartida",
+        "hasSharedChild": "contiene un elemento compartido"
+      },
+      "sharingLink": {
+        "title": "Enlace para compartir",
+        "copy": "Copiar",
+        "copied": "Copiado"
+      },
+      "whoHasAccess": {
+        "title": "1 persona tiene acceso |||| %{smart_count} personas tienen acceso"
+      },
+      "protectedShare": {
+        "title": "¡Próximamente!",
+        "desc": "¡Comparta lo que quiera por correo electrónico con su familia y sus amigos!"
+      },
+      "close": "Cerrar",
+      "gettingLink": "Obteniendo su enlace...",
+      "error": {
+        "generic": "Se ha producido un error al crear el enlace para compartir la nota. Inténtelo de nuevo.",
+        "revoke": "Vaya, se ha producido un error. Póngase en contacto con nosotros para que podamos solucionar este problema lo antes posible."
+      },
+      "specialCase": {
+        "base": "Solo se puede compartir %{type} mediante un enlace, porque",
+        "isInSharedFolder": "se encuentra en una carpeta compartida",
+        "hasSharedFolder": "contiene una carpeta compartida"
+      }
+    }
+  },
+  "Albums": {
+    "share": {
+      "cta": "Compartir",
+      "title": "Compartir \"%{name}\" con otras personas",
+      "details": {
+        "title": "Detalles del uso compartido",
+        "createdAt": "Desde el %{date}",
+        "ro": "Solo lectura",
+        "rw": "Lectura y escritura"
+      },
+      "sharedByMe": "Compartido",
+      "shared": "Compartido",
+      "sharedWithMe": "Compartido conmigo",
+      "shareByLink": {
+        "create": "Generar un enlace",
+        "send": "Enviar el enlace",
+        "copy": "Copiar el enlace",
+        "copied": "El enlace se ha copiado en el portapapeles",
+        "failed": "No se puede copiar en el portapapeles",
+        "permserror": "Se ha producido un error al cambiar los permisos del enlace. Inténtelo de nuevo.",
+        "fetchFailed": "Vaya, parece que su conexión es limitada. Vuelva a intentarlo más tarde, cuando mejore.",
+        "shareDescription": "Este es el enlace al álbum %{name}:"
+      },
+      "shareByEmail": {
+        "title": "Por correo electrónico",
+        "subtitle": "Por correo electrónico",
+        "email": "correo electrónico",
+        "emailPlaceholder": "Introduzca la dirección de correo electrónico o el nombre del destinatario",
+        "send": "Hecho",
+        "singleContactSuccess": "Ha enviado una invitación a %{email}.",
+        "contactSuccess": "Ha enviado una invitación a %{smart_count} contacto. |||| Ha enviado una invitación a %{smart_count} contactos.",
+        "singleGroupSuccess": "Ha enviado una invitación a los miembros del grupo %{groupName}.",
+        "groupSuccess": "Ha enviado una invitación a los miembros de %{smart_count} grupo. |||| Ha enviado una invitación a los miembros de %{smart_count} grupos.",
+        "contactAndGroupSuccess": "Ha enviado una invitación a %{nbContact} contactos y a los miembros de %{nbGroup} grupos.",
+        "comingsoon": "¡Próximamente! Podrá compartir documentos y fotos con un solo clic con su familia, sus amigos e incluso sus compañeros de trabajo. No se preocupe, le avisaremos cuando esté listo."
+      },
+      "unshare": {
+        "title": "Quitar del álbum",
+        "success": "Ha dejado de compartir este álbum con %{email}."
+      },
+      "sharingLink": {
+        "title": "Enlace para compartir",
+        "copy": "Copiar",
+        "copied": "Copiado"
+      },
+      "whoHasAccess": {
+        "title": "Quién tiene acceso"
+      },
+      "protectedShare": {
+        "title": "¡Próximamente!",
+        "desc": "¡Comparta lo que quiera por correo electrónico con su familia y sus amigos!"
+      },
+      "close": "Cerrar",
+      "gettingLink": "Obteniendo su enlace...",
+      "error": {
+        "generic": "Se ha producido un error al crear el enlace para compartir el álbum. Inténtelo de nuevo.",
+        "revoke": "Se ha producido un error al revocar el enlace para compartir el álbum. Inténtelo de nuevo."
+      }
+    }
+  },
+  "Organizations": {
+    "share": {
+      "cta": "Compartir",
+      "title": "Compartir \"%{name}\"",
+      "details": {
+        "title": "Detalles del uso compartido",
+        "createdAt": "Desde el %{date}",
+        "ro": "Lector",
+        "rw": "Editor",
+        "desc": {
+          "ro": "Puede ver, descargar y añadir este contenido a su Twake. Recibirá las actualizaciones del propietario, pero no podrá modificar este contenido usted mismo.",
+          "rw": "Puede ver, modificar, eliminar y añadir este contenido a su Twake. Las modificaciones que haga se verán en los demás Twake."
+        }
+      },
+      "sharedByMe": "Compartido por mí",
+      "shared": "Compartido",
+      "sharedWithMe": "Compartido conmigo",
+      "sharedBy": "Compartido por %{name}",
+      "sharedByLink": "Compartido mediante enlace",
+      "shareByLink": {
+        "create": "Generar un enlace",
+        "send": "Enviar el enlace",
+        "copy": "Copiar el enlace",
+        "copied": "El enlace se ha copiado en el portapapeles",
+        "failed": "No se puede copiar en el portapapeles",
+        "permserror": "Se ha producido un error al cambiar los permisos del enlace. Inténtelo de nuevo.",
+        "shareDescription": "Este es el enlace al documento %{name}:"
+      },
+      "shareByEmail": {
+        "subtitle": "Por correo electrónico",
+        "email": "Enviar a:",
+        "emailPlaceholder": "Introduzca la dirección de correo electrónico o el nombre del destinatario",
+        "send": "Hecho",
+        "error": {
+          "addingRecipient": "Se ha producido un error al añadir el destinatario. Inténtelo de nuevo."
+        },
+        "singleContactSuccess": "Ha enviado una invitación a %{email}.",
+        "contactSuccess": "Ha enviado una invitación a %{smart_count} contacto. |||| Ha enviado una invitación a %{smart_count} contactos.",
+        "singleGroupSuccess": "Ha enviado una invitación a los miembros del grupo %{groupName}.",
+        "groupSuccess": "Ha enviado una invitación a los miembros de %{smart_count} grupo. |||| Ha enviado una invitación a los miembros de %{smart_count} grupos.",
+        "contactAndGroupSuccess": "Ha enviado una invitación a %{nbContact} contactos y a los miembros de %{nbGroup} grupos.",
+        "comingsoon": "¡Próximamente! Podrá compartir documentos y fotos con un solo clic con su familia, sus amigos e incluso sus compañeros de trabajo. No se preocupe, le avisaremos cuando esté listo.",
+        "onlyByLink": "Solo se puede compartir %{type} mediante un enlace, porque",
+        "type": {
+          "file": "este archivo",
+          "folder": "esta carpeta"
+        },
+        "hasSharedParent": "se encuentra en una carpeta compartida",
+        "hasSharedChild": "contiene un elemento compartido"
+      },
+      "sharingLink": {
+        "title": "Enlace para compartir",
+        "copy": "Copiar",
+        "copied": "Copiado"
+      },
+      "protectedShare": {
+        "title": "¡Próximamente!",
+        "desc": "¡Comparta lo que quiera por correo electrónico con su familia y sus amigos!"
+      },
+      "close": "Cerrar",
+      "gettingLink": "Obteniendo su enlace...",
+      "error": {
+        "generic": "Se ha producido un error al crear el enlace para compartir el archivo. Inténtelo de nuevo.",
+        "revoke": "Vaya, se ha producido un error. Póngase en contacto con nosotros para que podamos solucionar este problema lo antes posible."
+      },
+      "specialCase": {
+        "base": "Solo se puede compartir %{type} mediante un enlace, porque",
+        "isInSharedFolder": "se encuentra en una carpeta compartida",
+        "hasSharedFolder": "contiene una carpeta compartida"
+      }
+    },
+    "fingerprint": {
+      "instruction": "Por motivos de seguridad, verifique la identidad de **%{userName} (%{userEmail})**. Para ello, póngase en contacto con **%{userName}** por el medio de comunicación que prefiera (llamada, SMS, aplicación de mensajería instantánea...) y verifique su código de seguridad.<br><br>Cada usuario de Twake tiene un código de seguridad que puede consultar en su aplicación web. Su código de seguridad debe corresponder a:",
+      "instruction2": "Si es así, puede confirmar este contacto, que se considerará seguro para sus próximos usos compartidos."
+    }
+  },
+  "ConfirmRecipientModal": {
+    "title": "%{smart_count} contacto pendiente de confirmación |||| %{smart_count} contactos pendientes de confirmación",
+    "intruction": "Verifique la identidad de su Twake para darles acceso al contenido que ha compartido con ellos."
+  },
+  "ShareRecipientsLimitModal": {
+    "title": "Problema con su uso compartido",
+    "content": "No puede compartir %{documentName} con más de %{limit} miembros.",
+    "confirm": "Entendido"
+  },
+  "ShareDiscardChangesModal": {
+    "title": "¿Descartar los cambios que no ha guardado?",
+    "cancel": "Cancelar",
+    "discard": "Descartar"
+  },
+  "DowngradePermissionConfirmDialog": {
+    "title": "¿Actualizar el rol de la carpeta principal?",
+    "content": "Cambiar los permisos de **%{contactName}** en este elemento también cambiará los permisos en una carpeta principal. También puede aplicar un acceso limitado a esta carpeta.",
+    "cancel": "Cancelar",
+    "confirm": "Actualizar la carpeta principal"
+  },
+  "GroupRecipient": {
+    "secondary": "%{memberCount} miembro |||| %{memberCount} miembros",
+    "secondary_you": "incluido usted"
+  },
+  "GroupRecipientDetail": {
+    "empty": {
+      "content": "Este grupo está vacío. Para añadir miembros a este grupo, póngase en contacto con su administrador."
+    },
+    "withAccess": {
+      "title": "Acceso al elemento"
+    },
+    "withoutAccess": {
+      "title": "Sin acceso",
+      "status": {
+        "mail-not-sent": "Error en la invitación",
+        "revoked": "Uso compartido revocado"
+      },
+      "addEmail": "Introduzca una dirección de correo electrónico para invitar al contacto"
+    }
+  },
+  "ShareRestrictionModal": {
+    "title": "Enlace para compartir",
+    "action": {
+      "confirm": "Confirmar"
+    },
+    "invalidPasswordMessage": "Falta %{smart_count} carácter |||| Faltan %{smart_count} caracteres"
+  },
+  "BoxDate": {
+    "label": "Fecha límite",
+    "text": "Retirar el acceso después de una fecha límite"
+  },
+  "BoxPassword": {
+    "label": "Contraseña",
+    "text": "Limitar el acceso con una contraseña"
+  },
+  "BoxEditingRights": {
+    "editTitle": "Derechos de edición",
+    "readOnlyTitle": "Derechos de lectura",
+    "editSubText": "Las personas con acceso al enlace pueden modificar el contenido",
+    "readOnlySubText": "Las personas con acceso al enlace solo pueden ver el contenido"
+  },
+  "copyReminderContent": {
+    "success": "Copiado en el portapapeles",
+    "error": "No se puede copiar en el portapapeles"
+  },
+  "shareFile": {
+    "error": "Problema al recuperar el enlace: %{error}",
+    "text": "Enlace a mi documento %{name}: |||| Enlace a mis documentos %{name}: ",
+    "title": "Enlace a mi documento %{name} |||| Enlace a mis documentos %{name}"
+  },
+  "FederatedFolder": {
+    "title": "Carpeta compartida",
+    "share": "Hecho",
+    "shareTitle": "Compartir \"%{name}\"",
+    "successNotification": "La carpeta se ha compartido",
+    "errorNotification": "Error al compartir la carpeta",
+    "add": "Añadir"
+  },
+  "SharedDrive": {
+    "sharedDriveModal": {
+      "title": "Nueva unidad de equipo",
+      "nameLabel": "Nombre de la unidad de equipo",
+      "add": "Añadir",
+      "cancel": "Cancelar",
+      "create": "Crear",
+      "save": "Guardar",
+      "successNotification": "Se ha añadido la unidad de equipo",
+      "errorNotification": "Error al crear la unidad de equipo"
+    },
+    "editSharedDriveModal": {
+      "title": "Editar la unidad de equipo",
+      "successNotification": "Se ha modificado la unidad de equipo",
+      "errorNotification": "Error al modificar la unidad de equipo"
+    }
+  },
+  "ShareLinkAccessModal": {
+    "title": "Definir el acceso mediante enlace",
+    "introText": "Elija lo que pueden hacer los destinatarios con estos archivos.",
+    "anyoneWithLink": "Permitir el acceso a cualquier persona con el enlace",
+    "settings": "Ajustes de uso compartido",
+    "accessLevel": "Nivel de acceso",
+    "viewer": "Lector",
+    "editor": "Editor",
+    "settingsTitle": "Ajustes de uso compartido",
+    "cancel": "Cancelar",
+    "addLinks": "Añadir los enlaces",
+    "error": {
+      "persistence": "No se han podido guardar los permisos del enlace. Inténtelo de nuevo."
+    }
+  }
+}
