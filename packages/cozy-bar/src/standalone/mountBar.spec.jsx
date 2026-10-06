@@ -50,10 +50,17 @@ jest.mock('./styles', () => ({
 }))
 
 const credentials = {
-  accessToken: 'access-1',
-  refreshToken: 'refresh-1',
+  idToken: 'id-token-1',
   cozyURL: 'http://alice.cozy.localhost:8080'
 }
+
+// Response of the token_exchange of cozy-stack
+const mockExchange = (accessToken = 'access-1') =>
+  global.fetch.mockResolvedValueOnce({
+    ok: true,
+    json: () =>
+      Promise.resolve({ access_token: accessToken, refresh_token: 'refresh-1' })
+  })
 
 const config = { appSlug: 'mail', appName: 'Twake Mail', onLogOut: () => {} }
 
@@ -92,6 +99,8 @@ describe('mountBar', () => {
     // The bar creates an OAuth client, the mock client is not one
     jest.spyOn(client.getStackClient(), 'setToken').mockImplementation(() => {})
     mockCozyClient.mockReset().mockReturnValue(client)
+    global.fetch = jest.fn()
+    mockExchange()
   })
 
   afterEach(() => {
@@ -164,11 +173,62 @@ describe('mountBar', () => {
     ])
   })
 
+  it('exchanges the id token on the Cozy', async () => {
+    mountBar(config)
+
+    await setCredentials(credentials)
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      new URL('/auth/token_exchange', credentials.cozyURL),
+      expect.objectContaining({
+        method: 'POST',
+        body: JSON.stringify({ id_token: 'id-token-1', exchange_type: 'app' })
+      })
+    )
+    expect(getOAuthClientCalls()).toEqual([
+      [
+        expect.objectContaining({
+          token: expect.objectContaining({ access_token: 'access-1' })
+        })
+      ]
+    ])
+  })
+
+  it('is ready once mounted with an id token', async () => {
+    await mountBar({ ...config, ...credentials })
+
+    await waitFor(() =>
+      expect(getBar().queryByTestId('user-menu-button')).toBeInTheDocument()
+    )
+    expect(getOAuthClientCalls()).toHaveLength(1)
+  })
+
+  it('requires cozyURL with an id token', () => {
+    expect(() => mountBar({ ...config, idToken: 'id-token-1' })).toThrow(
+      TypeError
+    )
+    expect(document.getElementById('cozy-bar')).toBe(null)
+  })
+
+  it('is public and rejects when the exchange fails', async () => {
+    global.fetch.mockReset().mockResolvedValueOnce({ ok: false, status: 400 })
+    mountBar(config)
+
+    await expect(setCredentials(credentials)).rejects.toThrow('400')
+
+    await waitFor(() =>
+      expect(getBar().queryByTestId('coz-bar-skeleton-avatar')).toBe(null)
+    )
+    expect(getBar().queryByTestId('user-menu-button')).toBe(null)
+    expect(getOAuthClientCalls()).toHaveLength(0)
+  })
+
   it('updates the token of the existing client on new credentials', async () => {
     mountBar(config)
     await setCredentials(credentials)
 
-    await setCredentials({ ...credentials, accessToken: 'access-2' })
+    mockExchange('access-2')
+    await setCredentials({ ...credentials, idToken: 'id-token-2' })
 
     expect(getOAuthClientCalls()).toHaveLength(1)
     expect(client.getStackClient().setToken).toHaveBeenCalledWith(
