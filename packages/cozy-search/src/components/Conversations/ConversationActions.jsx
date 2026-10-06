@@ -84,6 +84,7 @@ const ConversationActions = ({ buttonClassName, conversation }) => {
         className={buttonClassName}
         size="small"
         ref={anchorRef}
+        aria-expanded={isMenuOpen}
         onClick={toggleMenu}
       >
         <Icon icon={Dots} />
