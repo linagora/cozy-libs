@@ -78,13 +78,11 @@
       "confirm": "OK"
     },
     "errors": {
-      "errors": {
-        "groupMemberAlreadyInSharing": "I membri di %{groupName} sono già stati invitati con diritti di %{sharingRights}. Non è possibile invitare due volte lo stesso contatto con diritti diversi. |||| Alcuni contatti sono già stati invitati con diritti di %{sharingRights}. Non è possibile invitare due volte lo stesso contatto con diritti diversi.",
-        "contactAlreadyInSharing": "%{contactName} è già stato invitato in un gruppo con diritti di %{sharingRights}. Non è possibile invitare due volte lo stesso contatto con diritti diversi. |||| Alcuni contatti sono già stati invitati con diritti di %{sharingRights}. Non è possibile invitare due volte lo stesso contatto con diritti diversi.",
-        "sharingRights": {
-          "readOnly": "lettura",
-          "readWrite": "scrittura"
-        }
+      "groupMemberAlreadyInSharing": "I membri di %{groupName} sono già stati invitati con diritti di %{sharingRights}. Non è possibile invitare due volte lo stesso contatto con diritti diversi. |||| Alcuni contatti sono già stati invitati con diritti di %{sharingRights}. Non è possibile invitare due volte lo stesso contatto con diritti diversi.",
+      "contactAlreadyInSharing": "%{contactName} è già stato invitato in un gruppo con diritti di %{sharingRights}. Non è possibile invitare due volte lo stesso contatto con diritti diversi. |||| Alcuni contatti sono già stati invitati con diritti di %{sharingRights}. Non è possibile invitare due volte lo stesso contatto con diritti diversi.",
+      "sharingRights": {
+        "readOnly": "lettura",
+        "readWrite": "scrittura"
       }
     },
     "send": "Invia..."

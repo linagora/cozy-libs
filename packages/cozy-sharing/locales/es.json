@@ -78,13 +78,11 @@
       "confirm": "Aceptar"
     },
     "errors": {
-      "errors": {
-        "groupMemberAlreadyInSharing": "Los miembros de %{groupName} ya han sido invitados con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes. |||| Ya se ha invitado a algunos contactos con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes.",
-        "contactAlreadyInSharing": "%{contactName} ya ha sido invitado en un grupo con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes. |||| Ya se ha invitado a algunos contactos con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes.",
-        "sharingRights": {
-          "readOnly": "lectura",
-          "readWrite": "escritura"
-        }
+      "groupMemberAlreadyInSharing": "Los miembros de %{groupName} ya han sido invitados con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes. |||| Ya se ha invitado a algunos contactos con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes.",
+      "contactAlreadyInSharing": "%{contactName} ya ha sido invitado en un grupo con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes. |||| Ya se ha invitado a algunos contactos con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes.",
+      "sharingRights": {
+        "readOnly": "lectura",
+        "readWrite": "escritura"
       }
     },
     "send": "Enviar..."

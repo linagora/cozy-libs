@@ -78,13 +78,11 @@
       "confirm": "OK"
     },
     "errors": {
-      "errors": {
-        "groupMemberAlreadyInSharing": "Die Mitglieder von %{groupName} wurden bereits mit %{sharingRights} eingeladen. Derselbe Kontakt kann nicht zweimal mit unterschiedlichen Rechten eingeladen werden. |||| Kontakte wurden bereits mit %{sharingRights} eingeladen. Derselbe Kontakt kann nicht zweimal mit unterschiedlichen Rechten eingeladen werden.",
-        "contactAlreadyInSharing": "%{contactName} wurde bereits in einer Gruppe mit %{sharingRights} eingeladen. Derselbe Kontakt kann nicht zweimal mit unterschiedlichen Rechten eingeladen werden. |||| Kontakte wurden bereits mit %{sharingRights} eingeladen. Derselbe Kontakt kann nicht zweimal mit unterschiedlichen Rechten eingeladen werden.",
-        "sharingRights": {
-          "readOnly": "Leserechten",
-          "readWrite": "Schreibrechten"
-        }
+      "groupMemberAlreadyInSharing": "Die Mitglieder von %{groupName} wurden bereits mit %{sharingRights} eingeladen. Derselbe Kontakt kann nicht zweimal mit unterschiedlichen Rechten eingeladen werden. |||| Kontakte wurden bereits mit %{sharingRights} eingeladen. Derselbe Kontakt kann nicht zweimal mit unterschiedlichen Rechten eingeladen werden.",
+      "contactAlreadyInSharing": "%{contactName} wurde bereits in einer Gruppe mit %{sharingRights} eingeladen. Derselbe Kontakt kann nicht zweimal mit unterschiedlichen Rechten eingeladen werden. |||| Kontakte wurden bereits mit %{sharingRights} eingeladen. Derselbe Kontakt kann nicht zweimal mit unterschiedlichen Rechten eingeladen werden.",
+      "sharingRights": {
+        "readOnly": "Leserechten",
+        "readWrite": "Schreibrechten"
       }
     },
     "send": "Senden..."
