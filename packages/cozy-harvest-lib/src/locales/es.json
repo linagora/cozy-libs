@@ -1,0 +1,598 @@
+{
+  "close": "Cerrar",
+  "back": "Volver",
+  "badges": {
+    "warning": "Advertencia"
+  },
+  "accountForm": {
+    "submit": {
+      "label": "Conectar"
+    },
+    "fields": {
+      "optional": "(opcional)"
+    },
+    "password": {
+      "show": "Mostrar",
+      "hide": "Ocultar"
+    },
+    "disconnect": {
+      "button": "Desconectar esta cuenta"
+    },
+    "installFlagship": {
+      "label": "Instalar Twake en el móvil"
+    },
+    "cannotConnectModal": {
+      "title": "¿No puede conectarse?",
+      "content": "Puede comprobar su identificador o restablecer su contraseña en el sitio web de [%{vendorName}](%{vendorLink}).",
+      "noAccount": "Si no tiene una cuenta, deberá crear una en el sitio web de [%{vendorName}](%{vendorLink})."
+    },
+    "cannotConnectLink": "No puedo conectarme",
+    "notClientSide": "Para sincronizar sus datos de %{name} en su Twake, debe usar la aplicación Twake de su teléfono o tableta.",
+    "clientSide": {
+      "title": "Conectar a su Twake",
+      "submit": "Conectar",
+      "description": "Conecte %{name} a su Twake para sincronizar su cuenta y recuperar todos sus datos."
+    }
+  },
+  "contracts": {
+    "headers": {
+      "bankAccounts": "Cuentas bancarias",
+      "default": "Contratos"
+    },
+    "deleted": "Eliminado",
+    "no-contracts": "Ya no hay contratos",
+    "handle-synchronization": "Gestionar mis sincronizaciones",
+    "desynchronized": {
+      "message": "desincronizó esta cuenta el %{date}",
+      "dateFormat": "dd/LL/yy"
+    }
+  },
+  "contractForm": {
+    "details": "Detalles",
+    "sharing": "Uso compartido",
+    "back-to-accounts": "Volver a las cuentas",
+    "update": "Modificar",
+    "delete": "Borrar",
+    "deleting": "Borrando...",
+    "confirm-deletion": {
+      "description": "Esto también eliminará sus transacciones junto con los vínculos a las facturas. Si no desea volver a importar sus datos bancarios en la próxima sincronización programada, deberá eliminar la conexión.",
+      "confirm": "Confirmar la eliminación de la cuenta",
+      "title": "¿Está seguro?"
+    },
+    "deletion_error": "Se ha producido un error al eliminar la cuenta.",
+    "label": "Etiqueta",
+    "owner": "Titular",
+    "addOwnerBtn": "Añadir un titular",
+    "removeOwnerBtn": "Eliminar este titular",
+    "ownerPlaceholder": "Seleccione un titular",
+    "bank": "Banco",
+    "number": "Número",
+    "type": "Tipo",
+    "apply": "Aplicar",
+    "success": "Cuenta actualizada correctamente",
+    "failure": "Error al actualizar la cuenta",
+    "removeAccountBtn": "Eliminar la cuenta",
+    "listPlaceholder": "Buscar un contacto",
+    "listEmptyMessage": "No se ha encontrado ningún contacto",
+    "addContactLabel": "Añadir un contacto",
+    "cancel": "Cancelar",
+    "imported": "Cuenta sincronizada"
+  },
+  "card": {
+    "launchTrigger": {
+      "button": {
+        "label": "Sincronizar"
+      },
+      "configure": "Configurar",
+      "connect": "Conectar",
+      "success": "Sincronización correcta",
+      "error": "Se ha producido un error.",
+      "frequency": {
+        "label": "Frecuencia:",
+        "hourly": "Cada hora",
+        "daily": "Una vez al día",
+        "weekly": "Una vez a la semana",
+        "monthly": "Una vez al mes",
+        "undefined": "Manualmente"
+      },
+      "lastSync": {
+        "label": "Actualización:",
+        "syncing": "Recuperando datos…",
+        "unknown": "Última sincr. desconocida",
+        "afterSomeTimes": "Sincr. hace %{times}",
+        "format": "dd/LL/yyyy",
+        "disconnected": "Desconectado",
+        "justNow": "Sincr. hace un momento"
+      },
+      "runningAlert": {
+        "title": "¡No cierre la aplicación!",
+        "body": "Para que la recuperación de datos sea completa, el teléfono debe permanecer encendido. No obstante, puede seguir navegando en la aplicación móvil mientras permanezca activa en primer plano.",
+        "button": "Entendido"
+      }
+    },
+    "appLink": {
+      "drive": {
+        "title": "Sus documentos",
+        "description": "Este servicio recupera sus últimos documentos y guarda una copia completa por usted.",
+        "button": "Abrir los documentos",
+        "install": "Descubrir Twake Drive"
+      },
+      "contacts": {
+        "title": "Sus contactos",
+        "description": "Este servicio sincroniza todos sus contactos por usted.",
+        "button": "Abrir los contactos",
+        "install": "Descubrir Twake Contacts"
+      },
+      "banks": {
+        "title": "Sus datos bancarios",
+        "description": "Este servicio recupera sus últimas operaciones bancarias y guarda un historial completo por usted.",
+        "button": "Acceder a las cuentas bancarias",
+        "install": "Descubrir Twake Banks"
+      },
+      "coachco2": {
+        "title": "Aplicaciones para ir más allá",
+        "description": "Las siguientes aplicaciones pueden usar este tipo de datos de forma privada dentro de su Twake.",
+        "button": "Coach CO2",
+        "install": "Descubrir Coach CO2"
+      }
+    },
+    "information": {
+      "title": "Información útil",
+      "websiteLink": "Abrir el sitio web",
+      "store": "Ver en la Store de Twake Workplace",
+      "storeDescription": "Acceder a la descripción de esta aplicación"
+    }
+  },
+  "default": {
+    "dateFormat": "dd/LL/yyyy",
+    "baseDir": "/Administrativo"
+  },
+  "error": {
+    "application-not-found": "Esta aplicación no existe",
+    "reconnect-via-form": "Volver a conectar",
+    "job": {
+      "DISK_QUOTA_EXCEEDED": {
+        "title": "Almacenamiento lleno",
+        "description": "Este servicio no puede recuperar sus documentos en este momento. Elimine algunos archivos o vaya a **Ajustes > Almacenamiento** para obtener más espacio libre."
+      },
+      "CHALLENGE_ASKED": {
+        "title": "Verificación requerida",
+        "description": "El sitio web requiere un segundo factor de autenticación. Puede volver a ejecutar el conector manualmente para proporcionar el código y seguir recuperando sus datos."
+      },
+      "OAUTH_CANCELED": {
+        "title": "Cancelado",
+        "description": "No hemos podido añadir su banco porque canceló la conexión. Haga clic en \"Añadir su banco\" una vez más para intentarlo de nuevo."
+      },
+      "LOGIN_FAILED": {
+        "title": "Credenciales incorrectas o caducadas",
+        "description": "Lo sentimos, su identificador o contraseña no son válidos o han caducado. Compruebe sus credenciales en el sitio web de [%{name}](%{link}) antes de actualizarlas."
+      },
+      "LOGIN_FAILED.NEEDS_SECRET": {
+        "title": "Se necesita información adicional",
+        "description": "Debe rellenarse un campo adicional para conectar su servicio. Puede volver a ejecutar el conector manualmente para proporcionar la información."
+      },
+      "LOGIN_FAILED.TOO_MANY_ATTEMPTS": {
+        "title": "Bloqueado temporalmente",
+        "description": "Se han producido demasiados intentos. Actualice sus credenciales en el sitio web de [%{name}](%{link}) y actualice el conector más tarde."
+      },
+      "MAINTENANCE": {
+        "title": "Sitio web no disponible",
+        "description": "Parece que el sitio web de [%{name}](%{link}) no está disponible o que el conector debe actualizarse. Vuelva a ejecutar el conector más tarde o consulte nuestra ayuda en línea."
+      },
+      "NOT_EXISTING_DIRECTORY": {
+        "title": "Falta la carpeta de destino",
+        "description": "Parece que la carpeta de destino de esta cuenta se ha eliminado. Restáurela desconectando esta cuenta y volviendo a conectarla."
+      },
+      "TERMS_VERSION_MISMATCH": {
+        "title": "Últimas condiciones del servicio no aceptadas",
+        "description": "Parece que %{name} ha actualizado sus condiciones del servicio. Compruebe que el servicio esté actualizado. Si el error persiste, póngase en contacto con nosotros en [%{supportMail}](mailto:%{supportMail})."
+      },
+      "UNKNOWN_ERROR": {
+        "title": "Error de conexión",
+        "description": "Se ha producido un error desconocido. Puede intentar actualizar sus datos. Si el problema persiste, póngase en contacto con nosotros en [%{supportMail}](mailto:%{supportMail})."
+      },
+      "UNKNOWN_ERROR.PARTIAL_SYNC": {
+        "title": "Error de conexión",
+        "description": "La sincronización ha terminado, pero es posible que falten algunos elementos"
+      },
+      "USER_ACTION_NEEDED": {
+        "title": "Acción necesaria en el sitio web del proveedor",
+        "description": "Parece que el sitio web de [%{name}](%{link}) requiere que inicie sesión y realice una acción específica. Vuelva a ejecutar el conector cuando haya resuelto el problema en el sitio web."
+      },
+      "USER_ACTION_NEEDED.OAUTH_OUTDATED": {
+        "title": "Es necesario renovar el acceso",
+        "description": "El servicio [%{name}](%{link}) requiere que renueve su autenticación. Desconecte y vuelva a conectar su cuenta %{name} a esta aplicación. No se perderá ningún dato."
+      },
+      "USER_ACTION_NEEDED.ACCOUNT_REMOVED": {
+        "title": "Cuenta no disponible",
+        "description": "Parece que su cuenta ya no está activa. Compruebe su cuenta en [%{name}](%{link}) antes de volver a intentarlo."
+      },
+      "USER_ACTION_NEEDED.CHANGE_PASSWORD": {
+        "title": "Es necesario actualizar la contraseña",
+        "description": "Parece que el sitio web de [%{name}](%{link}) requiere que inicie sesión y actualice su contraseña. Vuelva a ejecutar el conector cuando haya resuelto el problema en el sitio web."
+      },
+      "USER_ACTION_NEEDED.PERMISSIONS_CHANGED": {
+        "title": "Se necesitan nuevos permisos",
+        "description": "Su conector se ha actualizado y los permisos han cambiado. Valídelos antes de volver a ejecutar el conector."
+      },
+      "USER_ACTION_NEEDED.SCA_REQUIRED": {
+        "title": "Es necesario renovar la autenticación",
+        "description": "Parece que %{name} requiere volver a verificar su conexión para que la sincronización funcione. Vuelva a ejecutar el conector para iniciar el proceso de verificación. Recibirá un código de un solo uso o una solicitud de validación en la aplicación o el sitio web de su banco."
+      },
+      "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
+        "title": "Es necesario renovar la autenticación",
+        "description": "La última conexión al servicio ha fallado; vuelva a iniciarla. Es posible que tenga que proporcionar un código de validación."
+      },
+      "USER_ACTION_NEEDED.WEBAUTH_REQUIRED": {
+        "title": "Se requiere autenticación en el sitio web del proveedor",
+        "description": "Parece que [%{name}](%{link}) requiere que inicie sesión en su sitio web para que la sincronización funcione. Vuelva a ejecutar el conector cuando haya resuelto el problema en el sitio web."
+      },
+      "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
+        "title": "Código de autenticación reforzada incorrecto",
+        "description": "El código del segundo factor proporcionado es incorrecto. Vuelva a empezar."
+      },
+      "USER_ACTION_NEEDED.CGU_FORM": {
+        "title": "Es necesario aceptar nuevas condiciones del servicio",
+        "description": "Parece que es necesario aceptar de nuevo las condiciones del servicio. Acéptelas en el sitio web de [%{name}](%{link}) y vuelva a sincronizar."
+      },
+      "VENDOR_DOWN": {
+        "title": "Servicio no disponible",
+        "description": "Parece que el servicio [%{name}](%{link}) no está disponible en este momento. Vuelva a ejecutar el conector más tarde."
+      },
+      "VENDOR_DOWN.BANK_DOWN": {
+        "title": "Sitio web del banco no disponible",
+        "description": "El acceso al área de clientes de [%{name}](%{link}) no está disponible en este momento. Vuelva a ejecutar el conector más tarde"
+      },
+      "VENDOR_DOWN.LINXO_DOWN": {
+        "title": "Servicio no disponible",
+        "description": "Parece que nuestros conectores bancarios están sobrecargados en este momento. Vuelva a ejecutar el conector más tarde."
+      },
+      "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
+        "title": "Esta cuenta ya existe",
+        "description": "Cualquier modificación de la lista de cuentas sincronizadas se tendrá en cuenta en unos minutos."
+      },
+      "WRONG_ACCOUNT_IDENTIFIER": {
+        "title": "Los identificadores no son correctos",
+        "description": "Ha introducido identificadores que no están asociados a esta cuenta"
+      }
+    }
+  },
+  "fields": {
+    "answer": {
+      "label": "Respuesta secreta"
+    },
+    "birthdate": {
+      "label": "Fecha de nacimiento",
+      "placeholder": "dd/mm/aaaa"
+    },
+    "code": {
+      "label": "Código confidencial"
+    },
+    "date": {
+      "label": "Fecha",
+      "placeholder": "dd/mm/aaaa"
+    },
+    "email": {
+      "label": "Correo"
+    },
+    "firstname": {
+      "label": "Nombre"
+    },
+    "lastname": {
+      "label": "Apellidos"
+    },
+    "login": {
+      "label": "Identificador"
+    },
+    "password": {
+      "label": "Contraseña"
+    },
+    "phone": {
+      "label": "Número de teléfono"
+    },
+    "two_fa_code": {
+      "label": "Código de autenticación reforzada"
+    }
+  },
+  "folder": {
+    "administrative": "Administrativo",
+    "photos": "Fotos"
+  },
+  "infos": {
+    "konnectorUpdate": {
+      "title": "Hay una actualización disponible para este servicio.",
+      "body": {
+        "regular": "Realice esta actualización para seguir recuperando sus datos y disfrutar de las últimas funciones:",
+        "blocking": "Actualícelo para seguir recuperando sus datos:"
+      },
+      "button": {
+        "label": "Ver la actualización"
+      }
+    }
+  },
+  "legacy": {
+    "fields": {
+      "access_token": {
+        "label": "Token de acceso"
+      },
+      "accessTokenSecret": {
+        "label": "Secreto del token de acceso"
+      },
+      "accountName": {
+        "label": "Nombre de la cuenta"
+      },
+      "agreement": {
+        "label": "Acepto"
+      },
+      "apikey": {
+        "label": "Clave de API"
+      },
+      "appKey": {
+        "label": "Clave de la aplicación"
+      },
+      "appSecret": {
+        "label": "Secreto de la aplicación"
+      },
+      "authCode": {
+        "label": "Código de autorización"
+      },
+      "bank_identifier": {
+        "label": "Identificador bancario (opcional)"
+      },
+      "branchName": {
+        "label": "Sucursal"
+      },
+      "cardNumber": {
+        "label": "Número de tarjeta"
+      },
+      "consumerKey": {
+        "label": "Clave de cliente"
+      },
+      "consumerSecret": {
+        "label": "Secreto de cliente"
+      },
+      "dob": {
+        "label": "Fecha de nacimiento"
+      },
+      "folderPath": {
+        "label": "Ruta de la carpeta"
+      },
+      "identifier": {
+        "label": "Identificador"
+      },
+      "loginUrl": {
+        "label": "URL de inicio de sesión"
+      },
+      "namePath": {
+        "label": "Nombre de la carpeta"
+      },
+      "new_identifier": {
+        "label": "Identificador"
+      },
+      "phoneNumber": {
+        "label": "Número de teléfono"
+      },
+      "profileName": {
+        "label": "Nombre del perfil"
+      },
+      "refreshToken": {
+        "label": "Token de actualización"
+      },
+      "secret": {
+        "label": "Contraseña"
+      },
+      "timeout": {
+        "label": "Retraso (ms)"
+      },
+      "token": {
+        "label": "Token"
+      },
+      "tricountUrl": {
+        "label": "URL de Tricount"
+      }
+    }
+  },
+  "modal": {
+    "aria-label": "Configuración del conector",
+    "konnector": {
+      "error": {
+        "title": "No se puede recuperar su cuenta",
+        "description": "No se puede recuperar la cuenta (%{message}).",
+        "button": "Cerrar"
+      }
+    },
+    "accounts": {
+      "title": "Seleccione una cuenta de %{name}",
+      "error": {
+        "title": "Error",
+        "description": "No se pueden recuperar sus cuentas",
+        "retry": "Reintentar"
+      }
+    },
+    "tabs": {
+      "data": "Datos",
+      "configuration": "Configuración"
+    },
+    "addAccount": {
+      "title": "Conectarse a %{name}",
+      "button": "Añadir una cuenta"
+    },
+    "deleteBIConnection": {
+      "title": "Desconexión del banco",
+      "description": "Su solicitud se ha registrado y será efectiva en breve. Los datos importados anteriormente no se eliminarán.",
+      "confirm-deletion": "Cerrar"
+    },
+    "deleteAccount": {
+      "title": "Desconexión",
+      "description": "Su cuenta se desconectará, pero se conservarán los datos ya importados.",
+      "confirm": "Desconectar",
+      "cancel": "Cancelar"
+    },
+    "updateAccount": {
+      "general-subheader": "General",
+      "identifiers": "Identificadores",
+      "delete-account-success": "La cuenta se ha desconectado",
+      "delete-account-error": "No se ha podido desconectar la cuenta. Inténtelo de nuevo más tarde o póngase en contacto con nuestro servicio de asistencia."
+    }
+  },
+  "oauth": {
+    "banking": {
+      "connect": {
+        "label": "Añadir su banco"
+      },
+      "reconnect": {
+        "label": "Volver a conectar"
+      }
+    },
+    "reconnect": {
+      "label": "Volver a conectar"
+    },
+    "connect": {
+      "description": "Conecte %{name} a su Twake para sincronizar su cuenta y recuperar automáticamente todos sus datos.",
+      "label": "Conectar",
+      "submit": "Conectar",
+      "title": "Conectar a su Twake"
+    },
+    "window": {
+      "title": "OAuth"
+    }
+  },
+  "triggerSuccessMessage": {
+    "button": {
+      "label": "Cerrar"
+    },
+    "description": "Sus datos estarán disponibles en unos minutos y los siguientes llegarán automáticamente.",
+    "figure": {
+      "alt": "conectado"
+    },
+    "title": "¡Configuración correcta!"
+  },
+  "twoFAForm": {
+    "modal-label": "Formulario de autenticación de dos factores",
+    "providers": {
+      "default": "Introduzca el código que ha recibido por correo electrónico o SMS",
+      "email": "Introduzca el código que ha recibido por correo electrónico",
+      "sms": "Introduzca el código que ha recibido por SMS",
+      "app_code": "Introduzca el código de un solo uso que debe generar en la aplicación móvil ${name}",
+      "app": "Use la aplicación de su proveedor para continuar la autenticación"
+    },
+    "desc-2fa": "Debe abrir la aplicación de su proveedor para confirmar su autenticación. En algunos casos, tendrá que validar dos veces.",
+    "desc_1": "Este código le permite completar la conexión.",
+    "desc_2": "El segundo código recibido en su teléfono móvil o por correo electrónico le permite finalizar la conexión.",
+    "code": {
+      "label_1": "código",
+      "label_2": "Segundo código"
+    },
+    "retry": "Código no válido. Vuelva a introducirlo.",
+    "CTA": "Validar"
+  },
+  "account": {
+    "success": {
+      "title": "¡Configuración correcta!",
+      "connect": "Sus datos estarán disponibles en unos minutos y los siguientes llegarán automáticamente.",
+      "banksLinkText": "Ver mis cuentas en %{appName}",
+      "driveLinkText": "Abrir la carpeta en Twake Drive",
+      "button": "Cerrar"
+    }
+  },
+  "maintenance": {
+    "noService": "Servicio interrumpido",
+    "explanationTitle": "¿Qué está pasando?"
+  },
+  "suggestions": {
+    "title": "Importar sus datos de %{name}",
+    "data": "Al instalar %{name} se importarán automáticamente los siguientes datos:",
+    "why": "¿Por qué se me sugiere %{name}?",
+    "reason_bank": "Se ha detectado %{name} en una de sus transacciones bancarias. No se preocupe, nadie más puede acceder a esta información",
+    "install": "Instalar",
+    "silence": "No volver a sugerirlo"
+  },
+  "dataType": {
+    "none": "%{name} no accederá a ninguno de sus datos personales",
+    "activity": "Sus actividades",
+    "appointment": "Sus citas",
+    "bankTransactions": "Sus transacciones bancarias",
+    "bankAccounts": "Sus cuentas bancarias",
+    "bill": "Sus facturas",
+    "bloodPressure": "Su presión arterial",
+    "calendar": "Sus calendarios",
+    "certificate": "Sus certificados",
+    "commit": "Sus commits",
+    "consumption": "Su consumo",
+    "contact": "Sus contactos",
+    "contract": "Sus contratos",
+    "courseMaterial": "Sus materiales de curso",
+    "document": "Sus documentos",
+    "event": "Sus eventos",
+    "family": "Información sobre su familia",
+    "geopoint": "Sus geolocalizaciones",
+    "heartbeat": "Su ritmo cardíaco",
+    "home": "Información sobre su domicilio",
+    "phonecommunicationlog": "Su registro de llamadas",
+    "picture": "Sus imágenes",
+    "podcast": "Sus pódcasts",
+    "profile": "Su perfil de cliente",
+    "refund": "Sus reembolsos",
+    "sinister": "Sus siniestros",
+    "sleepTime": "Su tiempo de sueño",
+    "stepsNumber": "Su número de pasos",
+    "temperature": "Sus datos de temperatura",
+    "travelDate": "Sus fechas de viaje",
+    "tweet": "Sus tuits",
+    "videostream": "Sus vídeos",
+    "weight": "Su peso"
+  },
+  "vaultCiphersList": {
+    "title": "¿Desde qué cuenta desea importar sus datos?",
+    "otherAccount": "Desde otra cuenta…"
+  },
+  "triggerManager": {
+    "confirmationModal": {
+      "title": "¿Actualizar las credenciales?",
+      "description": "Sus credenciales anteriores se perderán definitivamente. Añada una cuenta nueva para conservarlas.",
+      "primaryText": "Actualizar",
+      "secondaryText": "Cancelar"
+    }
+  },
+  "connectionBackdrop": {
+    "connecting": "Conexión en curso",
+    "progress": "Establecer la conexión con %{name} puede tardar hasta 30 segundos..."
+  },
+  "disconnectedAccountModal": {
+    "disconnected-help": "Esta cuenta está desconectada. Sus datos se han conservado. Si desea reanudar la sincronización, vuelva a configurar su cuenta con el botón \"Añadir un banco\"."
+  },
+  "konnectorBlock": {
+    "open": "Abrir el sitio web",
+    "store": {
+      "primary": "Ver en la store de Twake Workplace",
+      "secondary": "Acceder a la descripción de esta aplicación"
+    },
+    "disconnected": "Desconectado",
+    "inMaintenance": "En mantenimiento",
+    "hasNewVersionAvailable": "Nueva versión disponible",
+    "fatalError": "Se ha producido un error al recuperar el servicio. Si el problema persiste, no dude en ponerse en contacto con nosotros en [%{name}](%{link})"
+  },
+  "datacards": {
+    "trips": {
+      "title": "Últimos trayectos",
+      "caption": "Vea sus 5 trayectos más recientes recuperados en %{konnectorName}",
+      "modes": {
+        "AIR_OR_HSR": "Avión",
+        "BICYCLING": "Bicicleta",
+        "BUS": "Autobús",
+        "CAR": "Coche",
+        "IN_VEHICLE": "Vehículo",
+        "TRAIN": "Tren",
+        "UNKNOWN": "Desconocido",
+        "WALKING": "A pie",
+        "ON_FOOT": "A pie",
+        "RUNNING": "Carrera"
+      }
+    },
+    "files": {
+      "title": "Sus documentos",
+      "imported": "Importado el %{date}",
+      "caption": "Este servicio recupera sus últimos documentos y guarda una copia completa por usted."
+    }
+  }
+}
