@@ -1,0 +1,64 @@
+{
+  "drawer": "Mostrar el menú lateral",
+  "profile": "Perfil",
+  "appearance": "Apariencia",
+  "plans": "Planes",
+  "permissions": "Permisos",
+  "connectedDevices": "Dispositivos conectados",
+  "connections": "Conexiones",
+  "storage": "Almacenamiento",
+  "storage_phrase": "%{diskUsage} GB de %{diskQuota} GB usados",
+  "help": "Preguntas frecuentes",
+  "contact": "Contactar con nosotros",
+  "logout": "Cerrar sesión",
+  "soon": "próximamente",
+  "termsOfService": "Condiciones del servicio",
+  "legalNotice": "Aviso legal",
+  "error_UnavailableStack": "No se puede acceder a la stack (tiempo de conexión agotado).",
+  "error_UnauthorizedStack": "Faltan algunos permisos: la aplicación no puede acceder al recurso solicitado en la stack.",
+  "no_apps": "No se ha encontrado ninguna aplicación en el Cozy.",
+  "menu": {
+    "apps": "Aplicaciones",
+    "settings": "Ajustes",
+    "home_mobile": "Volver al panel...",
+    "home": "Volver al panel",
+    "home_title": "Inicio"
+  },
+  "Categories": {
+    "cozy": "Aplicaciones de Cozy",
+    "partners": "Aplicaciones de socios",
+    "ptnb": "expPTNB",
+    "others": "Otras aplicaciones"
+  },
+  "permsModal": {
+    "title": "Acceda a todo su Cozy desde su aplicación",
+    "description": "Autorice a %{app} a mostrar sus aplicaciones de Cozy en este dispositivo",
+    "button": "Autorizar el acceso"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "La aplicación Store estará disponible próximamente en su Cozy.",
+      "description": "Gracias a Cozy Store podrá instalar las aplicaciones que desee en su Cozy."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "Para cumplir con el RGPD, Cozy Cloud ha actualizado sus Condiciones del servicio, que entraron en vigor el 25 de mayo de 2018",
+      "CTA": "Leer ahora"
+    },
+    "moved": {
+      "description": "El Cozy se ha trasladado a una nueva dirección"
+    }
+  },
+  "userMenu": {
+    "manageProfile": "Gestionar el perfil",
+    "createBusinessAccount": "Crear una cuenta de empresa",
+    "storage": "Almacenamiento",
+    "storageAvailable": "%{smart_count} GB disponibles",
+    "emailDomainNotActive": "Correo no activo",
+    "logOut": "Cerrar sesión"
+  },
+  "platformBanners": {
+    "dismiss": "Descartar"
+  }
+}

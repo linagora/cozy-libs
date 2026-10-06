@@ -1,0 +1,64 @@
+{
+  "drawer": "Mostra il menu laterale",
+  "profile": "Profilo",
+  "appearance": "Aspetto",
+  "plans": "Piani",
+  "permissions": "Autorizzazioni",
+  "connectedDevices": "Dispositivi connessi",
+  "connections": "Connessioni",
+  "storage": "Spazio di archiviazione",
+  "storage_phrase": "%{diskUsage} GB di %{diskQuota} GB utilizzati",
+  "help": "Domande frequenti",
+  "contact": "Contattaci",
+  "logout": "Esci",
+  "soon": "prossimamente",
+  "termsOfService": "Termini di servizio",
+  "legalNotice": "Note legali",
+  "error_UnavailableStack": "Lo stack non è raggiungibile (connessione scaduta).",
+  "error_UnauthorizedStack": "Mancano alcune autorizzazioni, l'applicazione non può accedere alla risorsa richiesta sullo stack.",
+  "no_apps": "Nessuna applicazione trovata sul Cozy.",
+  "menu": {
+    "apps": "App",
+    "settings": "Impostazioni",
+    "home_mobile": "Torna alla dashboard...",
+    "home": "Torna alla dashboard",
+    "home_title": "Home"
+  },
+  "Categories": {
+    "cozy": "App Cozy",
+    "partners": "App dei partner",
+    "ptnb": "expPTNB",
+    "others": "Altre app"
+  },
+  "permsModal": {
+    "title": "Accedi a tutto il tuo Cozy dalla tua applicazione",
+    "description": "Autorizza %{app} a mostrare le tue applicazioni Cozy su questo dispositivo",
+    "button": "Autorizza l'accesso"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "L'applicazione Store sarà presto disponibile nel tuo Cozy.",
+      "description": "Grazie a Cozy Store potrai installare le applicazioni che desideri nel tuo Cozy."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "Per conformarsi al GDPR, Cozy Cloud ha aggiornato i suoi Termini di servizio, entrati in vigore il 25 maggio 2018",
+      "CTA": "Leggi ora"
+    },
+    "moved": {
+      "description": "Il Cozy è stato spostato a un nuovo indirizzo"
+    }
+  },
+  "userMenu": {
+    "manageProfile": "Gestisci il profilo",
+    "createBusinessAccount": "Crea un account aziendale",
+    "storage": "Spazio di archiviazione",
+    "storageAvailable": "%{smart_count} GB disponibili",
+    "emailDomainNotActive": "Email non attiva",
+    "logOut": "Esci"
+  },
+  "platformBanners": {
+    "dismiss": "Ignora"
+  }
+}
