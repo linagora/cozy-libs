@@ -78,13 +78,11 @@
       "confirm": "OK"
     },
     "errors": {
-      "errors": {
-        "groupMemberAlreadyInSharing": "Các thành viên của %{groupName} đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau. |||| Các liên hệ đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau.",
-        "contactAlreadyInSharing": "%{contactName} đã được mời vào một nhóm với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau. |||| Các liên hệ đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau.",
-        "sharingRights": {
-          "readOnly": "đọc",
-          "readWrite": "viết"
-        }
+      "groupMemberAlreadyInSharing": "Các thành viên của %{groupName} đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau. |||| Các liên hệ đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau.",
+      "contactAlreadyInSharing": "%{contactName} đã được mời vào một nhóm với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau. |||| Các liên hệ đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau.",
+      "sharingRights": {
+        "readOnly": "đọc",
+        "readWrite": "viết"
       }
     },
     "send": "Gửi..."

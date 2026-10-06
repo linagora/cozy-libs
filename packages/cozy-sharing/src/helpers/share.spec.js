@@ -1,3 +1,8 @@
+import fs from 'fs'
+import path from 'path'
+
+import { getI18n } from 'twake-i18n'
+
 import { getSuccessMessage, countNewRecipients, getErrorMessage } from './share'
 
 describe('share', () => {
@@ -419,6 +424,41 @@ describe('share', () => {
         selectedOption
       })
       expect(result).toEqual([`${documentType}.share.error.generic`])
+    })
+
+    describe('with the locale files', () => {
+      const localesDir = path.join(__dirname, '../../locales')
+      const locales = fs
+        .readdirSync(localesDir)
+        .filter(file => file.endsWith('.json'))
+        .map(file => file.replace(/\.json$/, ''))
+      // The locale is also passed as the default language, so that a key
+      // missing from it is not resolved from the English fallback
+      const getLocaleI18n = lang =>
+        getI18n(
+          lang,
+          locale =>
+            JSON.parse(
+              fs.readFileSync(path.join(localesDir, `${locale}.json`), 'utf8')
+            ),
+          undefined,
+          lang
+        )
+
+      it.each(locales)(
+        'should define every key read by getErrorMessage in %s',
+        lang => {
+          const { t } = getLocaleI18n(lang)
+          for (const key of [
+            'Share.errors.groupMemberAlreadyInSharing',
+            'Share.errors.contactAlreadyInSharing',
+            'Share.errors.sharingRights.readOnly',
+            'Share.errors.sharingRights.readWrite'
+          ]) {
+            expect(t(key, { smart_count: 1 })).not.toEqual(key)
+          }
+        }
+      )
     })
   })
 })
