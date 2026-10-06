@@ -149,9 +149,11 @@ To hide the AI assistant button in the search bar (e.g. when the assistant is al
 </script>
 ```
 
+- Every call returns a promise, rejected when the bar cannot load or when the call fails, e.g. `mount()` with an invalid config.
 - `mount(config)` prepends a `#cozy-bar` element to the body. The app must reserve its space: `3rem` height, full width.
 - `public: true` displays the bar logged out. Otherwise the bar waits for credentials (skeleton avatar) and falls back to logged out after 30 seconds.
 - `setCredentials()` creates the Cozy client and displays the logged in bar. Calling it again only updates the token of the existing client. Tokens are not refreshed by the bar.
+- `unmount()` removes the bar, e.g. to give the page its own header back when `mount()` failed.
 - `setLocale(locale)` re-renders the mounted bar in another language, without recreating the Cozy client. It is ignored before `mount()`. Supported locales are `en`, `fr`, `ru` and `vi`, others fall back to `en`.
 - `setTheme(theme)` does the same with the theme, `light` or `dark`. Locale and theme come from the app, not from `io.cozy.settings`, so the bar always matches it.
 - The log out item of the user menu calls `onLogOut`. It is required unless the page is public, since the app owns the session: `mount()` throws without it.

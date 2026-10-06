@@ -38,6 +38,7 @@ describe('cozy-bar standalone entry', () => {
 
     expect(window.TwakeBar).toBeDefined()
     expect(typeof window.TwakeBar.mount).toBe('function')
+    expect(typeof window.TwakeBar.unmount).toBe('function')
     expect(typeof window.TwakeBar.setCredentials).toBe('function')
     expect(typeof window.TwakeBar.setLocale).toBe('function')
     expect(typeof window.TwakeBar.setTheme).toBe('function')
@@ -123,5 +124,43 @@ describe('cozy-bar standalone entry', () => {
     expect(mockMountBar.mock.invocationCallOrder[0]).toBeLessThan(
       mockSetTheme.mock.invocationCallOrder[0]
     )
+  })
+
+  it('resolves each call with the result of the bar module', async () => {
+    require('./index')
+    mockSetCredentials.mockResolvedValue('ready')
+
+    await expect(window.TwakeBar.setCredentials({})).resolves.toBe('ready')
+    await expect(window.TwakeBar.setLocale('fr')).resolves.toBeUndefined()
+  })
+
+  it('rejects a failing queued call and still runs the next ones', async () => {
+    require('./index')
+    const error = new TypeError('onLogOut is required')
+    mockMountBar.mockImplementation(() => {
+      throw error
+    })
+
+    const mounting = window.TwakeBar.mount({})
+    const localeChange = window.TwakeBar.setLocale('fr')
+
+    await expect(mounting).rejects.toBe(error)
+    await expect(localeChange).resolves.toBeUndefined()
+    expect(mockSetLocale).toHaveBeenCalledWith('fr')
+  })
+
+  it('rejects the queued and later calls when the bar cannot load', async () => {
+    const error = new Error('cannot evaluate the bar')
+    jest.doMock('./styles', () => ({
+      injectThemeVariables: () => {
+        throw error
+      },
+      adoptHeadStyles: jest.fn()
+    }))
+    require('./index')
+
+    await expect(window.TwakeBar.mount({})).rejects.toBe(error)
+    await expect(window.TwakeBar.setLocale('fr')).rejects.toBe(error)
+    expect(mockMountBar).not.toHaveBeenCalled()
   })
 })
