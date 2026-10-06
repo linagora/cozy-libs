@@ -1,0 +1,25 @@
+{
+  "Contacts": {
+    "AddModal": {
+      "ContactAddressDialog": {
+        "fields": {
+          "address": "Dirección",
+          "number": "Número",
+          "street": "Dirección postal",
+          "code": "Código postal",
+          "city": "Ciudad",
+          "country": "País",
+          "locality": "Localidad",
+          "building": "Edificio",
+          "stairs": "Escalera",
+          "floor": "Planta",
+          "apartment": "Apartamento",
+          "region": "Región",
+          "entrycode": "Código de acceso"
+        },
+        "cancel": "Cancelar",
+        "ok": "Aceptar"
+      }
+    }
+  }
+}

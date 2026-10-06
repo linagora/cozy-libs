@@ -1,0 +1,15 @@
+{
+  "Contacts": {
+    "Header": {
+      "create": "Crea",
+      "filter": {
+        "no-group": "Crea gruppi di contatti per organizzarli e condividerli più facilmente!"
+      },
+      "import": {
+        "title": "Importa",
+        "store": "Da altre fonti",
+        "vcard": "Da un file vCard"
+      }
+    }
+  }
+}

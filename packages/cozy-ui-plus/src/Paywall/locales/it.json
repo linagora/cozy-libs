@@ -1,0 +1,107 @@
+{
+  "action": {
+    "loading": "Caricamento...",
+    "withoutIAP": "Ho capito"
+  },
+  "onlyOfficePaywall": {
+    "premium": {
+      "title": "Passa a un piano superiore",
+      "content": "Il tuo piano non ti permette di **modificare i tuoi documenti online**.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy.",
+      "action": "Scopri i nostri piani"
+    },
+    "public": {
+      "title": "Informazioni",
+      "content": "Non puoi modificare questo file online. Chiedi al proprietario del documento di aggiornare il suo abbonamento Cozy.",
+      "action": "Ho capito"
+    },
+    "default": {
+      "title": "Informazioni",
+      "content": "Il tuo piano attuale non ti permette di usare questa funzione.",
+      "action": "Ho capito"
+    }
+  },
+  "passwordSharingPaywall": {
+    "premium": {
+      "title": "Passa a un piano superiore",
+      "content": "Il tuo piano non ti permette di **condividere le tue password**.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy.",
+      "action": "Scopri i nostri piani"
+    },
+    "default": {
+      "title": "Informazioni",
+      "content": "Il tuo piano attuale non ti permette di usare questa funzione.",
+      "action": "Ho capito"
+    }
+  },
+  "maxAccountsByKonnectorPaywall": {
+    "premium": {
+      "title": "Passa a un piano superiore",
+      "content": "Il tuo piano ti permette di collegare fino a **%{smart_count} account %{konnectorName}** nel tuo Cozy.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy. |||| Il tuo piano ti permette di collegare fino a **%{smart_count} account %{konnectorName}** nel tuo Cozy.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy.",
+      "action": "Scopri i nostri piani"
+    },
+    "default": {
+      "title": "Informazioni",
+      "content": "Il tuo piano attuale non ti permette di usare questa funzione.",
+      "action": "Ho capito"
+    }
+  },
+  "maxAccountsPaywall": {
+    "premium": {
+      "title": "Passa a un piano superiore",
+      "content": "Il tuo piano ti permette di collegare fino a **%{smart_count} account** nel tuo Cozy.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy. |||| Il tuo piano ti permette di collegare fino a **%{smart_count} account** nel tuo Cozy.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy.",
+      "action": "Scopri i nostri piani"
+    },
+    "default": {
+      "title": "Informazioni",
+      "content": "Il tuo piano attuale non ti permette di usare questa funzione.",
+      "action": "Ho capito"
+    }
+  },
+  "maxPapersPaywall": {
+    "premium": {
+      "title": "Passa a un piano superiore",
+      "content": "Il tuo piano ti permette di aggiungere manualmente fino a **%{smart_count} documento**.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy. |||| Il tuo piano ti permette di aggiungere manualmente fino a **%{smart_count} documenti**.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy.",
+      "action": "Scopri i nostri piani"
+    },
+    "default": {
+      "title": "Informazioni",
+      "content": "Il tuo piano attuale non ti permette di usare questa funzione.",
+      "action": "Ho capito"
+    }
+  },
+  "quotaPaywall": {
+    "premium": {
+      "title": "Passa a un piano superiore",
+      "content": "Il tuo spazio di archiviazione è pieno.\n\nElimina dei file, svuota il cestino o passa a un piano superiore prima di caricare altri file.",
+      "action": "Scopri i nostri piani"
+    },
+    "default": {
+      "title": "Informazioni",
+      "content": "Il tuo spazio di archiviazione è pieno.\n\nElimina dei file o svuota il cestino prima di caricare altri file.",
+      "action": "Ho capito"
+    }
+  },
+  "maxDaysToCapturePaywall": {
+    "premium": {
+      "title": "Passa a un piano superiore",
+      "content": "Il tuo piano ti permette di registrare solo **%{smart_count} giorno di spostamenti**.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy. |||| Il tuo piano ti permette di registrare solo **%{smart_count} giorni di spostamenti**.\n\nPer sbloccare questa funzione, o semplicemente per sostenerci, puoi cambiare il tuo piano Cozy.",
+      "action": "Scopri i nostri piani"
+    },
+    "default": {
+      "title": "Informazioni",
+      "content": "Il tuo piano attuale non ti permette di usare questa funzione.",
+      "action": "Ho capito"
+    }
+  },
+  "AIAssistantPaywall": {
+    "premium": {
+      "title": "Questa funzione non è disponibile per te",
+      "content": "Le funzioni di IA sono disponibili solo con il piano premium. Passa a un piano superiore per accedere a questa funzione.",
+      "action": "Aggiorna il mio piano"
+    },
+    "default": {
+      "title": "Informazioni",
+      "content": "Il tuo piano attuale non ti permette di usare questa funzione.",
+      "action": "Ho capito"
+    }
+  }
+}

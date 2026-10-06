@@ -1,0 +1,18 @@
+{
+  "cancel": "Abbrechen",
+  "allow": "Erlauben",
+  "authentification-dialog": {
+    "title": "Anmeldung",
+    "title-oidc": "Twake Pass",
+    "subtitle": "Bitte bestätigen Sie aus Sicherheitsgründen Ihre Identität",
+    "label": "Twake-Passwort",
+    "label-oidc": "Twake Pass-Passwort",
+    "abort": "Verlassen",
+    "unlock": "Entsperren",
+    "forgotten-password": "Ich habe mein Passwort vergessen",
+    "errors": {
+      "invalid_password": "Falsches Passwort, bitte versuchen Sie es erneut.",
+      "server_error": "Auf dem Server ist ein Fehler aufgetreten. Bitte laden Sie die Seite neu."
+    }
+  }
+}

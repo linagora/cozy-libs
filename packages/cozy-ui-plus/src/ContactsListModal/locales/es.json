@@ -1,0 +1,11 @@
+{
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "newContact": "Nuevo contacto",
+  "coordinates": "Datos de contacto",
+  "givenName": "Nombre",
+  "familyName": "Apellidos",
+  "addContact": "Añadir un contacto",
+  "searchContact": "Buscar un contacto",
+  "emptyContact": "Ningún contacto"
+}

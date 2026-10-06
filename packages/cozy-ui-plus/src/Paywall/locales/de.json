@@ -1,0 +1,107 @@
+{
+  "action": {
+    "loading": "Wird geladen...",
+    "withoutIAP": "Verstanden"
+  },
+  "onlyOfficePaywall": {
+    "premium": {
+      "title": "Tarif upgraden",
+      "content": "Ihr Tarif erlaubt es Ihnen nicht, **Ihre Dokumente online zu bearbeiten**.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern.",
+      "action": "Unsere Tarife ansehen"
+    },
+    "public": {
+      "title": "Information",
+      "content": "Sie können diese Datei nicht online bearbeiten. Bitten Sie den Eigentümer des Dokuments, sein Cozy-Abonnement zu aktualisieren.",
+      "action": "Verstanden"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Ihr aktueller Tarif ermöglicht Ihnen die Nutzung dieser Funktion nicht.",
+      "action": "Verstanden"
+    }
+  },
+  "passwordSharingPaywall": {
+    "premium": {
+      "title": "Tarif upgraden",
+      "content": "Ihr Tarif erlaubt es Ihnen nicht, **Ihre Passwörter zu teilen**.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern.",
+      "action": "Unsere Tarife ansehen"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Ihr aktueller Tarif ermöglicht Ihnen die Nutzung dieser Funktion nicht.",
+      "action": "Verstanden"
+    }
+  },
+  "maxAccountsByKonnectorPaywall": {
+    "premium": {
+      "title": "Tarif upgraden",
+      "content": "Mit Ihrem Tarif können Sie bis zu **%{smart_count} Konto %{konnectorName}** in Ihrem Cozy verbinden.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern. |||| Mit Ihrem Tarif können Sie bis zu **%{smart_count} Konten %{konnectorName}** in Ihrem Cozy verbinden.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern.",
+      "action": "Unsere Tarife ansehen"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Ihr aktueller Tarif ermöglicht Ihnen die Nutzung dieser Funktion nicht.",
+      "action": "Verstanden"
+    }
+  },
+  "maxAccountsPaywall": {
+    "premium": {
+      "title": "Tarif upgraden",
+      "content": "Mit Ihrem Tarif können Sie bis zu **%{smart_count} Konto** in Ihrem Cozy verbinden.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern. |||| Mit Ihrem Tarif können Sie bis zu **%{smart_count} Konten** in Ihrem Cozy verbinden.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern.",
+      "action": "Unsere Tarife ansehen"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Ihr aktueller Tarif ermöglicht Ihnen die Nutzung dieser Funktion nicht.",
+      "action": "Verstanden"
+    }
+  },
+  "maxPapersPaywall": {
+    "premium": {
+      "title": "Tarif upgraden",
+      "content": "Mit Ihrem Tarif können Sie bis zu **%{smart_count} Dokument** manuell hinzufügen.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern. |||| Mit Ihrem Tarif können Sie bis zu **%{smart_count} Dokumente** manuell hinzufügen.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern.",
+      "action": "Unsere Tarife ansehen"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Ihr aktueller Tarif ermöglicht Ihnen die Nutzung dieser Funktion nicht.",
+      "action": "Verstanden"
+    }
+  },
+  "quotaPaywall": {
+    "premium": {
+      "title": "Tarif upgraden",
+      "content": "Ihr Speicherplatz ist voll.\n\nBitte löschen Sie Dateien, leeren Sie Ihren Papierkorb oder upgraden Sie Ihren Tarif, bevor Sie Dateien hochladen.",
+      "action": "Unsere Tarife ansehen"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Ihr Speicherplatz ist voll.\n\nBitte löschen Sie Dateien oder leeren Sie Ihren Papierkorb, bevor Sie Dateien hochladen.",
+      "action": "Verstanden"
+    }
+  },
+  "maxDaysToCapturePaywall": {
+    "premium": {
+      "title": "Tarif upgraden",
+      "content": "Mit Ihrem Tarif können Sie nur **%{smart_count} Tag an Fahrten** aufzeichnen.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern. |||| Mit Ihrem Tarif können Sie nur **%{smart_count} Tage an Fahrten** aufzeichnen.\n\nUm diese Funktion freizuschalten oder uns einfach zu unterstützen, können Sie Ihren Cozy-Tarif ändern.",
+      "action": "Unsere Tarife ansehen"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Ihr aktueller Tarif ermöglicht Ihnen die Nutzung dieser Funktion nicht.",
+      "action": "Verstanden"
+    }
+  },
+  "AIAssistantPaywall": {
+    "premium": {
+      "title": "Diese Funktion ist für Sie nicht verfügbar",
+      "content": "KI-Funktionen sind nur mit Premium verfügbar. Sie müssen Ihren Tarif upgraden, um auf diese Funktion zuzugreifen.",
+      "action": "Meinen Tarif upgraden"
+    },
+    "default": {
+      "title": "Information",
+      "content": "Ihr aktueller Tarif ermöglicht Ihnen die Nutzung dieser Funktion nicht.",
+      "action": "Verstanden"
+    }
+  }
+}

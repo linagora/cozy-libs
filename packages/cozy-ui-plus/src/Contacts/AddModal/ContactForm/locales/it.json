@@ -1,0 +1,76 @@
+{
+  "Contacts": {
+    "AddModal": {
+      "ContactForm": {
+        "gender": {
+          "man": "Uomo",
+          "woman": "Donna"
+        },
+        "other-fields": "Altri campi",
+        "fields": {
+          "gender": "Titolo",
+          "givenName": "Nome",
+          "additionalName": "Secondo nome",
+          "surname": "Nome d'uso",
+          "familyName": "Cognome",
+          "phone": "Telefono",
+          "email": "Email",
+          "matrix": "ID Matrix",
+          "address": "Indirizzo",
+          "cozy": "URL di Twake",
+          "company": "Azienda",
+          "jobTitle": "Qualifica",
+          "birthday": "Compleanno",
+          "birthplace": "Luogo di nascita",
+          "relatedContact": "Contatto collegato",
+          "relationship": "Relazione",
+          "note": "Note",
+          "label": "Etichetta",
+          "required": "Tutti i campi obbligatori devono essere compilati",
+          "not-valid": "Alcuni campi non sono compilati correttamente"
+        },
+        "label": {
+          "none": "Nessuna",
+          "home": "Personale",
+          "work": "Lavoro",
+          "custom": "Personalizzata",
+          "phone": {
+            "cell-home": "Cellulare (personale)",
+            "cell-work": "Cellulare (lavoro)",
+            "voice-home": "Fisso (personale)",
+            "voice-work": "Fisso (lavoro)",
+            "fax-home": "Fax (personale)",
+            "fax-work": "Fax (lavoro)"
+          },
+          "address": {
+            "home": "Casa (personale)",
+            "work": "Lavoro (ufficio)"
+          },
+          "relationship": {
+            "parent": "Genitore",
+            "child": "Figlio/Figlia",
+            "sibling": "Fratello/Sorella",
+            "spouse": "Coniuge",
+            "coResident": "Coinquilino",
+            "friend": "Amico",
+            "colleague": "Collega",
+            "coWorker": "Collaboratore",
+            "acquaintance": "Conoscente",
+            "helper": "Assistente/Badante",
+            "recipient": "Assistito"
+          }
+        },
+        "addLabel": {
+          "address": "Aggiungi un indirizzo",
+          "email": "Aggiungi un'email",
+          "phone": "Aggiungi un telefono",
+          "relatedContact": "Aggiungi un contatto collegato"
+        }
+      }
+    }
+  },
+  "formatted": {
+    "date": "dd/LL/yyyy",
+    "address": "%{street} %{number}, %{code} %{city}, %{country}"
+  }
+}
