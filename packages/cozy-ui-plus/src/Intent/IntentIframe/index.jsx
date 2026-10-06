@@ -45,7 +45,8 @@ class IntentIframe extends React.Component {
         onReady: this.onFrameLoaded,
         onHideCross: this.props.onHideCross,
         onShowCross: this.props.onShowCross,
-        onReadyToUse: this.onReadyToUse
+        onReadyToUse: this.onReadyToUse,
+        onResult: this.props.onResult
       })
       .then(result => {
         // eslint-disable-next-line promise/always-return
@@ -136,6 +137,7 @@ IntentIframe.propTypes = {
   onHideCross: PropTypes.func,
   onShowCross: PropTypes.func,
   onReadyToUse: PropTypes.func,
+  onResult: PropTypes.func,
   waitForReadyToUse: PropTypes.bool
 }
 

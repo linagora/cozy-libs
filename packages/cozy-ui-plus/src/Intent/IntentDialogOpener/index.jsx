@@ -24,6 +24,7 @@ const IntentDialogOpener = props => {
     onComplete,
     onDismiss,
     onReadyToUse,
+    onResult,
     waitForReadyToUse,
     iframeProps,
     Component,
@@ -76,6 +77,7 @@ const IntentDialogOpener = props => {
             onCancel={handleDismiss}
             onTerminate={handleComplete}
             onReadyToUse={onReadyToUse}
+            onResult={onResult}
             waitForReadyToUse={waitForReadyToUse}
             iframeProps={iframeProps}
           />
@@ -96,6 +98,8 @@ IntentDialogOpener.propTypes = {
   onDismiss: PropTypes.func,
   /** Called when the intent service signals it is ready to use */
   onReadyToUse: PropTypes.func,
+  /** Called with each result the intent service sends while it stays open */
+  onResult: PropTypes.func,
   /** Keep the loading state until the intent service signals it is ready to use */
   waitForReadyToUse: PropTypes.bool,
   /** Action you want to execute */
