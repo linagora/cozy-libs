@@ -21,8 +21,18 @@ describe('initFormat', () => {
     expect(date).toBe('1970-janvier-01')
   })
 
+  it.each([
+    ['es', '1970-enero-01'],
+    ['de', '1970-Januar-01'],
+    ['it', '1970-gennaio-01']
+  ])('should use the %s locale', (lang, expected) => {
+    const f = initFormat(lang, 'en')
+    const date = f(0, 'yyyy-LLLL-dd')
+    expect(date).toBe(expected)
+  })
+
   it('should use the correct default locale if user locale can not be found', () => {
-    const f = initFormat('it', 'fr')
+    const f = initFormat('unknown-lang', 'fr')
     const date = f(0, 'yyyy-LLLL-dd')
     expect(date).toBe('1970-janvier-01')
   })
