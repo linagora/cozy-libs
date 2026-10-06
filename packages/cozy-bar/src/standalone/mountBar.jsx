@@ -111,10 +111,17 @@ export function unmountBar() {
  * @param {'light'|'dark'} [config.theme] - Theme of the bar, the device one by default
  * @param {Function} [config.onLogOut] - Called by the log out item. Required
  * unless the page is public: the host app owns the logout
+ * @param {string} [config.idToken] - OIDC id token of the user, exchanged by
+ * the bar for a token of its Cozy. Can also be given later to setCredentials
+ * @param {string} [config.cozyURL] - URL of the user's Cozy, required with idToken
+ * @returns {Promise<void>|undefined} With idToken, the setCredentials promise
  */
-export function mountBar(config) {
+export function mountBar({ idToken, cozyURL, ...config }) {
   if (!config.public && typeof config.onLogOut !== 'function') {
     throw new TypeError('[cozy-bar] mount: onLogOut is required unless public')
+  }
+  if (idToken && !cozyURL) {
+    throw new TypeError('[cozy-bar] mount: cozyURL is required with idToken')
   }
   unmountBar()
   publicClient = publicClient || new CozyClient({})
@@ -158,6 +165,7 @@ export function mountBar(config) {
     })
   }
   setStatus(isClientReady ? 'ready' : config.public ? 'public' : 'waiting')
+  if (idToken) return setCredentials({ idToken, cozyURL })
 }
 
 // Re-renders the mounted bar with other settings. Ignored before `mount`.
@@ -174,19 +182,43 @@ export const setLocale = locale => updateConfig({ locale })
 export const setTheme = theme => updateConfig({ theme })
 
 /**
- * Creates the Cozy client on first call, then only updates its token.
+ * Exchanges the OIDC id token of the host app for a token of the Cozy, with
+ * the token_exchange of cozy-stack. The token has the permissions of the
+ * Cozy app linked to the id token audience.
+ *
+ * @param {string} cozyURL
+ * @param {string} idToken
+ */
+const exchangeToken = async (cozyURL, idToken) => {
+  const response = await fetch(new URL('/auth/token_exchange', cozyURL), {
+    method: 'POST',
+    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id_token: idToken, exchange_type: 'app' })
+  })
+  if (!response.ok) {
+    throw new Error(`[cozy-bar] Token exchange failed: ${response.status}`)
+  }
+  const { access_token, refresh_token } = await response.json()
+  // OAuthClient wraps the token in an AccessToken, which expects this shape
+  return { access_token, refresh_token, token_type: 'bearer' }
+}
+
+/**
+ * Exchanges the id token, then creates the Cozy client on first call, or only
+ * updates its token on later calls, e.g. when the host app renews its id token.
+ * A failed first exchange displays the bar logged out.
  *
  * @param {object} credentials
- * @param {string} credentials.accessToken
- * @param {string} credentials.refreshToken
- * @param {string} credentials.cozyURL
+ * @param {string} credentials.idToken - OIDC id token of the user
+ * @param {string} credentials.cozyURL - URL of the user's Cozy
  */
-export async function setCredentials({ accessToken, refreshToken, cozyURL }) {
-  // OAuthClient wraps the token in an AccessToken, which expects this shape
-  const token = {
-    access_token: accessToken,
-    refresh_token: refreshToken,
-    token_type: 'bearer'
+export async function setCredentials({ idToken, cozyURL }) {
+  let token
+  try {
+    token = await exchangeToken(cozyURL, idToken)
+  } catch (err) {
+    if (!client) setStatus('public')
+    throw err
   }
 
   if (client) {
@@ -196,9 +228,11 @@ export async function setCredentials({ accessToken, refreshToken, cozyURL }) {
 
   // An OAuth client is required to load the icons of the apps menu with the
   // token instead of cookies, which are not sent cross-origin
-  client = new CozyClient({ oauth: true, uri: cozyURL, token })
-  client.registerPlugin(RealtimePlugin)
+  const newClient = new CozyClient({ oauth: true, uri: cozyURL, token })
+  newClient.registerPlugin(RealtimePlugin)
   injectFonts(cozyURL)
+  // Assigned once set up, so that a failed setup can be retried
+  client = newClient
   if (bar) render()
 
   // The host page has no [data-cozy] node to read flags from. They must be

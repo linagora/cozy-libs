@@ -133,13 +133,14 @@ To hide the AI assistant button in the search bar (e.g. when the assistant is al
     appTextIcon: '/icon-text.svg', // optional, served by the app
     locale: 'fr', // optional, 'en' by default
     theme: 'dark', // optional, the device theme by default
-    onLogOut: () => myApp.logOut() // required unless public
+    onLogOut: () => myApp.logOut(), // required unless public
+    idToken: '…', // optional, the OIDC id token of the user
+    cozyURL: 'https://alice.mycozy.cloud' // required with idToken
   })
 
-  // Once the app has logged in, e.g. with the stack token_exchange
+  // When the app logs in after mount(), or renews its id token
   window.TwakeBar.setCredentials({
-    accessToken: '…',
-    refreshToken: '…',
+    idToken: '…',
     cozyURL: 'https://alice.mycozy.cloud'
   })
 
@@ -152,7 +153,8 @@ To hide the AI assistant button in the search bar (e.g. when the assistant is al
 - Every call returns a promise, rejected when the bar cannot load or when the call fails, e.g. `mount()` with an invalid config.
 - `mount(config)` prepends a `#cozy-bar` element to the body. The app must reserve its space: `3rem` height, full width.
 - `public: true` displays the bar logged out. Otherwise the bar waits for credentials (skeleton avatar) and falls back to logged out after 30 seconds.
-- `setCredentials()` creates the Cozy client and displays the logged in bar. Calling it again only updates the token of the existing client. Tokens are not refreshed by the bar.
+- The bar exchanges the id token for a token of the user's Cozy with the cozy-stack `POST /auth/token_exchange` (`exchange_type: 'app'`). The Cozy must accept the id token audience in its `app_token_exchange` config, and the token gets the permissions of the Cozy app it is linked to.
+- `mount()` with `idToken` and `cozyURL` exchanges the token right away, and its promise resolves once the bar is logged in. `setCredentials()` does the same after `mount()`: it creates the Cozy client and displays the logged in bar. Calling it again, e.g. with a renewed id token, only updates the token of the existing client. If the first exchange fails, the promise is rejected and the bar is displayed logged out.
 - `unmount()` removes the bar, e.g. to give the page its own header back when `mount()` failed.
 - `setLocale(locale)` re-renders the mounted bar in another language, without recreating the Cozy client. It is ignored before `mount()`. Supported locales are `en`, `fr`, `ru` and `vi`, others fall back to `en`.
 - `setTheme(theme)` does the same with the theme, `light` or `dark`. Locale and theme come from the app, not from `io.cozy.settings`, so the bar always matches it.
