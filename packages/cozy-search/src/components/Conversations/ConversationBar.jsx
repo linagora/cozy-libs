@@ -13,7 +13,7 @@ import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 
-const ConversationBar = props => {
+const ConversationBar = ({ onHeightChange, ...props }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const composerRuntime = useComposerRuntime()
@@ -59,7 +59,8 @@ const ConversationBar = props => {
           rows: 1,
           multiline: true,
           inputProps: {
-            className: styles['conversationBar-input']
+            className: styles['conversationBar-input'],
+            onHeightChange
           },
           autoFocus: !isMobile,
           inputComponent: ComposerPrimitive.Input,

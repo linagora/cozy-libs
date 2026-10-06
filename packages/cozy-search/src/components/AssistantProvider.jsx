@@ -16,7 +16,7 @@ export const useAssistant = () => {
   return context
 }
 
-const AssistantProvider = ({ children }) => {
+const AssistantProvider = ({ children, hasCompactPrompt = false }) => {
   const [isOpenCreateAssistant, setIsOpenCreateAssistant] = useState(false)
   const [isOpenDeleteAssistant, setIsOpenDeleteAssistant] = useState(false)
   const [isOpenEditAssistant, setIsOpenEditAssistant] = useState(false)
@@ -43,7 +43,8 @@ const AssistantProvider = ({ children }) => {
       setSelectedAssistantId,
       setIsOpenSearchConversation,
       websearchEnabled,
-      setWebsearchEnabled
+      setWebsearchEnabled,
+      hasCompactPrompt
     }),
     [
       isOpenCreateAssistant,
@@ -52,7 +53,8 @@ const AssistantProvider = ({ children }) => {
       assistantIdInAction,
       selectedAssistantId,
       isOpenSearchConversation,
-      websearchEnabled
+      websearchEnabled,
+      hasCompactPrompt
     ]
   )
 
