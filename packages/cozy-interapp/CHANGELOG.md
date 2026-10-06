@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.19.0...cozy-interapp@0.20.0) (2026-10-06)
+
+### Features
+
+- **cozy-interapp:** Let a service send results without ending the intent ([9276b1c](https://github.com/cozy/cozy-libs/commit/9276b1c230da34375279516d50b193a4dad4f41f))
+
 # [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.18.2...cozy-interapp@0.19.0) (2026-07-30)
 
 ### Features
