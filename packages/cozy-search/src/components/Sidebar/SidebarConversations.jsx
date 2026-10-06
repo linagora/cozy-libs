@@ -11,11 +11,13 @@ import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
 import AssistantSidebarItem from '../Assistant/AssistantSidebarItem'
+import { useAssistant } from '../AssistantProvider'
 import ConversationList from '../Conversations/ConversationList'
 
 export const SidebarConversations = () => {
   const { t } = useI18n()
-  const { conversationId: currentConversationId } = useParams()
+  const { conversationId } = useParams()
+  const { isOpenSearchConversation } = useAssistant()
   const { goToConversation } = useConversation()
   const { conversations, hasMore, fetchMore } = useFetchConversations()
 
@@ -42,7 +44,9 @@ export const SidebarConversations = () => {
       >
         <ConversationList
           conversations={conversations}
-          currentConversationId={currentConversationId}
+          currentConversationId={
+            isOpenSearchConversation ? null : conversationId
+          }
           onOpenConversation={goToConversation}
         />
         {hasMore && (
