@@ -2,6 +2,7 @@ import cx from 'classnames'
 import React from 'react'
 
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
+import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import ConversationActions from './ConversationActions'
@@ -24,12 +25,11 @@ const ConversationListItem = ({
       className={cx('u-ov-hidden u-ph-half', styles['conversation-list-item'], {
         [styles['conversation-list-item--selected']]: selected
       })}
+      ContainerProps={{
+        className: styles['conversation-list-item-container']
+      }}
       selected={selected}
     >
-      <ConversationActions
-        buttonClassName={styles['conversation-list-item-action']}
-        conversation={conversation}
-      />
       <ListItemText
         className="u-m-0"
         primaryTypographyProps={{
@@ -47,6 +47,14 @@ const ConversationListItem = ({
           </span>
         }
       />
+      <ListItemSecondaryAction
+        className={styles['conversation-list-item-secondary-action']}
+      >
+        <ConversationActions
+          buttonClassName={styles['conversation-list-item-menu-button']}
+          conversation={conversation}
+        />
+      </ListItemSecondaryAction>
     </ListItem>
   )
 }

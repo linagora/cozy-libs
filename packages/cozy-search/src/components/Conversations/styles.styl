@@ -226,6 +226,29 @@
   opacity 0
   pointer-events none
 
+// The secondary action is a sibling of the item, not inside it: hovering
+// it must still highlight the item
+.conversation-list-item-container
+  &:hover .conversation-list-item
+    background-color var(--actionColorHover)
+
+  &:hover .conversation-list-item-menu-button
+    opacity 1
+    pointer-events auto
+
+.conversation-list-item-secondary-action
+  right 4px !important
+
+.conversation-list-item-menu-button
+  opacity 0
+  pointer-events none
+
+  // Its open menu takes the hover away from the item
+  &[aria-expanded='true'],
+  &:focus-visible
+    opacity 1
+    pointer-events auto
+
 .conversation-list-item-text
   overflow hidden
   margin-right 24px !important
