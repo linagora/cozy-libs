@@ -1,0 +1,188 @@
+{
+  "assistant": {
+    "search": {
+      "placeholder": "Descrivi un compito",
+      "send": "Invia",
+      "noItem": "Nessun risultato",
+      "notEnough": "La ricerca deve contenere almeno 3 caratteri"
+    },
+    "websearch": {
+      "label": "Ricerca web"
+    },
+    "dialog": {
+      "close": "Chiudi"
+    },
+    "name": "Twake Assistant",
+    "default_username": "Anonimo",
+    "sources": "%{smart_count} fonte |||| %{smart_count} fonti",
+    "suggestions": {
+      "find_file": "Cerca un file",
+      "reimbursements": "Controlla i miei rimborsi",
+      "reorganise_files": "Riorganizza i miei file"
+    },
+    "actions": {
+      "copy": "Copia",
+      "copied": "Copiato negli appunti",
+      "reload": "Rigenera la risposta",
+      "edit": "Modifica",
+      "edited": "Messaggio salvato"
+    },
+    "sidebar": {
+      "create_new": "Nuova chat",
+      "toggle_sidebar": "Mostra/nascondi la barra laterale",
+      "toggle_search": "Mostra/nascondi la ricerca",
+      "close_sidebar": "Chiudi la barra laterale",
+      "assistant": "Assistente",
+      "recent_chats": "Recenti",
+      "conversation": {
+        "actions": {
+          "delete": "Elimina",
+          "rename": "Rinomina",
+          "share": "Condividi",
+          "load_more": "Carica altro"
+        }
+      }
+    },
+    "time": {
+      "today": "Oggi",
+      "yesterday": "Ieri"
+    },
+    "default_error": "Si è verificato un errore durante la generazione della risposta. Riprova",
+    "disclaimer": "Twake AI può commettere errori. Verifica le informazioni importanti.",
+    "default_empty_response": "Non ho trovato una risposta alla tua richiesta. Prova a riformularla",
+    "hide": "Nascondi",
+    "show": "Mostra",
+    "search_conversation": {
+      "placeholder": "Cerca nelle tue conversazioni...",
+      "new_chat": "Nuova conversazione",
+      "recent": "Conversazioni recenti",
+      "older": "Meno recenti",
+      "not_found_title": "Nessuna conversazione trovata",
+      "not_found_desc": "Fai clic su \"Nuova conversazione\" per iniziare una conversazione o scegli una delle tue chat recenti",
+      "close": "Chiudi"
+    },
+    "message": {
+      "welcome": "Come posso aiutarti oggi?",
+      "running": "L'assistente è al lavoro..."
+    },
+    "twake_knowledges": {
+      "drive": "Drive",
+      "mail": "Email",
+      "search_in": "Cerca in"
+    },
+    "knowledge_base": {
+      "change_folder": "Cambia cartella…",
+      "folder_hint": "L'assistente può accedere a tutti i file salvati in questa cartella di Drive",
+      "emails": "Email",
+      "open_folder": "Apri in Drive",
+      "picker_error": "Impossibile aprire il selettore di cartelle di Drive. Riprova.",
+      "remove": "Rimuovi la cartella",
+      "remove_emails": "Rimuovi le email",
+      "select_folder": "Seleziona questa cartella",
+      "unavailable": "Cartella non disponibile"
+    }
+  },
+  "assistant_create": {
+    "title": "Crea un agente",
+    "steps": {
+      "basic_info": {
+        "description": "Personalizza il tuo agente. Scegli la sua base di conoscenza, poi il suo modello di IA.",
+        "avatar": "Avatar (facoltativo)",
+        "upload_photo": "Carica una foto",
+        "name": "Nome",
+        "name_placeholder": "Dai un nome al tuo agente",
+        "prompt_label": "Istruzioni",
+        "prompt_placeholder": "Definisci il contesto e personalizza le risposte dell'assistente",
+        "knowledge_base": "Base di conoscenza (facoltativa)",
+        "knowledge_base_placeholder": "Le conversazioni possono rivelare in parte o del tutto i file caricati.",
+        "from_drive": "Da Drive",
+        "from_mail": "Da Mail"
+      },
+      "provider_selection": {
+        "description": "Scegli il modello di IA più adatto alle tue esigenze.",
+        "by": "di",
+        "openrag": {
+          "description": "L'assistente IA integrato in Twake, per lavorare sui tuoi dati senza che escano mai dal tuo Workplace"
+        },
+        "google": {
+          "description": "Modelli Gemini forniti da Google"
+        },
+        "openai": {
+          "description": "Modelli GPT forniti da OpenAI"
+        },
+        "mistral_ai": {
+          "description": "Modelli Mistral forniti da Mistral AI"
+        },
+        "meta": {
+          "description": "Modelli aperti Llama, forniti da Meta"
+        },
+        "custom": {
+          "name": "Aggiungi un provider personalizzato",
+          "description": "Configura il tuo provider di IA"
+        },
+        "external_warning": "I tuoi dati verranno elaborati su server esterni. Questa modalità non offre protezioni di sicurezza avanzate."
+      },
+      "configuration": {
+        "description": "Inserisci l'URL del provider, il modello e la tua chiave API per configurare il nuovo agente. La chiave verrà salvata in modo sicuro.",
+        "custom_provider_description": "Configura le impostazioni del tuo provider di IA personalizzato",
+        "model": {
+          "label": "Modello",
+          "placeholder": "Inserisci il nome del modello del provider",
+          "unsupported": "Questo modello non è ancora supportato."
+        },
+        "url": {
+          "label": "URL di base",
+          "placeholder": "https://api.example.com/v1"
+        },
+        "api_key": {
+          "label": "Chiave API",
+          "placeholder": "sk-..."
+        },
+        "no_key": "Non hai una chiave API?",
+        "generate": "Puoi generare una nuova chiave API dalla dashboard del tuo account %{provider}.",
+        "custom_provider": "provider personalizzato",
+        "read_docs": "Scopri di più"
+      }
+    },
+    "buttons": {
+      "cancel": "Annulla",
+      "next": "Avanti",
+      "create": "Crea"
+    },
+    "configure_api_key_title": "Configura un nuovo agente",
+    "configure_api_key_description": "Inserisci l'URL del provider, il modello e la tua chiave API per configurare il nuovo agente. La chiave verrà salvata in modo sicuro.",
+    "from_drive": {
+      "actions": {
+        "cancel": "Annulla",
+        "add": "Aggiungi"
+      }
+    },
+    "success": "Agente creato correttamente"
+  },
+  "assistant_edit": {
+    "title": "Modifica l'agente",
+    "buttons": {
+      "cancel": "Annulla",
+      "next": "Avanti",
+      "edit": "Modifica"
+    },
+    "configure_api_key_title": "Configura il tuo agente",
+    "success": "Agente aggiornato correttamente"
+  },
+  "conversation_delete": {
+    "title": "Elimina la conversazione",
+    "content": "Vuoi davvero eliminare questa conversazione? Questa azione non può essere annullata.",
+    "buttons": {
+      "cancel": "Annulla",
+      "confirm": "Elimina"
+    }
+  },
+  "assistant_delete": {
+    "title": "Elimina l'agente",
+    "content": "Vuoi davvero eliminare %{name}? Questa azione non può essere annullata e rimuoverà definitivamente questo agente dal tuo Twake.",
+    "buttons": {
+      "cancel": "Annulla",
+      "confirm": "Elimina"
+    }
+  }
+}
