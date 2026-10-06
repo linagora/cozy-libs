@@ -572,8 +572,7 @@ describe('shared drive recipient revocation', () => {
     })
   })
 
-  it('adds recipients to the existing shared drive when sharing a document nested inside it', async () => {
-    sharingCol.addRecipients.mockResolvedValue({ data: SHARED_DRIVE })
+  it('creates a new sharing when sharing a document nested inside a shared drive without its own sharing', async () => {
     const nestedDocument = {
       _id: 'nested_folder_456',
       id: 'nested_folder_456',
@@ -590,12 +589,16 @@ describe('shared drive recipient revocation', () => {
       sharedDrive: true
     })
 
-    expect(sharingCol.create).not.toHaveBeenCalled()
-    expect(sharingCol.addRecipients).toHaveBeenCalledWith({
-      document: SHARED_DRIVE,
+    expect(sharingCol.create).toHaveBeenCalledWith({
+      document: nestedDocument,
       recipients: [recipient],
-      readOnlyRecipients: []
+      readOnlyRecipients: [],
+      description: 'Sub folder',
+      previewPath: '/preview',
+      openSharing: false,
+      sharedDrive: true
     })
+    expect(sharingCol.addRecipients).not.toHaveBeenCalled()
   })
 
   it('clears effective recipients when the sharing was deleted (404)', async () => {
