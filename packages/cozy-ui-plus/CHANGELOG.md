@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.2.1...cozy-ui-plus@14.0.0) (2026-10-06)
+
+### Features
+
+- **cozy-ui-plus:** Require cozy-interapp 0.21.0 ([e27deaa](https://github.com/cozy/cozy-libs/commit/e27deaa4e1f7abb99c6a5331eb367ed84b2f67c6)), closes [#3173](https://github.com/cozy/cozy-libs/issues/3173)
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** cozy-ui-plus needs cozy-interapp >= 0.21.0 as a peer
+  dependency. Upgrade cozy-interapp to 0.21.0 or later in your app.
+
 ## [13.2.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.2.0...cozy-ui-plus@13.2.1) (2026-10-06)
 
 **Note:** Version bump only for package cozy-ui-plus
