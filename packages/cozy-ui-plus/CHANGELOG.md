@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.1.0...cozy-ui-plus@13.2.0) (2026-10-06)
+
+### Features
+
+- **cozy-ui-plus:** Give the results of an intent that stays open ([15d3786](https://github.com/cozy/cozy-libs/commit/15d37864880fefc03f39db1e94a3aea736e6eeb1))
+- **cozy-ui-plus:** Require cozy-interapp 0.21.0 ([2ad529c](https://github.com/cozy/cozy-libs/commit/2ad529c641ca44f77f0d06f98b81d01f7050be32))
+- **cozy-ui-plus:** Send new data to an open intent ([320438e](https://github.com/cozy/cozy-libs/commit/320438e6b30051c8002e6e8195363d804e1a774d))
+
 # [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@13.0.17...cozy-ui-plus@13.1.0) (2026-10-06)
 
 ### Features
