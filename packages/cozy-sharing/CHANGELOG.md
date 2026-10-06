@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [39.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@39.0.1...cozy-sharing@39.0.2) (2026-10-06)
+
+### Bug Fixes
+
+- **cozy-sharing:** Avoid falling back to driveId for nested sharing ([eac16ad](https://github.com/cozy/cozy-libs/commit/eac16ad94e2eddab74ea0d9b249cb91a05e98ac1))
+
 ## [39.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@39.0.0...cozy-sharing@39.0.1) (2026-10-06)
 
 **Note:** Version bump only for package cozy-sharing
