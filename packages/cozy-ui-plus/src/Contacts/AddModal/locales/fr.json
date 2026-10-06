@@ -4,7 +4,7 @@
       "error": {
         "save": "Une erreur est survenue lors de l'enregistrement du contact, veuillez réessayer"
       },
-      "edit-contact": "Edit contact",
+      "edit-contact": "Modifier le contact",
       "create_contact": "Créer un contact",
       "cancel": "Annuler",
       "save": "Enregistrer"

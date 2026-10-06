@@ -1,0 +1,25 @@
+{
+  "Contacts": {
+    "AddModal": {
+      "ContactAddressDialog": {
+        "fields": {
+          "address": "Indirizzo",
+          "number": "Numero civico",
+          "street": "Indirizzo postale",
+          "code": "CAP",
+          "city": "Città",
+          "country": "Paese",
+          "locality": "Località",
+          "building": "Edificio",
+          "stairs": "Scala",
+          "floor": "Piano",
+          "apartment": "Appartamento",
+          "region": "Regione",
+          "entrycode": "Codice d'accesso"
+        },
+        "cancel": "Annulla",
+        "ok": "OK"
+      }
+    }
+  }
+}

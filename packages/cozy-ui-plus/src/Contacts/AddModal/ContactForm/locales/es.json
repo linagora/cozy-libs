@@ -1,0 +1,76 @@
+{
+  "Contacts": {
+    "AddModal": {
+      "ContactForm": {
+        "gender": {
+          "man": "Hombre",
+          "woman": "Mujer"
+        },
+        "other-fields": "Otros campos",
+        "fields": {
+          "gender": "Tratamiento",
+          "givenName": "Nombre",
+          "additionalName": "Segundo nombre",
+          "surname": "Nombre de uso",
+          "familyName": "Apellidos",
+          "phone": "Teléfono",
+          "email": "Correo",
+          "matrix": "ID de Matrix",
+          "address": "Dirección",
+          "cozy": "URL de Twake",
+          "company": "Empresa",
+          "jobTitle": "Cargo",
+          "birthday": "Cumpleaños",
+          "birthplace": "Lugar de nacimiento",
+          "relatedContact": "Contacto relacionado",
+          "relationship": "Relación",
+          "note": "Notas",
+          "label": "Etiqueta",
+          "required": "Debe rellenar todos los campos obligatorios",
+          "not-valid": "Algunos campos no están rellenados correctamente"
+        },
+        "label": {
+          "none": "Ninguna",
+          "home": "Personal",
+          "work": "Trabajo",
+          "custom": "Personalizada",
+          "phone": {
+            "cell-home": "Móvil (personal)",
+            "cell-work": "Móvil (trabajo)",
+            "voice-home": "Fijo (personal)",
+            "voice-work": "Fijo (trabajo)",
+            "fax-home": "Fax (personal)",
+            "fax-work": "Fax (trabajo)"
+          },
+          "address": {
+            "home": "Domicilio (personal)",
+            "work": "Trabajo (profesional)"
+          },
+          "relationship": {
+            "parent": "Padre/Madre",
+            "child": "Hijo/Hija",
+            "sibling": "Hermano/Hermana",
+            "spouse": "Cónyuge",
+            "coResident": "Compañero de piso",
+            "friend": "Amigo",
+            "colleague": "Colega",
+            "coWorker": "Compañero de trabajo",
+            "acquaintance": "Conocido",
+            "helper": "Asistente/Cuidador",
+            "recipient": "Beneficiario"
+          }
+        },
+        "addLabel": {
+          "address": "Añadir una dirección",
+          "email": "Añadir un correo",
+          "phone": "Añadir un teléfono",
+          "relatedContact": "Añadir un contacto relacionado"
+        }
+      }
+    }
+  },
+  "formatted": {
+    "date": "dd/LL/yyyy",
+    "address": "%{street} %{number}, %{code} %{city}, %{country}"
+  }
+}

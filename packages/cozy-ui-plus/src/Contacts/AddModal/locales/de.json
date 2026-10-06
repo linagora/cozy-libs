@@ -1,0 +1,13 @@
+{
+  "Contacts": {
+    "AddModal": {
+      "error": {
+        "save": "Beim Speichern des Kontakts ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut"
+      },
+      "edit-contact": "Kontakt bearbeiten",
+      "create_contact": "Kontakt erstellen",
+      "cancel": "Abbrechen",
+      "save": "Speichern"
+    }
+  }
+}

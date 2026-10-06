@@ -13,8 +13,11 @@ import Tile, {
 import { createUseI18n } from 'twake-i18n'
 
 import { APP_STATUS, getCurrentStatusLabel } from './helpers'
+import de from './locales/de.json'
 import en from './locales/en.json'
+import es from './locales/es.json'
 import fr from './locales/fr.json'
+import it from './locales/it.json'
 import ru from './locales/ru.json'
 import vi from './locales/vi.json'
 import styles from './styles.styl'
@@ -23,7 +26,7 @@ import { isShortcutFile } from '../AppSections/helpers.js'
 import { ShortcutTile } from '../ShortcutTile'
 import { AppDoctype } from '../proptypes'
 
-const locales = { en, fr, ru, vi }
+const locales = { de, en, es, fr, it, ru, vi }
 
 let dataset
 const getDataset = () => {

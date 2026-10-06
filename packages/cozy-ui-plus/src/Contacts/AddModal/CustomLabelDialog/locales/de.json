@@ -1,0 +1,15 @@
+{
+  "Contacts": {
+    "AddModal": {
+      "CustomLabelDialog": {
+        "label": {
+          "custom": "Benutzerdefinierte Bezeichnung",
+          "home": "Privat",
+          "work": "Geschäftlich"
+        },
+        "cancel": "Abbrechen",
+        "ok": "OK"
+      }
+    }
+  }
+}

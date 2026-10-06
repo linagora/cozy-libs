@@ -1,0 +1,18 @@
+{
+  "cancel": "Annulla",
+  "allow": "Consenti",
+  "authentification-dialog": {
+    "title": "Accesso",
+    "title-oidc": "Twake Pass",
+    "subtitle": "Per sicurezza, conferma la tua identità",
+    "label": "Password di Twake",
+    "label-oidc": "Password di Twake Pass",
+    "abort": "Esci",
+    "unlock": "Sblocca",
+    "forgotten-password": "Ho dimenticato la password",
+    "errors": {
+      "invalid_password": "Password errata, riprova.",
+      "server_error": "Si è verificato un errore del server. Ricarica la pagina."
+    }
+  }
+}

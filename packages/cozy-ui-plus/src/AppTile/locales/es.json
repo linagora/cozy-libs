@@ -1,0 +1,9 @@
+{
+  "app_item": {
+    "by": "Por",
+    "installed": "Instalada",
+    "maintenance": "En mantenimiento",
+    "update": "Actualización disponible",
+    "favorite": "Añadida a la página de inicio"
+  }
+}

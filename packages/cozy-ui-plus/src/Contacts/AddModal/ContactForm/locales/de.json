@@ -1,0 +1,76 @@
+{
+  "Contacts": {
+    "AddModal": {
+      "ContactForm": {
+        "gender": {
+          "man": "Mann",
+          "woman": "Frau"
+        },
+        "other-fields": "Weitere Felder",
+        "fields": {
+          "gender": "Anrede",
+          "givenName": "Vorname",
+          "additionalName": "Zweiter Vorname",
+          "surname": "Rufname",
+          "familyName": "Nachname",
+          "phone": "Telefon",
+          "email": "E-Mail",
+          "matrix": "Matrix-ID",
+          "address": "Adresse",
+          "cozy": "Twake-URL",
+          "company": "Unternehmen",
+          "jobTitle": "Position",
+          "birthday": "Geburtstag",
+          "birthplace": "Geburtsort",
+          "relatedContact": "Verknüpfter Kontakt",
+          "relationship": "Beziehung",
+          "note": "Notizen",
+          "label": "Bezeichnung",
+          "required": "Alle Pflichtfelder müssen ausgefüllt werden",
+          "not-valid": "Einige Felder sind nicht korrekt ausgefüllt"
+        },
+        "label": {
+          "none": "Keine",
+          "home": "Privat",
+          "work": "Geschäftlich",
+          "custom": "Benutzerdefiniert",
+          "phone": {
+            "cell-home": "Mobil (privat)",
+            "cell-work": "Mobil (geschäftlich)",
+            "voice-home": "Festnetz (privat)",
+            "voice-work": "Festnetz (geschäftlich)",
+            "fax-home": "Fax (privat)",
+            "fax-work": "Fax (geschäftlich)"
+          },
+          "address": {
+            "home": "Zuhause (privat)",
+            "work": "Arbeit (geschäftlich)"
+          },
+          "relationship": {
+            "parent": "Elternteil",
+            "child": "Kind",
+            "sibling": "Geschwister",
+            "spouse": "Ehepartner",
+            "coResident": "Mitbewohner",
+            "friend": "Freund",
+            "colleague": "Kollege",
+            "coWorker": "Mitarbeiter",
+            "acquaintance": "Bekannter",
+            "helper": "Helfer/Betreuer",
+            "recipient": "Betreute Person"
+          }
+        },
+        "addLabel": {
+          "address": "Adresse hinzufügen",
+          "email": "E-Mail hinzufügen",
+          "phone": "Telefonnummer hinzufügen",
+          "relatedContact": "Verknüpften Kontakt hinzufügen"
+        }
+      }
+    }
+  },
+  "formatted": {
+    "date": "dd.LL.yyyy",
+    "address": "%{street} %{number}, %{code} %{city}, %{country}"
+  }
+}

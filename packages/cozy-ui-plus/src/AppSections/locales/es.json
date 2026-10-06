@@ -1,0 +1,37 @@
+{
+  "app_categories": {
+    "all": "Todas las categorías",
+    "banking": "Bancos",
+    "clouds": "Nubes y cajas fuertes",
+    "cozy": "Lo esencial",
+    "education": "Educación",
+    "energy": "Energía",
+    "finance": "Empleo y finanzas",
+    "health": "Salud",
+    "host_provider": "Alojamiento",
+    "insurance": "Seguros",
+    "isp": "Móvil e Internet",
+    "konnectors": "Servicios",
+    "list_separator": ", ",
+    "mes_infos": "Experimento MesInfos",
+    "online_services": "Servicios en línea",
+    "others": "Otros",
+    "partners": "Socios",
+    "press": "Prensa",
+    "productivity": "Productividad",
+    "ptnb": "Experimento PTNB",
+    "public_service": "Servicios públicos",
+    "shopping": "Compras",
+    "social": "Redes sociales",
+    "tech": "Tecnología",
+    "telecom": "Telecomunicaciones",
+    "transport": "Transporte",
+    "pro": "Trabajo",
+    "shortcuts": "Aplicaciones adicionales"
+  },
+  "sections": {
+    "applications": "Aplicaciones",
+    "konnectors": "Servicios",
+    "shortcuts": "Aplicaciones adicionales"
+  }
+}

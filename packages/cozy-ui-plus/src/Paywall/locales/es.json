@@ -1,0 +1,107 @@
+{
+  "action": {
+    "loading": "Cargando...",
+    "withoutIAP": "Entendido"
+  },
+  "onlyOfficePaywall": {
+    "premium": {
+      "title": "Mejore su plan",
+      "content": "Su plan no le permite **modificar sus documentos en línea**.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy.",
+      "action": "Ver nuestros planes"
+    },
+    "public": {
+      "title": "Información",
+      "content": "No puede editar este archivo en línea. Pida al propietario del documento que actualice su suscripción a Cozy.",
+      "action": "Entendido"
+    },
+    "default": {
+      "title": "Información",
+      "content": "Su plan actual no le permite disfrutar de esta función.",
+      "action": "Entendido"
+    }
+  },
+  "passwordSharingPaywall": {
+    "premium": {
+      "title": "Mejore su plan",
+      "content": "Su plan no le permite **compartir sus contraseñas**.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy.",
+      "action": "Ver nuestros planes"
+    },
+    "default": {
+      "title": "Información",
+      "content": "Su plan actual no le permite disfrutar de esta función.",
+      "action": "Entendido"
+    }
+  },
+  "maxAccountsByKonnectorPaywall": {
+    "premium": {
+      "title": "Mejore su plan",
+      "content": "Su plan le permite conectar hasta **%{smart_count} cuenta %{konnectorName}** en su Cozy.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy. |||| Su plan le permite conectar hasta **%{smart_count} cuentas %{konnectorName}** en su Cozy.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy.",
+      "action": "Ver nuestros planes"
+    },
+    "default": {
+      "title": "Información",
+      "content": "Su plan actual no le permite disfrutar de esta función.",
+      "action": "Entendido"
+    }
+  },
+  "maxAccountsPaywall": {
+    "premium": {
+      "title": "Mejore su plan",
+      "content": "Su plan le permite conectar hasta **%{smart_count} cuenta** en su Cozy.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy. |||| Su plan le permite conectar hasta **%{smart_count} cuentas** en su Cozy.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy.",
+      "action": "Ver nuestros planes"
+    },
+    "default": {
+      "title": "Información",
+      "content": "Su plan actual no le permite disfrutar de esta función.",
+      "action": "Entendido"
+    }
+  },
+  "maxPapersPaywall": {
+    "premium": {
+      "title": "Mejore su plan",
+      "content": "Su plan le permite añadir manualmente hasta **%{smart_count} documento**.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy. |||| Su plan le permite añadir manualmente hasta **%{smart_count} documentos**.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy.",
+      "action": "Ver nuestros planes"
+    },
+    "default": {
+      "title": "Información",
+      "content": "Su plan actual no le permite disfrutar de esta función.",
+      "action": "Entendido"
+    }
+  },
+  "quotaPaywall": {
+    "premium": {
+      "title": "Mejore su plan",
+      "content": "Su espacio de almacenamiento está lleno.\n\nElimine archivos, vacíe la papelera o mejore su plan antes de subir archivos.",
+      "action": "Ver nuestros planes"
+    },
+    "default": {
+      "title": "Información",
+      "content": "Su espacio de almacenamiento está lleno.\n\nElimine archivos o vacíe la papelera antes de subir archivos.",
+      "action": "Entendido"
+    }
+  },
+  "maxDaysToCapturePaywall": {
+    "premium": {
+      "title": "Mejore su plan",
+      "content": "Su plan solo le permite registrar **%{smart_count} día de trayectos**.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy. |||| Su plan solo le permite registrar **%{smart_count} días de trayectos**.\n\nPara desbloquear esta función, o simplemente para apoyarnos, puede cambiar su plan de Cozy.",
+      "action": "Ver nuestros planes"
+    },
+    "default": {
+      "title": "Información",
+      "content": "Su plan actual no le permite disfrutar de esta función.",
+      "action": "Entendido"
+    }
+  },
+  "AIAssistantPaywall": {
+    "premium": {
+      "title": "Esta función no está disponible para usted",
+      "content": "Las funciones de IA solo están disponibles en el plan premium. Debe mejorar su plan para acceder a esta función.",
+      "action": "Mejorar mi plan"
+    },
+    "default": {
+      "title": "Información",
+      "content": "Su plan actual no le permite disfrutar de esta función.",
+      "action": "Entendido"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "cancel": "Cancelar",
+  "allow": "Permitir",
+  "authentification-dialog": {
+    "title": "Inicio de sesión",
+    "title-oidc": "Twake Pass",
+    "subtitle": "Por seguridad, confirme su identidad",
+    "label": "Contraseña de Twake",
+    "label-oidc": "Contraseña de Twake Pass",
+    "abort": "Salir",
+    "unlock": "Desbloquear",
+    "forgotten-password": "He olvidado mi contraseña",
+    "errors": {
+      "invalid_password": "Contraseña incorrecta. Inténtelo de nuevo.",
+      "server_error": "Se ha producido un error en el servidor. Vuelva a cargar la página."
+    }
+  }
+}

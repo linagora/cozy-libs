@@ -1,0 +1,21 @@
+{
+  "Contacts": {
+    "GroupsSelect": {
+      "create": "Gruppe erstellen",
+      "name": "Name der Gruppe",
+      "already_exists": "Die Gruppe %{name} existiert bereits.",
+      "manage": "Gruppen",
+      "filter": {
+        "all-groups": "Alle Gruppen"
+      },
+      "created": {
+        "success": "Die Gruppe wurde erfolgreich erstellt.",
+        "error": "Die Gruppe konnte nicht erstellt werden."
+      },
+      "renamed": {
+        "success": "Die Gruppe wurde erfolgreich umbenannt.",
+        "error": "Die Gruppe konnte nicht umbenannt werden."
+      }
+    }
+  }
+}
