@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 
 import { Drive, Icon, LinkOut, Pen } from '@linagora/twake-icons'
 import { useClient, generateWebLink } from 'cozy-client'
+import flag from 'cozy-flags'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Chip from 'cozy-ui/transpiled/react/Chips'
@@ -23,6 +24,8 @@ import sourceStyles from '../TwakeKnowledges/styles.styl'
  * open the folder in Drive (new tab) or change the knowledge base through
  * the Drive folder picker (persisted on the assistant immediately). The
  * menu starts with the folder name, which the icon button does not show.
+ * Changing the folder is part of editing assistants, so it follows the
+ * same flag as creating and editing them.
  */
 const KnowledgeBaseChip = ({
   dirId,
@@ -37,6 +40,8 @@ const KnowledgeBaseChip = ({
   const chipRef = useRef(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isPickerOpen, setIsPickerOpen] = useState(false)
+  const canChangeFolder = flag('cozy.assistant.create-assistant.enabled')
+  const hasActions = !isUnavailable || canChangeFolder
 
   const closeMenu = () => setIsMenuOpen(false)
 
@@ -86,10 +91,10 @@ const KnowledgeBaseChip = ({
             <Chip
               icon={<Icon icon={Drive} size={16} preserveColor />}
               label={label}
-              clickable
-              aria-haspopup="menu"
-              aria-expanded={isMenuOpen}
-              onClick={() => setIsMenuOpen(true)}
+              clickable={hasActions}
+              aria-haspopup={hasActions ? 'menu' : undefined}
+              aria-expanded={hasActions ? isMenuOpen : undefined}
+              onClick={hasActions ? () => setIsMenuOpen(true) : undefined}
               className={sourceStyles['source-chip']}
               classes={CHIP_CLASSES}
             />
@@ -129,17 +134,19 @@ const KnowledgeBaseChip = ({
               </div>
             </ActionsMenuItem>
           )}
-          <ActionsMenuItem onClick={handleChangeFolder}>
-            <div className="u-flex u-flex-items-center">
-              <Icon icon={Pen} size={16} className="u-mr-half" />
-              <Typography variant="body1">
-                {t('assistant.knowledge_base.change_folder')}
-              </Typography>
-            </div>
-          </ActionsMenuItem>
+          {canChangeFolder && (
+            <ActionsMenuItem onClick={handleChangeFolder}>
+              <div className="u-flex u-flex-items-center">
+                <Icon icon={Pen} size={16} className="u-mr-half" />
+                <Typography variant="body1">
+                  {t('assistant.knowledge_base.change_folder')}
+                </Typography>
+              </div>
+            </ActionsMenuItem>
+          )}
         </ActionsMenu>
       )}
-      {isPickerOpen && (
+      {canChangeFolder && isPickerOpen && (
         <FolderPickerDialog
           open={isPickerOpen}
           onClose={() => setIsPickerOpen(false)}
