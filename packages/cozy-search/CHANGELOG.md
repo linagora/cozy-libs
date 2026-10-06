@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.10.1...cozy-search@2.11.0) (2026-10-06)
+
+### Bug Fixes
+
+- **cozy-search:** Align sidebar conversations with the assistant item ([671010b](https://github.com/cozy/cozy-libs/commit/671010b0ecfbcec05939fc45633f4c34b6265e70))
+- **cozy-search:** Don't open the conversation from its actions menu ([0e4f8c1](https://github.com/cozy/cozy-libs/commit/0e4f8c1cb71d373b3fc2a686ad4958e148072aa1))
+- **cozy-search:** Stop clipping the conversation search bar shadow ([d86fea4](https://github.com/cozy/cozy-libs/commit/d86fea42aa8b929c467793ea7e9957cc66d2fbbf))
+- **cozy-search:** Unselect the conversation while searching ([fcc12c5](https://github.com/cozy/cozy-libs/commit/fcc12c51721502339f09d5df5815acd780ffe7f8))
+
+### Features
+
+- **cozy-search:** Add a compact prompt option to the assistant view ([7bbcd8f](https://github.com/cozy/cozy-libs/commit/7bbcd8f32246d603fd4cedbb8b08020c867755e2))
+- **cozy-search:** Add bool to hide assistant button in the searchbar ([99271f3](https://github.com/cozy/cozy-libs/commit/99271f39394fe454ecbce95ae57ad3c714fe48ec))
+- **cozy-search:** Add more space between prompt and disclaimer ([10fb009](https://github.com/cozy/cozy-libs/commit/10fb009b2a50b8d9d8175b0eb7c5aa86db28fb52))
+- **cozy-search:** Adjust button position in sidebar ([ef3be26](https://github.com/cozy/cozy-libs/commit/ef3be2670d4d61ac84093ae820b36b89343ed5c9))
+- **cozy-search:** Adjust title size on empty page ([60c8d5c](https://github.com/cozy/cozy-libs/commit/60c8d5c76fed698717a5a1dce3d18c0d012a7b07))
+- **cozy-search:** Adjust user message style ([e0fea5a](https://github.com/cozy/cozy-libs/commit/e0fea5ae646513990404c2a97adc81bb7aa7ea1e))
+- **cozy-search:** Build the assistant sidebar on cozy-ui Drawer ([a63f34a](https://github.com/cozy/cozy-libs/commit/a63f34a7988c4df5128c628bba9164984c277f7d))
+- **cozy-search:** Dock the assistant composer at the bottom when empty ([6dc293b](https://github.com/cozy/cozy-libs/commit/6dc293bf9b8d964bc34a013f6bca307400f1872e))
+- **cozy-search:** Raise the welcome halo above the title ([535b856](https://github.com/cozy/cozy-libs/commit/535b8566db325eb9b0b5badc734f9e824c18b343))
+- **cozy-search:** Use a dedicated icon for conversation not found ([230af2b](https://github.com/cozy/cozy-libs/commit/230af2b4597289ccf421c92088e1012c6cbc77d0))
+
 ## [2.10.1](https://github.com/cozy/cozy-libs/compare/cozy-search@2.10.0...cozy-search@2.10.1) (2026-10-06)
 
 **Note:** Version bump only for package cozy-search

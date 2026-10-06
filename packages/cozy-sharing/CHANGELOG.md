@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [39.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.2.1...cozy-sharing@39.0.0) (2026-10-06)
+
+### Bug Fixes
+
+- **cozy-sharing:** Expose duplicate-invite errors at Share.errors ([80a78d9](https://github.com/cozy/cozy-libs/commit/80a78d9142033f458714ec31383a08bfe8475d01))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** In an app that reads or overrides the cozy-sharing
+  keys Share.errors.errors._, rename them to Share.errors._.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01EzbMP6xL3QaMcFeBaPS7aA
+
 ## [38.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@38.2.0...cozy-sharing@38.2.1) (2026-10-06)
 
 **Note:** Version bump only for package cozy-sharing
