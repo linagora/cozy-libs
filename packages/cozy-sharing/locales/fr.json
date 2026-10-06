@@ -112,6 +112,7 @@
       "shared": "Partagé",
       "sharedWithMe": "Partagé avec moi",
       "sharedBy": "Partagé par %{name}",
+      "sharedByLink": "Partagé par lien",
       "shareByLink": {
         "create": "Générer un lien",
         "send": "Envoyer le lien",
@@ -313,6 +314,7 @@
       "shared": "Partagé",
       "sharedWithMe": "Partagé avec moi",
       "sharedBy": "Partagé par %{name}",
+      "sharedByLink": "Partagé par lien",
       "shareByLink": {
         "create": "Générer un lien",
         "send": "Envoyer le lien",
