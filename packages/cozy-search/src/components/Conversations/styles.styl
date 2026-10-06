@@ -21,6 +21,14 @@
         // The shadows vanish on a dark background: keep a border there
         border-color var(--borderMainColor)
 
+    &--compact
+        // The mobile 8px are for the chips row, which the compact composer
+        // does not have
+        padding-bottom 12px
+
+    &--single-line
+        border-radius 9999px
+
 .composer-dock
     // The composer and the disclaimer sit on a fade: the conversation runs
     // under them and dissolves into the background over the 32px above the

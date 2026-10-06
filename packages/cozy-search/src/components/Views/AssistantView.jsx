@@ -65,10 +65,14 @@ const AssistantView = () => {
   )
 }
 
-const AssistantViewWithProviders = () => {
+/**
+ * @param {object} props
+ * @param {boolean} [props.hasCompactPrompt] - A one-line prompt without the assistant and sources chips, that grows above its send button for long prompts
+ */
+const AssistantViewWithProviders = ({ hasCompactPrompt = false }) => {
   return (
     <CozyTheme variant="normal">
-      <AssistantProvider>
+      <AssistantProvider hasCompactPrompt={hasCompactPrompt}>
         <AssistantView />
       </AssistantProvider>
     </CozyTheme>

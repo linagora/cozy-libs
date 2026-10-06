@@ -8,7 +8,9 @@ import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
 import ConversationComposer from './ConversationComposer'
+import { ConversationComposerCompact } from './ConversationComposerCompact'
 import styles from './styles.styl'
+import { useAssistant } from '../AssistantProvider'
 import AssistantMessage from '../Messages/AssistantMessage'
 import UserMessage from '../Messages/UserMessage'
 
@@ -16,6 +18,7 @@ const Conversation = ({ className }) => {
   const { t } = useI18n()
   const { isLight } = useCozyTheme()
   const { isMobile } = useBreakpoints()
+  const { hasCompactPrompt } = useAssistant()
 
   const isThreadEmpty = useThread(state => state.messages.length === 0)
   // On mobile the conversation scrolls under the sidebar bar: once it has,
@@ -88,7 +91,11 @@ const Conversation = ({ className }) => {
           [styles['composer-dock']]: !isThreadEmpty
         })}
       >
-        <ConversationComposer />
+        {hasCompactPrompt ? (
+          <ConversationComposerCompact />
+        ) : (
+          <ConversationComposer />
+        )}
         <Typography
           variant="caption"
           color="textSecondary"

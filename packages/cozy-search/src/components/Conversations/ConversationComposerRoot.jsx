@@ -7,7 +7,7 @@ import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 
 import styles from './styles.styl'
 
-export const ConversationComposerRoot = ({ children }) => {
+export const ConversationComposerRoot = ({ className, children }) => {
   const { isMobile } = useBreakpoints()
   const { isLight } = useCozyTheme()
 
@@ -19,7 +19,8 @@ export const ConversationComposerRoot = ({ children }) => {
         {
           [styles['composerContainer--mobile']]: isMobile,
           [styles['composerContainer--mobile-dark']]: isMobile && !isLight
-        }
+        },
+        className
       )}
     >
       {children}
