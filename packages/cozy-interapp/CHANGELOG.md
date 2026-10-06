@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.1](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.20.0...cozy-interapp@0.20.1) (2026-10-06)
+
+### Bug Fixes
+
+- **cozy-interapp:** Do not send the data of an intent to the stack ([ecb1124](https://github.com/cozy/cozy-libs/commit/ecb11249b4190b7e78de627639a62a5f090f6c11))
+
 # [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.19.0...cozy-interapp@0.20.0) (2026-10-06)
 
 ### Features
