@@ -17,6 +17,7 @@ function setup({ data, startError = null, waitForReadyToUse = false } = {}) {
   const create = jest.fn(() => ({ start }))
   const onError = jest.fn()
   const onReadyToUse = jest.fn()
+  const onResult = jest.fn()
   const setIsLoading = jest.fn()
 
   const result = render(
@@ -29,6 +30,7 @@ function setup({ data, startError = null, waitForReadyToUse = false } = {}) {
       onCancel={jest.fn()}
       onError={onError}
       onReadyToUse={onReadyToUse}
+      onResult={onResult}
       onTerminate={jest.fn()}
       type="io.cozy.files"
       waitForReadyToUse={waitForReadyToUse}
@@ -40,6 +42,7 @@ function setup({ data, startError = null, waitForReadyToUse = false } = {}) {
     getStartOptions: () => startOptions,
     onError,
     onReadyToUse,
+    onResult,
     setIsLoading
   }
 }
@@ -104,6 +107,16 @@ describe('IntentIframe', () => {
 
     expect(queryByTestId('intent-spinner')).toBe(null)
     expect(setIsLoading).toHaveBeenCalledTimes(1)
+  })
+
+  it('gives the results the service sends while the intent goes on', () => {
+    const { container, getStartOptions, onResult } = setup()
+
+    act(() => getStartOptions().onReady())
+    act(() => getStartOptions().onResult({ id: '1' }))
+
+    expect(onResult).toHaveBeenCalledWith({ id: '1' })
+    expect(container.querySelector('iframe')).toBeInTheDocument()
   })
 
   it('shows intent errors instead of waiting for readyToUse', async () => {

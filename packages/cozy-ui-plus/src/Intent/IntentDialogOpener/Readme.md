@@ -30,6 +30,10 @@ Set `waitForReadyToUse` to keep the intent hidden behind the loading spinner
 until its service sends the `readyToUse` signal. This option is disabled by
 default because older intent services do not send this signal.
 
+Set `onResult` to receive the results a service hands over while it stays
+open. The dialog is not closed: `onComplete` is still called when the intent
+ends.
+
 Set `options.theme.type` to `light` or `dark` to force that theme on the
 dialog, close button and loading surface as well as passing it to the intent
 service. Any other value or no value keeps the caller's theme.
