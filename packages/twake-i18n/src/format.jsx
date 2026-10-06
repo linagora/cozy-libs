@@ -1,8 +1,10 @@
 import format from 'date-fns/format'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import deLocale from 'date-fns/locale/de'
 import enLocale from 'date-fns/locale/en-GB'
 import esLocale from 'date-fns/locale/es'
 import frLocale from 'date-fns/locale/fr'
+import itLocale from 'date-fns/locale/it'
 import ruLocale from 'date-fns/locale/ru'
 import viLocale from 'date-fns/locale/vi'
 
@@ -18,6 +20,10 @@ const getDateFnsLocale = lang => {
       return frLocale
     case 'es':
       return esLocale
+    case 'de':
+      return deLocale
+    case 'it':
+      return itLocale
     case 'ru':
       return ruLocale
     case 'vi':
