@@ -31,6 +31,10 @@ Set `onResult` to receive the results a service hands over while it stays
 open, with `service.sendResult(result)`. `onTerminate` still receives the one
 that ends the intent.
 
+When `data` changes while the intent is open, the new data are sent to its
+service, which gets them with `service.onData()`: the intent is not started
+again.
+
 Set `data.theme.type` to `light` or `dark` to force that theme on the
 loading surface and pass it to the intent service. Any other value or no value
 keeps the caller's theme.
