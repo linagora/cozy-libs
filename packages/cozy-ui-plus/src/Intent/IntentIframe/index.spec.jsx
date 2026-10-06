@@ -9,10 +9,15 @@ jest.mock('cozy-ui/transpiled/react/Spinner', () => () => (
 
 function setup({ data, startError = null, waitForReadyToUse = false } = {}) {
   let startOptions
+  const sendData = jest.fn()
   const start = jest.fn((element, options) => {
     startOptions = options
     element.appendChild(document.createElement('iframe'))
-    return startError ? Promise.reject(startError) : new Promise(() => {})
+    const started = startError
+      ? Promise.reject(startError)
+      : new Promise(() => {})
+    started.sendData = sendData
+    return started
   })
   const create = jest.fn(() => ({ start }))
   const onError = jest.fn()
@@ -20,12 +25,12 @@ function setup({ data, startError = null, waitForReadyToUse = false } = {}) {
   const onResult = jest.fn()
   const setIsLoading = jest.fn()
 
-  const result = render(
+  const makeIframe = iframeData => (
     <IntentIframe
       action="PICK"
       client={{}}
       create={create}
-      data={data}
+      data={iframeData}
       iframeProps={{ setIsLoading }}
       onCancel={jest.fn()}
       onError={onError}
@@ -36,9 +41,13 @@ function setup({ data, startError = null, waitForReadyToUse = false } = {}) {
       waitForReadyToUse={waitForReadyToUse}
     />
   )
+  const result = render(makeIframe(data))
 
   return {
     ...result,
+    rerenderWithData: newData => result.rerender(makeIframe(newData)),
+    create,
+    sendData,
     getStartOptions: () => startOptions,
     onError,
     onReadyToUse,
@@ -54,6 +63,21 @@ describe('IntentIframe', () => {
 
   afterEach(() => {
     jest.restoreAllMocks()
+  })
+
+  it('sends new data to the open intent, without starting it again', () => {
+    const { create, sendData, rerenderWithData } = setup({
+      data: { content: 'Bonjour' }
+    })
+
+    rerenderWithData({ content: 'Bonjour' })
+    expect(sendData).not.toHaveBeenCalled()
+
+    rerenderWithData({ content: 'Au revoir' })
+    expect(sendData).toHaveBeenCalledWith(
+      expect.objectContaining({ content: 'Au revoir' })
+    )
+    expect(create).toHaveBeenCalledTimes(1)
   })
 
   it('keeps the iframe rendered behind the spinner until it is ready to use', () => {

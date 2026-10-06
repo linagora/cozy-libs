@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 
 import get from 'lodash/get'
+import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -37,17 +38,18 @@ class IntentIframe extends React.Component {
       create = intents.create
     }
 
-    create(action, type, {
+    this.intent = create(action, type, {
       ...DEFAULT_DATA,
       ...data
+    }).start(this.intentViewer, {
+      onReady: this.onFrameLoaded,
+      onHideCross: this.props.onHideCross,
+      onShowCross: this.props.onShowCross,
+      onReadyToUse: this.onReadyToUse,
+      onResult: this.props.onResult
     })
-      .start(this.intentViewer, {
-        onReady: this.onFrameLoaded,
-        onHideCross: this.props.onHideCross,
-        onShowCross: this.props.onShowCross,
-        onReadyToUse: this.onReadyToUse,
-        onResult: this.props.onResult
-      })
+
+    this.intent
       .then(result => {
         // eslint-disable-next-line promise/always-return
         result ? onTerminate && onTerminate(result) : onCancel()
@@ -57,6 +59,14 @@ class IntentIframe extends React.Component {
         this.setState({ error })
         this.setIsLoading(false)
       })
+  }
+
+  componentDidUpdate(prevProps) {
+    // A service that stays open gets the new data, an older cozy-interapp
+    // cannot send them
+    if (!isEqual(prevProps.data, this.props.data)) {
+      this.intent?.sendData?.({ ...DEFAULT_DATA, ...this.props.data })
+    }
   }
 
   onFrameLoaded = () => {
