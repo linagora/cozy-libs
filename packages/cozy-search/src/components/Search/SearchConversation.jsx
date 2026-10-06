@@ -88,7 +88,7 @@ const SearchConversation = () => {
     <SearchConversationContainer isMobile={isMobile}>
       <div
         className={cx(
-          'u-h-100 u-flex u-flex-column u-flex-items-start u-ov-hidden u-w-100',
+          'u-h-100 u-flex u-flex-column u-flex-items-start u-w-100',
           {
             'u-maw-7': !isMobile
           }
