@@ -1,0 +1,117 @@
+{
+  "Viewer": {
+    "actions": {
+      "download": "Herunterladen",
+      "forward": "Senden"
+    },
+    "alert": {
+      "preparing": "Ihre Dateien werden vorbereitet…"
+    },
+    "close": "schließen",
+    "cancel": "Abbrechen",
+    "ok": "OK",
+    "download": "Herunterladen",
+    "share_btn": "Teilen",
+    "complete": "Dokument vervollständigen",
+    "noImage": "Kein Bild",
+    "error": {
+      "downloadFile": {
+        "offline": "Sie müssen online sein, um diese Datei herunterzuladen"
+      },
+      "generic": "Beim Öffnen dieser Datei ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "missing": "Diese Datei fehlt",
+      "network": "Diese Datei konnte nicht geladen werden. Haben Sie gerade eine funktionierende Internetverbindung?"
+    },
+    "goto": "Zu %{url} wechseln",
+    "next": "Weiter",
+    "openWith": "Öffnen mit...",
+    "openInOnlyOffice": "Mit Only Office öffnen",
+    "editPdf": "Bearbeiten",
+    "panel": {
+      "collapse": "Einklappen",
+      "header": "Details",
+      "summary": "Zusammenfassung",
+      "edit_summary": "Zusammenfassung bearbeiten",
+      "shorter": "Kürzer fassen",
+      "expand": "Weitere Details hinzufügen",
+      "sharing": "Wer hat Zugriff?",
+      "manage_access": "Zugriff verwalten",
+      "informations": {
+        "format": {
+          "title": "%{format}-Dokument",
+          "subtitle": "Format"
+        },
+        "size": "Größe",
+        "location": "Speicherort",
+        "creation": "Erstellung",
+        "modification": "Letzte Änderung"
+      },
+      "certifications": {
+        "carbonCopy": {
+          "title": "Originalkopie",
+          "caption": "Gibt an, ob das Dokument von Twake Workplace, dem Hoster Ihres Twake, als „authentisch und original“ eingestuft wird, da es bestätigen kann, dass es ohne jede Änderung direkt von einem Drittanbieterdienst stammt."
+        },
+        "electronicSafe": {
+          "title": "Elektronischer Tresor",
+          "caption": "Gibt an, ob das Originaldokument in Ihrem persönlichen digitalen Tresor gesichert ist, mit den Zertifizierungen, die ihm Beweiskraft und eine Aufbewahrungsgarantie von 50 Jahren ab seiner Hinterlegung verleihen."
+        }
+      },
+      "qualification": {
+        "empty": {
+          "primary": "Dokumenttyp",
+          "secondary": "Rechnungen, Vertrag, Personalausweis..."
+        },
+        "actions": {
+          "copy": "Kopieren",
+          "copyClipboard": "In die Zwischenablage kopieren",
+          "edit": "Bearbeiten"
+        }
+      },
+      "antivirus": {
+        "scanning": "Wird von Twake geprüft",
+        "scanned": "Von Twake geprüft",
+        "infected": "Virus von Twake erkannt",
+        "info": {
+          "title": "Prüfung von Anhängen in Twake",
+          "description": "Zum Schutz Ihres Arbeitsbereichs blockiert Twake automatisch Anhänge, die als schädlich erkannt wurden. Laden Sie Dateien immer nur aus vertrauenswürdigen Quellen herunter.",
+          "learnMore": "Mehr erfahren"
+        }
+      },
+      "expiration": {
+        "dismiss": "Verstanden"
+      },
+      "title": "Nützliche Informationen",
+      "more_menu": "Weitere Optionen",
+      "collapse_btn": "Einklappen"
+    },
+    "previous": "Zurück",
+    "retry": "Erneut versuchen",
+    "scaledown": "Verkleinern",
+    "scaleup": "Vergrößern",
+    "share": {
+      "title": "Link zu meinem Dokument %{name}",
+      "text": "Hier ist ein Link zu meinem Dokument %{name}: ",
+      "error": "Problem beim Abrufen des Links: %{error}",
+      "success": "Ihre Datei wurde erfolgreich geteilt"
+    },
+    "snackbar": {
+      "copiedToClipboard": {
+        "success": "In die Zwischenablage kopiert",
+        "error": "Kopieren in die Zwischenablage nicht möglich"
+      }
+    },
+    "summariseWithAi": "Zusammenfassen",
+    "ai": {
+      "panelTitle": "KI-Assistent",
+      "bodyText": "Zusammenfassung",
+      "error": {
+        "summary": "Die Zusammenfassung konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+        "documentTooLarge": "Dieses Dokument ist zu groß für eine Zusammenfassung. Bitte versuchen Sie es mit einem kürzeren Dokument."
+      },
+      "copied": "Zusammenfassung in die Zwischenablage kopiert",
+      "footerText": "Dieser Inhalt wurde von KI erstellt und kann Fehler enthalten.",
+      "stop": "Stoppen",
+      "loadingText": "Inhalt wird zusammengefasst"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "Viewer": {
+    "actions": {
+      "download": "Scarica",
+      "forward": "Invia"
+    },
+    "alert": {
+      "preparing": "Preparazione dei tuoi file…"
+    },
+    "close": "chiudi",
+    "cancel": "Annulla",
+    "ok": "OK",
+    "download": "Scarica",
+    "share_btn": "Condividi",
+    "complete": "Completa il documento",
+    "noImage": "Nessuna immagine",
+    "error": {
+      "downloadFile": {
+        "offline": "Devi essere online per scaricare questo file"
+      },
+      "generic": "Si è verificato un errore durante l'apertura di questo file, riprova.",
+      "missing": "Questo file è mancante",
+      "network": "Impossibile caricare questo file. La tua connessione a Internet funziona?"
+    },
+    "goto": "Vai a %{url}",
+    "next": "Successivo",
+    "openWith": "Apri con...",
+    "openInOnlyOffice": "Apri con Only Office",
+    "editPdf": "Modifica",
+    "panel": {
+      "collapse": "Comprimi",
+      "header": "Dettagli",
+      "summary": "Riepilogo",
+      "edit_summary": "Modifica il riepilogo",
+      "shorter": "Rendilo più breve",
+      "expand": "Aggiungi più dettagli",
+      "sharing": "Chi ha accesso?",
+      "manage_access": "Gestisci l'accesso",
+      "informations": {
+        "format": {
+          "title": "Documento %{format}",
+          "subtitle": "Formato"
+        },
+        "size": "Dimensione",
+        "location": "Posizione",
+        "creation": "Creazione",
+        "modification": "Ultima modifica"
+      },
+      "certifications": {
+        "carbonCopy": {
+          "title": "Copia conforme",
+          "caption": "Indica se il documento è definito \"autentico e originale\" da Twake Workplace, l'hosting del tuo Twake, in quanto può affermare che proviene direttamente da un servizio di terze parti senza aver subito alcuna modifica."
+        },
+        "electronicSafe": {
+          "title": "Cassaforte elettronica",
+          "caption": "Indica se il documento originale è protetto dalla tua cassaforte digitale personale con le certificazioni che gli conferiscono valore probatorio e una garanzia di conservazione di 50 anni dal deposito."
+        }
+      },
+      "qualification": {
+        "empty": {
+          "primary": "Tipo di documento",
+          "secondary": "Bollette, contratto, carta d'identità..."
+        },
+        "actions": {
+          "copy": "Copia",
+          "copyClipboard": "Copia negli appunti",
+          "edit": "Modifica"
+        }
+      },
+      "antivirus": {
+        "scanning": "Analisi di Twake in corso",
+        "scanned": "Analizzato da Twake",
+        "infected": "Virus rilevato da Twake",
+        "info": {
+          "title": "Analisi degli allegati in Twake",
+          "description": "Per proteggere il tuo spazio di lavoro, Twake blocca automaticamente gli allegati identificati come dannosi. Scarica sempre i file solo da fonti attendibili.",
+          "learnMore": "Scopri di più"
+        }
+      },
+      "expiration": {
+        "dismiss": "Ho capito"
+      },
+      "title": "Informazioni utili",
+      "more_menu": "Altre opzioni",
+      "collapse_btn": "Comprimi"
+    },
+    "previous": "Precedente",
+    "retry": "Riprova",
+    "scaledown": "Riduci",
+    "scaleup": "Ingrandisci",
+    "share": {
+      "title": "Link al mio documento %{name}",
+      "text": "Ecco un link al mio documento %{name}: ",
+      "error": "Problema durante il recupero del link: %{error}",
+      "success": "Il tuo file è stato condiviso correttamente"
+    },
+    "snackbar": {
+      "copiedToClipboard": {
+        "success": "Copiato negli appunti",
+        "error": "Impossibile copiare negli appunti"
+      }
+    },
+    "summariseWithAi": "Riassumi",
+    "ai": {
+      "panelTitle": "Assistente IA",
+      "bodyText": "Riepilogo",
+      "error": {
+        "summary": "Impossibile generare il riepilogo. Riprova.",
+        "documentTooLarge": "Questo documento è troppo grande per essere riassunto. Prova con un documento più breve."
+      },
+      "copied": "Riepilogo copiato negli appunti",
+      "footerText": "Questo contenuto è generato dall'IA e può contenere errori.",
+      "stop": "Interrompi",
+      "loadingText": "Riepilogo del contenuto in corso"
+    }
+  }
+}

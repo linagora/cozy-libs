@@ -1,0 +1,117 @@
+{
+  "Viewer": {
+    "actions": {
+      "download": "Descargar",
+      "forward": "Enviar"
+    },
+    "alert": {
+      "preparing": "Preparando sus archivos…"
+    },
+    "close": "cerrar",
+    "cancel": "Cancelar",
+    "ok": "Aceptar",
+    "download": "Descargar",
+    "share_btn": "Compartir",
+    "complete": "Completar el documento",
+    "noImage": "Ninguna imagen",
+    "error": {
+      "downloadFile": {
+        "offline": "Debe estar conectado para descargar este archivo"
+      },
+      "generic": "Se ha producido un error al abrir este archivo. Inténtelo de nuevo.",
+      "missing": "Falta este archivo",
+      "network": "No se ha podido cargar este archivo. ¿Tiene conexión a Internet en este momento?"
+    },
+    "goto": "Ir a %{url}",
+    "next": "Siguiente",
+    "openWith": "Abrir con...",
+    "openInOnlyOffice": "Abrir con Only Office",
+    "editPdf": "Editar",
+    "panel": {
+      "collapse": "Contraer",
+      "header": "Detalles",
+      "summary": "Resumen",
+      "edit_summary": "Editar el resumen",
+      "shorter": "Acortar",
+      "expand": "Añadir más detalles",
+      "sharing": "¿Quién tiene acceso?",
+      "manage_access": "Gestionar el acceso",
+      "informations": {
+        "format": {
+          "title": "Documento %{format}",
+          "subtitle": "Formato"
+        },
+        "size": "Tamaño",
+        "location": "Ubicación",
+        "creation": "Creación",
+        "modification": "Última modificación"
+      },
+      "certifications": {
+        "carbonCopy": {
+          "title": "Copia auténtica",
+          "caption": "Indica si Twake Workplace, el proveedor de alojamiento de su Twake, define el documento como \"auténtico y original\", ya que puede afirmar que procede directamente de un servicio de terceros sin haber sufrido ninguna modificación."
+        },
+        "electronicSafe": {
+          "title": "Caja fuerte electrónica",
+          "caption": "Indica si el documento original está protegido por su caja fuerte digital personal con las certificaciones que le otorgan valor probatorio y una garantía de conservación de 50 años a partir de su depósito."
+        }
+      },
+      "qualification": {
+        "empty": {
+          "primary": "Tipo de documento",
+          "secondary": "Facturas, contrato, documento de identidad..."
+        },
+        "actions": {
+          "copy": "Copiar",
+          "copyClipboard": "Copiar en el portapapeles",
+          "edit": "Editar"
+        }
+      },
+      "antivirus": {
+        "scanning": "Twake está analizando",
+        "scanned": "Analizado por Twake",
+        "infected": "Virus detectado por Twake",
+        "info": {
+          "title": "Análisis de archivos adjuntos en Twake",
+          "description": "Para proteger su espacio de trabajo, Twake bloquea automáticamente los archivos adjuntos identificados como maliciosos. Descargue siempre archivos solo de fuentes de confianza.",
+          "learnMore": "Más información"
+        }
+      },
+      "expiration": {
+        "dismiss": "Entendido"
+      },
+      "title": "Información útil",
+      "more_menu": "Más opciones",
+      "collapse_btn": "Contraer"
+    },
+    "previous": "Anterior",
+    "retry": "Reintentar",
+    "scaledown": "Alejar",
+    "scaleup": "Acercar",
+    "share": {
+      "title": "Enlace a mi documento %{name}",
+      "text": "Aquí tienes un enlace a mi documento %{name}: ",
+      "error": "Problema al recuperar el enlace: %{error}",
+      "success": "Su archivo se ha compartido correctamente"
+    },
+    "snackbar": {
+      "copiedToClipboard": {
+        "success": "Copiado en el portapapeles",
+        "error": "No se puede copiar en el portapapeles"
+      }
+    },
+    "summariseWithAi": "Resumir",
+    "ai": {
+      "panelTitle": "Asistente de IA",
+      "bodyText": "Resumen",
+      "error": {
+        "summary": "No se ha podido generar el resumen. Inténtelo de nuevo.",
+        "documentTooLarge": "Este documento es demasiado grande para resumirlo. Pruebe con un documento más corto."
+      },
+      "copied": "Resumen copiado en el portapapeles",
+      "footerText": "Este contenido lo genera la IA y puede contener errores.",
+      "stop": "Detener",
+      "loadingText": "Resumiendo el contenido"
+    }
+  }
+}
