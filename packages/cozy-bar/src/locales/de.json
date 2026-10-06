@@ -1,0 +1,64 @@
+{
+  "drawer": "Seitenmenü anzeigen",
+  "profile": "Profil",
+  "appearance": "Darstellung",
+  "plans": "Tarife",
+  "permissions": "Berechtigungen",
+  "connectedDevices": "Verbundene Geräte",
+  "connections": "Verbindungen",
+  "storage": "Speicher",
+  "storage_phrase": "%{diskUsage} GB von %{diskQuota} GB belegt",
+  "help": "FAQ",
+  "contact": "Kontakt",
+  "logout": "Abmelden",
+  "soon": "demnächst",
+  "termsOfService": "Nutzungsbedingungen",
+  "legalNotice": "Impressum",
+  "error_UnavailableStack": "Der Stack ist nicht erreichbar (Zeitüberschreitung der Verbindung).",
+  "error_UnauthorizedStack": "Es fehlen Berechtigungen, die Anwendung kann nicht auf die angeforderte Ressource im Stack zugreifen.",
+  "no_apps": "Im Cozy wurden keine Anwendungen gefunden.",
+  "menu": {
+    "apps": "Apps",
+    "settings": "Einstellungen",
+    "home_mobile": "Zurück zum Dashboard...",
+    "home": "Zurück zum Dashboard",
+    "home_title": "Startseite"
+  },
+  "Categories": {
+    "cozy": "Cozy-Apps",
+    "partners": "Partner-Apps",
+    "ptnb": "expPTNB",
+    "others": "Weitere Apps"
+  },
+  "permsModal": {
+    "title": "Greifen Sie aus Ihrer Anwendung auf Ihr gesamtes Cozy zu",
+    "description": "Erlauben Sie %{app}, Ihre Cozy-Anwendungen auf diesem Gerät anzuzeigen",
+    "button": "Zugriff erlauben"
+  },
+  "comingSoon": {
+    "store": {
+      "title": "Die Store-Anwendung ist bald in Ihrem Cozy verfügbar.",
+      "description": "Mit dem Cozy Store können Sie die gewünschten Anwendungen in Ihrem Cozy installieren."
+    }
+  },
+  "banner": {
+    "tos-updated": {
+      "description": "Zur Einhaltung der DSGVO hat Cozy Cloud seine Nutzungsbedingungen aktualisiert, die am 25. Mai 2018 in Kraft getreten sind",
+      "CTA": "Jetzt lesen"
+    },
+    "moved": {
+      "description": "Das Cozy wurde an eine neue Adresse verschoben"
+    }
+  },
+  "userMenu": {
+    "manageProfile": "Profil verwalten",
+    "createBusinessAccount": "Geschäftskonto erstellen",
+    "storage": "Speicher",
+    "storageAvailable": "%{smart_count} GB verfügbar",
+    "emailDomainNotActive": "E-Mail nicht aktiv",
+    "logOut": "Abmelden"
+  },
+  "platformBanners": {
+    "dismiss": "Ausblenden"
+  }
+}
