@@ -1,4 +1,8 @@
-import { ComposerPrimitive } from '@assistant-ui/react'
+import {
+  ComposerPrimitive,
+  useComposer,
+  useComposerRuntime
+} from '@assistant-ui/react'
 import cx from 'classnames'
 import React, { useRef } from 'react'
 
@@ -9,9 +13,12 @@ import { useI18n } from 'twake-i18n'
 
 import styles from './styles.styl'
 
-const ConversationBar = ({ value, isEmpty, onKeyDown, ...props }) => {
+const ConversationBar = props => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
+  const composerRuntime = useComposerRuntime()
+  const value = useComposer(state => state.text)
+  const isEmpty = useComposer(state => state.isEmpty)
   const inputRef = useRef()
 
   // to adjust input height for multiline when typing in it
@@ -23,10 +30,13 @@ const ConversationBar = ({ value, isEmpty, onKeyDown, ...props }) => {
     }
   })
 
-  const handleKeyDown = e => {
-    if (isEmpty) return
+  const handleKeyDown = ev => {
+    if (isEmpty || isMobile) return
 
-    onKeyDown(e)
+    if (ev.key === 'Enter' && !ev.shiftKey) {
+      ev.preventDefault()
+      composerRuntime.send()
+    }
   }
 
   return (
