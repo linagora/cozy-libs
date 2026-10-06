@@ -80,6 +80,7 @@ sequenceDiagram
     Service->>Client: postMessage { type: "intent-{id}:readyToUse" }
     Note over Client,Service: Intent is usable (optional messages can happen here)
     Service->>Client: postMessage { type: "intent-{id}:result", result }  (any number of times)
+    Client->>Service: postMessage { type: "intent-{id}:data", data }  (any number of times)
     Service->>Client: postMessage { type: "intent-{id}:done", document } OR
     Service->>Client: postMessage { type: "intent-{id}:exposeFrameRemoval", document } OR
     Service->>Client: postMessage { type: "intent-{id}:cancel" } OR
@@ -115,6 +116,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 | Service → Client | `intent-{id}:resize` | `dimensions: { width?, height?, maxWidth?, maxHeight?, element? }`, `transition?: string` | Resizes the element that holds the iframe. `element` is measured client-side by the service and converted to `maxWidth` / `maxHeight`. `transition` is applied as a CSS `transition` property. |
 | Service → Client | `intent-{id}:hideCross` | — | Ask the client to hide its close button. Fires `onHideCross`. |
 | Service → Client | `intent-{id}:showCross` | — | Ask the client to show its close button. Fires `onShowCross`. |
+| Client → Service | `intent-{id}:data` | `data` | New data for a service that stays open, sent with `sendData(data)` on the started intent. The service reads them with `getData()`, and gets them with `onData(listener)`. |
 | Service → Client | `intent-{id}:result` | `result` | The service hands a result to the client without ending the intent. Fires `onResult(result)`. May be sent any number of times before the intent terminates. |
 | Service → Client | `intent-{id}:compose` | `action`, `doctype`, `data` | Ask the client to start a nested intent. The client creates it, hides the current service iframe, runs the nested intent, then posts the resulting document back to the service via `postMessage(doc, origin)`. |
 
@@ -203,6 +205,8 @@ const app = await service.compose('INSTALL', 'io.cozy.apps', { slug: 'drive' })
 - `throw(error)`: throw an error to client and causes the intent promise rejection.
 
 - `notifyReadyToUse()`: tells the client the service UI is rendered and its initial data has loaded. A service may call this only once; a second call is a no-op with a warning. Throws if called after `terminate()`. The client receives it via the `onReadyToUse` option of `start()`.
+
+- `onData(listener)`: calls `listener` with the new data the client sends while the intent goes on (`sendData()` of the started intent). `getData()` then gives them too. Returns a function that stops the calls.
 
 - `sendResult(result)`: passes a `result` to the client without ending the intent process, any number of times. Throws if called after the service is terminated. The client receives it via the `onResult` option of `start()`.
 
