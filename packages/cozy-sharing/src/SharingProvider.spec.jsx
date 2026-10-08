@@ -1331,6 +1331,44 @@ describe('updateSharingMemberType', () => {
       readOnly: false
     })
   })
+
+  describe('when the sharing is a shared drive', () => {
+    const setupDriveSharing = ({ owner }) => {
+      const driveSharing = {
+        ...mockSharing,
+        attributes: { ...mockSharing.attributes, drive: true, owner }
+      }
+      instance.state = {
+        ...instance.state,
+        sharings: [driveSharing],
+        byDocId: {
+          'drive-root': { sharings: ['sharing-123'], permissions: [] }
+        }
+      }
+    }
+
+    it('should refetch effective recipients through the drive on the recipient side', async () => {
+      setupDriveSharing({ owner: false })
+
+      await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
+
+      expect(instance.sharingCol.fetchEffectiveRecipients).toHaveBeenCalledWith(
+        'drive-root',
+        { driveId: 'sharing-123' }
+      )
+    })
+
+    it('should refetch effective recipients locally on the owner side', async () => {
+      setupDriveSharing({ owner: true })
+
+      await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
+
+      expect(instance.sharingCol.fetchEffectiveRecipients).toHaveBeenCalledWith(
+        'drive-root',
+        { driveId: undefined }
+      )
+    })
+  })
 })
 
 describe('hasWriteAccess', () => {

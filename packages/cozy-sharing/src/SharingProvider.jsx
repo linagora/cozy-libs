@@ -458,7 +458,9 @@ export class SharingProvider extends Component {
       this.state.byDocId[id].sharings?.includes(sharingId)
     )
     if (docId) {
-      const driveId = this.state.byDocId[docId].driveId
+      const isDriveRecipient =
+        sharing.attributes.drive && !sharing.attributes.owner
+      const driveId = isDriveRecipient ? sharingId : undefined
       await this.fetchEffectiveRecipients(docId, driveId)
     }
   }
