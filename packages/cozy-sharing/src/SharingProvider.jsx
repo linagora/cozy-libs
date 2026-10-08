@@ -387,8 +387,14 @@ export class SharingProvider extends Component {
    * @param {string} sharingId - The ID of the sharing
    * @param {number} memberIndex - The index of the member in the sharing members array
    * @param {string} newType - 'one-way' for read-only, 'two-way' for read-write
+   * @param {object} [document] - Document whose effective recipients are refetched once updated
    */
-  updateSharingMemberType = async (sharingId, memberIndex, newType) => {
+  updateSharingMemberType = async (
+    sharingId,
+    memberIndex,
+    newType,
+    document
+  ) => {
     const sharing = getSharingById(this.state, sharingId)
     if (!sharing) throw new Error('Sharing not found')
 
@@ -454,14 +460,11 @@ export class SharingProvider extends Component {
       throw error
     }
 
-    const docId = Object.keys(this.state.byDocId).find(id =>
-      this.state.byDocId[id].sharings?.includes(sharingId)
-    )
-    if (docId) {
-      const isDriveRecipient =
-        sharing.attributes.drive && !sharing.attributes.owner
-      const driveId = isDriveRecipient ? sharingId : undefined
-      await this.fetchEffectiveRecipients(docId, driveId)
+    if (document) {
+      await this.fetchEffectiveRecipients(
+        getDocumentId(document),
+        document.driveId
+      )
     }
   }
 
