@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [39.0.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@39.0.2...cozy-sharing@39.0.3) (2026-10-08)
+
+### Bug Fixes
+
+- **cozy-sharing:** Keep drive members after a recipient changes a role ([13e609c](https://github.com/cozy/cozy-libs/commit/13e609c5edf6b051321d53956b3b5e0b390ce207))
+- **cozy-sharing:** Refetch the displayed document after a role change ([5cfb13d](https://github.com/cozy/cozy-libs/commit/5cfb13dd6acf0a2c03a6d9acd2539bb06d5c04a6))
+
 ## [39.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@39.0.1...cozy-sharing@39.0.2) (2026-10-06)
 
 ### Bug Fixes
