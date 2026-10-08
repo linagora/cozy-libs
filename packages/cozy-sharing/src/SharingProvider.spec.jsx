@@ -1332,42 +1332,40 @@ describe('updateSharingMemberType', () => {
     })
   })
 
-  describe('when the sharing is a shared drive', () => {
-    const setupDriveSharing = ({ owner }) => {
-      const driveSharing = {
-        ...mockSharing,
-        attributes: { ...mockSharing.attributes, drive: true, owner }
-      }
-      instance.state = {
-        ...instance.state,
-        sharings: [driveSharing],
-        byDocId: {
-          'drive-root': { sharings: ['sharing-123'], permissions: [] }
-        }
+  it('should refetch effective recipients of the given document through its drive', async () => {
+    await instance.updateSharingMemberType('sharing-123', 1, 'one-way', {
+      _id: 'nested-folder',
+      driveId: 'drive-sharing'
+    })
+
+    expect(instance.sharingCol.fetchEffectiveRecipients).toHaveBeenCalledWith(
+      'nested-folder',
+      { driveId: 'drive-sharing' }
+    )
+  })
+
+  it('should refetch effective recipients of an owned document locally', async () => {
+    await instance.updateSharingMemberType('sharing-123', 1, 'one-way', {
+      _id: 'owned-folder'
+    })
+
+    expect(instance.sharingCol.fetchEffectiveRecipients).toHaveBeenCalledWith(
+      'owned-folder',
+      { driveId: undefined }
+    )
+  })
+
+  it('should not refetch effective recipients without a document', async () => {
+    instance.state = {
+      ...instance.state,
+      byDocId: {
+        'drive-root': { sharings: ['sharing-123'], permissions: [] }
       }
     }
 
-    it('should refetch effective recipients through the drive on the recipient side', async () => {
-      setupDriveSharing({ owner: false })
+    await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
 
-      await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
-
-      expect(instance.sharingCol.fetchEffectiveRecipients).toHaveBeenCalledWith(
-        'drive-root',
-        { driveId: 'sharing-123' }
-      )
-    })
-
-    it('should refetch effective recipients locally on the owner side', async () => {
-      setupDriveSharing({ owner: true })
-
-      await instance.updateSharingMemberType('sharing-123', 1, 'one-way')
-
-      expect(instance.sharingCol.fetchEffectiveRecipients).toHaveBeenCalledWith(
-        'drive-root',
-        { driveId: undefined }
-      )
-    })
+    expect(instance.sharingCol.fetchEffectiveRecipients).not.toHaveBeenCalled()
   })
 })
 

@@ -91,7 +91,7 @@ const PermissionTypeMenuComponent = ({
           }
         }
 
-        await updateSharingMemberType(sharingId, memberIndex, newType)
+        await updateSharingMemberType(sharingId, memberIndex, newType, document)
       } catch (error) {
         log.error('Failed to change member permission type', error)
         showAlert({

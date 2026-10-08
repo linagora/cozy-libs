@@ -95,7 +95,8 @@ describe('PermissionTypeMenu component', () => {
     expect(mockUpdateSharingMemberType).toHaveBeenCalledWith(
       'sharing-123',
       1,
-      'one-way'
+      'one-way',
+      undefined
     )
   })
 
@@ -110,7 +111,8 @@ describe('PermissionTypeMenu component', () => {
     expect(mockUpdateSharingMemberType).toHaveBeenCalledWith(
       'sharing-123',
       1,
-      'two-way'
+      'two-way',
+      undefined
     )
   })
 
@@ -238,7 +240,8 @@ describe('PermissionTypeMenu component', () => {
         expect(mockUpdateSharingMemberType).toHaveBeenCalledWith(
           'sharing-123',
           1,
-          'one-way'
+          'one-way',
+          folderDocument
         )
       })
     })
@@ -276,7 +279,7 @@ describe('PermissionTypeMenu component', () => {
       await waitFor(() => {
         expect(mockUpdateSharingMemberType.mock.calls).toEqual([
           ['sharing-parent', 2, 'one-way'],
-          ['sharing-123', 1, 'one-way']
+          ['sharing-123', 1, 'one-way', folderDocument]
         ])
       })
     })
@@ -309,7 +312,8 @@ describe('PermissionTypeMenu component', () => {
       expect(mockUpdateSharingMemberType).toHaveBeenCalledWith(
         'sharing-123',
         1,
-        'one-way'
+        'one-way',
+        folderDocument
       )
       expect(queryByRole('button', { name: 'Update parent' })).toBe(null)
     })

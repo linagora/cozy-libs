@@ -198,7 +198,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 |-----------|------|--------|
 | Editable modal | `isEditable = !byDocId[doc] \|\| isOwner(doc) \|\| canReshare(doc)` | `ShareModal.jsx:35-36` |
 | Non-editable view | `SharingDetailsModal` — read-only members (no cross/perm menu), with link management (gear + copy link) for shared drives | `ShareModal.jsx:53-62` |
-| Updating member type | `updateSharingMemberType` calls `setReadOnly` / `setReadWrite` on the stack | `SharingProvider.jsx:361-420` |
+| Updating member type | `updateSharingMemberType` calls `setReadOnly` / `setReadWrite` on the stack, then refetches the effective recipients of the given document (through its `driveId` on the recipient side) | `SharingProvider.jsx:361-420` |
 | Revoke self | Available to all recipients | `SharingProvider.jsx:349-353` |
 | Revoke group | Available to owner/editor; removes all group members at once | `SharingProvider.jsx:336-347` |
 
