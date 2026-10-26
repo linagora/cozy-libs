@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.1.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@14.0.9...cozy-ui-plus@14.1.0) (2026-10-26)
+
+### Features
+
+- **cozy-ui-plus:** Add Tile component ([fb7c819](https://github.com/cozy/cozy-libs/commit/fb7c81950bd57afbee2fe9b6d585b248d5cf2918))
+
 ## [14.0.9](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@14.0.8...cozy-ui-plus@14.0.9) (2026-10-26)
 
 **Note:** Version bump only for package cozy-ui-plus
