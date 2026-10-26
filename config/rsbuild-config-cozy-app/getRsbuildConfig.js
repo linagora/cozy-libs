@@ -5,7 +5,7 @@ import { pluginNodePolyfill } from '@rsbuild/plugin-node-polyfill'
 import { pluginReact } from '@rsbuild/plugin-react'
 import { pluginStylus } from '@rsbuild/plugin-stylus'
 import { pluginSvgr } from '@rsbuild/plugin-svgr'
-import { RsdoctorRspackPlugin } from '@rsdoctor/rspack-plugin'
+import { RsdoctorRspackPlugin } from '@rsdoctor/core'
 import { pluginEjs } from 'rsbuild-plugin-ejs'
 
 import { getServicesEntries } from './helpers'
