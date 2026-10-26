@@ -52,6 +52,29 @@ const intents = new Intents({ fetch: fetchJSON })
 
 See [cozy-ui-plus](https://github.com/linagora/cozy-libs/tree/master/packages/cozy-ui-plus/src/Intent) for ready for use React components using cozy-interapp.
 
+## Guideline to build an intent
+
+### UI lifecycle
+
+The service app owns the UI inside the iframe, including how the user ends the intent:
+
+- it draws its own close button (e.g. the Drive File Picker has a cross in its header) and calls `service.cancel()` when the user uses it
+- it calls `service.terminate(doc)` when the user confirms
+- if the client should show its own close button instead, the service sends `hideCross` / `showCross`
+
+The client app owns the container around the iframe:
+
+- where and how the intent is displayed: inside a modal, a bottom sheet, a card, etc.
+- a loading state until `readyToUse`, with its own close button while the service UI is not there yet
+- removing the iframe when the intent ends (`done`, `cancel` or `error`), or earlier with `stop()` when the client must close it itself (e.g. the user navigates away)
+
+### Error handling
+
+- Business errors are handled inside the service. E.g. with the File Picker: the user selects a file, but it has been deleted when they confirm. The File Picker shows an error message and lets the user select another file or cancel. These errors are not forwarded to the client, which would not know what to do with them.
+- Technical errors (invalid data, failed initialization, unusable service) are sent to the client with `service.throw(error)` (`error` message). A service that cannot be used must not send `readyToUse`. The client decides what to do: retry, show that the service is unavailable, etc.
+
+The client should wait for `readyToUse` with a timeout (e.g. 20 seconds): a cross-origin iframe does not report loading errors. When the timeout is reached, the client handles it as a technical error.
+
 ## postMessage intent protocol overview
 
 ### Roles
