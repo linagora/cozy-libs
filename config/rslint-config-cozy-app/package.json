@@ -1,6 +1,6 @@
 {
   "name": "rslint-config-cozy-app",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rslint and rs fmt config for Cozy Applications (Cozy Cloud)",
   "type": "module",
   "author": "Cozy Cloud",
