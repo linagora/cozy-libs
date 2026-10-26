@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.9.0...rsbuild-config-cozy-app@0.10.0) (2026-10-26)
+
+### Features
+
+- **rsbuild-config-cozy-app:** Upgrade to Rsdoctor 2.0.1 ([8350f37](https://github.com/cozy/cozy-libs/commit/8350f370debe3ea10073e0c4887b86d8c895e875))
+
 # [0.9.0](https://github.com/cozy/cozy-libs/compare/rsbuild-config-cozy-app@0.8.0...rsbuild-config-cozy-app@0.9.0) (2026-09-17)
 
 ### Features
