@@ -3,7 +3,11 @@ import LinkRecipientPermissions from './LinkRecipientPermissions'
 const meta = {
   component: LinkRecipientPermissions,
   args: {
-    document: { _id: '123' }
+    document: { _id: '123' },
+    documentType: 'Files',
+    permissions: [],
+    onUpdateLinkPermissions: () => {},
+    onRevokeLink: () => {}
   }
 }
 

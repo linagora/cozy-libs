@@ -44,6 +44,8 @@ const WhoHasAccess = ({
   onRevokeSelf,
   onRevokeGroup,
   onLeaveGroup,
+  onUpdateLinkPermissions,
+  onRevokeLink,
   onSetType,
   verifyRecipient,
   link,
@@ -66,6 +68,8 @@ const WhoHasAccess = ({
             onRevoke={onRevoke}
             onRevokeSelf={onRevokeSelf}
             permissions={permissions}
+            onUpdateLinkPermissions={onUpdateLinkPermissions}
+            onRevokeLink={onRevokeLink}
             fadeIn={linkHasBeenJustCreated}
           />
         )}
@@ -112,6 +116,9 @@ WhoHasAccess.propTypes = {
   onRevokeSelf: PropTypes.func,
   onRevokeGroup: PropTypes.func.isRequired,
   onLeaveGroup: PropTypes.func.isRequired,
-  verifyRecipient: PropTypes.func
+  onUpdateLinkPermissions: PropTypes.func.isRequired,
+  onRevokeLink: PropTypes.func.isRequired,
+  verifyRecipient: PropTypes.func,
+  permissions: PropTypes.arrayOf(PropTypes.object)
 }
 export default WhoHasAccess

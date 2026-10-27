@@ -6,6 +6,10 @@ const meta = {
     recipientConfirmationData: false,
     verifyRecipient: () => true,
     document: { _id: '123' },
+    documentType: 'Files',
+    permissions: [],
+    onUpdateLinkPermissions: () => {},
+    onRevokeLink: () => {},
     fadeIn: false
   }
 }
