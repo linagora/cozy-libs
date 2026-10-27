@@ -9,6 +9,8 @@ const meta = {
     isOwner: false,
     onRevoke: () => {},
     onRevokeSelf: () => {},
+    onRevokeGroup: () => {},
+    onLeaveGroup: () => {},
     verifyRecipient: () => true
   }
 }

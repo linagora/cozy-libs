@@ -13,7 +13,9 @@ const meta = {
       { status: 'pending' },
       { status: 'revoked' }
     ],
-    groupIndex: 0
+    groupIndex: 0,
+    onRevokeGroup: () => {},
+    onLeaveGroup: () => {}
   }
 }
 
