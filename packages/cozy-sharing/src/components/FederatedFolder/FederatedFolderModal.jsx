@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useCallback, useEffect, useState } from 'react'
 
-import { useClient } from 'cozy-client'
 import minilog from 'cozy-minilog'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -12,9 +11,9 @@ import ConfirmDialogProvider, {
 } from 'cozy-ui/transpiled/react/providers/ConfirmDialog'
 import { useI18n } from 'twake-i18n'
 
-import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
+import { useResolveRecipients } from '../../hooks/useResolveRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import styles from '../../styles/share.styl'
 import AntivirusAlert from '../AntivirusAlert'
@@ -38,7 +37,7 @@ const FederatedFolderModalContent = ({
   // we close the popup and we do not want to see briefly the new contacts added
   // in members before the modal closes. That's why when clicking on "Share"
   // we do not use the reactive existingDocument and existingRecipients.
-  const client = useClient()
+  const resolveRecipients = useResolveRecipients()
   const { t } = useI18n()
   const {
     canReshare,
@@ -162,13 +161,8 @@ const FederatedFolderModalContent = ({
     setFrozenRecipients(recipients)
 
     try {
-      const contacts = await getOrCreateFromArray(
-        client,
-        pendingRecipients,
-        contact => client.create('io.cozy.contacts', contact)
-      )
-      const readWriteRecipients = selectedOption === 'readOnly' ? [] : contacts
-      const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
+      const { recipients: readWriteRecipients, readOnlyRecipients } =
+        await resolveRecipients(pendingRecipients, selectedOption)
 
       await share({
         description: folderName,

@@ -2,12 +2,12 @@ import { useState } from 'react'
 
 import { useClient } from 'cozy-client'
 
-import { getOrCreateFromArray } from '../../helpers/contacts'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
-import { DOCTYPE_CONTACTS } from '../../models'
+import { useResolveRecipients } from '../../hooks/useResolveRecipients'
 
 export const useSharedDrive = () => {
   const client = useClient()
+  const resolveRecipients = useResolveRecipients()
 
   const [sharedDriveName, setSharedDriveName] = useState('')
   const {
@@ -21,16 +21,9 @@ export const useSharedDrive = () => {
     setSharedDriveName(event.target.value)
   }
 
-  const createContact = contact => client.create(DOCTYPE_CONTACTS, contact)
-
   const onCreate = async () => {
-    const contacts = await getOrCreateFromArray(
-      client,
-      pendingRecipients,
-      createContact
-    )
-    const readWriteRecipients = selectedOption === 'readOnly' ? [] : contacts
-    const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
+    const { recipients: readWriteRecipients, readOnlyRecipients } =
+      await resolveRecipients(pendingRecipients, selectedOption)
 
     await client.collection('io.cozy.sharings').createSharedDrive({
       name: sharedDriveName,
