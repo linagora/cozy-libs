@@ -20,8 +20,8 @@ flowchart TD
     SharingContent --> ShareByEmail
     ConfirmTrustedRecipientsDialog --> DumbConfirmTrustedRecipientsDialog
     DumbConfirmTrustedRecipientsDialog --> ShareDialogTwoStepsConfirmationContainer
-    ShareByEmail --> ShareRecipientsInput
-    ShareRecipientsInput --> ShareAutosuggest
+    ShareByEmail --> ShareAutosuggestWrapper
+    ShareAutosuggestWrapper --> ShareAutosuggest
 ```
 
 ### Specific case of `ShareDialogTwoStepsConfirmationContainer`
