@@ -2,26 +2,21 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import { useQueryAll, isQueryLoading } from 'cozy-client'
-import { models } from 'cozy-client'
 import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
-import { getContactsFromGroupId } from '../helpers/contacts'
+import { computeContactsAndGroups } from '../helpers/contacts'
 import {
   buildReachableContactsQuery,
   buildContactGroupsQuery,
   buildUnreachableContactsWithGroupsQuery
 } from '../queries/queries'
 
-const ContactModel = models.contact
-
 /**
  * ShareRecipientsInput is responsible for fetching contacts and groups.
  * We retrieve all the contacts that are reachable and the groups they belong to.
  * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
  */
-const isCurrentUser = contact => contact.me === true
-
 const ShareRecipientsInput = ({
   currentRecipients,
   recipients,
@@ -64,60 +59,14 @@ const ShareRecipientsInput = ({
       (isQueryLoading(unreachableContactsWithGroupsResult) ||
         unreachableContactsWithGroupsResult.hasMore))
 
-  const reachableContacts = (reachableContactsResult.data || []).filter(
-    contact =>
-      !isCurrentUser(contact) &&
-      // We do not want contact already in the sharing
-      !currentRecipients.find(
-        r => r.email === ContactModel.getPrimaryEmail(contact)
-      ) &&
-      // We do not want contact currently in pending contacts (in chips)
-      !recipients.find(r => r._id === contact._id)
-  )
-
-  const unreachableContactsWithGroups = (
-    unreachableContactsWithGroupsResult.data || []
-  ).filter(contact => !isCurrentUser(contact))
-  const currentRecipientGroups = currentRecipients
-    .map(({ id }) => id)
-    .filter(Boolean)
-  const contactGroups = (contactGroupsResult.data || [])
-    .filter(
-      ({ _id }) =>
-        !flag('sharing.show-recipient-groups') ||
-        !currentRecipientGroups.includes(_id)
-    )
-    .map(contactGroup => {
-      const reachableMembers = getContactsFromGroupId(
-        reachableContacts,
-        contactGroup.id
-      ).map(contact => ({
-        ...contact,
-        isReachable: true
-      }))
-
-      if (flag('sharing.show-recipient-groups') !== true) {
-        return {
-          ...contactGroup,
-          members: reachableMembers
-        }
-      }
-
-      const unreachableMembers = getContactsFromGroupId(
-        unreachableContactsWithGroups,
-        contactGroup.id
-      ).map(contact => ({
-        ...contact,
-        isReachable: false
-      }))
-
-      return {
-        ...contactGroup,
-        members: [...reachableMembers, ...unreachableMembers]
-      }
-    })
-
-  const contactsAndGroups = [...reachableContacts, ...contactGroups]
+  const contactsAndGroups = computeContactsAndGroups({
+    reachableContacts: reachableContactsResult.data || [],
+    unreachableContactsWithGroups:
+      unreachableContactsWithGroupsResult.data || [],
+    contactGroups: contactGroupsResult.data || [],
+    currentRecipients,
+    pendingRecipients: recipients
+  })
 
   return (
     <ShareAutosuggest

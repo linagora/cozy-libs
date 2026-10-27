@@ -1,4 +1,9 @@
+import { models } from 'cozy-client'
+import flag from 'cozy-flags'
+
 import { validateEmail } from '../helpers/email'
+
+const ContactModel = models.contact
 
 // Return the contact object if present
 // Else check if a contact exist with this email address, if yes return it
@@ -58,4 +63,82 @@ export const getContactsFromGroupId = (contacts = [], groupId) => {
  */
 export const isContactToBeCreated = contact => {
   return !contact._id
+}
+
+const isCurrentUser = contact => contact.me === true
+
+/**
+ * Computes the contacts and groups to suggest when adding recipients to a
+ * sharing. The unreachable contacts only count in the members of the groups,
+ * when flag sharing.show-recipient-groups is enabled.
+ *
+ * @param {object} params
+ * @param {object[]} params.reachableContacts - Contacts that can be shared with
+ * @param {object[]} params.unreachableContactsWithGroups - Contacts that cannot be shared with but belong to a group
+ * @param {object[]} params.contactGroups - Groups of contacts
+ * @param {object[]} params.currentRecipients - Recipients already in the sharing
+ * @param {object[]} params.pendingRecipients - Recipients picked but not yet shared with
+ * @returns {object[]} The contacts, then the groups with their members
+ */
+export const computeContactsAndGroups = ({
+  reachableContacts,
+  unreachableContactsWithGroups,
+  contactGroups,
+  currentRecipients,
+  pendingRecipients
+}) => {
+  const suggestedContacts = reachableContacts.filter(
+    contact =>
+      !isCurrentUser(contact) &&
+      // We do not want contact already in the sharing
+      !currentRecipients.find(
+        r => r.email === ContactModel.getPrimaryEmail(contact)
+      ) &&
+      // We do not want contact currently in pending contacts (in chips)
+      !pendingRecipients.find(r => r._id === contact._id)
+  )
+
+  const unreachableContacts = unreachableContactsWithGroups.filter(
+    contact => !isCurrentUser(contact)
+  )
+  const currentRecipientGroups = currentRecipients
+    .map(({ id }) => id)
+    .filter(Boolean)
+  const suggestedGroups = contactGroups
+    .filter(
+      ({ _id }) =>
+        !flag('sharing.show-recipient-groups') ||
+        !currentRecipientGroups.includes(_id)
+    )
+    .map(contactGroup => {
+      const reachableMembers = getContactsFromGroupId(
+        suggestedContacts,
+        contactGroup.id
+      ).map(contact => ({
+        ...contact,
+        isReachable: true
+      }))
+
+      if (flag('sharing.show-recipient-groups') !== true) {
+        return {
+          ...contactGroup,
+          members: reachableMembers
+        }
+      }
+
+      const unreachableMembers = getContactsFromGroupId(
+        unreachableContacts,
+        contactGroup.id
+      ).map(contact => ({
+        ...contact,
+        isReachable: false
+      }))
+
+      return {
+        ...contactGroup,
+        members: [...reachableMembers, ...unreachableMembers]
+      }
+    })
+
+  return [...suggestedContacts, ...suggestedGroups]
 }
