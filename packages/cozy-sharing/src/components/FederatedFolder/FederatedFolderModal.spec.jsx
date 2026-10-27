@@ -61,6 +61,7 @@ jest.mock('cozy-ui/transpiled/react/providers/Alert', () => ({
 jest.mock('../../hoc/withLocales', () => Component => Component)
 
 jest.mock('../../helpers/contacts', () => ({
+  ...jest.requireActual('../../helpers/contacts'),
   getOrCreateFromArray: jest.fn()
 }))
 
