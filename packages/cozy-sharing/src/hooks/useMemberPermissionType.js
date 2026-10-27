@@ -13,11 +13,17 @@ import { getSharingDocIds } from '../state'
  * of a document's sharing
  *
  * @param {object} document - Shared document
+ * @param {object} [options]
+ * @param {boolean} [options.shouldFetchPath] - Whether to fetch the document
+ * path, needed to know the shared parent
  * @returns {{ isInsideSharedParent: boolean, sharedParentName: string|null, setMemberType: Function }}
  * `setMemberType({ sharingId, memberIndex, type, recipient }, newType, { withAncestors })`
  * also downgrades the member on the read-write ancestor sharings when `withAncestors` is set
  */
-export const useMemberPermissionType = document => {
+export const useMemberPermissionType = (
+  document,
+  { shouldFetchPath = true } = {}
+) => {
   const client = useClient()
   const {
     hasSharedParent,
@@ -28,7 +34,10 @@ export const useMemberPermissionType = document => {
   } = useSharingContext()
   const resolveRecipients = useResolveRecipients()
 
-  const documentPath = useFetchDocumentPath(client, document)
+  const documentPath = useFetchDocumentPath(
+    client,
+    shouldFetchPath ? document : null
+  )
   const isInsideSharedParent =
     Boolean(documentPath) && Boolean(hasSharedParent?.(documentPath))
   const sharedParentPath = documentPath

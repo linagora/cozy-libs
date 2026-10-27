@@ -3,7 +3,7 @@ import React from 'react'
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
 import WhoHasAccess from './WhoHasAccess'
-import { markCurrentUser } from '../helpers/recipients'
+import { hasMemberActions, markCurrentUser } from '../helpers/recipients'
 import { useMemberPermissionType } from '../hooks/useMemberPermissionType'
 import { useSharingContext } from '../hooks/useSharingContext'
 import { buildInstanceSettingsQuery } from '../queries/queries'
@@ -16,15 +16,15 @@ import { buildInstanceSettingsQuery } from '../queries/queries'
 const OWNER_PUBLIC_AVATAR_PATH = '/public/avatar?fallback=initials'
 
 const WhoHasAccessWrapper = ({
-  isOwner,
-  canManageSharing,
+  isOwner = false,
+  canManageSharing = isOwner,
   isSharedDrive,
   isReadOnly,
-  canManageMembers,
+  canManageMembers = !isReadOnly,
   canManageLink,
   showOwner = true,
   recipients,
-  recipientsToBeConfirmed,
+  recipientsToBeConfirmed = [],
   document,
   documentType,
   className,
@@ -42,11 +42,23 @@ const WhoHasAccessWrapper = ({
     revokeGroup,
     revokeSelf
   } = useSharingContext()
-  const { isInsideSharedParent, sharedParentName, setMemberType } =
-    useMemberPermissionType(document)
 
   const instanceUri = client.options.uri
   const markedRecipients = markCurrentUser(recipients, instanceUri)
+  const hasMemberMenus = markedRecipients.some(
+    recipient =>
+      !recipient.members &&
+      !recipientsToBeConfirmed.some(user => user.email === recipient.email) &&
+      hasMemberActions({
+        status: recipient.status,
+        isCurrentUser: recipient.isCurrentUser,
+        isOwner,
+        canManageSharing,
+        canManageMembers
+      })
+  )
+  const { isInsideSharedParent, sharedParentName, setMemberType } =
+    useMemberPermissionType(document, { shouldFetchPath: hasMemberMenus })
   const ownerRecipient = markedRecipients.find(
     recipient => recipient.status === 'owner'
   )

@@ -7,6 +7,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import PermissionTypeMenu from './PermissionTypeMenu'
+import { hasMemberActions } from '../../helpers/recipients'
 
 const MemberRecipientPermissions = ({
   isOwner,
@@ -31,10 +32,14 @@ const MemberRecipientPermissions = ({
 
   const contactIsOwner = status === 'owner'
   const shouldShowMenu =
-    canManageMembers &&
     !revoking &&
-    !contactIsOwner &&
-    ((isCurrentUser && !isOwner) || canManageSharing)
+    hasMemberActions({
+      status,
+      isCurrentUser,
+      isOwner,
+      canManageSharing,
+      canManageMembers
+    })
 
   const handleRevocation = useCallback(async () => {
     setRevoking(true)
