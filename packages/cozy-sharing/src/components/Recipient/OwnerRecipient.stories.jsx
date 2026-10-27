@@ -4,7 +4,7 @@ import { recipients } from '../../../.storybook/fixtures/recipients'
 const meta = {
   component: OwnerRecipient,
   args: {
-    recipients
+    owner: recipients.find(recipient => recipient.status === 'owner')
   }
 }
 
