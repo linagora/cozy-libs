@@ -3,7 +3,6 @@ import React from 'react'
 import snarkdown from 'snarkdown'
 
 import { Icon, FolderOutlined, ArrowUp } from '@linagora/twake-icons'
-import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Timeline from 'cozy-ui/transpiled/react/Timeline'
@@ -17,23 +16,16 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { DEFAULT_DISPLAY_NAME } from '../../helpers/recipients'
-import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
-import { useSharingContext } from '../../hooks/useSharingContext'
 import { getDisplayName } from '../../models'
 
 const DowngradePermissionConfirmDialog = ({
   document,
   recipient,
+  sharedParentName,
   onCancel,
   onConfirm
 }) => {
   const { t } = useI18n()
-  const client = useClient()
-  const { getSharedParentPath } = useSharingContext()
-
-  const documentPath = useFetchDocumentPath(client, document)
-  const sharedParentPath = documentPath && getSharedParentPath(documentPath)
-  const parentFolderName = sharedParentPath?.split('/').pop()
   const contactName = getDisplayName(recipient, t(DEFAULT_DISPLAY_NAME))
   const [before, afterOpen] = snarkdown(
     t('DowngradePermissionConfirmDialog.content', { contactName })
@@ -68,7 +60,7 @@ const DowngradePermissionConfirmDialog = ({
                 <TimelineConnector />
               </TimelineSeparator>
               <TimelineContent>
-                <Typography variant="body2">{parentFolderName}</Typography>
+                <Typography variant="body2">{sharedParentName}</Typography>
                 <div>
                   <s>
                     <Typography display="inline" variant="caption">
@@ -147,6 +139,7 @@ const DowngradePermissionConfirmDialog = ({
 DowngradePermissionConfirmDialog.propTypes = {
   document: PropTypes.object.isRequired,
   recipient: PropTypes.object.isRequired,
+  sharedParentName: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   onConfirm: PropTypes.func.isRequired
 }
