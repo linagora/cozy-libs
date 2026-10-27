@@ -11,6 +11,7 @@ const meta = {
     onRevokeSelf: () => {},
     onRevokeGroup: () => {},
     onLeaveGroup: () => {},
+    onSetMemberType: () => {},
     verifyRecipient: () => true
   }
 }

@@ -36,7 +36,7 @@ export { ShareButtonWithRecipients } from './ShareButtonWithRecipients'
 export { DOCUMENT_TYPE } from './helpers/documentType'
 export { getRecipientsFromSharing } from './state'
 export { default as OpenSharingLinkButton } from './OpenSharingLinkButton'
-export { PermissionTypeMenu } from './components/Recipient/PermissionTypeMenu'
+export { default as PermissionTypeMenu } from './components/Recipient/PermissionTypeMenuWrapper'
 export { default as OpenSharingLinkFabButton } from './OpenSharingLinkFabButton'
 export {
   NativeFileSharingProvider,

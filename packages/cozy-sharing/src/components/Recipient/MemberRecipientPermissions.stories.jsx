@@ -5,6 +5,7 @@ const meta = {
   args: {
     onRevoke: () => {},
     onRevokeSelf: () => {},
+    onSetMemberType: () => {},
     type: 'two-way',
     status: 'ready'
   },

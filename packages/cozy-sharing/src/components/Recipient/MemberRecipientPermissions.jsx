@@ -6,7 +6,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import { PermissionTypeMenu } from './PermissionTypeMenu'
+import PermissionTypeMenu from './PermissionTypeMenu'
 
 const MemberRecipientPermissions = ({
   isOwner,
@@ -16,8 +16,11 @@ const MemberRecipientPermissions = ({
   isCurrentUser = false,
   type,
   document,
+  isInsideSharedParent,
+  sharedParentName,
   onRevoke,
   onRevokeSelf,
+  onSetMemberType,
   sharingId,
   memberIndex,
   ...recipient
@@ -67,11 +70,23 @@ const MemberRecipientPermissions = ({
       {shouldShowMenu && (
         <>
           <PermissionTypeMenu
-            sharingId={sharingId}
-            memberIndex={memberIndex}
             type={type ?? 'one-way'}
             document={document}
             recipient={recipient}
+            isInsideSharedParent={isInsideSharedParent}
+            sharedParentName={sharedParentName}
+            onSetType={(newType, options) =>
+              onSetMemberType(
+                {
+                  sharingId,
+                  memberIndex,
+                  type: type ?? 'one-way',
+                  recipient
+                },
+                newType,
+                options
+              )
+            }
           />
           <IconButton
             onClick={handleRevocation}

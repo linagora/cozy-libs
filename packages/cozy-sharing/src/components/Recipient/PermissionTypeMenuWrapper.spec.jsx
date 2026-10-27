@@ -4,7 +4,7 @@ import React from 'react'
 import { createMockClient } from 'cozy-client'
 import flag from 'cozy-flags'
 
-import { PermissionTypeMenu } from './PermissionTypeMenu'
+import PermissionTypeMenuWrapper from './PermissionTypeMenuWrapper'
 import AppLike from '../../../test/AppLike'
 
 const mockUpdateSharingMemberType = jest.fn()
@@ -56,7 +56,7 @@ describe('PermissionTypeMenu component', () => {
   const setup = props => {
     return render(
       <AppLike client={client}>
-        <PermissionTypeMenu {...defaultProps} {...props} />
+        <PermissionTypeMenuWrapper {...defaultProps} {...props} />
       </AppLike>
     )
   }
