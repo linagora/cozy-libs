@@ -13,7 +13,6 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { permission } from './actions/permission'
-import { useSharingContext } from '../../hooks/useSharingContext'
 import { GroupAvatar } from '../Avatar/GroupAvatar'
 
 const GroupRecipientPermissions = ({
@@ -26,11 +25,12 @@ const GroupRecipientPermissions = ({
   read_only = false,
   className,
   isUserInsideMembers,
-  document
+  document,
+  onRevokeGroup,
+  onLeaveGroup
 }) => {
   const { t } = useI18n()
   const buttonRef = useRef()
-  const { revokeGroup, revokeSelf } = useSharingContext()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
   const [revoking, setRevoking] = useState(false)
@@ -44,9 +44,9 @@ const GroupRecipientPermissions = ({
   const handleRevocation = async () => {
     setRevoking(true)
     if (isOwner) {
-      await revokeGroup(document, sharingId, groupIndex)
+      await onRevokeGroup(document, sharingId, groupIndex)
     } else {
-      await revokeSelf(document)
+      await onLeaveGroup(document)
     }
     setRevoking(false)
   }

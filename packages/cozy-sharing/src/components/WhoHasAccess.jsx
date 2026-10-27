@@ -42,6 +42,8 @@ const WhoHasAccess = ({
   className,
   onRevoke,
   onRevokeSelf,
+  onRevokeGroup,
+  onLeaveGroup,
   onSetType,
   verifyRecipient,
   link,
@@ -81,6 +83,8 @@ const WhoHasAccess = ({
           documentType={documentType}
           onRevoke={onRevoke}
           onRevokeSelf={onRevokeSelf}
+          onRevokeGroup={onRevokeGroup}
+          onLeaveGroup={onLeaveGroup}
           onSetType={onSetType}
           verifyRecipient={verifyRecipient}
         />
@@ -106,6 +110,8 @@ WhoHasAccess.propTypes = {
   documentType: PropTypes.string.isRequired,
   onRevoke: PropTypes.func.isRequired,
   onRevokeSelf: PropTypes.func,
+  onRevokeGroup: PropTypes.func.isRequired,
+  onLeaveGroup: PropTypes.func.isRequired,
   verifyRecipient: PropTypes.func
 }
 export default WhoHasAccess

@@ -5,6 +5,8 @@ const meta = {
   args: {
     onRevoke: () => {},
     onRevokeSelf: () => {},
+    onRevokeGroup: () => {},
+    onLeaveGroup: () => {},
     type: 'two-way',
     status: 'ready',
     groupIndex: 0

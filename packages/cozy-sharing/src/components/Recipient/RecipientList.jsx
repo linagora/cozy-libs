@@ -16,6 +16,8 @@ const RecipientList = ({
   documentType,
   onRevoke,
   onRevokeSelf,
+  onRevokeGroup,
+  onLeaveGroup,
   verifyRecipient
 }) => {
   const previousRecipients = usePrevious(recipients)
@@ -41,6 +43,8 @@ const RecipientList = ({
           documentType={documentType}
           onRevoke={onRevoke}
           onRevokeSelf={onRevokeSelf}
+          onRevokeGroup={onRevokeGroup}
+          onLeaveGroup={onLeaveGroup}
           fadeIn={recipient.hasBeenJustAdded}
         />
       )
