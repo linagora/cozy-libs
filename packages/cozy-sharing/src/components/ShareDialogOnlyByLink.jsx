@@ -8,7 +8,7 @@ import { useI18n } from 'twake-i18n'
 
 import AntivirusAlert from './AntivirusAlert'
 import { default as DumbShareByLink } from './ShareByLink'
-import WhoHasAccess from './WhoHasAccess'
+import WhoHasAccessWrapper from './WhoHasAccessWrapper'
 import { useSharingContext } from '../hooks/useSharingContext'
 
 const ShareDialogOnlyByLink = ({
@@ -46,7 +46,7 @@ const ShareDialogOnlyByLink = ({
           >
             {t('Share.contacts.whoHasAccess')}
           </Typography>
-          <WhoHasAccess
+          <WhoHasAccessWrapper
             document={document}
             documentType={documentType}
             isOwner={isOwner}

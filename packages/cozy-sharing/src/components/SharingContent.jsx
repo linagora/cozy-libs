@@ -7,7 +7,7 @@ import { useI18n } from 'twake-i18n'
 
 import AntivirusAlert from './AntivirusAlert'
 import { default as DumbShareByEmail } from './ShareByEmail'
-import WhoHasAccess from './WhoHasAccess'
+import WhoHasAccessWrapper from './WhoHasAccessWrapper'
 import styles from '../styles/share.styl'
 
 const SharingContent = ({
@@ -74,7 +74,7 @@ const SharingContent = ({
         )}
       </div>
       {showWhoHasAccess && (
-        <WhoHasAccess
+        <WhoHasAccessWrapper
           document={document}
           documentType={documentType}
           isOwner={isOwner}
