@@ -1,4 +1,4 @@
-import { markCurrentUser } from './recipients'
+import { hasMemberActions, markCurrentUser } from './recipients'
 
 const instanceUri = 'https://alice.cozy.cc'
 
@@ -36,5 +36,47 @@ describe('markCurrentUser', () => {
 
     expect(group.isCurrentUser).toBe(false)
     expect(group.members.map(m => m.isCurrentUser)).toEqual([false, true])
+  })
+})
+
+describe('hasMemberActions', () => {
+  const ownerRights = {
+    isOwner: true,
+    canManageSharing: true,
+    canManageMembers: true
+  }
+  const memberRights = {
+    isOwner: false,
+    canManageSharing: false,
+    canManageMembers: true
+  }
+
+  it('gives actions on the members to whom can manage the sharing', () => {
+    expect(hasMemberActions({ ...ownerRights, status: 'ready' })).toBe(true)
+  })
+
+  it('gives no action on the owner', () => {
+    expect(hasMemberActions({ ...ownerRights, status: 'owner' })).toBe(false)
+  })
+
+  it('gives no action when the members cannot be managed', () => {
+    expect(
+      hasMemberActions({
+        ...ownerRights,
+        canManageMembers: false,
+        status: 'ready'
+      })
+    ).toBe(false)
+  })
+
+  it('gives actions on themselves to a member who cannot manage the sharing', () => {
+    expect(
+      hasMemberActions({
+        ...memberRights,
+        status: 'ready',
+        isCurrentUser: true
+      })
+    ).toBe(true)
+    expect(hasMemberActions({ ...memberRights, status: 'ready' })).toBe(false)
   })
 })

@@ -122,3 +122,24 @@ export const markCurrentUser = (recipients, instanceUri) =>
       }))
     })
   }))
+
+/**
+ * @param {object} params
+ * @param {string} params.status - Status of the member in the sharing
+ * @param {boolean} params.isCurrentUser - Whether the member is the current user
+ * @param {boolean} params.isOwner - Whether the current user owns the sharing
+ * @param {boolean} params.canManageSharing - Whether the current user can manage the sharing
+ * @param {boolean} params.canManageMembers - Whether the members can be managed
+ * @returns {boolean} Whether the current user can change the member's
+ * permission type or revoke them
+ */
+export const hasMemberActions = ({
+  status,
+  isCurrentUser,
+  isOwner,
+  canManageSharing,
+  canManageMembers
+}) =>
+  canManageMembers &&
+  status !== 'owner' &&
+  ((isCurrentUser && !isOwner) || canManageSharing)
