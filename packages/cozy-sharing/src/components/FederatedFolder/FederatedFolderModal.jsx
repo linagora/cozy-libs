@@ -19,7 +19,7 @@ import styles from '../../styles/share.styl'
 import AntivirusAlert from '../AntivirusAlert'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import ShareByLink from '../ShareByLink'
-import WhoHasAccess from '../WhoHasAccess'
+import WhoHasAccessWrapper from '../WhoHasAccessWrapper'
 
 const log = minilog('FederatedFolderModal')
 
@@ -269,7 +269,7 @@ const FederatedFolderModalContent = ({
               </>
             )}
           </div>
-          <WhoHasAccess
+          <WhoHasAccessWrapper
             isOwner={isCurrentUserOwner}
             canManageSharing={canManageSharing}
             isSharedDrive

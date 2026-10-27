@@ -7,7 +7,7 @@ import { useI18n } from 'twake-i18n'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import styles from '../../styles/share.styl'
 import ShareByLink from '../ShareByLink'
-import WhoHasAccess from '../WhoHasAccess'
+import WhoHasAccessWrapper from '../WhoHasAccessWrapper'
 
 export const SharingDetailsModal = ({
   recipients,
@@ -34,7 +34,7 @@ export const SharingDetailsModal = ({
       title={t(`${documentType}.share.details.title`)}
       content={
         <div className={styles['share-modal-content']}>
-          <WhoHasAccess
+          <WhoHasAccessWrapper
             canManageMembers={false}
             canManageLink={isSharedDrive}
             isSharedDrive={isSharedDrive}

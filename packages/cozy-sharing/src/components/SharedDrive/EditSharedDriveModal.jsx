@@ -16,7 +16,7 @@ import { useResolveRecipients } from '../../hooks/useResolveRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import styles from '../../styles/share.styl'
 import { default as DumbShareByEmail } from '../ShareByEmail'
-import WhoHasAccess from '../WhoHasAccess'
+import WhoHasAccessWrapper from '../WhoHasAccessWrapper'
 
 export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
   const client = useClient()
@@ -95,7 +95,7 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
               onSelectedOptionChange={setSelectedOption}
             />
           </div>
-          <WhoHasAccess
+          <WhoHasAccessWrapper
             isOwner
             isSharedDrive
             showOwner={false}
