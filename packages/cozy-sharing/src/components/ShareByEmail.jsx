@@ -4,7 +4,7 @@ import React from 'react'
 import flag from 'cozy-flags'
 import { useI18n } from 'twake-i18n'
 
-import ShareRecipientsInput from './ShareRecipientsInput'
+import ShareAutosuggestWrapper from './ShareAutosuggestWrapper'
 import ShareTypeSelect from './Sharetypeselect'
 import {
   mergeRecipients,
@@ -60,7 +60,7 @@ export const ShareByEmail = ({
   return (
     <div className={styles['coz-form-group']}>
       <div className={styles['coz-form']}>
-        <ShareRecipientsInput
+        <ShareAutosuggestWrapper
           placeholder={
             pendingRecipients.length === 0
               ? t(`${documentType}.share.shareByEmail.emailPlaceholder`)

@@ -13,11 +13,11 @@ import {
 } from '../queries/queries'
 
 /**
- * ShareRecipientsInput is responsible for fetching contacts and groups.
+ * ShareAutosuggestWrapper is responsible for fetching contacts and groups.
  * We retrieve all the contacts that are reachable and the groups they belong to.
  * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
  */
-const ShareRecipientsInput = ({
+const ShareAutosuggestWrapper = ({
   currentRecipients,
   recipients,
   placeholder,
@@ -84,7 +84,7 @@ const ShareRecipientsInput = ({
   )
 }
 
-ShareRecipientsInput.propTypes = {
+ShareAutosuggestWrapper.propTypes = {
   currentRecipients: PropTypes.array,
   recipients: PropTypes.array,
   placeholder: PropTypes.string,
@@ -96,9 +96,9 @@ ShareRecipientsInput.propTypes = {
   endAdornment: PropTypes.node
 }
 
-ShareRecipientsInput.defaultProps = {
+ShareAutosuggestWrapper.defaultProps = {
   currentRecipients: [],
   recipients: []
 }
 
-export default ShareRecipientsInput
+export default ShareAutosuggestWrapper

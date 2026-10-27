@@ -4,7 +4,7 @@ import React from 'react'
 import { createMockClient } from 'cozy-client'
 import flag from 'cozy-flags'
 
-import ShareRecipientsInput from './ShareRecipientsInput'
+import ShareAutosuggestWrapper from './ShareAutosuggestWrapper'
 import AppLike from './SharingBanner/test/AppLike'
 
 jest.mock('cozy-flags', () => ({
@@ -37,7 +37,7 @@ jest.mock('./ShareAutosuggest', () => ({
   }
 }))
 
-describe('ShareRecipientsInput component', () => {
+describe('ShareAutosuggestWrapper component', () => {
   const setup = (
     { contacts, contactGroups, unreachableContact },
     { currentRecipients, recipients } = {}
@@ -60,7 +60,7 @@ describe('ShareRecipientsInput component', () => {
     })
     render(
       <AppLike client={mockClient}>
-        <ShareRecipientsInput
+        <ShareAutosuggestWrapper
           onPick={() => {}}
           onRemove={() => {}}
           placeholder="Enter recipients here"
