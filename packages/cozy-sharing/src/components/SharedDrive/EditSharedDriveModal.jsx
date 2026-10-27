@@ -10,9 +10,9 @@ import { useSubmitWithLoader } from 'cozy-ui/transpiled/react/hooks/useSubmitWit
 import { useI18n } from 'twake-i18n'
 
 import SharedDriveHeader from './SharedDriveHeader'
-import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
+import { useResolveRecipients } from '../../hooks/useResolveRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import styles from '../../styles/share.styl'
 import { default as DumbShareByEmail } from '../ShareByEmail'
@@ -29,18 +29,13 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
     setSelectedOption
   } = usePendingRecipients()
   const { onSubmit, isLoading } = useSubmitWithLoader()
+  const resolveRecipients = useResolveRecipients()
 
   const [driveName, setDriveName] = useState(document.name)
 
   const onSave = async () => {
-    // We add contacts
-    const contacts = await getOrCreateFromArray(
-      client,
-      pendingRecipients,
-      contact => client.create('io.cozy.contacts', contact)
-    )
-    const readWriteRecipients = selectedOption === 'readOnly' ? [] : contacts
-    const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
+    const { recipients: readWriteRecipients, readOnlyRecipients } =
+      await resolveRecipients(pendingRecipients, selectedOption)
 
     await share({
       document: document,

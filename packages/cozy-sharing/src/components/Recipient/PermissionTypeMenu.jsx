@@ -12,9 +12,9 @@ import { useI18n } from 'twake-i18n'
 import DowngradePermissionConfirmDialog from './DowngradePermissionConfirmDialog'
 import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
 import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
-import { getOrCreateFromArray } from '../../helpers/contacts'
 import withLocales from '../../hoc/withLocales'
 import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
+import { useResolveRecipients } from '../../hooks/useResolveRecipients'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { getSharingDocIds } from '../../state'
 
@@ -33,6 +33,7 @@ const PermissionTypeMenuComponent = ({
   const { hasSharedParent, updateSharingMemberType, getSharingById, share } =
     useSharingContext()
   const { showAlert } = useAlert()
+  const resolveRecipients = useResolveRecipients()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
   const [pendingType, setPendingType] = useState(null)
@@ -73,16 +74,12 @@ const PermissionTypeMenuComponent = ({
             sourceSharing &&
             !getSharingDocIds(sourceSharing).includes(documentId)
           ) {
-            const contacts = await getOrCreateFromArray(
-              client,
-              [recipient],
-              contact => client.create('io.cozy.contacts', contact)
-            )
-            if (!contacts[0]) throw new Error('Recipient contact not found')
+            const { recipients } = await resolveRecipients([recipient])
+            if (!recipients[0]) throw new Error('Recipient contact not found')
             await share({
               document: { ...document, id: documentId },
               description: document.name,
-              recipients: contacts,
+              recipients,
               readOnlyRecipients: [],
               sharedDrive: true,
               openSharing: false
@@ -102,11 +99,11 @@ const PermissionTypeMenuComponent = ({
       }
     },
     [
-      client,
       document,
       getSharingById,
       memberIndex,
       recipient,
+      resolveRecipients,
       share,
       sharingId,
       showAlert,

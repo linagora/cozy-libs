@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useCallback, useMemo, useState } from 'react'
 
-import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
@@ -10,10 +9,10 @@ import { default as DumbShareByLink } from './ShareByLink'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
 import { ShareRecipientsLimitModal } from './ShareRecipientsLimitModal'
 import SharingContent from './SharingContent'
-import { getOrCreateFromArray } from '../helpers/contacts'
 import { hasReachRecipientsLimit } from '../helpers/recipients'
 import { getErrorMessage, getSuccessMessage } from '../helpers/share'
 import { usePendingRecipients } from '../hooks/usePendingRecipients'
+import { useResolveRecipients } from '../hooks/useResolveRecipients'
 import { useSharingContext } from '../hooks/useSharingContext'
 
 const SharingTitleFunction = ({ documentType, document }) =>
@@ -39,7 +38,7 @@ const ShareDialogCozyToCozy = ({
   ...props
 }) => {
   const { t } = useI18n()
-  const client = useClient()
+  const resolveRecipients = useResolveRecipients()
   const { showAlert } = useAlert()
   const { getSharingLink } = useSharingContext()
 
@@ -67,13 +66,13 @@ const ShareDialogCozyToCozy = ({
 
     setSubmitting(true)
     try {
-      const contacts = await getOrCreateFromArray(
-        client,
-        pendingRecipients,
-        createContact
-      )
-      const readWriteRecipients = selectedOption === 'readOnly' ? [] : contacts
-      const readOnlyRecipients = selectedOption === 'readOnly' ? contacts : []
+      const { recipients: readWriteRecipients, readOnlyRecipients } =
+        await resolveRecipients(
+          pendingRecipients,
+          selectedOption,
+          createContact
+        )
+      const contacts = [...readWriteRecipients, ...readOnlyRecipients]
 
       await onShare({
         document,
@@ -109,7 +108,7 @@ const ShareDialogCozyToCozy = ({
   }, [
     pendingRecipients,
     selectedOption,
-    client,
+    resolveRecipients,
     showAlert,
     t,
     recipients,
