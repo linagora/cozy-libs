@@ -25,7 +25,6 @@ const SharingContent = ({
   recipientsToBeConfirmed,
   verifyRecipient,
   link,
-  permissions,
   pendingRecipients,
   onPendingRecipientsChange,
   selectedOption,
@@ -84,7 +83,6 @@ const SharingContent = ({
           recipientsToBeConfirmed={recipientsToBeConfirmed}
           verifyRecipient={verifyRecipient}
           link={link}
-          permissions={permissions}
         />
       )}
     </div>

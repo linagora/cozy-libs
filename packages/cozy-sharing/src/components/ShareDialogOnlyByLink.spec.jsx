@@ -33,7 +33,6 @@ describe('ShareDialogOnlyByLink', () => {
         onClose={jest.fn()}
         onRevoke={jest.fn()}
         onRevokeSelf={jest.fn()}
-        permissions={[]}
         recipients={[]}
       />
     </AppLike>

@@ -19,7 +19,6 @@ const ShareDialogOnlyByLink = ({
   document,
   documentType,
   onClose,
-  permissions,
   showGenerateLinkButton,
   autoOpenShareRestriction
 }) => {
@@ -54,7 +53,6 @@ const ShareDialogOnlyByLink = ({
             onRevokeSelf={onRevokeSelf}
             recipients={recipients}
             link={displayedLink}
-            permissions={permissions}
           />
           <div
             className={cx(
