@@ -51,6 +51,7 @@ describe('MemberRecipient component', () => {
   it('should render if isMe ', () => {
     const { getByText } = setup({
       instance: 'foo.mycozy.cloud',
+      isCurrentUser: true,
       status: 'ready',
       type: 'two-way'
     })
@@ -61,6 +62,7 @@ describe('MemberRecipient component', () => {
   it('should match snapshot if isOwner', () => {
     const { getByText } = setup({
       instance: 'foo.mycozy.cloud',
+      isCurrentUser: true,
       status: 'ready',
       type: 'two-way',
       isOwner: true
@@ -75,6 +77,7 @@ describe('MemberRecipient component', () => {
 
     const { getByLabelText } = setup({
       instance: 'foo.mycozy.cloud',
+      isCurrentUser: true,
       status: 'ready',
       type: 'two-way',
       documentType: 'Files',
@@ -93,6 +96,7 @@ describe('MemberRecipient component', () => {
 
     const { getByLabelText } = setup({
       instance: 'foo.mycozy.cloud',
+      isCurrentUser: true,
       status: 'ready',
       type: 'two-way',
       isOwner: true,
@@ -112,6 +116,7 @@ describe('MemberRecipient component', () => {
 
     const { getByText } = setup({
       instance: 'foo.mycozy.cloud',
+      isCurrentUser: true,
       status: 'ready',
       type: 'two-way',
       isOwner: false,
@@ -132,6 +137,7 @@ describe('MemberRecipient component', () => {
 
     const { queryByText } = setup({
       instance: 'foo.mycozy.cloud',
+      isCurrentUser: true,
       status: 'ready',
       type: 'two-way',
       isOwner: false,
@@ -149,6 +155,7 @@ describe('MemberRecipient component', () => {
 
     const { getByText } = setup({
       instance: 'foo.mycozy.cloud',
+      isCurrentUser: true,
       status: 'ready',
       type: 'two-way',
       isOwner: false,

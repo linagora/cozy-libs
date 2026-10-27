@@ -99,3 +99,26 @@ export const getGroupRecipientSecondaryText = ({
     (isUserInsideMembers ? ` (${t('GroupRecipient.secondary_you')})` : '')
   )
 }
+
+const isInstance = (recipient, instanceUri) =>
+  recipient.instance !== undefined && recipient.instance === instanceUri
+
+/**
+ * Flags with `isCurrentUser` the recipients, and the members of group
+ * recipients, whose instance is the current user's one
+ *
+ * @param {object[]} recipients - Recipients of a sharing
+ * @param {string} instanceUri - URI of the current user's instance
+ * @returns {object[]} The recipients with their `isCurrentUser` flag
+ */
+export const markCurrentUser = (recipients, instanceUri) =>
+  recipients.map(recipient => ({
+    ...recipient,
+    isCurrentUser: isInstance(recipient, instanceUri),
+    ...(recipient.members && {
+      members: recipient.members.map(member => ({
+        ...member,
+        isCurrentUser: isInstance(member, instanceUri)
+      }))
+    })
+  }))

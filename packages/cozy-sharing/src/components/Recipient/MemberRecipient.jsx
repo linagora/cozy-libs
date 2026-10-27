@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { useClient } from 'cozy-client'
 import Fade from 'cozy-ui/transpiled/react/Fade'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -22,13 +21,13 @@ import { MemberAvatar } from '../Avatar/MemberAvatar'
 
 const MemberRecipient = props => {
   const { t } = useI18n()
-  const client = useClient()
   const { isMobile } = useBreakpoints()
 
   const {
     instance,
     isOwner,
     status,
+    isCurrentUser = false,
     recipientConfirmationData,
     verifyRecipient,
     fadeIn,
@@ -36,8 +35,7 @@ const MemberRecipient = props => {
     ...rest
   } = props
 
-  const isMe =
-    (isOwner && status === 'owner') || instance === client.options.uri
+  const isMe = (isOwner && status === 'owner') || isCurrentUser
   const defaultDisplayName = t(DEFAULT_DISPLAY_NAME)
   const name = getDisplayName(rest, defaultDisplayName)
 
@@ -52,6 +50,7 @@ const MemberRecipient = props => {
       instance={instance}
       isOwner={isOwner}
       status={status}
+      isCurrentUser={isCurrentUser}
     />
   )
 
@@ -88,6 +87,7 @@ MemberRecipient.propTypes = {
   instance: PropTypes.string,
   isOwner: PropTypes.bool,
   status: PropTypes.string,
+  isCurrentUser: PropTypes.bool,
   recipientConfirmationData: PropTypes.object,
   verifyRecipient: PropTypes.func,
   isOrgSharedDrive: PropTypes.bool

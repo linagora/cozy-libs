@@ -33,7 +33,7 @@ describe('MemberRecipientPermissions component', () => {
     isOwner: true,
     isSharedDrive: false,
     status: 'ready',
-    instance: 'http://cozy.local:8080',
+    isCurrentUser: true,
     type: 'two-way',
     document: { id: 'doc-123', type: 'io.cozy.files', path: '/test' },
     sharingId: 'sharing-123',
@@ -75,7 +75,7 @@ describe('MemberRecipientPermissions component', () => {
   it('should not render menu when user is not owner and not the shared drive contact', () => {
     const { queryByRole } = setup({
       isOwner: false,
-      instance: 'http://other-cozy.local:8080'
+      isCurrentUser: false
     })
 
     expect(queryByRole('button', { name: 'Editor' })).not.toBeInTheDocument()
@@ -91,7 +91,7 @@ describe('MemberRecipientPermissions component', () => {
   it('should render menu for the user themselves', () => {
     const { getByRole } = setup({
       isOwner: false,
-      instance: 'http://cozy.local:8080'
+      isCurrentUser: true
     })
 
     expect(getByRole('button', { name: 'Editor' })).toBeInTheDocument()
