@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
@@ -14,7 +13,6 @@ import { getInitials, getDisplayName } from '../../models'
 
 const GroupRecipientDetailWithAccess = ({ withAccess }) => {
   const { t } = useI18n()
-  const client = useClient()
 
   return (
     <div>
@@ -24,7 +22,6 @@ const GroupRecipientDetailWithAccess = ({ withAccess }) => {
       <List>
         {withAccess.map(recipient => {
           const name = getDisplayName(recipient)
-          const isMe = recipient.instance === client.options.uri
 
           return (
             <ListItem disableGutters key={recipient.index} size="small">
@@ -36,7 +33,7 @@ const GroupRecipientDetailWithAccess = ({ withAccess }) => {
                 secondary={
                   <MemberRecipientStatus
                     status={recipient.status}
-                    isMe={isMe}
+                    isMe={Boolean(recipient.isCurrentUser)}
                     instance={recipient.instance}
                     email={recipient.email}
                     name={recipient.name || recipient.public_name}

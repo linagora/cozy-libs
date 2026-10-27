@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react'
 
 import { Icon, CrossCircleOutline } from '@linagora/twake-icons'
-import { useClient } from 'cozy-client'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -14,7 +13,7 @@ const MemberRecipientPermissions = ({
   canManageSharing = isOwner,
   canManageMembers = true,
   status,
-  instance,
+  isCurrentUser = false,
   type,
   document,
   onRevoke,
@@ -24,23 +23,20 @@ const MemberRecipientPermissions = ({
   ...recipient
 }) => {
   const { t } = useI18n()
-  const client = useClient()
 
   const [revoking, setRevoking] = useState(false)
 
-  const instanceMatchesClient =
-    instance !== undefined && instance === client.options.uri
   const contactIsOwner = status === 'owner'
   const shouldShowMenu =
     canManageMembers &&
     !revoking &&
     !contactIsOwner &&
-    ((instanceMatchesClient && !isOwner) || canManageSharing)
+    ((isCurrentUser && !isOwner) || canManageSharing)
 
   const handleRevocation = useCallback(async () => {
     setRevoking(true)
     try {
-      if (instanceMatchesClient && !isOwner) {
+      if (isCurrentUser && !isOwner) {
         await onRevokeSelf(document)
       } else {
         await onRevoke(document, sharingId, memberIndex)
@@ -50,7 +46,7 @@ const MemberRecipientPermissions = ({
     }
   }, [
     document,
-    instanceMatchesClient,
+    isCurrentUser,
     isOwner,
     memberIndex,
     onRevoke,

@@ -35,6 +35,6 @@ export const Self = {
   name: 'Self',
   args: {
     isOwner: false,
-    instance: 'http://alice.cozy.localhost:8080'
+    isCurrentUser: true
   }
 }

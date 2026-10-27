@@ -1,6 +1,9 @@
 import React from 'react'
 
+import { useClient } from 'cozy-client'
+
 import WhoHasAccess from './WhoHasAccess'
+import { markCurrentUser } from '../helpers/recipients'
 
 const WhoHasAccessWrapper = ({
   isOwner,
@@ -21,6 +24,8 @@ const WhoHasAccessWrapper = ({
   link,
   permissions
 }) => {
+  const client = useClient()
+
   return (
     <WhoHasAccess
       isOwner={isOwner}
@@ -30,7 +35,7 @@ const WhoHasAccessWrapper = ({
       canManageMembers={canManageMembers}
       canManageLink={canManageLink}
       showOwner={showOwner}
-      recipients={recipients}
+      recipients={markCurrentUser(recipients, client.options.uri)}
       recipientsToBeConfirmed={recipientsToBeConfirmed}
       document={document}
       documentType={documentType}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-import { useClient } from 'cozy-client'
 import Fade from 'cozy-ui/transpiled/react/Fade'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
@@ -21,7 +20,6 @@ import { GroupAvatar } from '../Avatar/GroupAvatar'
 const GroupRecipient = props => {
   const { name, color, members, fadeIn, isOwner } = props
   const { t } = useI18n()
-  const client = useClient()
   const { isMobile } = useBreakpoints()
 
   const [isDetailOpened, setDetailOpened] = useState(false)
@@ -30,9 +28,7 @@ const GroupRecipient = props => {
   const nbMemberReady = members.filter(
     member => !['revoked', 'mail-not-sent'].includes(member.status)
   ).length
-  const isUserInsideMembers = members.some(
-    member => member.instance === client.options.uri
-  )
+  const isUserInsideMembers = members.some(member => member.isCurrentUser)
 
   const toogleDetailOpened = () => {
     setDetailOpened(!isDetailOpened)
