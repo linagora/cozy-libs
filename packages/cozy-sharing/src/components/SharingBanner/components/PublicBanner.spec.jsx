@@ -1,22 +1,14 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import { useClient } from 'cozy-client'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
 import { SharingBannerCozyToCozy } from './PublicBanner'
 
 jest.mock('twake-i18n')
-jest.mock('cozy-client')
 
 describe('PublicBanner', () => {
-  beforeEach(() => {
-    useClient.mockReturnValue({
-      options: { uri: 'http://cozy.localhost:8080' }
-    })
-  })
-
   it('should not add dangerous html', () => {
     // Given
     useI18n.mockReturnValue({
@@ -35,6 +27,7 @@ describe('PublicBanner', () => {
       <BreakpointsProvider>
         <SharingBannerCozyToCozy
           sharing={sharing}
+          avatarURL="http://cozy.localhost:8080/public/avatar?fallback=initials"
           isSharingShortcutCreated={true}
           addSharingLink="discoveryLink"
           onClose={() => {}}
