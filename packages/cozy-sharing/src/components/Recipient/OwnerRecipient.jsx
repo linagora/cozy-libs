@@ -2,28 +2,15 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import MemberRecipient from './MemberRecipient'
-import OwnerRecipientDefault from './OwnerRecipientDefault'
 
-const OwnerRecipient = ({ recipients, isOrgSharedDrive }) => {
-  const ownerRecipient = recipients.find(
-    recipient => recipient.status === 'owner'
-  )
+const OwnerRecipient = ({ owner }) => {
+  if (!owner) return null
 
-  if (ownerRecipient) {
-    return (
-      <MemberRecipient
-        {...ownerRecipient}
-        isOrgSharedDrive={isOrgSharedDrive}
-      />
-    )
-  }
-
-  return <OwnerRecipientDefault />
+  return <MemberRecipient {...owner} />
 }
 
 OwnerRecipient.propTypes = {
-  recipients: PropTypes.array.isRequired,
-  isOrgSharedDrive: PropTypes.bool
+  owner: PropTypes.object
 }
 
 export default OwnerRecipient
