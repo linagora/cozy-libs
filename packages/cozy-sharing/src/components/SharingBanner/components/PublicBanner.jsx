@@ -3,7 +3,6 @@ import React from 'react'
 import snarkdown from 'snarkdown'
 
 import { Icon, SyncCozy, ToTheCloud } from '@linagora/twake-icons'
-import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
@@ -17,11 +16,9 @@ import styles from '../../../styles/publicBanner.styl'
 const getPublicNameFromSharing = sharing =>
   sharing.attributes.members[0].public_name
 
-const PublicBannerCozyToCozyContent = ({ sharing }) => {
+const PublicBannerCozyToCozyContent = ({ sharing, avatarURL }) => {
   const { t } = useI18n()
-  const client = useClient()
   const name = getPublicNameFromSharing(sharing)
-  const avatarURL = `${client.options.uri}/public/avatar?fallback=initials`
 
   const withAvatar = snarkdown(
     t('Share.banner.shared_from', {
@@ -43,13 +40,15 @@ const PublicBannerCozyToCozyContent = ({ sharing }) => {
   )
 }
 PublicBannerCozyToCozyContent.propTypes = {
-  sharing: PropTypes.object.isRequired
+  sharing: PropTypes.object.isRequired,
+  avatarURL: PropTypes.string.isRequired
 }
 
 const openExternalLink = url => (window.location = url)
 
 const SharingBannerCozyToCozy = ({
   sharing,
+  avatarURL,
   isSharingShortcutCreated,
   addSharingLink,
   onClose
@@ -90,7 +89,7 @@ const SharingBannerCozyToCozy = ({
         </>
       }
     >
-      <PublicBannerCozyToCozyContent sharing={sharing} />
+      <PublicBannerCozyToCozyContent sharing={sharing} avatarURL={avatarURL} />
     </Alert>
   )
 }
@@ -162,6 +161,7 @@ SharingBannerByLink.propTypes = {
 }
 SharingBannerCozyToCozy.propTypes = {
   sharing: PropTypes.object.isRequired,
+  avatarURL: PropTypes.string.isRequired,
   isSharingShortcutCreated: PropTypes.bool.isRequired,
   addSharingLink: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired
