@@ -35,6 +35,8 @@ const WhoHasAccess = ({
   canManageLink = canManageMembers,
   showOwner = true,
   owner,
+  isInsideSharedParent = false,
+  sharedParentName,
   recipients,
   recipientsToBeConfirmed = [],
   document,
@@ -44,9 +46,9 @@ const WhoHasAccess = ({
   onRevokeSelf,
   onRevokeGroup,
   onLeaveGroup,
+  onSetMemberType,
   onUpdateLinkPermissions,
   onRevokeLink,
-  onSetType,
   verifyRecipient,
   link,
   permissions
@@ -85,11 +87,13 @@ const WhoHasAccess = ({
           isSharedDrive={isSharedDrive}
           document={document}
           documentType={documentType}
+          isInsideSharedParent={isInsideSharedParent}
+          sharedParentName={sharedParentName}
           onRevoke={onRevoke}
           onRevokeSelf={onRevokeSelf}
           onRevokeGroup={onRevokeGroup}
           onLeaveGroup={onLeaveGroup}
-          onSetType={onSetType}
+          onSetMemberType={onSetMemberType}
           verifyRecipient={verifyRecipient}
         />
       </List>
@@ -104,6 +108,8 @@ WhoHasAccess.propTypes = {
   canManageLink: PropTypes.bool,
   showOwner: PropTypes.bool,
   owner: PropTypes.object,
+  isInsideSharedParent: PropTypes.bool,
+  sharedParentName: PropTypes.string,
   recipients: PropTypes.array.isRequired,
   recipientsToBeConfirmed: PropTypes.arrayOf(
     PropTypes.shape({
@@ -116,6 +122,7 @@ WhoHasAccess.propTypes = {
   onRevokeSelf: PropTypes.func,
   onRevokeGroup: PropTypes.func.isRequired,
   onLeaveGroup: PropTypes.func.isRequired,
+  onSetMemberType: PropTypes.func.isRequired,
   onUpdateLinkPermissions: PropTypes.func.isRequired,
   onRevokeLink: PropTypes.func.isRequired,
   verifyRecipient: PropTypes.func,

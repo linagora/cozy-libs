@@ -4,6 +4,7 @@ import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
 import WhoHasAccess from './WhoHasAccess'
 import { markCurrentUser } from '../helpers/recipients'
+import { useMemberPermissionType } from '../hooks/useMemberPermissionType'
 import { useSharingContext } from '../hooks/useSharingContext'
 import { buildInstanceSettingsQuery } from '../queries/queries'
 
@@ -41,6 +42,8 @@ const WhoHasAccessWrapper = ({
     revokeGroup,
     revokeSelf
   } = useSharingContext()
+  const { isInsideSharedParent, sharedParentName, setMemberType } =
+    useMemberPermissionType(document)
 
   const instanceUri = client.options.uri
   const markedRecipients = markCurrentUser(recipients, instanceUri)
@@ -78,6 +81,8 @@ const WhoHasAccessWrapper = ({
       canManageLink={canManageLink}
       showOwner={showOwner}
       owner={owner}
+      isInsideSharedParent={isInsideSharedParent}
+      sharedParentName={sharedParentName}
       recipients={markedRecipients}
       recipientsToBeConfirmed={recipientsToBeConfirmed}
       document={document}
@@ -87,6 +92,7 @@ const WhoHasAccessWrapper = ({
       onRevokeSelf={onRevokeSelf}
       onRevokeGroup={revokeGroup}
       onLeaveGroup={revokeSelf}
+      onSetMemberType={setMemberType}
       onUpdateLinkPermissions={updateDocumentPermissions}
       onRevokeLink={revokeSharingLink}
       verifyRecipient={verifyRecipient}

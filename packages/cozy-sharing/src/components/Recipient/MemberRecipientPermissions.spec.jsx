@@ -6,14 +6,7 @@ import { createMockClient } from 'cozy-client'
 import MemberRecipientPermissions from './MemberRecipientPermissions'
 import AppLike from '../../../test/AppLike'
 
-const mockUpdateSharingMemberType = jest.fn()
 const mockShowAlert = jest.fn()
-
-jest.mock('../../hooks/useSharingContext', () => ({
-  useSharingContext: () => ({
-    updateSharingMemberType: mockUpdateSharingMemberType
-  })
-}))
 
 jest.mock('cozy-ui/transpiled/react/providers/Alert', () => ({
   __esModule: true,
@@ -39,7 +32,8 @@ describe('MemberRecipientPermissions component', () => {
     sharingId: 'sharing-123',
     memberIndex: 1,
     onRevoke: jest.fn(),
-    onRevokeSelf: jest.fn()
+    onRevokeSelf: jest.fn(),
+    onSetMemberType: jest.fn()
   }
 
   beforeEach(() => {

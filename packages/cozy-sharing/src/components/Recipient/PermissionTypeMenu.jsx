@@ -1,7 +1,6 @@
+import PropTypes from 'prop-types'
 import React, { useCallback, useRef, useState } from 'react'
 
-import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import minilog from 'cozy-minilog'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
@@ -12,91 +11,32 @@ import { useI18n } from 'twake-i18n'
 import DowngradePermissionConfirmDialog from './DowngradePermissionConfirmDialog'
 import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
 import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
-import withLocales from '../../hoc/withLocales'
-import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
-import { useResolveRecipients } from '../../hooks/useResolveRecipients'
-import { useSharingContext } from '../../hooks/useSharingContext'
-import { getSharingDocIds } from '../../state'
 
 const log = minilog('PermissionTypeMenu')
 
-const PermissionTypeMenuComponent = ({
-  sharingId,
-  memberIndex,
+const PermissionTypeMenu = ({
   type,
   document,
-  recipient
+  recipient,
+  isInsideSharedParent,
+  sharedParentName,
+  onSetType
 }) => {
   const { t } = useI18n()
-  const client = useClient()
   const buttonRef = useRef()
-  const {
-    hasSharedParent,
-    getSharedParentPath,
-    updateSharingMemberType,
-    getSharingById,
-    share
-  } = useSharingContext()
   const { showAlert } = useAlert()
-  const resolveRecipients = useResolveRecipients()
 
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
   const [pendingType, setPendingType] = useState(null)
-
-  const documentPath = useFetchDocumentPath(client, document)
-  const sharedParentPath = documentPath
-    ? getSharedParentPath?.(documentPath)
-    : null
 
   const hideMenu = useCallback(() => {
     setMenuDisplayed(false)
   }, [])
 
   const applyType = useCallback(
-    async (newType, { withAncestors = false } = {}) => {
+    async (newType, options) => {
       try {
-        if (withAncestors) {
-          // Ancestors first: only the target's own update refetches its
-          // effective recipients, which must already see them downgraded.
-          const ancestors = (recipient?.sources || []).filter(
-            s => s.kind === 'ancestor' && !s.read_only
-          )
-          for (const ancestor of ancestors) {
-            await updateSharingMemberType(
-              ancestor.sharing_id,
-              ancestor.member_index,
-              newType
-            )
-          }
-        }
-
-        const documentId = document?._id || document?.id
-        if (
-          flag('drive.federated-shared-folder.enabled') &&
-          type === 'one-way' &&
-          newType === 'two-way' &&
-          documentId
-        ) {
-          const sourceSharing = getSharingById(sharingId)
-          if (
-            sourceSharing &&
-            !getSharingDocIds(sourceSharing).includes(documentId)
-          ) {
-            const { recipients } = await resolveRecipients([recipient])
-            if (!recipients[0]) throw new Error('Recipient contact not found')
-            await share({
-              document: { ...document, id: documentId },
-              description: document.name,
-              recipients,
-              readOnlyRecipients: [],
-              sharedDrive: true,
-              openSharing: false
-            })
-            return
-          }
-        }
-
-        await updateSharingMemberType(sharingId, memberIndex, newType, document)
+        await onSetType(newType, options)
       } catch (error) {
         log.error('Failed to change member permission type', error)
         showAlert({
@@ -106,27 +46,12 @@ const PermissionTypeMenuComponent = ({
         })
       }
     },
-    [
-      document,
-      getSharingById,
-      memberIndex,
-      recipient,
-      resolveRecipients,
-      share,
-      sharingId,
-      showAlert,
-      t,
-      type,
-      updateSharingMemberType
-    ]
+    [onSetType, showAlert, t]
   )
 
   // Downgrading to viewer on a folder inside a shared parent also reduces
   // the member's rights on the parent: require explicit confirmation first.
-  const shouldConfirmDowngrade =
-    type === 'two-way' &&
-    Boolean(documentPath) &&
-    hasSharedParent?.(documentPath)
+  const shouldConfirmDowngrade = type === 'two-way' && isInsideSharedParent
 
   const setType = useCallback(
     newType => {
@@ -182,7 +107,7 @@ const PermissionTypeMenuComponent = ({
         <DowngradePermissionConfirmDialog
           document={document}
           recipient={recipient}
-          sharedParentName={sharedParentPath?.split('/').pop() ?? null}
+          sharedParentName={sharedParentName}
           onCancel={handleCancelDowngrade}
           onConfirm={handleConfirmDowngrade}
         />
@@ -191,4 +116,13 @@ const PermissionTypeMenuComponent = ({
   )
 }
 
-export const PermissionTypeMenu = withLocales(PermissionTypeMenuComponent)
+PermissionTypeMenu.propTypes = {
+  type: PropTypes.oneOf(['one-way', 'two-way']),
+  document: PropTypes.object,
+  recipient: PropTypes.object,
+  isInsideSharedParent: PropTypes.bool,
+  sharedParentName: PropTypes.string,
+  onSetType: PropTypes.func.isRequired
+}
+
+export default PermissionTypeMenu
