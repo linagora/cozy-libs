@@ -15,21 +15,20 @@ import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermissi
 import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
 import { isOnlyReadOnlyLinkAllowed } from '../../helpers/link'
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
-import { useSharingContext } from '../../hooks/useSharingContext'
 import { WRITE_PERMS, READ_ONLY_PERMS } from '../ShareRestrictionModal/helpers'
 
-const LinkRecipientPermissions = ({ document, isReadOnly }) => {
+const LinkRecipientPermissions = ({
+  document,
+  documentType,
+  isReadOnly,
+  permissions,
+  onUpdateLinkPermissions,
+  onRevokeLink
+}) => {
   const { t } = useI18n()
   const buttonRef = useRef()
   const [isMenuDisplayed, setMenuDisplayed] = useState(false)
-  const {
-    updateDocumentPermissions,
-    revokeSharingLink,
-    documentType,
-    getDocumentPermissions
-  } = useSharingContext()
 
-  const permissions = getDocumentPermissions(document._id)
   const isReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
   const type = isReadOnlyPermissions ? 'one-way' : 'two-way'
 
@@ -38,11 +37,11 @@ const LinkRecipientPermissions = ({ document, isReadOnly }) => {
 
   const handleSetType = newType => {
     const verbs = newType === 'one-way' ? READ_ONLY_PERMS : WRITE_PERMS
-    updateDocumentPermissions(document, { verbs })
+    onUpdateLinkPermissions(document, { verbs })
     hideMenu()
   }
 
-  const handleRevocation = () => revokeSharingLink(document)
+  const handleRevocation = () => onRevokeLink(document)
 
   const actionsToShow = [setReadOnlySharedPermission]
   if (!isOnlyReadOnlyLinkAllowed({ documentType })) {
@@ -87,7 +86,12 @@ const LinkRecipientPermissions = ({ document, isReadOnly }) => {
 }
 
 LinkRecipientPermissions.propTypes = {
-  document: PropTypes.object.isRequired
+  document: PropTypes.object.isRequired,
+  documentType: PropTypes.string.isRequired,
+  isReadOnly: PropTypes.bool,
+  permissions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onUpdateLinkPermissions: PropTypes.func.isRequired,
+  onRevokeLink: PropTypes.func.isRequired
 }
 
 export default LinkRecipientPermissions

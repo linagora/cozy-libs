@@ -30,11 +30,17 @@ const WhoHasAccessWrapper = ({
   onRevoke,
   onRevokeSelf,
   verifyRecipient,
-  link,
-  permissions
+  link
 }) => {
   const client = useClient()
-  const { isOrgSharedDrive, revokeGroup, revokeSelf } = useSharingContext()
+  const {
+    isOrgSharedDrive,
+    getDocumentPermissions,
+    updateDocumentPermissions,
+    revokeSharingLink,
+    revokeGroup,
+    revokeSelf
+  } = useSharingContext()
 
   const instanceUri = client.options.uri
   const markedRecipients = markCurrentUser(recipients, instanceUri)
@@ -81,9 +87,11 @@ const WhoHasAccessWrapper = ({
       onRevokeSelf={onRevokeSelf}
       onRevokeGroup={revokeGroup}
       onLeaveGroup={revokeSelf}
+      onUpdateLinkPermissions={updateDocumentPermissions}
+      onRevokeLink={revokeSharingLink}
       verifyRecipient={verifyRecipient}
       link={link}
-      permissions={permissions}
+      permissions={getDocumentPermissions(document?._id)}
     />
   )
 }

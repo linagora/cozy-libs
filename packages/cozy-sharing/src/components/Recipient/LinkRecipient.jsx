@@ -19,7 +19,6 @@ import {
   getPermissionExpiresDate
 } from '../../helpers/permissions'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
-import { useSharingContext } from '../../hooks/useSharingContext'
 import { ShareRestrictionModal } from '../ShareRestrictionModal/ShareRestrictionModal'
 
 const LinkRecipientTextReadOnly = ({ textPrimary, textSecondary }) => {
@@ -55,19 +54,18 @@ const LinkRecipientText = ({ onClick, textPrimary, textSecondary }) => {
 const LinkRecipient = props => {
   const { t, f, lang } = useI18n()
   const { isMobile } = useBreakpoints()
-  const { getDocumentPermissions } = useSharingContext()
 
   const {
     recipientConfirmationData,
     verifyRecipient,
     fadeIn,
     document,
-    isReadOnly
+    isReadOnly,
+    permissions
   } = props
 
   const [openShareRestrictionModal, setOpenShareRestrictionModal] =
     useState(false)
-  const permissions = getDocumentPermissions(document?._id)
   const hasPassword = checkIsPermissionHasPassword(permissions)
   const expiresDate = getPermissionExpiresDate(permissions)
   const dateFormatted = expiresDate

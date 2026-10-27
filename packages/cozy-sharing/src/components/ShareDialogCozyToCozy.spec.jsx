@@ -17,6 +17,7 @@ jest.mock('cozy-client', () => ({
 jest.mock('../hooks/useSharingContext', () => ({
   useSharingContext: () => ({
     getSharingLink: jest.fn(() => null),
+    getDocumentPermissions: jest.fn(() => []),
     updateSharingMemberType: jest.fn(),
     isOrgSharedDrive: jest.fn(() => false)
   })
