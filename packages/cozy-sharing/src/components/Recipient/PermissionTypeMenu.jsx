@@ -30,8 +30,13 @@ const PermissionTypeMenuComponent = ({
   const { t } = useI18n()
   const client = useClient()
   const buttonRef = useRef()
-  const { hasSharedParent, updateSharingMemberType, getSharingById, share } =
-    useSharingContext()
+  const {
+    hasSharedParent,
+    getSharedParentPath,
+    updateSharingMemberType,
+    getSharingById,
+    share
+  } = useSharingContext()
   const { showAlert } = useAlert()
   const resolveRecipients = useResolveRecipients()
 
@@ -39,6 +44,9 @@ const PermissionTypeMenuComponent = ({
   const [pendingType, setPendingType] = useState(null)
 
   const documentPath = useFetchDocumentPath(client, document)
+  const sharedParentPath = documentPath
+    ? getSharedParentPath?.(documentPath)
+    : null
 
   const hideMenu = useCallback(() => {
     setMenuDisplayed(false)
@@ -174,6 +182,7 @@ const PermissionTypeMenuComponent = ({
         <DowngradePermissionConfirmDialog
           document={document}
           recipient={recipient}
+          sharedParentName={sharedParentPath?.split('/').pop() ?? null}
           onCancel={handleCancelDowngrade}
           onConfirm={handleConfirmDowngrade}
         />
