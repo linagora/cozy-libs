@@ -39,7 +39,7 @@ const makeOwnerMember = (owner, { t }) => {
 
 const makeGroupMember = (
   group,
-  { t, isOwner, canManageMembers, onOpenGroup }
+  { t, isOwner, canManageMembers, isGroupRoleMenuShown, onOpenGroup }
 ) => {
   const isUserInsideMembers = group.members.some(member => member.isCurrentUser)
   const role = group.read_only ? 'one-way' : 'two-way'
@@ -60,7 +60,7 @@ const makeGroupMember = (
     isGroup: true,
     role,
     roles: [{ value: role, label: t(`Share.type.${role}`) }],
-    canChangeRole: canManageGroup,
+    canChangeRole: canManageGroup && isGroupRoleMenuShown,
     canRemove: canManageGroup,
     onClick: () => onOpenGroup(group),
     data: group
@@ -130,6 +130,8 @@ const makeRecipientMember = (
  * @param {boolean} params.isOwner - Whether the current user owns the sharing
  * @param {boolean} params.canManageSharing - Whether the current user can manage the sharing
  * @param {boolean} params.canManageMembers - Whether the members can be managed
+ * @param {boolean} [params.isGroupRoleMenuShown] - Whether to show the role of
+ * the groups in a menu, though it cannot be changed, rather than as text
  * @param {string[]} [params.pendingIds] - Ids of the members being removed
  * @param {Function} [params.verifyRecipient] - Starts the confirmation of a recipient
  * @param {Function} params.onOpenGroup - Opens the detail of a group recipient
@@ -143,6 +145,7 @@ export const makeMembers = ({
   isOwner,
   canManageSharing,
   canManageMembers,
+  isGroupRoleMenuShown = false,
   pendingIds = [],
   verifyRecipient,
   onOpenGroup
@@ -155,6 +158,7 @@ export const makeMembers = ({
             t,
             isOwner,
             canManageMembers,
+            isGroupRoleMenuShown,
             onOpenGroup
           })
         : makeRecipientMember(recipient, {

@@ -32,6 +32,7 @@ const WhoHasAccessWrapper = ({
   canManageLink = canManageMembers,
   showOwner = true,
   showEmptyState = false,
+  isGroupRoleMenuShown = false,
   recipients,
   recipientsToBeConfirmed = [],
   document,
@@ -118,6 +119,7 @@ const WhoHasAccessWrapper = ({
     isOwner,
     canManageSharing,
     canManageMembers,
+    isGroupRoleMenuShown,
     pendingIds,
     verifyRecipient,
     onOpenGroup: setOpenedGroup
