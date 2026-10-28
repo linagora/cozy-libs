@@ -6,7 +6,7 @@ import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import { GroupAvatar } from './Avatar/GroupAvatar'
-import { MemberAvatarWrapper } from './Avatar/MemberAvatarWrapper'
+import { MemberAvatar } from './Avatar/MemberAvatar'
 import ContactSuggestion from './ContactSuggestion'
 import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
@@ -29,7 +29,8 @@ const ShareAutosuggest = ({
   placeholder,
   autoFocus,
   endAdornment,
-  fetchContacts
+  fetchContacts,
+  getAvatarUrl
 }) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
@@ -199,7 +200,11 @@ const ShareAutosuggest = ({
               isContactGroup ? (
                 <GroupAvatar size="xs" color={recipient.color} />
               ) : (
-                <MemberAvatarWrapper size="xs" recipient={recipient} />
+                <MemberAvatar
+                  size="xs"
+                  recipient={recipient}
+                  avatarUrl={getAvatarUrl(recipient)}
+                />
               )
             }
             label={name}
@@ -221,7 +226,10 @@ const ShareAutosuggest = ({
   )
 
   const renderSuggestion = contactOrGroup => (
-    <ContactSuggestion contactOrGroup={contactOrGroup} />
+    <ContactSuggestion
+      contactOrGroup={contactOrGroup}
+      avatarUrl={getAvatarUrl(contactOrGroup)}
+    />
   )
 
   return (
@@ -269,7 +277,8 @@ ShareAutosuggest.propTypes = {
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
   endAdornment: PropTypes.node,
-  fetchContacts: PropTypes.func
+  fetchContacts: PropTypes.func,
+  getAvatarUrl: PropTypes.func.isRequired
 }
 
 export default ShareAutosuggest

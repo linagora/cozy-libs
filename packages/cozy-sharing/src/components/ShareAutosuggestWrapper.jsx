@@ -7,6 +7,7 @@ import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
 import { computeContactsAndGroups, suggestContacts } from '../helpers/contacts'
+import { makeAvatarUrl } from '../helpers/recipients'
 import { useSharingContext } from '../hooks/useSharingContext'
 import { DOCTYPE_GROUPS } from '../models'
 import {
@@ -110,6 +111,7 @@ const ShareAutosuggestWrapper = ({
       autoFocus={autoFocus}
       endAdornment={endAdornment}
       fetchContacts={contactsSuggestEnabled ? fetchContacts : undefined}
+      getAvatarUrl={recipient => makeAvatarUrl(recipient, client.options.uri)}
     />
   )
 }

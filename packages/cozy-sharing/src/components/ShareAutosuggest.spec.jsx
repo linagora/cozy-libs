@@ -27,6 +27,7 @@ describe('ShareAutosuggest', () => {
           onRemove={onRemove}
           enableCreateContact={enableCreateContact}
           fetchContacts={fetchContacts}
+          getAvatarUrl={() => null}
         />
       </AppLike>
     )

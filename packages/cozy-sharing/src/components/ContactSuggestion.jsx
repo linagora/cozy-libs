@@ -14,9 +14,9 @@ import {
   getDisplayName
 } from '../models'
 import { GroupAvatar } from './Avatar/GroupAvatar'
-import { MemberAvatarWrapper } from './Avatar/MemberAvatarWrapper'
+import { MemberAvatar } from './Avatar/MemberAvatar'
 
-export const ContactSuggestion = ({ contactOrGroup }) => {
+export const ContactSuggestion = ({ contactOrGroup, avatarUrl }) => {
   const { t } = useI18n()
 
   if (contactOrGroup._type === DOCTYPE_GROUPS) {
@@ -41,7 +41,11 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
   return (
     <ListItem button>
       <ListItemIcon>
-        <MemberAvatarWrapper recipient={contactOrGroup} size="m" />
+        <MemberAvatar
+          recipient={contactOrGroup}
+          avatarUrl={avatarUrl}
+          size="m"
+        />
       </ListItemIcon>
       <ListItemText primary={name} secondary={cozyUrl || '-'} />
     </ListItem>
@@ -59,7 +63,8 @@ ContactSuggestion.propTypes = {
     groupPropType,
     newUnknownContactProptypes
   ]).isRequired,
-  contacts: PropTypes.arrayOf(contactPropType)
+  contacts: PropTypes.arrayOf(contactPropType),
+  avatarUrl: PropTypes.string
 }
 
 export default ContactSuggestion
