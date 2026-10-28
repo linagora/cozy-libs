@@ -1,19 +1,14 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import { createMockClient } from 'cozy-client'
-
 import { MemberAvatar } from './MemberAvatar'
 import AppLike from '../../../test/AppLike'
 
 describe('MemberAvatar', () => {
-  const client = createMockClient({})
-  client.options = { uri: 'http://cozy.example.com' }
-
-  const setup = recipient =>
+  const setup = (recipient, avatarUrl = null) =>
     render(
-      <AppLike client={client}>
-        <MemberAvatar recipient={recipient} />
+      <AppLike>
+        <MemberAvatar recipient={recipient} avatarUrl={avatarUrl} />
       </AppLike>
     )
 
@@ -26,59 +21,18 @@ describe('MemberAvatar', () => {
     expect(container.querySelector('img')).toBeNull()
   })
 
-  it('renders the avatar image when the recipient has an avatarPath and a status', () => {
-    const { container } = setup({
-      public_name: 'Bob',
-      status: 'owner',
-      avatarPath: '/sharings/123/recipients/0/avatar'
-    })
+  it('renders the avatar image', () => {
+    const { container } = setup(
+      { public_name: 'Bob', status: 'owner' },
+      'http://cozy.example.com/sharings/123/recipients/0/avatar?v=owner'
+    )
 
-    const img = container.querySelector('img')
-    expect(img).toBeTruthy()
-    expect(img.getAttribute('src')).toBe(
+    expect(container.querySelector('img').getAttribute('src')).toBe(
       'http://cozy.example.com/sharings/123/recipients/0/avatar?v=owner'
     )
   })
 
-  it('appends the cache-busting param with & when avatarPath already has a query string', () => {
-    const { container } = setup({
-      public_name: 'Bob',
-      status: 'owner',
-      avatarPath: '/public/avatar?fallback=initials'
-    })
-
-    expect(container.querySelector('img').getAttribute('src')).toBe(
-      'http://cozy.example.com/public/avatar?fallback=initials&v=owner'
-    )
-  })
-
-  it('renders a full URL avatarPath without prefixing the local instance URI', () => {
-    const { container } = setup({
-      public_name: 'Jon Snow',
-      status: 'contact',
-      avatarPath: 'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials'
-    })
-
-    expect(container.querySelector('img').getAttribute('src')).toBe(
-      'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials&v=contact'
-    )
-  })
-
-  it('derives avatarPath from cozy URL when avatarPath is not set', () => {
-    const { container } = setup({
-      _type: 'io.cozy.contacts',
-      name: { givenName: 'Jon', familyName: 'Snow' },
-      cozy: [{ url: 'https://jonsnow.mycozy.cloud' }]
-    })
-
-    const img = container.querySelector('img')
-    expect(img).toBeTruthy()
-    expect(img.getAttribute('src')).toBe(
-      'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials&v=contact'
-    )
-  })
-
-  it('renders initials when there is no avatarPath and no cozy URL', () => {
+  it('renders the initials when there is no avatar URL', () => {
     const { container, getByText } = setup({
       _type: 'io.cozy.contacts',
       name: { givenName: 'Jon', familyName: 'Snow' }
@@ -88,27 +42,13 @@ describe('MemberAvatar', () => {
     expect(getByText('JS')).toBeTruthy()
   })
 
-  it('renders the initials when there is no avatarPath', () => {
-    const { container, getByText } = setup({
-      public_name: 'Bob',
-      status: 'owner'
-    })
-
-    expect(container.querySelector('img')).toBeNull()
-    expect(getByText('B')).toBeTruthy()
-  })
-
   it('falls back to the initials when the avatar image fails to load', () => {
-    const { container, getByText } = setup({
-      public_name: 'Bob',
-      status: 'owner',
-      avatarPath: '/sharings/123/recipients/0/avatar'
-    })
+    const { container, getByText } = setup(
+      { public_name: 'Bob', status: 'owner' },
+      'http://cozy.example.com/sharings/123/recipients/0/avatar?v=owner'
+    )
 
-    const img = container.querySelector('img')
-    expect(img).toBeTruthy()
-
-    fireEvent.error(img)
+    fireEvent.error(container.querySelector('img'))
 
     expect(container.querySelector('img')).toBeNull()
     expect(getByText('B')).toBeTruthy()

@@ -1,14 +1,11 @@
 import React, { useState } from 'react'
 
-import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
-import { makeAvatarUrl } from '../../helpers/recipients'
 import logger from '../../logger'
 import { getInitials } from '../../models'
 
-const MemberAvatar = ({ recipient, ...rest }) => {
-  const client = useClient()
+const MemberAvatar = ({ recipient, avatarUrl, ...rest }) => {
   // Remember which image url failed to load so we can fall back to the
   // initials. Storing the url (instead of a boolean) means a new url is
   // retried automatically, without an effect to reset the error state.
@@ -24,20 +21,18 @@ const MemberAvatar = ({ recipient, ...rest }) => {
     return null
   }
 
-  const image = makeAvatarUrl(recipient, client.options.uri)
-
   // The avatar can become unreachable (eg. the related sharing is revoked
   // while its members are still rendered), in which case the image request
   // fails. Without a fallback the browser shows a broken-image icon, so we
   // render the initials instead.
   return (
     <Avatar {...rest}>
-      {image && erroredSrc !== image ? (
+      {avatarUrl && erroredSrc !== avatarUrl ? (
         <img
           width="100%"
           height="100%"
-          src={image}
-          onError={() => setErroredSrc(image)}
+          src={avatarUrl}
+          onError={() => setErroredSrc(avatarUrl)}
         />
       ) : (
         getInitials(recipient)

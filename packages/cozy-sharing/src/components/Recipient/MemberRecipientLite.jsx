@@ -12,7 +12,7 @@ import MemberRecipientStatus from './MemberRecipientStatus'
 import { DEFAULT_DISPLAY_NAME } from '../../helpers/recipients'
 import withLocales from '../../hoc/withLocales'
 import { getDisplayName } from '../../models'
-import { MemberAvatar } from '../Avatar/MemberAvatar'
+import { MemberAvatarWrapper } from '../Avatar/MemberAvatarWrapper'
 
 const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
   const { t } = useI18n()
@@ -25,7 +25,7 @@ const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
   return (
     <ListItem size="small" ellipsis>
       <ListItemIcon>
-        <MemberAvatar size="m" recipient={recipient} {...props} />
+        <MemberAvatarWrapper size="m" recipient={recipient} {...props} />
       </ListItemIcon>
       <ListItemText
         primary={
