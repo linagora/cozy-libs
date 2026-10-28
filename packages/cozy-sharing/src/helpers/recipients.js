@@ -1,3 +1,4 @@
+import { getPrimaryCozy } from 'cozy-client/dist/models/contact'
 import flag from 'cozy-flags'
 
 import { DOCTYPE_GROUPS } from '../models'
@@ -143,3 +144,28 @@ export const hasMemberActions = ({
   canManageMembers &&
   status !== 'owner' &&
   ((isCurrentUser && !isOwner) || canManageSharing)
+
+/**
+ * makeAvatarUrl derives the avatar image URL for the recipient.
+ * - If the recipient has an avatarPath (sharing context), it is
+ *   used directly with a base URI prefix (unless it is already
+ *   a full URL for a remote Cozy).
+ * - If the recipient has no avatarPath but has a cozy URL
+ *   (contact context), it points to that Cozy's public avatar.
+ * - The status is used as a cache-buster in the URL so the
+ *   browser refreshes the image when the sharing status changes.
+ *   For non-sharing recipients, 'contact' is the stable default.
+ */
+export const makeAvatarUrl = (recipient, instanceUri) => {
+  const avatarPath = recipient.avatarPath
+  const cozyUrl = !avatarPath ? getPrimaryCozy(recipient) : null
+  if (!avatarPath && !cozyUrl) return null
+
+  const finalPath =
+    avatarPath ||
+    `${cozyUrl.replace(/\/$/, '')}/public/avatar?fallback=initials`
+  const status = recipient.status || 'contact'
+  const isFullPath = finalPath.startsWith('http')
+  const base = isFullPath ? '' : instanceUri
+  return `${base}${finalPath}${finalPath.includes('?') ? '&' : '?'}v=${status}`
+}
