@@ -33,6 +33,7 @@ export const Default = {
   render: ShareAutosuggestRender,
   args: {
     loading: false,
+    getAvatarUrl: () => null,
     contactsAndGroups: [
       {
         id: 'group1',
