@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [40.1.9](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.1.8...cozy-sharing@40.1.9) (2026-10-28)
+
+### Bug Fixes
+
+- **cozy-sharing:** Keep the link password when its field is left empty ([a842354](https://github.com/cozy/cozy-libs/commit/a84235406035b9fe98edc6d2e59fd4ee37cbd5f0)), closes [linagora/twake-drive#4317](https://github.com/linagora/twake-drive/issues/4317)
+
 ## [40.1.8](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.1.7...cozy-sharing@40.1.8) (2026-10-27)
 
 **Note:** Version bump only for package cozy-sharing
