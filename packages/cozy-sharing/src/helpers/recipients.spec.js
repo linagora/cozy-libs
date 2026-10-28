@@ -1,4 +1,9 @@
-import { hasMemberActions, makeAvatarUrl, markCurrentUser } from './recipients'
+import {
+  addAvatarUrls,
+  hasMemberActions,
+  makeAvatarUrl,
+  markCurrentUser
+} from './recipients'
 
 const instanceUri = 'https://alice.cozy.cc'
 
@@ -138,5 +143,22 @@ describe('makeAvatarUrl', () => {
         instanceUri
       )
     ).toBe(null)
+  })
+})
+
+describe('addAvatarUrls', () => {
+  it('adds the avatar URL to the members but not to the groups', () => {
+    const [member, group] = addAvatarUrls(
+      [
+        { status: 'ready', avatarPath: '/sharings/123/recipients/1/avatar' },
+        { name: 'Team', members: [] }
+      ],
+      'http://cozy.example.com'
+    )
+
+    expect(member.avatarUrl).toBe(
+      'http://cozy.example.com/sharings/123/recipients/1/avatar?v=ready'
+    )
+    expect(group).not.toHaveProperty('avatarUrl')
   })
 })

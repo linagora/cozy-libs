@@ -1,20 +1,13 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import { createMockClient } from 'cozy-client'
-
 import MemberRecipient from './MemberRecipient'
 import AppLike from '../../../test/AppLike'
 
 describe('MemberRecipient component', () => {
-  const client = createMockClient({})
-  client.options = {
-    uri: 'foo.mycozy.cloud'
-  }
-
   const setup = props => {
     return render(
-      <AppLike client={client}>
+      <AppLike>
         <MemberRecipient {...props} />
       </AppLike>
     )

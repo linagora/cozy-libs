@@ -169,3 +169,17 @@ export const makeAvatarUrl = (recipient, instanceUri) => {
   const base = isFullPath ? '' : instanceUri
   return `${base}${finalPath}${finalPath.includes('?') ? '&' : '?'}v=${status}`
 }
+
+/**
+ * Adds to the recipients, except groups, the URL of their avatar
+ *
+ * @param {object[]} recipients - Recipients of a sharing
+ * @param {string} instanceUri - URI of the current user's instance
+ * @returns {object[]} The recipients with their `avatarUrl`
+ */
+export const addAvatarUrls = (recipients, instanceUri) =>
+  recipients.map(recipient =>
+    recipient.members
+      ? recipient
+      : { ...recipient, avatarUrl: makeAvatarUrl(recipient, instanceUri) }
+  )

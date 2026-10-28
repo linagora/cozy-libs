@@ -3,7 +3,12 @@ import React from 'react'
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
 import WhoHasAccess from './WhoHasAccess'
-import { hasMemberActions, markCurrentUser } from '../helpers/recipients'
+import {
+  addAvatarUrls,
+  hasMemberActions,
+  makeAvatarUrl,
+  markCurrentUser
+} from '../helpers/recipients'
 import { useMemberPermissionType } from '../hooks/useMemberPermissionType'
 import { useSharingContext } from '../hooks/useSharingContext'
 import { buildInstanceSettingsQuery } from '../queries/queries'
@@ -44,7 +49,10 @@ const WhoHasAccessWrapper = ({
   } = useSharingContext()
 
   const instanceUri = client.options.uri
-  const markedRecipients = markCurrentUser(recipients, instanceUri)
+  const markedRecipients = addAvatarUrls(
+    markCurrentUser(recipients, instanceUri),
+    instanceUri
+  )
   const hasMemberMenus = markedRecipients.some(
     recipient =>
       !recipient.members &&
@@ -75,6 +83,10 @@ const WhoHasAccessWrapper = ({
         status: 'owner',
         instance: instanceUri,
         avatarPath: OWNER_PUBLIC_AVATAR_PATH,
+        avatarUrl: makeAvatarUrl(
+          { status: 'owner', avatarPath: OWNER_PUBLIC_AVATAR_PATH },
+          instanceUri
+        ),
         public_name: instanceSettingsResult.data?.attributes?.public_name
       }
     : null
