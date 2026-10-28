@@ -270,6 +270,7 @@ const FederatedFolderModalContent = ({
             )}
           </div>
           <WhoHasAccessWrapper
+            showEmptyState
             isOwner={isCurrentUserOwner}
             canManageSharing={canManageSharing}
             isSharedDrive
