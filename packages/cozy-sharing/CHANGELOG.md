@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [40.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.1.9...cozy-sharing@40.2.0) (2026-10-28)
+
+### Bug Fixes
+
+- **cozy-sharing:** Ignore the email case when filtering suggestions ([4057cf0](https://github.com/cozy/cozy-libs/commit/4057cf010f54c646d8518aa787e03be445b60df2))
+
+### Features
+
+- **cozy-sharing:** Suggest recipients from the stack ([8b06972](https://github.com/cozy/cozy-libs/commit/8b0697256b118c365ca9f7315aae3f00eef6ebd6)), closes [linagora/twake-workplace-private#1929](https://github.com/linagora/twake-workplace-private/issues/1929)
+
 ## [40.1.9](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.1.8...cozy-sharing@40.1.9) (2026-10-28)
 
 ### Bug Fixes
