@@ -43,7 +43,7 @@ jest.mock('./ShareAutosuggest', () => ({
 describe('ShareAutosuggestWrapper component', () => {
   const setup = (
     { contacts, contactGroups, unreachableContact, groupMembers },
-    { currentRecipients, recipients } = {}
+    { currentRecipients, recipients, contactsSuggestEnabled } = {}
   ) => {
     const mockClient = createMockClient({
       queries: {
@@ -66,7 +66,10 @@ describe('ShareAutosuggestWrapper component', () => {
       }
     })
     render(
-      <AppLike client={mockClient}>
+      <AppLike
+        client={mockClient}
+        sharingContextValue={{ contactsSuggestEnabled }}
+      >
         <ShareAutosuggestWrapper
           onPick={() => {}}
           onRemove={() => {}}
@@ -303,11 +306,9 @@ describe('ShareAutosuggestWrapper component', () => {
     ).toBeInTheDocument()
   })
 
-  describe('with sharing.contacts-suggest.enabled', () => {
+  describe('with contactsSuggestEnabled', () => {
     beforeEach(() => {
-      flag.mockImplementation(
-        name => name === 'sharing.contacts-suggest.enabled'
-      )
+      flag.mockReset()
     })
 
     it('should suggest only groups, with the count of their members', () => {
@@ -333,7 +334,7 @@ describe('ShareAutosuggestWrapper component', () => {
         }
       ]
 
-      setup({ contactGroups, groupMembers })
+      setup({ contactGroups, groupMembers }, { contactsSuggestEnabled: true })
 
       expect(screen.getByText('Friends - 1 members')).toBeInTheDocument()
       expect(screen.queryByText('Teagan Wolf')).not.toBeInTheDocument()
@@ -348,7 +349,8 @@ describe('ShareAutosuggestWrapper component', () => {
         { contactGroups: [], groupMembers: [] },
         {
           currentRecipients: [{ email: 'Current@Cozy.cc' }],
-          recipients: [{ email: 'pending@cozy.cc' }]
+          recipients: [{ email: 'pending@cozy.cc' }],
+          contactsSuggestEnabled: true
         }
       )
       const fetchJSON = jest.fn().mockResolvedValue({

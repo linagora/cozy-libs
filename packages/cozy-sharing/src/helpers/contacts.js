@@ -9,10 +9,15 @@ const ContactModel = models.contact
 // Return the contact object if present
 // Else check if a contact exist with this email address, if yes return it
 // if not create it
-// With sharing.contacts-suggest.enabled, people are sent by email and the
+// With contactsSuggestEnabled, people are sent by email and the
 // stack finds or creates the contact: an org member's id is not on this instance
-export const getOrCreateFromArray = async (client, contacts, createContact) => {
-  if (flag('sharing.contacts-suggest.enabled')) {
+export const getOrCreateFromArray = async (
+  client,
+  contacts,
+  createContact,
+  contactsSuggestEnabled
+) => {
+  if (contactsSuggestEnabled) {
     return contacts.map(contact => {
       if (contact._type === DOCTYPE_GROUPS) return contact
       const email = ContactModel.getPrimaryEmail(contact)

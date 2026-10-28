@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 
 import { useClient } from 'cozy-client'
 
+import { useSharingContext } from './useSharingContext'
 import { getOrCreateFromArray } from '../helpers/contacts'
 import { DOCTYPE_CONTACTS } from '../models'
 
@@ -14,6 +15,7 @@ import { DOCTYPE_CONTACTS } from '../models'
  */
 export const useResolveRecipients = () => {
   const client = useClient()
+  const contactsSuggestEnabled = useSharingContext()?.contactsSuggestEnabled
 
   return useCallback(
     async (
@@ -24,7 +26,8 @@ export const useResolveRecipients = () => {
       const contacts = await getOrCreateFromArray(
         client,
         pendingRecipients,
-        createContact
+        createContact,
+        contactsSuggestEnabled
       )
       const isReadOnly = selectedOption === 'readOnly'
 
@@ -33,6 +36,6 @@ export const useResolveRecipients = () => {
         readOnlyRecipients: isReadOnly ? contacts : []
       }
     },
-    [client]
+    [client, contactsSuggestEnabled]
   )
 }

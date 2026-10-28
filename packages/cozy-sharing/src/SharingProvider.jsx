@@ -745,7 +745,12 @@ export class SharingProvider extends Component {
     // but if we don't, consumers don't rerender when the state changes after loading the sharings,
     // probably because the state object remains the same...
     return (
-      <SharingContext.Provider value={{ ...this.state }}>
+      <SharingContext.Provider
+        value={{
+          ...this.state,
+          contactsSuggestEnabled: this.props.contactsSuggestEnabled
+        }}
+      >
         {this.props.children}
       </SharingContext.Provider>
     )
