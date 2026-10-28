@@ -213,13 +213,15 @@ export const makeMembers = ({
  */
 export const makeMemberFromContact = ({ contact, t, instanceUri }) => {
   if (contact._type === DOCTYPE_GROUPS) {
+    const memberCount = contact.member_count ?? contact.members?.length
     return {
       id: contact._id ?? contact.id,
       name: contact.name,
-      subtitle: t('Share.members.count', {
-        smart_count: contact.members.length
-      }),
-      color: contact.color,
+      subtitle:
+        memberCount !== undefined
+          ? t('Share.members.count', { smart_count: memberCount })
+          : undefined,
+      color: contact.color || undefined,
       isGroup: true,
       data: contact
     }

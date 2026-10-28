@@ -233,6 +233,43 @@ describe('makeMemberFromContact', () => {
     })
   })
 
+  it.each([0, 12])(
+    'uses the API member count (%s) over local members',
+    count => {
+      const translate = jest.fn(() => 'member count')
+      const contact = {
+        _id: 'group-1',
+        _type: 'io.cozy.contacts.groups',
+        member_count: count,
+        members: [{}],
+        color: ''
+      }
+
+      expect(
+        makeMemberFromContact({ contact, t: translate, instanceUri })
+      ).toMatchObject({
+        subtitle: 'member count',
+        color: undefined
+      })
+      expect(translate).toHaveBeenCalledWith('Share.members.count', {
+        smart_count: count
+      })
+    }
+  )
+
+  it('leaves unknown group counts and colors to the UI', () => {
+    const translate = jest.fn()
+    const contact = { _id: 'group-1', _type: 'io.cozy.contacts.groups' }
+
+    expect(
+      makeMemberFromContact({ contact, t: translate, instanceUri })
+    ).toMatchObject({
+      subtitle: undefined,
+      color: undefined
+    })
+    expect(translate).not.toHaveBeenCalled()
+  })
+
   it('makes a contact with its Cozy as subtitle', () => {
     const contact = {
       _id: 'contact-1',

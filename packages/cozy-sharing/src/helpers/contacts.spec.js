@@ -3,7 +3,8 @@ import flag from 'cozy-flags'
 import {
   computeContactsAndGroups,
   getOrCreateFromArray,
-  suggestContacts
+  fetchSuggestedContacts,
+  hasContactSuggestions
 } from './contacts'
 
 jest.mock('cozy-flags', () => ({
@@ -25,6 +26,7 @@ const findMock = jest
 
 const mockClient = {
   collection: () => ({
+    suggest: jest.fn(),
     find: findMock
   }),
   create: jest.fn().mockReturnValue({
@@ -134,7 +136,24 @@ describe('computeContactsAndGroups', () => {
 })
 
 describe('getOrCreateFromArray with contactsSuggestEnabled', () => {
-  it('should send people by email and keep groups, without creating contacts', async () => {
+  it('still resolves local contacts with an older client', async () => {
+    const contact = { id: 'local', email: 'alice@example.org' }
+    const find = jest.fn().mockResolvedValue({ data: [contact] })
+    const createContact = jest.fn()
+
+    expect(
+      await getOrCreateFromArray(
+        { collection: () => ({ find }) },
+        [{ email: 'alice@example.org' }],
+        createContact,
+        true
+      )
+    ).toEqual([contact])
+    expect(find).toHaveBeenCalled()
+    expect(createContact).not.toHaveBeenCalled()
+  })
+
+  it('keeps organization suggestions for the sharing serializer without creating contacts', async () => {
     const createContact = jest.fn()
     const group = { _id: 'group-1', _type: 'io.cozy.contacts.groups' }
 
@@ -145,7 +164,7 @@ describe('getOrCreateFromArray with contactsSuggestEnabled', () => {
           _id: 'org-member-1',
           _type: 'io.cozy.contacts',
           email: [{ address: 'member@org.example', primary: true }],
-          meta: { kind: 'member' }
+          meta: { kind: 'org_member' }
         },
         { email: 'unknown@friends.example' },
         group
@@ -155,77 +174,142 @@ describe('getOrCreateFromArray with contactsSuggestEnabled', () => {
     )
 
     expect(recipients).toEqual([
-      { _type: 'io.cozy.contacts', email: 'member@org.example' },
+      {
+        _id: 'org-member-1',
+        _type: 'io.cozy.contacts',
+        email: [{ address: 'member@org.example', primary: true }],
+        meta: { kind: 'org_member' }
+      },
       { _type: 'io.cozy.contacts', email: 'unknown@friends.example' },
       group
     ])
     expect(createContact).not.toHaveBeenCalled()
   })
 
-  it('should keep a contact without email by id, and drop a recipient with neither', async () => {
-    const cozyOnlyContact = {
-      _id: 'contact-1',
+  it('keeps known local contacts by ID', async () => {
+    const contact = {
+      _id: 'local',
       _type: 'io.cozy.contacts',
-      cozy: [{ url: 'https://bob.example' }]
+      meta: { kind: 'contact' },
+      email: [{ address: 'local@example.org' }]
     }
+    expect(
+      await getOrCreateFromArray(mockClient, [contact], jest.fn(), true)
+    ).toEqual([contact])
+  })
 
-    const recipients = await getOrCreateFromArray(
-      mockClient,
-      [cozyOnlyContact, { instance: 'https://alice.example' }],
-      jest.fn(),
-      true
-    )
+  it('rejects a recipient with neither an ID nor an email', async () => {
+    await expect(
+      getOrCreateFromArray(mockClient, [{}], jest.fn(), true)
+    ).rejects.toThrow('requires')
+  })
 
-    expect(recipients).toEqual([cozyOnlyContact, undefined])
+  it('lets the serializer choose a usable address for organization members', async () => {
+    const contact = {
+      _id: 'org-member',
+      _type: 'io.cozy.contacts',
+      meta: { kind: 'org_member' },
+      email: [null, { address: '' }, { address: 'alice@example.org' }]
+    }
+    expect(
+      await getOrCreateFromArray(mockClient, [contact], jest.fn(), true)
+    ).toEqual([contact])
   })
 })
 
-describe('suggestContacts', () => {
-  it('should map the suggestions of the stack to contacts', async () => {
-    const fetchJSON = jest.fn().mockResolvedValue({
-      data: [
-        {
-          type: 'io.cozy.contacts',
-          id: 'org-member-1',
-          attributes: {
-            fullname: 'Jean Dupont',
-            name: { givenName: 'Jean', familyName: 'Dupont' },
-            email: [{ address: 'jean@org.example', primary: true }]
-          },
-          meta: { kind: 'member' }
-        },
-        {
-          type: 'io.cozy.contacts',
-          attributes: {
-            fullname: 'Paul Dupuis',
-            email: [{ address: 'paul@friends.example', primary: true }]
-          }
-        }
-      ]
-    })
-    const client = { getStackClient: () => ({ fetchJSON }) }
+describe('hasContactSuggestions', () => {
+  it('checks the transport API available on the client', () => {
+    expect(hasContactSuggestions(mockClient)).toBe(true)
+    expect(hasContactSuggestions({ collection: () => ({}) })).toBe(false)
+  })
+})
 
-    const contacts = await suggestContacts(client, 'dup & co')
+describe('fetchSuggestedContacts', () => {
+  const group = id => ({ _type: 'io.cozy.contacts.groups', _id: id })
+  const contact = email => ({
+    _type: 'io.cozy.contacts',
+    email: [{ address: email }]
+  })
+  const setup = suggestions => ({
+    collection: jest.fn().mockReturnValue({
+      suggest: jest.fn().mockResolvedValue({ data: suggestions })
+    }),
+    query: jest.fn(),
+    fetchQueryAndGetFromState: jest.fn()
+  })
 
-    expect(fetchJSON).toHaveBeenCalledWith(
-      'GET',
-      '/contacts/suggest?q=dup%20%26%20co'
-    )
-    expect(contacts).toEqual([
-      {
-        _id: 'org-member-1',
-        id: 'org-member-1',
-        _type: 'io.cozy.contacts',
-        fullname: 'Jean Dupont',
-        name: { givenName: 'Jean', familyName: 'Dupont' },
-        email: [{ address: 'jean@org.example', primary: true }]
-      },
-      {
-        _type: 'io.cozy.contacts',
-        fullname: 'Paul Dupuis',
-        displayName: 'Paul Dupuis',
-        email: [{ address: 'paul@friends.example', primary: true }]
-      }
-    ])
+  beforeEach(() => {
+    flag.mockImplementation(name => name === 'sharing.show-recipient-groups')
+  })
+
+  it('returns server order and ID-less people without using the query cache', async () => {
+    const suggestions = [group('team'), contact('alice@example.org')]
+    const client = setup(suggestions)
+
+    expect(
+      await fetchSuggestedContacts({
+        client,
+        query: 'al & co',
+        currentRecipients: [],
+        pendingRecipients: []
+      })
+    ).toEqual(suggestions)
+    expect(client.collection).toHaveBeenCalledWith('io.cozy.contacts')
+    expect(client.collection().suggest).toHaveBeenCalledWith('al & co')
+    expect(client.query).not.toHaveBeenCalled()
+    expect(client.fetchQueryAndGetFromState).not.toHaveBeenCalled()
+  })
+
+  it('excludes self, people by normalized email, and groups by ID without changing server order', async () => {
+    const suggestions = [
+      group('selected'),
+      group('shared'),
+      group('available'),
+      { ...contact('me@example.org'), me: true },
+      contact(' CURRENT@example.org '),
+      contact('pending@example.org'),
+      contact('new@example.org')
+    ]
+
+    expect(
+      await fetchSuggestedContacts({
+        client: setup(suggestions),
+        query: 'ex',
+        currentRecipients: [
+          { email: 'current@EXAMPLE.org' },
+          { id: 'shared', groupIndex: 0 }
+        ],
+        pendingRecipients: [group('selected'), { email: 'PENDING@example.org' }]
+      })
+    ).toEqual([group('available'), contact('new@example.org')])
+  })
+
+  it('excludes API groups when sharing groups is disabled', async () => {
+    flag.mockReturnValue(false)
+    const person = contact('alice@example.org')
+
+    expect(
+      await fetchSuggestedContacts({
+        client: setup([group('team'), person]),
+        query: 'al',
+        currentRecipients: [],
+        pendingRecipients: []
+      })
+    ).toEqual([person])
+  })
+
+  it('propagates a failed search', async () => {
+    const error = Object.assign(new Error('Forbidden'), { status: 403 })
+    const client = {
+      collection: () => ({ suggest: jest.fn().mockRejectedValue(error) })
+    }
+    await expect(
+      fetchSuggestedContacts({
+        client,
+        query: 'al',
+        currentRecipients: [],
+        pendingRecipients: []
+      })
+    ).rejects.toBe(error)
   })
 })

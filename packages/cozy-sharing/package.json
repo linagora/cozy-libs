@@ -34,6 +34,7 @@
     "lodash": "^4.17.21",
     "react-autosuggest": "^10.1.0",
     "react-tooltip": "^3.11.1",
+    "rooks": "7.14.1",
     "snarkdown": "^2.0.0"
   },
   "devDependencies": {

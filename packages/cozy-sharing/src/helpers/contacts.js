@@ -11,20 +11,19 @@ const ContactModel = models.contact
 // Return the contact object if present
 // Else check if a contact exist with this email address, if yes return it
 // if not create it
-// With contactsSuggestEnabled, people are sent by email and the
-// stack finds or creates the contact: an org member's id is not on this instance
+// Keep suggestion metadata so the client can share organization members by email.
 export const getOrCreateFromArray = async (
   client,
   contacts,
   createContact,
   contactsSuggestEnabled
 ) => {
-  if (contactsSuggestEnabled) {
+  if (contactsSuggestEnabled && hasContactSuggestions(client)) {
     return contacts.map(contact => {
-      if (contact._type === DOCTYPE_GROUPS) return contact
+      if (contact._type === DOCTYPE_GROUPS || contact._id) return contact
       const email = ContactModel.getPrimaryEmail(contact)
       if (validateEmail(email)) return { _type: DOCTYPE_CONTACTS, email }
-      return contact._id ? contact : undefined
+      throw new Error('A sharing recipient requires an ID or a valid email')
     })
   }
 
@@ -64,18 +63,8 @@ export const getOrCreateFromArray = async (
   )
 }
 
-// A suggestion without id has no contact document, and only a fullname,
-// which getDisplayName does not read
-export const suggestContacts = async (client, q) => {
-  const { data } = await client
-    .getStackClient()
-    .fetchJSON('GET', `/contacts/suggest?q=${encodeURIComponent(q)}`)
-  return data.map(({ id, type, attributes }) => ({
-    ...attributes,
-    ...(id ? { _id: id, id } : { displayName: attributes.fullname }),
-    _type: type
-  }))
-}
+export const hasContactSuggestions = client =>
+  typeof client.collection(DOCTYPE_CONTACTS).suggest === 'function'
 
 export const getContactsFromGroupId = (contacts = [], groupId) => {
   return contacts.filter(contact => {
@@ -208,13 +197,31 @@ export const fetchSuggestedContacts = async ({
   currentRecipients,
   pendingRecipients
 }) => {
-  const contacts = await suggestContacts(client, query)
-  return contacts.filter(
-    contact =>
+  const { data: suggestions } = await client
+    .collection(DOCTYPE_CONTACTS)
+    .suggest(query)
+  const groupIds = new Set(
+    [...currentRecipients, ...pendingRecipients]
+      .filter(
+        recipient =>
+          recipient._type === DOCTYPE_GROUPS ||
+          recipient.groupIndex !== undefined
+      )
+      .map(recipient => recipient._id || recipient.id)
+  )
+  return suggestions.filter(suggestion => {
+    if (suggestion._type === DOCTYPE_GROUPS) {
+      return (
+        !!flag('sharing.show-recipient-groups') && !groupIds.has(suggestion._id)
+      )
+    }
+    return (
+      !suggestion.me &&
       !isRecipientEmail({
-        email: ContactModel.getPrimaryEmail(contact),
+        email: ContactModel.getPrimaryEmail(suggestion),
         currentRecipients,
         pendingRecipients
       })
-  )
+    )
+  })
 }

@@ -20,7 +20,7 @@ const ShareAutosuggest = ({
   title,
   placeholder,
   isLoading,
-  contactsSuggestEnabled,
+  useSuggestions,
   enableCreateContact,
   disabled,
   autoFocus,
@@ -79,7 +79,8 @@ const ShareAutosuggest = ({
     <MemberAutocomplete
       value={value}
       getSuggestions={getSuggestions}
-      fetchSuggestions={contactsSuggestEnabled ? fetchSuggestions : undefined}
+      fetchSuggestions={useSuggestions ? fetchSuggestions : undefined}
+      minQueryLength={2}
       getMembersFromText={enableCreateContact ? getMembersFromText : undefined}
       roles={roles}
       role={role}
@@ -104,7 +105,7 @@ ShareAutosuggest.propTypes = {
   placeholder: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
   /** Whether the stack suggests the contacts while typing */
-  contactsSuggestEnabled: PropTypes.bool,
+  useSuggestions: PropTypes.bool,
   enableCreateContact: PropTypes.bool,
   disabled: PropTypes.bool,
   autoFocus: PropTypes.bool,
