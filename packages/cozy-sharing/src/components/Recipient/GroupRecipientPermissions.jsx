@@ -1,10 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 
 import { Icon, CrossCircleOutline } from '@linagora/twake-icons'
-import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
-import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import ActionsMenuMobileHeader from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuMobileHeader'
-import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -12,7 +9,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import { permission } from './actions/permission'
+import PermissionTypeMenu from './PermissionTypeMenu'
 import { GroupAvatar } from '../Avatar/GroupAvatar'
 
 const GroupRecipientPermissions = ({
@@ -30,16 +27,10 @@ const GroupRecipientPermissions = ({
   onLeaveGroup
 }) => {
   const { t } = useI18n()
-  const buttonRef = useRef()
-
-  const [isMenuDisplayed, setMenuDisplayed] = useState(false)
   const [revoking, setRevoking] = useState(false)
 
   const shouldShowMenu =
     canManageMembers && !revoking && (isOwner || isUserInsideMembers)
-
-  const toggleMenu = () => setMenuDisplayed(!isMenuDisplayed)
-  const hideMenu = () => setMenuDisplayed(false)
 
   const handleRevocation = async () => {
     setRevoking(true)
@@ -53,11 +44,6 @@ const GroupRecipientPermissions = ({
 
   const type = read_only ? 'one-way' : 'two-way'
 
-  const actions = makeActions([permission], {
-    t,
-    type
-  })
-
   return (
     <div className={className}>
       {revoking && <Spinner />}
@@ -66,32 +52,22 @@ const GroupRecipientPermissions = ({
       )}
       {shouldShowMenu && (
         <>
-          <DropdownButton
-            ref={buttonRef}
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={toggleMenu}
-            textVariant="body2"
-          >
-            {t(`Share.type.${type}`)}
-          </DropdownButton>
-          <ActionsMenu
-            ref={buttonRef}
-            open={isMenuDisplayed}
-            actions={actions}
-            autoClose
-            onClose={hideMenu}
-          >
-            <ActionsMenuMobileHeader>
-              <ListItemIcon>
-                <GroupAvatar size="m" color={color} />
-              </ListItemIcon>
-              <ListItemText
-                primary={name}
-                primaryTypographyProps={{ variant: 'h6' }}
-              />
-            </ActionsMenuMobileHeader>
-          </ActionsMenu>
+          <PermissionTypeMenu
+            value={type}
+            roles={[{ value: type, label: t(`Share.type.${type}`) }]}
+            onChange={() => {}}
+            mobileHeader={
+              <ActionsMenuMobileHeader>
+                <ListItemIcon>
+                  <GroupAvatar size="m" color={color} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={name}
+                  primaryTypographyProps={{ variant: 'h6' }}
+                />
+              </ActionsMenuMobileHeader>
+            }
+          />
           <IconButton
             onClick={handleRevocation}
             size="small"

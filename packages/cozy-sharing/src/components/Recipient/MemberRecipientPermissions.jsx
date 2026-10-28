@@ -7,6 +7,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import PermissionTypeMenu from './PermissionTypeMenu'
+import { makeMemberRoles } from '../../helpers/members'
 import { hasMemberActions } from '../../helpers/recipients'
 
 const MemberRecipientPermissions = ({
@@ -73,8 +74,9 @@ const MemberRecipientPermissions = ({
       {shouldShowMenu && (
         <>
           <PermissionTypeMenu
-            type={type ?? 'one-way'}
-            onSetType={newType =>
+            value={type ?? 'one-way'}
+            roles={makeMemberRoles(t)}
+            onChange={newType =>
               onSetMemberType(
                 {
                   sharingId,
