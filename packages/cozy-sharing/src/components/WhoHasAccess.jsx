@@ -30,6 +30,7 @@ const WhoHasAccess = ({
   roles,
   onRoleChange,
   onRemove,
+  showEmptyState,
   canManageLink = true,
   recipientsToBeConfirmed = [],
   document,
@@ -71,7 +72,7 @@ const WhoHasAccess = ({
         roles={roles}
         onRoleChange={onRoleChange}
         onRemove={onRemove}
-        showEmptyState={false}
+        showEmptyState={showEmptyState}
       />
     </div>
   )
@@ -82,6 +83,7 @@ WhoHasAccess.propTypes = {
   roles: PropTypes.array.isRequired,
   onRoleChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
+  showEmptyState: PropTypes.bool,
   canManageLink: PropTypes.bool,
   recipientsToBeConfirmed: PropTypes.arrayOf(
     PropTypes.shape({

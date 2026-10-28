@@ -74,6 +74,7 @@ const SharingContent = ({
       </div>
       {showWhoHasAccess && (
         <WhoHasAccessWrapper
+          showEmptyState
           document={document}
           documentType={documentType}
           isOwner={isOwner}

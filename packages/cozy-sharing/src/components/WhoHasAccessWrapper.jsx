@@ -31,6 +31,7 @@ const WhoHasAccessWrapper = ({
   canManageMembers = !isReadOnly,
   canManageLink = canManageMembers,
   showOwner = true,
+  showEmptyState = false,
   recipients,
   recipientsToBeConfirmed = [],
   document,
@@ -166,6 +167,7 @@ const WhoHasAccessWrapper = ({
         roles={roles}
         onRoleChange={handleRoleChange}
         onRemove={handleRemove}
+        showEmptyState={showEmptyState}
         canManageLink={canManageLink}
         recipientsToBeConfirmed={recipientsToBeConfirmed}
         document={document}
