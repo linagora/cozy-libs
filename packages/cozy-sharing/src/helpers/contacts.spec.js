@@ -212,6 +212,7 @@ describe('fetchContactSuggestions', () => {
       options: expect.objectContaining({
         as: 'io.cozy.contacts.suggestions/q/al%20%26%20co/limit/20',
         singleDocData: true,
+        forceLink: 'stack',
         fetchPolicy: expect.any(Function)
       })
     })

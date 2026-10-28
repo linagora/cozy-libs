@@ -111,6 +111,7 @@ export function buildContactSuggestionsQuery(q, limit = 20) {
         text
       )}/limit/${limit}`,
       singleDocData: true,
+      forceLink: 'stack',
       fetchPolicy: fetchPolicies.olderThan(30 * 1000)
     }
   }
