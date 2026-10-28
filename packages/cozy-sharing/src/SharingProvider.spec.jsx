@@ -534,7 +534,7 @@ describe('shared drive recipient revocation', () => {
       reducer(undefined, receiveSharings({ sharings: [SHARED_DRIVE] }))
     )
     sharingCol = {
-      addRecipients: jest.fn(),
+      addRecipients: jest.fn().mockResolvedValue({ data: SHARED_DRIVE }),
       create: jest.fn().mockResolvedValue({ data: NEW_SHARING }),
       createSharedDrive: jest.fn(),
       revokeRecipient: jest.fn().mockResolvedValue({}),
@@ -543,14 +543,17 @@ describe('shared drive recipient revocation', () => {
     provider.sharingCol = sharingCol
   })
 
-  it('forgets the shared drive when revoking its last recipient', async () => {
+  it('keeps the shared drive when revoking its last recipient', async () => {
     await provider.revoke(document, SHARED_DRIVE.id, 1)
 
     expect(sharingCol.revokeRecipient).toHaveBeenCalledWith(SHARED_DRIVE, 1)
-    expect(getDocumentSharing(provider.state, document.id)).toBeNull()
+    expect(getDocumentSharing(provider.state, document.id)).toMatchObject({
+      id: SHARED_DRIVE.id,
+      attributes: { members: [{ status: 'owner' }, { status: 'revoked' }] }
+    })
   })
 
-  it('creates a new sharing when re-adding after the last recipient was revoked', async () => {
+  it('adds a recipient to the existing drive after the last recipient was revoked', async () => {
     await provider.revoke(document, SHARED_DRIVE.id, 1)
 
     await provider.share({
@@ -562,16 +565,12 @@ describe('shared drive recipient revocation', () => {
       sharedDrive: true
     })
 
-    expect(sharingCol.addRecipients).not.toHaveBeenCalled()
-    expect(sharingCol.create).toHaveBeenCalledWith({
-      document,
+    expect(sharingCol.addRecipients).toHaveBeenCalledWith({
+      document: expect.objectContaining({ id: SHARED_DRIVE.id }),
       recipients: [recipient],
-      readOnlyRecipients: [],
-      description: 'Shared folder',
-      previewPath: '/preview',
-      openSharing: true,
-      sharedDrive: true
+      readOnlyRecipients: []
     })
+    expect(sharingCol.create).not.toHaveBeenCalled()
   })
 
   it('creates a new sharing when sharing a document nested inside a shared drive without its own sharing', async () => {

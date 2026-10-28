@@ -32,8 +32,7 @@ export const receiveSharings = ({
     sharings: sharings.filter(
       s =>
         // Shared drives without recipients are valid and should be kept
-        (isSharingADrive(s) || !areAllRecipientsRevoked(s)) &&
-        !hasBeenSelfRevoked(s, instanceUri)
+        !shouldForgetSharing(s) && !hasBeenSelfRevoked(s, instanceUri)
     ),
     permissions
   }
@@ -201,7 +200,7 @@ const byDocId = (state = {}, action) => {
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
     case UPDATE_SHARING:
-      if (areAllRecipientsRevoked(action.sharing)) {
+      if (shouldForgetSharing(action.sharing)) {
         return forgetSharing(state, action.sharing)
       }
       return state
@@ -263,7 +262,7 @@ const sharings = (state = [], action) => {
     case UPDATE_SHARING:
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
-      if (areAllRecipientsRevoked(action.sharing)) {
+      if (shouldForgetSharing(action.sharing)) {
         return state.filter(s => s.id !== action.sharing.id)
       }
       return state.map(s => {
@@ -290,7 +289,7 @@ const sharedPaths = (state = [], action) => {
     case REVOKE_GROUP:
     case REVOKE_RECIPIENT:
     case UPDATE_SHARING:
-      if (areAllRecipientsRevoked(action.sharing)) {
+      if (shouldForgetSharing(action.sharing)) {
         return state.filter(p => p !== action.path)
       }
       return state
@@ -638,6 +637,9 @@ const isSharingADrive = sharing => sharing.attributes.drive === true
 const areAllRecipientsRevoked = sharing =>
   sharing.attributes.owner &&
   sharing.attributes.members.filter(m => m.status !== 'revoked').length === 1
+
+const shouldForgetSharing = sharing =>
+  !isSharingADrive(sharing) && areAllRecipientsRevoked(sharing)
 
 const hasBeenSelfRevoked = (sharing, instanceUri) => {
   const me = sharing.attributes.members.find(matchingInstanceName(instanceUri))
