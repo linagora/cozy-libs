@@ -1,8 +1,9 @@
 import React from 'react'
 
+import DowngradePermissionConfirmDialog from './DowngradePermissionConfirmDialog'
 import PermissionTypeMenu from './PermissionTypeMenu'
 import withLocales from '../../hoc/withLocales'
-import { useMemberPermissionType } from '../../hooks/useMemberPermissionType'
+import { useMemberTypeChange } from '../../hooks/useMemberTypeChange'
 
 const PermissionTypeMenuWrapper = ({
   sharingId,
@@ -11,21 +12,31 @@ const PermissionTypeMenuWrapper = ({
   document,
   recipient
 }) => {
-  const { isInsideSharedParent, sharedParentName, setMemberType } =
-    useMemberPermissionType(document)
+  const {
+    changeMemberType,
+    isDowngradeDialogOpen,
+    downgradedRecipient,
+    sharedParentName,
+    confirmDowngrade,
+    cancelDowngrade
+  } = useMemberTypeChange(document)
 
-  const handleSetType = (newType, options) =>
-    setMemberType({ sharingId, memberIndex, type, recipient }, newType, options)
+  const handleSetType = newType =>
+    changeMemberType({ sharingId, memberIndex, type, recipient }, newType)
 
   return (
-    <PermissionTypeMenu
-      type={type}
-      document={document}
-      recipient={recipient}
-      isInsideSharedParent={isInsideSharedParent}
-      sharedParentName={sharedParentName}
-      onSetType={handleSetType}
-    />
+    <>
+      <PermissionTypeMenu type={type} onSetType={handleSetType} />
+      {isDowngradeDialogOpen && (
+        <DowngradePermissionConfirmDialog
+          document={document}
+          recipient={downgradedRecipient}
+          sharedParentName={sharedParentName}
+          onCancel={cancelDowngrade}
+          onConfirm={confirmDowngrade}
+        />
+      )}
+    </>
   )
 }
 

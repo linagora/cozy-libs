@@ -2,6 +2,7 @@ import React from 'react'
 
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
+import DowngradePermissionConfirmDialog from './Recipient/DowngradePermissionConfirmDialog'
 import WhoHasAccess from './WhoHasAccess'
 import {
   addAvatarUrls,
@@ -9,7 +10,7 @@ import {
   makeAvatarUrl,
   markCurrentUser
 } from '../helpers/recipients'
-import { useMemberPermissionType } from '../hooks/useMemberPermissionType'
+import { useMemberTypeChange } from '../hooks/useMemberTypeChange'
 import { useSharingContext } from '../hooks/useSharingContext'
 import { buildInstanceSettingsQuery } from '../queries/queries'
 
@@ -65,8 +66,16 @@ const WhoHasAccessWrapper = ({
         canManageMembers
       })
   )
-  const { isInsideSharedParent, sharedParentName, setMemberType } =
-    useMemberPermissionType(document, { shouldFetchPath: hasMemberMenus })
+  const {
+    changeMemberType,
+    isDowngradeDialogOpen,
+    downgradedRecipient,
+    sharedParentName,
+    confirmDowngrade,
+    cancelDowngrade
+  } = useMemberTypeChange(document, {
+    shouldFetchPath: hasMemberMenus
+  })
   const ownerRecipient = markedRecipients.find(
     recipient => recipient.status === 'owner'
   )
@@ -96,33 +105,42 @@ const WhoHasAccessWrapper = ({
     : defaultOwner
 
   return (
-    <WhoHasAccess
-      isOwner={isOwner}
-      canManageSharing={canManageSharing}
-      isSharedDrive={isSharedDrive}
-      isReadOnly={isReadOnly}
-      canManageMembers={canManageMembers}
-      canManageLink={canManageLink}
-      showOwner={showOwner}
-      owner={owner}
-      isInsideSharedParent={isInsideSharedParent}
-      sharedParentName={sharedParentName}
-      recipients={markedRecipients}
-      recipientsToBeConfirmed={recipientsToBeConfirmed}
-      document={document}
-      documentType={documentType}
-      className={className}
-      onRevoke={onRevoke}
-      onRevokeSelf={onRevokeSelf}
-      onRevokeGroup={revokeGroup}
-      onLeaveGroup={revokeSelf}
-      onSetMemberType={setMemberType}
-      onUpdateLinkPermissions={updateDocumentPermissions}
-      onRevokeLink={revokeSharingLink}
-      verifyRecipient={verifyRecipient}
-      link={link}
-      permissions={getDocumentPermissions(document?._id)}
-    />
+    <>
+      <WhoHasAccess
+        isOwner={isOwner}
+        canManageSharing={canManageSharing}
+        isSharedDrive={isSharedDrive}
+        isReadOnly={isReadOnly}
+        canManageMembers={canManageMembers}
+        canManageLink={canManageLink}
+        showOwner={showOwner}
+        owner={owner}
+        recipients={markedRecipients}
+        recipientsToBeConfirmed={recipientsToBeConfirmed}
+        document={document}
+        documentType={documentType}
+        className={className}
+        onRevoke={onRevoke}
+        onRevokeSelf={onRevokeSelf}
+        onRevokeGroup={revokeGroup}
+        onLeaveGroup={revokeSelf}
+        onSetMemberType={changeMemberType}
+        onUpdateLinkPermissions={updateDocumentPermissions}
+        onRevokeLink={revokeSharingLink}
+        verifyRecipient={verifyRecipient}
+        link={link}
+        permissions={getDocumentPermissions(document?._id)}
+      />
+      {isDowngradeDialogOpen && (
+        <DowngradePermissionConfirmDialog
+          document={document}
+          recipient={downgradedRecipient}
+          sharedParentName={sharedParentName}
+          onCancel={cancelDowngrade}
+          onConfirm={confirmDowngrade}
+        />
+      )}
+    </>
   )
 }
 
