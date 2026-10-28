@@ -82,13 +82,18 @@ const ShareAutosuggestWrapper = ({
     ? suggestedContactsAndGroups.filter(({ _type }) => _type === DOCTYPE_GROUPS)
     : suggestedContactsAndGroups
 
+  // The stack matches the emails whatever their case
+  const normalizeEmail = email => email?.trim().toLowerCase()
   const isRecipient = email =>
-    currentRecipients.some(r => r.email === email) ||
-    recipients.some(r => ContactModel.getPrimaryEmail(r) === email)
+    currentRecipients.some(r => normalizeEmail(r.email) === email) ||
+    recipients.some(
+      r => normalizeEmail(ContactModel.getPrimaryEmail(r)) === email
+    )
 
   const fetchContacts = async q =>
     (await suggestContacts(client, q)).filter(
-      contact => !isRecipient(ContactModel.getPrimaryEmail(contact))
+      contact =>
+        !isRecipient(normalizeEmail(ContactModel.getPrimaryEmail(contact)))
     )
 
   return (

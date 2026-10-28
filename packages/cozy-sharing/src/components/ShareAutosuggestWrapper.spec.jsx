@@ -339,7 +339,7 @@ describe('ShareAutosuggestWrapper component', () => {
       expect(screen.queryByText('Teagan Wolf')).not.toBeInTheDocument()
     })
 
-    it('should fetch suggestions without the current and pending recipients', async () => {
+    it('should fetch suggestions without the current and pending recipients, whatever the case of their email', async () => {
       const suggestion = email => ({
         type: 'io.cozy.contacts',
         attributes: { fullname: email, email: [{ address: email }] }
@@ -347,14 +347,14 @@ describe('ShareAutosuggestWrapper component', () => {
       const mockClient = setup(
         { contactGroups: [], groupMembers: [] },
         {
-          currentRecipients: [{ email: 'current@cozy.cc' }],
+          currentRecipients: [{ email: 'Current@Cozy.cc' }],
           recipients: [{ email: 'pending@cozy.cc' }]
         }
       )
       const fetchJSON = jest.fn().mockResolvedValue({
         data: [
           suggestion('current@cozy.cc'),
-          suggestion('pending@cozy.cc'),
+          suggestion('PENDING@cozy.cc'),
           suggestion('new@cozy.cc')
         ]
       })
