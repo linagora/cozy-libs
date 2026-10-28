@@ -6,7 +6,7 @@ import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import { GroupAvatar } from './Avatar/GroupAvatar'
-import { MemberAvatar } from './Avatar/MemberAvatar'
+import { MemberAvatarWrapper } from './Avatar/MemberAvatarWrapper'
 import ContactSuggestion from './ContactSuggestion'
 import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
@@ -199,7 +199,7 @@ const ShareAutosuggest = ({
               isContactGroup ? (
                 <GroupAvatar size="xs" color={recipient.color} />
               ) : (
-                <MemberAvatar size="xs" recipient={recipient} />
+                <MemberAvatarWrapper size="xs" recipient={recipient} />
               )
             }
             label={name}

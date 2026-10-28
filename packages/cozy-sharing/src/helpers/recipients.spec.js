@@ -1,4 +1,4 @@
-import { hasMemberActions, markCurrentUser } from './recipients'
+import { hasMemberActions, makeAvatarUrl, markCurrentUser } from './recipients'
 
 const instanceUri = 'https://alice.cozy.cc'
 
@@ -78,5 +78,65 @@ describe('hasMemberActions', () => {
       })
     ).toBe(true)
     expect(hasMemberActions({ ...memberRights, status: 'ready' })).toBe(false)
+  })
+})
+
+describe('makeAvatarUrl', () => {
+  const instanceUri = 'http://cozy.example.com'
+
+  it('prefixes the avatarPath with the instance URI and the status', () => {
+    expect(
+      makeAvatarUrl(
+        { status: 'owner', avatarPath: '/sharings/123/recipients/0/avatar' },
+        instanceUri
+      )
+    ).toBe('http://cozy.example.com/sharings/123/recipients/0/avatar?v=owner')
+  })
+
+  it('appends the status with & when avatarPath already has a query string', () => {
+    expect(
+      makeAvatarUrl(
+        { status: 'owner', avatarPath: '/public/avatar?fallback=initials' },
+        instanceUri
+      )
+    ).toBe('http://cozy.example.com/public/avatar?fallback=initials&v=owner')
+  })
+
+  it('does not prefix a full URL avatarPath with the instance URI', () => {
+    expect(
+      makeAvatarUrl(
+        {
+          status: 'contact',
+          avatarPath:
+            'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials'
+        },
+        instanceUri
+      )
+    ).toBe(
+      'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials&v=contact'
+    )
+  })
+
+  it('points to the public avatar of the contact cozy when there is no avatarPath', () => {
+    expect(
+      makeAvatarUrl(
+        {
+          _type: 'io.cozy.contacts',
+          cozy: [{ url: 'https://jonsnow.mycozy.cloud' }]
+        },
+        instanceUri
+      )
+    ).toBe(
+      'https://jonsnow.mycozy.cloud/public/avatar?fallback=initials&v=contact'
+    )
+  })
+
+  it('returns null when there is no avatarPath and no cozy URL', () => {
+    expect(
+      makeAvatarUrl(
+        { _type: 'io.cozy.contacts', public_name: 'Bob' },
+        instanceUri
+      )
+    ).toBe(null)
   })
 })

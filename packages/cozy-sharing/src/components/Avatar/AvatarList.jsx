@@ -7,7 +7,7 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import { ExtraAvatar } from './ExtraAvatar'
 import { GroupAvatar } from './GroupAvatar'
-import { MemberAvatar } from './MemberAvatar'
+import { MemberAvatarWrapper } from './MemberAvatarWrapper'
 import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
 
@@ -104,7 +104,7 @@ const AvatarList = ({
             }`}
             key={recipient.index}
           >
-            <MemberAvatar recipient={recipient} size={size} />
+            <MemberAvatarWrapper recipient={recipient} size={size} />
           </span>
         )
       })}

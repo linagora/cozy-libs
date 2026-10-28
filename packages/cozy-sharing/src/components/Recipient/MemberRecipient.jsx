@@ -17,7 +17,7 @@ import {
   DEFAULT_DISPLAY_NAME
 } from '../../helpers/recipients'
 import { getDisplayName } from '../../models'
-import { MemberAvatar } from '../Avatar/MemberAvatar'
+import { MemberAvatarWrapper } from '../Avatar/MemberAvatarWrapper'
 
 const MemberRecipient = props => {
   const { t } = useI18n()
@@ -58,7 +58,7 @@ const MemberRecipient = props => {
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
       <ListItem gutters={isMobile ? 'default' : 'double'} size="small">
         <ListItemIcon>
-          <MemberAvatar size="m" recipient={props} />
+          <MemberAvatarWrapper size="m" recipient={props} />
         </ListItemIcon>
         <ListItemText
           primary={

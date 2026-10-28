@@ -14,7 +14,7 @@ import {
   getDisplayName
 } from '../models'
 import { GroupAvatar } from './Avatar/GroupAvatar'
-import { MemberAvatar } from './Avatar/MemberAvatar'
+import { MemberAvatarWrapper } from './Avatar/MemberAvatarWrapper'
 
 export const ContactSuggestion = ({ contactOrGroup }) => {
   const { t } = useI18n()
@@ -41,7 +41,7 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
   return (
     <ListItem button>
       <ListItemIcon>
-        <MemberAvatar recipient={contactOrGroup} size="m" />
+        <MemberAvatarWrapper recipient={contactOrGroup} size="m" />
       </ListItemIcon>
       <ListItemText primary={name} secondary={cozyUrl || '-'} />
     </ListItem>
