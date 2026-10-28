@@ -1,67 +1,72 @@
 import PropTypes from 'prop-types'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useState } from 'react'
 
-import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
-import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
+import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
+import ActionsMenuWrapper from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuWrapper'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
-import { useI18n } from 'twake-i18n'
+import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Radios from 'cozy-ui/transpiled/react/Radios'
+import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
-import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
+const PermissionTypeMenu = ({ value, roles, onChange, mobileHeader }) => {
+  const { isMobile } = useBreakpoints()
+  const [anchorEl, setAnchorEl] = useState(null)
 
-const PermissionTypeMenu = ({ type, onSetType }) => {
-  const { t } = useI18n()
-  const buttonRef = useRef()
+  const label = roles.find(role => role.value === value)?.label
 
-  const [isMenuDisplayed, setMenuDisplayed] = useState(false)
-
-  const hideMenu = useCallback(() => {
-    setMenuDisplayed(false)
-  }, [])
-
-  const setType = useCallback(
-    newType => {
-      hideMenu()
-      if (newType === type) return
-      onSetType(newType)
-    },
-    [hideMenu, onSetType, type]
-  )
-
-  const actions = makeActions(
-    [setReadOnlySharedPermission, setReadWriteSharedPermission],
-    {
-      t,
-      type: type ?? 'one-way',
-      setType
-    }
-  )
+  const handleRoleClick = role => {
+    if (role.value !== value) onChange(role.value)
+  }
 
   return (
     <>
       <DropdownButton
-        ref={buttonRef}
         aria-controls="simple-menu"
         aria-haspopup="true"
-        onClick={() => setMenuDisplayed(true)}
+        onClick={event => setAnchorEl(event.currentTarget)}
         textVariant="body2"
       >
-        {t(`Share.type.${type}`)}
+        {label}
       </DropdownButton>
-      <ActionsMenu
-        ref={buttonRef}
-        open={isMenuDisplayed}
-        actions={actions}
+      <ActionsMenuWrapper
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        getContentAnchorEl={null}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+        keepMounted
         autoClose
-        onClose={hideMenu}
-      />
+        onClose={() => setAnchorEl(null)}
+      >
+        {/* The header renders nothing on desktop but would still take the initial focus of the menu */}
+        {isMobile && mobileHeader}
+        {roles.map(role => (
+          <ActionsMenuItem
+            key={role.value}
+            onClick={() => handleRoleClick(role)}
+          >
+            <ListItemIcon>
+              <Radios checked={role.value === value} />
+            </ListItemIcon>
+            <ListItemText primary={role.label} />
+          </ActionsMenuItem>
+        ))}
+      </ActionsMenuWrapper>
     </>
   )
 }
 
 PermissionTypeMenu.propTypes = {
-  type: PropTypes.oneOf(['one-way', 'two-way']),
-  onSetType: PropTypes.func.isRequired
+  value: PropTypes.string.isRequired,
+  roles: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired,
+  onChange: PropTypes.func.isRequired,
+  mobileHeader: PropTypes.node
 }
 
 export default PermissionTypeMenu
