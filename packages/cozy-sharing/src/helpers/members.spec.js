@@ -130,7 +130,7 @@ describe('makeMembers', () => {
     expect(verifyRecipient).toHaveBeenCalledWith(confirmation)
   })
 
-  it('makes a group with its only role and its detail', () => {
+  it('makes a group with its role as text and its detail', () => {
     const onOpenGroup = jest.fn()
     const [group] = makeMembers({ ...params, recipients: [team], onOpenGroup })
 
@@ -144,9 +144,19 @@ describe('makeMembers', () => {
       isGroup: true,
       role: 'one-way',
       roles: [{ value: 'one-way', label: 'Share.type.one-way' }],
-      canChangeRole: true,
+      canChangeRole: false,
       canRemove: true
     })
     expect(onOpenGroup).toHaveBeenCalledWith(team)
+  })
+
+  it('shows the role of a group in a menu when asked', () => {
+    const [group] = makeMembers({
+      ...params,
+      recipients: [team],
+      isGroupRoleMenuShown: true
+    })
+
+    expect(group.canChangeRole).toBe(true)
   })
 })
