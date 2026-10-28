@@ -3,6 +3,10 @@
     "sharing": "Loading in progress"
   },
   "Share": {
+    "suggestions": {
+      "empty": "No suggestions",
+      "offline": "Offline: only locally available contacts and groups are shown."
+    },
     "status": {
       "owner": "Owner",
       "pending": "Invitation sent",

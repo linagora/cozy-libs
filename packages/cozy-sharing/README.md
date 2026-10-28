@@ -42,6 +42,31 @@ import SharingProvider from 'cozy-sharing'
 | `previewPath` | no | Custom preview path sent to the share creation |
 | `contactsSuggestEnabled` | no | Suggest the recipients with `GET /contacts/suggest` instead of loading every contact |
 
+### Contact and group suggestions
+
+Enable `contactsSuggestEnabled` after deploying a stack with the mixed contact/group
+suggest API and a `cozy-client` version exposing `Q(...).suggestContacts`. Older
+clients use the local picker. Apps need whole-doctype read permission for both
+`io.cozy.contacts` and `io.cozy.contacts.groups`.
+
+Search starts after two characters, with a 300 ms debounce and up to 20 results
+in server order (groups first). Results are cached for 30 seconds. No full contact,
+group or group-member list is downloaded while the API picker is online. Suggested
+groups are shared by ID, even when `sharing.show-recipient-groups` is disabled;
+their member count is omitted because the API does not return it. Local contacts
+keep their IDs; organization members and people without a local contact are sent
+by email, allowing the stack to resolve or create the local contact.
+
+The stack controls the sources: `centralized_org_directory=false` searches only
+local contacts and groups. `common_contacts` does not enable organization search
+on its own. The picker works without an organization.
+
+When the browser reports it is offline, the picker uses locally available contacts
+and groups and shows an offline notice. This requires the app's existing PouchDB
+sync configuration for offline data. Online API errors are shown to the user.
+With `contactsSuggestEnabled` disabled, the existing local picker and group
+expansion behavior remain available.
+
 ### Built-in components
 
 Surrounding application code (imports, state, props) is omitted for brevity.

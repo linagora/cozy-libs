@@ -3,6 +3,10 @@ import flag from 'cozy-flags'
 
 import { validateEmail } from '../helpers/email'
 import { DOCTYPE_CONTACTS, DOCTYPE_GROUPS } from '../models'
+import {
+  buildContactSuggestionsQuery,
+  supportsContactSuggestions
+} from '../queries/queries'
 
 const ContactModel = models.contact
 
@@ -17,12 +21,17 @@ export const getOrCreateFromArray = async (
   createContact,
   contactsSuggestEnabled
 ) => {
-  if (contactsSuggestEnabled) {
+  if (contactsSuggestEnabled && supportsContactSuggestions) {
     return contacts.map(contact => {
-      if (contact._type === DOCTYPE_GROUPS) return contact
+      if (
+        contact._type === DOCTYPE_GROUPS ||
+        (contact._id && contact.meta?.kind !== 'member')
+      )
+        return contact
       const email = ContactModel.getPrimaryEmail(contact)
       if (validateEmail(email)) return { _type: DOCTYPE_CONTACTS, email }
-      return contact._id ? contact : undefined
+      if (contact._id) return contact
+      throw new Error('A sharing recipient requires an ID or a valid email')
     })
   }
 
@@ -62,17 +71,43 @@ export const getOrCreateFromArray = async (
   )
 }
 
-// A suggestion without id has no contact document, and only a fullname,
-// which getDisplayName does not read
-export const suggestContacts = async (client, q) => {
-  const { data } = await client
-    .getStackClient()
-    .fetchJSON('GET', `/contacts/suggest?q=${encodeURIComponent(q)}`)
-  return data.map(({ id, type, attributes }) => ({
-    ...attributes,
-    ...(id ? { _id: id, id } : { displayName: attributes.fullname }),
-    _type: type
-  }))
+export async function fetchContactSuggestions(client, q) {
+  const result = await client.fetchQueryAndGetFromState(
+    buildContactSuggestionsQuery(q)
+  )
+  if (result.fetchStatus === 'failed') throw result.lastError
+  return result.data.suggestions
+}
+
+export function filterContactSuggestions(suggestions, current, pending) {
+  const recipients = [...current, ...pending]
+  const emails = new Set(
+    recipients
+      .map(recipient =>
+        ContactModel.getPrimaryEmail(recipient)?.trim().toLowerCase()
+      )
+      .filter(Boolean)
+  )
+  const groupIds = new Set(
+    recipients
+      .filter(
+        recipient =>
+          recipient._type === DOCTYPE_GROUPS ||
+          recipient.groupIndex !== undefined
+      )
+      .map(recipient => recipient._id || recipient.id)
+  )
+  return suggestions.filter(suggestion => {
+    if (suggestion._type === DOCTYPE_GROUPS) {
+      return !groupIds.has(suggestion._id)
+    }
+    return (
+      !suggestion.me &&
+      !emails.has(
+        ContactModel.getPrimaryEmail(suggestion)?.trim().toLowerCase()
+      )
+    )
+  })
 }
 
 export const getContactsFromGroupId = (contacts = [], groupId) => {

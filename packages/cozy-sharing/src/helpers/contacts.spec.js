@@ -3,8 +3,14 @@ import flag from 'cozy-flags'
 import {
   computeContactsAndGroups,
   getOrCreateFromArray,
-  suggestContacts
+  fetchContactSuggestions,
+  filterContactSuggestions
 } from './contacts'
+
+jest.mock('../queries/queries', () => ({
+  ...jest.requireActual('../queries/queries'),
+  supportsContactSuggestions: true
+}))
 
 jest.mock('cozy-flags', () => ({
   __esModule: true,
@@ -162,70 +168,87 @@ describe('getOrCreateFromArray with contactsSuggestEnabled', () => {
     expect(createContact).not.toHaveBeenCalled()
   })
 
-  it('should keep a contact without email by id, and drop a recipient with neither', async () => {
-    const cozyOnlyContact = {
-      _id: 'contact-1',
+  it('keeps known local contacts by ID', async () => {
+    const contact = {
+      _id: 'local',
       _type: 'io.cozy.contacts',
-      cozy: [{ url: 'https://bob.example' }]
+      meta: { kind: 'contact' },
+      email: [{ address: 'local@example.org' }]
     }
+    expect(
+      await getOrCreateFromArray(mockClient, [contact], jest.fn(), true)
+    ).toEqual([contact])
+  })
 
-    const recipients = await getOrCreateFromArray(
-      mockClient,
-      [cozyOnlyContact, { instance: 'https://alice.example' }],
-      jest.fn(),
-      true
-    )
-
-    expect(recipients).toEqual([cozyOnlyContact, undefined])
+  it('rejects a recipient with neither an ID nor an email', async () => {
+    await expect(
+      getOrCreateFromArray(mockClient, [{}], jest.fn(), true)
+    ).rejects.toThrow('requires')
   })
 })
 
-describe('suggestContacts', () => {
-  it('should map the suggestions of the stack to contacts', async () => {
-    const fetchJSON = jest.fn().mockResolvedValue({
-      data: [
-        {
-          type: 'io.cozy.contacts',
-          id: 'org-member-1',
-          attributes: {
-            fullname: 'Jean Dupont',
-            name: { givenName: 'Jean', familyName: 'Dupont' },
-            email: [{ address: 'jean@org.example', primary: true }]
-          },
-          meta: { kind: 'member' }
-        },
-        {
-          type: 'io.cozy.contacts',
-          attributes: {
-            fullname: 'Paul Dupuis',
-            email: [{ address: 'paul@friends.example', primary: true }]
-          }
-        }
-      ]
-    })
-    const client = { getStackClient: () => ({ fetchJSON }) }
-
-    const contacts = await suggestContacts(client, 'dup & co')
-
-    expect(fetchJSON).toHaveBeenCalledWith(
-      'GET',
-      '/contacts/suggest?q=dup%20%26%20co'
-    )
-    expect(contacts).toEqual([
-      {
-        _id: 'org-member-1',
-        id: 'org-member-1',
-        _type: 'io.cozy.contacts',
-        fullname: 'Jean Dupont',
-        name: { givenName: 'Jean', familyName: 'Dupont' },
-        email: [{ address: 'jean@org.example', primary: true }]
-      },
+describe('fetchContactSuggestions', () => {
+  it('uses the query cache without replacing absent contact IDs', async () => {
+    const suggestions = [
       {
         _type: 'io.cozy.contacts',
-        fullname: 'Paul Dupuis',
-        displayName: 'Paul Dupuis',
-        email: [{ address: 'paul@friends.example', primary: true }]
+        fullname: 'Alice',
+        email: [{ address: 'alice@example.org' }]
       }
-    ])
+    ]
+    const client = {
+      fetchQueryAndGetFromState: jest
+        .fn()
+        .mockResolvedValue({ data: { suggestions } })
+    }
+    expect(await fetchContactSuggestions(client, '  al & co ')).toEqual(
+      suggestions
+    )
+    expect(client.fetchQueryAndGetFromState).toHaveBeenCalledWith({
+      definition: expect.objectContaining({
+        doctype: 'io.cozy.contacts.suggestions',
+        selector: { q: 'al & co', limit: 20 }
+      }),
+      options: expect.objectContaining({
+        as: 'io.cozy.contacts.suggestions/q/al%20%26%20co/limit/20',
+        singleDocData: true,
+        fetchPolicy: expect.any(Function)
+      })
+    })
+  })
+
+  it('does not interpret a cached failed search as empty results', async () => {
+    const error = Object.assign(new Error('Forbidden'), { status: 403 })
+    const client = {
+      fetchQueryAndGetFromState: jest
+        .fn()
+        .mockResolvedValue({ fetchStatus: 'failed', lastError: error })
+    }
+    await expect(fetchContactSuggestions(client, 'al')).rejects.toBe(error)
+  })
+})
+
+describe('filterContactSuggestions', () => {
+  it('excludes people by normalized email and groups by ID without changing server order', () => {
+    const group = id => ({ _type: 'io.cozy.contacts.groups', _id: id })
+    const contact = email => ({
+      _type: 'io.cozy.contacts',
+      email: [{ address: email }]
+    })
+    const suggestions = [
+      group('selected'),
+      group('shared'),
+      group('available'),
+      contact(' CURRENT@example.org '),
+      contact('pending@example.org'),
+      contact('new@example.org')
+    ]
+    expect(
+      filterContactSuggestions(
+        suggestions,
+        [{ email: 'current@EXAMPLE.org' }, { id: 'shared', groupIndex: 0 }],
+        [group('selected'), { email: 'PENDING@example.org' }]
+      )
+    ).toEqual([group('available'), contact('new@example.org')])
   })
 })

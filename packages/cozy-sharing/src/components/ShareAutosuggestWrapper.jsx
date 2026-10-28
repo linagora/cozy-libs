@@ -1,28 +1,23 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useClient, useQueryAll, isQueryLoading } from 'cozy-client'
-import { models } from 'cozy-client'
 import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
-import { computeContactsAndGroups, suggestContacts } from '../helpers/contacts'
+import {
+  computeContactsAndGroups,
+  fetchContactSuggestions,
+  filterContactSuggestions
+} from '../helpers/contacts'
 import { useSharingContext } from '../hooks/useSharingContext'
-import { DOCTYPE_GROUPS } from '../models'
 import {
   buildReachableContactsQuery,
   buildContactGroupsQuery,
-  buildUnreachableContactsWithGroupsQuery
+  buildUnreachableContactsWithGroupsQuery,
+  supportsContactSuggestions
 } from '../queries/queries'
 
-const ContactModel = models.contact
-
-/**
- * ShareAutosuggestWrapper is responsible for fetching contacts and groups.
- * We retrieve all the contacts that are reachable and the groups they belong to.
- * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
- * With contactsSuggestEnabled, the stack suggests the contacts and we only retrieve the group members.
- */
 const ShareAutosuggestWrapper = ({
   currentRecipients,
   recipients,
@@ -37,12 +32,24 @@ const ShareAutosuggestWrapper = ({
   const client = useClient()
   const contactsSuggestEnabled = useSharingContext()?.contactsSuggestEnabled
 
-  const reachableContactsQuery = buildReachableContactsQuery({
-    inGroups: contactsSuggestEnabled
-  })
+  const [isOnline, setIsOnline] = useState(
+    () => typeof navigator === 'undefined' || navigator.onLine !== false
+  )
+  useEffect(() => {
+    const updateOnline = () => setIsOnline(navigator.onLine !== false)
+    window.addEventListener('online', updateOnline)
+    window.addEventListener('offline', updateOnline)
+    return () => {
+      window.removeEventListener('online', updateOnline)
+      window.removeEventListener('offline', updateOnline)
+    }
+  }, [])
+  const useSuggestions =
+    contactsSuggestEnabled && supportsContactSuggestions && isOnline
+  const reachableContactsQuery = buildReachableContactsQuery()
   const reachableContactsResult = useQueryAll(
     reachableContactsQuery.definition,
-    reachableContactsQuery.options
+    { ...reachableContactsQuery.options, enabled: !useSuggestions }
   )
 
   const unreachableContactsWithGroupsQuery =
@@ -51,54 +58,47 @@ const ShareAutosuggestWrapper = ({
     unreachableContactsWithGroupsQuery.definition,
     {
       ...unreachableContactsWithGroupsQuery.options,
-      enabled: !!flag('sharing.show-recipient-groups')
+      enabled: !useSuggestions && !!flag('sharing.show-recipient-groups')
     }
   )
 
   const contactGroupsQuery = buildContactGroupsQuery()
-  const contactGroupsResult = useQueryAll(
-    contactGroupsQuery.definition,
-    contactGroupsQuery.options
-  )
-
-  const isLoading =
-    isQueryLoading(reachableContactsResult) ||
-    reachableContactsResult.hasMore ||
-    isQueryLoading(contactGroupsResult) ||
-    contactGroupsResult.hasMore ||
-    (flag('sharing.show-recipient-groups') &&
-      (isQueryLoading(unreachableContactsWithGroupsResult) ||
-        unreachableContactsWithGroupsResult.hasMore))
-
-  const suggestedContactsAndGroups = computeContactsAndGroups({
-    reachableContacts: reachableContactsResult.data || [],
-    unreachableContactsWithGroups:
-      unreachableContactsWithGroupsResult.data || [],
-    contactGroups: contactGroupsResult.data || [],
-    currentRecipients,
-    pendingRecipients: recipients
+  const contactGroupsResult = useQueryAll(contactGroupsQuery.definition, {
+    ...contactGroupsQuery.options,
+    enabled: !useSuggestions
   })
 
-  const contactsAndGroups = contactsSuggestEnabled
-    ? suggestedContactsAndGroups.filter(({ _type }) => _type === DOCTYPE_GROUPS)
-    : suggestedContactsAndGroups
+  const isLoading =
+    !useSuggestions &&
+    (isQueryLoading(reachableContactsResult) ||
+      reachableContactsResult.hasMore ||
+      isQueryLoading(contactGroupsResult) ||
+      contactGroupsResult.hasMore ||
+      (flag('sharing.show-recipient-groups') &&
+        (isQueryLoading(unreachableContactsWithGroupsResult) ||
+          unreachableContactsWithGroupsResult.hasMore)))
 
-  // The stack matches the emails whatever their case
-  const normalizeEmail = email => email?.trim().toLowerCase()
-  const isRecipient = email =>
-    currentRecipients.some(r => normalizeEmail(r.email) === email) ||
-    recipients.some(
-      r => normalizeEmail(ContactModel.getPrimaryEmail(r)) === email
-    )
+  const contactsAndGroups = useSuggestions
+    ? []
+    : computeContactsAndGroups({
+        reachableContacts: reachableContactsResult.data || [],
+        unreachableContactsWithGroups:
+          unreachableContactsWithGroupsResult.data || [],
+        contactGroups: contactGroupsResult.data || [],
+        currentRecipients,
+        pendingRecipients: recipients
+      })
 
   const fetchContacts = async q =>
-    (await suggestContacts(client, q)).filter(
-      contact =>
-        !isRecipient(normalizeEmail(ContactModel.getPrimaryEmail(contact)))
+    filterContactSuggestions(
+      await fetchContactSuggestions(client, q),
+      currentRecipients,
+      recipients
     )
 
   return (
     <ShareAutosuggest
+      key={useSuggestions ? 'suggestions' : 'local'}
       loading={isLoading}
       disabled={disabled}
       contactsAndGroups={contactsAndGroups}
@@ -109,7 +109,8 @@ const ShareAutosuggestWrapper = ({
       placeholder={placeholder}
       autoFocus={autoFocus}
       endAdornment={endAdornment}
-      fetchContacts={contactsSuggestEnabled ? fetchContacts : undefined}
+      fetchContacts={useSuggestions ? fetchContacts : null}
+      offline={contactsSuggestEnabled && !isOnline}
     />
   )
 }

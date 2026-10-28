@@ -10,6 +10,7 @@ import {
   mergeRecipients,
   spreadGroupAndMergeRecipients
 } from '../helpers/recipients'
+import { useSharingContext } from '../hooks/useSharingContext'
 import { isReadOnlySharing } from '../state'
 import styles from '../styles/share.styl'
 
@@ -26,11 +27,13 @@ export const ShareByEmail = ({
   sharing
 }) => {
   const { t } = useI18n()
+  const contactsSuggestEnabled = useSharingContext()?.contactsSuggestEnabled
 
   const onRecipientPick = recipient => {
-    const merged = flag('sharing.show-recipient-groups')
-      ? mergeRecipients(pendingRecipients, recipient)
-      : spreadGroupAndMergeRecipients(pendingRecipients, recipient)
+    const merged =
+      contactsSuggestEnabled || flag('sharing.show-recipient-groups')
+        ? mergeRecipients(pendingRecipients, recipient)
+        : spreadGroupAndMergeRecipients(pendingRecipients, recipient)
     onPendingRecipientsChange(merged)
   }
 

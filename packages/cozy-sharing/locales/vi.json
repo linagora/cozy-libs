@@ -3,6 +3,10 @@
     "sharing": "Đang tải"
   },
   "Share": {
+    "suggestions": {
+      "empty": "Không có gợi ý",
+      "offline": "Ngoại tuyến: chỉ hiển thị các liên hệ và nhóm có sẵn cục bộ."
+    },
     "status": {
       "owner": "Chủ sở hữu",
       "pending": "Đã gửi lời mời",

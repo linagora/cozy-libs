@@ -6,9 +6,13 @@ import { COLORS } from 'cozy-ui/transpiled/react/ColorList/helpers'
 
 const DEFAULT_COLOR = COLORS[4]
 
-const GroupAvatar = ({ size, color = DEFAULT_COLOR, className }) => {
+const GroupAvatar = ({ size, color, className }) => {
   return (
-    <Avatar size={size} color={colorToGradient(color)} className={className}>
+    <Avatar
+      size={size}
+      color={colorToGradient(color || DEFAULT_COLOR)}
+      className={className}
+    >
       <Icon icon={Peoples} />
     </Avatar>
   )

@@ -4,6 +4,8 @@ import Autosuggest from 'react-autosuggest'
 
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'twake-i18n'
 
 import { GroupAvatar } from './Avatar/GroupAvatar'
 import { MemberAvatar } from './Avatar/MemberAvatar'
@@ -16,7 +18,7 @@ import styles from '../styles/autosuggest.styl'
 import { contactOrGroupMatch } from '../suggestionMatchers'
 
 const FETCH_CONTACTS_DEBOUNCE = 300
-const FETCH_CONTACTS_MIN_LENGTH = 3
+const FETCH_CONTACTS_MIN_LENGTH = 2
 
 const ShareAutosuggest = ({
   loading,
@@ -29,8 +31,12 @@ const ShareAutosuggest = ({
   placeholder,
   autoFocus,
   endAdornment,
-  fetchContacts
+  fetchContacts,
+  offline
 }) => {
+  const { t } = useI18n()
+  const [fetchError, setFetchError] = useState(false)
+  const [hasSearched, setHasSearched] = useState(false)
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] = useState([])
   const [isPasted, setIsPasted] = useState(false)
@@ -40,9 +46,16 @@ const ShareAutosuggest = ({
   const autosuggestRef = useRef(null)
   const containerRef = useRef(null)
   const fetchTimeoutRef = useRef(null)
-  const fetchedValueRef = useRef(null)
+  const fetchSequenceRef = useRef(0)
+  const usesRemoteSearch = typeof fetchContacts === 'function'
 
-  useEffect(() => () => clearTimeout(fetchTimeoutRef.current), [])
+  useEffect(
+    () => () => {
+      clearTimeout(fetchTimeoutRef.current)
+      fetchSequenceRef.current += 1
+    },
+    []
+  )
 
   const computeSuggestions = value => {
     const inputValue = value.trim().toLowerCase()
@@ -70,35 +83,44 @@ const ShareAutosuggest = ({
   }
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    const computedSuggestions = computeSuggestions(value)
     clearTimeout(fetchTimeoutRef.current)
-    fetchedValueRef.current = value
+    const sequence = ++fetchSequenceRef.current
+    setFetchError(false)
+    setHasSearched(false)
 
-    if (!fetchContacts || value.trim().length < FETCH_CONTACTS_MIN_LENGTH) {
+    if (!usesRemoteSearch) {
+      showSuggestions(computeSuggestions(value), value)
+      return
+    }
+    setSuggestions([])
+    if (Array.from(value.trim()).length < FETCH_CONTACTS_MIN_LENGTH) {
       setIsFetching(false)
-      showSuggestions(computedSuggestions, value)
       return
     }
 
     setIsFetching(true)
     fetchTimeoutRef.current = setTimeout(async () => {
-      let contacts = []
       try {
-        contacts = await fetchContacts(value.trim())
+        const results = await fetchContacts(value.trim())
+        if (fetchSequenceRef.current !== sequence) return
+        setIsFetching(false)
+        setHasSearched(true)
+        showSuggestions(results, value)
       } catch (err) {
+        if (fetchSequenceRef.current !== sequence) return
+        setIsFetching(false)
+        setFetchError(true)
         logger.error('Failed to fetch contact suggestions', err)
       }
-      // The user kept typing or left the input while the stack was answering
-      if (fetchedValueRef.current !== value) return
-      setIsFetching(false)
-      showSuggestions([...contacts, ...computedSuggestions], value)
     }, FETCH_CONTACTS_DEBOUNCE)
   }
 
   const onSuggestionsClearRequested = () => {
     clearTimeout(fetchTimeoutRef.current)
-    fetchedValueRef.current = null
+    fetchSequenceRef.current += 1
     setIsFetching(false)
+    setFetchError(false)
+    setHasSearched(false)
     setSuggestions([])
   }
 
@@ -164,6 +186,7 @@ const ShareAutosuggest = ({
   const onAutosuggestPick = value => {
     if (isContactToBeCreated(value) && !enableCreateContact) return
 
+    onSuggestionsClearRequested()
     onPick(value)
     setInputValue('')
     autosuggestRef?.current?.input?.focus()
@@ -250,6 +273,21 @@ const ShareAutosuggest = ({
           disabled
         }}
       />
+      {offline && (
+        <Typography variant="caption" role="status">
+          {t('Share.suggestions.offline')}
+        </Typography>
+      )}
+      {fetchError && (
+        <Typography variant="caption" role="alert">
+          {t('Share.loadingError')}
+        </Typography>
+      )}
+      {hasSearched && suggestions.length === 0 && (
+        <Typography variant="caption" role="status">
+          {t('Share.suggestions.empty')}
+        </Typography>
+      )}
     </div>
   )
 }
@@ -269,7 +307,8 @@ ShareAutosuggest.propTypes = {
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
   endAdornment: PropTypes.node,
-  fetchContacts: PropTypes.func
+  fetchContacts: PropTypes.func,
+  offline: PropTypes.bool
 }
 
 export default ShareAutosuggest

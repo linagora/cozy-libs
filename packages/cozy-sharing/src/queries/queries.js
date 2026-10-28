@@ -50,7 +50,8 @@ export const buildReachableContactsQuery = ({ inGroups } = {}) => ({
   options: {
     as: inGroups
       ? 'io.cozy.contacts/reachable-with-groups'
-      : 'io.cozy.contacts/reachable'
+      : 'io.cozy.contacts/reachable',
+    fetchPolicy: defaultFetchPolicy
   }
 })
 
@@ -98,3 +99,22 @@ export const buildInstanceSettingsQuery = () => ({
     singleDocData: true
   }
 })
+
+export function buildContactSuggestionsQuery(q, limit = 20) {
+  const text = q.trim()
+  return {
+    definition: Q('io.cozy.contacts.suggestions')
+      .getById(JSON.stringify([text, limit]))
+      .where({ q: text, limit }),
+    options: {
+      as: `io.cozy.contacts.suggestions/q/${encodeURIComponent(
+        text
+      )}/limit/${limit}`,
+      singleDocData: true,
+      fetchPolicy: fetchPolicies.olderThan(30 * 1000)
+    }
+  }
+}
+
+export const supportsContactSuggestions =
+  typeof Q('io.cozy.contacts.suggestions').suggestContacts === 'function'

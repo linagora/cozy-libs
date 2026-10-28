@@ -27,9 +27,13 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
         </ListItemIcon>
         <ListItemText
           primary={contactOrGroup.name}
-          secondary={t('Share.members.count', {
-            smart_count: contactOrGroup.members.length.toString()
-          })}
+          secondary={
+            Array.isArray(contactOrGroup.members)
+              ? t('Share.members.count', {
+                  smart_count: contactOrGroup.members.length.toString()
+                })
+              : null
+          }
         />
       </ListItem>
     )
@@ -50,7 +54,7 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
 
 const newUnknownContactProptypes = PropTypes.shape({
   _type: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired
+  email: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired
 })
 
 ContactSuggestion.propTypes = {

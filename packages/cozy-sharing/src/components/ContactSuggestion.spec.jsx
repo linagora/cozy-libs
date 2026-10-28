@@ -75,4 +75,27 @@ describe('ContactSuggestion component', () => {
     expect(screen.getByText("The Night's Watch")).toBeInTheDocument()
     expect(screen.getByText('2 members')).toBeInTheDocument()
   })
+  it('shows a suggested group without inventing a member count', () => {
+    setup({
+      contactOrGroup: {
+        _type: 'io.cozy.contacts.groups',
+        _id: 'team',
+        name: 'Team',
+        color: ''
+      }
+    })
+    expect(screen.getByText('Team')).toBeInTheDocument()
+    expect(screen.queryByText(/members/)).toBeNull()
+  })
+
+  it('shows an ID-less person with the normalized display name', () => {
+    setup({
+      contactOrGroup: {
+        _type: 'io.cozy.contacts',
+        displayName: 'Alice',
+        email: [{ address: 'alice@example.org' }]
+      }
+    })
+    expect(screen.getByText('Alice')).toBeInTheDocument()
+  })
 })
