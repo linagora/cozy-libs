@@ -33,8 +33,8 @@ jest.mock('cozy-ui/transpiled/react/MemberAutocomplete', () => ({
 
 describe('ShareAutosuggestWrapper component', () => {
   const setup = (
-    { contacts, contactGroups, unreachableContact, groupMembers },
-    { currentRecipients, recipients, contactsSuggestEnabled } = {}
+    { contacts, contactGroups, unreachableContact },
+    { currentRecipients, recipients, contactsSuggestEnabled, suggest } = {}
   ) => {
     const mockClient = createMockClient({
       queries: {
@@ -49,13 +49,10 @@ describe('ShareAutosuggestWrapper component', () => {
         'io.cozy.contacts/unreachable-with-groups': {
           doctype: 'io.cozy.contacts',
           data: unreachableContact
-        },
-        'io.cozy.contacts/reachable-with-groups': {
-          doctype: 'io.cozy.contacts',
-          data: groupMembers
         }
       }
     })
+    jest.spyOn(mockClient, 'collection').mockReturnValue({ suggest })
     render(
       <AppLike
         client={mockClient}
@@ -304,67 +301,54 @@ describe('ShareAutosuggestWrapper component', () => {
   })
 
   describe('with contactsSuggestEnabled', () => {
+    const contact = {
+      _id: 'alice',
+      _type: 'io.cozy.contacts',
+      fullname: 'Alice',
+      name: { givenName: 'Alice' },
+      email: [{ address: 'alice@example.org' }],
+      relationships: { groups: { data: [{ _id: 'friends' }] } }
+    }
+    const group = {
+      _id: 'friends',
+      id: 'friends',
+      _type: 'io.cozy.contacts.groups',
+      name: 'Friends'
+    }
+
     beforeEach(() => {
       flag.mockReset()
     })
 
-    it('should suggest only groups, with the count of their members', () => {
-      const groupMembers = [
-        {
-          id: '5a3b4ccf-c257',
-          _id: '5a3b4ccf-c257',
-          _type: 'io.cozy.contacts',
-          fullname: 'Teagan Wolf',
-          name: { givenName: 'Teagan', familyName: 'Wolf' },
-          relationships: {
-            groups: {
-              data: [{ _id: 'fe86af20-c6c5', _type: 'io.cozy.contacts.groups' }]
-            }
-          }
-        }
-      ]
-      const contactGroups = [
-        {
-          id: 'fe86af20-c6c5',
-          _id: 'fe86af20-c6c5',
-          _type: 'io.cozy.contacts.groups',
-          name: 'Friends'
-        }
-      ]
+    it('uses API suggestions without loading local contacts or groups', async () => {
+      flag.mockImplementation(name => name === 'sharing.show-recipient-groups')
+      const suggest = jest.fn().mockResolvedValue({
+        data: [{ ...group, member_count: 12 }, contact]
+      })
+      const client = setup(
+        { contacts: [contact], contactGroups: [group] },
+        { contactsSuggestEnabled: true, suggest }
+      )
 
-      setup({ contactGroups, groupMembers }, { contactsSuggestEnabled: true })
-
-      expect(screen.getByText('Friends - 1 member')).toBeInTheDocument()
-      expect(screen.queryByText('Teagan Wolf')).not.toBeInTheDocument()
+      expect(mockAutocompleteProps.getSuggestions('')).toEqual([])
+      expect(mockAutocompleteProps.minQueryLength).toBe(2)
+      expect(client.query).not.toHaveBeenCalled()
+      expect(await mockAutocompleteProps.fetchSuggestions('fr')).toEqual([
+        expect.objectContaining({ name: 'Friends', subtitle: '12 members' }),
+        expect.objectContaining({ name: 'Alice' })
+      ])
+      expect(suggest).toHaveBeenCalledWith('fr')
     })
 
-    it('should fetch suggestions without the current and pending recipients, whatever the case of their email', async () => {
-      const suggestion = email => ({
-        type: 'io.cozy.contacts',
-        attributes: { fullname: email, email: [{ address: email }] }
-      })
-      const mockClient = setup(
-        { contactGroups: [], groupMembers: [] },
-        {
-          currentRecipients: [{ email: 'Current@Cozy.cc' }],
-          recipients: [{ email: 'pending@cozy.cc' }],
-          contactsSuggestEnabled: true
-        }
+    it('keeps the local contacts and group members for older clients', () => {
+      setup(
+        { contacts: [contact], contactGroups: [group] },
+        { contactsSuggestEnabled: true }
       )
-      const fetchJSON = jest.fn().mockResolvedValue({
-        data: [
-          suggestion('current@cozy.cc'),
-          suggestion('PENDING@cozy.cc'),
-          suggestion('new@cozy.cc')
-        ]
-      })
-      jest.spyOn(mockClient, 'getStackClient').mockReturnValue({ fetchJSON })
 
-      const suggestions = await mockAutocompleteProps.fetchSuggestions('coz')
-
-      expect(suggestions.map(suggestion => suggestion.name)).toEqual([
-        'new@cozy.cc'
-      ])
+      expect(mockAutocompleteProps.fetchSuggestions).toBeUndefined()
+      expect(screen.getByText('Alice')).toBeInTheDocument()
+      expect(screen.getByText('Friends - 1 member')).toBeInTheDocument()
     })
   })
 })

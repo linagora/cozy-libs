@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { useOnline } from 'rooks'
 
-import { useQueryAll } from 'cozy-client'
+import { useClient, useQueryAll } from 'cozy-client'
 import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
 import {
   computeContactsAndGroups,
+  hasContactSuggestions,
   isAnyContactQueryLoading
 } from '../helpers/contacts'
 import { useSharingContext } from '../hooks/useSharingContext'
-import { DOCTYPE_GROUPS } from '../models'
 import {
   buildReachableContactsQuery,
   buildContactGroupsQuery,
@@ -21,7 +22,7 @@ import {
  * ShareAutosuggestWrapper is responsible for fetching contacts and groups.
  * We retrieve all the contacts that are reachable and the groups they belong to.
  * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
- * With contactsSuggestEnabled, the stack suggests the contacts and we only retrieve the group members.
+ * In online API mode, the stack returns suggestions without loading local lists.
  */
 const ShareAutosuggestWrapper = ({
   currentRecipients,
@@ -37,15 +38,19 @@ const ShareAutosuggestWrapper = ({
   onRoleChange,
   onSubmit
 }) => {
+  const client = useClient()
+  const isOnline = useOnline()
   const contactsSuggestEnabled = useSharingContext()?.contactsSuggestEnabled
   const hasRecipientGroups = Boolean(flag('sharing.show-recipient-groups'))
+  const useSuggestions =
+    contactsSuggestEnabled &&
+    hasContactSuggestions(client) &&
+    isOnline !== false
 
-  const reachableContactsQuery = buildReachableContactsQuery({
-    inGroups: contactsSuggestEnabled
-  })
+  const reachableContactsQuery = buildReachableContactsQuery()
   const reachableContactsResult = useQueryAll(
     reachableContactsQuery.definition,
-    reachableContactsQuery.options
+    { ...reachableContactsQuery.options, enabled: !useSuggestions }
   )
 
   const unreachableContactsWithGroupsQuery =
@@ -54,34 +59,34 @@ const ShareAutosuggestWrapper = ({
     unreachableContactsWithGroupsQuery.definition,
     {
       ...unreachableContactsWithGroupsQuery.options,
-      enabled: hasRecipientGroups
+      enabled: !useSuggestions && hasRecipientGroups
     }
   )
 
   const contactGroupsQuery = buildContactGroupsQuery()
-  const contactGroupsResult = useQueryAll(
-    contactGroupsQuery.definition,
-    contactGroupsQuery.options
-  )
-
-  const isLoading = isAnyContactQueryLoading([
-    reachableContactsResult,
-    contactGroupsResult,
-    ...(hasRecipientGroups ? [unreachableContactsWithGroupsResult] : [])
-  ])
-
-  const suggestedContactsAndGroups = computeContactsAndGroups({
-    reachableContacts: reachableContactsResult.data || [],
-    unreachableContactsWithGroups:
-      unreachableContactsWithGroupsResult.data || [],
-    contactGroups: contactGroupsResult.data || [],
-    currentRecipients,
-    pendingRecipients: recipients
+  const contactGroupsResult = useQueryAll(contactGroupsQuery.definition, {
+    ...contactGroupsQuery.options,
+    enabled: !useSuggestions
   })
 
-  const contactsAndGroups = contactsSuggestEnabled
-    ? suggestedContactsAndGroups.filter(({ _type }) => _type === DOCTYPE_GROUPS)
-    : suggestedContactsAndGroups
+  const isLoading =
+    !useSuggestions &&
+    isAnyContactQueryLoading([
+      reachableContactsResult,
+      contactGroupsResult,
+      ...(hasRecipientGroups ? [unreachableContactsWithGroupsResult] : [])
+    ])
+
+  const contactsAndGroups = useSuggestions
+    ? []
+    : computeContactsAndGroups({
+        reachableContacts: reachableContactsResult.data || [],
+        unreachableContactsWithGroups:
+          unreachableContactsWithGroupsResult.data || [],
+        contactGroups: contactGroupsResult.data || [],
+        currentRecipients,
+        pendingRecipients: recipients
+      })
 
   return (
     <ShareAutosuggest
@@ -91,7 +96,7 @@ const ShareAutosuggestWrapper = ({
       title={title}
       placeholder={placeholder}
       isLoading={isLoading}
-      contactsSuggestEnabled={contactsSuggestEnabled}
+      useSuggestions={useSuggestions}
       enableCreateContact={enableCreateContact}
       disabled={disabled}
       autoFocus={autoFocus}

@@ -17770,6 +17770,7 @@ __metadata:
     react-dom: "npm:16.13.0"
     react-router: "npm:^5.0.1"
     react-tooltip: "npm:^3.11.1"
+    rooks: "npm:7.14.1"
     snarkdown: "npm:^2.0.0"
     storybook: "npm:7.6.0"
     twake-i18n: "npm:^0.7.1"
