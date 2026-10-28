@@ -133,15 +133,7 @@ describe('computeContactsAndGroups', () => {
   })
 })
 
-describe('getOrCreateFromArray with sharing.contacts-suggest.enabled', () => {
-  beforeEach(() => {
-    flag.mockImplementation(name => name === 'sharing.contacts-suggest.enabled')
-  })
-
-  afterEach(() => {
-    flag.mockReset()
-  })
-
+describe('getOrCreateFromArray with contactsSuggestEnabled', () => {
   it('should send people by email and keep groups, without creating contacts', async () => {
     const createContact = jest.fn()
     const group = { _id: 'group-1', _type: 'io.cozy.contacts.groups' }
@@ -158,7 +150,8 @@ describe('getOrCreateFromArray with sharing.contacts-suggest.enabled', () => {
         { email: 'unknown@friends.example' },
         group
       ],
-      createContact
+      createContact,
+      true
     )
 
     expect(recipients).toEqual([
@@ -179,7 +172,8 @@ describe('getOrCreateFromArray with sharing.contacts-suggest.enabled', () => {
     const recipients = await getOrCreateFromArray(
       mockClient,
       [cozyOnlyContact, { instance: 'https://alice.example' }],
-      jest.fn()
+      jest.fn(),
+      true
     )
 
     expect(recipients).toEqual([cozyOnlyContact, undefined])

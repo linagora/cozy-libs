@@ -40,6 +40,7 @@ import SharingProvider from 'cozy-sharing'
 | `onShared` | no | Callback fired after a share is created |
 | `isPublic` | no | Set to `true` when rendering a public page (disables fetching) |
 | `previewPath` | no | Custom preview path sent to the share creation |
+| `contactsSuggestEnabled` | no | Suggest the recipients with `GET /contacts/suggest` instead of loading every contact |
 
 ### Built-in components
 

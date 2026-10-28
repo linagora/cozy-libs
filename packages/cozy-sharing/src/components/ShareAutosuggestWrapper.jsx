@@ -7,6 +7,7 @@ import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
 import { computeContactsAndGroups, suggestContacts } from '../helpers/contacts'
+import { useSharingContext } from '../hooks/useSharingContext'
 import { DOCTYPE_GROUPS } from '../models'
 import {
   buildReachableContactsQuery,
@@ -20,7 +21,7 @@ const ContactModel = models.contact
  * ShareAutosuggestWrapper is responsible for fetching contacts and groups.
  * We retrieve all the contacts that are reachable and the groups they belong to.
  * In order to display the total number of members in each group, we also retrieve the contacts that are not reachable.
- * With sharing.contacts-suggest.enabled, the stack suggests the contacts and we only retrieve the group members.
+ * With contactsSuggestEnabled, the stack suggests the contacts and we only retrieve the group members.
  */
 const ShareAutosuggestWrapper = ({
   currentRecipients,
@@ -34,10 +35,10 @@ const ShareAutosuggestWrapper = ({
   endAdornment
 }) => {
   const client = useClient()
-  const isSuggestEnabled = !!flag('sharing.contacts-suggest.enabled')
+  const contactsSuggestEnabled = useSharingContext()?.contactsSuggestEnabled
 
   const reachableContactsQuery = buildReachableContactsQuery({
-    inGroups: isSuggestEnabled
+    inGroups: contactsSuggestEnabled
   })
   const reachableContactsResult = useQueryAll(
     reachableContactsQuery.definition,
@@ -78,7 +79,7 @@ const ShareAutosuggestWrapper = ({
     pendingRecipients: recipients
   })
 
-  const contactsAndGroups = isSuggestEnabled
+  const contactsAndGroups = contactsSuggestEnabled
     ? suggestedContactsAndGroups.filter(({ _type }) => _type === DOCTYPE_GROUPS)
     : suggestedContactsAndGroups
 
@@ -108,7 +109,7 @@ const ShareAutosuggestWrapper = ({
       placeholder={placeholder}
       autoFocus={autoFocus}
       endAdornment={endAdornment}
-      fetchContacts={isSuggestEnabled ? fetchContacts : undefined}
+      fetchContacts={contactsSuggestEnabled ? fetchContacts : undefined}
     />
   )
 }

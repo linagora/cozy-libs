@@ -13,6 +13,10 @@ jest.mock('../helpers/contacts', () => ({
   getOrCreateFromArray: jest.fn()
 }))
 
+jest.mock('./useSharingContext', () => ({
+  useSharingContext: () => ({ contactsSuggestEnabled: true })
+}))
+
 const contacts = [{ _id: 'alice' }, { _id: 'bob' }]
 
 describe('useResolveRecipients', () => {
@@ -48,7 +52,8 @@ describe('useResolveRecipients', () => {
     expect(getOrCreateFromArray).toHaveBeenCalledWith(
       mockClient,
       pendingRecipients,
-      expect.any(Function)
+      expect.any(Function),
+      true
     )
     expect(mockClient.create).toHaveBeenCalledWith('io.cozy.contacts', {
       email: [{ address: 'alice@cozy.cc' }]
@@ -64,7 +69,8 @@ describe('useResolveRecipients', () => {
     expect(getOrCreateFromArray).toHaveBeenCalledWith(
       mockClient,
       [],
-      createContact
+      createContact,
+      true
     )
   })
 })
