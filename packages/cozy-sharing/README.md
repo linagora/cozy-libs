@@ -212,6 +212,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Contacts shown | Only contacts with a defined `email` or `cozy` URL | `helpers/recipients.js:51-52` |
 | Invite field | The cozy-ui `MemberAutocomplete` field suggests the contacts and groups. A typed or pasted email needs a domain extension, and gives the suggested or picked contact with the same email, whatever its case, instead of a second recipient | `ShareAutosuggestWrapper.jsx`, `helpers/contacts.js`, `helpers/members.js` |
 | Group sharing | All members get the same permission; dynamic membership (add/remove) propagates | `state.js:414-451` |
+| Empty shared drives | A shared drive remains available for adding recipients after its last recipient is revoked | `state.js` |
 | Downgrade confirmation | Switching a member from `two-way` (editor) to `one-way` (viewer) on a folder with a shared parent first opens `DowngradePermissionConfirmDialog`: the change is applied only on confirm, cancel keeps the editor permission (the downgrade also reduces the member's rights on the parent folder) | `helpers/permissions.js`, `hooks/useMemberTypeChange.js`, `Recipient/DowngradePermissionConfirmDialog.jsx` |
 
 ### Shared drives & federated folders

@@ -144,7 +144,7 @@ describe('Sharing state', () => {
     expect(state.sharings).toEqual([SHARING_1, SHARED_DRIVE_WITHOUT_RECIPIENTS])
   })
 
-  it('should forget shared drives without recipients when updating', () => {
+  it('keeps shared drives without recipients when updating', () => {
     const SHARED_DRIVE_WITHOUT_RECIPIENTS = {
       ...SHARING_1,
       id: 'shared_drive_no_recipients',
@@ -186,11 +186,13 @@ describe('Sharing state', () => {
     }
     const state = reducer(initialState, updateSharing(updatedSharing))
 
-    expect(state.byDocId).toEqual({})
-    expect(state.sharings).toEqual([])
+    expect(state.byDocId.shared_drive_folder.sharings).toEqual([
+      updatedSharing.id
+    ])
+    expect(state.sharings).toEqual([updatedSharing])
   })
 
-  it('should forget a shared drive when revoking its last group', () => {
+  it('keeps a shared drive when revoking its last group', () => {
     const SHARED_DRIVE_WITH_GROUP = {
       ...SHARING_1,
       id: 'shared_drive_group',
@@ -238,12 +240,14 @@ describe('Sharing state', () => {
       revokeGroup(SHARED_DRIVE_WITH_GROUP, 0, sharedDrivePath)
     )
 
-    expect(state.byDocId).toEqual({})
-    expect(state.sharings).toEqual([])
-    expect(state.sharedPaths).toEqual([])
+    expect(state.byDocId.shared_drive_group_folder.sharings).toEqual([
+      SHARED_DRIVE_WITH_GROUP.id
+    ])
+    expect(state.sharings[0].attributes.groups[0].revoked).toBe(true)
+    expect(state.sharedPaths).toEqual([sharedDrivePath])
   })
 
-  it('should forget a shared drive when revoking last recipient', () => {
+  it('keeps a shared drive when revoking its last recipient', () => {
     const SHARED_DRIVE_WITH_ONE_RECIPIENT = {
       ...SHARING_1,
       id: 'shared_drive_one_recipient',
@@ -291,9 +295,11 @@ describe('Sharing state', () => {
       revokeRecipient(SHARED_DRIVE_WITH_ONE_RECIPIENT, 1, sharedDrivePath)
     )
 
-    expect(state.byDocId).toEqual({})
-    expect(state.sharings).toEqual([])
-    expect(state.sharedPaths).toEqual([])
+    expect(state.byDocId.shared_drive_folder.sharings).toEqual([
+      SHARED_DRIVE_WITH_ONE_RECIPIENT.id
+    ])
+    expect(state.sharings[0].attributes.members[1].status).toBe('revoked')
+    expect(state.sharedPaths).toEqual([sharedDrivePath])
   })
 
   it('should index received permissions', () => {
