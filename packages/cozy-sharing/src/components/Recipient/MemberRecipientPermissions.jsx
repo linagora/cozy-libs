@@ -17,8 +17,6 @@ const MemberRecipientPermissions = ({
   isCurrentUser = false,
   type,
   document,
-  isInsideSharedParent,
-  sharedParentName,
   onRevoke,
   onRevokeSelf,
   onSetMemberType,
@@ -76,11 +74,7 @@ const MemberRecipientPermissions = ({
         <>
           <PermissionTypeMenu
             type={type ?? 'one-way'}
-            document={document}
-            recipient={recipient}
-            isInsideSharedParent={isInsideSharedParent}
-            sharedParentName={sharedParentName}
-            onSetType={(newType, options) =>
+            onSetType={newType =>
               onSetMemberType(
                 {
                   sharingId,
@@ -88,8 +82,7 @@ const MemberRecipientPermissions = ({
                   type: type ?? 'one-way',
                   recipient
                 },
-                newType,
-                options
+                newType
               )
             }
           />

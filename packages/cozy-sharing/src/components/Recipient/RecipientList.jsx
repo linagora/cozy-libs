@@ -14,8 +14,6 @@ const RecipientList = ({
   isSharedDrive,
   document,
   documentType,
-  isInsideSharedParent,
-  sharedParentName,
   onRevoke,
   onRevokeSelf,
   onRevokeGroup,
@@ -63,8 +61,6 @@ const RecipientList = ({
         isSharedDrive={isSharedDrive}
         document={document}
         documentType={documentType}
-        isInsideSharedParent={isInsideSharedParent}
-        sharedParentName={sharedParentName}
         onRevoke={onRevoke}
         onRevokeSelf={onRevokeSelf}
         onSetMemberType={onSetMemberType}

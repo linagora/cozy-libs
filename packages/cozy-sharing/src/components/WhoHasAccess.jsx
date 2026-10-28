@@ -35,8 +35,6 @@ const WhoHasAccess = ({
   canManageLink = canManageMembers,
   showOwner = true,
   owner,
-  isInsideSharedParent = false,
-  sharedParentName,
   recipients,
   recipientsToBeConfirmed = [],
   document,
@@ -87,8 +85,6 @@ const WhoHasAccess = ({
           isSharedDrive={isSharedDrive}
           document={document}
           documentType={documentType}
-          isInsideSharedParent={isInsideSharedParent}
-          sharedParentName={sharedParentName}
           onRevoke={onRevoke}
           onRevokeSelf={onRevokeSelf}
           onRevokeGroup={onRevokeGroup}
@@ -108,8 +104,6 @@ WhoHasAccess.propTypes = {
   canManageLink: PropTypes.bool,
   showOwner: PropTypes.bool,
   owner: PropTypes.object,
-  isInsideSharedParent: PropTypes.bool,
-  sharedParentName: PropTypes.string,
   recipients: PropTypes.array.isRequired,
   recipientsToBeConfirmed: PropTypes.arrayOf(
     PropTypes.shape({
