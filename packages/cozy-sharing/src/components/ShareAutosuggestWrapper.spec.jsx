@@ -392,7 +392,6 @@ describe('ShareAutosuggestWrapper component', () => {
           { contactsSuggestEnabled: true }
         )
         expect(mockAutosuggestProps.fetchContacts).toBeNull()
-        expect(mockAutosuggestProps.offline).toBe(true)
         expect(client.query).toHaveBeenCalled()
       } finally {
         online.mockRestore()

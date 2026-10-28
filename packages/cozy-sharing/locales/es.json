@@ -3,10 +3,6 @@
     "sharing": "Cargando"
   },
   "Share": {
-    "suggestions": {
-      "empty": "No hay sugerencias",
-      "offline": "Sin conexión: solo se muestran los contactos y grupos disponibles localmente."
-    },
     "status": {
       "owner": "Propietario",
       "pending": "Invitación enviada",

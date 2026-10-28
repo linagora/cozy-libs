@@ -214,7 +214,7 @@ describe('ShareAutosuggest', () => {
       expect(screen.getByPlaceholderText('myPlaceHolder')).toHaveValue('')
     })
 
-    it('distinguishes a failed search from an empty result', async () => {
+    it('clears loading after a failed search without adding UI messages', async () => {
       setup({
         onPick: jest.fn(),
         onRemove: jest.fn(),
@@ -224,8 +224,8 @@ describe('ShareAutosuggest', () => {
         target: { value: 'al' }
       })
       await act(async () => jest.runAllTimers())
-      expect(screen.getByRole('alert')).toHaveTextContent('Loading error')
-      expect(screen.queryByText('No suggestions')).toBeNull()
+      expect(screen.queryByRole('alert')).toBe(null)
+      expect(screen.queryByText('loading')).toBe(null)
     })
 
     it('shows an empty result without an error', async () => {
@@ -238,7 +238,7 @@ describe('ShareAutosuggest', () => {
         target: { value: 'al' }
       })
       await act(async () => jest.runAllTimers())
-      expect(screen.getByRole('status')).toHaveTextContent('No suggestions')
+      expect(screen.queryByRole('status')).toBe(null)
       expect(screen.queryByRole('alert')).toBeNull()
     })
 

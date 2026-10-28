@@ -110,7 +110,6 @@ const ShareAutosuggestWrapper = ({
       autoFocus={autoFocus}
       endAdornment={endAdornment}
       fetchContacts={useSuggestions ? fetchContacts : null}
-      offline={contactsSuggestEnabled && !isOnline}
     />
   )
 }

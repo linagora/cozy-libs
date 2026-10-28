@@ -88,6 +88,19 @@ describe('ContactSuggestion component', () => {
     expect(screen.queryByText(/members/)).toBeNull()
   })
 
+  it('shows the member count returned with a suggested group', () => {
+    setup({
+      contactOrGroup: {
+        _type: 'io.cozy.contacts.groups',
+        _id: 'team',
+        name: 'Team',
+        color: '',
+        member_count: 2
+      }
+    })
+    expect(screen.getByText('2 members')).toBeInTheDocument()
+  })
+
   it('shows an ID-less person with the normalized display name', () => {
     setup({
       contactOrGroup: {

@@ -20,6 +20,8 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
   const { t } = useI18n()
 
   if (contactOrGroup._type === DOCTYPE_GROUPS) {
+    const memberCount =
+      contactOrGroup.member_count ?? contactOrGroup.members?.length
     return (
       <ListItem button>
         <ListItemIcon>
@@ -28,9 +30,9 @@ export const ContactSuggestion = ({ contactOrGroup }) => {
         <ListItemText
           primary={contactOrGroup.name}
           secondary={
-            Array.isArray(contactOrGroup.members)
+            memberCount != null
               ? t('Share.members.count', {
-                  smart_count: contactOrGroup.members.length.toString()
+                  smart_count: memberCount.toString()
                 })
               : null
           }

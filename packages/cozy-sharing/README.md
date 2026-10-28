@@ -53,7 +53,7 @@ Search starts after two characters, with a 300 ms debounce and up to 20 results
 in server order (groups first). Results are cached for 30 seconds. No full contact,
 group or group-member list is downloaded while the API picker is online. Suggested
 groups are shared by ID, even when `sharing.show-recipient-groups` is disabled;
-their member count is omitted because the API does not return it. Local contacts
+their member count comes from the API. Local contacts
 keep their IDs; organization members and people without a local contact are sent
 by email, allowing the stack to resolve or create the local contact.
 
@@ -62,8 +62,8 @@ local contacts and groups. `common_contacts` does not enable organization search
 on its own. The picker works without an organization.
 
 When the browser reports it is offline, the picker uses locally available contacts
-and groups and shows an offline notice. This requires the app's existing PouchDB
-sync configuration for offline data. Online API errors are shown to the user.
+and groups. This requires the app's existing PouchDB sync configuration for offline
+data. The picker keeps the same presentation regardless of the contact source.
 With `contactsSuggestEnabled` disabled, the existing local picker and group
 expansion behavior remain available.
 
