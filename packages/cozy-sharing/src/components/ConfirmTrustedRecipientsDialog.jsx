@@ -1,6 +1,7 @@
 import cx from 'classnames'
 import React from 'react'
 
+import { useClient } from 'cozy-client'
 import List from 'cozy-ui/transpiled/react/List'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -8,6 +9,7 @@ import { useI18n } from 'twake-i18n'
 
 import MemberRecipient from './Recipient/MemberRecipient'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
+import { makeAvatarUrl } from '../helpers/recipients'
 
 /**
  * Displays the sharing interface that can be used when ConfirmTrustedRecipientsDialog is in sharing state
@@ -15,6 +17,7 @@ import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfi
 const SharingContent = ({ recipientsToBeConfirmed, verifyRecipient }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
+  const client = useClient()
 
   return (
     <>
@@ -36,6 +39,10 @@ const SharingContent = ({ recipientsToBeConfirmed, verifyRecipient }) => {
               isOwner={false}
               recipientConfirmationData={recipientConfirmationData}
               verifyRecipient={verifyRecipient}
+              avatarUrl={makeAvatarUrl(
+                recipientConfirmationData,
+                client.options.uri
+              )}
             />
           )
         })}

@@ -17,7 +17,7 @@ import {
   DEFAULT_DISPLAY_NAME
 } from '../../helpers/recipients'
 import { getDisplayName } from '../../models'
-import { MemberAvatarWrapper } from '../Avatar/MemberAvatarWrapper'
+import { MemberAvatar } from '../Avatar/MemberAvatar'
 
 const MemberRecipient = props => {
   const { t } = useI18n()
@@ -32,6 +32,7 @@ const MemberRecipient = props => {
     verifyRecipient,
     fadeIn,
     isOrgSharedDrive,
+    avatarUrl,
     ...rest
   } = props
 
@@ -58,7 +59,7 @@ const MemberRecipient = props => {
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
       <ListItem gutters={isMobile ? 'default' : 'double'} size="small">
         <ListItemIcon>
-          <MemberAvatarWrapper size="m" recipient={props} />
+          <MemberAvatar size="m" recipient={props} avatarUrl={avatarUrl} />
         </ListItemIcon>
         <ListItemText
           primary={
@@ -90,7 +91,8 @@ MemberRecipient.propTypes = {
   isCurrentUser: PropTypes.bool,
   recipientConfirmationData: PropTypes.object,
   verifyRecipient: PropTypes.func,
-  isOrgSharedDrive: PropTypes.bool
+  isOrgSharedDrive: PropTypes.bool,
+  avatarUrl: PropTypes.string
 }
 
 export default MemberRecipient
