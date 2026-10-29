@@ -32,6 +32,9 @@
     "remark-cli": "9.0.0",
     "typescript": "^5.5.2"
   },
+  "resolutions": {
+    "post-me@npm:0.4.5": "patch:post-me@npm%3A0.4.5#~/.yarn/patches/post-me-npm-0.4.5-ed59302ab7.patch"
+  },
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -e $GIT_PARAMS"
