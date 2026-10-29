@@ -1,0 +1,12 @@
+diff --git a/package.json b/package.json
+index abbc6adb02b5c204f88401b676197400a69e5063..147cd70f3036d87eb58b467d01a08643cb28423a 100644
+--- a/package.json
++++ b/package.json
+@@ -20,6 +20,7 @@
+   },
+   "main": "./dist/index.js",
+   "exports": {
++    "types": "./dist/index.d.ts",
+     "import": "./dist/index.esnext.mjs",
+     "require": "./dist/index.js"
+   },
