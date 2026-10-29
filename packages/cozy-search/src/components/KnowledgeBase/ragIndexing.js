@@ -1,9 +1,9 @@
-import { withRootFolderIfMissing } from './knowledgeBase'
 import {
   ASSISTANTS_DOCTYPE,
   buildAllAssistantsQuery,
   FILES_DOCTYPE
 } from '../queries'
+import { withRootFolderIfMissing } from './knowledgeBase'
 
 export const RAG_INDEX_WORKER = 'rag-index'
 export const RAG_INDEX_FILES_DEBOUNCE = '30s'

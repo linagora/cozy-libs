@@ -12,8 +12,8 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import { permission } from './actions/permission'
 import { GroupAvatar } from '../Avatar/GroupAvatar'
+import { permission } from './actions/permission'
 
 const GroupRecipientPermissions = ({
   name,

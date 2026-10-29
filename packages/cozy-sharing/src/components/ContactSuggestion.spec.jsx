@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
-import { ContactSuggestion } from './ContactSuggestion'
 import AppLike from '../../test/AppLike'
+import { ContactSuggestion } from './ContactSuggestion'
 
 describe('ContactSuggestion component', () => {
   const setup = ({ contactOrGroup }) => {

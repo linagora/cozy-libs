@@ -9,13 +9,13 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import { GroupRecipientDetail } from './GroupRecipientDetail'
-import { GroupRecipientPermissions } from './GroupRecipientPermissions'
 import {
   FADE_IN_DURATION,
   getGroupRecipientSecondaryText
 } from '../../helpers/recipients'
 import { GroupAvatar } from '../Avatar/GroupAvatar'
+import { GroupRecipientDetail } from './GroupRecipientDetail'
+import { GroupRecipientPermissions } from './GroupRecipientPermissions'
 
 const GroupRecipient = props => {
   const { name, color, members, fadeIn, isOwner } = props

@@ -1,9 +1,9 @@
 import { render, screen, fireEvent, act } from '@testing-library/react'
 import React from 'react'
 
-import ContactForm, { isSameContactProp } from './index'
 import DemoProvider from '../../../providers/DemoProvider'
 import { johnDoeContact as contact } from '../mocks'
+import ContactForm, { isSameContactProp } from './index'
 
 const dictRequire = lang => require(`../ContactAddressDialog/locales/${lang}`)
 

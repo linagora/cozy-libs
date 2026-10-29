@@ -1,6 +1,6 @@
-import { Icon, Right } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon, Right } from '@linagora/twake-icons'
 import Grid from 'cozy-ui/transpiled/react/Grid'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 

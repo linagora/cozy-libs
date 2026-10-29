@@ -3,9 +3,9 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
+import AppLike from '../../test/AppLike'
 import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
-import AppLike from '../../test/AppLike'
 
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),

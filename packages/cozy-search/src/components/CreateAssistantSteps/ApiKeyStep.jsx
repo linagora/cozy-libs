@@ -1,7 +1,7 @@
-import { Icon, Eye } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useState } from 'react'
 
+import { Icon, Eye } from '@linagora/twake-icons'
 import Box from 'cozy-ui/transpiled/react/Box'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import TextField from 'cozy-ui/transpiled/react/TextField'

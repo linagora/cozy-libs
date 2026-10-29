@@ -4,6 +4,9 @@ import { useClient, useQuery } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
+import { useAssistant } from '../AssistantProvider'
+import { DEFAULT_ASSISTANT } from '../constants'
+import { buildAssistantByIdQuery, buildFileByIdQuery } from '../queries'
 import {
   getKnowledgeBaseDirId,
   hasEmailKnowledgeBase,
@@ -12,9 +15,6 @@ import {
   saveKnowledgeBase,
   withKnowledgeBaseEntry
 } from './knowledgeBase'
-import { useAssistant } from '../AssistantProvider'
-import { DEFAULT_ASSISTANT } from '../constants'
-import { buildAssistantByIdQuery, buildFileByIdQuery } from '../queries'
 
 /**
  * Resolves the selected assistant's knowledge-base sources: the Drive folder

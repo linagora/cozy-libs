@@ -1,7 +1,7 @@
-import { Openwith } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
+import { Openwith } from '@linagora/twake-icons'
 import { withClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import AppLinker from 'cozy-ui-plus/dist/AppLinker'

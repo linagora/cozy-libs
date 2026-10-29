@@ -3,8 +3,8 @@ import React from 'react'
 
 import { makeSharingLink } from 'cozy-client/dist/models/sharing'
 
-import ForwardButton from './ForwardButton'
 import DemoProvider from '../providers/DemoProvider'
+import ForwardButton from './ForwardButton'
 
 jest.mock('cozy-device-helper')
 jest.mock('cozy-client/dist/models/sharing', () => ({

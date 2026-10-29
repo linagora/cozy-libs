@@ -5,13 +5,13 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useExtendI18n } from 'twake-i18n'
 
+import { locales } from '../../locales'
+import AssistantContainer from '../Assistant/AssistantContainer'
 import AssistantProvider, { useAssistant } from '../AssistantProvider'
+import styles from '../styles.styl'
 import CreateAssistantDialog from './CreateAssistantDialog'
 import DeleteAssistantDialog from './DeleteAssistantDialog'
 import EditAssistantDialog from './EditAssistantDialog'
-import { locales } from '../../locales'
-import AssistantContainer from '../Assistant/AssistantContainer'
-import styles from '../styles.styl'
 
 const AssistantView = () => {
   // The view is mounted by the app on its own route, without the search

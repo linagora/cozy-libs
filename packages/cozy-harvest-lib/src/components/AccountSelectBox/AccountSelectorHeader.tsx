@@ -8,8 +8,8 @@ import DialogBackButton from 'cozy-ui/transpiled/react/CozyDialogs/DialogBackBut
 import DialogTitle from 'cozy-ui/transpiled/react/Dialog/DialogTitle'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import AccountSelectBox from './AccountSelectBox'
 import { useDialogContext } from '../DialogContext'
+import AccountSelectBox from './AccountSelectBox'
 
 export interface AccountSelectorHeaderProps {
   konnector: { slug: string }

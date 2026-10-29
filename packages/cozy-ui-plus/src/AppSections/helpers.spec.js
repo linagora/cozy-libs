@@ -1,8 +1,8 @@
 import { extend as extendI18n } from 'twake-i18n'
 
+import { I18nContext } from '../../test/I18n'
 import { getTranslatedManifestProperty } from './helpers'
 import en from './locales/en'
-import { I18nContext } from '../../test/I18n'
 
 const i18nContext = I18nContext({ locale: en })
 const tMock = i18nContext.t

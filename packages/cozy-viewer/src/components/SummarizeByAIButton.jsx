@@ -7,9 +7,9 @@ import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'twake-i18n'
 
-import styles from './styles.styl'
 import { isFileSummaryCompatible } from '../helpers'
 import { useViewer } from '../providers/ViewerProvider'
+import styles from './styles.styl'
 
 const SummarizeByAIButton = ({ onPaywallRedirect, className }) => {
   const { t } = useI18n()

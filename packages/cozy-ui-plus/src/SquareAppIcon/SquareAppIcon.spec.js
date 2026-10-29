@@ -1,7 +1,7 @@
-import { Icon, Cozy } from '@linagora/twake-icons'
 import { render } from '@testing-library/react'
 import React from 'react'
 
+import { Icon, Cozy } from '@linagora/twake-icons'
 import DemoProvider from 'cozy-ui/transpiled/react/providers/DemoProvider'
 
 import SquareAppIcon from '.'

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import PermissionTypeMenu from './PermissionTypeMenu'
 import withLocales from '../../hoc/withLocales'
 import { useMemberPermissionType } from '../../hooks/useMemberPermissionType'
+import PermissionTypeMenu from './PermissionTypeMenu'
 
 const PermissionTypeMenuWrapper = ({
   sharingId,

@@ -6,10 +6,10 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
-import { makeFormattedAddressWithSubFields } from './helpers'
-import { locales } from './locales'
 import FieldInputWrapper from '../ContactForm/FieldInputWrapper'
 import { fieldInputAttributesTypes } from '../types'
+import { makeFormattedAddressWithSubFields } from './helpers'
+import { locales } from './locales'
 
 const ContactAddressModal = ({ onClose, name, subFields }) => {
   useExtendI18n(locales)

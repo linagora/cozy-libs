@@ -2,10 +2,10 @@
 
 import mapValues from 'lodash/mapValues'
 
+import { I18nContext } from '../../test/I18n'
 import mockApps from './_testApps'
 import * as catUtils from './categories'
 import en from './locales/en'
-import { I18nContext } from '../../test/I18n'
 
 const i18nContext = I18nContext({
   locale: {

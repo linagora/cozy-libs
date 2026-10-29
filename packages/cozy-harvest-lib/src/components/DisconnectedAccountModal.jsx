@@ -14,11 +14,11 @@ import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import { intentsApiProptype } from '../helpers/proptypes'
 import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
 import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import withLocales from './hoc/withLocales'
-import { intentsApiProptype } from '../helpers/proptypes'
 
 const createDummyKonnectorFromAccount = account => {
   return {

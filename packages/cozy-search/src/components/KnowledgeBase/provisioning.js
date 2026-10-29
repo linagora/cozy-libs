@@ -1,17 +1,17 @@
 import { models } from 'cozy-client'
 import flag from 'cozy-flags'
 
-import {
-  getKnowledgeBaseDirId,
-  isRootDirId,
-  saveKnowledgeBase
-} from './knowledgeBase'
 import { getSelectedProviderById } from '../CreateAssistantSteps/helpers'
 import {
   ACCOUNTS_DOCTYPE,
   buildAssistantByIdQuery,
   FILES_DOCTYPE
 } from '../queries'
+import {
+  getKnowledgeBaseDirId,
+  isRootDirId,
+  saveKnowledgeBase
+} from './knowledgeBase'
 
 export const AUTOPROVISION_FLAG = 'cozy.assistant.autoprovision'
 

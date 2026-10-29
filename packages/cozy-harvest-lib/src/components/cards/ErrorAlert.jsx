@@ -1,15 +1,16 @@
-import { Icon, Info } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Icon, Info } from '@linagora/twake-icons'
+
+import { isDisconnected } from '../../helpers/konnectors'
+import TriggerErrorDescription from '../infos/TriggerErrorDescription'
 import { LaunchButton } from './LaunchButton'
 import { LaunchTriggerAlertMenu } from './LaunchTriggerAlertMenu'
 import { TriggerAlertTemplate } from './TriggerAlertTemplate'
 import { UnrunnableAlert } from './UnrunnableAlert'
 import { launchAction, connectAction, configureAction } from './actions'
-import { isDisconnected } from '../../helpers/konnectors'
-import TriggerErrorDescription from '../infos/TriggerErrorDescription'
 
 /**
  * This component warns the user when the connector synchronisation is in error. It can also be used to restart synchronisation.

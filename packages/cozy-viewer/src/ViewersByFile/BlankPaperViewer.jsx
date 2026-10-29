@@ -3,10 +3,10 @@ import React from 'react'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 
-import styles from './styles.styl'
 import IlluGenericNewPage from '../assets/IlluGenericNewPage.svg'
 import IntentOpener from '../components/IntentOpener'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import styles from './styles.styl'
 
 const BlankPaperViewer = ({ file, t }) => {
   return (

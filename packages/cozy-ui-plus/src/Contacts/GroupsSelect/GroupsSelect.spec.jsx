@@ -3,10 +3,10 @@ import React from 'react'
 
 import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 
+import DemoProvider from '../../providers/DemoProvider'
 import GroupsSelect from './GroupsSelect'
 import SelectedGroupProvider from './GroupsSelectProvider'
 import Control from './SelectBox/Control'
-import DemoProvider from '../../providers/DemoProvider'
 
 const createGroup = jest.fn()
 const updateGroup = jest.fn()

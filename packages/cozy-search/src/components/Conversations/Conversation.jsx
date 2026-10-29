@@ -7,12 +7,12 @@ import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
-import ConversationComposer from './ConversationComposer'
-import { ConversationComposerCompact } from './ConversationComposerCompact'
-import styles from './styles.styl'
 import { useAssistant } from '../AssistantProvider'
 import AssistantMessage from '../Messages/AssistantMessage'
 import UserMessage from '../Messages/UserMessage'
+import ConversationComposer from './ConversationComposer'
+import { ConversationComposerCompact } from './ConversationComposerCompact'
+import styles from './styles.styl'
 
 const Conversation = ({ className }) => {
   const { t } = useI18n()

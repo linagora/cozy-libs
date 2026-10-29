@@ -1,8 +1,8 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import RedirectToAccountFormButton from './RedirectToAccountFormButton'
 import AppLike from '../../test/AppLike'
+import RedirectToAccountFormButton from './RedirectToAccountFormButton'
 
 const mockNavigate = jest.fn()
 

@@ -7,10 +7,10 @@ import Chip from 'cozy-ui/transpiled/react/Chips'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import SourceButton, { CHIP_CLASSES } from './SourceButton'
-import styles from './styles.styl'
 import KnowledgeBaseChip from '../KnowledgeBase/KnowledgeBaseChip'
 import { useSelectedAssistantKnowledgeBase } from '../KnowledgeBase/useSelectedAssistantKnowledgeBase'
+import SourceButton, { CHIP_CLASSES } from './SourceButton'
+import styles from './styles.styl'
 
 /**
  * The knowledge sources of the composer. The Drive source is always on:

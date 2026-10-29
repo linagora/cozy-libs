@@ -3,10 +3,10 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import { FederatedFolderModal } from './FederatedFolderModal'
 import { getOrCreateFromArray } from '../../helpers/contacts'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import AppLike from '../SharingBanner/test/AppLike'
+import { FederatedFolderModal } from './FederatedFolderModal'
 
 const mockShare = jest.fn()
 const mockShareByLink = jest.fn()

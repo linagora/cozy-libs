@@ -1,8 +1,8 @@
-import { Icon, Keychain } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Keychain } from '@linagora/twake-icons'
 import { withClient } from 'cozy-client'
 
 import AppIcon from '../AppIcon'

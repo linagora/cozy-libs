@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import NewAccountModal from './NewAccountModal'
 import AppLike from '../../test/AppLike'
+import NewAccountModal from './NewAccountModal'
 
 let onLoginSuccessFn
 let onSuccessFn

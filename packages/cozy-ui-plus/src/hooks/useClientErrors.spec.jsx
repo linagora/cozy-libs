@@ -4,8 +4,8 @@ import React from 'react'
 
 import { FetchError } from 'cozy-stack-client'
 
-import useClientErrors from './useClientErrors'
 import DemoProvider from '../providers/DemoProvider'
+import useClientErrors from './useClientErrors'
 
 function createCozyClient() {
   return {

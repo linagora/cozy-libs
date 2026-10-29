@@ -5,9 +5,9 @@ import List from 'cozy-ui/transpiled/react/List'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import withLocales from '../hoc/withLocales'
 import CiphersListItem from './CiphersListItem'
 import OtherAccountListItem from './OtherAccountListItem'
-import withLocales from '../hoc/withLocales'
 
 export const DumbVaultCiphersList = ({ konnector, onSelect, ciphers, t }) => {
   const activeCiphers = ciphers.filter(cipherView => !cipherView.deletedDate)

@@ -1,6 +1,6 @@
-import { Icon, Dots } from '@linagora/twake-icons'
 import React, { useState, useRef } from 'react'
 
+import { Icon, Dots } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'

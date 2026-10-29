@@ -3,8 +3,8 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import MemberRecipientPermissions from './MemberRecipientPermissions'
 import AppLike from '../../../test/AppLike'
+import MemberRecipientPermissions from './MemberRecipientPermissions'
 
 const mockShowAlert = jest.fn()
 

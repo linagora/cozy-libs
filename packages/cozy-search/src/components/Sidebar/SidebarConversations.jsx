@@ -7,12 +7,12 @@ import LoadMore from 'cozy-ui/transpiled/react/LoadMore'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
 import AssistantSidebarItem from '../Assistant/AssistantSidebarItem'
 import { useAssistant } from '../AssistantProvider'
 import ConversationList from '../Conversations/ConversationList'
+import styles from './styles.styl'
 
 export const SidebarConversations = () => {
   const { t } = useI18n()

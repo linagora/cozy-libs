@@ -26,11 +26,11 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 
+import { makeSummaryLonger, makeSummaryShorter } from '../actions'
+import { withViewerLocales } from '../hoc/withViewerLocales'
 import QualificationListItemText from './Qualifications/QualificationListItemText'
 import SummaryDialog from './SummaryDialog'
 import styles from './styles.styl'
-import { makeSummaryLonger, makeSummaryShorter } from '../actions'
-import { withViewerLocales } from '../hoc/withViewerLocales'
 
 const Summary = ({ file, isReadOnly, t }) => {
   const [showModal, setShowModal] = useState(false)

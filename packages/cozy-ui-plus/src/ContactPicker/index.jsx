@@ -4,8 +4,8 @@ import React from 'react'
 
 import { getDisplayName } from 'cozy-client/dist/models/contact'
 
-import styles from './styles.styl'
 import ContactsListModal from '../ContactsListModal'
+import styles from './styles.styl'
 
 const SelectControl = props => {
   const { className, children, ...rest } = props

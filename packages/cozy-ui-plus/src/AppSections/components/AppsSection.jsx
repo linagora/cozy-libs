@@ -5,9 +5,9 @@ import React, { useMemo } from 'react'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import styles from './AppsSection.styl'
 import AppTile from '../../AppTile'
 import { getTranslatedManifestProperty } from '../helpers'
+import styles from './AppsSection.styl'
 
 const makeNameGetter = t => app => getTranslatedManifestProperty(app, 'name', t)
 

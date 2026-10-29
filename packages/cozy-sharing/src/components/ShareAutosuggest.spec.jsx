@@ -1,8 +1,8 @@
 import { act, render, fireEvent, screen } from '@testing-library/react'
 import React from 'react'
 
-import ShareAutosuggest from './ShareAutosuggest'
 import AppLike from '../../test/AppLike'
+import ShareAutosuggest from './ShareAutosuggest'
 
 jest.mock('cozy-ui/transpiled/react/Spinner', () => ({
   Spinner: () => <div>loading</div>

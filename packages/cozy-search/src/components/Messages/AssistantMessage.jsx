@@ -4,10 +4,10 @@ import React from 'react'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import { useI18n } from 'twake-i18n'
 
+import Sources from '../Conversations/Sources/Sources'
 import AssistantMessageActions from './AssistantMessageActions'
 import MarkdownText from './MarkdownText'
 import styles from './styles.styl'
-import Sources from '../Conversations/Sources/Sources'
 
 const useIsErrorMessage = () => {
   return useMessage(s => s.metadata?.custom?.isError === true)

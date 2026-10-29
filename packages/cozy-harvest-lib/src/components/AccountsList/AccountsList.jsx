@@ -1,7 +1,7 @@
-import { Icon, Plus } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Plus } from '@linagora/twake-icons'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'

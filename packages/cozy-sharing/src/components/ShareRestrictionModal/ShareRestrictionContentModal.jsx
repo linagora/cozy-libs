@@ -5,10 +5,10 @@ import Box from 'cozy-ui/transpiled/react/Box'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import { BoxEditingRights } from './BoxEditingRights'
-import { ShareLinkSettings } from './ShareLinkSettings'
 import { checkIsPermissionHasPassword } from '../../helpers/permissions'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { BoxEditingRights } from './BoxEditingRights'
+import { ShareLinkSettings } from './ShareLinkSettings'
 
 export const ShareRestrictionContentModal = ({
   file,

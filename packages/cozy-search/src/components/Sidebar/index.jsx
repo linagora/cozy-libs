@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-import { SidebarDesktop } from './SidebarDesktop'
-import { SidebarMobile } from './SidebarMobile'
 import useConversation from '../../hooks/useConversation'
 import { useAssistant } from '../AssistantProvider'
+import { SidebarDesktop } from './SidebarDesktop'
+import { SidebarMobile } from './SidebarMobile'
 
 const Sidebar = ({ className }) => {
   const { createNewConversation } = useConversation()

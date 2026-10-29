@@ -1,6 +1,6 @@
-import { Icon, Dropdown, Dropup } from '@linagora/twake-icons'
 import React, { useState } from 'react'
 
+import { Icon, Dropdown, Dropup } from '@linagora/twake-icons'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 

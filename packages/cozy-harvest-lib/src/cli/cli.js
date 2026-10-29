@@ -4,7 +4,6 @@ import minilog from '@cozy/minilog'
 import { createClientInteractive } from 'cozy-client/dist/cli'
 
 import './polyfill'
-import { multiPrompt } from './prompt'
 import assert from '../assert'
 import logger from '../logger'
 import ConnectionFlow, {
@@ -14,6 +13,7 @@ import ConnectionFlow, {
   TWO_FA_REQUEST_EVENT,
   UPDATE_EVENT
 } from '../models/ConnectionFlow'
+import { multiPrompt } from './prompt'
 
 minilog.enable()
 

@@ -4,12 +4,12 @@ import React from 'react'
 import flag from 'cozy-flags'
 
 import { useAssistant } from '../AssistantProvider'
-import styles from './styles.styl'
 import Conversation from '../Conversations/Conversation'
 import CozyAssistantRuntimeProviderWithErrorBoundary from '../CozyAssistantRuntimeProvider'
 import { useAssistantsAutoprovision } from '../KnowledgeBase/useAssistantsAutoprovision'
 import SearchConversation from '../Search/SearchConversation'
 import Sidebar from '../Sidebar'
+import styles from './styles.styl'
 
 const AssistantContainer = () => {
   const { isOpenSearchConversation } = useAssistant()

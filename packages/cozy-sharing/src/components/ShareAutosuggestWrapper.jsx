@@ -5,7 +5,6 @@ import { useClient, useQueryAll, isQueryLoading } from 'cozy-client'
 import { models } from 'cozy-client'
 import flag from 'cozy-flags'
 
-import ShareAutosuggest from './ShareAutosuggest'
 import { computeContactsAndGroups, suggestContacts } from '../helpers/contacts'
 import { makeAvatarUrl } from '../helpers/recipients'
 import { useSharingContext } from '../hooks/useSharingContext'
@@ -15,6 +14,7 @@ import {
   buildContactGroupsQuery,
   buildUnreachableContactsWithGroupsQuery
 } from '../queries/queries'
+import ShareAutosuggest from './ShareAutosuggest'
 
 const ContactModel = models.contact
 

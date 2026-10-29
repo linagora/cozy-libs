@@ -5,15 +5,15 @@ import Autosuggest from 'react-autosuggest'
 import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
-import { GroupAvatar } from './Avatar/GroupAvatar'
-import { MemberAvatar } from './Avatar/MemberAvatar'
-import ContactSuggestion from './ContactSuggestion'
 import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
 import logger from '../logger'
 import { getDisplayName, DOCTYPE_CONTACTS, DOCTYPE_GROUPS } from '../models'
 import styles from '../styles/autosuggest.styl'
 import { contactOrGroupMatch } from '../suggestionMatchers'
+import { GroupAvatar } from './Avatar/GroupAvatar'
+import { MemberAvatar } from './Avatar/MemberAvatar'
+import ContactSuggestion from './ContactSuggestion'
 
 const FETCH_CONTACTS_DEBOUNCE = 300
 const FETCH_CONTACTS_MIN_LENGTH = 3

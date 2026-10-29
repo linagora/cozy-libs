@@ -1,13 +1,13 @@
-import { Icon, CrossSmall, Plus } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useRef } from 'react'
 
+import { Icon, CrossSmall, Plus } from '@linagora/twake-icons'
 import InputLabel from 'cozy-ui/transpiled/react/InputLabel'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Button from 'cozy-ui/transpiled/react/deprecated/Button'
 
-import styles from './styles.styl'
 import { FieldContainer } from '../Field'
+import styles from './styles.styl'
 
 /**
  * Handles a collection of form fields.

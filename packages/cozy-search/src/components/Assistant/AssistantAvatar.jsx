@@ -1,7 +1,7 @@
-import { Icon, AssistantColor } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
+import { Icon, AssistantColor } from '@linagora/twake-icons'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import styles from './styles.styl'

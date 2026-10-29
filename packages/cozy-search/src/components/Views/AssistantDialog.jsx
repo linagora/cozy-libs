@@ -6,12 +6,12 @@ import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 
+import AssistantContainer from '../Assistant/AssistantContainer'
 import AssistantProvider, { useAssistant } from '../AssistantProvider'
+import styles from '../styles.styl'
 import CreateAssistantDialog from './CreateAssistantDialog'
 import DeleteAssistantDialog from './DeleteAssistantDialog'
 import EditAssistantDialog from './EditAssistantDialog'
-import AssistantContainer from '../Assistant/AssistantContainer'
-import styles from '../styles.styl'
 
 const AssistantDialog = () => {
   const {

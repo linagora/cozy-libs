@@ -8,8 +8,8 @@ import {
   getT
 } from 'services/utils'
 
-import softDeleteOrRestoreAccounts from './softDeleteOrRestoreAccounts'
 import { ensureTrigger } from '../connections/triggers'
+import softDeleteOrRestoreAccounts from './softDeleteOrRestoreAccounts'
 
 jest.mock('services/utils')
 jest.mock('services/logger')

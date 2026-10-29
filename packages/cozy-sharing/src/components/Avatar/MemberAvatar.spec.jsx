@@ -1,8 +1,8 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import { MemberAvatar } from './MemberAvatar'
 import AppLike from '../../../test/AppLike'
+import { MemberAvatar } from './MemberAvatar'
 
 describe('MemberAvatar', () => {
   const setup = (recipient, avatarUrl = null) =>

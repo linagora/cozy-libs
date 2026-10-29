@@ -4,10 +4,10 @@ import { useDataProxy } from 'cozy-dataproxy-lib'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItemSkeleton from 'cozy-ui/transpiled/react/Skeletons/ListItemSkeleton'
 
+import { useSearch } from '../Search/SearchProvider'
 import NoResultItem from './NoResultItem'
 import NotEnoughItem from './NotEnoughItem'
 import ResultMenuItem from './ResultMenuItem'
-import { useSearch } from '../Search/SearchProvider'
 
 const SearchResult = ({ onClear }) => {
   const { isLoading, results, selectedIndex, searchValue } = useSearch()

@@ -7,9 +7,9 @@ import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'twake-i18n'
 
+import useConversation from '../../hooks/useConversation'
 import AssistantMenu from './AssistantMenu'
 import styles from './styles.styl'
-import useConversation from '../../hooks/useConversation'
 
 /**
  * The "Assistant" item of the sidebar: opens the assistant menu. Picking

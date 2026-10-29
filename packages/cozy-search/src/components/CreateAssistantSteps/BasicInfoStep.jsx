@@ -1,14 +1,14 @@
-import { Icon, Plus } from '@linagora/twake-icons'
 import React, { useRef } from 'react'
 
+import { Icon, Plus } from '@linagora/twake-icons'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Tooltip from 'cozy-ui/transpiled/react/Tooltip'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useCozyTheme } from 'cozy-ui/transpiled/react/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
-import styles from './styles.styl'
 import KnowledgeBaseSection from '../KnowledgeBase/KnowledgeBaseSection'
+import styles from './styles.styl'
 
 const BasicInfoStep = ({
   name,

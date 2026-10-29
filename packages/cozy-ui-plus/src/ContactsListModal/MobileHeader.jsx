@@ -1,7 +1,7 @@
-import { Icon, Previous } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Previous } from '@linagora/twake-icons'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Input from 'cozy-ui/transpiled/react/Input'
 import Paper from 'cozy-ui/transpiled/react/Paper'

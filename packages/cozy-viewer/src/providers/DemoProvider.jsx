@@ -6,8 +6,8 @@ import AlertProvider from 'cozy-ui/transpiled/react/providers/Alert'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import I18n from 'twake-i18n'
 
-import ViewerProvider from './ViewerProvider'
 import { locales } from '../locales/index'
+import ViewerProvider from './ViewerProvider'
 
 const demoTextFileResponse = {
   text: () => new Promise(resolve => resolve('Hello World !'))

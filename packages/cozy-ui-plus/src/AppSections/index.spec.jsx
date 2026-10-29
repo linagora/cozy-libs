@@ -3,11 +3,11 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
+import { I18nContext } from '../../test/I18n'
+import DemoProvider from '../providers/DemoProvider'
 import { Sections } from './Sections'
 import mockApps from './_testApps'
 import en from './locales/en.json'
-import { I18nContext } from '../../test/I18n'
-import DemoProvider from '../providers/DemoProvider'
 
 const i18nContext = I18nContext({ locale: en })
 const tMock = i18nContext.t

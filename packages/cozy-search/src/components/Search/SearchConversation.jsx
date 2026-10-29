@@ -13,14 +13,14 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import NotFoundConversation from './NotFoundConversation'
-import { formatDayLabel, groupConversationsByDate } from './helpers'
-import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import useFetchConversations from '../../hooks/useFetchConversations'
 import { useAssistant } from '../AssistantProvider'
 import ConversationList from '../Conversations/ConversationList'
 import ConversationListItemWider from '../Conversations/ConversationListItemWider'
+import NotFoundConversation from './NotFoundConversation'
+import { formatDayLabel, groupConversationsByDate } from './helpers'
+import styles from './styles.styl'
 
 const SearchConversationContainer = ({ children, isMobile }) =>
   !isMobile ? (

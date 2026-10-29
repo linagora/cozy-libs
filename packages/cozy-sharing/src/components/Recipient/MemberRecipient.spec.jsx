@@ -1,8 +1,8 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import MemberRecipient from './MemberRecipient'
 import AppLike from '../../../test/AppLike'
+import MemberRecipient from './MemberRecipient'
 
 describe('MemberRecipient component', () => {
   const setup = props => {

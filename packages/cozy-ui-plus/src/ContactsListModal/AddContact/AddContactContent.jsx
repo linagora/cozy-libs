@@ -1,13 +1,13 @@
-import { Icon, People } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, People } from '@linagora/twake-icons'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 
-import styles from './styles.styl'
 import { withContactsListLocales } from '../withContactsListLocales'
+import styles from './styles.styl'
 
 const AddContactContent = ({ t, setContactValues }) => {
   const handleChange = ev => {

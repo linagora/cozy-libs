@@ -18,9 +18,9 @@ jest.mock('../components/helpers')
 // Set up mock implementations
 import * as routerModule from 'react-router-dom'
 
-import useConversation from './useConversation'
 import * as assistantModule from '../components/AssistantProvider'
 import * as helpersModule from '../components/helpers'
+import useConversation from './useConversation'
 
 routerModule.useNavigate.mockImplementation(() => mockNavigate)
 routerModule.useLocation.mockImplementation(() => mockLocation)

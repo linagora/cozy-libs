@@ -5,10 +5,10 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import styles from '../styles/share.styl'
 import AntivirusAlert from './AntivirusAlert'
 import { default as DumbShareByEmail } from './ShareByEmail'
 import WhoHasAccessWrapper from './WhoHasAccessWrapper'
-import styles from '../styles/share.styl'
 
 const SharingContent = ({
   document,

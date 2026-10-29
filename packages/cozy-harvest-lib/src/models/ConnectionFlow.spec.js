@@ -4,11 +4,6 @@ import { waitFor } from '@testing-library/react'
 
 import { Q } from 'cozy-client'
 
-import ConnectionFlow from './ConnectionFlow'
-import { ERRORED, EXPECTING_TRIGGER_LAUNCH, PENDING } from './flowEvents'
-import KonnectorJobWatcher, {
-  watchKonnectorJob
-} from './konnector/KonnectorJobWatcher'
 import fixtures from '../../test/fixtures'
 import { saveAccount } from '../connections/accounts'
 import {
@@ -19,6 +14,11 @@ import {
   launchTrigger
 } from '../connections/triggers'
 import { KonnectorJobError } from '../helpers/konnectors'
+import ConnectionFlow from './ConnectionFlow'
+import { ERRORED, EXPECTING_TRIGGER_LAUNCH, PENDING } from './flowEvents'
+import KonnectorJobWatcher, {
+  watchKonnectorJob
+} from './konnector/KonnectorJobWatcher'
 
 jest.mock('./konnector/KonnectorJobWatcher')
 

@@ -5,11 +5,11 @@ import { Icon, Link } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
+import { getDisplayName } from '../../models'
+import styles from '../../styles/recipient.styl'
 import { ExtraAvatar } from './ExtraAvatar'
 import { GroupAvatar } from './GroupAvatar'
 import { MemberAvatarWrapper } from './MemberAvatarWrapper'
-import { getDisplayName } from '../../models'
-import styles from '../../styles/recipient.styl'
 
 export const MAX_DISPLAYED_RECIPIENTS = 3
 

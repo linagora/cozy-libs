@@ -7,9 +7,9 @@ import BottomSheet, {
 } from 'cozy-ui/transpiled/react/BottomSheet'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
+import { useViewer } from '../providers/ViewerProvider'
 import BottomSheetContent from './BottomSheetContent'
 import { extractChildrenCompByName } from './helpers'
-import { useViewer } from '../providers/ViewerProvider'
 
 const useStyles = makeStyles(theme => ({
   footer: {

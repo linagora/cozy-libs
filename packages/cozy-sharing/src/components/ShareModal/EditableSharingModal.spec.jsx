@@ -5,12 +5,12 @@ import React from 'react'
 import { createMockClient } from 'cozy-client'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-import { EditableSharingModal } from './EditableSharingModal'
 import AppLike from '../../../test/AppLike'
 import { SharingProvider } from '../../SharingProvider'
 import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
 import { receivePaths } from '../../state'
 import { default as DumbShareModal } from '../ShareModal'
+import { EditableSharingModal } from './EditableSharingModal'
 
 jest.mock('../../hooks/useFetchDocumentPath', () => ({
   useFetchDocumentPath: jest.fn()

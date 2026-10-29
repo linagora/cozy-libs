@@ -1,15 +1,15 @@
-import { Icon, Magnifier } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useRef } from 'react'
 
+import { Icon, Magnifier } from '@linagora/twake-icons'
 import ClickAwayListener from 'cozy-ui/transpiled/react/ClickAwayListener'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 
+import ResultMenu from '../ResultMenu/ResultMenu'
+import { isAssistantEnabled } from '../helpers'
 import { AssistantButton } from './AssistantButton'
 import { useSearch } from './SearchProvider'
 import styles from './styles.styl'
-import ResultMenu from '../ResultMenu/ResultMenu'
-import { isAssistantEnabled } from '../helpers'
 
 const SearchBarDesktop = ({
   value,

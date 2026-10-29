@@ -1,6 +1,6 @@
-import { Icon, HelpOutlined } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon, HelpOutlined } from '@linagora/twake-icons'
 import { useInstanceInfo } from 'cozy-client'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 

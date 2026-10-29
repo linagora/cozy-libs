@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
-import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
 import AppLike from '../../test/AppLike'
+import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
 
 let mockSharingLink = null
 

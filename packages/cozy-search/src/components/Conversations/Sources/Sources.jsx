@@ -8,10 +8,10 @@ import Chip from 'cozy-ui/transpiled/react/Chips'
 import Grow from 'cozy-ui/transpiled/react/Grow'
 import { useI18n } from 'twake-i18n'
 
+import { EMAIL_DOCTYPE, FILES_DOCTYPE, buildFilesByIds } from '../../queries'
 import EmailSourceItem from './EmailSourceItem'
 import FileSourcesItem from './FileSourcesItem'
 import WebSourceItem from './WebSourceItem'
-import { EMAIL_DOCTYPE, FILES_DOCTYPE, buildFilesByIds } from '../../queries'
 
 const WEB_SOURCE_TYPE = 'web'
 

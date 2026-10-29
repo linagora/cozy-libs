@@ -4,8 +4,8 @@ import React from 'react'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { checkImageSource } from 'cozy-ui-plus/dist/FileImageLoader/checkImageSource'
 
-import ImageViewer from './ImageViewer'
 import DemoProvider from '../providers/DemoProvider'
+import ImageViewer from './ImageViewer'
 
 jest.mock('cozy-ui-plus/dist/FileImageLoader/checkImageSource', () => ({
   ...jest.requireActual('cozy-ui-plus/dist/FileImageLoader/checkImageSource'),

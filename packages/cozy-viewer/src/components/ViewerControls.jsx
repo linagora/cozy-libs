@@ -6,12 +6,12 @@ import React, { Component } from 'react'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
+import { toolbarPropsPropType } from '../proptypes'
+import { useViewer } from '../providers/ViewerProvider'
 import { infoWidth } from './InformationPanel'
 import Navigation from './Navigation'
 import Toolbar from './Toolbar'
 import styles from './styles.styl'
-import { toolbarPropsPropType } from '../proptypes'
-import { useViewer } from '../providers/ViewerProvider'
 
 const ACTIONS_HIDE_DELAY = 3000
 

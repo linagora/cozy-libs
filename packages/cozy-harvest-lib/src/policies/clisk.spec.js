@@ -1,5 +1,5 @@
-import { getLauncher, konnectorPolicy } from './clisk'
 import { KonnectorJobError } from '../helpers/konnectors'
+import { getLauncher, konnectorPolicy } from './clisk'
 
 describe('getLauncher', () => {
   it('should get the current Launcher from the given window object', () => {

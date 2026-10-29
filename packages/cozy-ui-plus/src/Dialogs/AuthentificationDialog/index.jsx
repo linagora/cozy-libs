@@ -1,7 +1,7 @@
-import { CozyAuthentification } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useMemo, useState } from 'react'
 
+import { CozyAuthentification } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
 import PermissionDialog from 'cozy-ui/transpiled/react/CozyDialogs/PermissionDialog'
