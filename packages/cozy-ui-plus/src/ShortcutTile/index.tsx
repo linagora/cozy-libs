@@ -20,8 +20,7 @@ const useStyles = makeStyles({
     margin: 'auto'
   },
   letterWrapper: {
-    backgroundColor: ({ name }: { name: string }) =>
-      (nameToColor as (name: string) => string)(name)
+    backgroundColor: ({ name }: { name: string }) => nameToColor(name)
   }
 })
 
