@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [41.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.2.1...cozy-sharing@41.0.0) (2026-10-29)
+
+### Code Refactoring
+
+- **cozy-sharing:** Use the members list of cozy-ui ([02c63c3](https://github.com/cozy/cozy-libs/commit/02c63c3b300326f5e43fbd88b80ad0547d88516f))
+
+### Features
+
+- **cozy-sharing:** Show an empty state in the members list ([25b6eb6](https://github.com/cozy/cozy-libs/commit/25b6eb6ecd1a2ed1ceb0e584b6a17148415eb3ee))
+- **cozy-sharing:** Show the role of the groups as text ([0b1a980](https://github.com/cozy/cozy-libs/commit/0b1a980381a8ea4e7ae4b4ad1268c4b068fe8126))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** cozy-sharing needs cozy-ui 146.1.0 or later for its
+  members list: upgrade cozy-ui in the app. `GroupAvatar` is no longer
+  exported: import `MemberGroupAvatar` from
+  `cozy-ui/transpiled/react/MemberRow/MemberGroupAvatar` instead.
+
 ## [40.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.2.0...cozy-sharing@40.2.1) (2026-10-28)
 
 **Note:** Version bump only for package cozy-sharing
