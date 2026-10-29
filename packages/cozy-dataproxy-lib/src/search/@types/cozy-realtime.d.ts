@@ -1,8 +1,6 @@
-import type CozyClient from 'cozy-client'
-
-import { CozyDoc } from '../types'
-
 declare module 'cozy-realtime' {
+  import type CozyClient from 'cozy-client'
+
   export interface RealtimePluginType {
     (): void
     pluginName: 'realtime'
@@ -19,7 +17,7 @@ declare module 'cozy-realtime' {
     subscribe(
       event: string,
       doctype: string,
-      handler: (doc: CozyDoc) => void
+      handler: (doc: import('../types').CozyDoc) => void
     ): void
     stop(): void
   }
