@@ -28,12 +28,12 @@ const ShareAutosuggestWrapper = ({
   currentRecipients,
   recipients,
   placeholder,
-  onPick,
-  onRemove,
   enableCreateContact,
   disabled,
   autoFocus,
-  endAdornment
+  endAdornment,
+  onPick,
+  onRemove
 }) => {
   const client = useClient()
   const contactsSuggestEnabled = useSharingContext()?.contactsSuggestEnabled
@@ -120,12 +120,12 @@ ShareAutosuggestWrapper.propTypes = {
   currentRecipients: PropTypes.array,
   recipients: PropTypes.array,
   placeholder: PropTypes.string,
-  onPick: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired,
   enableCreateContact: PropTypes.bool,
   disabled: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  endAdornment: PropTypes.node
+  endAdornment: PropTypes.node,
+  onPick: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired
 }
 
 ShareAutosuggestWrapper.defaultProps = {
