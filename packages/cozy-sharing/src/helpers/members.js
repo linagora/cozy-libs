@@ -1,9 +1,15 @@
 import {
+  getPrimaryCozy,
+  getPrimaryEmail
+} from 'cozy-client/dist/models/contact'
+
+import {
   getGroupRecipientSecondaryText,
   getMemberStatusText,
-  hasMemberActions
+  hasMemberActions,
+  makeAvatarUrl
 } from './recipients'
-import { getDisplayName, getInitials } from '../models'
+import { DOCTYPE_GROUPS, getDisplayName, getInitials } from '../models'
 
 /**
  * Finds the confirmation data of a recipient waiting for the two steps
@@ -194,3 +200,41 @@ export const makeMembers = ({
 
   return owner ? [makeOwnerMember(owner, { t }), ...members] : members
 }
+
+/**
+ * Makes a member for `MemberAutocomplete` from a contact, a group of contacts
+ * or a typed email
+ *
+ * @param {object} params
+ * @param {object} params.contact - Contact, group of contacts or `{ email }`
+ * @param {Function} params.t - Translation function
+ * @param {string} params.instanceUri - URI of the current user's instance
+ * @returns {object} The member, with the contact or group as `data`
+ */
+export const makeMemberFromContact = ({ contact, t, instanceUri }) => {
+  if (contact._type === DOCTYPE_GROUPS) {
+    return {
+      id: contact._id ?? contact.id,
+      name: contact.name,
+      subtitle: t('Share.members.count', {
+        smart_count: contact.members.length
+      }),
+      color: contact.color,
+      isGroup: true,
+      data: contact
+    }
+  }
+
+  return {
+    id: contact._id ?? contact.id ?? contact.email,
+    name: getDisplayName(contact),
+    subtitle: getPrimaryCozy(contact) || '-',
+    email: getPrimaryEmail(contact),
+    initials: getInitials(contact),
+    avatarUrl: makeAvatarUrl(contact, instanceUri),
+    data: contact
+  }
+}
+
+export const makeMembersFromContacts = ({ contacts, t, instanceUri }) =>
+  contacts.map(contact => makeMemberFromContact({ contact, t, instanceUri }))

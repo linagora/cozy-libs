@@ -66,8 +66,6 @@ export const ShareByEmail = ({
               ? t(`${documentType}.share.shareByEmail.emailPlaceholder`)
               : ''
           }
-          onPick={onRecipientPick}
-          onRemove={onRecipientRemove}
           enableCreateContact={enableCreateContact}
           currentRecipients={currentRecipients}
           recipients={pendingRecipients}
@@ -79,6 +77,8 @@ export const ShareByEmail = ({
               onChange={onSelectedOptionChange}
             />
           }
+          onPick={onRecipientPick}
+          onRemove={onRecipientRemove}
         />
       </div>
     </div>

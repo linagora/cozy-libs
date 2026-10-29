@@ -1,5 +1,6 @@
 import {
   findRecipientConfirmationData,
+  makeMemberFromContact,
   makeMemberRoles,
   makeMembers
 } from './members'
@@ -207,5 +208,63 @@ describe('findRecipientConfirmationData', () => {
     expect(
       findRecipientConfirmationData([{ id: 'a', email: '' }], { email: '' })
     ).toBeUndefined()
+  })
+})
+
+describe('makeMemberFromContact', () => {
+  const instanceUri = 'https://alice.cozy.cc'
+
+  it('makes a group with its number of members', () => {
+    const group = {
+      _id: 'group-1',
+      _type: 'io.cozy.contacts.groups',
+      name: 'Family',
+      color: 'red',
+      members: [{}, {}]
+    }
+
+    expect(makeMemberFromContact({ contact: group, t, instanceUri })).toEqual({
+      id: 'group-1',
+      name: 'Family',
+      subtitle: 'Share.members.count',
+      color: 'red',
+      isGroup: true,
+      data: group
+    })
+  })
+
+  it('makes a contact with its Cozy as subtitle', () => {
+    const contact = {
+      _id: 'contact-1',
+      _type: 'io.cozy.contacts',
+      fullname: 'Bob Sponge',
+      name: { givenName: 'Bob', familyName: 'Sponge' },
+      email: [{ address: 'bob@cozy.cc', primary: true }],
+      cozy: [{ url: 'https://bob.cozy.cc', primary: true }]
+    }
+
+    expect(makeMemberFromContact({ contact, t, instanceUri })).toMatchObject({
+      id: 'contact-1',
+      name: 'Bob Sponge',
+      subtitle: 'https://bob.cozy.cc',
+      email: 'bob@cozy.cc',
+      initials: 'BS',
+      data: contact
+    })
+  })
+
+  it('identifies a typed email by itself', () => {
+    expect(
+      makeMemberFromContact({
+        contact: { email: 'carol@cozy.cc' },
+        t,
+        instanceUri
+      })
+    ).toMatchObject({
+      id: 'carol@cozy.cc',
+      name: 'carol@cozy.cc',
+      subtitle: '-',
+      email: 'carol@cozy.cc'
+    })
   })
 })
