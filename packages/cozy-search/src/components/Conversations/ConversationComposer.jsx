@@ -5,13 +5,13 @@ import React, { useCallback } from 'react'
 import flag from 'cozy-flags'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
+import AssistantSelection from '../Assistant/AssistantSelection'
+import { useAssistant } from '../AssistantProvider'
+import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
 import ConversationBar from './ConversationBar'
 import { ConversationComposerRoot } from './ConversationComposerRoot'
 import { ConversationSendButton } from './ConversationSendButton'
 import styles from './styles.styl'
-import AssistantSelection from '../Assistant/AssistantSelection'
-import { useAssistant } from '../AssistantProvider'
-import TwakeKnowledgeSelector from '../TwakeKnowledges/TwakeKnowledgeSelector'
 
 const ConversationComposer = () => {
   const { isMobile } = useBreakpoints()

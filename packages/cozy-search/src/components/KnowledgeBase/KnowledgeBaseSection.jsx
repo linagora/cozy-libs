@@ -8,6 +8,9 @@ import Chip from 'cozy-ui/transpiled/react/Chips'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
+import TDrive from '../../assets/tdrive.png'
+import TMail from '../../assets/tmail.png'
+import { buildFileByIdQuery, EMAIL_DOCTYPE, FILES_DOCTYPE } from '../queries'
 import FolderPickerDialog from './FolderPickerDialog'
 import {
   getKnowledgeBaseDirId,
@@ -18,9 +21,6 @@ import {
   withKnowledgeBaseEntry,
   withoutKnowledgeBaseDoctype
 } from './knowledgeBase'
-import TDrive from '../../assets/tdrive.png'
-import TMail from '../../assets/tmail.png'
-import { buildFileByIdQuery, EMAIL_DOCTYPE, FILES_DOCTYPE } from '../queries'
 
 const KnowledgeBaseSection = ({ knowledgeBase = [], onChange }) => {
   const { t } = useI18n()

@@ -2,7 +2,6 @@ import React from 'react'
 
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
-import WhoHasAccess from './WhoHasAccess'
 import {
   addAvatarUrls,
   hasMemberActions,
@@ -12,6 +11,7 @@ import {
 import { useMemberPermissionType } from '../hooks/useMemberPermissionType'
 import { useSharingContext } from '../hooks/useSharingContext'
 import { buildInstanceSettingsQuery } from '../queries/queries'
+import WhoHasAccess from './WhoHasAccess'
 
 // When the owner is not part of a sharing's members (eg. the folder only has
 // a link), there is no per-sharing avatar to reference. The instance's public

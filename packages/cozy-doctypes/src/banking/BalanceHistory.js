@@ -1,5 +1,5 @@
-const BankAccount = require('./BankAccount')
 const Document = require('../Document')
+const BankAccount = require('./BankAccount')
 
 class BalanceHistory extends Document {
   static async getByYearAndAccount(year, accountId) {

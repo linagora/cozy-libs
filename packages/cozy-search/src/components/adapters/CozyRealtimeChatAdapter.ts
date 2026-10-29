@@ -16,9 +16,9 @@ import type {
 
 import Minilog from 'cozy-minilog'
 
-import { StreamBridge } from './StreamBridge'
 import { DEFAULT_ASSISTANT } from '../constants'
 import { sanitizeChatContent, formatAnswer } from '../helpers'
+import { StreamBridge } from './StreamBridge'
 
 const log = Minilog('🔍 [CozyRealtimeChatAdapter]')
 

@@ -9,13 +9,13 @@ import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import Field from 'cozy-ui-plus/dist/Field'
 import { translate } from 'twake-i18n'
 
-import KonnectorIcon from './KonnectorIcon'
-import withLocales from './hoc/withLocales'
 import accounts, {
   TWOFA_PROVIDERS,
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
 import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/flowEvents'
+import KonnectorIcon from './KonnectorIcon'
+import withLocales from './hoc/withLocales'
 
 /**
  * Displayed during connection creation when the konnector detects

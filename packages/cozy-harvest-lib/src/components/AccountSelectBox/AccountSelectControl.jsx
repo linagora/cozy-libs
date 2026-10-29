@@ -1,6 +1,6 @@
-import { Icon, Bottom } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon, Bottom } from '@linagora/twake-icons'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const AccountSelectControlBig = ({ name }) => {

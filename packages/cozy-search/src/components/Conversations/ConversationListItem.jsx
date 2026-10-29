@@ -5,9 +5,9 @@ import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
+import { getNameOfConversation } from '../helpers'
 import ConversationActions from './ConversationActions'
 import styles from './styles.styl'
-import { getNameOfConversation } from '../helpers'
 
 /**
  * A conversation of the sidebar: its name on one line, with its actions

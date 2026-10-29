@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 
 import FileImageLoader from 'cozy-ui-plus/dist/FileImageLoader'
 
+import ViewerSpinner from '../components/ViewerSpinner'
 import NoNetworkViewer from './NoNetworkViewer'
 import styles from './styles.styl'
-import ViewerSpinner from '../components/ViewerSpinner'
 
 const MIN_SCALE = 1
 const MAX_SCALE = 6

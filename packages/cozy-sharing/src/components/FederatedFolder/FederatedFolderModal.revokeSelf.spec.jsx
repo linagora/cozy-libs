@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import { FederatedFolderModal } from './FederatedFolderModal'
 import AppLike from '../../../test/AppLike'
 import { SharingProvider } from '../../SharingProvider'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { FederatedFolderModal } from './FederatedFolderModal'
 
 jest.mock('../ShareByEmail', () => () => null)
 jest.mock('../ShareByLink', () => () => null)

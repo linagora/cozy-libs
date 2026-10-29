@@ -1,7 +1,7 @@
 import { useQuery } from 'cozy-client'
 
-import { getDefaultProvisionedAssistantId } from './provisioning'
 import { buildAssistantByIdQuery } from '../queries'
+import { getDefaultProvisionedAssistantId } from './provisioning'
 
 /**
  * The assistant new conversations start on: the flagged default of the

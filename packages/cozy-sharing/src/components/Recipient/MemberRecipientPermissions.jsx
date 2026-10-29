@@ -6,8 +6,8 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import PermissionTypeMenu from './PermissionTypeMenu'
 import { hasMemberActions } from '../../helpers/recipients'
+import PermissionTypeMenu from './PermissionTypeMenu'
 
 const MemberRecipientPermissions = ({
   isOwner,

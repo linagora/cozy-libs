@@ -4,8 +4,8 @@ import trim from 'lodash/trim'
 
 import { Q, fetchPolicies } from 'cozy-client'
 
-import * as accounts from './accounts'
 import { getBoundT } from '../locales'
+import * as accounts from './accounts'
 
 const DEFAULT_SUPPORT_MAIL = 'claude@cozycloud.cc'
 

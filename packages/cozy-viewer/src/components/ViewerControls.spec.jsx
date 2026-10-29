@@ -2,9 +2,9 @@ import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
+import DemoProvider from '../providers/DemoProvider'
 import ViewerByFile from './ViewerByFile'
 import ViewerControls from './ViewerControls'
-import DemoProvider from '../providers/DemoProvider'
 
 jest.mock('../ViewersByFile/AudioViewer', () => () => <div>AudioViewer</div>)
 

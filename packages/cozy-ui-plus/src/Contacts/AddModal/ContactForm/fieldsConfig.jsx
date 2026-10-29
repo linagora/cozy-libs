@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   Icon,
   Bottom,
@@ -12,8 +14,6 @@ import {
   Relationship,
   Telephone
 } from '@linagora/twake-icons'
-import React from 'react'
-
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 
 import TextFieldPhone from './TextFieldPhone/index'

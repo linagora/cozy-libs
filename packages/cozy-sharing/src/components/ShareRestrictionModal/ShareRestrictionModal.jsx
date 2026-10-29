@@ -10,14 +10,6 @@ import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import { ShareRestrictionContentModal } from './ShareRestrictionContentModal'
-import {
-  copyToClipboard,
-  updatePermissions,
-  makeTTL,
-  revokePermissions,
-  createPermissions
-} from './helpers'
 import { getAppSlugFromDocumentType } from '../../helpers/link'
 import {
   checkIsPermissionHasExpiresDate,
@@ -26,6 +18,14 @@ import {
   getPermissionExpiresDate
 } from '../../helpers/permissions'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { ShareRestrictionContentModal } from './ShareRestrictionContentModal'
+import {
+  copyToClipboard,
+  updatePermissions,
+  makeTTL,
+  revokePermissions,
+  createPermissions
+} from './helpers'
 
 export const ShareRestrictionModal = ({ file, onClose }) => {
   const client = useClient()

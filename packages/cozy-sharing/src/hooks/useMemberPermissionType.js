@@ -3,10 +3,10 @@ import { useCallback } from 'react'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 
+import { getSharingDocIds } from '../state'
 import { useFetchDocumentPath } from './useFetchDocumentPath'
 import { useResolveRecipients } from './useResolveRecipients'
 import { useSharingContext } from './useSharingContext'
-import { getSharingDocIds } from '../state'
 
 /**
  * Gives what is needed to change the permission type of the members

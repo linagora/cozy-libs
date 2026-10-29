@@ -7,11 +7,11 @@ import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { translate } from 'twake-i18n'
 
+import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
+import getRelatedAppsSlugs from '../models/getRelatedAppsSlugs'
 import BanksLink from './KonnectorConfiguration/Success/BanksLink'
 import DriveLink from './KonnectorConfiguration/Success/DriveLink'
 import Markdown from './Markdown'
-import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
-import getRelatedAppsSlugs from '../models/getRelatedAppsSlugs'
 
 const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 

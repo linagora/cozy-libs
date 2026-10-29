@@ -1,4 +1,3 @@
-import { Icon, Sync, Unlink } from '@linagora/twake-icons'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import dateFnsLocaleEn from 'date-fns/locale/en-US'
 import dateFnsLocaleEs from 'date-fns/locale/es'
@@ -6,6 +5,7 @@ import dateFnsLocalefr from 'date-fns/locale/fr'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Sync, Unlink } from '@linagora/twake-icons'
 import { useI18n } from 'twake-i18n'
 
 import { isDeleted, isDisabled, isErrored, isImported } from './helpers'

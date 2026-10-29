@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { Field as FinalFormField } from 'react-final-form'
 
-import AccountField from './AccountField'
 import { getEncryptedFieldName } from '../../helpers/fields'
+import AccountField from './AccountField'
 
 // As SelectBox component from Cozy-UI, rendering dropdown type, is just giving
 // us the full Option object, we just get its value to facilitate mapping

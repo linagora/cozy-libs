@@ -1,14 +1,14 @@
-import { Icon } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon } from '@linagora/twake-icons'
 import { useClient, generateWebLink } from 'cozy-client'
 import { isNote, isDocs } from 'cozy-client/dist/models/file'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
-import styles from './styles.styl'
 import { getDriveMimeTypeIcon } from '../../Search/getIconForSearchResult'
+import styles from './styles.styl'
 
 const getSlug = file => {
   if (isNote(file)) {

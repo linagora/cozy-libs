@@ -10,7 +10,14 @@
   {
     "id": "google",
     "name": "Google",
-    "models": ["gemini-3-pro", "gemini-3-pro-001", "gemini-3-flash", "gemini-2.5-pro", "gemini-2.5-flash", "gemini-nano-banana-pro"],
+    "models": [
+      "gemini-3-pro",
+      "gemini-3-pro-001",
+      "gemini-3-flash",
+      "gemini-2.5-pro",
+      "gemini-2.5-flash",
+      "gemini-nano-banana-pro"
+    ],
     "description": "assistant_create.steps.provider_selection.google.description",
     "icon": "GeminiLogo",
     "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai/v1",
@@ -19,7 +26,15 @@
   {
     "id": "openai",
     "name": "OpenAI",
-    "models": ["gpt-5.1", "gpt-5-2025-11-14", "o3", "o4-mini", "gpt-5-mini", "gpt-4.1-mini", "sora-v2"],
+    "models": [
+      "gpt-5.1",
+      "gpt-5-2025-11-14",
+      "o3",
+      "o4-mini",
+      "gpt-5-mini",
+      "gpt-4.1-mini",
+      "sora-v2"
+    ],
     "unsupportedModels": ["o1", "o1-mini", "o1-preview"],
     "description": "assistant_create.steps.provider_selection.openai.description",
     "icon": "OpenAILogo",
@@ -29,7 +44,17 @@
   {
     "id": "mistral_ai",
     "name": "Mistral AI",
-    "models": ["mistral-large-3", "mistral-large-2512", "mistral-medium-3.1", "ministral-3b", "ministral-8b", "ministral-14b", "codestral-2", "devstral-small-2", "pixtral-large-2502"],
+    "models": [
+      "mistral-large-3",
+      "mistral-large-2512",
+      "mistral-medium-3.1",
+      "ministral-3b",
+      "ministral-8b",
+      "ministral-14b",
+      "codestral-2",
+      "devstral-small-2",
+      "pixtral-large-2502"
+    ],
     "description": "assistant_create.steps.provider_selection.mistral_ai.description",
     "icon": "MistralLogo",
     "baseUrl": "https://api.mistral.ai/v1",

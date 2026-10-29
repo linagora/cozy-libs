@@ -1,9 +1,9 @@
-import { Icon, Globe, Right } from '@linagora/twake-icons'
 import cx from 'classnames'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 
+import { Icon, Globe, Right } from '@linagora/twake-icons'
 import { useClient, generateWebLink } from 'cozy-client'
 import Divider from 'cozy-ui/transpiled/react/Divider'
 import List from 'cozy-ui/transpiled/react/List'
@@ -15,10 +15,10 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import AppIcon from 'cozy-ui-plus/dist/AppIcon'
 import { useI18n } from 'twake-i18n'
 
+import { fetchKonnectorData } from '../helpers/konnectorBlock'
 import Markdown from './Markdown'
 import { makeLabel } from './cards/helpers'
 import withLocales from './hoc/withLocales'
-import { fetchKonnectorData } from '../helpers/konnectorBlock'
 
 /**
  * KonnectorBlock is a standalone component and can be imported directly.

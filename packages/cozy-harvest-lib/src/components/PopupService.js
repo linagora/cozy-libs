@@ -1,6 +1,6 @@
 // @ts-check
-import { popupCenter } from './Popup'
 import { windowOpen } from '../helpers/windowWrapper'
+import { popupCenter } from './Popup'
 
 /**
  * @typedef OpenWindowResult

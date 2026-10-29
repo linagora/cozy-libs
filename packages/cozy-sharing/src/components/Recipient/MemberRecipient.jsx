@@ -9,15 +9,15 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import MemberRecipientPermissions from './MemberRecipientPermissions'
-import MemberRecipientStatus from './MemberRecipientStatus'
-import RecipientConfirm from './RecipientConfirm'
 import {
   FADE_IN_DURATION,
   DEFAULT_DISPLAY_NAME
 } from '../../helpers/recipients'
 import { getDisplayName } from '../../models'
 import { MemberAvatar } from '../Avatar/MemberAvatar'
+import MemberRecipientPermissions from './MemberRecipientPermissions'
+import MemberRecipientStatus from './MemberRecipientStatus'
+import RecipientConfirm from './RecipientConfirm'
 
 const MemberRecipient = props => {
   const { t } = useI18n()

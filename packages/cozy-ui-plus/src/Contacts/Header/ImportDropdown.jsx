@@ -1,6 +1,6 @@
-import { Icon, Bottom, Team } from '@linagora/twake-icons'
 import React, { useState, useRef } from 'react'
 
+import { Icon, Bottom, Team } from '@linagora/twake-icons'
 import { useClient, generateWebLink } from 'cozy-client'
 import { CONTACTS_DOCTYPE } from 'cozy-client/dist/models/contact'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -10,9 +10,9 @@ import ActionMenu, {
 } from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
-import { locales } from './locales'
 import AppIcon from '../../AppIcon'
 import AppLinker from '../../AppLinker'
+import { locales } from './locales'
 
 const ImportDropdown = ({ onContactImport }) => {
   useExtendI18n(locales)

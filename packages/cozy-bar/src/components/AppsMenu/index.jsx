@@ -1,7 +1,7 @@
-import { Icon, Mosaic } from '@linagora/twake-icons'
 import AppsMenuContent from 'components/AppsMenu/AppsMenuContent'
 import React, { useRef, useState } from 'react'
 
+import { Icon, Mosaic } from '@linagora/twake-icons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Menu from 'cozy-ui/transpiled/react/Menu'

@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import OpenOAuthWindowButton from './OpenOAuthWindowButton'
 import { intentsApiProptype } from '../../helpers/proptypes'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import RedirectToAccountFormButton from '../RedirectToAccountFormButton'
+import OpenOAuthWindowButton from './OpenOAuthWindowButton'
 
 const TriggerErrorAction = ({
   flow,

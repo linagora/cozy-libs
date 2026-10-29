@@ -3,10 +3,10 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import KonnectorBlock from './KonnectorBlock'
 import AppLike from '../../test/AppLike'
 import { fetchKonnectorData } from '../helpers/konnectorBlock'
 import en from '../locales/en.json'
+import KonnectorBlock from './KonnectorBlock'
 
 jest.mock('../helpers/konnectorBlock', () => ({
   fetchKonnectorData: jest.fn()

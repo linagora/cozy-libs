@@ -1,9 +1,9 @@
-import { Icon, Key, Right, Unlink } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Icon, Key, Right, Unlink } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
 import { useVaultClient, useVaultUnlockContext } from 'cozy-keys-lib'
@@ -23,7 +23,6 @@ import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 // @ts-ignore peerDep
 
-import { ContractsForAccount } from './Contracts'
 import { deleteAccount } from '../../../connections/accounts'
 import {
   intentsApiProptype,
@@ -33,6 +32,7 @@ import { findKonnectorPolicy } from '../../../konnector-policies'
 import { unshareCipher } from '../../../models/cipherUtils'
 import { useTrackPage, useTracker } from '../../hoc/tracking'
 import useSafeState from '../../useSafeState'
+import { ContractsForAccount } from './Contracts'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 

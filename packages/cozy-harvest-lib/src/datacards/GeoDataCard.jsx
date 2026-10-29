@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import React, { useEffect, useRef, useMemo, memo } from 'react'
 import SwipeableViews from 'react-swipeable-views'
 
+import { Icon, Clock, Compass, Flag, Left, Right } from '@linagora/twake-icons'
 import CozyClient, {
   Q,
   queryConnect,
@@ -23,6 +24,8 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/deprecated/Media'
 import { useI18n } from 'twake-i18n'
 
+import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
+import AppLinkCard from '../components/cards/AppLinkCard'
 import {
   transformTimeSeriesToTrips,
   getStartPlaceDisplayName,
@@ -31,10 +34,6 @@ import {
   getModes
 } from './trips'
 import useCycle from './useCycle'
-import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
-import AppLinkCard from '../components/cards/AppLinkCard'
-
-import { Icon, Clock, Compass, Flag, Left, Right } from '@linagora/twake-icons'
 
 const setupMap = node => {
   var map = L.map(node).setView([51.505, -0.09], 13)

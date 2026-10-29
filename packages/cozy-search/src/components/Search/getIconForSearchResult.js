@@ -1,3 +1,5 @@
+import get from 'lodash/get'
+
 import {
   Contacts,
   FileTypeAudio,
@@ -14,8 +16,6 @@ import {
   FileTypeVideo,
   FileTypeZip
 } from '@linagora/twake-icons'
-import get from 'lodash/get'
-
 import { isNote, isDocs } from 'cozy-client/dist/models/file'
 
 import IconDocs from './Icons/DocsIcon'

@@ -3,10 +3,10 @@ import React from 'react'
 
 import flag from 'cozy-flags'
 
-import { SidebarToggleButton } from './SidebarToggleButton'
-import styles from './styles.styl'
 import useConversation from '../../hooks/useConversation'
 import AssistantSelection from '../Assistant/AssistantSelection'
+import { SidebarToggleButton } from './SidebarToggleButton'
+import styles from './styles.styl'
 
 export const SidebarMobileToolbar = ({ onToggle }) => {
   const { createNewConversation } = useConversation()

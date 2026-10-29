@@ -8,8 +8,8 @@ import ActionMenu, {
 } from 'cozy-ui/transpiled/react/deprecated/ActionMenu'
 import { useI18n } from 'twake-i18n'
 
-import styles from './styles.styl'
 import IntentOpener from '../components/IntentOpener'
+import styles from './styles.styl'
 
 const ActionMenuDesktop = forwardRef(
   ({ actions, isEditable, onClose }, ref) => {

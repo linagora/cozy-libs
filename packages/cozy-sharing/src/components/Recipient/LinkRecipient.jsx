@@ -12,14 +12,14 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import LinkRecipientPermissions from './LinkRecipientPermissions'
-import RecipientConfirm from './RecipientConfirm'
 import {
   checkIsPermissionHasPassword,
   getPermissionExpiresDate
 } from '../../helpers/permissions'
 import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { ShareRestrictionModal } from '../ShareRestrictionModal/ShareRestrictionModal'
+import LinkRecipientPermissions from './LinkRecipientPermissions'
+import RecipientConfirm from './RecipientConfirm'
 
 const LinkRecipientTextReadOnly = ({ textPrimary, textSecondary }) => {
   return (

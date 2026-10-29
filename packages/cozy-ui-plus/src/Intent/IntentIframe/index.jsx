@@ -9,8 +9,8 @@ import { withClient } from 'cozy-client'
 import { Intents } from 'cozy-interapp'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
-import styles from './styles.styl'
 import CozyTheme from '../../providers/CozyTheme'
+import styles from './styles.styl'
 
 const DEFAULT_DATA = {
   // TODO remove `closeable` since it is only there for backward compatibility
@@ -50,8 +50,8 @@ class IntentIframe extends React.Component {
     })
 
     this.intent
+      // eslint-disable-next-line promise/always-return
       .then(result => {
-        // eslint-disable-next-line promise/always-return
         result ? onTerminate && onTerminate(result) : onCancel()
       })
       .catch(error => {

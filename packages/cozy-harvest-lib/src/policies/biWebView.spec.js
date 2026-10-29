@@ -1,13 +1,13 @@
 import CozyClient from 'cozy-client'
 
+import ConnectionFlow from '../models/ConnectionFlow'
+import { getBIConnectionAccountsList } from '../services/bi-http'
 import {
   checkBIConnection,
   refreshContracts,
   fetchExtraOAuthUrlParams,
   isCacheExpired
 } from './biWebView'
-import ConnectionFlow from '../models/ConnectionFlow'
-import { getBIConnectionAccountsList } from '../services/bi-http'
 
 jest.mock('../services/bi-http', () => ({
   createBIConnection: jest

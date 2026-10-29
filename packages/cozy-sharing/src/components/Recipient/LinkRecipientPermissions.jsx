@@ -10,12 +10,12 @@ import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import { revokeLink } from './actions/revokeLink'
-import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
-import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
 import { isOnlyReadOnlyLinkAllowed } from '../../helpers/link'
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import { WRITE_PERMS, READ_ONLY_PERMS } from '../ShareRestrictionModal/helpers'
+import { revokeLink } from './actions/revokeLink'
+import { setReadOnlySharedPermission } from './actions/setReadOnlySharedPermission'
+import { setReadWriteSharedPermission } from './actions/setReadWriteSharedPermission'
 
 const LinkRecipientPermissions = ({
   document,

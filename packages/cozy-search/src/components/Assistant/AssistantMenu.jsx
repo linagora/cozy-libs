@@ -8,11 +8,11 @@ import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuIte
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import AssistantSelectionItem from './AssistantSelectionItem'
-import styles from './styles.styl'
 import { useAssistant } from '../AssistantProvider'
 import { DEFAULT_ASSISTANT } from '../constants'
 import { buildAssistantsQuery } from '../queries'
+import AssistantSelectionItem from './AssistantSelectionItem'
+import styles from './styles.styl'
 
 /**
  * The assistants of the instance and the selected one (the default

@@ -11,12 +11,12 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
+import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
 import DialogContext from './DialogContext'
 import HarvestWrapper from './HarvestWrapper'
 import { InternalRoutes } from './InternalRoutes'
 import KonnectorAccounts from './KonnectorAccounts'
-import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
 
 const HarvestDialog = props => {
   const { showingUnlockForm } = useVaultUnlockContext()

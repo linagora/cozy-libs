@@ -1,29 +1,27 @@
 # Configuration for AI agents
 
-## ESLint Configuration
+## Lint and format
 
-This project uses ESLint rules from `cozy-libs`. When generating code, strictly follow these rules:
+This project is linted with Rslint (`yarn lint`) and formatted with `rs fmt` (`yarn fmt`), both from Rstack and configured in `rstack.config.mjs`. When generating code, strictly follow these rules:
 
 ### Configuration files
 
-- `config/eslint-config-cozy-app/basics.js`
-- `config/eslint-config-cozy-app/react.js`
+- `config/rslint-config-cozy-app/basics.js`
+- `config/rslint-config-cozy-app/react.js`
+- `config/rslint-config-cozy-app/fmt.js`
 
 ### Important rules to follow
 
-#### Prettier (formatting)
+#### Formatting (rs fmt)
 
 ```javascript
-'prettier/prettier': [
-  'error',
-  {
-    arrowParens: 'avoid',      // No parentheses for single-parameter arrow functions
-    endOfLine: 'auto',         // Automatic line ending
-    semi: false,               // NO SEMICOLONS at end of lines
-    singleQuote: true,         // Single quotes
-    trailingComma: 'none'      // NO TRAILING COMMAS
-  }
-]
+{
+  arrowParens: 'avoid',      // No parentheses for single-parameter arrow functions
+  endOfLine: 'auto',         // Automatic line ending
+  semi: false,               // NO SEMICOLONS at end of lines
+  singleQuote: true,         // Single quotes
+  trailingComma: 'none'      // NO TRAILING COMMAS
+}
 ```
 
 #### Import/Order (import order)

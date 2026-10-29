@@ -2,8 +2,8 @@ import React from 'react'
 
 import { useClient } from 'cozy-client'
 
-import { MemberAvatar } from './MemberAvatar'
 import { makeAvatarUrl } from '../../helpers/recipients'
+import { MemberAvatar } from './MemberAvatar'
 
 const MemberAvatarWrapper = ({ recipient, ...avatarProps }) => {
   const client = useClient()

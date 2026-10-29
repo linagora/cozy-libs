@@ -1,8 +1,8 @@
-import { Icon, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
+import { Icon, Plus } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import {

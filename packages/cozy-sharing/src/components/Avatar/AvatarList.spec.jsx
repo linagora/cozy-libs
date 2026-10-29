@@ -3,12 +3,12 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
+import AppLike from '../../../test/AppLike'
 import {
   AvatarList,
   MAX_DISPLAYED_RECIPIENTS,
   excludeMeAsOwnerFromRecipients
 } from './AvatarList'
-import AppLike from '../../../test/AppLike'
 
 const mockRecipients = new Array(MAX_DISPLAYED_RECIPIENTS - 1)
   .fill(

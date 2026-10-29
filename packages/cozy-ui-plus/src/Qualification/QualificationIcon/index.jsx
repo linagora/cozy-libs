@@ -1,3 +1,6 @@
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import {
   Icon,
   Bank,
@@ -33,9 +36,6 @@ import {
   Water,
   Work
 } from '@linagora/twake-icons'
-import PropTypes from 'prop-types'
-import React from 'react'
-
 import { getIconByLabel } from 'cozy-client/dist/models/document/qualification'
 
 const IconByLabel = {

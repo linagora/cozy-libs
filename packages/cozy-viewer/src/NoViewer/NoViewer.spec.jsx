@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import NoViewer from './NoViewer'
 import DemoProvider from '../providers/DemoProvider'
+import NoViewer from './NoViewer'
 
 const file = {
   _id: 'notSupported',

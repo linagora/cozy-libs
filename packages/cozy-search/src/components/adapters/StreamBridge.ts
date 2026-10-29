@@ -68,7 +68,7 @@ export class StreamBridge {
         isDone = true
 
         if (resolveNext) {
-          resolveNext({ value: undefined as unknown as string, done: true })
+          resolveNext({ value: undefined, done: true })
           resolveNext = null
           rejectNext = null
         }
@@ -95,7 +95,7 @@ export class StreamBridge {
             if (queue.length > 0) {
               resolve({ value: queue.shift()!, done: false })
             } else if (isDone) {
-              resolve({ value: undefined as unknown as string, done: true })
+              resolve({ value: undefined, done: true })
             } else {
               if (resolveNext) {
                 reject(

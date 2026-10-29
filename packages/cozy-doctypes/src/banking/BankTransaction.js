@@ -7,10 +7,10 @@ const maxBy = require('lodash/maxBy')
 
 const flag = require('cozy-flags').default
 
-const BankAccount = require('./BankAccount')
-const { matchTransactions } = require('./matching-transactions')
 const Document = require('../Document')
 const log = require('../log')
+const BankAccount = require('./BankAccount')
+const { matchTransactions } = require('./matching-transactions')
 
 const maxValue = (iterable, fn) => {
   const res = maxBy(iterable, fn)

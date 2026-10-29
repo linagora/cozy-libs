@@ -4,11 +4,11 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Icon, Dropdown } from '@linagora/twake-icons'
 import Chips from 'cozy-ui/transpiled/react/Chips'
 
+import { CHIP_CLASSES } from '../TwakeKnowledges/SourceButton'
+import sourceStyles from '../TwakeKnowledges/styles.styl'
 import AssistantAvatar from './AssistantAvatar'
 import AssistantMenu, { useSelectedAssistant } from './AssistantMenu'
 import styles from './styles.styl'
-import { CHIP_CLASSES } from '../TwakeKnowledges/SourceButton'
-import sourceStyles from '../TwakeKnowledges/styles.styl'
 
 /**
  * The chip naming the assistant of the conversation. With `selectable`

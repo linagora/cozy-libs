@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
-import MemberRecipientStatus from './MemberRecipientStatus'
 import AppLike from '../../../test/AppLike'
+import MemberRecipientStatus from './MemberRecipientStatus'
 
 describe('MemberRecipientStatus component', () => {
   const setup = props =>

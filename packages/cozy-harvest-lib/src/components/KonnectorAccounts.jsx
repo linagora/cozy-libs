@@ -12,10 +12,10 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 import { translate } from 'twake-i18n'
 
-import KonnectorModalHeader from './KonnectorModalHeader'
 import { fetchAccountsFromTriggers } from '../connections/accounts'
 import { fetchTrigger } from '../connections/triggers'
 import logger from '../logger'
+import KonnectorModalHeader from './KonnectorModalHeader'
 
 export class KonnectorAccounts extends React.Component {
   constructor(props) {

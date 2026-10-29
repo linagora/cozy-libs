@@ -1,7 +1,7 @@
-import { Icon, Check, Pen, Trash } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React, { useMemo } from 'react'
 
+import { Icon, Check, Pen, Trash } from '@linagora/twake-icons'
 import ActionsMenuItem from 'cozy-ui/transpiled/react/ActionsMenu/ActionsMenuItem'
 import Badge from 'cozy-ui/transpiled/react/Badge'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -9,8 +9,8 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import styles from './styles.styl'
 import AssistantAvatar from '../Assistant/AssistantAvatar'
+import styles from './styles.styl'
 
 const AssistantSelectionItem = ({
   assistant,

@@ -7,13 +7,13 @@ import { Field } from 'react-final-form'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
+import ContactAddressDialog from '../ContactAddressDialog'
+import { fieldInputAttributesTypes, labelPropTypes } from '../types'
 import FieldInputWrapper from './FieldInputWrapper'
 import HasValueCondition from './HasValueCondition'
 import { RelatedContactList } from './RelatedContactList'
 import RemoveButton from './RemoveButton'
 import { locales } from './locales'
-import ContactAddressDialog from '../ContactAddressDialog'
-import { fieldInputAttributesTypes, labelPropTypes } from '../types'
 
 const FieldAndRemove = ({ showRemove, onRemove, ...props }) => {
   const { isMobile } = useBreakpoints()

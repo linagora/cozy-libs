@@ -23,6 +23,8 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
+import { roughTokensEstimation, sanitizeText } from '../../helpers'
+import { useViewer } from '../../providers/ViewerProvider'
 import {
   SUMMARY_SYSTEM_PROMPT,
   LONG_SUMMARY_SYSTEM_PROMPT,
@@ -30,8 +32,6 @@ import {
   getSummaryUserPrompt
 } from './prompts'
 import styles from './styles.styl'
-import { roughTokensEstimation, sanitizeText } from '../../helpers'
-import { useViewer } from '../../providers/ViewerProvider'
 
 const AIAssistantPanel = ({ className }) => {
   const { t } = useI18n()

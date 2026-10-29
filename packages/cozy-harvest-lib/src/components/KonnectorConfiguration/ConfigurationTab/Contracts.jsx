@@ -11,13 +11,13 @@ import NavigationList, {
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
-import BIContractActivationWindow from './BiContractActivationWindow'
-import ContractItem from './ContractItem'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../../../helpers/proptypes'
 import withLocales from '../../hoc/withLocales'
+import BIContractActivationWindow from './BiContractActivationWindow'
+import ContractItem from './ContractItem'
 
 const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'

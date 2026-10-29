@@ -7,14 +7,14 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import ConversationActions from './ConversationActions'
-import styles from './styles.styl'
 import AssistantAvatar from '../Assistant/AssistantAvatar'
 import {
   formatConversationDate,
   getDescriptionOfConversation,
   getNameOfConversation
 } from '../helpers'
+import ConversationActions from './ConversationActions'
+import styles from './styles.styl'
 
 const ConversationListItemWider = ({
   conversation,

@@ -1,8 +1,8 @@
-import { Icon, Bottom } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
+import { Icon, Bottom } from '@linagora/twake-icons'
 import SelectBox from 'cozy-ui/transpiled/react/SelectBox'
 
 import styles from './DropdownFilter.styl'

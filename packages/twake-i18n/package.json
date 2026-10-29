@@ -19,7 +19,7 @@
     "start": "yarn build --watch",
     "prepublishOnly": "yarn build",
     "test": "env NODE_ENV=test jest",
-    "lint": "cd .. && yarn eslint --ext js,jsx packages/twake-i18n"
+    "lint": "cd ../.. && yarn rs lint packages/twake-i18n"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",

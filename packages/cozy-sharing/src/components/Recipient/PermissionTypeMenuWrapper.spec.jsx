@@ -4,8 +4,8 @@ import React from 'react'
 import { createMockClient } from 'cozy-client'
 import flag from 'cozy-flags'
 
-import PermissionTypeMenuWrapper from './PermissionTypeMenuWrapper'
 import AppLike from '../../../test/AppLike'
+import PermissionTypeMenuWrapper from './PermissionTypeMenuWrapper'
 
 const mockUpdateSharingMemberType = jest.fn()
 const mockHasSharedParent = jest.fn()

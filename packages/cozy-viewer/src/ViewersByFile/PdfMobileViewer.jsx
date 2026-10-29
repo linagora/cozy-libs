@@ -10,10 +10,10 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import FileImageLoader from 'cozy-ui-plus/dist/FileImageLoader'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
-import styles from './styles.styl'
 import NoViewer from '../NoViewer'
 import DownloadButton from '../NoViewer/DownloadButton'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import styles from './styles.styl'
 
 export const PdfMobileViewer = ({ file, t, gestures }) => {
   const [loading, setLoading] = useState(true)

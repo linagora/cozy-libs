@@ -1,7 +1,7 @@
-import { Icon, TwakeWorkplace } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
+import { Icon, TwakeWorkplace } from '@linagora/twake-icons'
 import { useInstanceInfo } from 'cozy-client'
 import { buildPremiumLink } from 'cozy-client/dist/models/instance'
 import Button from 'cozy-ui/transpiled/react/Buttons'

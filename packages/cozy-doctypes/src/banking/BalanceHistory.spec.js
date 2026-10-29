@@ -1,6 +1,6 @@
-const BalanceHistory = require('./BalanceHistory')
 const Document = require('../Document')
 const { cozyClientJS } = require('../testUtils')
+const BalanceHistory = require('./BalanceHistory')
 
 describe('Balance history', () => {
   let queryResult = []

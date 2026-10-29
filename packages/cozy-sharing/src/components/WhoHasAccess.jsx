@@ -4,10 +4,10 @@ import React from 'react'
 import List from 'cozy-ui/transpiled/react/List'
 import { useI18n } from 'twake-i18n'
 
+import { usePrevious } from '../helpers/hooks'
 import LinkRecipient from './Recipient/LinkRecipient'
 import OwnerRecipient from './Recipient/OwnerRecipient'
 import { RecipientList } from './Recipient/RecipientList'
-import { usePrevious } from '../helpers/hooks'
 
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing

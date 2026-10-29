@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { Icon, Globe, Store } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 
+import { Icon, Globe, Store } from '@linagora/twake-icons'
 import { useClient, generateWebLink } from 'cozy-client'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Divider from 'cozy-ui/transpiled/react/Divider'

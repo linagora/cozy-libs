@@ -4,6 +4,7 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
+import AppLike from '../test/AppLike'
 import { SharingProvider } from './SharingProvider'
 import SharingContext from './context'
 import reducer, {
@@ -14,7 +15,6 @@ import reducer, {
   receiveEffectiveRecipients,
   receiveSharings
 } from './state'
-import AppLike from '../test/AppLike'
 
 const AppWrapper = ({ children, client, isPublic }) => {
   return (

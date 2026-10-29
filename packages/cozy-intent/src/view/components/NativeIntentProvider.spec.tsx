@@ -1,9 +1,9 @@
 import { render, act } from '@testing-library/react'
-import { NativeMethodsRegister } from 'api'
 import 'mutationobserver-shim'
 import React, { useEffect } from 'react'
 
 import { mockNativeMethods } from '../../../tests'
+import { NativeMethodsRegister } from '../../api'
 import { NativeIntentProvider, useNativeIntent } from '../../view'
 
 describe('NativeIntentProvider', () => {

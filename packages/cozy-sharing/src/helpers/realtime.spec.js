@@ -1,13 +1,13 @@
 import {
-  normalizeDocFromRealtime,
-  updateInternalObjectFromRealtime
-} from './realtime'
-import {
   SHARING1_FROM_REALTIME,
   SHARING2_FROM_REALTIME,
   SHARINGS_DOCTYPE,
   SHARING1_FROM_INTERNAL_STORE
 } from '../../test/fixtures/realtimesharing'
+import {
+  normalizeDocFromRealtime,
+  updateInternalObjectFromRealtime
+} from './realtime'
 describe('realtime helpers', () => {
   it('test if the object is well formated if received from the realtime', () => {
     const createdFakeObjectFromRealtime = normalizeDocFromRealtime(

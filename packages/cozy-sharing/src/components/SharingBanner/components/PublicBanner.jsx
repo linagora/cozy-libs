@@ -10,8 +10,8 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import CozyHomeLinkIcon from './CozyHomeLinkIcon'
 import styles from '../../../styles/publicBanner.styl'
+import CozyHomeLinkIcon from './CozyHomeLinkIcon'
 
 const getPublicNameFromSharing = sharing =>
   sharing.attributes.members[0].public_name

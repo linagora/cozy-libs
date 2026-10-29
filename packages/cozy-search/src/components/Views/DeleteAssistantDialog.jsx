@@ -1,6 +1,6 @@
-import { Icon, Cross } from '@linagora/twake-icons'
 import React, { useState } from 'react'
 
+import { Icon, Cross } from '@linagora/twake-icons'
 import { useClient, useQuery } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'

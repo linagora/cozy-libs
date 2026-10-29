@@ -5,10 +5,11 @@ var oldEnable = Minilog.enable,
     typeof navigator != 'undefined' && /chrome/i.test(navigator.userAgent),
   isReactNative =
     typeof navigator != 'undefined' && navigator.product === 'ReactNative',
-  console = require('./console.js')
+  consoleBackend = require('./console.js')
 
 // Use a more capable logging backend if on Chrome
-Minilog.defaultBackend = isChrome || isReactNative ? console.minilog : console
+Minilog.defaultBackend =
+  isChrome || isReactNative ? consoleBackend.minilog : consoleBackend
 
 // apply enable inputs from localStorage and from the URL
 if (typeof window != 'undefined') {

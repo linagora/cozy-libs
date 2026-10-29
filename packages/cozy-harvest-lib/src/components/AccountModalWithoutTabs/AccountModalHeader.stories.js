@@ -1,7 +1,7 @@
 import { reactRouterParameters } from 'storybook-addon-remix-react-router'
 
-import { AccountModalHeader } from './AccountModalHeader'
 import { AccountSelectorHeaderFixtures } from '../../../.storybook/fixtures/AccountSelectorHeader.fixtures'
+import { AccountModalHeader } from './AccountModalHeader'
 
 const meta = {
   component: AccountModalHeader,

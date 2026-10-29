@@ -4,6 +4,8 @@ import get from 'lodash/get'
 import { triggers } from 'cozy-client/dist/models/trigger'
 import { generateUniversalLink } from 'cozy-ui-plus/dist/AppLinker'
 
+import { fetchTrigger } from '../connections/triggers'
+import logger from '../logger'
 import { getErrorLocale } from './konnectors'
 import { hasNewVersionAvailable } from './konnectors'
 import {
@@ -12,8 +14,6 @@ import {
   buildTriggersQuery,
   buildAppsRegistryQueryBySlug
 } from './queries'
-import { fetchTrigger } from '../connections/triggers'
-import logger from '../logger'
 
 const formatKonnector = ({
   client,

@@ -1,12 +1,12 @@
 import CozyClient from 'cozy-client'
 import { IOCozyContact, IOCozyFile } from 'cozy-client/types/types'
 
+import { FILES_DOCTYPE } from '../consts'
+import { EnrichedSearchResult } from '../types'
 import {
   getCleanedFilePath,
   normalizeSearchResult
 } from './normalizeSearchResult'
-import { FILES_DOCTYPE } from '../consts'
-import { EnrichedSearchResult } from '../types'
 
 const fakeFlatDomainClient = {
   getStackClient: () => ({

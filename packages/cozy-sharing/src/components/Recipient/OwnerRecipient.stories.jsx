@@ -1,5 +1,5 @@
-import OwnerRecipient from './OwnerRecipient'
 import { recipients } from '../../../.storybook/fixtures/recipients'
+import OwnerRecipient from './OwnerRecipient'
 
 const meta = {
   component: OwnerRecipient,

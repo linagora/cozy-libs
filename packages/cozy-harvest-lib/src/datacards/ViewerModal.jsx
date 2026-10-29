@@ -5,8 +5,8 @@ import { models, useQuery } from 'cozy-client'
 import Overlay from 'cozy-ui/transpiled/react/deprecated/Overlay'
 import Viewer from 'cozy-viewer'
 
-import { useDataCardFiles } from './useDataCardFiles'
 import { buildAccountQueryById } from '../helpers/queries'
+import { useDataCardFiles } from './useDataCardFiles'
 
 export const ViewerModal = () => {
   const { accountId, folderToSaveId, fileIndex } = useParams()

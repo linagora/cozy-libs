@@ -10,10 +10,10 @@ import Tooltip from 'cozy-ui/transpiled/react/Tooltip'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import FolderPickerDialog from './FolderPickerDialog'
-import styles from './styles.styl'
 import SourceButton, { CHIP_CLASSES } from '../TwakeKnowledges/SourceButton'
 import sourceStyles from '../TwakeKnowledges/styles.styl'
+import FolderPickerDialog from './FolderPickerDialog'
+import styles from './styles.styl'
 
 /**
  * The Drive source of the composer when the selected assistant has a

@@ -6,9 +6,9 @@ import { MemberAvatar } from 'cozy-sharing/dist/components/Avatar/MemberAvatar'
 import { TableCell } from 'cozy-ui/transpiled/react/deprecated/Table'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
-import ContactName from './ContactName'
 import { locales } from '../locales/withContactsListLocales'
 import styles from '../styles.styl'
+import ContactName from './ContactName'
 
 const MyselfMarker = () => {
   useExtendI18n(locales)

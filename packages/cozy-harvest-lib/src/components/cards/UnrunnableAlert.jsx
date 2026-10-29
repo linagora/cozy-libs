@@ -1,7 +1,7 @@
-import { Icon, Info } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Info } from '@linagora/twake-icons'
 import { useI18n } from 'twake-i18n'
 
 import { TriggerAlertTemplate } from './TriggerAlertTemplate'

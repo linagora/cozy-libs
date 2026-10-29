@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { GroupRecipient } from './GroupRecipient'
-import MemberRecipient from './MemberRecipient'
 import { usePrevious } from '../../helpers/hooks'
 import { filterAndReworkRecipients } from '../../helpers/recipients'
+import { GroupRecipient } from './GroupRecipient'
+import MemberRecipient from './MemberRecipient'
 
 const RecipientList = ({
   recipients,

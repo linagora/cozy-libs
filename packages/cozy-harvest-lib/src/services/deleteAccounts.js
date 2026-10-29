@@ -1,8 +1,8 @@
 import get from 'lodash/get'
 
-import { fetchAccountsForCipherId } from './utils'
 import { deleteAccount } from '../connections/accounts.js'
 import logger from '../logger'
+import { fetchAccountsForCipherId } from './utils'
 
 const deleteAccounts = async (cozyClient, bitwardenCipherDocument) => {
   const bitwardenCipherId = get(bitwardenCipherDocument, '_id')

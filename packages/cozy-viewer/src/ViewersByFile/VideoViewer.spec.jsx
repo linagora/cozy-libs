@@ -3,8 +3,8 @@ import React from 'react'
 
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-import VideoViewer from './VideoViewer'
 import DemoProvider from '../providers/DemoProvider'
+import VideoViewer from './VideoViewer'
 
 const file = {
   _id: 'video',

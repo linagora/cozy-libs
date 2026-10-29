@@ -5,8 +5,8 @@ import { createMockClient, useInstanceInfo } from 'cozy-client'
 import { isFlagshipApp } from 'cozy-device-helper'
 import { useWebviewIntent } from 'cozy-intent'
 
-import Paywall from './Paywall'
 import DemoProvider from '../providers/DemoProvider'
+import Paywall from './Paywall'
 
 jest.mock('cozy-device-helper', () => ({
   ...jest.requireActual('cozy-device-helper'),

@@ -10,9 +10,9 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import getPanelBlocks, { getPanelBlocksSpecs } from './getPanelBlocks'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 import { useViewer } from '../providers/ViewerProvider'
+import getPanelBlocks, { getPanelBlocksSpecs } from './getPanelBlocks'
 
 const PanelContent = () => {
   const {

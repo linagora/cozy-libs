@@ -2,8 +2,8 @@ import '@testing-library/jest-dom'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
-import QualificationListItemInformation from './QualificationListItemInformation'
 import DemoProvider from '../../providers/DemoProvider'
+import QualificationListItemInformation from './QualificationListItemInformation'
 
 const setup = ({
   formattedMetadataQualification = {},

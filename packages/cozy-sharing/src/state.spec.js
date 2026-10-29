@@ -1,3 +1,14 @@
+import {
+  SHARING_1,
+  SHARING_2,
+  SHARING_3,
+  SHARING_READ_ONLY,
+  PERM_1,
+  PERM_2,
+  PERM_WITHOUT_DOC,
+  SHARING_NO_ACTIVE,
+  SHARING_WITH_SHORTCUT
+} from '../__tests__/fixtures'
 import reducer, {
   canReshare,
   receiveSharings,
@@ -23,17 +34,6 @@ import reducer, {
   getExternalSharingIds,
   getRecipientsWithGroups
 } from './state'
-import {
-  SHARING_1,
-  SHARING_2,
-  SHARING_3,
-  SHARING_READ_ONLY,
-  PERM_1,
-  PERM_2,
-  PERM_WITHOUT_DOC,
-  SHARING_NO_ACTIVE,
-  SHARING_WITH_SHORTCUT
-} from '../__tests__/fixtures'
 
 describe('Sharing state', () => {
   it('should have a default state', () => {

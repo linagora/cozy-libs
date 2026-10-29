@@ -1,9 +1,9 @@
 import { render, fireEvent, waitFor } from '@testing-library/react'
 import React from 'react'
 
-import TwoFAModal from './TwoFAModal'
 import AppLike from '../../test/AppLike'
 import ConnectionFlow from '../models/ConnectionFlow'
+import TwoFAModal from './TwoFAModal'
 
 jest.mock('./KonnectorIcon', () => () => null)
 

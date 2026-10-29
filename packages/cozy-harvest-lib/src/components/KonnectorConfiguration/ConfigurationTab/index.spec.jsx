@@ -1,4 +1,4 @@
-/* eslint no-console: off */
+/* eslint-disable no-console */
 
 import { render, fireEvent, act } from '@testing-library/react'
 import React from 'react'
@@ -11,11 +11,11 @@ import {
   CozyUtils
 } from 'cozy-keys-lib'
 
-import ConfigurationTab from './index'
 import AppLike from '../../../../test/AppLike'
 import { deleteAccount } from '../../../connections/accounts'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import VaultUnlockProvider from '../../VaultUnlockProvider'
+import ConfigurationTab from './index'
 
 jest.mock('../../../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()

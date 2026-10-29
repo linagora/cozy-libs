@@ -8,12 +8,12 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import { useSharingContext } from '../hooks/useSharingContext'
 import { ShareRestrictionModal } from './ShareRestrictionModal/ShareRestrictionModal'
 import {
   copyToClipboard,
   createSharingLink
 } from './ShareRestrictionModal/helpers'
-import { useSharingContext } from '../hooks/useSharingContext'
 
 const ShareByLink = ({
   link,

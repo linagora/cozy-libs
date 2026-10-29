@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import React from 'react'
 
-import { setReadOnlySharedPermission } from './setReadOnlySharedPermission'
 import AppLike from '../../../../test/AppLike'
+import { setReadOnlySharedPermission } from './setReadOnlySharedPermission'
 
 const mockT = key => {
   const translations = {

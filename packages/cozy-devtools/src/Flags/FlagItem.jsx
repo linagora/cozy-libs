@@ -1,7 +1,7 @@
-import { Icon, Pen, Trash } from '@linagora/twake-icons'
 import React from 'react'
 import { ObjectInspector } from 'react-inspector'
 
+import { Icon, Pen, Trash } from '@linagora/twake-icons'
 import flagUtils from 'cozy-flags'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'

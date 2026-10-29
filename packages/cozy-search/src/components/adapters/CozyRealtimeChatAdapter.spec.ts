@@ -3,9 +3,9 @@ import type {
   ChatModelRunResult
 } from '@assistant-ui/react'
 
+import { DEFAULT_ASSISTANT } from '../constants'
 import { createCozyRealtimeChatAdapter } from './CozyRealtimeChatAdapter'
 import type { StreamBridge } from './StreamBridge'
-import { DEFAULT_ASSISTANT } from '../constants'
 
 const makeStreamBridge = (): StreamBridge =>
   ({
