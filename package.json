@@ -53,6 +53,7 @@
   },
   "packageManager": "yarn@4.7.0",
   "resolutions": {
-    "mui-bottom-sheet": "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.12"
+    "mui-bottom-sheet": "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.12",
+    "post-me@npm:0.4.5": "patch:post-me@npm%3A0.4.5#~/.yarn/patches/post-me-npm-0.4.5-ed59302ab7.patch"
   }
 }
