@@ -29,6 +29,7 @@ jobs:
       - name: Lint
         run: |
           yarn lint
+          yarn lint:fmt
           yarn lint:md -f
       - name: Test
         run: yarn test

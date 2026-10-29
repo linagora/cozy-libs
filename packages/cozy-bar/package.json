@@ -27,7 +27,7 @@
     "test": "jest --config=./jest.config.js",
     "test:watch": "yarn test --watchAll",
     "start": "yarn build:watch",
-    "lint": "cd ../.. && yarn eslint --ext js,jsx,ts packages/cozy-bar"
+    "lint": "cd ../.. && yarn rs lint packages/cozy-bar"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",

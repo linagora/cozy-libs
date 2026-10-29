@@ -17,6 +17,7 @@
 - [Cozy Browserslist Config](./config/browserslist-config-cozy): Browserslist config enforcing the official Cozy supported browsers
 - [ESLint Config Cozy App](./config/eslint-config-cozy-app): Config for eslint using prettier (for applications and libraries)
 - [Remark Preset Cozy](./config/remark-preset-cozy): Remark config for markdown linting
+- [Rslint Config Cozy App](./config/rslint-config-cozy-app): Config for Rslint and rs fmt (for applications and libraries)
 - [Renovate Config Cozy](./config/renovate-config-cozy): Renovate config for dependency updates
 - [Renovate Config Cozy Libs](./config/renovate-config-cozy-libs): Renovate config for libraries
 - [Cozy Logger](./packages/cozy-logger): Logs message in a human friendly way while developing and logs in JSON when in production. It can be used by konnectors, services alike, and web apps.
