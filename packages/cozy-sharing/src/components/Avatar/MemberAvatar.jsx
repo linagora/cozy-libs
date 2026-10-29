@@ -17,7 +17,10 @@ const MemberAvatar = ({ recipient, avatarUrl, ...rest }) => {
   // Nevertheless, we can prevent the crash by returning null if the recipient is undefined
   if (!recipient) {
     // eslint-disable-next-line
-    logger.warn('RecipientAvatar: recipient is missing, see props:', { recipient, ...rest })
+    logger.warn('RecipientAvatar: recipient is missing, see props:', {
+      recipient,
+      ...rest
+    })
     return null
   }
 

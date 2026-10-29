@@ -166,7 +166,7 @@ export class SharingProvider extends Component {
     this.fetchAllSharings()
     if (!client.plugins.realtime) {
       // eslint-disable-next-line
-         console.warn(
+      console.warn(
         `You should register the realtime plugin to your CozyClient instance see https://docs.cozy.io/en/cozy-realtime/#example`
       )
     } else {
