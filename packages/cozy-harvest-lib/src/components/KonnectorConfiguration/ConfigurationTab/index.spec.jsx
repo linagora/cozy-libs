@@ -1,4 +1,4 @@
-/* eslint no-console: off */
+/* eslint-disable no-console */
 
 import { render, fireEvent, act } from '@testing-library/react'
 import React from 'react'
