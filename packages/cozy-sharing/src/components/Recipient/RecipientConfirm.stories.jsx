@@ -2,7 +2,10 @@ import RecipientConfirm from './RecipientConfirm'
 
 const meta = {
   component: RecipientConfirm,
-  args: {}
+  args: {
+    label: 'Verify',
+    onClick: () => {}
+  }
 }
 
 export default meta

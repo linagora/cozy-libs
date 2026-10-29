@@ -2,11 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import List from 'cozy-ui/transpiled/react/List'
+import MemberList from 'cozy-ui/transpiled/react/MemberList'
 import { useI18n } from 'twake-i18n'
 
 import LinkRecipient from './Recipient/LinkRecipient'
-import OwnerRecipient from './Recipient/OwnerRecipient'
-import { RecipientList } from './Recipient/RecipientList'
 import { usePrevious } from '../helpers/hooks'
 
 /**
@@ -27,27 +26,19 @@ const RecipientWaitingForConfirmationAlert = ({ recipientsToBeConfirmed }) => {
 }
 
 const WhoHasAccess = ({
-  isOwner = false,
-  canManageSharing = isOwner,
-  isSharedDrive = false,
-  isReadOnly = false,
-  canManageMembers = !isReadOnly,
-  canManageLink = canManageMembers,
-  showOwner = true,
-  owner,
-  recipients,
+  members,
+  roles,
+  onRoleChange,
+  onRemove,
+  canManageLink = true,
   recipientsToBeConfirmed = [],
   document,
   documentType,
   className,
   onRevoke,
   onRevokeSelf,
-  onRevokeGroup,
-  onLeaveGroup,
-  onSetMemberType,
   onUpdateLinkPermissions,
   onRevokeLink,
-  verifyRecipient,
   link,
   permissions
 }) => {
@@ -59,8 +50,8 @@ const WhoHasAccess = ({
       <RecipientWaitingForConfirmationAlert
         recipientsToBeConfirmed={recipientsToBeConfirmed}
       />
-      <List>
-        {link && (
+      {link && (
+        <List className="u-pb-0">
           <LinkRecipient
             isReadOnly={!canManageLink}
             document={document}
@@ -72,39 +63,26 @@ const WhoHasAccess = ({
             onRevokeLink={onRevokeLink}
             fadeIn={linkHasBeenJustCreated}
           />
-        )}
-
-        {showOwner && <OwnerRecipient owner={owner} />}
-
-        <RecipientList
-          recipients={recipients}
-          recipientsToBeConfirmed={recipientsToBeConfirmed}
-          isOwner={isOwner}
-          canManageSharing={canManageSharing}
-          canManageMembers={canManageMembers}
-          isSharedDrive={isSharedDrive}
-          document={document}
-          documentType={documentType}
-          onRevoke={onRevoke}
-          onRevokeSelf={onRevokeSelf}
-          onRevokeGroup={onRevokeGroup}
-          onLeaveGroup={onLeaveGroup}
-          onSetMemberType={onSetMemberType}
-          verifyRecipient={verifyRecipient}
-        />
-      </List>
+        </List>
+      )}
+      <MemberList
+        className={link ? 'u-pt-0' : undefined}
+        members={members}
+        roles={roles}
+        onRoleChange={onRoleChange}
+        onRemove={onRemove}
+        showEmptyState={false}
+      />
     </div>
   )
 }
 
 WhoHasAccess.propTypes = {
-  isOwner: PropTypes.bool,
-  canManageSharing: PropTypes.bool,
-  canManageMembers: PropTypes.bool,
+  members: PropTypes.array.isRequired,
+  roles: PropTypes.array.isRequired,
+  onRoleChange: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
   canManageLink: PropTypes.bool,
-  showOwner: PropTypes.bool,
-  owner: PropTypes.object,
-  recipients: PropTypes.array.isRequired,
   recipientsToBeConfirmed: PropTypes.arrayOf(
     PropTypes.shape({
       email: PropTypes.string.isRequired
@@ -114,12 +92,8 @@ WhoHasAccess.propTypes = {
   documentType: PropTypes.string.isRequired,
   onRevoke: PropTypes.func.isRequired,
   onRevokeSelf: PropTypes.func,
-  onRevokeGroup: PropTypes.func.isRequired,
-  onLeaveGroup: PropTypes.func.isRequired,
-  onSetMemberType: PropTypes.func.isRequired,
   onUpdateLinkPermissions: PropTypes.func.isRequired,
   onRevokeLink: PropTypes.func.isRequired,
-  verifyRecipient: PropTypes.func,
   permissions: PropTypes.arrayOf(PropTypes.object)
 }
 export default WhoHasAccess

@@ -8,6 +8,7 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import { FADE_IN_DURATION } from 'cozy-ui/transpiled/react/MemberRow'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
@@ -18,7 +19,6 @@ import {
   checkIsPermissionHasPassword,
   getPermissionExpiresDate
 } from '../../helpers/permissions'
-import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { ShareRestrictionModal } from '../ShareRestrictionModal/ShareRestrictionModal'
 
 const LinkRecipientTextReadOnly = ({ textPrimary, textSecondary }) => {
@@ -84,8 +84,8 @@ const LinkRecipient = props => {
 
   const RightPart = recipientConfirmationData ? (
     <RecipientConfirm
-      recipientConfirmationData={recipientConfirmationData}
-      verifyRecipient={verifyRecipient}
+      label={t('Share.twoStepsConfirmation.verify')}
+      onClick={() => verifyRecipient(recipientConfirmationData)}
     />
   ) : (
     <LinkRecipientPermissions {...props} />

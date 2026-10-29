@@ -4,9 +4,9 @@ import React from 'react'
 import { Icon, Link } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import MemberGroupAvatar from 'cozy-ui/transpiled/react/MemberRow/MemberGroupAvatar'
 
 import { ExtraAvatar } from './ExtraAvatar'
-import { GroupAvatar } from './GroupAvatar'
 import { MemberAvatarWrapper } from './MemberAvatarWrapper'
 import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
@@ -92,7 +92,7 @@ const AvatarList = ({
               }`}
               key={recipient.index}
             >
-              <GroupAvatar size={size} color={recipient.color} />
+              <MemberGroupAvatar size={size} color={recipient.color} />
             </span>
           )
         }
