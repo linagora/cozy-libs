@@ -9,6 +9,7 @@
     "**/*.styl"
   ],
   "compilerOptions": {
+    "types": ["jest"],
     "allowJs": true,
     "checkJs": false,
     "outDir": "./dist",
