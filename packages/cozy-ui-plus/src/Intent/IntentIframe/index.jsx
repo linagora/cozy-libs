@@ -50,8 +50,8 @@ class IntentIframe extends React.Component {
     })
 
     this.intent
+      // eslint-disable-next-line promise/always-return
       .then(result => {
-        // eslint-disable-next-line promise/always-return
         result ? onTerminate && onTerminate(result) : onCancel()
       })
       .catch(error => {

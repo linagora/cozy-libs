@@ -93,7 +93,7 @@
     "test": "jest --config=./tests/jest.config.js --passWithNoTests",
     "test:watch": "yarn test --watchAll",
     "start": "yarn build:watch",
-    "lint": "cd .. && yarn eslint --ext js,jsx,ts packages/cozy-search"
+    "lint": "cd ../.. && yarn rs lint packages/cozy-search"
   },
   "types": "dist/index.d.ts"
 }
