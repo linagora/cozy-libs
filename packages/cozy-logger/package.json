@@ -14,10 +14,6 @@
     "build": "babel src/ --out-dir dist",
     "prepublishOnly": "yarn build"
   },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true
-  },
   "devDependencies": {
     "babel-plugin-import-redirect": "1.1.1",
     "jest": "30.3.0"

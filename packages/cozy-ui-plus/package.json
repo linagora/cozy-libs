@@ -19,7 +19,7 @@
     "start": "yarn build --watch",
     "prepublishOnly": "yarn build",
     "test": "env NODE_ENV=test jest",
-    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-ui-plus"
+    "lint": "cd ../.. && yarn rs lint packages/cozy-ui-plus"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",

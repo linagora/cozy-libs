@@ -17,7 +17,7 @@
     "start": "yarn build --watch",
     "prepublishOnly": "yarn build",
     "test": "env NODE_ENV=test jest --passWithNoTests",
-    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-devtools"
+    "lint": "cd ../.. && yarn rs lint packages/cozy-devtools"
   },
   "devDependencies": {
     "@linagora/twake-icons": "^2.6.6",

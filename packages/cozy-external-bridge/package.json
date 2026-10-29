@@ -43,7 +43,7 @@
     "build:types": "tsc",
     "build:lib": "rspack build",
     "prepublishOnly": "yarn build",
-    "lint": "cd ../.. && yarn eslint --ext js,jsx,ts packages/cozy-external-bridge"
+    "lint": "cd ../.. && yarn rs lint packages/cozy-external-bridge"
   },
   "types": "dist/index.d.ts"
 }
