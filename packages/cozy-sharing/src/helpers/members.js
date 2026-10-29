@@ -3,7 +3,7 @@ import {
   getMemberStatusText,
   hasMemberActions
 } from './recipients'
-import { getDisplayName } from '../models'
+import { getDisplayName, getInitials } from '../models'
 
 /**
  * @param {Function} t - Translation function
@@ -30,6 +30,7 @@ const makeOwnerMember = (owner, { t }) => {
       isOrgSharedDrive: owner.isOrgSharedDrive
     }),
     avatarUrl: owner.avatarUrl,
+    initials: getInitials(owner),
     isOwner: true,
     isCurrentUser: isMe,
     data: owner
@@ -101,6 +102,7 @@ const makeRecipientMember = (
       name: recipient.name || recipient.public_name
     }),
     avatarUrl: recipient.avatarUrl,
+    initials: getInitials(recipient),
     isCurrentUser: isMe,
     role: recipient.type ?? 'one-way',
     canChangeRole: canManageMember,

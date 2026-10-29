@@ -5,6 +5,10 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import logger from '../../logger'
 import { getInitials } from '../../models'
 
+/**
+ * @deprecated Kept for deep imports only (cozy-ui-plus `ContactIdentity`).
+ * Use `MemberAvatar` from `cozy-ui/transpiled/react/MemberRow/MemberAvatar`.
+ */
 const MemberAvatar = ({ recipient, avatarUrl, ...rest }) => {
   // Remember which image url failed to load so we can fall back to the
   // initials. Storing the url (instead of a boolean) means a new url is

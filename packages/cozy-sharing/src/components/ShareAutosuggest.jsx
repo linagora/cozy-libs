@@ -3,15 +3,20 @@ import React, { useEffect, useState, useRef } from 'react'
 import Autosuggest from 'react-autosuggest'
 
 import Chip from 'cozy-ui/transpiled/react/Chips'
+import MemberAvatar from 'cozy-ui/transpiled/react/MemberRow/MemberAvatar'
+import MemberGroupAvatar from 'cozy-ui/transpiled/react/MemberRow/MemberGroupAvatar'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
-import { GroupAvatar } from './Avatar/GroupAvatar'
-import { MemberAvatar } from './Avatar/MemberAvatar'
 import ContactSuggestion from './ContactSuggestion'
 import { isContactToBeCreated } from '../helpers/contacts'
 import { extractEmails, validateEmail } from '../helpers/email'
 import logger from '../logger'
-import { getDisplayName, DOCTYPE_CONTACTS, DOCTYPE_GROUPS } from '../models'
+import {
+  getDisplayName,
+  getInitials,
+  DOCTYPE_CONTACTS,
+  DOCTYPE_GROUPS
+} from '../models'
 import styles from '../styles/autosuggest.styl'
 import { contactOrGroupMatch } from '../suggestionMatchers'
 
@@ -198,11 +203,11 @@ const ShareAutosuggest = ({
             key={`key_recipient_${idx}`}
             avatar={
               isContactGroup ? (
-                <GroupAvatar size="xs" color={recipient.color} />
+                <MemberGroupAvatar size="xs" color={recipient.color} />
               ) : (
                 <MemberAvatar
                   size="xs"
-                  recipient={recipient}
+                  initials={getInitials(recipient)}
                   avatarUrl={getAvatarUrl(recipient)}
                 />
               )

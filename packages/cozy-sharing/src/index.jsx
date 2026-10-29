@@ -9,7 +9,6 @@ export { SharingContext, withLocales }
 export { useSharingContext } from './hooks/useSharingContext'
 export { useFetchDocumentPath } from './hooks/useFetchDocumentPath'
 
-export { GroupAvatar } from './components/Avatar/GroupAvatar'
 export { MemberAvatarWrapper as MemberAvatar } from './components/Avatar/MemberAvatarWrapper'
 export { SharedDocument } from './SharedDocument'
 export { SharedStatus } from './SharedStatus'

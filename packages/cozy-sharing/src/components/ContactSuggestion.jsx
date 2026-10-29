@@ -5,16 +5,17 @@ import { getPrimaryCozy } from 'cozy-client/dist/models/contact'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import MemberAvatar from 'cozy-ui/transpiled/react/MemberRow/MemberAvatar'
+import MemberGroupAvatar from 'cozy-ui/transpiled/react/MemberRow/MemberGroupAvatar'
 import { useI18n } from 'twake-i18n'
 
 import {
   DOCTYPE_GROUPS,
   contactPropType,
   groupPropType,
-  getDisplayName
+  getDisplayName,
+  getInitials
 } from '../models'
-import { GroupAvatar } from './Avatar/GroupAvatar'
-import { MemberAvatar } from './Avatar/MemberAvatar'
 
 export const ContactSuggestion = ({ contactOrGroup, avatarUrl }) => {
   const { t } = useI18n()
@@ -23,7 +24,7 @@ export const ContactSuggestion = ({ contactOrGroup, avatarUrl }) => {
     return (
       <ListItem button>
         <ListItemIcon>
-          <GroupAvatar size="m" color={contactOrGroup.color} />
+          <MemberGroupAvatar size="m" color={contactOrGroup.color} />
         </ListItemIcon>
         <ListItemText
           primary={contactOrGroup.name}
@@ -42,7 +43,7 @@ export const ContactSuggestion = ({ contactOrGroup, avatarUrl }) => {
     <ListItem button>
       <ListItemIcon>
         <MemberAvatar
-          recipient={contactOrGroup}
+          initials={getInitials(contactOrGroup)}
           avatarUrl={avatarUrl}
           size="m"
         />

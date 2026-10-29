@@ -9,7 +9,7 @@ const getBestSource = effectiveRecipient => {
 }
 
 /**
- * Build a view object for MemberRecipient/MemberRecipientPermissions.
+ * Build a view object for the members list.
  * Extracts sharingId/memberIndex/avatarPath/type from the source so
  * existing components work without reading sources[] directly.
  * Does not spread the backend data — only the fields needed for rendering.

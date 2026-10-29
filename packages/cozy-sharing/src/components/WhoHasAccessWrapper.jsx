@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
+import { useI18n } from 'twake-i18n'
 
 import DowngradePermissionConfirmDialog from './Recipient/DowngradePermissionConfirmDialog'
+import { GroupRecipientDetail } from './Recipient/GroupRecipientDetail'
 import WhoHasAccess from './WhoHasAccess'
+import { makeMemberRoles, makeMembers } from '../helpers/members'
 import {
   addAvatarUrls,
   hasMemberActions,
@@ -24,10 +27,9 @@ const OWNER_PUBLIC_AVATAR_PATH = '/public/avatar?fallback=initials'
 const WhoHasAccessWrapper = ({
   isOwner = false,
   canManageSharing = isOwner,
-  isSharedDrive,
   isReadOnly,
   canManageMembers = !isReadOnly,
-  canManageLink,
+  canManageLink = canManageMembers,
   showOwner = true,
   recipients,
   recipientsToBeConfirmed = [],
@@ -40,6 +42,9 @@ const WhoHasAccessWrapper = ({
   link
 }) => {
   const client = useClient()
+  const { t } = useI18n()
+  const [pendingIds, setPendingIds] = useState([])
+  const [openedGroup, setOpenedGroup] = useState(null)
   const {
     isOrgSharedDrive,
     getDocumentPermissions,
@@ -104,32 +109,74 @@ const WhoHasAccessWrapper = ({
     ? { ...ownerRecipient, isOrgSharedDrive: isOrgSharedDrive(document?._id) }
     : defaultOwner
 
+  const members = makeMembers({
+    t,
+    owner: showOwner ? owner : null,
+    recipients: markedRecipients,
+    recipientsToBeConfirmed,
+    isOwner,
+    canManageSharing,
+    canManageMembers,
+    pendingIds,
+    verifyRecipient,
+    onOpenGroup: setOpenedGroup
+  })
+  const roles = makeMemberRoles(t)
+  const permissions = getDocumentPermissions(document?._id)
+
+  const handleRoleChange = (member, role) =>
+    changeMemberType(
+      {
+        sharingId: member.data.sharingId,
+        memberIndex: member.data.memberIndex,
+        type: member.role,
+        recipient: member.data
+      },
+      role
+    )
+
+  const removeMember = async member => {
+    const recipient = member.data
+    if (member.isGroup) {
+      if (isOwner) {
+        await revokeGroup(document, recipient.sharingId, recipient.groupIndex)
+      } else {
+        await revokeSelf(document)
+      }
+    } else if (recipient.isCurrentUser && !isOwner) {
+      await onRevokeSelf(document)
+    } else {
+      await onRevoke(document, recipient.sharingId, recipient.memberIndex)
+    }
+  }
+
+  const handleRemove = async member => {
+    setPendingIds(ids => [...ids, member.id])
+    try {
+      await removeMember(member)
+    } finally {
+      setPendingIds(ids => ids.filter(id => id !== member.id))
+    }
+  }
+
   return (
     <>
       <WhoHasAccess
-        isOwner={isOwner}
-        canManageSharing={canManageSharing}
-        isSharedDrive={isSharedDrive}
-        isReadOnly={isReadOnly}
-        canManageMembers={canManageMembers}
+        members={members}
+        roles={roles}
+        onRoleChange={handleRoleChange}
+        onRemove={handleRemove}
         canManageLink={canManageLink}
-        showOwner={showOwner}
-        owner={owner}
-        recipients={markedRecipients}
         recipientsToBeConfirmed={recipientsToBeConfirmed}
         document={document}
         documentType={documentType}
         className={className}
         onRevoke={onRevoke}
         onRevokeSelf={onRevokeSelf}
-        onRevokeGroup={revokeGroup}
-        onLeaveGroup={revokeSelf}
-        onSetMemberType={changeMemberType}
         onUpdateLinkPermissions={updateDocumentPermissions}
         onRevokeLink={revokeSharingLink}
-        verifyRecipient={verifyRecipient}
         link={link}
-        permissions={getDocumentPermissions(document?._id)}
+        permissions={permissions}
       />
       {isDowngradeDialogOpen && (
         <DowngradePermissionConfirmDialog
@@ -138,6 +185,14 @@ const WhoHasAccessWrapper = ({
           sharedParentName={sharedParentName}
           onCancel={cancelDowngrade}
           onConfirm={confirmDowngrade}
+        />
+      )}
+      {openedGroup && (
+        <GroupRecipientDetail
+          isOwner={isOwner}
+          name={openedGroup.name}
+          members={openedGroup.members}
+          onClose={() => setOpenedGroup(null)}
         />
       )}
     </>

@@ -57,6 +57,7 @@ describe('makeMembers', () => {
       isOwner: true,
       isCurrentUser: true,
       avatarUrl: owner.avatarUrl,
+      initials: 'A',
       data: owner
     })
     expect(others.map(member => member.id)).toEqual([bob.index])
@@ -68,6 +69,7 @@ describe('makeMembers', () => {
     expect(member).toMatchObject({
       id: bob.index,
       name: 'Bob',
+      initials: 'B',
       role: 'two-way',
       canChangeRole: true,
       canRemove: true,

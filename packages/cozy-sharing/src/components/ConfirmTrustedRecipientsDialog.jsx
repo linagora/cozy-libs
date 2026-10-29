@@ -2,14 +2,14 @@ import cx from 'classnames'
 import React from 'react'
 
 import { useClient } from 'cozy-client'
-import List from 'cozy-ui/transpiled/react/List'
+import MemberList from 'cozy-ui/transpiled/react/MemberList'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import MemberRecipient from './Recipient/MemberRecipient'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
-import { makeAvatarUrl } from '../helpers/recipients'
+import { makeMemberRoles, makeMembers } from '../helpers/members'
+import { addAvatarUrls } from '../helpers/recipients'
 
 /**
  * Displays the sharing interface that can be used when ConfirmTrustedRecipientsDialog is in sharing state
@@ -18,6 +18,21 @@ const SharingContent = ({ recipientsToBeConfirmed, verifyRecipient }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const client = useClient()
+  const members = makeMembers({
+    t,
+    recipients: addAvatarUrls(
+      recipientsToBeConfirmed.map(recipient => ({
+        ...recipient,
+        index: `key_r_${recipient.id}`
+      })),
+      client.options.uri
+    ),
+    recipientsToBeConfirmed,
+    isOwner: false,
+    verifyRecipient,
+    onOpenGroup: () => {}
+  })
+  const roles = makeMemberRoles(t)
 
   return (
     <>
@@ -30,23 +45,14 @@ const SharingContent = ({ recipientsToBeConfirmed, verifyRecipient }) => {
       >
         {t(`ConfirmRecipientModal.intruction`)}
       </Typography>
-      <List className={isMobile ? 'u-mb-half' : 'u-mb-1'}>
-        {recipientsToBeConfirmed.map(recipientConfirmationData => {
-          return (
-            <MemberRecipient
-              {...recipientConfirmationData}
-              key={`key_r_${recipientConfirmationData.id}`}
-              isOwner={false}
-              recipientConfirmationData={recipientConfirmationData}
-              verifyRecipient={verifyRecipient}
-              avatarUrl={makeAvatarUrl(
-                recipientConfirmationData,
-                client.options.uri
-              )}
-            />
-          )
-        })}
-      </List>
+      <MemberList
+        className={isMobile ? 'u-mb-half' : 'u-mb-1'}
+        members={members}
+        roles={roles}
+        onRoleChange={() => {}}
+        onRemove={() => {}}
+        showEmptyState={false}
+      />
     </>
   )
 }

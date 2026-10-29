@@ -5,28 +5,6 @@ import { DOCTYPE_GROUPS } from '../models'
 
 export const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
-export const filterAndReworkRecipients = (recipients, previousRecipients) => {
-  return recipients
-    .filter(recipient => recipient.status !== 'owner')
-    .map(recipient => {
-      const recipientHasChanged =
-        previousRecipients &&
-        !previousRecipients.find(
-          previousRecipient =>
-            previousRecipient.name === recipient.name &&
-            previousRecipient.email === recipient.email
-        )
-
-      if (recipientHasChanged) {
-        return { ...recipient, hasBeenJustAdded: true }
-      }
-
-      return recipient
-    })
-}
-
-export const FADE_IN_DURATION = 600
-
 /**
  * @returns {boolean} the maximum recipients limit by document
  */
