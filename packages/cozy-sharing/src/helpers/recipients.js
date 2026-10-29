@@ -183,3 +183,40 @@ export const addAvatarUrls = (recipients, instanceUri) =>
       ? recipient
       : { ...recipient, avatarUrl: makeAvatarUrl(recipient, instanceUri) }
   )
+
+/**
+ * Text shown below the name of a member: their email or instance once they
+ * joined, otherwise the state of their invitation
+ *
+ * @param {object} params
+ * @param {Function} params.t - Translation function
+ * @param {string} params.status - Status of the member in the sharing
+ * @param {boolean} params.isMe - Whether the member is the current user
+ * @param {string} [params.instance] - Cozy instance of the member
+ * @param {string} [params.email] - Email of the member
+ * @param {string} [params.name] - Name of the member
+ * @param {boolean} [params.isOrgSharedDrive] - Whether the sharing is an organization shared drive
+ * @returns {string}
+ */
+export const getMemberStatusText = ({
+  t,
+  status,
+  isMe,
+  instance,
+  email,
+  name,
+  isOrgSharedDrive
+}) => {
+  if (isMe || status === 'ready' || status === 'owner') {
+    // Hide the email when the name already falls back to it, but keep the
+    // instance when there is no email so a member of another Cozy is told apart
+    if (status === 'owner' && isOrgSharedDrive) return ''
+    return isMe || name || !email ? email || instance : ''
+  }
+
+  if (status === 'mail-not-sent') return t('Share.status.mail-not-sent')
+
+  return ['pending', 'seen'].includes(status)
+    ? t(`Share.status.${status}`)
+    : t('Share.status.pending')
+}
