@@ -51,5 +51,8 @@
       "**/cozy-ui"
     ]
   },
-  "packageManager": "yarn@4.7.0"
+  "packageManager": "yarn@4.7.0",
+  "resolutions": {
+    "mui-bottom-sheet": "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.12"
+  }
 }
