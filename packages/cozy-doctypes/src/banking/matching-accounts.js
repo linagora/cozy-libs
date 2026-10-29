@@ -247,7 +247,7 @@ const findMatch = (account, existingAccounts) => {
 /**
  * Matches existing accounts with accounts fetched on a vendor
  *
- * @typedef {MatchResult}
+ * @typedef {object} MatchResult
  * @property {io.cozy.account} account - Account from fetched accounts
  * @property {io.cozy.account} match - Existing account that was matched. Null if no match was found.
  * @property {string} method - How the two accounts were matched
