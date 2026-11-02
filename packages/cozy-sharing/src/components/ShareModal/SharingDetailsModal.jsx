@@ -37,7 +37,6 @@ export const SharingDetailsModal = ({
           <WhoHasAccessWrapper
             canManageMembers={false}
             canManageLink={isSharedDrive}
-            isSharedDrive={isSharedDrive}
             recipients={recipients}
             document={document}
             documentType={documentType}

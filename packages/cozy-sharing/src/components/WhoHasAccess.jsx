@@ -36,8 +36,6 @@ const WhoHasAccess = ({
   document,
   documentType,
   className,
-  onRevoke,
-  onRevokeSelf,
   onUpdateLinkPermissions,
   onRevokeLink,
   link,
@@ -57,8 +55,6 @@ const WhoHasAccess = ({
             isReadOnly={!canManageLink}
             document={document}
             documentType={documentType}
-            onRevoke={onRevoke}
-            onRevokeSelf={onRevokeSelf}
             permissions={permissions}
             onUpdateLinkPermissions={onUpdateLinkPermissions}
             onRevokeLink={onRevokeLink}
@@ -92,8 +88,6 @@ WhoHasAccess.propTypes = {
   ),
   document: PropTypes.object,
   documentType: PropTypes.string.isRequired,
-  onRevoke: PropTypes.func.isRequired,
-  onRevokeSelf: PropTypes.func,
   onUpdateLinkPermissions: PropTypes.func.isRequired,
   onRevokeLink: PropTypes.func.isRequired,
   permissions: PropTypes.arrayOf(PropTypes.object)
