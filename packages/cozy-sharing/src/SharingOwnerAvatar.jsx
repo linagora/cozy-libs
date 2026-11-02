@@ -7,9 +7,12 @@ import withLocales from './hoc/withLocales'
 export const SharingOwnerAvatar = withLocales(({ docId, ...rest }) => (
   <SharingContext.Consumer>
     {({ byDocId, getOwner } = {}) => {
-      return !byDocId || !byDocId[docId] ? null : (
-        <MemberAvatarWrapper recipient={getOwner(docId)} {...rest} />
-      )
+      const owner = byDocId?.[docId] ? getOwner(docId) : undefined
+      const hasOwner = owner !== undefined
+
+      return hasOwner ? (
+        <MemberAvatarWrapper recipient={owner} {...rest} />
+      ) : null
     }}
   </SharingContext.Consumer>
 ))
