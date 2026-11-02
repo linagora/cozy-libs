@@ -79,9 +79,10 @@ const makeRecipientMember = (
   }
 ) => {
   const isMe = Boolean(recipient.isCurrentUser)
-  const recipientConfirmationData = recipientsToBeConfirmed.find(
-    user => user.email === recipient.email
-  )
+  const recipientConfirmationData =
+    recipientsToBeConfirmed.find(
+      user => user.id !== undefined && user.id === recipient.id
+    ) ?? recipientsToBeConfirmed.find(user => user.email === recipient.email)
   const canManageMember = hasMemberActions({
     status: recipient.status,
     isCurrentUser: isMe,
