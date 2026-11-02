@@ -7,7 +7,11 @@ import { useI18n } from 'twake-i18n'
 import DowngradePermissionConfirmDialog from './Recipient/DowngradePermissionConfirmDialog'
 import { GroupRecipientDetail } from './Recipient/GroupRecipientDetail'
 import WhoHasAccess from './WhoHasAccess'
-import { makeMemberRoles, makeMembers } from '../helpers/members'
+import {
+  findRecipientConfirmationData,
+  makeMemberRoles,
+  makeMembers
+} from '../helpers/members'
 import {
   addAvatarUrls,
   hasMemberActions,
@@ -67,7 +71,8 @@ const WhoHasAccessWrapper = ({
   const hasMemberMenus = markedRecipients.some(
     recipient =>
       !recipient.members &&
-      !recipientsToBeConfirmed.some(user => user.email === recipient.email) &&
+      findRecipientConfirmationData(recipientsToBeConfirmed, recipient) ===
+        undefined &&
       hasMemberActions({
         status: recipient.status,
         isCurrentUser: recipient.isCurrentUser,
