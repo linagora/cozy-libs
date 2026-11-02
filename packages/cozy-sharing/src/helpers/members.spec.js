@@ -130,6 +130,22 @@ describe('makeMembers', () => {
     expect(verifyRecipient).toHaveBeenCalledWith(confirmation)
   })
 
+  it('asks to verify each recipient without email with its own entry', () => {
+    const verifyRecipient = jest.fn()
+    const first = { id: 'a', email: '', index: 'key_r_a' }
+    const second = { id: 'b', email: '', index: 'key_r_b' }
+    const [, member] = makeMembers({
+      ...params,
+      recipients: [first, second],
+      recipientsToBeConfirmed: [first, second],
+      verifyRecipient
+    })
+
+    member.action.onClick()
+
+    expect(verifyRecipient).toHaveBeenCalledWith(second)
+  })
+
   it('makes a group with its role as text and its detail', () => {
     const onOpenGroup = jest.fn()
     const [group] = makeMembers({ ...params, recipients: [team], onOpenGroup })
