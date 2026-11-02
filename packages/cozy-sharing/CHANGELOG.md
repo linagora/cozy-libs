@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [42.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@42.0.0...cozy-sharing@42.0.1) (2026-11-02)
+
+### Bug Fixes
+
+- **cozy-sharing:** Alert when removing a member fails ([b22b4ad](https://github.com/cozy/cozy-libs/commit/b22b4adf3c41cbb75740972c308b06d76cf7110c))
+- **cozy-sharing:** Never match a recipient to verify on an empty email ([cd9a0ef](https://github.com/cozy/cozy-libs/commit/cd9a0ef42d9936372bed3f50eff35c7dd35f3e0e))
+- **cozy-sharing:** Show no owner avatar for a document shared by link ([458d829](https://github.com/cozy/cozy-libs/commit/458d829b3518c45e0a61c624168fcb2574a4e91a))
+
 # [42.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@41.0.0...cozy-sharing@42.0.0) (2026-11-02)
 
 ### Bug Fixes
