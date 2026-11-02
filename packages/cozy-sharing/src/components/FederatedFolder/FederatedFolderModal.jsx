@@ -274,7 +274,6 @@ const FederatedFolderModalContent = ({
             showEmptyState={hasLoadedRecipients}
             isOwner={isCurrentUserOwner}
             canManageSharing={canManageSharing}
-            isSharedDrive
             canManageMembers={!isMemberReadOnly}
             canManageLink={true}
             recipients={isSending ? frozenRecipients : recipients}

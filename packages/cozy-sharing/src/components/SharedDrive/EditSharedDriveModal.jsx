@@ -98,7 +98,6 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
           <WhoHasAccessWrapper
             isOwner
             isGroupRoleMenuShown
-            isSharedDrive
             showOwner={false}
             recipients={existingRecipients}
             document={document}
