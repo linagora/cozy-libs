@@ -378,6 +378,10 @@ export class SharingProvider extends Component {
         document.path || (await fetchFilesPaths(client, doctype, [document]))
       )
     )
+    await this.fetchEffectiveRecipients(
+      getDocumentId(document),
+      document.driveId
+    )
   }
 
   revokeSelf = async document => {

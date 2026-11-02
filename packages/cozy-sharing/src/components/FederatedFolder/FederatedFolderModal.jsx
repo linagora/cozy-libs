@@ -10,6 +10,7 @@ import ConfirmDialogProvider, {
 } from 'cozy-ui/transpiled/react/providers/ConfirmDialog'
 import { useI18n } from 'twake-i18n'
 
+import { includeDirectGroups } from '../../helpers/effectiveRecipients'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useResolveRecipients } from '../../hooks/useResolveRecipients'
@@ -307,6 +308,7 @@ FederatedFolderModalContent.propTypes = {
 const FederatedFolderModalWrapper = ({ document, ...props }) => {
   const fileId = document._id || document.id
   const {
+    getRecipients,
     getEffectiveRecipients,
     hasLoadedEffectiveRecipients,
     fetchEffectiveRecipients,
@@ -325,7 +327,10 @@ const FederatedFolderModalWrapper = ({ document, ...props }) => {
     invalidateEffectiveRecipients
   ])
 
-  const recipients = getEffectiveRecipients(fileId)
+  const recipients = includeDirectGroups(
+    getEffectiveRecipients(fileId),
+    getRecipients(fileId)
+  )
   const hasLoadedRecipients = hasLoadedEffectiveRecipients(fileId)
 
   return (

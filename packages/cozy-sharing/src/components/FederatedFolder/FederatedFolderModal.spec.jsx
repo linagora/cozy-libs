@@ -11,6 +11,7 @@ import AppLike from '../SharingBanner/test/AppLike'
 const mockShare = jest.fn()
 const mockShareByLink = jest.fn()
 const mockRevoke = jest.fn()
+const mockRevokeGroup = jest.fn()
 const mockRevokeSelf = jest.fn()
 const mockIsOwner = jest.fn()
 const mockCanReshare = jest.fn()
@@ -26,12 +27,14 @@ const mockShowAlert = jest.fn()
 const mockOnClose = jest.fn()
 
 const mockGetEffectiveRecipients = jest.fn(() => [])
+const mockGetRecipients = jest.fn(() => [])
 
 jest.mock('../../hooks/useSharingContext', () => ({
   useSharingContext: () => ({
     share: mockShare,
     shareByLink: mockShareByLink,
     revoke: mockRevoke,
+    revokeGroup: mockRevokeGroup,
     revokeSelf: mockRevokeSelf,
     isOwner: mockIsOwner,
     canReshare: mockCanReshare,
@@ -47,6 +50,7 @@ jest.mock('../../hooks/useSharingContext', () => ({
     hasSharedParent: mockHasSharedParent,
     isOrgSharedDrive: jest.fn(() => false),
     getEffectiveRecipients: (...args) => mockGetEffectiveRecipients(...args),
+    getRecipients: (...args) => mockGetRecipients(...args),
     hasLoadedEffectiveRecipients: () => true,
     fetchEffectiveRecipients: jest.fn().mockResolvedValue(),
     invalidateEffectiveRecipients: jest.fn()
@@ -116,6 +120,8 @@ describe('FederatedFolderModal', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     mockRevoke.mockResolvedValue()
+    mockRevokeGroup.mockResolvedValue()
+    mockGetRecipients.mockReturnValue([])
     mockRevokeSelf.mockResolvedValue()
     mockIsOwner.mockReturnValue(false)
     mockCanReshare.mockReturnValue(false)
@@ -170,6 +176,33 @@ describe('FederatedFolderModal', () => {
   }
 
   describe('initialization', () => {
+    it('shows and removes a group even when none of its members have access', async () => {
+      mockIsOwner.mockReturnValue(true)
+      mockGetRecipients.mockReturnValue([
+        {
+          id: 'engineering',
+          index: 'sharing-1-group-0',
+          sharingId: 'sharing-1',
+          groupIndex: 0,
+          name: 'Engineering',
+          color: '#4A90E2',
+          members: [{ status: 'revoked' }]
+        }
+      ])
+
+      const { findByText, getByRole } = setup()
+      await findByText('Engineering')
+      fireEvent.click(getByRole('button', { name: 'Remove from sharing' }))
+
+      await waitFor(() =>
+        expect(mockRevokeGroup).toHaveBeenCalledWith(
+          mockDocument,
+          'sharing-1',
+          0
+        )
+      )
+    })
+
     it('should pass document name as title', async () => {
       const { findByText } = setup()
 
