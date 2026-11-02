@@ -6,6 +6,25 @@ import {
 import { getDisplayName, getInitials } from '../models'
 
 /**
+ * Finds the confirmation data of a recipient waiting for the two steps
+ * confirmation, by id or else by a non-empty email
+ *
+ * @param {object[]} recipientsToBeConfirmed - Recipients waiting for the confirmation
+ * @param {object} recipient - Recipient of the sharing
+ * @returns {object|undefined} Its confirmation data
+ */
+export const findRecipientConfirmationData = (
+  recipientsToBeConfirmed,
+  recipient
+) =>
+  recipientsToBeConfirmed.find(
+    user => user.id !== undefined && user.id === recipient.id
+  ) ??
+  recipientsToBeConfirmed.find(
+    user => Boolean(recipient.email) && user.email === recipient.email
+  )
+
+/**
  * @param {Function} t - Translation function
  * @returns {object[]} The roles a member can get, as `{ value, label }`
  */
@@ -79,10 +98,10 @@ const makeRecipientMember = (
   }
 ) => {
   const isMe = Boolean(recipient.isCurrentUser)
-  const recipientConfirmationData =
-    recipientsToBeConfirmed.find(
-      user => user.id !== undefined && user.id === recipient.id
-    ) ?? recipientsToBeConfirmed.find(user => user.email === recipient.email)
+  const recipientConfirmationData = findRecipientConfirmationData(
+    recipientsToBeConfirmed,
+    recipient
+  )
   const canManageMember = hasMemberActions({
     status: recipient.status,
     isCurrentUser: isMe,

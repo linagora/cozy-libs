@@ -1,4 +1,8 @@
-import { makeMemberRoles, makeMembers } from './members'
+import {
+  findRecipientConfirmationData,
+  makeMemberRoles,
+  makeMembers
+} from './members'
 
 const t = (key, options) =>
   options?.memberCount ? `${key} ${options.memberCount}` : key
@@ -183,5 +187,25 @@ describe('makeMembers', () => {
     })
 
     expect(group.canChangeRole).toBe(true)
+  })
+})
+
+describe('findRecipientConfirmationData', () => {
+  it('finds a recipient by id, then by email', () => {
+    const byId = { id: 'a', email: '' }
+    const byEmail = { id: 'b', email: 'bob@cozy.cc' }
+
+    expect(findRecipientConfirmationData([byEmail, byId], { id: 'a' })).toBe(
+      byId
+    )
+    expect(
+      findRecipientConfirmationData([byId, byEmail], { email: 'bob@cozy.cc' })
+    ).toBe(byEmail)
+  })
+
+  it('never matches an empty email', () => {
+    expect(
+      findRecipientConfirmationData([{ id: 'a', email: '' }], { email: '' })
+    ).toBeUndefined()
   })
 })
