@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import minilog from 'cozy-minilog'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import ConfirmDialogProvider, {
   useConfirmDialog
@@ -250,10 +249,7 @@ const FederatedFolderModalContent = ({
                 <strong>{t('Files.share.shareByEmail.hasSharedParent')}</strong>
               </div>
             ) : (
-              <>
-                <Typography variant="h6" className="u-mt-1-half u-mb-half">
-                  {t('Share.contacts.addUsers')}
-                </Typography>
+              <div className="u-mt-1-half">
                 <DumbShareByEmail
                   currentRecipients={isSending ? frozenRecipients : recipients}
                   document={isSending ? frozenDoc : existingDocument}
@@ -263,10 +259,11 @@ const FederatedFolderModalContent = ({
                   selectedOption={selectedOption}
                   onSelectedOptionChange={setSelectedOption}
                   enableCreateContact
+                  title={t('Share.contacts.addUsers')}
                   isSending={isSending}
                   onSend={onSend}
                 />
-              </>
+              </div>
             )}
           </div>
           <WhoHasAccessWrapper

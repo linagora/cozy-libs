@@ -26,6 +26,7 @@ import {
 const ShareAutosuggestWrapper = ({
   currentRecipients,
   recipients,
+  title,
   placeholder,
   enableCreateContact,
   disabled,
@@ -87,6 +88,7 @@ const ShareAutosuggestWrapper = ({
       contactsAndGroups={contactsAndGroups}
       currentRecipients={currentRecipients}
       recipients={recipients}
+      title={title}
       placeholder={placeholder}
       isLoading={isLoading}
       contactsSuggestEnabled={contactsSuggestEnabled}
@@ -105,6 +107,7 @@ const ShareAutosuggestWrapper = ({
 ShareAutosuggestWrapper.propTypes = {
   currentRecipients: PropTypes.array,
   recipients: PropTypes.array,
+  title: PropTypes.string,
   placeholder: PropTypes.string,
   enableCreateContact: PropTypes.bool,
   disabled: PropTypes.bool,
