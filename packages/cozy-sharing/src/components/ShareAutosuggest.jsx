@@ -17,6 +17,7 @@ const ShareAutosuggest = ({
   contactsAndGroups,
   currentRecipients,
   recipients,
+  title,
   placeholder,
   isLoading,
   contactsSuggestEnabled,
@@ -82,6 +83,7 @@ const ShareAutosuggest = ({
       getMembersFromText={enableCreateContact ? getMembersFromText : undefined}
       roles={roles}
       role={role}
+      title={title}
       placeholder={placeholder}
       loading={isLoading}
       disabled={disabled}
@@ -98,6 +100,7 @@ ShareAutosuggest.propTypes = {
   contactsAndGroups: PropTypes.array.isRequired,
   currentRecipients: PropTypes.array.isRequired,
   recipients: PropTypes.array.isRequired,
+  title: PropTypes.string,
   placeholder: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
   /** Whether the stack suggests the contacts while typing */

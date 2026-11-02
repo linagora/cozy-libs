@@ -21,6 +21,7 @@ export const ShareByEmail = ({
   selectedOption,
   onSelectedOptionChange,
   enableCreateContact,
+  title,
   autoFocus,
   sharing,
   isSending,
@@ -62,6 +63,7 @@ export const ShareByEmail = ({
     <div className={styles['coz-form-group']}>
       <div className={styles['coz-form']}>
         <ShareAutosuggestWrapper
+          title={title}
           placeholder={t(`${documentType}.share.shareByEmail.emailPlaceholder`)}
           enableCreateContact={enableCreateContact}
           disabled={isSending}
@@ -88,6 +90,8 @@ ShareByEmail.propTypes = {
   selectedOption: PropTypes.oneOf(['readWrite', 'readOnly']).isRequired,
   onSelectedOptionChange: PropTypes.func.isRequired,
   enableCreateContact: PropTypes.bool,
+  /** Title shown above the field, hidden with it */
+  title: PropTypes.string,
   autoFocus: PropTypes.bool,
   sharing: PropTypes.object,
   isSending: PropTypes.bool,

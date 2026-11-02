@@ -1,7 +1,6 @@
 import cx from 'classnames'
 import React from 'react'
 
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
@@ -59,9 +58,6 @@ const SharingContent = ({
             </strong>
           </div>
         )}
-        <Typography variant="h6" className="u-mb-half">
-          {t('Share.contacts.addUsers')}
-        </Typography>
         {showShareByEmail && (
           <DumbShareByEmail
             currentRecipients={recipients}
@@ -73,6 +69,7 @@ const SharingContent = ({
             selectedOption={selectedOption}
             onSelectedOptionChange={onSelectedOptionChange}
             enableCreateContact
+            title={t('Share.contacts.addUsers')}
             isSending={isSending}
             onSend={onSend}
           />
