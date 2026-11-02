@@ -46,7 +46,7 @@ const WhoHasAccessWrapper = ({
   const client = useClient()
   const { t } = useI18n()
   const [pendingIds, setPendingIds] = useState([])
-  const [openedGroup, setOpenedGroup] = useState(null)
+  const [openedGroupIndex, setOpenedGroupIndex] = useState(null)
   const {
     isOrgSharedDrive,
     getDocumentPermissions,
@@ -86,6 +86,10 @@ const WhoHasAccessWrapper = ({
   const ownerRecipient = markedRecipients.find(
     recipient => recipient.status === 'owner'
   )
+  const openedGroup = markedRecipients.find(
+    recipient => recipient.index === openedGroupIndex
+  )
+  const isGroupDetailOpen = openedGroup !== undefined
 
   const instanceSettingsQuery = buildInstanceSettingsQuery()
   const instanceSettingsResult = useQuery(instanceSettingsQuery.definition, {
@@ -122,7 +126,7 @@ const WhoHasAccessWrapper = ({
     isGroupRoleMenuShown,
     pendingIds,
     verifyRecipient,
-    onOpenGroup: setOpenedGroup
+    onOpenGroup: group => setOpenedGroupIndex(group.index)
   })
   const roles = makeMemberRoles(t)
   const permissions = getDocumentPermissions(document?._id)
@@ -191,12 +195,12 @@ const WhoHasAccessWrapper = ({
           onConfirm={confirmDowngrade}
         />
       )}
-      {openedGroup && (
+      {isGroupDetailOpen && (
         <GroupRecipientDetail
           isOwner={isOwner}
           name={openedGroup.name}
           members={openedGroup.members}
-          onClose={() => setOpenedGroup(null)}
+          onClose={() => setOpenedGroupIndex(null)}
         />
       )}
     </>
