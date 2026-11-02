@@ -131,7 +131,9 @@ const WhoHasAccessWrapper = ({
   const roles = makeMemberRoles(t)
   const permissions = getDocumentPermissions(document?._id)
 
-  const handleRoleChange = (member, role) =>
+  const handleRoleChange = (member, role) => {
+    if (member.isGroup) return
+
     changeMemberType(
       {
         sharingId: member.data.sharingId,
@@ -141,6 +143,7 @@ const WhoHasAccessWrapper = ({
       },
       role
     )
+  }
 
   const removeMember = async member => {
     const recipient = member.data
