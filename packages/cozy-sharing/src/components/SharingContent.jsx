@@ -14,6 +14,7 @@ const SharingContent = ({
   document,
   documentType,
   hasSharedParent,
+  hasLoadedRecipients = true,
   isOwner,
   onRevoke,
   onRevokeSelf,
@@ -32,6 +33,7 @@ const SharingContent = ({
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
+  const isEmptyStateShown = showShareByEmail && hasLoadedRecipients
 
   return (
     <div className={cx(styles['share-modal-content'])}>
@@ -74,7 +76,7 @@ const SharingContent = ({
       </div>
       {showWhoHasAccess && (
         <WhoHasAccessWrapper
-          showEmptyState={showShareByEmail}
+          showEmptyState={isEmptyStateShown}
           document={document}
           documentType={documentType}
           isOwner={isOwner}

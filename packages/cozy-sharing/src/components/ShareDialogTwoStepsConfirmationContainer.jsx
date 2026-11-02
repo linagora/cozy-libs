@@ -90,6 +90,7 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   document,
   documentType,
   hasSharedParent,
+  hasLoadedRecipients,
   isOwner,
   link,
   onClose,
@@ -210,6 +211,7 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         document={document}
         documentType={documentType}
         hasSharedParent={hasSharedParent}
+        hasLoadedRecipients={hasLoadedRecipients}
         isOwner={isOwner}
         onRevoke={onRevoke}
         onRevokeSelf={onRevokeSelf}

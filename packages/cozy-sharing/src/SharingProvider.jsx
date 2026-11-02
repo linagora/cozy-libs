@@ -33,6 +33,7 @@ import reducer, {
   updateEffectiveRecipient,
   invalidateEffectiveRecipients,
   getEffectiveRecipients,
+  hasLoadedEffectiveRecipients,
   isOwner,
   isSharedDrive,
   isOrgSharedDrive,
@@ -117,6 +118,8 @@ export class SharingProvider extends Component {
       updateSharingMemberType: this.updateSharingMemberType,
       getEffectiveRecipients: docId =>
         getEffectiveRecipients(this.state, docId),
+      hasLoadedEffectiveRecipients: docId =>
+        hasLoadedEffectiveRecipients(this.state, docId),
       fetchEffectiveRecipients: this.fetchEffectiveRecipients,
       invalidateEffectiveRecipients: this.invalidateEffectiveRecipients
     }

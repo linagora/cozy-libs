@@ -67,6 +67,7 @@ export const EditableSharingModalWrapper = ({ document, ...rest }) => {
   const {
     getRecipients,
     getEffectiveRecipients,
+    hasLoadedEffectiveRecipients,
     fetchEffectiveRecipients,
     invalidateEffectiveRecipients
   } = useSharingContext()
@@ -93,11 +94,14 @@ export const EditableSharingModalWrapper = ({ document, ...rest }) => {
   const recipients = isFederatedMode
     ? getEffectiveRecipients(fileId)
     : getRecipients(fileId)
+  const hasLoadedRecipients =
+    !isFederatedMode || hasLoadedEffectiveRecipients(fileId)
 
   return (
     <EditableSharingModal
       document={document}
       recipients={recipients}
+      hasLoadedRecipients={hasLoadedRecipients}
       {...rest}
     />
   )

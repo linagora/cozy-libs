@@ -47,6 +47,7 @@ jest.mock('../../hooks/useSharingContext', () => ({
     hasSharedParent: mockHasSharedParent,
     isOrgSharedDrive: jest.fn(() => false),
     getEffectiveRecipients: (...args) => mockGetEffectiveRecipients(...args),
+    hasLoadedEffectiveRecipients: () => true,
     fetchEffectiveRecipients: jest.fn().mockResolvedValue(),
     invalidateEffectiveRecipients: jest.fn()
   })

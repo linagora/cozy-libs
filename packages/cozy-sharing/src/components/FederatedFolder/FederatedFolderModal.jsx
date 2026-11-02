@@ -28,6 +28,7 @@ const FederatedFolderModalContent = ({
   onRevokeSuccess,
   document: existingDocument,
   recipients,
+  hasLoadedRecipients,
   autoOpenShareRestriction,
   showGenerateLinkButton
 }) => {
@@ -270,7 +271,7 @@ const FederatedFolderModalContent = ({
             )}
           </div>
           <WhoHasAccessWrapper
-            showEmptyState
+            showEmptyState={hasLoadedRecipients}
             isOwner={isCurrentUserOwner}
             canManageSharing={canManageSharing}
             isSharedDrive
@@ -314,6 +315,7 @@ FederatedFolderModalContent.propTypes = {
   onRevokeSuccess: PropTypes.func,
   document: PropTypes.object.isRequired,
   recipients: PropTypes.array,
+  hasLoadedRecipients: PropTypes.bool,
   autoOpenShareRestriction: PropTypes.bool,
   showGenerateLinkButton: PropTypes.bool
 }
@@ -322,6 +324,7 @@ const FederatedFolderModalWrapper = ({ document, ...props }) => {
   const fileId = document._id || document.id
   const {
     getEffectiveRecipients,
+    hasLoadedEffectiveRecipients,
     fetchEffectiveRecipients,
     invalidateEffectiveRecipients
   } = useSharingContext()
@@ -339,11 +342,13 @@ const FederatedFolderModalWrapper = ({ document, ...props }) => {
   ])
 
   const recipients = getEffectiveRecipients(fileId)
+  const hasLoadedRecipients = hasLoadedEffectiveRecipients(fileId)
 
   return (
     <FederatedFolderModalContent
       document={document}
       recipients={recipients}
+      hasLoadedRecipients={hasLoadedRecipients}
       {...props}
     />
   )

@@ -578,6 +578,9 @@ export const getSharedParentPath = (state, documentPath) => {
 export const getEffectiveRecipients = (state, docId) =>
   state.effectiveRecipients?.[docId] || []
 
+export const hasLoadedEffectiveRecipients = (state, docId) =>
+  state.effectiveRecipients?.[docId] !== undefined
+
 // helpers
 export const getSharedDocIds = doc =>
   doc.type === 'io.cozy.sharings'
