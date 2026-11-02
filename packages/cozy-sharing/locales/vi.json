@@ -32,7 +32,8 @@
       "otherContacts": "người liên hệ khác |||| người liên hệ khác",
       "revoke": "Xóa khỏi chia sẻ",
       "error": {
-        "changePermission": "Đã xảy ra lỗi khi thay đổi quyền. Vui lòng thử lại."
+        "changePermission": "Đã xảy ra lỗi khi thay đổi quyền. Vui lòng thử lại.",
+        "remove": "Đã xảy ra lỗi khi xóa thành viên. Vui lòng thử lại."
       }
     },
     "contacts": {

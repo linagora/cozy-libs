@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
+import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
 import DowngradePermissionConfirmDialog from './Recipient/DowngradePermissionConfirmDialog'
@@ -15,6 +16,7 @@ import {
 } from '../helpers/recipients'
 import { useMemberTypeChange } from '../hooks/useMemberTypeChange'
 import { useSharingContext } from '../hooks/useSharingContext'
+import logger from '../logger'
 import { buildInstanceSettingsQuery } from '../queries/queries'
 
 // When the owner is not part of a sharing's members (eg. the folder only has
@@ -45,6 +47,7 @@ const WhoHasAccessWrapper = ({
 }) => {
   const client = useClient()
   const { t } = useI18n()
+  const { showAlert } = useAlert()
   const [pendingIds, setPendingIds] = useState([])
   const [openedGroupIndex, setOpenedGroupIndex] = useState(null)
   const {
@@ -164,6 +167,13 @@ const WhoHasAccessWrapper = ({
     setPendingIds(ids => [...ids, member.id])
     try {
       await removeMember(member)
+    } catch (error) {
+      logger.error('Failed to remove member', error)
+      showAlert({
+        message: t('Share.members.error.remove'),
+        severity: 'error',
+        variant: 'filled'
+      })
     } finally {
       setPendingIds(ids => ids.filter(id => id !== member.id))
     }

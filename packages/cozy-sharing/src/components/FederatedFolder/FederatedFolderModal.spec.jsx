@@ -526,6 +526,34 @@ describe('FederatedFolderModal', () => {
       })
     })
 
+    it('should show an error alert when the removal fails', async () => {
+      const otherRecipient = {
+        instance: 'https://other.mycozy.cloud',
+        memberIndex: 2,
+        sharingId: 'sharing-id',
+        type: 'two-way',
+        status: 'ready',
+        name: 'Other',
+        email: 'other@test.com'
+      }
+      mockCanReshare.mockReturnValue(true)
+      mockGetEffectiveRecipients.mockReturnValue([otherRecipient])
+      mockRevoke.mockRejectedValueOnce(new Error('Revoke failed'))
+
+      const { findByLabelText } = setup()
+
+      fireEvent.click(await findByLabelText('Remove from sharing'))
+
+      await waitFor(() => {
+        expect(mockShowAlert).toHaveBeenCalledWith({
+          message:
+            'An error occurred while removing the member. Please try again.',
+          severity: 'error',
+          variant: 'filled'
+        })
+      })
+    })
+
     it('should allow a write recipient to revoke another recipient', async () => {
       const otherRecipient = {
         instance: 'https://other.mycozy.cloud',
