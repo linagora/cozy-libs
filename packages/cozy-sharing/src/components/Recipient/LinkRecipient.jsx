@@ -14,7 +14,6 @@ import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
 import LinkRecipientPermissions from './LinkRecipientPermissions'
-import RecipientConfirm from './RecipientConfirm'
 import {
   checkIsPermissionHasPassword,
   getPermissionExpiresDate
@@ -55,14 +54,7 @@ const LinkRecipient = props => {
   const { t, f, lang } = useI18n()
   const { isMobile } = useBreakpoints()
 
-  const {
-    recipientConfirmationData,
-    verifyRecipient,
-    fadeIn,
-    document,
-    isReadOnly,
-    permissions
-  } = props
+  const { fadeIn, document, isReadOnly, permissions } = props
 
   const [openShareRestrictionModal, setOpenShareRestrictionModal] =
     useState(false)
@@ -81,15 +73,6 @@ const LinkRecipient = props => {
         date: dateFormatted
       })
     : ''
-
-  const RightPart = recipientConfirmationData ? (
-    <RecipientConfirm
-      label={t('Share.twoStepsConfirmation.verify')}
-      onClick={() => verifyRecipient(recipientConfirmationData)}
-    />
-  ) : (
-    <LinkRecipientPermissions {...props} />
-  )
 
   return (
     <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
@@ -111,7 +94,7 @@ const LinkRecipient = props => {
             textSecondary={textSecondary}
           />
         )}
-        {RightPart}
+        <LinkRecipientPermissions {...props} />
         {openShareRestrictionModal && (
           <ShareRestrictionModal
             file={document}
@@ -124,11 +107,6 @@ const LinkRecipient = props => {
 }
 
 LinkRecipient.propTypes = {
-  recipientConfirmationData: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.object
-  ]),
-  verifyRecipient: PropTypes.func,
   fadeIn: PropTypes.bool,
   document: PropTypes.object,
   permissions: PropTypes.arrayOf(PropTypes.object)
