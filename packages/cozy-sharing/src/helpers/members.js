@@ -92,7 +92,7 @@ const makeRecipientMember = (
   })
 
   return {
-    id: recipient.index,
+    id: recipient.id ?? recipient.index,
     name: getDisplayName(recipient),
     subtitle: getMemberStatusText({
       t,
