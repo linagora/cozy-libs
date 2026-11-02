@@ -32,7 +32,8 @@
       "otherContacts": "weiterer Kontakt |||| weitere Kontakte",
       "revoke": "Aus der Freigabe entfernen",
       "error": {
-        "changePermission": "Beim Ändern der Berechtigungen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+        "changePermission": "Beim Ändern der Berechtigungen ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+        "remove": "Beim Entfernen des Mitglieds ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
       }
     },
     "contacts": {

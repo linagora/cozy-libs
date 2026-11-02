@@ -32,7 +32,8 @@
       "otherContacts": "other contact |||| other contacts",
       "revoke": "Remove from sharing",
       "error": {
-        "changePermission": "An error occurred while changing the permissions. Please try again."
+        "changePermission": "An error occurred while changing the permissions. Please try again.",
+        "remove": "An error occurred while removing the member. Please try again."
       }
     },
     "contacts": {

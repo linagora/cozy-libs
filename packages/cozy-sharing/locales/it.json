@@ -32,7 +32,8 @@
       "otherContacts": "altro contatto |||| altri contatti",
       "revoke": "Rimuovi dalla condivisione",
       "error": {
-        "changePermission": "Si è verificato un errore durante la modifica delle autorizzazioni. Riprova."
+        "changePermission": "Si è verificato un errore durante la modifica delle autorizzazioni. Riprova.",
+        "remove": "Si è verificato un errore durante la rimozione del membro. Riprova."
       }
     },
     "contacts": {

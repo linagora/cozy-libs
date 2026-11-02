@@ -32,7 +32,8 @@
       "otherContacts": "autre contact |||| autres contacts",
       "revoke": "Arrêter le partage",
       "error": {
-        "changePermission": "Une erreur s'est produite lors du changement des permissions. Veuillez réessayer."
+        "changePermission": "Une erreur s'est produite lors du changement des permissions. Veuillez réessayer.",
+        "remove": "Une erreur est survenue lors du retrait du membre. Veuillez réessayer."
       }
     },
     "contacts": {
