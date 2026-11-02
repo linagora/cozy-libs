@@ -5,6 +5,7 @@ import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import minilog from 'cozy-minilog'
 
+import { includeDirectGroups } from '../../helpers/effectiveRecipients'
 import { useFetchDocumentPath } from '../../hooks/useFetchDocumentPath'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import { DOCTYPE_CONTACTS } from '../../models'
@@ -92,7 +93,7 @@ export const EditableSharingModalWrapper = ({ document, ...rest }) => {
   ])
 
   const recipients = isFederatedMode
-    ? getEffectiveRecipients(fileId)
+    ? includeDirectGroups(getEffectiveRecipients(fileId), getRecipients(fileId))
     : getRecipients(fileId)
   const hasLoadedRecipients =
     !isFederatedMode || hasLoadedEffectiveRecipients(fileId)

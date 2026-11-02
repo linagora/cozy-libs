@@ -1,5 +1,8 @@
 import { getOrCreateFromArray } from './contacts'
-import { mapEffectiveRecipients } from './effectiveRecipients'
+import {
+  includeDirectGroups,
+  mapEffectiveRecipients
+} from './effectiveRecipients'
 
 const makeAncestorSource = (rootName = 'Parent Folder') => ({
   sharing_id: 'sharing-1',
@@ -173,5 +176,50 @@ describe('mapEffectiveRecipients', () => {
     const resolved = await getOrCreateFromArray(client, [recipient], jest.fn())
 
     expect(resolved).toEqual([contact])
+  })
+})
+
+describe('includeDirectGroups', () => {
+  const groups = [
+    {
+      id: 'engineering',
+      sharingId: 'sharing-2',
+      groupIndex: 0,
+      members: [
+        { sharingId: 'sharing-2', memberIndex: 1, only_in_groups: true }
+      ]
+    },
+    { id: 'design', sharingId: 'sharing-2', groupIndex: 1, members: [] }
+  ]
+
+  it('keeps groups visible even when their members have been revoked', () => {
+    const owner = makeRecipient({
+      status: 'owner',
+      sources: [makeSelfSource({ memberIndex: 0 })]
+    })
+    expect(includeDirectGroups([owner], groups)).toEqual([owner, ...groups])
+  })
+
+  it('hides a group-only member while preserving independent inherited access', () => {
+    const groupOnly = makeRecipient({ sources: [makeSelfSource()] })
+    const alsoInherited = makeRecipient({
+      sources: [makeSelfSource(), makeAncestorSource()]
+    })
+    expect(includeDirectGroups([groupOnly, alsoInherited], groups)).toEqual([
+      alsoInherited,
+      ...groups
+    ])
+  })
+
+  it('keeps members without group-only membership', () => {
+    const directMember = makeRecipient({ sources: [makeSelfSource()] })
+    const group = {
+      ...groups[0],
+      members: [{ ...groups[0].members[0], only_in_groups: false }]
+    }
+    expect(includeDirectGroups([directMember], [group])).toEqual([
+      directMember,
+      group
+    ])
   })
 })

@@ -50,3 +50,27 @@ export const mapEffectiveRecipients = (effectiveRecipients, driveId) =>
         )
       : recipient
   })
+
+export const includeDirectGroups = (effectiveRecipients, directRecipients) => {
+  const groups = directRecipients.filter(recipient => recipient.members)
+  const groupMembers = new Set(
+    groups.flatMap(group =>
+      group.members
+        .filter(member => member.only_in_groups)
+        .map(member => `${member.sharingId}:${member.memberIndex}`)
+    )
+  )
+  return [
+    ...effectiveRecipients.filter(recipient => {
+      const sources = recipient.sources || []
+      return (
+        sources.length === 0 ||
+        sources.some(
+          source =>
+            !groupMembers.has(`${source.sharing_id}:${source.member_index}`)
+        )
+      )
+    }),
+    ...groups
+  ]
+}
