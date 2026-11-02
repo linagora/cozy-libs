@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [42.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@41.0.0...cozy-sharing@42.0.0) (2026-11-02)
+
+### Bug Fixes
+
+- **cozy-sharing:** Hide the empty state when sharing only by link ([e21c95f](https://github.com/cozy/cozy-libs/commit/e21c95f81baf88c7a26bb2d87b6b4ad2874b955e))
+- **cozy-sharing:** Ignore a role change on a group ([ac156bc](https://github.com/cozy/cozy-libs/commit/ac156bcffac79a01e1df4d86c3bdfd79b59285e8))
+- **cozy-sharing:** Keep a federated member's row when its source changes ([6f3238f](https://github.com/cozy/cozy-libs/commit/6f3238f29e0777831c9e168a81de01e9eaa2884b))
+- **cozy-sharing:** Keep the group detail in sync with the sharing ([b2bf068](https://github.com/cozy/cozy-libs/commit/b2bf06860ec1920adf959831c088542a6600b071))
+- **cozy-sharing:** Render PermissionTypeMenu without a recipient ([c6dd1c2](https://github.com/cozy/cozy-libs/commit/c6dd1c2d13ca964c7a2211e6f63317e1ab438d4c))
+- **cozy-sharing:** Show the empty state once federated members load ([fd13af2](https://github.com/cozy/cozy-libs/commit/fd13af2f8a5d5d7144f3c4f19703b1e7623eff03))
+- **cozy-sharing:** Verify each trusted recipient with its own entry ([6418bf9](https://github.com/cozy/cozy-libs/commit/6418bf935777d8e7ebd79a14d077aed1b2db796b))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** cozy-sharing needs cozy-ui 146.2.1 or later: upgrade
+  cozy-ui in the app.
+
 # [41.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@40.2.1...cozy-sharing@41.0.0) (2026-10-29)
 
 ### Code Refactoring
