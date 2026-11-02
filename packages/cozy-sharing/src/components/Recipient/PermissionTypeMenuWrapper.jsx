@@ -28,12 +28,15 @@ const PermissionTypeMenuWrapper = ({
     confirmDowngrade,
     cancelDowngrade
   } = useMemberTypeChange(document)
-  const member = {
-    id: `sharing-${sharingId}-member-${memberIndex}`,
-    name: getDisplayName(recipient),
-    initials: getInitials(recipient),
-    avatarUrl: makeAvatarUrl(recipient, client.options.uri)
-  }
+  const member = recipient
+    ? {
+        id: `sharing-${sharingId}-member-${memberIndex}`,
+        name: getDisplayName(recipient),
+        initials: getInitials(recipient),
+        avatarUrl: makeAvatarUrl(recipient, client.options.uri),
+        isCurrentUser: recipient.isCurrentUser
+      }
+    : undefined
   const roles = makeMemberRoles(t)
 
   const handleSetType = newType =>

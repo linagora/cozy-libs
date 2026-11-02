@@ -17756,7 +17756,7 @@ __metadata:
     cozy-device-helper: "npm:^4.0.0"
     cozy-intent: "npm:^2.31.1"
     cozy-minilog: "npm:^3.10.1"
-    cozy-ui: "npm:^146.1.0"
+    cozy-ui: "npm:^146.2.1"
     cozy-ui-plus: "npm:^14.1.7"
     date-fns: "npm:2.30.0"
     jest: "npm:30.3.0"
@@ -17777,7 +17777,7 @@ __metadata:
     cozy-flags: ">=4.8.1"
     cozy-intent: ">=2.29.1"
     cozy-minilog: ">=3.9.1"
-    cozy-ui: ">=146.1.0"
+    cozy-ui: ">=146.2.1"
     cozy-ui-plus: ">=6.0.0"
     prop-types: ">=15.7.2"
     react: ">=16.12.0"
@@ -18170,9 +18170,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-ui@npm:^146.1.0":
-  version: 146.1.0
-  resolution: "cozy-ui@npm:146.1.0"
+"cozy-ui@npm:^146.2.1":
+  version: 146.2.1
+  resolution: "cozy-ui@npm:146.2.1"
   dependencies:
     "@babel/runtime": "npm:^7.3.4"
     "@date-io/date-fns": "npm:1"
@@ -18210,7 +18210,7 @@ __metadata:
     twake-i18n: ">=0.3.0"
   bin:
     rsg-screenshots: scripts/screenshots.js
-  checksum: 10c0/82dab7297956c11638f3d00d41c2ba0bb9e2a1d4c239308e84d09a49ff46f0708ca13ad4f27fb5719f67a0105e513c3fa1ece980cef373cf126692e431b34d8c
+  checksum: 10c0/af6f34b94f5da05217cc432972945c8b005be1c6c431fe71471b82e007343b5a4b82471f69c11b2138c393f9365a9d2241106f16230e52af6a8b5a57c8a60900
   languageName: node
   linkType: hard
 
