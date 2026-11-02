@@ -13,6 +13,7 @@ export const ShareModal = ({
   documentType = 'Document',
   hasSharedChild,
   hasSharedParent,
+  hasLoadedRecipients = true,
   isOwner,
   link,
   onClose,
@@ -54,6 +55,7 @@ export const ShareModal = ({
       document={document}
       documentType={documentType}
       hasSharedParent={hasSharedParent}
+      hasLoadedRecipients={hasLoadedRecipients}
       isOwner={isOwner}
       link={link}
       onClose={onClose}
@@ -82,6 +84,7 @@ ShareModal.propTypes = {
   documentType: PropTypes.string,
   hasSharedChild: PropTypes.bool,
   hasSharedParent: PropTypes.bool,
+  hasLoadedRecipients: PropTypes.bool,
   isOwner: PropTypes.bool,
   link: PropTypes.string,
   onClose: PropTypes.func.isRequired,
