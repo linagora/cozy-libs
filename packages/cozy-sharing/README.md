@@ -174,10 +174,10 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Who can share | Owner or Editor (`canReshare`) | `SharingProvider.jsx` |
 | Nested sharing | When `drive.federated-shared-folder.enabled` is on, the `hasSharedParent` / `hasSharedChild` gates are removed so a folder can be shared by email even inside a shared parent or containing a shared child. When the flag is off, the gates remain active (behavior unchanged). | `ShareModal.jsx`, `FederatedFolderModal.jsx` |
 | Effective recipients | When `drive.federated-shared-folder.enabled` is on, the Share modal shows the combined list of direct and inherited recipients via `client.collection('io.cozy.sharings').fetchEffectiveRecipients(fileId, { driveId })`, stored in the SharingProvider redux store. All recipients are rendered with the same actions (revoke, RO/RW). When the flag is off, recipients come from the store's direct sharings as before. | `SharingProvider.jsx`, `helpers/effectiveRecipients.js`, `EditableSharingModal.jsx`, `FederatedFolderModal.jsx` |
-| Recipients limit | Default 100; overridable via `sharing.recipients-limit` flag | `helpers/recipients.js:33` |
+| Recipients limit | Default 100; overridable via `sharing.recipients-limit` flag | `helpers/recipients.js:12` |
 | Recipient display mode | `sharing.show-recipient-groups` flag: `true` = groups as units, `false` = spread group members | `ShareByEmail.jsx:31` |
-| Read-only sharing | If the existing sharing is read-only, only the `readOnly` option is offered | `ShareByEmail.jsx:46-57` |
-| Contacts shown | Only contacts with a defined `email` or `cozy` URL | `helpers/recipients.js:72-73` |
+| Read-only sharing | If the existing sharing is read-only, only the `readOnly` option is offered | `ShareByEmail.jsx:45-57` |
+| Contacts shown | Only contacts with a defined `email` or `cozy` URL | `helpers/recipients.js:51-52` |
 | Group sharing | All members get the same permission; dynamic membership (add/remove) propagates | `state.js:414-451` |
 | Downgrade confirmation | Switching a member from `two-way` (editor) to `one-way` (viewer) on a folder with a shared parent first opens `DowngradePermissionConfirmDialog`: the change is applied only on confirm, cancel keeps the editor permission (the downgrade also reduces the member's rights on the parent folder) | `helpers/permissions.js`, `hooks/useMemberTypeChange.js`, `Recipient/DowngradePermissionConfirmDialog.jsx` |
 
@@ -267,4 +267,4 @@ Key decisions:
 - `EditableSharingModal` renders `ShareModal` (the dumb component), which decides `ShareDialogCozyToCozy` vs `ShareDialogOnlyByLink` based on flags and context.
 - `ShareDialogTwoStepsConfirmationContainer` wraps the cozy-to-cozy dialog when recipients need confirmation (untrusted contacts).
 - Federated mode: when `drive.federated-shared-folder.enabled` is true, `FederatedFolderModal` replaces the standard `EditableSharingModal`.
-- `WhoHasAccess` accepts an independent `canManageLink` prop to control link management (gear + perm dropdown) separately from `canManageMembers` which controls member management. This allows shared-drive members to see the link gear without the member cross/perm menu.
+- `WhoHasAccessWrapper` accepts an independent `canManageLink` prop to control link management (gear + perm dropdown) separately from `canManageMembers` which controls member management. This allows shared-drive members to see the link gear without the member cross/perm menu.

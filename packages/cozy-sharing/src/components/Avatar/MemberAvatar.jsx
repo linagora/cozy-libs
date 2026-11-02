@@ -6,7 +6,7 @@ import logger from '../../logger'
 import { getInitials } from '../../models'
 
 /**
- * @deprecated Kept for deep imports only (cozy-ui-plus `ContactIdentity`).
+ * @deprecated Kept for deep imports only.
  * Use `MemberAvatar` from `cozy-ui/transpiled/react/MemberRow/MemberAvatar`.
  */
 const MemberAvatar = ({ recipient, avatarUrl, ...rest }) => {

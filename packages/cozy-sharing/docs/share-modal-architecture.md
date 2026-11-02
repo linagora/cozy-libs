@@ -5,18 +5,20 @@ flowchart TD
     ShareModal --> ShareModalConditions{isReadOnly}
     ShareModalConditions --> |yes| SharingDetailsModal
     ShareModalConditions --> |no| EditableSharingModal
-    SharingDetailsModal --> WhoHasAccess
+    SharingDetailsModal --> WhoHasAccessWrapper
     EditableSharingModal --> DumbShareModal
     DumbShareModal --> DumbShareModalConditions{isOnlyByLink}
     DumbShareModalConditions --> |yes| ShareDialogOnlyByLink
     DumbShareModalConditions --> |no| ShareDialogCozyToCozy
-    ShareDialogOnlyByLink --> WhoHasAccess
+    ShareDialogOnlyByLink --> WhoHasAccessWrapper
     ShareDialogOnlyByLink --> DumbShareByLink
     ShareDialogCozyToCozy --> ShareDialogTwoStepsConfirmationContainer
     ShareDialogTwoStepsConfirmationContainer --> |dialogContentOnShare|SharingContent
     ShareDialogTwoStepsConfirmationContainer --> |dialogTitleOnShare|SharingTitleFunction
     ShareDialogTwoStepsConfirmationContainer --> |dialogActionsOnShare|DumbShareByLink
-    SharingContent --> WhoHasAccess
+    SharingContent --> WhoHasAccessWrapper
+    WhoHasAccessWrapper --> WhoHasAccess
+    WhoHasAccess --> |cozy-ui|MemberList
     SharingContent --> ShareByEmail
     ConfirmTrustedRecipientsDialog --> DumbConfirmTrustedRecipientsDialog
     DumbConfirmTrustedRecipientsDialog --> ShareDialogTwoStepsConfirmationContainer
