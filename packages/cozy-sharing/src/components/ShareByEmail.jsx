@@ -17,14 +17,14 @@ export const ShareByEmail = ({
   documentType,
   currentRecipients,
   pendingRecipients,
-  onPendingRecipientsChange,
   selectedOption,
-  onSelectedOptionChange,
   enableCreateContact,
   title,
   autoFocus,
   sharing,
   isSending,
+  onPendingRecipientsChange,
+  onSelectedOptionChange,
   onSend
 }) => {
   const { t } = useI18n()
@@ -86,15 +86,15 @@ ShareByEmail.propTypes = {
   document: PropTypes.object,
   documentType: PropTypes.string.isRequired,
   pendingRecipients: PropTypes.array.isRequired,
-  onPendingRecipientsChange: PropTypes.func.isRequired,
   selectedOption: PropTypes.oneOf(['readWrite', 'readOnly']).isRequired,
-  onSelectedOptionChange: PropTypes.func.isRequired,
   enableCreateContact: PropTypes.bool,
   /** Title shown above the field, hidden with it */
   title: PropTypes.string,
   autoFocus: PropTypes.bool,
   sharing: PropTypes.object,
   isSending: PropTypes.bool,
+  onPendingRecipientsChange: PropTypes.func.isRequired,
+  onSelectedOptionChange: PropTypes.func.isRequired,
   /** Sends the invitations to the pending recipients, from a button next to the field */
   onSend: PropTypes.func
 }

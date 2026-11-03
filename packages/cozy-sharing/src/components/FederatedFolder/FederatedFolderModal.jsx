@@ -255,12 +255,12 @@ const FederatedFolderModalContent = ({
                   document={isSending ? frozenDoc : existingDocument}
                   documentType="Files"
                   pendingRecipients={pendingRecipients}
-                  onPendingRecipientsChange={setPendingRecipients}
                   selectedOption={selectedOption}
-                  onSelectedOptionChange={setSelectedOption}
                   enableCreateContact
                   title={t('Share.contacts.addUsers')}
                   isSending={isSending}
+                  onPendingRecipientsChange={setPendingRecipients}
+                  onSelectedOptionChange={setSelectedOption}
                   onSend={onSend}
                 />
               </div>

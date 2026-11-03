@@ -15,8 +15,6 @@ const SharingContent = ({
   hasSharedParent,
   hasLoadedRecipients = true,
   isOwner,
-  onRevoke,
-  onRevokeSelf,
   recipients,
   sharing,
   showShareByEmail,
@@ -26,10 +24,12 @@ const SharingContent = ({
   verifyRecipient,
   link,
   pendingRecipients,
-  onPendingRecipientsChange,
   selectedOption,
-  onSelectedOptionChange,
   isSending,
+  onRevoke,
+  onRevokeSelf,
+  onPendingRecipientsChange,
+  onSelectedOptionChange,
   onSend
 }) => {
   const { t } = useI18n()
@@ -65,12 +65,12 @@ const SharingContent = ({
             documentType={documentType}
             sharing={sharing}
             pendingRecipients={pendingRecipients}
-            onPendingRecipientsChange={onPendingRecipientsChange}
             selectedOption={selectedOption}
-            onSelectedOptionChange={onSelectedOptionChange}
             enableCreateContact
             title={t('Share.contacts.addUsers')}
             isSending={isSending}
+            onPendingRecipientsChange={onPendingRecipientsChange}
+            onSelectedOptionChange={onSelectedOptionChange}
             onSend={onSend}
           />
         )}

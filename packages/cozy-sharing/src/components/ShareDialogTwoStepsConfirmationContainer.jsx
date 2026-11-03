@@ -93,12 +93,6 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   hasLoadedRecipients,
   isOwner,
   link,
-  onClose,
-  onRevoke,
-  onRevokeLink,
-  onRevokeSelf,
-  onShare,
-  onUpdateShareLinkPermissions,
   permissions,
   recipients,
   sharing,
@@ -111,10 +105,16 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   dialogActionsOnShare: DialogActionsOnShare,
   dialogTitleOnShare: DialogTitleOnShare,
   pendingRecipients,
-  onPendingRecipientsChange,
   selectedOption,
-  onSelectedOptionChange,
   isSending,
+  onClose,
+  onRevoke,
+  onRevokeLink,
+  onRevokeSelf,
+  onShare,
+  onUpdateShareLinkPermissions,
+  onPendingRecipientsChange,
+  onSelectedOptionChange,
   onSend
 }) => {
   const { t } = useI18n()
@@ -215,9 +215,6 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         hasSharedParent={hasSharedParent}
         hasLoadedRecipients={hasLoadedRecipients}
         isOwner={isOwner}
-        onRevoke={onRevoke}
-        onRevokeSelf={onRevokeSelf}
-        onShare={onShare}
         recipients={recipients}
         sharing={sharing}
         sharingDesc={sharingDesc}
@@ -228,13 +225,16 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         verifyRecipient={showConfirmationDialog}
         link={link}
         permissions={permissions}
+        pendingRecipients={pendingRecipients}
+        selectedOption={selectedOption}
+        isSending={isSending}
+        onRevoke={onRevoke}
+        onRevokeSelf={onRevokeSelf}
+        onShare={onShare}
         onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
         onRevokeLink={onRevokeLink}
-        pendingRecipients={pendingRecipients}
         onPendingRecipientsChange={onPendingRecipientsChange}
-        selectedOption={selectedOption}
         onSelectedOptionChange={onSelectedOptionChange}
-        isSending={isSending}
         onSend={onSend}
       />
     )
