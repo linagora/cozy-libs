@@ -126,7 +126,6 @@
       "shareByEmail": {
         "subtitle": "Par email",
         "emailPlaceholder": "Ajouter des contacts",
-        "send": "Terminé",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -194,7 +193,6 @@
         "subtitle": "Par email",
         "email": "À :",
         "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
-        "send": "Terminé",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -264,7 +262,6 @@
         "subtitle": "Par email",
         "email": "e-mail",
         "emailPlaceholder": "Saisissez l'email ou le nom du destinataire.",
-        "send": "Terminé",
         "singleContactSuccess": "Vous avez envoyé une invitation à %{email}.",
         "contactSuccess": "Vous avez invité %{smart_count} contact. |||| Vous avez invité %{smart_count} contacts.",
         "singleGroupSuccess": "Vous avez invité les membres du groupe %{groupName}.",
@@ -329,7 +326,6 @@
         "subtitle": "Par email",
         "email": "Envoyer à :",
         "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
-        "send": "Terminé",
         "error": {
           "addingRecipient": "Une erreur s'est produite lors de l'ajout du destinataire. Veuillez réessayer."
         },
@@ -445,7 +441,6 @@
   },
   "FederatedFolder": {
     "title": "Dossier partagé",
-    "share": "Terminé",
     "shareTitle": "Partager \"%{name}\"",
     "successNotification": "Le dossier a été partagé",
     "errorNotification": "Erreur lors du partage du dossier",

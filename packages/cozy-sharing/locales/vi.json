@@ -126,7 +126,6 @@
       "shareByEmail": {
         "subtitle": "Bằng email",
         "emailPlaceholder": "Thêm liên hệ",
-        "send": "Xong",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -194,7 +193,6 @@
         "subtitle": "Bằng email",
         "email": "Đến:",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Xong",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -263,7 +261,6 @@
         "subtitle": "Bằng email",
         "email": "email",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Xong",
         "singleContactSuccess": "Bạn đã gửi lời mời đến %{email}.",
         "contactSuccess": "Bạn đã gửi lời mời đến %{smart_count} liên hệ. |||| Bạn đã gửi lời mời đến %{smart_count} liên hệ.",
         "singleGroupSuccess": "Bạn đã gửi lời mời đến các thành viên của nhóm %{groupName}.",
@@ -327,7 +324,6 @@
         "subtitle": "Bằng email",
         "email": "Gửi đến:",
         "emailPlaceholder": "Nhập địa chỉ email hoặc tên người nhận",
-        "send": "Xong",
         "error": {
           "addingRecipient": "Đã xảy ra lỗi khi thêm người nhận. Vui lòng thử lại."
         },
@@ -443,7 +439,6 @@
   },
   "FederatedFolder": {
     "title": "Thư mục chia sẻ",
-    "share": "Xong",
     "shareTitle": "Chia sẻ \"%{name}\"",
     "successNotification": "Thư mục đã được chia sẻ",
     "errorNotification": "Lỗi khi chia sẻ thư mục",

@@ -22,7 +22,9 @@ export const ShareByEmail = ({
   onSelectedOptionChange,
   enableCreateContact,
   autoFocus,
-  sharing
+  sharing,
+  isSending,
+  onSend
 }) => {
   const { t } = useI18n()
 
@@ -62,6 +64,7 @@ export const ShareByEmail = ({
         <ShareAutosuggestWrapper
           placeholder={t(`${documentType}.share.shareByEmail.emailPlaceholder`)}
           enableCreateContact={enableCreateContact}
+          disabled={isSending}
           currentRecipients={currentRecipients}
           recipients={pendingRecipients}
           autoFocus={autoFocus}
@@ -69,6 +72,7 @@ export const ShareByEmail = ({
           role={selectedOption}
           onChange={onRecipientsChange}
           onRoleChange={onSelectedOptionChange}
+          onSubmit={onSend}
         />
       </div>
     </div>
@@ -85,7 +89,10 @@ ShareByEmail.propTypes = {
   onSelectedOptionChange: PropTypes.func.isRequired,
   enableCreateContact: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  sharing: PropTypes.object
+  sharing: PropTypes.object,
+  isSending: PropTypes.bool,
+  /** Sends the invitations to the pending recipients, from a button next to the field */
+  onSend: PropTypes.func
 }
 
 export default ShareByEmail

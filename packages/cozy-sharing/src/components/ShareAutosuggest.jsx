@@ -26,7 +26,8 @@ const ShareAutosuggest = ({
   roles,
   role,
   onChange,
-  onRoleChange
+  onRoleChange,
+  onSubmit
 }) => {
   const client = useClient()
   const { t } = useI18n()
@@ -87,6 +88,7 @@ const ShareAutosuggest = ({
       autoFocus={autoFocus}
       onChange={handleChange}
       onRoleChange={onRoleChange}
+      onSubmit={onSubmit}
     />
   )
 }
@@ -111,7 +113,8 @@ ShareAutosuggest.propTypes = {
   ),
   role: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onRoleChange: PropTypes.func
+  onRoleChange: PropTypes.func,
+  onSubmit: PropTypes.func
 }
 
 export default ShareAutosuggest

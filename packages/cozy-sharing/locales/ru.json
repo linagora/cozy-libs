@@ -126,7 +126,6 @@
       "shareByEmail": {
         "subtitle": "По электронной почте",
         "emailPlaceholder": "Добавить контакты",
-        "send": "Готово",
         "singleContactSuccess": "Вы отправили приглашение на %{email}.",
         "contactSuccess": "Вы отправили приглашение %{smart_count} контакту. |||| Вы отправили приглашение %{smart_count} контактам.",
         "singleGroupSuccess": "Вы отправили приглашение участникам группы %{groupName}.",
@@ -194,7 +193,6 @@
         "subtitle": "По электронной почте",
         "email": "Кому:",
         "emailPlaceholder": "Введите адрес электронной почты или имя получателя",
-        "send": "Готово",
         "singleContactSuccess": "Вы отправили приглашение на %{email}.",
         "contactSuccess": "Вы отправили приглашение %{smart_count} контакту. |||| Вы отправили приглашение %{smart_count} контактам.",
         "singleGroupSuccess": "Вы отправили приглашение участникам группы %{groupName}.",
@@ -263,7 +261,6 @@
         "subtitle": "По электронной почте",
         "email": "эл. почта",
         "emailPlaceholder": "Введите адрес электронной почты или имя получателя",
-        "send": "Готово",
         "singleContactSuccess": "Вы отправили приглашение на %{email}.",
         "contactSuccess": "Вы отправили приглашение %{smart_count} контакту. |||| Вы отправили приглашение %{smart_count} контактам.",
         "singleGroupSuccess": "Вы отправили приглашение участникам группы %{groupName}.",
@@ -327,7 +324,6 @@
         "subtitle": "По электронной почте",
         "email": "Отправить:",
         "emailPlaceholder": "Введите адрес электронной почты или имя получателя",
-        "send": "Готово",
         "error": {
           "addingRecipient": "Произошла ошибка при добавлении получателя. Пожалуйста, попробуйте еще раз."
         },
@@ -443,7 +439,6 @@
   },
   "FederatedFolder": {
     "title": "Общая папка",
-    "share": "Готово",
     "shareTitle": "Поделиться \"%{name}\"",
     "successNotification": "Папка была расшарена",
     "errorNotification": "Ошибка при расшаривании папки",

@@ -173,19 +173,6 @@ describe('ShareDialogCozyToCozy', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('main Done button calls onClose when there are no pending chips', () => {
-    const onClose = jest.fn()
-    const onShare = jest.fn()
-    const props = { ...getMockProps(), onClose, onShare }
-
-    const { getByRole } = setup(props)
-
-    fireEvent.click(getByRole('button', { name: 'Done' }))
-
-    expect(onShare).not.toHaveBeenCalled()
-    expect(onClose).toHaveBeenCalledTimes(1)
-  })
-
   it('close action closes dialog when there are no pending chips', () => {
     const onClose = jest.fn()
     const props = { ...getMockProps(), onClose }
@@ -197,7 +184,7 @@ describe('ShareDialogCozyToCozy', () => {
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
-  it('close action closes dialog when there are pending chips', () => {
+  it('asks before closing the dialog with unsent chips', () => {
     const onClose = jest.fn()
     const props = { ...getMockProps(), onClose }
 
@@ -224,11 +211,17 @@ describe('ShareDialogCozyToCozy', () => {
 
     fireEvent.click(getByRole('button', { name: 'Close' }))
 
-    expect(queryByText("Discard the changes you haven't saved?")).toBe(null)
+    expect(
+      queryByText("Discard the changes you haven't saved?")
+    ).toBeInTheDocument()
+    expect(onClose).not.toHaveBeenCalled()
+
+    fireEvent.click(getByRole('button', { name: 'Discard' }))
+
     expect(onClose).toHaveBeenCalledTimes(1)
   })
 
-  it('main Done button calls onShare with chips then closes', async () => {
+  it('sends the chips from the field without closing', async () => {
     const onClose = jest.fn()
     const onShare = jest.fn().mockResolvedValue(undefined)
     const props = { ...getMockProps(), onClose, onShare }
@@ -255,7 +248,7 @@ describe('ShareDialogCozyToCozy', () => {
     })
 
     await act(async () => {
-      fireEvent.click(getByRole('button', { name: 'Done' }))
+      fireEvent.click(getByRole('button', { name: 'Send' }))
     })
 
     expect(onShare).toHaveBeenCalledWith(
@@ -267,7 +260,7 @@ describe('ShareDialogCozyToCozy', () => {
         openSharing: true
       })
     )
-    expect(onClose).toHaveBeenCalledTimes(1)
+    expect(onClose).not.toHaveBeenCalled()
   })
 
   it(`should display confirmation of 'contact rejection' when user click on the 'reject' button`, async () => {
