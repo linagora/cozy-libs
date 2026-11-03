@@ -126,7 +126,6 @@
       "shareByEmail": {
         "subtitle": "Via email",
         "emailPlaceholder": "Aggiungi contatti",
-        "send": "Fatto",
         "singleContactSuccess": "Hai inviato un invito a %{email}.",
         "contactSuccess": "Hai inviato un invito a %{smart_count} contatto. |||| Hai inviato un invito a %{smart_count} contatti.",
         "singleGroupSuccess": "Hai inviato un invito ai membri del gruppo %{groupName}.",
@@ -194,7 +193,6 @@
         "subtitle": "Via email",
         "email": "A:",
         "emailPlaceholder": "Inserisci l'indirizzo email o il nome del destinatario",
-        "send": "Fatto",
         "singleContactSuccess": "Hai inviato un invito a %{email}.",
         "contactSuccess": "Hai inviato un invito a %{smart_count} contatto. |||| Hai inviato un invito a %{smart_count} contatti.",
         "singleGroupSuccess": "Hai inviato un invito ai membri del gruppo %{groupName}.",
@@ -263,7 +261,6 @@
         "subtitle": "Via email",
         "email": "email",
         "emailPlaceholder": "Inserisci l'indirizzo email o il nome del destinatario",
-        "send": "Fatto",
         "singleContactSuccess": "Hai inviato un invito a %{email}.",
         "contactSuccess": "Hai inviato un invito a %{smart_count} contatto. |||| Hai inviato un invito a %{smart_count} contatti.",
         "singleGroupSuccess": "Hai inviato un invito ai membri del gruppo %{groupName}.",
@@ -327,7 +324,6 @@
         "subtitle": "Via email",
         "email": "Invia a:",
         "emailPlaceholder": "Inserisci l'indirizzo email o il nome del destinatario",
-        "send": "Fatto",
         "error": {
           "addingRecipient": "Si è verificato un errore durante l'aggiunta del destinatario. Riprova."
         },
@@ -443,7 +439,6 @@
   },
   "FederatedFolder": {
     "title": "Cartella condivisa",
-    "share": "Fatto",
     "shareTitle": "Condividi \"%{name}\"",
     "successNotification": "La cartella è stata condivisa",
     "errorNotification": "Errore durante la condivisione della cartella",

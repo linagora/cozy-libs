@@ -126,7 +126,6 @@
       "shareByEmail": {
         "subtitle": "Por correo electrónico",
         "emailPlaceholder": "Añadir contactos",
-        "send": "Hecho",
         "singleContactSuccess": "Ha enviado una invitación a %{email}.",
         "contactSuccess": "Ha enviado una invitación a %{smart_count} contacto. |||| Ha enviado una invitación a %{smart_count} contactos.",
         "singleGroupSuccess": "Ha enviado una invitación a los miembros del grupo %{groupName}.",
@@ -194,7 +193,6 @@
         "subtitle": "Por correo electrónico",
         "email": "Para:",
         "emailPlaceholder": "Introduzca la dirección de correo electrónico o el nombre del destinatario",
-        "send": "Hecho",
         "singleContactSuccess": "Ha enviado una invitación a %{email}.",
         "contactSuccess": "Ha enviado una invitación a %{smart_count} contacto. |||| Ha enviado una invitación a %{smart_count} contactos.",
         "singleGroupSuccess": "Ha enviado una invitación a los miembros del grupo %{groupName}.",
@@ -263,7 +261,6 @@
         "subtitle": "Por correo electrónico",
         "email": "correo electrónico",
         "emailPlaceholder": "Introduzca la dirección de correo electrónico o el nombre del destinatario",
-        "send": "Hecho",
         "singleContactSuccess": "Ha enviado una invitación a %{email}.",
         "contactSuccess": "Ha enviado una invitación a %{smart_count} contacto. |||| Ha enviado una invitación a %{smart_count} contactos.",
         "singleGroupSuccess": "Ha enviado una invitación a los miembros del grupo %{groupName}.",
@@ -327,7 +324,6 @@
         "subtitle": "Por correo electrónico",
         "email": "Enviar a:",
         "emailPlaceholder": "Introduzca la dirección de correo electrónico o el nombre del destinatario",
-        "send": "Hecho",
         "error": {
           "addingRecipient": "Se ha producido un error al añadir el destinatario. Inténtelo de nuevo."
         },
@@ -443,7 +439,6 @@
   },
   "FederatedFolder": {
     "title": "Carpeta compartida",
-    "share": "Hecho",
     "shareTitle": "Compartir \"%{name}\"",
     "successNotification": "La carpeta se ha compartido",
     "errorNotification": "Error al compartir la carpeta",

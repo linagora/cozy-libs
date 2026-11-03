@@ -152,10 +152,7 @@ const FederatedFolderModalContent = ({
   ])
 
   const onSend = async () => {
-    if (isSending || pendingRecipients.length === 0) {
-      onClose()
-      return
-    }
+    if (isSending || pendingRecipients.length === 0) return
 
     setIsSending(true)
     setFrozenDoc(existingDocument)
@@ -180,7 +177,7 @@ const FederatedFolderModalContent = ({
         variant: 'filled'
       })
 
-      onClose()
+      setPendingRecipients([])
     } catch (_err) {
       showAlert({
         message: t('FederatedFolder.errorNotification'),
@@ -266,6 +263,8 @@ const FederatedFolderModalContent = ({
                   selectedOption={selectedOption}
                   onSelectedOptionChange={setSelectedOption}
                   enableCreateContact
+                  isSending={isSending}
+                  onSend={onSend}
                 />
               </>
             )}
@@ -287,23 +286,13 @@ const FederatedFolderModalContent = ({
         </div>
       }
       actions={
-        <>
-          <ShareByLink
-            link={displayedLink}
-            document={isSending ? frozenDoc : existingDocument}
-            documentType="Files"
-            showGenerateLinkButton={showGenerateLinkButton}
-            autoOpenShareRestriction={autoOpenShareRestriction}
-          />
-          {!isMemberReadOnly && (
-            <Button
-              variant="primary"
-              label={t('FederatedFolder.share')}
-              busy={isSending}
-              onClick={onSend}
-            />
-          )}
-        </>
+        <ShareByLink
+          link={displayedLink}
+          document={isSending ? frozenDoc : existingDocument}
+          documentType="Files"
+          showGenerateLinkButton={showGenerateLinkButton}
+          autoOpenShareRestriction={autoOpenShareRestriction}
+        />
       }
     />
   )

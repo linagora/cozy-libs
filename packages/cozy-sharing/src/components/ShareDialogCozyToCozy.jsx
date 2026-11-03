@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
-import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
 import { default as DumbShareByLink } from './ShareByLink'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
+import { ShareDiscardChangesModal } from './ShareDiscardChangesModal'
 import { ShareRecipientsLimitModal } from './ShareRecipientsLimitModal'
 import SharingContent from './SharingContent'
 import { hasReachRecipientsLimit } from '../helpers/recipients'
@@ -51,13 +51,11 @@ const ShareDialogCozyToCozy = ({
 
   const [submitting, setSubmitting] = useState(false)
   const [showRecipientsLimit, setShowRecipientsLimit] = useState(false)
+  const [isDiscardDialogOpen, setDiscardDialogOpen] = useState(false)
   const displayedLink = getSharingLink(document._id || document.id)
 
-  const handleShare = useCallback(async () => {
-    if (pendingRecipients.length === 0) {
-      onClose()
-      return
-    }
+  const handleSend = async () => {
+    if (pendingRecipients.length === 0) return
 
     if (hasReachRecipientsLimit(recipients, pendingRecipients)) {
       setShowRecipientsLimit(true)
@@ -87,7 +85,7 @@ const ShareDialogCozyToCozy = ({
         severity: 'success',
         variant: 'filled'
       })
-      onClose()
+      setPendingRecipients([])
     } catch (err) {
       showAlert({
         message: t(
@@ -105,50 +103,26 @@ const ShareDialogCozyToCozy = ({
     } finally {
       setSubmitting(false)
     }
-  }, [
-    pendingRecipients,
-    selectedOption,
-    resolveRecipients,
-    showAlert,
-    t,
-    recipients,
-    onShare,
-    onClose,
-    createContact,
-    document,
-    documentType,
-    sharingDesc
-  ])
+  }
+
+  const handleCloseRequest = () => {
+    if (pendingRecipients.length === 0) onClose()
+    else setDiscardDialogOpen(true)
+  }
 
   const dialogActionsOnShare = useMemo(() => {
+    if (!showShareByLink) return null
+
     const Actions = dialogActionProps => (
-      <>
-        {showShareByLink && (
-          <DumbShareByLink
-            {...dialogActionProps}
-            showGenerateLinkButton={showGenerateLinkButton}
-            autoOpenShareRestriction={autoOpenShareRestriction}
-          />
-        )}
-        <Button
-          variant="primary"
-          label={t(`${documentType}.share.shareByEmail.send`)}
-          busy={submitting}
-          onClick={handleShare}
-        />
-      </>
+      <DumbShareByLink
+        {...dialogActionProps}
+        showGenerateLinkButton={showGenerateLinkButton}
+        autoOpenShareRestriction={autoOpenShareRestriction}
+      />
     )
     Actions.displayName = 'ShareDialogCozyToCozyActions'
     return Actions
-  }, [
-    handleShare,
-    submitting,
-    t,
-    documentType,
-    showShareByLink,
-    showGenerateLinkButton,
-    autoOpenShareRestriction
-  ])
+  }, [showShareByLink, showGenerateLinkButton, autoOpenShareRestriction])
 
   return (
     <>
@@ -160,17 +134,25 @@ const ShareDialogCozyToCozy = ({
         recipients={recipients}
         sharingDesc={sharingDesc}
         createContact={createContact}
-        onShare={onShare}
-        onClose={onClose}
         dialogContentOnShare={SharingContent}
         dialogActionsOnShare={dialogActionsOnShare}
         dialogTitleOnShare={SharingTitleFunction({ documentType, document })}
         disableGutters
         pendingRecipients={pendingRecipients}
-        onPendingRecipientsChange={setPendingRecipients}
         selectedOption={selectedOption}
+        isSending={submitting}
+        onShare={onShare}
+        onClose={handleCloseRequest}
+        onPendingRecipientsChange={setPendingRecipients}
         onSelectedOptionChange={setSelectedOption}
+        onSend={handleSend}
       />
+      {isDiscardDialogOpen && (
+        <ShareDiscardChangesModal
+          onCancel={() => setDiscardDialogOpen(false)}
+          onConfirm={onClose}
+        />
+      )}
       {showRecipientsLimit && (
         <ShareRecipientsLimitModal
           documentName={document?.name}

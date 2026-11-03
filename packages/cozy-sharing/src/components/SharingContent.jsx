@@ -29,7 +29,9 @@ const SharingContent = ({
   pendingRecipients,
   onPendingRecipientsChange,
   selectedOption,
-  onSelectedOptionChange
+  onSelectedOptionChange,
+  isSending,
+  onSend
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -71,6 +73,8 @@ const SharingContent = ({
             selectedOption={selectedOption}
             onSelectedOptionChange={onSelectedOptionChange}
             enableCreateContact
+            isSending={isSending}
+            onSend={onSend}
           />
         )}
       </div>

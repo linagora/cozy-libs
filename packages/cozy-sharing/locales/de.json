@@ -126,7 +126,6 @@
       "shareByEmail": {
         "subtitle": "Per E-Mail",
         "emailPlaceholder": "Kontakte hinzufügen",
-        "send": "Fertig",
         "singleContactSuccess": "Sie haben eine Einladung an %{email} gesendet.",
         "contactSuccess": "Sie haben eine Einladung an %{smart_count} Kontakt gesendet. |||| Sie haben eine Einladung an %{smart_count} Kontakte gesendet.",
         "singleGroupSuccess": "Sie haben eine Einladung an die Mitglieder der Gruppe %{groupName} gesendet.",
@@ -194,7 +193,6 @@
         "subtitle": "Per E-Mail",
         "email": "An:",
         "emailPlaceholder": "Geben Sie die E-Mail-Adresse oder den Namen des Empfängers ein",
-        "send": "Fertig",
         "singleContactSuccess": "Sie haben eine Einladung an %{email} gesendet.",
         "contactSuccess": "Sie haben eine Einladung an %{smart_count} Kontakt gesendet. |||| Sie haben eine Einladung an %{smart_count} Kontakte gesendet.",
         "singleGroupSuccess": "Sie haben eine Einladung an die Mitglieder der Gruppe %{groupName} gesendet.",
@@ -263,7 +261,6 @@
         "subtitle": "Per E-Mail",
         "email": "E-Mail",
         "emailPlaceholder": "Geben Sie die E-Mail-Adresse oder den Namen des Empfängers ein",
-        "send": "Fertig",
         "singleContactSuccess": "Sie haben eine Einladung an %{email} gesendet.",
         "contactSuccess": "Sie haben eine Einladung an %{smart_count} Kontakt gesendet. |||| Sie haben eine Einladung an %{smart_count} Kontakte gesendet.",
         "singleGroupSuccess": "Sie haben eine Einladung an die Mitglieder der Gruppe %{groupName} gesendet.",
@@ -327,7 +324,6 @@
         "subtitle": "Per E-Mail",
         "email": "Senden an:",
         "emailPlaceholder": "Geben Sie die E-Mail-Adresse oder den Namen des Empfängers ein",
-        "send": "Fertig",
         "error": {
           "addingRecipient": "Beim Hinzufügen des Empfängers ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
         },
@@ -443,7 +439,6 @@
   },
   "FederatedFolder": {
     "title": "Geteilter Ordner",
-    "share": "Fertig",
     "shareTitle": "„%{name}“ teilen",
     "successNotification": "Der Ordner wurde geteilt",
     "errorNotification": "Fehler beim Teilen des Ordners",

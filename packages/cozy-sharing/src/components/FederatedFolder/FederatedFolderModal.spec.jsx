@@ -241,7 +241,7 @@ describe('FederatedFolderModal', () => {
       })
 
       await findByText('Add users')
-      await findByText('Done')
+      await findByText('Send')
 
       expect(
         queryByText('This folder can only be shared by link, because')
@@ -378,20 +378,6 @@ describe('FederatedFolderModal', () => {
   describe('onSend callback', () => {
     const pendingRecipient = { name: 'Alice', email: 'alice@example.com' }
 
-    it('should call onClose and skip share when there are no pending recipients', async () => {
-      // pendingRecipients defaults to [] via beforeEach
-      const { findByText } = setup()
-
-      const sendButton = await findByText('Done')
-
-      fireEvent.click(sendButton)
-
-      await waitFor(() => {
-        expect(mockOnClose).toHaveBeenCalled()
-        expect(mockShare).not.toHaveBeenCalled()
-      })
-    })
-
     it('should call share with correct parameters', async () => {
       usePendingRecipients.mockReturnValue({
         pendingRecipients: [pendingRecipient],
@@ -403,7 +389,7 @@ describe('FederatedFolderModal', () => {
       mockShare.mockResolvedValueOnce({})
       const { findByText } = setup()
 
-      const sendButton = await findByText('Done')
+      const sendButton = await findByText('Send')
 
       fireEvent.click(sendButton)
 
@@ -419,10 +405,11 @@ describe('FederatedFolderModal', () => {
       })
     })
 
-    it('should show success alert and close modal on successful share', async () => {
+    it('should show success alert and empty the field without closing on successful share', async () => {
+      const setPendingRecipients = jest.fn()
       usePendingRecipients.mockReturnValue({
         pendingRecipients: [pendingRecipient],
-        setPendingRecipients: jest.fn(),
+        setPendingRecipients,
         selectedOption: 'readWrite',
         setSelectedOption: jest.fn()
       })
@@ -430,7 +417,7 @@ describe('FederatedFolderModal', () => {
       mockShare.mockResolvedValueOnce({})
       const { findByText } = setup()
 
-      const sendButton = await findByText('Done')
+      const sendButton = await findByText('Send')
 
       fireEvent.click(sendButton)
 
@@ -440,7 +427,8 @@ describe('FederatedFolderModal', () => {
           severity: 'success',
           variant: 'filled'
         })
-        expect(mockOnClose).toHaveBeenCalled()
+        expect(setPendingRecipients).toHaveBeenCalledWith([])
+        expect(mockOnClose).not.toHaveBeenCalled()
       })
     })
 
@@ -455,7 +443,7 @@ describe('FederatedFolderModal', () => {
       mockShare.mockRejectedValueOnce(new Error('Share failed'))
       const { findByText } = setup()
 
-      const sendButton = await findByText('Done')
+      const sendButton = await findByText('Send')
 
       fireEvent.click(sendButton)
 
@@ -469,7 +457,7 @@ describe('FederatedFolderModal', () => {
       })
     })
 
-    it('should show progress icon on Done button while share is in progress', async () => {
+    it('should disable the send button while share is in progress', async () => {
       usePendingRecipients.mockReturnValue({
         pendingRecipients: [pendingRecipient],
         setPendingRecipients: jest.fn(),
@@ -483,15 +471,14 @@ describe('FederatedFolderModal', () => {
           resolveShare = resolve
         })
       )
-      const { findByText, getByRole, queryByRole } = setup()
+      const { findByText, getByRole } = setup()
 
-      const sendButton = await findByText('Done')
+      const sendButton = await findByText('Send')
 
       fireEvent.click(sendButton)
 
       await waitFor(() => {
-        expect(getByRole('button', { name: 'Done' })).toBeDisabled()
-        expect(queryByRole('progressbar')).not.toBeNull()
+        expect(getByRole('button', { name: 'Send' })).toBeDisabled()
       })
 
       await act(async () => {

@@ -33,7 +33,8 @@ const ShareAutosuggestWrapper = ({
   roles,
   role,
   onChange,
-  onRoleChange
+  onRoleChange,
+  onSubmit
 }) => {
   const contactsSuggestEnabled = useSharingContext()?.contactsSuggestEnabled
   const hasRecipientGroups = Boolean(flag('sharing.show-recipient-groups'))
@@ -96,6 +97,7 @@ const ShareAutosuggestWrapper = ({
       role={role}
       onChange={onChange}
       onRoleChange={onRoleChange}
+      onSubmit={onSubmit}
     />
   )
 }
@@ -115,7 +117,8 @@ ShareAutosuggestWrapper.propTypes = {
   ),
   role: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  onRoleChange: PropTypes.func
+  onRoleChange: PropTypes.func,
+  onSubmit: PropTypes.func
 }
 
 ShareAutosuggestWrapper.defaultProps = {

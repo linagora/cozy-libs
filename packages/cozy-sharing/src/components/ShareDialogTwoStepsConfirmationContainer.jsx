@@ -113,7 +113,9 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   pendingRecipients,
   onPendingRecipientsChange,
   selectedOption,
-  onSelectedOptionChange
+  onSelectedOptionChange,
+  isSending,
+  onSend
 }) => {
   const { t } = useI18n()
 
@@ -232,6 +234,8 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         onPendingRecipientsChange={onPendingRecipientsChange}
         selectedOption={selectedOption}
         onSelectedOptionChange={onSelectedOptionChange}
+        isSending={isSending}
+        onSend={onSend}
       />
     )
 
