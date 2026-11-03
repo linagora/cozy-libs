@@ -41,10 +41,8 @@ describe('ShareByEmail (controlled)', () => {
       })
     })
     act(() => {
-      fireEvent.keyPress(screen.getByPlaceholderText('Add contacts'), {
-        key: 'Enter',
-        code: 'Enter',
-        charCode: 13
+      fireEvent.keyDown(screen.getByPlaceholderText('Add contacts'), {
+        key: 'Enter'
       })
     })
 

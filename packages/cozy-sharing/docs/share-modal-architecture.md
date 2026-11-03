@@ -24,6 +24,7 @@ flowchart TD
     DumbConfirmTrustedRecipientsDialog --> ShareDialogTwoStepsConfirmationContainer
     ShareByEmail --> ShareAutosuggestWrapper
     ShareAutosuggestWrapper --> ShareAutosuggest
+    ShareAutosuggest --> |cozy-ui|MemberAutocomplete
 ```
 
 ### Specific case of `ShareDialogTwoStepsConfirmationContainer`
