@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [43.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@42.0.1...cozy-sharing@43.0.0) (2026-11-03)
+
+### Code Refactoring
+
+- **cozy-sharing:** Use the invite field of cozy-ui ([0d3e502](https://github.com/cozy/cozy-libs/commit/0d3e502104b4f3d5ec919cc157b2670b900b3cc1))
+
+### Features
+
+- **cozy-sharing:** Give the invite title to the field ([48615a4](https://github.com/cozy/cozy-libs/commit/48615a422e7edae8f7b54fc0e7033ee7471cf3de))
+- **cozy-sharing:** Send the invitations from the invite field ([d4c91dc](https://github.com/cozy/cozy-libs/commit/d4c91dc6e51ce5b8ee1b24ee8df337a163be2fbb))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** ShareModal and FederatedFolderModal no longer close
+  after sending the invitations, and their Done and Share buttons are
+  removed. The locale keys `<documentType>.share.shareByEmail.send` and
+  `FederatedFolder.share` are removed: drop their overrides in the app.
+- **cozy-sharing:** cozy-sharing needs cozy-ui 146.3.1 or later for its
+  invite field: upgrade cozy-ui in the app.
+
 ## [42.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@42.0.0...cozy-sharing@42.0.1) (2026-11-02)
 
 ### Bug Fixes
