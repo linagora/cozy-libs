@@ -214,15 +214,11 @@ describe('ShareDialogCozyToCozy', () => {
       )
     })
     act(() => {
-      fireEvent.keyPress(
+      fireEvent.keyDown(
         getByPlaceholderText(
           'Enter the email address or name of the recipient'
         ),
-        {
-          key: 'Enter',
-          code: 'Enter',
-          charCode: 13
-        }
+        { key: 'Enter' }
       )
     })
 
@@ -250,15 +246,11 @@ describe('ShareDialogCozyToCozy', () => {
       )
     })
     act(() => {
-      fireEvent.keyPress(
+      fireEvent.keyDown(
         getByPlaceholderText(
           'Enter the email address or name of the recipient'
         ),
-        {
-          key: 'Enter',
-          code: 'Enter',
-          charCode: 13
-        }
+        { key: 'Enter' }
       )
     })
 

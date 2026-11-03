@@ -1,9 +1,41 @@
-import { getPrimaryCozy } from 'cozy-client/dist/models/contact'
+import {
+  getPrimaryCozy,
+  getPrimaryEmail
+} from 'cozy-client/dist/models/contact'
 import flag from 'cozy-flags'
 
 import { DOCTYPE_GROUPS } from '../models'
 
 export const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
+
+// The stack matches the emails whatever their case
+const normalizeEmail = email => email?.trim().toLowerCase()
+
+/**
+ * Whether an email belongs to a current recipient of the sharing or to a pending one
+ *
+ * @param {object} params
+ * @param {string} params.email - Email to look for
+ * @param {object[]} params.currentRecipients - Recipients of the sharing
+ * @param {object[]} params.pendingRecipients - Contacts picked to be invited
+ * @returns {boolean}
+ */
+export const isRecipientEmail = ({
+  email,
+  currentRecipients,
+  pendingRecipients
+}) => {
+  const normalizedEmail = normalizeEmail(email)
+  return (
+    currentRecipients.some(
+      recipient => normalizeEmail(recipient.email) === normalizedEmail
+    ) ||
+    pendingRecipients.some(
+      recipient =>
+        normalizeEmail(getPrimaryEmail(recipient)) === normalizedEmail
+    )
+  )
+}
 
 /**
  * @returns {boolean} the maximum recipients limit by document

@@ -5,7 +5,6 @@ import flag from 'cozy-flags'
 import { useI18n } from 'twake-i18n'
 
 import ShareAutosuggestWrapper from './ShareAutosuggestWrapper'
-import ShareTypeSelect from './Sharetypeselect'
 import {
   mergeRecipients,
   spreadGroupAndMergeRecipients
@@ -27,19 +26,17 @@ export const ShareByEmail = ({
 }) => {
   const { t } = useI18n()
 
-  const onRecipientPick = recipient => {
-    const merged = flag('sharing.show-recipient-groups')
-      ? mergeRecipients(pendingRecipients, recipient)
-      : spreadGroupAndMergeRecipients(pendingRecipients, recipient)
-    onPendingRecipientsChange(merged)
-  }
-
-  const onRecipientRemove = recipient => {
-    const idx = pendingRecipients.findIndex(r => r === recipient)
-    onPendingRecipientsChange([
-      ...pendingRecipients.slice(0, idx),
-      ...pendingRecipients.slice(idx + 1)
-    ])
+  const onRecipientsChange = recipients => {
+    const merge = flag('sharing.show-recipient-groups')
+      ? mergeRecipients
+      : spreadGroupAndMergeRecipients
+    const keptRecipients = pendingRecipients.filter(recipient =>
+      recipients.includes(recipient)
+    )
+    const addedRecipients = recipients.filter(
+      recipient => !pendingRecipients.includes(recipient)
+    )
+    onPendingRecipientsChange(addedRecipients.reduce(merge, keptRecipients))
   }
 
   const getSharingOptions = () => {
@@ -57,28 +54,21 @@ export const ShareByEmail = ({
     return isSharingReadOnly ? [readOnly] : [readWrite, readOnly]
   }
 
+  const roles = getSharingOptions()
+
   return (
     <div className={styles['coz-form-group']}>
       <div className={styles['coz-form']}>
         <ShareAutosuggestWrapper
-          placeholder={
-            pendingRecipients.length === 0
-              ? t(`${documentType}.share.shareByEmail.emailPlaceholder`)
-              : ''
-          }
+          placeholder={t(`${documentType}.share.shareByEmail.emailPlaceholder`)}
           enableCreateContact={enableCreateContact}
           currentRecipients={currentRecipients}
           recipients={pendingRecipients}
           autoFocus={autoFocus}
-          endAdornment={
-            <ShareTypeSelect
-              value={selectedOption}
-              options={getSharingOptions()}
-              onChange={onSelectedOptionChange}
-            />
-          }
-          onPick={onRecipientPick}
-          onRemove={onRecipientRemove}
+          roles={roles}
+          role={selectedOption}
+          onChange={onRecipientsChange}
+          onRoleChange={onSelectedOptionChange}
         />
       </div>
     </div>

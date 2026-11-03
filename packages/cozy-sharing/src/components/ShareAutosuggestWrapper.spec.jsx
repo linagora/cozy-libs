@@ -12,29 +12,20 @@ jest.mock('cozy-flags', () => ({
   default: jest.fn(() => null)
 }))
 
-let mockAutosuggestProps
-jest.mock('./ShareAutosuggest', () => ({
+let mockAutocompleteProps
+jest.mock('cozy-ui/transpiled/react/MemberAutocomplete', () => ({
   __esModule: true,
   default: props => {
-    mockAutosuggestProps = props
-    const { contactsAndGroups } = props
+    mockAutocompleteProps = props
     return (
       <ul>
-        {contactsAndGroups.map(contactOrGroup => {
-          if (contactOrGroup._type === 'io.cozy.contacts') {
-            return (
-              <li key={contactOrGroup.id}>
-                {contactOrGroup.name.givenName} {contactOrGroup.name.familyName}
-              </li>
-            )
-          } else {
-            return (
-              <li key={contactOrGroup.id}>
-                {contactOrGroup.name} - {contactOrGroup.members.length} members
-              </li>
-            )
-          }
-        })}
+        {props.getSuggestions('').map(suggestion => (
+          <li key={suggestion.id}>
+            {suggestion.isGroup
+              ? `${suggestion.name} - ${suggestion.subtitle}`
+              : suggestion.name}
+          </li>
+        ))}
       </ul>
     )
   }
@@ -71,8 +62,7 @@ describe('ShareAutosuggestWrapper component', () => {
         sharingContextValue={{ contactsSuggestEnabled }}
       >
         <ShareAutosuggestWrapper
-          onPick={() => {}}
-          onRemove={() => {}}
+          onChange={() => {}}
           placeholder="Enter recipients here"
           currentRecipients={currentRecipients}
           recipients={recipients}
@@ -88,6 +78,7 @@ describe('ShareAutosuggestWrapper component', () => {
         id: 'df563cc4-6440',
         _id: 'df563cc4-6440',
         _type: 'io.cozy.contacts',
+        fullname: 'Michale Russel',
         name: {
           givenName: 'Michale',
           familyName: 'Russel'
@@ -97,6 +88,7 @@ describe('ShareAutosuggestWrapper component', () => {
         id: '5a3b4ccf-c257',
         _id: '5a3b4ccf-c257',
         _type: 'io.cozy.contacts',
+        fullname: 'Teagan Wolf',
         name: {
           givenName: 'Teagan',
           familyName: 'Wolf'
@@ -127,9 +119,7 @@ describe('ShareAutosuggestWrapper component', () => {
 
     expect(screen.getByText('Michale Russel')).toBeInTheDocument()
     expect(screen.getByText('Teagan Wolf')).toBeInTheDocument()
-    expect(
-      screen.getByText("The Night's Watch - 1 members")
-    ).toBeInTheDocument()
+    expect(screen.getByText("The Night's Watch - 1 member")).toBeInTheDocument()
   })
 
   it('should exclude current user from suggestions when me is true', async () => {
@@ -139,6 +129,7 @@ describe('ShareAutosuggestWrapper component', () => {
         _id: 'df563cc4-6440',
         _type: 'io.cozy.contacts',
         me: true,
+        fullname: 'My Self',
         name: {
           givenName: 'My',
           familyName: 'Self'
@@ -158,6 +149,7 @@ describe('ShareAutosuggestWrapper component', () => {
         id: '5a3b4ccf-c257',
         _id: '5a3b4ccf-c257',
         _type: 'io.cozy.contacts',
+        fullname: 'Teagan Wolf',
         name: {
           givenName: 'Teagan',
           familyName: 'Wolf'
@@ -188,7 +180,7 @@ describe('ShareAutosuggestWrapper component', () => {
 
     expect(screen.queryByText('My Self')).not.toBeInTheDocument()
     expect(screen.getByText('Teagan Wolf')).toBeInTheDocument()
-    expect(screen.getByText('Friends - 1 members')).toBeInTheDocument()
+    expect(screen.getByText('Friends - 1 member')).toBeInTheDocument()
   })
 
   it('should exclude already added recipients from suggestions', async () => {
@@ -197,6 +189,7 @@ describe('ShareAutosuggestWrapper component', () => {
         id: 'df563cc4-6440',
         _id: 'df563cc4-6440',
         _type: 'io.cozy.contacts',
+        fullname: 'Michale Russel',
         name: {
           givenName: 'Michale',
           familyName: 'Russel'
@@ -207,6 +200,7 @@ describe('ShareAutosuggestWrapper component', () => {
         id: '5a3b4ccf-c257',
         _id: '5a3b4ccf-c257',
         _type: 'io.cozy.contacts',
+        fullname: 'Teagan Wolf',
         name: {
           givenName: 'Teagan',
           familyName: 'Wolf'
@@ -237,6 +231,7 @@ describe('ShareAutosuggestWrapper component', () => {
         id: 'df563cc4-6440',
         _id: 'df563cc4-6440',
         _type: 'io.cozy.contacts',
+        fullname: 'Michale Russel',
         name: {
           givenName: 'Michale',
           familyName: 'Russel'
@@ -246,6 +241,7 @@ describe('ShareAutosuggestWrapper component', () => {
         id: '5a3b4ccf-c257',
         _id: '5a3b4ccf-c257',
         _type: 'io.cozy.contacts',
+        fullname: 'Teagan Wolf',
         name: {
           givenName: 'Teagan',
           familyName: 'Wolf'
@@ -277,6 +273,7 @@ describe('ShareAutosuggestWrapper component', () => {
         id: 'df532cc4-6560',
         _id: 'df532cc4-6560',
         _type: 'io.cozy.contacts',
+        fullname: 'Tony Stark',
         name: {
           givenName: 'Tony',
           familyName: 'Stark'
@@ -317,6 +314,7 @@ describe('ShareAutosuggestWrapper component', () => {
           id: '5a3b4ccf-c257',
           _id: '5a3b4ccf-c257',
           _type: 'io.cozy.contacts',
+          fullname: 'Teagan Wolf',
           name: { givenName: 'Teagan', familyName: 'Wolf' },
           relationships: {
             groups: {
@@ -336,7 +334,7 @@ describe('ShareAutosuggestWrapper component', () => {
 
       setup({ contactGroups, groupMembers }, { contactsSuggestEnabled: true })
 
-      expect(screen.getByText('Friends - 1 members')).toBeInTheDocument()
+      expect(screen.getByText('Friends - 1 member')).toBeInTheDocument()
       expect(screen.queryByText('Teagan Wolf')).not.toBeInTheDocument()
     })
 
@@ -362,9 +360,11 @@ describe('ShareAutosuggestWrapper component', () => {
       })
       jest.spyOn(mockClient, 'getStackClient').mockReturnValue({ fetchJSON })
 
-      const contacts = await mockAutosuggestProps.fetchContacts('coz')
+      const suggestions = await mockAutocompleteProps.fetchSuggestions('coz')
 
-      expect(contacts.map(c => c.fullname)).toEqual(['new@cozy.cc'])
+      expect(suggestions.map(suggestion => suggestion.name)).toEqual([
+        'new@cozy.cc'
+      ])
     })
   })
 })

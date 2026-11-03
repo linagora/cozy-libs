@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { useClient, useQueryAll, isQueryLoading } from 'cozy-client'
-import { models } from 'cozy-client'
+import { useQueryAll } from 'cozy-client'
 import flag from 'cozy-flags'
 
 import ShareAutosuggest from './ShareAutosuggest'
-import { computeContactsAndGroups, suggestContacts } from '../helpers/contacts'
-import { makeAvatarUrl } from '../helpers/recipients'
+import {
+  computeContactsAndGroups,
+  isAnyContactQueryLoading
+} from '../helpers/contacts'
 import { useSharingContext } from '../hooks/useSharingContext'
 import { DOCTYPE_GROUPS } from '../models'
 import {
@@ -15,8 +16,6 @@ import {
   buildContactGroupsQuery,
   buildUnreachableContactsWithGroupsQuery
 } from '../queries/queries'
-
-const ContactModel = models.contact
 
 /**
  * ShareAutosuggestWrapper is responsible for fetching contacts and groups.
@@ -31,12 +30,13 @@ const ShareAutosuggestWrapper = ({
   enableCreateContact,
   disabled,
   autoFocus,
-  endAdornment,
-  onPick,
-  onRemove
+  roles,
+  role,
+  onChange,
+  onRoleChange
 }) => {
-  const client = useClient()
   const contactsSuggestEnabled = useSharingContext()?.contactsSuggestEnabled
+  const hasRecipientGroups = Boolean(flag('sharing.show-recipient-groups'))
 
   const reachableContactsQuery = buildReachableContactsQuery({
     inGroups: contactsSuggestEnabled
@@ -52,7 +52,7 @@ const ShareAutosuggestWrapper = ({
     unreachableContactsWithGroupsQuery.definition,
     {
       ...unreachableContactsWithGroupsQuery.options,
-      enabled: !!flag('sharing.show-recipient-groups')
+      enabled: hasRecipientGroups
     }
   )
 
@@ -62,14 +62,11 @@ const ShareAutosuggestWrapper = ({
     contactGroupsQuery.options
   )
 
-  const isLoading =
-    isQueryLoading(reachableContactsResult) ||
-    reachableContactsResult.hasMore ||
-    isQueryLoading(contactGroupsResult) ||
-    contactGroupsResult.hasMore ||
-    (flag('sharing.show-recipient-groups') &&
-      (isQueryLoading(unreachableContactsWithGroupsResult) ||
-        unreachableContactsWithGroupsResult.hasMore))
+  const isLoading = isAnyContactQueryLoading([
+    reachableContactsResult,
+    contactGroupsResult,
+    ...(hasRecipientGroups ? [unreachableContactsWithGroupsResult] : [])
+  ])
 
   const suggestedContactsAndGroups = computeContactsAndGroups({
     reachableContacts: reachableContactsResult.data || [],
@@ -84,34 +81,21 @@ const ShareAutosuggestWrapper = ({
     ? suggestedContactsAndGroups.filter(({ _type }) => _type === DOCTYPE_GROUPS)
     : suggestedContactsAndGroups
 
-  // The stack matches the emails whatever their case
-  const normalizeEmail = email => email?.trim().toLowerCase()
-  const isRecipient = email =>
-    currentRecipients.some(r => normalizeEmail(r.email) === email) ||
-    recipients.some(
-      r => normalizeEmail(ContactModel.getPrimaryEmail(r)) === email
-    )
-
-  const fetchContacts = async q =>
-    (await suggestContacts(client, q)).filter(
-      contact =>
-        !isRecipient(normalizeEmail(ContactModel.getPrimaryEmail(contact)))
-    )
-
   return (
     <ShareAutosuggest
-      loading={isLoading}
-      disabled={disabled}
       contactsAndGroups={contactsAndGroups}
+      currentRecipients={currentRecipients}
       recipients={recipients}
-      onPick={onPick}
-      onRemove={onRemove}
-      enableCreateContact={enableCreateContact}
       placeholder={placeholder}
+      isLoading={isLoading}
+      contactsSuggestEnabled={contactsSuggestEnabled}
+      enableCreateContact={enableCreateContact}
+      disabled={disabled}
       autoFocus={autoFocus}
-      endAdornment={endAdornment}
-      fetchContacts={contactsSuggestEnabled ? fetchContacts : undefined}
-      getAvatarUrl={recipient => makeAvatarUrl(recipient, client.options.uri)}
+      roles={roles}
+      role={role}
+      onChange={onChange}
+      onRoleChange={onRoleChange}
     />
   )
 }
@@ -123,14 +107,21 @@ ShareAutosuggestWrapper.propTypes = {
   enableCreateContact: PropTypes.bool,
   disabled: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  endAdornment: PropTypes.node,
-  onPick: PropTypes.func.isRequired,
-  onRemove: PropTypes.func.isRequired
+  roles: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ),
+  role: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  onRoleChange: PropTypes.func
 }
 
 ShareAutosuggestWrapper.defaultProps = {
   currentRecipients: [],
-  recipients: []
+  recipients: [],
+  autoFocus: true
 }
 
 export default ShareAutosuggestWrapper

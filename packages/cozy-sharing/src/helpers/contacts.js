@@ -1,8 +1,10 @@
-import { models } from 'cozy-client'
+import { isQueryLoading, models } from 'cozy-client'
 import flag from 'cozy-flags'
 
-import { validateEmail } from '../helpers/email'
+import { extractEmails, validateEmail } from '../helpers/email'
+import { isRecipientEmail } from '../helpers/recipients'
 import { DOCTYPE_CONTACTS, DOCTYPE_GROUPS } from '../models'
+import { contactOrGroupMatch } from '../suggestionMatchers'
 
 const ContactModel = models.contact
 
@@ -171,4 +173,48 @@ export const computeContactsAndGroups = ({
     })
 
   return [...suggestedContacts, ...suggestedGroups]
+}
+
+/**
+ * Whether a contact query is still loading or has more pages to load
+ *
+ * @param {object[]} queryResults - Results of the contact queries
+ * @returns {boolean}
+ */
+export const isAnyContactQueryLoading = queryResults =>
+  queryResults.some(result => isQueryLoading(result) || result.hasMore)
+
+export const filterContactsAndGroups = (contactsAndGroups, query) =>
+  contactsAndGroups.filter(contactOrGroup =>
+    contactOrGroupMatch(query.toLowerCase(), contactOrGroup)
+  )
+
+export const makeContactsFromText = text =>
+  (extractEmails(text) ?? []).map(email => ({ email }))
+
+/**
+ * Fetches the contacts the stack suggests for a text, without the current and pending recipients
+ *
+ * @param {object} params
+ * @param {object} params.client - CozyClient instance
+ * @param {string} params.query - Typed text
+ * @param {object[]} params.currentRecipients - Recipients of the sharing
+ * @param {object[]} params.pendingRecipients - Contacts picked to be invited
+ * @returns {Promise<object[]>}
+ */
+export const fetchSuggestedContacts = async ({
+  client,
+  query,
+  currentRecipients,
+  pendingRecipients
+}) => {
+  const contacts = await suggestContacts(client, query)
+  return contacts.filter(
+    contact =>
+      !isRecipientEmail({
+        email: ContactModel.getPrimaryEmail(contact),
+        currentRecipients,
+        pendingRecipients
+      })
+  )
 }
