@@ -2,7 +2,7 @@ import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { generateWebLink, useClient } from 'cozy-client'
+import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -14,9 +14,9 @@ import {
   copyToClipboard,
   updatePermissions,
   makeTTL,
-  createPermissions
+  createPermissions,
+  generateShareLinkFromFile
 } from './helpers'
-import { getAppSlugFromDocumentType } from '../../helpers/link'
 import {
   checkIsPermissionHasExpiresDate,
   checkIsPermissionHasPassword,
@@ -39,7 +39,9 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     getDocumentPermissions,
     updateDocumentPermissions,
     shareByLink,
-    getSharingLink
+    getSharingLink,
+    getOwner,
+    getSharingById
   } = useSharingContext()
 
   const hasSharingLink = getSharingLink(file._id) !== null
@@ -92,12 +94,13 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
         }).then(({ data: perms }) => perms)
 
     const urlPromise = permsPromise.then(perms =>
-      generateWebLink({
-        cozyUrl: client.getStackClient().uri,
-        searchParams: [['sharecode', perms.attributes.shortcodes.code]],
-        pathname: '/public',
-        slug: getAppSlugFromDocumentType({ documentType }),
-        subDomainType: client.capabilities.flat_subdomains ? 'flat' : 'nested'
+      generateShareLinkFromFile({
+        client,
+        file,
+        sharecode: perms.attributes.shortcodes.code,
+        getOwner,
+        getSharingById,
+        documentType
       })
     )
 
