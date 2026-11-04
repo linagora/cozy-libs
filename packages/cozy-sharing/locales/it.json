@@ -36,7 +36,7 @@
     },
     "contacts": {
       "whoHasAccess": "Chi ha accesso?",
-      "addUsers": "Aggiungi utenti",
+      "addUsers": "Invita utenti",
       "permissionRequired": {
         "title": "Salvare i tuoi contatti nel tuo Twake?",
         "desc": "Autorizza l'applicazione ad accedere ai contatti del tuo Twake: potrai selezionarli la prossima volta.",
@@ -75,7 +75,23 @@
         "readWrite": "scrittura"
       }
     },
-    "send": "Invia..."
+    "send": "Invia...",
+    "publicAccess": {
+      "divider": "Oppure condividi tramite link",
+      "title": "Accesso pubblico",
+      "settings": "Impostazioni del link di condivisione",
+      "restricted": "Limitato",
+      "status": {
+        "restricted": "Solo gli utenti aggiunti tramite e-mail possono aprirlo",
+        "view": "Chiunque riceva questo link può visualizzare il file.",
+        "edit": "Chiunque riceva questo link può modificare il file.",
+        "password": "Protetto da password.",
+        "expires": "Scade il %{date}",
+        "passwordAndExpires": "Protetto da password. Scade il %{date}"
+      },
+      "sendByEmail": "Invia via e-mail",
+      "sendByChat": "Invia via chat"
+    }
   },
   "Sharings": {
     "unavailable": {
@@ -107,6 +123,7 @@
         "send": "Invia il link",
         "copy": "Copia il link",
         "copied": "Il link è stato copiato negli appunti",
+        "copiedButton": "Copiato",
         "failed": "Impossibile copiare negli appunti",
         "permserror": "Si è verificato un errore durante la modifica delle autorizzazioni del link, riprova.",
         "shareDescription": "Ecco il link al documento %{name}:"
@@ -172,6 +189,7 @@
         "send": "Invia il link",
         "copy": "Copia il link",
         "copied": "Il link è stato copiato negli appunti",
+        "copiedButton": "Copiato",
         "failed": "Impossibile copiare negli appunti",
         "permserror": "Si è verificato un errore durante la modifica delle autorizzazioni del link, riprova.",
         "shareDescription": "Ecco il link al documento %{name}:"
@@ -237,6 +255,7 @@
         "send": "Invia il link",
         "copy": "Copia il link",
         "copied": "Il link è stato copiato negli appunti",
+        "copiedButton": "Copiato",
         "failed": "Impossibile copiare negli appunti",
         "permserror": "Si è verificato un errore durante la modifica delle autorizzazioni del link, riprova.",
         "fetchFailed": "Ops! Sembra che la tua connessione sia limitata, riprova più tardi quando migliorerà.",
@@ -301,6 +320,7 @@
         "send": "Invia il link",
         "copy": "Copia il link",
         "copied": "Il link è stato copiato negli appunti",
+        "copiedButton": "Copiato",
         "failed": "Impossibile copiare negli appunti",
         "permserror": "Si è verificato un errore durante la modifica delle autorizzazioni del link, riprova.",
         "shareDescription": "Ecco il link al documento %{name}:"
@@ -393,7 +413,7 @@
     }
   },
   "ShareRestrictionModal": {
-    "title": "Link di condivisione",
+    "title": "Impostazioni del link di condivisione",
     "action": {
       "confirm": "Conferma"
     },
@@ -460,5 +480,8 @@
     "error": {
       "persistence": "Impossibile salvare le autorizzazioni del link. Riprova."
     }
+  },
+  "MemberAutocomplete": {
+    "send": "Condividi"
   }
 }

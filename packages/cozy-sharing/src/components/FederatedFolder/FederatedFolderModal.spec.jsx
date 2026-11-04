@@ -213,7 +213,7 @@ describe('FederatedFolderModal', () => {
 
       await findByText('Copy link')
 
-      expect(queryByText('Add users')).toBe(null)
+      expect(queryByText('Invite users')).toBe(null)
       expect(queryByText('Done')).toBe(null)
     })
 
@@ -241,8 +241,8 @@ describe('FederatedFolderModal', () => {
         }
       })
 
-      await findByText('Add users')
-      await findByText('Send')
+      await findByText('Invite users')
+      await findByText('Share')
 
       expect(
         queryByText('This folder can only be shared by link, because')
@@ -267,7 +267,7 @@ describe('FederatedFolderModal', () => {
         }
       })
 
-      await findByText('Add users')
+      await findByText('Invite users')
 
       expect(
         queryByText('This folder can only be shared by link, because')
@@ -288,7 +288,7 @@ describe('FederatedFolderModal', () => {
         }
       })
 
-      await findByText('Add users')
+      await findByText('Invite users')
 
       expect(
         queryByText('This folder can only be shared by link, because')
@@ -390,7 +390,7 @@ describe('FederatedFolderModal', () => {
       mockShare.mockResolvedValueOnce({})
       const { findByText } = setup()
 
-      const sendButton = await findByText('Send')
+      const sendButton = await findByText('Share')
 
       fireEvent.click(sendButton)
 
@@ -418,7 +418,7 @@ describe('FederatedFolderModal', () => {
       mockShare.mockResolvedValueOnce({})
       const { findByText } = setup()
 
-      const sendButton = await findByText('Send')
+      const sendButton = await findByText('Share')
 
       fireEvent.click(sendButton)
 
@@ -444,7 +444,7 @@ describe('FederatedFolderModal', () => {
       mockShare.mockRejectedValueOnce(new Error('Share failed'))
       const { findByText } = setup()
 
-      const sendButton = await findByText('Send')
+      const sendButton = await findByText('Share')
 
       fireEvent.click(sendButton)
 
@@ -474,12 +474,12 @@ describe('FederatedFolderModal', () => {
       )
       const { findByText, getByRole } = setup()
 
-      const sendButton = await findByText('Send')
+      const sendButton = await findByText('Share')
 
       fireEvent.click(sendButton)
 
       await waitFor(() => {
-        expect(getByRole('button', { name: 'Send' })).toBeDisabled()
+        expect(getByRole('button', { name: 'Share' })).toBeDisabled()
       })
 
       await act(async () => {

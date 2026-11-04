@@ -36,7 +36,7 @@
     },
     "contacts": {
       "whoHasAccess": "¿Quién tiene acceso?",
-      "addUsers": "Añadir usuarios",
+      "addUsers": "Invitar usuarios",
       "permissionRequired": {
         "title": "¿Guardar sus contactos en su Twake?",
         "desc": "Autorice a la aplicación a acceder a los contactos de su Twake: podrá seleccionarlos la próxima vez.",
@@ -75,7 +75,23 @@
         "readWrite": "escritura"
       }
     },
-    "send": "Enviar..."
+    "send": "Enviar...",
+    "publicAccess": {
+      "divider": "O compartir mediante enlace",
+      "title": "Acceso público",
+      "settings": "Ajustes del enlace para compartir",
+      "restricted": "Restringido",
+      "status": {
+        "restricted": "Solo los usuarios añadidos por correo electrónico pueden abrirlo",
+        "view": "Cualquiera que reciba este enlace puede ver el archivo.",
+        "edit": "Cualquiera que reciba este enlace puede editar el archivo.",
+        "password": "Protegido con contraseña.",
+        "expires": "Caduca el %{date}",
+        "passwordAndExpires": "Protegido con contraseña. Caduca el %{date}"
+      },
+      "sendByEmail": "Enviar por correo electrónico",
+      "sendByChat": "Enviar por chat"
+    }
   },
   "Sharings": {
     "unavailable": {
@@ -107,6 +123,7 @@
         "send": "Enviar el enlace",
         "copy": "Copiar el enlace",
         "copied": "El enlace se ha copiado en el portapapeles",
+        "copiedButton": "Copiado",
         "failed": "No se puede copiar en el portapapeles",
         "permserror": "Se ha producido un error al cambiar los permisos del enlace. Inténtelo de nuevo.",
         "shareDescription": "Este es el enlace al documento %{name}:"
@@ -172,6 +189,7 @@
         "send": "Enviar el enlace",
         "copy": "Copiar el enlace",
         "copied": "El enlace se ha copiado en el portapapeles",
+        "copiedButton": "Copiado",
         "failed": "No se puede copiar en el portapapeles",
         "permserror": "Se ha producido un error al cambiar los permisos del enlace. Inténtelo de nuevo.",
         "shareDescription": "Este es el enlace al documento %{name}:"
@@ -237,6 +255,7 @@
         "send": "Enviar el enlace",
         "copy": "Copiar el enlace",
         "copied": "El enlace se ha copiado en el portapapeles",
+        "copiedButton": "Copiado",
         "failed": "No se puede copiar en el portapapeles",
         "permserror": "Se ha producido un error al cambiar los permisos del enlace. Inténtelo de nuevo.",
         "fetchFailed": "Vaya, parece que su conexión es limitada. Vuelva a intentarlo más tarde, cuando mejore.",
@@ -301,6 +320,7 @@
         "send": "Enviar el enlace",
         "copy": "Copiar el enlace",
         "copied": "El enlace se ha copiado en el portapapeles",
+        "copiedButton": "Copiado",
         "failed": "No se puede copiar en el portapapeles",
         "permserror": "Se ha producido un error al cambiar los permisos del enlace. Inténtelo de nuevo.",
         "shareDescription": "Este es el enlace al documento %{name}:"
@@ -393,7 +413,7 @@
     }
   },
   "ShareRestrictionModal": {
-    "title": "Enlace para compartir",
+    "title": "Ajustes del enlace para compartir",
     "action": {
       "confirm": "Confirmar"
     },
@@ -460,5 +480,8 @@
     "error": {
       "persistence": "No se han podido guardar los permisos del enlace. Inténtelo de nuevo."
     }
+  },
+  "MemberAutocomplete": {
+    "send": "Compartir"
   }
 }
