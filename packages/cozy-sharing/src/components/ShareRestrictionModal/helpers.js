@@ -304,34 +304,3 @@ export const updatePermissions = async ({
     )
   }
 }
-
-/**
- * revokePermissions - Revokes the permissions of a file
- * @param {object} options
- * @param {import('cozy-client/types/types').IOCozyFile} options.file File to revoke permissions
- * @param {Function} options.t i18n function
- * @param {string} options.documentType - Type of the document
- * @param {Function} options.revokeSharingLink - Function to revoke permissions
- * @param {Function} options.showAlert - Function to display an alert
- */
-export const revokePermissions = async ({
-  file,
-  t,
-  documentType,
-  revokeSharingLink,
-  showAlert
-}) => {
-  try {
-    return revokeSharingLink(file)
-  } catch (err) {
-    showAlert({
-      message: t(`${documentType}.share.error.revoke`),
-      severity: 'error',
-      variant: 'filled'
-    })
-    log.error(
-      "Error in 'revokePermissions' function when trying to revoke sharing link",
-      err
-    )
-  }
-}

@@ -65,16 +65,7 @@
       "close": "Close"
     },
     "permissionLink": {
-      "title": "Allow anyone with the link to:",
-      "seeFile": "See file",
-      "modifyFile": "Modify file",
-      "seeFolder": "See folder",
-      "modifyFolder": "Modify folder",
-      "readDescription": "Link holders can only read or download content.",
-      "writeDescription": "Link holders can alter and delete content.",
-      "deactivate": "Deactivate link",
-      "cancel": "Cancel",
-      "confirm": "OK"
+      "deactivate": "Deactivate link"
     },
     "errors": {
       "groupMemberAlreadyInSharing": "%{groupName} members have already been invited with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights. |||| Contacts have already been invited with %{sharingRights} rights. It is not possible to invite the same contact twice with different rights.",
@@ -420,7 +411,7 @@
     }
   },
   "ShareRestrictionModal": {
-    "title": "Sharing link",
+    "title": "Sharing link settings",
     "action": {
       "confirm": "Confirm"
     },

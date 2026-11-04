@@ -65,16 +65,7 @@
       "close": "Đóng"
     },
     "permissionLink": {
-      "title": "Cho phép bất kỳ ai có liên kết để:",
-      "seeFile": "Xem tệp",
-      "modifyFile": "Sửa đổi tệp",
-      "seeFolder": "Xem thư mục",
-      "modifyFolder": "Sửa đổi thư mục",
-      "readDescription": "Người giữ liên kết chỉ có thể đọc hoặc tải xuống nội dung.",
-      "writeDescription": "Người giữ liên kết có thể thay đổi và xóa nội dung.",
-      "deactivate": "Hủy kích hoạt liên kết",
-      "cancel": "Hủy",
-      "confirm": "OK"
+      "deactivate": "Hủy kích hoạt liên kết"
     },
     "errors": {
       "groupMemberAlreadyInSharing": "Các thành viên của %{groupName} đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau. |||| Các liên hệ đã được mời với quyền %{sharingRights}. Không thể mời cùng một người liên hệ hai lần với các quyền khác nhau.",

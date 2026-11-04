@@ -1,11 +1,6 @@
 import { endOfDay } from 'date-fns'
 
-import {
-  makeTTL,
-  revokePermissions,
-  toExpirationDate,
-  updatePermissions
-} from './helpers'
+import { makeTTL, toExpirationDate, updatePermissions } from './helpers'
 
 describe('ShareRestrictionModal/helpers', () => {
   describe('toExpirationDate', () => {
@@ -202,24 +197,6 @@ describe('ShareRestrictionModal/helpers', () => {
       } finally {
         jest.useRealTimers()
       }
-    })
-  })
-
-  describe('revokePermissions', () => {
-    const documentType = 'Files'
-    it('should call revokeSharingLink', async () => {
-      const revokeSharingLink = jest.fn()
-      const file = { _id: '123' }
-
-      await revokePermissions({
-        file,
-        t: jest.fn(),
-        documentType,
-        revokeSharingLink,
-        showAlert: jest.fn()
-      })
-
-      expect(revokeSharingLink).toHaveBeenCalledWith(file)
     })
   })
 })
