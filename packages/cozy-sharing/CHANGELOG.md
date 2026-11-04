@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [43.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@43.0.0...cozy-sharing@43.0.1) (2026-11-04)
+
+### Bug Fixes
+
+- **cozy-sharing:** Take shared drive avatars from the drive's sharing ([259f94e](https://github.com/cozy/cozy-libs/commit/259f94ec4e3cf5010afe3a80f16bf3d9f63091da))
+
 # [43.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@42.0.1...cozy-sharing@43.0.0) (2026-11-03)
 
 ### Code Refactoring
