@@ -482,7 +482,7 @@ export class SharingProvider extends Component {
       this.dispatch(
         receiveEffectiveRecipients(
           fileId,
-          mapEffectiveRecipients(resp?.data || [])
+          mapEffectiveRecipients(resp?.data || [], driveId)
         )
       )
     } catch (error) {

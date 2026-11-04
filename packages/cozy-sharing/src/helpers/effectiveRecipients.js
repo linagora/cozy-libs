@@ -14,7 +14,7 @@ const getBestSource = effectiveRecipient => {
  * existing components work without reading sources[] directly.
  * Does not spread the backend data — only the fields needed for rendering.
  */
-const mapToRecipient = (effectiveRecipient, source) => ({
+const mapToRecipient = (effectiveRecipient, source, avatarSource) => ({
   id: effectiveRecipient.id,
   name: effectiveRecipient.name,
   email: effectiveRecipient.email,
@@ -24,13 +24,29 @@ const mapToRecipient = (effectiveRecipient, source) => ({
   index: `effective-${source.sharing_id}-${source.member_index}`,
   sharingId: source.sharing_id,
   memberIndex: source.member_index,
-  avatarPath: `/sharings/${source.sharing_id}/recipients/${source.member_index}/avatar`,
+  avatarPath: `/sharings/${avatarSource.sharing_id}/recipients/${avatarSource.member_index}/avatar`,
   type: effectiveRecipient.read_only ? 'one-way' : 'two-way',
   sources: effectiveRecipient.sources
 })
 
-export const mapEffectiveRecipients = effectiveRecipients =>
+/**
+ * In a shared drive the list comes from the owner's instance, but the avatar
+ * is served by ours: only our copy of the drive's sharing is kept in sync
+ * with the owner's member indexes, so prefer it when the member is in it.
+ */
+const getAvatarSource = (effectiveRecipient, driveId, bestSource) =>
+  (driveId &&
+    effectiveRecipient.sources?.find(s => s.sharing_id === driveId)) ||
+  bestSource
+
+export const mapEffectiveRecipients = (effectiveRecipients, driveId) =>
   (effectiveRecipients || []).map(recipient => {
     const source = getBestSource(recipient)
-    return source ? mapToRecipient(recipient, source) : recipient
+    return source
+      ? mapToRecipient(
+          recipient,
+          source,
+          getAvatarSource(recipient, driveId, source)
+        )
+      : recipient
   })
