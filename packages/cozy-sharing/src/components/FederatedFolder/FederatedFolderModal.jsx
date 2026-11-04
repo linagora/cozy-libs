@@ -268,6 +268,8 @@ const FederatedFolderModalContent = ({
           </div>
           <WhoHasAccessWrapper
             showEmptyState={hasLoadedRecipients}
+            showPublicAccess
+            isAutoOpenSettings={autoOpenShareRestriction}
             isOwner={isCurrentUserOwner}
             canManageSharing={canManageSharing}
             canManageMembers={!isMemberReadOnly}

@@ -38,6 +38,8 @@ const WhoHasAccessWrapper = ({
   canManageLink = canManageMembers,
   showOwner = true,
   showEmptyState = false,
+  showPublicAccess = false,
+  isAutoOpenSettings = false,
   isGroupRoleMenuShown = false,
   recipients,
   recipientsToBeConfirmed = [],
@@ -192,15 +194,17 @@ const WhoHasAccessWrapper = ({
         onRoleChange={handleRoleChange}
         onRemove={handleRemove}
         showEmptyState={showEmptyState}
+        showPublicAccess={showPublicAccess}
         canManageLink={canManageLink}
+        isAutoOpenSettings={isAutoOpenSettings}
         recipientsToBeConfirmed={recipientsToBeConfirmed}
         document={document}
         documentType={documentType}
         className={className}
-        onUpdateLinkPermissions={updateDocumentPermissions}
-        onRevokeLink={revokeSharingLink}
         link={link}
         permissions={permissions}
+        onUpdateLinkPermissions={updateDocumentPermissions}
+        onRevokeLink={revokeSharingLink}
       />
       {isDowngradeDialogOpen && (
         <DowngradePermissionConfirmDialog

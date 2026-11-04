@@ -208,6 +208,34 @@ describe('shareByLink', () => {
     expect(permissions).toHaveLength(1)
     expect(permissions[0].id).toBe(PERM_REGULAR_FILE.id)
   })
+
+  it('creates a single link when it is asked again while being created', async () => {
+    const file = { _id: 'file_id', id: 'file_id' }
+    const mockCreateSharingLink = jest.fn().mockResolvedValue({
+      data: {
+        id: 'perm',
+        type: 'io.cozy.permissions',
+        attributes: {
+          permissions: {
+            rule0: {
+              type: 'io.cozy.files',
+              verbs: ['GET'],
+              values: ['file_id']
+            }
+          }
+        }
+      }
+    })
+    const provider = setupProvider(createMockClient({}))
+    provider.permissionCol = { createSharingLink: mockCreateSharingLink }
+
+    await Promise.all([
+      provider.shareByLink(file, { verbs: ['GET'] }),
+      provider.shareByLink(file, { verbs: ['GET', 'POST', 'PUT', 'PATCH'] })
+    ])
+
+    expect(mockCreateSharingLink).toHaveBeenCalledTimes(1)
+  })
 })
 
 describe('ensureSharingLink', () => {

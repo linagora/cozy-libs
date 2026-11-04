@@ -21,9 +21,7 @@
     "locked-type-folder": "Скоро: вы сможете изменять разрешения для папки.",
     "recipients": {
       "you": "Вы",
-      "anyoneWithTheLink": "Любой, у кого есть ссылка",
-      "linkWithPassword": "Любой с паролем",
-      "expires": "До %{date}"
+      "anyoneWithTheLink": "Любой, у кого есть ссылка"
     },
     "create-cozy": "Создать |||| Создать мой Twake",
     "members": {

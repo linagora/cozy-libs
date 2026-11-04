@@ -19,6 +19,10 @@ flowchart TD
     SharingContent --> WhoHasAccessWrapper
     WhoHasAccessWrapper --> WhoHasAccess
     WhoHasAccess --> |cozy-ui|MemberList
+    WhoHasAccess --> |showPublicAccess|PublicAccess
+    PublicAccess --> PublicAccessMenu
+    PublicAccess --> ShareRestrictionModal
+    DumbShareByLink --> ShareRestrictionModal
     SharingContent --> ShareByEmail
     ConfirmTrustedRecipientsDialog --> DumbConfirmTrustedRecipientsDialog
     DumbConfirmTrustedRecipientsDialog --> ShareDialogTwoStepsConfirmationContainer

@@ -6,6 +6,8 @@ import AppLike from '../../test/AppLike'
 
 let mockSharingLink = null
 
+const RESTRICTED_TEXT = 'Only users added via email can open it'
+
 jest.mock('./ShareByLink', () => () => <button>Copy link</button>)
 
 jest.mock('../hooks/useSharingContext', () => ({
@@ -43,23 +45,23 @@ describe('ShareDialogOnlyByLink', () => {
   it('shows link access as soon as a link is generated', () => {
     const { rerender } = setup()
 
-    expect(screen.queryByText('Anyone with the link')).toBe(null)
+    expect(screen.queryByText(RESTRICTED_TEXT)).toBeInTheDocument()
 
     mockSharingLink = 'https://example.com/public'
     rerender(renderModal())
 
-    expect(screen.queryByText('Anyone with the link')).toBeInTheDocument()
+    expect(screen.queryByText(RESTRICTED_TEXT)).toBe(null)
   })
 
   it('hides link access as soon as a link is revoked', () => {
     mockSharingLink = 'https://example.com/public'
     const { rerender } = setup()
 
-    expect(screen.queryByText('Anyone with the link')).toBeInTheDocument()
+    expect(screen.queryByText(RESTRICTED_TEXT)).toBe(null)
 
     mockSharingLink = null
     rerender(renderModal())
 
-    expect(screen.queryByText('Anyone with the link')).toBe(null)
+    expect(screen.queryByText(RESTRICTED_TEXT)).toBeInTheDocument()
   })
 })

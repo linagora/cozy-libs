@@ -113,17 +113,17 @@ The `write` permission allows editing content, uploading files, deleting files (
 
 Creates a public URL accessible without a Twake account. One link per resource at any time.
 
-**Options (set in `ShareRestrictionModal` or `ShareLinkAccessModal`):**
+**Options:**
 
 | Option | Default | Details |
 |--------|---------|---------|
-| Permission | `readOnly` | Can be changed to `write` |
-| Expiration date | Off | Toggle; defaults to 30 days ahead when enabled; expires at end of that day |
-| Password | Off | Minimum 4 characters; owner communicates it out-of-band |
+| Permission | `readOnly` | Viewer or Editor, set in the Public access menu (or `ShareLinkAccessModal`) |
+| Expiration date | Off | Set in `ShareRestrictionModal` or `ShareLinkAccessModal`. Toggle; defaults to 30 days ahead when enabled; expires at end of that day |
+| Password | Off | Set in `ShareRestrictionModal` or `ShareLinkAccessModal`. Minimum 4 characters; owner communicates it out-of-band |
 
 **Lifecycle:**
 
-- Deactivating a link revokes the current permissions. Reactivating generates a **new URL** — the old one stays invalid.
+- Deactivating a link (Public access menu) revokes the current permissions. Reactivating generates a **new URL** — the old one stays invalid.
 - Deleting the root resource revokes all associated shares (link and email).
 - Link sharing coexists with email sharing on the same resource.
 
@@ -161,7 +161,8 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Who can create/manage | Owner or Editor (`canReshare` = owner, or `open_sharing && !read_only`) | `canReshare()` in `state.js` |
 | Document type restriction | Hidden when `documentType === 'Organizations'` | `ShareModal.jsx:33` |
 | Albums | Link-only, read-only permissions only | `ShareModal.jsx:30`, `link.js:3` |
-| Editing rights box | Hidden when `drive.federated-shared-folder.enabled` flag is true | `BoxEditingRights.jsx:54` |
+| Public access block | Shown under the members when the modal enables it (`showPublicAccess`) and the user can manage the link (`canManageLink`); not shown in `EditSharedDriveModal` | `WhoHasAccess.jsx` |
+| Link rights | Viewer only for albums and for read-only members of a shared drive (the stack refuses editor links to them) | `helpers/publicAccess.js` |
 | Expiration date toggle default | Controlled by `sharing.date-toggle.enabled` flag (default: false) | `ShareRestrictionModal.jsx:62` |
 | Link deactivation | Revokes the permission document; regenerates a new URL on reactivation | `SharingProvider.jsx:635` |
 | Password | 4+ characters; no limit on attempts | `ShareLinkSettings.jsx:10` |
