@@ -21,9 +21,7 @@
     "locked-type-folder": "Demnächst: Sie können die Berechtigungen ändern, die Sie für den Ordner vergeben.",
     "recipients": {
       "you": "Du",
-      "anyoneWithTheLink": "Alle mit dem Link",
-      "linkWithPassword": "Alle mit einem Passwort",
-      "expires": "Bis %{date}"
+      "anyoneWithTheLink": "Alle mit dem Link"
     },
     "create-cozy": "Erstellen |||| Mein Twake erstellen",
     "members": {

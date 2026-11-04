@@ -21,9 +21,7 @@
     "locked-type-folder": "Prossimamente: potrai cambiare le autorizzazioni che concedi sulla cartella.",
     "recipients": {
       "you": "Tu",
-      "anyoneWithTheLink": "Chiunque abbia il link",
-      "linkWithPassword": "Chiunque abbia una password",
-      "expires": "Fino al %{date}"
+      "anyoneWithTheLink": "Chiunque abbia il link"
     },
     "create-cozy": "Crea |||| Crea il mio Twake",
     "members": {

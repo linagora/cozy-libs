@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import List from 'cozy-ui/transpiled/react/List'
 import MemberList from 'cozy-ui/transpiled/react/MemberList'
 import { useI18n } from 'twake-i18n'
 
-import LinkRecipient from './Recipient/LinkRecipient'
-import { usePrevious } from '../helpers/hooks'
+import PublicAccess from './PublicAccess/PublicAccess'
 
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing
@@ -31,45 +29,43 @@ const WhoHasAccess = ({
   onRoleChange,
   onRemove,
   showEmptyState,
+  showPublicAccess = false,
   canManageLink = true,
+  isAutoOpenSettings = false,
   recipientsToBeConfirmed = [],
   document,
   documentType,
   className,
-  onUpdateLinkPermissions,
-  onRevokeLink,
   link,
-  permissions
+  permissions,
+  onUpdateLinkPermissions,
+  onRevokeLink
 }) => {
-  const previousLink = usePrevious(link)
-  const linkHasBeenJustCreated = link && previousLink === null
+  const isPublicAccessShown = showPublicAccess && canManageLink
 
   return (
     <div className={className}>
       <RecipientWaitingForConfirmationAlert
         recipientsToBeConfirmed={recipientsToBeConfirmed}
       />
-      {link && (
-        <List className="u-pb-0">
-          <LinkRecipient
-            isReadOnly={!canManageLink}
-            document={document}
-            documentType={documentType}
-            permissions={permissions}
-            onUpdateLinkPermissions={onUpdateLinkPermissions}
-            onRevokeLink={onRevokeLink}
-            fadeIn={linkHasBeenJustCreated}
-          />
-        </List>
-      )}
       <MemberList
-        className={link ? 'u-pt-0' : undefined}
         members={members}
         roles={roles}
         onRoleChange={onRoleChange}
         onRemove={onRemove}
         showEmptyState={showEmptyState}
       />
+      {isPublicAccessShown && (
+        <PublicAccess
+          document={document}
+          documentType={documentType}
+          link={link}
+          permissions={permissions}
+          isAutoOpenSettings={isAutoOpenSettings}
+          onUpdateLinkPermissions={onUpdateLinkPermissions}
+          onRevokeLink={onRevokeLink}
+        />
+      )}
     </div>
   )
 }
@@ -80,7 +76,9 @@ WhoHasAccess.propTypes = {
   onRoleChange: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   showEmptyState: PropTypes.bool,
+  showPublicAccess: PropTypes.bool,
   canManageLink: PropTypes.bool,
+  isAutoOpenSettings: PropTypes.bool,
   recipientsToBeConfirmed: PropTypes.arrayOf(
     PropTypes.shape({
       email: PropTypes.string.isRequired

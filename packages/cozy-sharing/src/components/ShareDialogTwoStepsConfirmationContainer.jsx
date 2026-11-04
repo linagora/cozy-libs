@@ -98,8 +98,10 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   sharing,
   sharingDesc,
   showShareByEmail,
+  showShareByLink,
   showShareOnlyByLink,
   showWhoHasAccess,
+  isAutoOpenSettings,
   twoStepsConfirmationMethods = {},
   dialogContentOnShare: DialogContentOnShare,
   dialogActionsOnShare: DialogActionsOnShare,
@@ -219,8 +221,10 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         sharing={sharing}
         sharingDesc={sharingDesc}
         showShareByEmail={showShareByEmail}
+        showShareByLink={showShareByLink}
         showShareOnlyByLink={showShareOnlyByLink}
         showWhoHasAccess={showWhoHasAccess}
+        isAutoOpenSettings={isAutoOpenSettings}
         recipientsToBeConfirmed={recipientsToBeConfirmed}
         verifyRecipient={showConfirmationDialog}
         link={link}

@@ -21,9 +21,7 @@
     "locked-type-folder": "Bientôt : vous pourrez changer la permission donnée sur le dossier.",
     "recipients": {
       "you": "Vous",
-      "anyoneWithTheLink": "Tous les utilisateurs qui ont le lien",
-      "linkWithPassword": "Tous les utilisateurs avec le mot de passe",
-      "expires": "Jusqu'au %{date}"
+      "anyoneWithTheLink": "Tous les utilisateurs qui ont le lien"
     },
     "create-cozy": "Créer |||| Créer mon Twake",
     "members": {

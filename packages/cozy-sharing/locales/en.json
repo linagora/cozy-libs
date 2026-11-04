@@ -21,9 +21,7 @@
     "locked-type-folder": "Coming soon: you will be able to change permissions you grant on the folder.",
     "recipients": {
       "you": "You",
-      "anyoneWithTheLink": "Anyone with the link",
-      "linkWithPassword": "Anyone with a password",
-      "expires": "Until %{date}"
+      "anyoneWithTheLink": "Anyone with the link"
     },
     "create-cozy": "Create |||| Create my Twake",
     "members": {
@@ -86,7 +84,21 @@
         "readWrite": "write"
       }
     },
-    "send": "Send..."
+    "send": "Send...",
+    "publicAccess": {
+      "divider": "Or share via link",
+      "title": "Public access",
+      "settings": "Sharing link settings",
+      "restricted": "Restricted",
+      "status": {
+        "restricted": "Only users added via email can open it",
+        "view": "Anyone who receives this link can view the file.",
+        "edit": "Anyone who receives this link can edit the file.",
+        "password": "Password-protected.",
+        "expires": "Expires on %{date}",
+        "passwordAndExpires": "Password-protected. Expires on %{date}"
+      }
+    }
   },
   "Sharings": {
     "unavailable": {

@@ -46,6 +46,8 @@ const ShareDialogOnlyByLink = ({
             {t('Share.contacts.whoHasAccess')}
           </Typography>
           <WhoHasAccessWrapper
+            showPublicAccess
+            isAutoOpenSettings={autoOpenShareRestriction}
             document={document}
             documentType={documentType}
             isOwner={isOwner}

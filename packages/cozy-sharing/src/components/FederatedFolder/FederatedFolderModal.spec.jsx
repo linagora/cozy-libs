@@ -193,7 +193,7 @@ describe('FederatedFolderModal', () => {
       mockGetSharingLink.mockReturnValue(null)
       const { findByText, queryByText, rerender } = setup()
 
-      expect(queryByText('Anyone with the link')).toBe(null)
+      await findByText('Only users added via email can open it')
 
       mockGetSharingLink.mockReturnValue('https://example.com/share/abc123')
       rerender(
@@ -202,7 +202,8 @@ describe('FederatedFolderModal', () => {
         </AppLike>
       )
 
-      await findByText('Anyone with the link')
+      await findByText('Anyone who receives this link can edit the file.')
+      expect(queryByText('Only users added via email can open it')).toBe(null)
     })
 
     it('should hide share by email when document is in federated shared folder received by current user', async () => {

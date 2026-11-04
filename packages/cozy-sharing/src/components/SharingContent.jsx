@@ -18,8 +18,10 @@ const SharingContent = ({
   recipients,
   sharing,
   showShareByEmail,
+  showShareByLink,
   showShareOnlyByLink,
   showWhoHasAccess,
+  isAutoOpenSettings,
   recipientsToBeConfirmed,
   verifyRecipient,
   link,
@@ -78,6 +80,8 @@ const SharingContent = ({
       {showWhoHasAccess && (
         <WhoHasAccessWrapper
           showEmptyState={isEmptyStateShown}
+          showPublicAccess={showShareByLink}
+          isAutoOpenSettings={isAutoOpenSettings}
           document={document}
           documentType={documentType}
           isOwner={isOwner}

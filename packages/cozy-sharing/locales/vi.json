@@ -21,9 +21,7 @@
     "locked-type-folder": "Sắp ra mắt: bạn sẽ có thể thay đổi quyền mà bạn cấp trên thư mục.",
     "recipients": {
       "you": "Bạn",
-      "anyoneWithTheLink": "Bất kỳ ai có liên kết",
-      "linkWithPassword": "Bất kỳ ai có mật khẩu",
-      "expires": "Cho đến %{date}"
+      "anyoneWithTheLink": "Bất kỳ ai có liên kết"
     },
     "create-cozy": "Tạo |||| Tạo Twake của tôi",
     "members": {

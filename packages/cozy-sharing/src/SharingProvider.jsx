@@ -498,7 +498,25 @@ export class SharingProvider extends Component {
     this.dispatch(invalidateEffectiveRecipients(docId))
   }
 
-  shareByLink = async (document, options) => {
+  pendingSharingLinks = {}
+
+  // Several controls can create the link of the same document (Copy link,
+  // rights menu); a second request while the first is pending would create
+  // a duplicate link.
+  shareByLink = (document, options) => {
+    const documentId = getDocumentId(document)
+    if (!this.pendingSharingLinks[documentId]) {
+      this.pendingSharingLinks[documentId] = this.createSharingLink(
+        document,
+        options
+      ).finally(() => {
+        delete this.pendingSharingLinks[documentId]
+      })
+    }
+    return this.pendingSharingLinks[documentId]
+  }
+
+  createSharingLink = async (document, options) => {
     try {
       const resp = document.driveId
         ? await this.createSharedDriveSharingLink(document, options)
