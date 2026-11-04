@@ -122,4 +122,36 @@ describe('mapEffectiveRecipients', () => {
     expect(result[0].sharingId).toBe('sharing-2')
     expect(result[1].sharingId).toBe('sharing-1')
   })
+
+  describe('in a shared drive', () => {
+    const parentSource = {
+      ...makeAncestorSource('Commerce'),
+      sharing_id: 'parent-sharing',
+      member_index: 16
+    }
+    const driveSource = {
+      ...makeAncestorSource('Drive'),
+      sharing_id: 'drive-id',
+      member_index: 3
+    }
+
+    it("takes the avatar from the drive's own sharing", () => {
+      const recipient = makeRecipient({ sources: [parentSource, driveSource] })
+      const [result] = mapEffectiveRecipients([recipient], 'drive-id')
+
+      expect(result.avatarPath).toBe('/sharings/drive-id/recipients/3/avatar')
+      // Member actions keep using the best source
+      expect(result.sharingId).toBe('parent-sharing')
+      expect(result.memberIndex).toBe(16)
+    })
+
+    it('keeps the best source avatar when the member is not in the drive sharing', () => {
+      const recipient = makeRecipient({ sources: [parentSource] })
+      const [result] = mapEffectiveRecipients([recipient], 'drive-id')
+
+      expect(result.avatarPath).toBe(
+        '/sharings/parent-sharing/recipients/16/avatar'
+      )
+    })
+  })
 })
