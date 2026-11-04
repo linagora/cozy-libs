@@ -17116,6 +17116,9 @@ __metadata:
     react: ">=16.12.0"
     react-dom: ">=16.12.0"
     react-router-dom: ^6.28.0
+  peerDependenciesMeta:
+    cozy-pouch-link:
+      optional: true
   languageName: unknown
   linkType: soft
 
