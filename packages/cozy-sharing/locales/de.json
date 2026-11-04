@@ -36,7 +36,7 @@
     },
     "contacts": {
       "whoHasAccess": "Wer hat Zugriff?",
-      "addUsers": "Benutzer hinzufügen",
+      "addUsers": "Personen einladen",
       "permissionRequired": {
         "title": "Ihre Kontakte in Ihrem Twake speichern?",
         "desc": "Erlauben Sie der Anwendung den Zugriff auf die Kontakte Ihres Twake: Beim nächsten Mal können Sie sie auswählen.",
@@ -75,7 +75,23 @@
         "readWrite": "Schreibrechten"
       }
     },
-    "send": "Senden..."
+    "send": "Senden...",
+    "publicAccess": {
+      "divider": "Oder per Link teilen",
+      "title": "Öffentlicher Zugriff",
+      "settings": "Einstellungen des Freigabelinks",
+      "restricted": "Eingeschränkt",
+      "status": {
+        "restricted": "Nur per E-Mail hinzugefügte Personen können es öffnen",
+        "view": "Alle, die diesen Link erhalten, können die Datei ansehen.",
+        "edit": "Alle, die diesen Link erhalten, können die Datei bearbeiten.",
+        "password": "Passwortgeschützt.",
+        "expires": "Läuft am %{date} ab",
+        "passwordAndExpires": "Passwortgeschützt. Läuft am %{date} ab"
+      },
+      "sendByEmail": "Per E-Mail senden",
+      "sendByChat": "Per Chat senden"
+    }
   },
   "Sharings": {
     "unavailable": {
@@ -107,6 +123,7 @@
         "send": "Link senden",
         "copy": "Link kopieren",
         "copied": "Der Link wurde in die Zwischenablage kopiert",
+        "copiedButton": "Kopiert",
         "failed": "Kopieren in die Zwischenablage nicht möglich",
         "permserror": "Beim Ändern der Berechtigungen des Links ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
         "shareDescription": "Hier ist der Link zum Dokument %{name}:"
@@ -172,6 +189,7 @@
         "send": "Link senden",
         "copy": "Link kopieren",
         "copied": "Der Link wurde in die Zwischenablage kopiert",
+        "copiedButton": "Kopiert",
         "failed": "Kopieren in die Zwischenablage nicht möglich",
         "permserror": "Beim Ändern der Berechtigungen des Links ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
         "shareDescription": "Hier ist der Link zum Dokument %{name}:"
@@ -237,6 +255,7 @@
         "send": "Link senden",
         "copy": "Link kopieren",
         "copied": "Der Link wurde in die Zwischenablage kopiert",
+        "copiedButton": "Kopiert",
         "failed": "Kopieren in die Zwischenablage nicht möglich",
         "permserror": "Beim Ändern der Berechtigungen des Links ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
         "fetchFailed": "Hoppla! Ihre Verbindung scheint eingeschränkt zu sein. Versuchen Sie es später erneut, wenn sie besser ist.",
@@ -301,6 +320,7 @@
         "send": "Link senden",
         "copy": "Link kopieren",
         "copied": "Der Link wurde in die Zwischenablage kopiert",
+        "copiedButton": "Kopiert",
         "failed": "Kopieren in die Zwischenablage nicht möglich",
         "permserror": "Beim Ändern der Berechtigungen des Links ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
         "shareDescription": "Hier ist der Link zum Dokument %{name}:"
@@ -393,7 +413,7 @@
     }
   },
   "ShareRestrictionModal": {
-    "title": "Freigabelink",
+    "title": "Einstellungen des Freigabelinks",
     "action": {
       "confirm": "Bestätigen"
     },
@@ -460,5 +480,8 @@
     "error": {
       "persistence": "Die Linkberechtigungen konnten nicht gespeichert werden. Bitte versuchen Sie es erneut."
     }
+  },
+  "MemberAutocomplete": {
+    "send": "Teilen"
   }
 }

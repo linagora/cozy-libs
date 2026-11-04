@@ -36,7 +36,7 @@
     },
     "contacts": {
       "whoHasAccess": "Qui a accès ?",
-      "addUsers": "Ajouter des utilisateurs",
+      "addUsers": "Inviter des utilisateurs",
       "permissionRequired": {
         "title": "Enregistrer vos contacts dans votre Twake ?",
         "desc": "Autorisez l'application à accéder aux contacts de votre Twake : vous pourrez les sélectionner la prochaine fois.",
@@ -75,7 +75,23 @@
         "readWrite": "modification"
       }
     },
-    "send": "Envoyer..."
+    "send": "Envoyer...",
+    "publicAccess": {
+      "divider": "Ou partager via un lien",
+      "title": "Accès public",
+      "settings": "Paramètres du lien de partage",
+      "restricted": "Restreint",
+      "status": {
+        "restricted": "Seuls les utilisateurs ajoutés par e-mail peuvent l'ouvrir",
+        "view": "Toute personne qui reçoit ce lien peut voir le fichier.",
+        "edit": "Toute personne qui reçoit ce lien peut modifier le fichier.",
+        "password": "Protégé par mot de passe.",
+        "expires": "Expire le %{date}",
+        "passwordAndExpires": "Protégé par mot de passe. Expire le %{date}"
+      },
+      "sendByEmail": "Envoyer par e-mail",
+      "sendByChat": "Envoyer par chat"
+    }
   },
   "Sharings": {
     "unavailable": {
@@ -107,6 +123,7 @@
         "send": "Envoyer le lien",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
+        "copiedButton": "Copié",
         "failed": "Impossible de copier dans le presse papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
         "shareDescription": "Voici le lien de partage du document %{name} :"
@@ -172,6 +189,7 @@
         "send": "Envoyer le lien",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
+        "copiedButton": "Copié",
         "failed": "Impossible de copier dans le presse papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
         "shareDescription": "Voici le lien de partage du document %{name} :"
@@ -238,6 +256,7 @@
         "send": "Envoyer le lien",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papier",
+        "copiedButton": "Copié",
         "failed": "Impossible de copier dans le presse-papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
         "fetchFailed": "Oups ! Il semblerait que votre connexion internet soit limitée, réessayez plus tard quand le réseau sera meilleur.",
@@ -303,6 +322,7 @@
         "send": "Envoyer le lien",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
+        "copiedButton": "Copié",
         "failed": "Impossible de copier dans le presse papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
         "shareDescription": "Voici le lien de partage du document %{name} :"
@@ -395,7 +415,7 @@
     }
   },
   "ShareRestrictionModal": {
-    "title": "Lien de partage",
+    "title": "Paramètres du lien de partage",
     "action": {
       "confirm": "Valider"
     },
@@ -462,5 +482,8 @@
     "error": {
       "persistence": "Impossible d'enregistrer les autorisations du lien. Veuillez réessayer."
     }
+  },
+  "MemberAutocomplete": {
+    "send": "Partager"
   }
 }

@@ -36,7 +36,7 @@
     },
     "contacts": {
       "whoHasAccess": "Who has access?",
-      "addUsers": "Add users",
+      "addUsers": "Invite users",
       "permissionRequired": {
         "title": "Save your contacts in your Twake?",
         "desc": "Authorize the application to access to your Twake's contacts: you'll be able to select them next time.",
@@ -480,5 +480,8 @@
     "error": {
       "persistence": "Could not save link permissions. Please try again."
     }
+  },
+  "MemberAutocomplete": {
+    "send": "Share"
   }
 }

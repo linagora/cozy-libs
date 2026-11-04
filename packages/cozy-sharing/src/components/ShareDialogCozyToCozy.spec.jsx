@@ -248,7 +248,7 @@ describe('ShareDialogCozyToCozy', () => {
     })
 
     await act(async () => {
-      fireEvent.click(getByRole('button', { name: 'Send' }))
+      fireEvent.click(getByRole('button', { name: 'Share' }))
     })
 
     expect(onShare).toHaveBeenCalledWith(
