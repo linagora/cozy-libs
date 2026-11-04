@@ -2,7 +2,6 @@ import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { Icon, Trash } from '@linagora/twake-icons'
 import { generateWebLink, useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Buttons'
@@ -15,7 +14,6 @@ import {
   copyToClipboard,
   updatePermissions,
   makeTTL,
-  revokePermissions,
   createPermissions
 } from './helpers'
 import { getAppSlugFromDocumentType } from '../../helpers/link'
@@ -41,8 +39,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     getDocumentPermissions,
     updateDocumentPermissions,
     shareByLink,
-    getSharingLink,
-    revokeSharingLink
+    getSharingLink
   } = useSharingContext()
 
   const hasSharingLink = getSharingLink(file._id) !== null
@@ -62,9 +59,8 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
       : flag('sharing.date-toggle.enabled')
   )
   const [passwordToggle, setPasswordToggle] = useState(hasPassword)
-  const [editingRights, setEditingRights] = useState(
+  const editingRights =
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
-  )
 
   const handleClick = async () => {
     setLoading(true)
@@ -108,7 +104,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     await copyToClipboard(urlPromise, { t, showAlert })
     try {
       // Observe the permission result so we can keep the modal open (and
-      // preserve the user's date / password / editing-rights inputs) if
+      // preserve the user's date / password inputs) if
       // the permission round-trip failed. copyToClipboard swallows its
       // own errors so the await above always resolves.
       await permsPromise
@@ -116,18 +112,6 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
       setLoading(false)
       return
     }
-    onClose()
-  }
-
-  const handleRevokeLink = async () => {
-    setLoading(true)
-    await revokePermissions({
-      file,
-      t,
-      documentType,
-      revokeSharingLink,
-      showAlert
-    })
     onClose()
   }
 
@@ -151,30 +135,15 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
           password={password}
           setPassword={setPassword}
           setIsValidPassword={setIsValidPassword}
-          // Editing rights
-          editingRights={editingRights}
-          setEditingRights={setEditingRights}
         />
       }
       actions={
-        <>
-          {hasSharingLink && (
-            <Button
-              label={t('Share.permissionLink.deactivate')}
-              variant="secondary"
-              color="error"
-              startIcon={<Icon icon={Trash} />}
-              onClick={handleRevokeLink}
-              busy={loading}
-            />
-          )}
-          <Button
-            label={t('ShareRestrictionModal.action.confirm')}
-            onClick={handleClick}
-            disabled={!isValidDate || !isValidPassword}
-            busy={loading}
-          />
-        </>
+        <Button
+          label={t('ShareRestrictionModal.action.confirm')}
+          onClick={handleClick}
+          disabled={!isValidDate || !isValidPassword}
+          busy={loading}
+        />
       }
     />
   )

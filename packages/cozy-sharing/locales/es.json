@@ -65,16 +65,7 @@
       "close": "Cerrar"
     },
     "permissionLink": {
-      "title": "Permitir a cualquier persona con el enlace:",
-      "seeFile": "Ver el archivo",
-      "modifyFile": "Modificar el archivo",
-      "seeFolder": "Ver la carpeta",
-      "modifyFolder": "Modificar la carpeta",
-      "readDescription": "Quienes tengan el enlace solo pueden ver o descargar el contenido.",
-      "writeDescription": "Quienes tengan el enlace pueden modificar y eliminar el contenido.",
-      "deactivate": "Desactivar el enlace",
-      "cancel": "Cancelar",
-      "confirm": "Aceptar"
+      "deactivate": "Desactivar el enlace"
     },
     "errors": {
       "groupMemberAlreadyInSharing": "Los miembros de %{groupName} ya han sido invitados con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes. |||| Ya se ha invitado a algunos contactos con derechos de %{sharingRights}. No se puede invitar dos veces al mismo contacto con derechos diferentes.",
