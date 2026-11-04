@@ -19,7 +19,8 @@ jest.mock('../../hooks/useSharingContext', () => ({
     getSharingLink: () => mockLink,
     updateDocumentPermissions: mockUpdateDocumentPermissions,
     shareByLink: mockShareByLink,
-    revokeSharingLink: jest.fn()
+    getOwner: () => ({ instance: 'https://owner.cozy.example' }),
+    getSharingById: () => ({ rules: [{ values: ['drive-root'] }] })
   })
 }))
 
@@ -33,6 +34,7 @@ const linkPermission = verbs => ({
 describe('ShareRestrictionModal', () => {
   const client = createMockClient({})
   client.capabilities = { flat_subdomains: true }
+  client.getStackClient = () => ({ uri: 'https://me.cozy.example' })
   const file = { _id: 'file-1', name: 'file.txt' }
 
   beforeEach(() => {
@@ -42,10 +44,10 @@ describe('ShareRestrictionModal', () => {
     })
   })
 
-  const setup = () =>
+  const setup = ({ sharedFile = file } = {}) =>
     render(
       <AppLike client={client}>
-        <ShareRestrictionModal file={file} onClose={jest.fn()} />
+        <ShareRestrictionModal file={sharedFile} onClose={jest.fn()} />
       </AppLike>
     )
 
@@ -75,6 +77,19 @@ describe('ShareRestrictionModal', () => {
       expect(mockShareByLink).toHaveBeenCalledWith(
         file,
         expect.objectContaining({ verbs: READ_ONLY_PERMS })
+      )
+    )
+  })
+
+  it("copies a shared drive link from the drive owner's instance", async () => {
+    mockLink = null
+    mockPermissions = []
+    mockShareByLink.mockResolvedValue({ data: linkPermission(READ_ONLY_PERMS) })
+    setup({ sharedFile: { ...file, driveId: 'drive-1' } })
+    fireEvent.click(screen.getByText('Confirm'))
+    await waitFor(() =>
+      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+        expect.stringContaining('https://owner-drive.cozy.example/')
       )
     )
   })
