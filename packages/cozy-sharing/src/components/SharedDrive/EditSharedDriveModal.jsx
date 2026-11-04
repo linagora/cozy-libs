@@ -146,8 +146,7 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
 EditSharedDriveModal.propTypes = {
   onClose: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,
-  autoOpenShareRestriction: PropTypes.bool,
-  showGenerateLinkButton: PropTypes.bool
+  autoOpenShareRestriction: PropTypes.bool
 }
 
 export default EditSharedDriveModal

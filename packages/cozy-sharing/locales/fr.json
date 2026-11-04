@@ -104,7 +104,6 @@
       "sharedBy": "Partagé par %{name}",
       "sharedByLink": "Partagé par lien",
       "shareByLink": {
-        "create": "Générer un lien",
         "send": "Envoyer le lien",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
@@ -170,7 +169,6 @@
       "sharedWithMe": "Partagé avec moi",
       "sharedBy": "Partagé par %{name}",
       "shareByLink": {
-        "create": "Générer un lien",
         "send": "Envoyer le lien",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
@@ -237,7 +235,6 @@
       "shared": "Partagé",
       "sharedWithMe": "Partagé avec moi",
       "shareByLink": {
-        "create": "Générer un lien",
         "send": "Envoyer le lien",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papier",
@@ -303,7 +300,6 @@
       "sharedBy": "Partagé par %{name}",
       "sharedByLink": "Partagé par lien",
       "shareByLink": {
-        "create": "Générer un lien",
         "send": "Envoyer le lien",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",

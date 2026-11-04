@@ -24,7 +24,6 @@ export const ShareModal = ({
   recipients,
   sharing,
   sharingDesc,
-  showGenerateLinkButton,
   twoStepsConfirmationMethods
 }) => {
   const shareDialogOnlyByLink =
@@ -46,7 +45,6 @@ export const ShareModal = ({
       link={link}
       onClose={onClose}
       permissions={permissions}
-      showGenerateLinkButton={showGenerateLinkButton}
       autoOpenShareRestriction={autoOpenShareRestriction}
     />
   ) : (
@@ -70,7 +68,6 @@ export const ShareModal = ({
       showShareByLink={showShareByLink}
       showShareOnlyByLink={showShareOnlyByLink}
       showWhoHasAccess={showWhoHasAccess}
-      showGenerateLinkButton={showGenerateLinkButton}
       autoOpenShareRestriction={autoOpenShareRestriction}
       twoStepsConfirmationMethods={twoStepsConfirmationMethods}
     />
@@ -93,7 +90,6 @@ ShareModal.propTypes = {
   permissions: PropTypes.array.isRequired,
   recipients: PropTypes.array.isRequired,
   sharingDesc: PropTypes.string,
-  showGenerateLinkButton: PropTypes.bool,
   twoStepsConfirmationMethods: PropTypes.shape({
     getRecipientsToBeConfirmed: PropTypes.func,
     confirmRecipient: PropTypes.func,

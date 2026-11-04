@@ -104,7 +104,6 @@
       "sharedBy": "Compartido por %{name}",
       "sharedByLink": "Compartido mediante enlace",
       "shareByLink": {
-        "create": "Generar un enlace",
         "send": "Enviar el enlace",
         "copy": "Copiar el enlace",
         "copied": "El enlace se ha copiado en el portapapeles",
@@ -170,7 +169,6 @@
       "sharedWithMe": "Compartido conmigo",
       "sharedBy": "Compartido por %{name}",
       "shareByLink": {
-        "create": "Generar un enlace",
         "send": "Enviar el enlace",
         "copy": "Copiar el enlace",
         "copied": "El enlace se ha copiado en el portapapeles",
@@ -236,7 +234,6 @@
       "shared": "Compartido",
       "sharedWithMe": "Compartido conmigo",
       "shareByLink": {
-        "create": "Generar un enlace",
         "send": "Enviar el enlace",
         "copy": "Copiar el enlace",
         "copied": "El enlace se ha copiado en el portapapeles",
@@ -301,7 +298,6 @@
       "sharedBy": "Compartido por %{name}",
       "sharedByLink": "Compartido mediante enlace",
       "shareByLink": {
-        "create": "Generar un enlace",
         "send": "Enviar el enlace",
         "copy": "Copiar el enlace",
         "copied": "El enlace se ha copiado en el portapapeles",

@@ -123,12 +123,19 @@ export const generateShareLinkFromFile = ({
  * `ClipboardItem` lets the clipboard API be invoked synchronously while the
  * content is resolved later.
  *
- * @param {string | Promise<string>} value - Value to copy
- * @param {object} [options]
+ * @param {object} options
+ * @param {string | Promise<string>} options.value - Value to copy
  * @param {Function} options.t - Translation function
  * @param {Function} options.showAlert - Function to display an alert
+ * @param {boolean} [options.isSuccessAlertShown] - Show an alert on success, true by default
+ * @returns {Promise<boolean>} - Whether the value has been copied
  */
-export const copyToClipboard = async (value, { t, showAlert } = {}) => {
+export const copyToClipboard = async ({
+  value,
+  t,
+  showAlert,
+  isSuccessAlertShown = true
+}) => {
   if (!value) return false
   try {
     if (typeof value === 'string') {
@@ -143,11 +150,14 @@ export const copyToClipboard = async (value, { t, showAlert } = {}) => {
     } else {
       await navigator.clipboard.writeText(await value)
     }
-    showAlert({
-      message: t('copyReminderContent.success'),
-      severity: 'success',
-      variant: 'filled'
-    })
+    if (isSuccessAlertShown) {
+      showAlert({
+        message: t('copyReminderContent.success'),
+        severity: 'success',
+        variant: 'filled'
+      })
+    }
+    return true
   } catch (error) {
     showAlert({
       message: t('copyReminderContent.error'),
@@ -158,6 +168,7 @@ export const copyToClipboard = async (value, { t, showAlert } = {}) => {
       "Error in 'copyToClipboard' function when trying to copy to clipboard",
       error
     )
+    return false
   }
 }
 

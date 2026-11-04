@@ -1,8 +1,9 @@
+import cx from 'classnames'
 import PropTypes from 'prop-types'
-import React, { useReducer, useState } from 'react'
+import React, { useEffect, useReducer, useRef, useState } from 'react'
 
-import { Icon, Copy, Link } from '@linagora/twake-icons'
-import { useClient } from 'cozy-client'
+import { Icon, Check, Discuss, EmailOpen, Link } from '@linagora/twake-icons'
+import { models, useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
@@ -14,13 +15,22 @@ import {
   createSharingLink
 } from './ShareRestrictionModal/helpers'
 import { useSharingContext } from '../hooks/useSharingContext'
+import { buildAppsQuery } from '../queries/queries'
+
+const COPIED_DURATION = 2000
+const ROUND_BUTTON_CLASSNAME = 'u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle'
+
+const findAppUrl = ({ apps, slug }) => {
+  const app = models.applications.isInstalled(apps, { slug })
+  if (!app) return null
+  return models.applications.getUrl(app) ?? null
+}
 
 const ShareByLink = ({
   link,
   document,
   documentType,
-  showGenerateLinkButton = false,
-  autoOpenShareRestriction = false
+  isAutoOpenSettings = false
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -28,16 +38,26 @@ const ShareByLink = ({
   const client = useClient()
   const { shareByLink, getOwner, getSharingById } = useSharingContext()
   const [isGenerating, setIsGenerating] = useState(false)
+  const [isCopied, setCopied] = useState(false)
+  const copiedTimeout = useRef(null)
 
-  const canShare = typeof navigator?.share === 'function'
-  const showGenerateButton = showGenerateLinkButton && !link
-  const showCopyAndSendButtons = !showGenerateButton && isMobile && canShare
-  const showOnlyCopyButton = !showGenerateButton && (!isMobile || !canShare)
+  const appsQuery = buildAppsQuery()
+  const appsResult = useQuery(appsQuery.definition, appsQuery.options)
+  const apps = hasQueryBeenLoaded(appsResult) ? appsResult.data : []
+  const mailUrl = findAppUrl({ apps, slug: 'mail' })
+  const chatUrl = findAppUrl({ apps, slug: 'chat' })
+  const hasMailApp = mailUrl !== null
+  const hasChatApp = chatUrl !== null
+  const hasAppButtons = hasMailApp || hasChatApp
+
+  const isSendLinkShown = isMobile && typeof navigator?.share === 'function'
 
   const [isEditDialogOpen, toggleEditDialogOpen] = useReducer(
     state => !state,
     false
   )
+
+  useEffect(() => () => clearTimeout(copiedTimeout.current), [])
 
   const showGenericError = () => {
     showAlert({
@@ -45,6 +65,12 @@ const ShareByLink = ({
       severity: 'error',
       variant: 'filled'
     })
+  }
+
+  const showCopied = () => {
+    clearTimeout(copiedTimeout.current)
+    setCopied(true)
+    copiedTimeout.current = setTimeout(() => setCopied(false), COPIED_DURATION)
   }
 
   const handleGenerateLink = async () => {
@@ -70,9 +96,15 @@ const ShareByLink = ({
     }
   }
 
-  const generateLinkAndCopyLinkToClipboard = async () => {
+  const copyLink = async () => {
     if (link) {
-      await copyToClipboard(link, { t, showAlert })
+      const isLinkCopied = await copyToClipboard({
+        value: link,
+        t,
+        showAlert,
+        isSuccessAlertShown: false
+      })
+      if (isLinkCopied) showCopied()
       return
     }
     // Safari: the clipboard API must be invoked synchronously within the
@@ -80,30 +112,22 @@ const ShareByLink = ({
     // The resolved URL is captured here so we can branch on success after
     // the copy has completed, without re-awaiting the promise.
     let generatedLink = null
-    await copyToClipboard(
-      handleGenerateLink().then(generated => {
+    const isLinkCopied = await copyToClipboard({
+      value: handleGenerateLink().then(generated => {
         generatedLink = generated
         if (!generated) throw new Error('link-generation-failed')
         return generated
       }),
-      { t, showAlert }
-    )
+      t,
+      showAlert,
+      isSuccessAlertShown: false
+    })
     if (!generatedLink) {
       showGenericError()
       return
     }
-    if (autoOpenShareRestriction) {
-      toggleEditDialogOpen()
-    }
-  }
-
-  const generateLinkSilently = async () => {
-    const generated = await handleGenerateLink()
-    if (!generated) {
-      showGenericError()
-      return
-    }
-    if (autoOpenShareRestriction) {
+    if (isLinkCopied) showCopied()
+    if (isAutoOpenSettings) {
       toggleEditDialogOpen()
     }
   }
@@ -135,45 +159,65 @@ const ShareByLink = ({
   }
 
   return (
-    <div className="u-w-100">
-      {showCopyAndSendButtons && (
-        <>
-          <Button
-            label={t(`${documentType}.share.shareByLink.send`)}
-            variant="secondary"
-            size="medium"
-            startIcon={<Icon icon={Link} />}
-            onClick={shareLink}
-            busy={isGenerating}
-          />
-          <Button
-            label={<Icon icon={Copy} />}
-            variant="secondary"
-            size="medium"
-            onClick={generateLinkAndCopyLinkToClipboard}
-            disabled={isGenerating}
-          />
-        </>
-      )}
-      {showOnlyCopyButton && (
+    <div
+      className={cx('u-w-100 u-flex u-flex-items-center', {
+        'u-flex-justify-end': !hasAppButtons
+      })}
+    >
+      {isSendLinkShown && (
         <Button
-          label={t(`${documentType}.share.shareByLink.copy`)}
+          className="u-mr-half"
+          label={t(`${documentType}.share.shareByLink.send`)}
           variant="secondary"
           size="medium"
           startIcon={<Icon icon={Link} />}
-          onClick={generateLinkAndCopyLinkToClipboard}
-          busy={isGenerating}
+          onClick={shareLink}
+          disabled={isGenerating}
         />
       )}
-      {showGenerateButton && (
-        <Button
-          label={t(`${documentType}.share.shareByLink.create`)}
-          variant="secondary"
-          size="medium"
-          startIcon={<Icon icon={Link} />}
-          onClick={generateLinkSilently}
-          busy={isGenerating}
-        />
+      <Button
+        label={
+          isCopied
+            ? t(`${documentType}.share.shareByLink.copiedButton`)
+            : t(`${documentType}.share.shareByLink.copy`)
+        }
+        color={isCopied ? 'success' : undefined}
+        size="medium"
+        startIcon={<Icon icon={isCopied ? Check : Link} />}
+        onClick={copyLink}
+        busy={isGenerating}
+      />
+      {hasAppButtons && (
+        <div className="u-ml-auto u-flex u-flex-items-center">
+          {hasMailApp && (
+            <Button
+              component="a"
+              href={mailUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('Share.publicAccess.sendByEmail')}
+              className={ROUND_BUTTON_CLASSNAME}
+              classes={{ label: 'u-flex u-w-auto' }}
+              variant="secondary"
+              label={<Icon icon={EmailOpen} />}
+            />
+          )}
+          {hasChatApp && (
+            <Button
+              component="a"
+              href={chatUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('Share.publicAccess.sendByChat')}
+              className={cx(ROUND_BUTTON_CLASSNAME, {
+                'u-ml-half': hasMailApp
+              })}
+              classes={{ label: 'u-flex u-w-auto' }}
+              variant="secondary"
+              label={<Icon icon={Discuss} />}
+            />
+          )}
+        </div>
       )}
       {isEditDialogOpen && (
         <ShareRestrictionModal file={document} onClose={toggleEditDialogOpen} />
@@ -186,8 +230,7 @@ ShareByLink.propTypes = {
   link: PropTypes.string,
   document: PropTypes.object.isRequired,
   documentType: PropTypes.string.isRequired,
-  showGenerateLinkButton: PropTypes.bool,
-  autoOpenShareRestriction: PropTypes.bool
+  isAutoOpenSettings: PropTypes.bool
 }
 
 export default ShareByLink
