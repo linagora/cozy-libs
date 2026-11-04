@@ -88,7 +88,9 @@
         "password": "Password-protected.",
         "expires": "Expires on %{date}",
         "passwordAndExpires": "Password-protected. Expires on %{date}"
-      }
+      },
+      "sendByEmail": "Send by email",
+      "sendByChat": "Send by chat"
     }
   },
   "Sharings": {
@@ -118,10 +120,10 @@
       "sharedBy": "Shared by %{name}",
       "sharedByLink": "Shared by link",
       "shareByLink": {
-        "create": "Generate a link",
         "send": "Send link",
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
+        "copiedButton": "Copied",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again.",
         "shareDescription": "Here is the link to the document %{name}:"
@@ -184,10 +186,10 @@
       "sharedWithMe": "Shared with me",
       "sharedBy": "Shared by %{name}",
       "shareByLink": {
-        "create": "Generate a link",
         "send": "Send link",
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
+        "copiedButton": "Copied",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again.",
         "shareDescription": "Here is the link to the document %{name}:"
@@ -250,10 +252,10 @@
       "shared": "Shared",
       "sharedWithMe": "Shared with me",
       "shareByLink": {
-        "create": "Generate a link",
         "send": "Send link",
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
+        "copiedButton": "Copied",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again.",
         "fetchFailed": "Woops! It seems your connectivity is limited, try again later when it gets better.",
@@ -315,10 +317,10 @@
       "sharedBy": "Shared by %{name}",
       "sharedByLink": "Shared by link",
       "shareByLink": {
-        "create": "Generate a link",
         "send": "Send link",
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
+        "copiedButton": "Copied",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again.",
         "shareDescription": "Here is the link to the document %{name}:"

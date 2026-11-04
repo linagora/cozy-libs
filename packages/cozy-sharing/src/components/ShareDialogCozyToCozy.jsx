@@ -26,7 +26,6 @@ const SharingTitleFunction = ({ documentType, document }) =>
 
 const ShareDialogCozyToCozy = ({
   showShareByLink,
-  showGenerateLinkButton,
   autoOpenShareRestriction,
   documentType,
   document,
@@ -116,13 +115,12 @@ const ShareDialogCozyToCozy = ({
     const Actions = dialogActionProps => (
       <DumbShareByLink
         {...dialogActionProps}
-        showGenerateLinkButton={showGenerateLinkButton}
-        autoOpenShareRestriction={autoOpenShareRestriction}
+        isAutoOpenSettings={autoOpenShareRestriction}
       />
     )
     Actions.displayName = 'ShareDialogCozyToCozyActions'
     return Actions
-  }, [showShareByLink, showGenerateLinkButton, autoOpenShareRestriction])
+  }, [showShareByLink, autoOpenShareRestriction])
 
   return (
     <>
@@ -167,7 +165,6 @@ const ShareDialogCozyToCozy = ({
 
 ShareDialogCozyToCozy.propTypes = {
   showShareByLink: PropTypes.bool,
-  showGenerateLinkButton: PropTypes.bool,
   autoOpenShareRestriction: PropTypes.bool,
   documentType: PropTypes.string.isRequired,
   document: PropTypes.object.isRequired,

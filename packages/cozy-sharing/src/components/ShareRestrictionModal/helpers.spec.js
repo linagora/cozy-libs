@@ -1,6 +1,11 @@
 import { endOfDay } from 'date-fns'
 
-import { makeTTL, toExpirationDate, updatePermissions } from './helpers'
+import {
+  copyToClipboard,
+  makeTTL,
+  toExpirationDate,
+  updatePermissions
+} from './helpers'
 
 describe('ShareRestrictionModal/helpers', () => {
   describe('toExpirationDate', () => {
@@ -197,6 +202,47 @@ describe('ShareRestrictionModal/helpers', () => {
       } finally {
         jest.useRealTimers()
       }
+    })
+  })
+
+  describe('copyToClipboard', () => {
+    const t = key => key
+    const setClipboard = writeText =>
+      Object.assign(navigator, { clipboard: { writeText } })
+
+    it('tells whether the value has been copied', async () => {
+      setClipboard(jest.fn().mockResolvedValue())
+      expect(
+        await copyToClipboard({ value: 'url', t, showAlert: jest.fn() })
+      ).toBe(true)
+
+      setClipboard(jest.fn().mockRejectedValue(new Error('denied')))
+      expect(
+        await copyToClipboard({ value: 'url', t, showAlert: jest.fn() })
+      ).toBe(false)
+    })
+
+    it('only shows the error alert when the success alert is hidden', async () => {
+      const showAlert = jest.fn()
+      setClipboard(jest.fn().mockResolvedValue())
+      await copyToClipboard({
+        value: 'url',
+        t,
+        showAlert,
+        isSuccessAlertShown: false
+      })
+      expect(showAlert).not.toHaveBeenCalled()
+
+      setClipboard(jest.fn().mockRejectedValue(new Error('denied')))
+      await copyToClipboard({
+        value: 'url',
+        t,
+        showAlert,
+        isSuccessAlertShown: false
+      })
+      expect(showAlert).toHaveBeenCalledWith(
+        expect.objectContaining({ severity: 'error' })
+      )
     })
   })
 })

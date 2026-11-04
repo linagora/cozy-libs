@@ -67,6 +67,5 @@ export const ShareModal = withLocales(props => {
 ShareModal.propTypes = {
   autoOpenShareRestriction: PropTypes.bool,
   document: PropTypes.object.isRequired,
-  onRevokeSuccess: PropTypes.func,
-  showGenerateLinkButton: PropTypes.bool
+  onRevokeSuccess: PropTypes.func
 }

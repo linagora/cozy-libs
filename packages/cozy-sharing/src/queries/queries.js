@@ -98,3 +98,11 @@ export const buildInstanceSettingsQuery = () => ({
     singleDocData: true
   }
 })
+
+export const buildAppsQuery = () => ({
+  definition: Q('io.cozy.apps'),
+  options: {
+    as: 'io.cozy.apps',
+    fetchPolicy: defaultFetchPolicy
+  }
+})

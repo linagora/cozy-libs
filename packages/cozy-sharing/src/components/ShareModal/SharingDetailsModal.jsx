@@ -53,8 +53,6 @@ export const SharingDetailsModal = ({
             link={displayedLink}
             document={document}
             documentType="Files"
-            showGenerateLinkButton={true}
-            autoOpenShareRestriction={false}
           />
         )
       }

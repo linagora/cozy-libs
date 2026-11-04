@@ -101,7 +101,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
       })
     )
 
-    await copyToClipboard(urlPromise, { t, showAlert })
+    await copyToClipboard({ value: urlPromise, t, showAlert })
     try {
       // Observe the permission result so we can keep the modal open (and
       // preserve the user's date / password inputs) if

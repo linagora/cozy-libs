@@ -104,7 +104,6 @@
       "sharedBy": "Geteilt von %{name}",
       "sharedByLink": "Per Link geteilt",
       "shareByLink": {
-        "create": "Link erstellen",
         "send": "Link senden",
         "copy": "Link kopieren",
         "copied": "Der Link wurde in die Zwischenablage kopiert",
@@ -170,7 +169,6 @@
       "sharedWithMe": "Mit mir geteilt",
       "sharedBy": "Geteilt von %{name}",
       "shareByLink": {
-        "create": "Link erstellen",
         "send": "Link senden",
         "copy": "Link kopieren",
         "copied": "Der Link wurde in die Zwischenablage kopiert",
@@ -236,7 +234,6 @@
       "shared": "Geteilt",
       "sharedWithMe": "Mit mir geteilt",
       "shareByLink": {
-        "create": "Link erstellen",
         "send": "Link senden",
         "copy": "Link kopieren",
         "copied": "Der Link wurde in die Zwischenablage kopiert",
@@ -301,7 +298,6 @@
       "sharedBy": "Geteilt von %{name}",
       "sharedByLink": "Per Link geteilt",
       "shareByLink": {
-        "create": "Link erstellen",
         "send": "Link senden",
         "copy": "Link kopieren",
         "copied": "Der Link wurde in die Zwischenablage kopiert",

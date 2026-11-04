@@ -48,7 +48,7 @@ export const BoxPassword = ({
   }
 
   const handleCopy = async () => {
-    await copyToClipboard(password, { t, showAlert })
+    await copyToClipboard({ value: password, t, showAlert })
   }
 
   return (

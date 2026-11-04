@@ -104,7 +104,6 @@
       "sharedBy": "Được chia sẻ bởi %{name}",
       "sharedByLink": "Được chia sẻ qua liên kết",
       "shareByLink": {
-        "create": "Tạo một liên kết",
         "send": "Gửi liên kết",
         "copy": "Sao chép liên kết",
         "copied": "Liên kết đã được sao chép vào khay nhớ tạm",
@@ -170,7 +169,6 @@
       "sharedWithMe": "Được chia sẻ với tôi",
       "sharedBy": "Được chia sẻ bởi %{name}",
       "shareByLink": {
-        "create": "Tạo một liên kết",
         "send": "Gửi liên kết",
         "copy": "Sao chép liên kết",
         "copied": "Liên kết đã được sao chép vào khay nhớ tạm",
@@ -236,7 +234,6 @@
       "shared": "Đã chia sẻ",
       "sharedWithMe": "Được chia sẻ với tôi",
       "shareByLink": {
-        "create": "Tạo một liên kết",
         "send": "Gửi liên kết",
         "copy": "Sao chép liên kết",
         "copied": "Liên kết đã được sao chép vào khay nhớ tạm",
@@ -301,7 +298,6 @@
       "sharedBy": "Được chia sẻ bởi %{name}",
       "sharedByLink": "Được chia sẻ qua liên kết",
       "shareByLink": {
-        "create": "Tạo một liên kết",
         "send": "Gửi liên kết",
         "copy": "Sao chép liên kết",
         "copied": "Liên kết đã được sao chép vào khay nhớ tạm",

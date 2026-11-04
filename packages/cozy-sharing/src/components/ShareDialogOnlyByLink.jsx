@@ -19,7 +19,6 @@ const ShareDialogOnlyByLink = ({
   document,
   documentType,
   onClose,
-  showGenerateLinkButton,
   autoOpenShareRestriction
 }) => {
   const { t } = useI18n()
@@ -66,8 +65,7 @@ const ShareDialogOnlyByLink = ({
               link={displayedLink}
               document={document}
               documentType={documentType}
-              showGenerateLinkButton={showGenerateLinkButton}
-              autoOpenShareRestriction={autoOpenShareRestriction}
+              isAutoOpenSettings={autoOpenShareRestriction}
             />
           </div>
         </>
