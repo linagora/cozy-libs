@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.15.9](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.8...cozy-dataproxy-lib@4.15.9) (2026-11-05)
+
+### Bug Fixes
+
+- **cozy-dataproxy-lib:** Stop loading cozy-pouch-link at runtime ([f4ba98a](https://github.com/cozy/cozy-libs/commit/f4ba98a1cce0c4d6c943dc05fa36912b9482cc5f))
+
 ## [4.15.8](https://github.com/cozy/cozy-libs/compare/cozy-dataproxy-lib@4.15.7...cozy-dataproxy-lib@4.15.8) (2026-10-22)
 
 **Note:** Version bump only for package cozy-dataproxy-lib
