@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [45.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.0.1...cozy-sharing@45.1.0) (2026-11-05)
+
+### Bug Fixes
+
+- **cozy-sharing:** Keep shared drives after revocation ([d318314](https://github.com/cozy/cozy-libs/commit/d318314dfaef2702f23ac51d92d30afd3d3ac199))
+- **cozy-sharing:** Show groups in federated sharing dialogs ([d8a80a0](https://github.com/cozy/cozy-libs/commit/d8a80a0fc0ff01928ed0254c25697383f111c0fa))
+
+### Features
+
+- **cozy-sharing:** Use mixed contact and group suggestions ([e94c8da](https://github.com/cozy/cozy-libs/commit/e94c8da8fc8da765db5dc1167c3b83644329ec78))
+
 ## [45.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.0.0...cozy-sharing@45.0.1) (2026-11-05)
 
 ### Bug Fixes
