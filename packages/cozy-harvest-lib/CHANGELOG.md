@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [39.2.29](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@39.2.28...cozy-harvest-lib@39.2.29) (2026-11-05)
+
+**Note:** Version bump only for package cozy-harvest-lib
+
 ## [39.2.28](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@39.2.27...cozy-harvest-lib@39.2.28) (2026-11-04)
 
 **Note:** Version bump only for package cozy-harvest-lib

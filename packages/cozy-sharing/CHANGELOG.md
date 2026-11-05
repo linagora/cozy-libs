@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [44.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@43.0.1...cozy-sharing@44.0.0) (2026-11-05)
+
+### Bug Fixes
+
+- **cozy-sharing:** Copy shared drive links from the owner's instance ([9dc8de0](https://github.com/cozy/cozy-libs/commit/9dc8de00546fc0c9b9ac0fa2782dee5b8817d9bb))
+
+### Features
+
+- **cozy-sharing:** Move the share link to a Public access block ([98d455d](https://github.com/cozy/cozy-libs/commit/98d455dd5896211627a3ac305b34400a5f32ac5f))
+- **cozy-sharing:** Rework the share by link actions ([78aadf6](https://github.com/cozy/cozy-libs/commit/78aadf60d81f09cc72f579270df882d6b2f14997))
+- **cozy-sharing:** Simplify the sharing link settings ([623a028](https://github.com/cozy/cozy-libs/commit/623a02810b28c66cd4b038f4fcab6595a9c015ca))
+- **cozy-sharing:** Update the share modal labels ([952b51b](https://github.com/cozy/cozy-libs/commit/952b51b633b37b12a04cbf9a83ea6413340e935b))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** the `showGenerateLinkButton` prop is removed from
+  `ShareModal`, `FederatedFolderModal` and `EditSharedDriveModal`: stop
+  passing it, and drop the `sharing.generate-link-button.enabled` flag
+  read that fed it. Copy link now always creates the link when needed
+  and copies it, turning green with "Copied" instead of showing an alert.
+  Mail and Chat buttons open those apps in a new tab when they are
+  installed, which needs the `io.cozy.apps` GET permission.
+
 ## [43.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@43.0.0...cozy-sharing@43.0.1) (2026-11-04)
 
 ### Bug Fixes
