@@ -15,7 +15,7 @@ const getBestSource = effectiveRecipient => {
  * Does not spread the backend data — only the fields needed for rendering.
  */
 const mapToRecipient = (effectiveRecipient, source, avatarSource) => ({
-  id: effectiveRecipient.id,
+  recipientId: effectiveRecipient.id,
   name: effectiveRecipient.name,
   email: effectiveRecipient.email,
   instance: effectiveRecipient.instance,

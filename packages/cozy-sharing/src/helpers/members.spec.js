@@ -86,7 +86,7 @@ describe('makeMembers', () => {
   it('identifies a recipient by its id rather than its sharing index', () => {
     const [member] = makeMembers({
       ...params,
-      recipients: [{ ...bob, id: 'recipient-1' }]
+      recipients: [{ ...bob, recipientId: 'recipient-1' }]
     })
 
     expect(member.id).toBe('recipient-1')
