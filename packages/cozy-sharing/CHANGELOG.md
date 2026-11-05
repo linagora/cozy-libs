@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [45.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.0.0...cozy-sharing@45.0.1) (2026-11-05)
+
+### Bug Fixes
+
+- **cozy-sharing:** Resolve a listed recipient by its email on upgrade ([935683c](https://github.com/cozy/cozy-libs/commit/935683cbffab3b8147e4214e8e73ca684924ba3d))
+
 # [45.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@44.0.0...cozy-sharing@45.0.0) (2026-11-05)
 
 ### chore
