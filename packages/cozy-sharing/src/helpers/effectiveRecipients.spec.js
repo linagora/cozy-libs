@@ -1,3 +1,4 @@
+import { getOrCreateFromArray } from './contacts'
 import { mapEffectiveRecipients } from './effectiveRecipients'
 
 const makeAncestorSource = (rootName = 'Parent Folder') => ({
@@ -153,5 +154,24 @@ describe('mapEffectiveRecipients', () => {
         '/sharings/parent-sharing/recipients/16/avatar'
       )
     })
+  })
+
+  it('keeps a listed recipient resolvable as a contact by its email', async () => {
+    const contact = {
+      _id: 'contact-alice',
+      email: [{ address: 'alice@example.com' }]
+    }
+    const client = {
+      collection: () => ({
+        find: jest.fn().mockResolvedValue({ data: [contact] })
+      })
+    }
+    const [recipient] = mapEffectiveRecipients([
+      makeRecipient({ sources: [makeAncestorSource()] })
+    ])
+
+    const resolved = await getOrCreateFromArray(client, [recipient], jest.fn())
+
+    expect(resolved).toEqual([contact])
   })
 })
