@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [45.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@44.0.0...cozy-sharing@45.0.0) (2026-11-05)
+
+### chore
+
+- **cozy-sharing:** Upgrade cozy-ui to 146.5.1 ([0b245ea](https://github.com/cozy/cozy-libs/commit/0b245ea923e86c0b74ba4170e50feb3a80a8a203))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** cozy-sharing needs cozy-ui 146.5.1 or later: upgrade
+  cozy-ui in the app.
+
 # [44.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@43.0.1...cozy-sharing@44.0.0) (2026-11-05)
 
 ### Bug Fixes
