@@ -350,5 +350,24 @@ describe('ShareAutosuggestWrapper component', () => {
       expect(screen.getByText('Alice')).toBeInTheDocument()
       expect(screen.getByText('Friends - 1 member')).toBeInTheDocument()
     })
+
+    it('falls back to the local contacts when offline', () => {
+      const onLine = jest
+        .spyOn(navigator, 'onLine', 'get')
+        .mockReturnValue(false)
+      try {
+        const suggest = jest.fn()
+        setup(
+          { contacts: [contact], contactGroups: [group] },
+          { contactsSuggestEnabled: true, suggest }
+        )
+
+        expect(mockAutocompleteProps.fetchSuggestions).toBeUndefined()
+        expect(screen.getByText('Alice')).toBeInTheDocument()
+        expect(suggest).not.toHaveBeenCalled()
+      } finally {
+        onLine.mockRestore()
+      }
+    })
   })
 })
