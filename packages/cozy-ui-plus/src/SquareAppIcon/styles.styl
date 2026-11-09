@@ -94,18 +94,21 @@ opacity-end = 1
         fill transparent !important
 
         path
-            animation-duration icon-duration !important
+            animation draw-stroke icon-duration ease-in-out icon-start backwards
+            stroke-dasharray 100px
 
-        path:first-of-type
-            animation-delay icon-start !important
-
-        // The second path is a part of the cross,
-        // since it has its own hardcoded animation delay we need to add it again (.16s)
+        // The second path is the second stroke of the cross
         path+path
-            animation-delay icon-start + .16s !important
+            animation-delay icon-start + .16s
 
         *
             stroke var(--white) !important
+
+@keyframes draw-stroke {
+  from {
+    stroke-dashoffset 100px
+  }
+}
 
 .onEnd.isFailed
     --animationColor var(--errorColor)
