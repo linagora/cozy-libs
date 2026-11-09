@@ -1,5 +1,5 @@
 module.exports = {
-  presets: ['cozy-app'],
+  presets: [['cozy-app', { presetEnv: { modules: false } }]],
   env: {
     transpilation: {
       ignore: ['**/*.spec.jsx', '**/*.spec.js', '**/*.spec.tsx', '**/*.spec.ts']
