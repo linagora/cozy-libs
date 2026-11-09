@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [37.0.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@36.2.25...cozy-bar@37.0.0) (2026-11-09)
+
+### Bug Fixes
+
+- **cozy-bar:** Ship ES modules in dist ([285a426](https://github.com/cozy/cozy-libs/commit/285a426902d7c772dbfb2e0c89e278f83d9bef2f))
+
+### BREAKING CHANGES
+
+- **cozy-bar:** dist now contains ES modules. Apps must add cozy-bar
+  to Jest transformIgnorePatterns so it gets transformed.
+
+Assisted-by: LLM
+
 ## [36.2.25](https://github.com/cozy/cozy-libs/compare/cozy-bar@36.2.24...cozy-bar@36.2.25) (2026-11-05)
 
 **Note:** Version bump only for package cozy-bar

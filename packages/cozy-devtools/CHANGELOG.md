@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-devtools@3.0.1...cozy-devtools@4.0.0) (2026-11-09)
+
+### Bug Fixes
+
+- **cozy-devtools:** Ship ES modules in dist ([3a9d7d7](https://github.com/cozy/cozy-libs/commit/3a9d7d79500e26b564380481ff2c8711e165ffff))
+
+### BREAKING CHANGES
+
+- **cozy-devtools:** dist now contains ES modules. Apps must add cozy-devtools
+  to Jest transformIgnorePatterns so it gets transformed.
+
+Assisted-by: LLM
+
 ## [3.0.1](https://github.com/cozy/cozy-libs/compare/cozy-devtools@3.0.0...cozy-devtools@3.0.1) (2026-10-22)
 
 **Note:** Version bump only for package cozy-devtools

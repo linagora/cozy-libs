@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@14.1.15...cozy-ui-plus@15.0.0) (2026-11-09)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Ship ES modules in dist ([433932c](https://github.com/cozy/cozy-libs/commit/433932c7956f9399c3597d67ce669b9cce8a48b6))
+
+### BREAKING CHANGES
+
+- **cozy-ui-plus:** dist now contains ES modules. Apps must add cozy-ui-plus
+  to Jest transformIgnorePatterns so it gets transformed.
+
+Assisted-by: LLM
+
 ## [14.1.15](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@14.1.14...cozy-ui-plus@14.1.15) (2026-11-05)
 
 **Note:** Version bump only for package cozy-ui-plus

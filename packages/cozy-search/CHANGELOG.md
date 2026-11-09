@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-search@2.12.21...cozy-search@3.0.0) (2026-11-09)
+
+### Bug Fixes
+
+- **cozy-search:** Ship ES modules in dist ([7ac72d3](https://github.com/cozy/cozy-libs/commit/7ac72d3dd9e54941f5166e2b566089aee770d93d))
+
+### BREAKING CHANGES
+
+- **cozy-search:** dist now contains ES modules. Apps must add cozy-search
+  to Jest transformIgnorePatterns so it gets transformed.
+
+Assisted-by: LLM
+
 ## [2.12.21](https://github.com/cozy/cozy-libs/compare/cozy-search@2.12.20...cozy-search@2.12.21) (2026-11-05)
 
 **Note:** Version bump only for package cozy-search

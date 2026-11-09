@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [33.0.0](https://github.com/cozy/cozy-libs/compare/cozy-viewer@32.0.19...cozy-viewer@33.0.0) (2026-11-09)
+
+### Bug Fixes
+
+- **cozy-viewer:** Ship ES modules in dist ([4e7a955](https://github.com/cozy/cozy-libs/commit/4e7a9556e96ed7be20aed5173f1b6ef76b4828bc))
+
+### BREAKING CHANGES
+
+- **cozy-viewer:** dist now contains ES modules. Apps must add cozy-viewer
+  to Jest transformIgnorePatterns so it gets transformed.
+
+Assisted-by: LLM
+
 ## [32.0.19](https://github.com/cozy/cozy-libs/compare/cozy-viewer@32.0.18...cozy-viewer@32.0.19) (2026-11-05)
 
 **Note:** Version bump only for package cozy-viewer
