@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.45.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.44.3...cozy-app-publish@0.45.0) (2026-11-09)
+
+### Features
+
+- **cozy-app-publish:** Add --build-file to upload a local archive ([3b1b6ab](https://github.com/cozy/cozy-libs/commit/3b1b6ab1d2b00a13e9e79caa8187876fea202e0d))
+
 ## [0.44.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.44.2...cozy-app-publish@0.44.3) (2026-10-19)
 
 ### Bug Fixes
