@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [15.0.1](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@15.0.0...cozy-ui-plus@15.0.1) (2026-11-09)
+
+### Bug Fixes
+
+- **cozy-ui-plus:** Ship the animated icons of SquareAppIcon ([250ba36](https://github.com/cozy/cozy-libs/commit/250ba36228dc05b9307d7fc89c3d1bf96c7fa949))
+
 # [15.0.0](https://github.com/cozy/cozy-libs/compare/cozy-ui-plus@14.1.15...cozy-ui-plus@15.0.0) (2026-11-09)
 
 ### Bug Fixes
