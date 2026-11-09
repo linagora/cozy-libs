@@ -1,11 +1,4 @@
-import {
-  Icon,
-  IconCheckAnimated,
-  IconCrossAnimated,
-  LinkOut,
-  Plus,
-  WarningCircle
-} from '@linagora/twake-icons'
+import { Icon, LinkOut, Plus, WarningCircle } from '@linagora/twake-icons'
 import cx from 'classnames'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
@@ -18,6 +11,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { alpha, makeStyles } from 'cozy-ui/transpiled/react/styles'
 
+import { IconCheckAnimated, IconCrossAnimated } from './AnimatedIcons'
 import styles from './styles.styl'
 import AppIcon from '../AppIcon'
 import { useCozyTheme } from '../providers/CozyTheme'
