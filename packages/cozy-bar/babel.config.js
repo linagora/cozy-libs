@@ -1,5 +1,10 @@
 module.exports = {
-  presets: ['cozy-app'],
+  presets: [['cozy-app', { presetEnv: { modules: false } }]],
+  env: {
+    test: {
+      presets: ['cozy-app']
+    }
+  },
   plugins: [
     [
       'module-resolver',
