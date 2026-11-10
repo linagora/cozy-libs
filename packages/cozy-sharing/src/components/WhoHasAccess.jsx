@@ -5,6 +5,7 @@ import MemberList from 'cozy-ui/transpiled/react/MemberList'
 import { useI18n } from 'twake-i18n'
 
 import PublicAccess from './PublicAccess/PublicAccess'
+import styles from '../styles/share.styl'
 
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing
@@ -48,13 +49,15 @@ const WhoHasAccess = ({
       <RecipientWaitingForConfirmationAlert
         recipientsToBeConfirmed={recipientsToBeConfirmed}
       />
-      <MemberList
-        members={members}
-        roles={roles}
-        onRoleChange={onRoleChange}
-        onRemove={onRemove}
-        showEmptyState={showEmptyState}
-      />
+      <div className={styles['share-dialog-members-list']}>
+        <MemberList
+          members={members}
+          roles={roles}
+          onRoleChange={onRoleChange}
+          onRemove={onRemove}
+          showEmptyState={showEmptyState}
+        />
+      </div>
       {isPublicAccessShown && (
         <PublicAccess
           document={document}
