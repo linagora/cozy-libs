@@ -160,6 +160,21 @@ describe('Interapp', () => {
       other.remove()
     })
 
+    it('tells the client when the service is ready, once', async () => {
+      prom.stop()
+      const onServiceReady = jest.fn()
+      prom = intents
+        .create('EDIT', 'io.cozy.files', { id: 'fileId' })
+        .start(element, { onServiceReady })
+      await sleep(1)
+      iframe = element.querySelector('iframe')
+
+      expect(onServiceReady).not.toHaveBeenCalled()
+      window.dispatchEvent(mkMessage('ready', {}))
+      window.dispatchEvent(mkMessage('ready', {}))
+      expect(onServiceReady).toHaveBeenCalledTimes(1)
+    })
+
     it('ignores what is not an intent message, silently', async () => {
       const warn = jest.spyOn(console, 'warn')
       for (const data of [null, 'hello', { type: 'load' }, { type: 3 }]) {
