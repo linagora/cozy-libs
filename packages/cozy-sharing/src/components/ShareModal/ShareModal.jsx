@@ -10,12 +10,17 @@ import SharingDetailsModal from './SharingDetailsModal'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import FederatedFolderModal from '../FederatedFolder/FederatedFolderModal'
+import { ActivityReportContext } from '../ShareRestrictionModal/ActivityReportContext'
 
-export const ShareModal = withLocales(props => {
+const ShareModalContent = props => {
   const location = useLocation?.()
   const locationProps = location?.state?.modalProps
   const document = locationProps?.document || props.document
-  const { onRevokeSuccess, ...rest } = omit(locationProps || props, 'document')
+  const {
+    onRevokeSuccess,
+    enableActivityReport = props.enableActivityReport ?? false,
+    ...rest
+  } = omit(locationProps || props, 'document')
 
   const {
     byDocId,
@@ -44,28 +49,38 @@ export const ShareModal = withLocales(props => {
         <FederatedFolderModal
           document={document}
           onRevokeSuccess={onRevokeSuccess}
+          enableActivityReport={enableActivityReport}
           {...rest}
         />
       )
     }
 
-    return <EditableSharingModal document={document} {...rest} />
+    return (
+      <ActivityReportContext.Provider value={enableActivityReport}>
+        <EditableSharingModal document={document} {...rest} />
+      </ActivityReportContext.Provider>
+    )
   }
 
   return (
-    <SharingDetailsModal
-      recipients={getRecipients(document.id)}
-      document={document}
-      documentType={documentType}
-      onRevoke={revokeSelf}
-      onRevokeSelf={handleRevokeSelf}
-      {...rest}
-    />
+    <ActivityReportContext.Provider value={enableActivityReport}>
+      <SharingDetailsModal
+        recipients={getRecipients(document.id)}
+        document={document}
+        documentType={documentType}
+        onRevoke={revokeSelf}
+        onRevokeSelf={handleRevokeSelf}
+        {...rest}
+      />
+    </ActivityReportContext.Provider>
   )
-})
+}
+
+export const ShareModal = withLocales(ShareModalContent)
 
 ShareModal.propTypes = {
   autoOpenShareRestriction: PropTypes.bool,
   document: PropTypes.object.isRequired,
+  enableActivityReport: PropTypes.bool,
   onRevokeSuccess: PropTypes.func
 }

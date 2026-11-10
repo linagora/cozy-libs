@@ -421,6 +421,9 @@
     },
     "invalidPasswordMessage": "Il manque %{smart_count} caractère |||| Il manque %{smart_count} caractères"
   },
+  "ActivityReport": {
+    "label": "Envoyer par e-mail un rapport sur les statistiques du lien"
+  },
   "BoxDate": {
     "label": "Date limite",
     "text": "Restreindre l'accès après une date limite"

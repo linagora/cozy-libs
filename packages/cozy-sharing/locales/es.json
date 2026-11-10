@@ -419,6 +419,9 @@
     },
     "invalidPasswordMessage": "Falta %{smart_count} carácter |||| Faltan %{smart_count} caracteres"
   },
+  "ActivityReport": {
+    "label": "Enviar por correo un informe con las estadísticas del enlace"
+  },
   "BoxDate": {
     "label": "Fecha límite",
     "text": "Retirar el acceso después de una fecha límite"
