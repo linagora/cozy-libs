@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.22.2...cozy-interapp@0.23.0) (2026-11-10)
+
+### Bug Fixes
+
+- **cozy-interapp:** Give the data to the service at its first ready only ([0fdd6e9](https://github.com/cozy/cozy-libs/commit/0fdd6e97abe5315c1384b9a1ad1f4a39f8283e9f))
+- **cozy-interapp:** Listen to the messages of the intent frame only ([88946b1](https://github.com/cozy/cozy-libs/commit/88946b16cfb23bcc4ebfe9211da419331da320f8))
+- **cozy-interapp:** Open nothing for an intent stopped while it is created ([df74efa](https://github.com/cozy/cozy-libs/commit/df74efa338e90828ca40910bde10c3ac51620427))
+- **cozy-interapp:** Pick the service with filteredServices ([3b76739](https://github.com/cozy/cozy-libs/commit/3b76739e755183e1c16ecb7e38a6aa6a0d431b95))
+
+### Features
+
+- **cozy-interapp:** Let the client keep the focus when the iframe is inserted ([6a86fed](https://github.com/cozy/cozy-libs/commit/6a86fedc71933fe9598a36031341f6d8595b38c2))
+- **cozy-interapp:** Let the client resize the intent element ([4e251ee](https://github.com/cozy/cozy-libs/commit/4e251eec214152849138be06cc2a27bd1abdf2c7))
+- **cozy-interapp:** Tell the client when the service is ready ([e7e9172](https://github.com/cozy/cozy-libs/commit/e7e9172dc04810980996a9964d317803c13121e9))
+- **cozy-interapp:** Title the intent iframe ([90b1faf](https://github.com/cozy/cozy-libs/commit/90b1fafb1eff28434ae5663074fb4b42ead7acac))
+
 ## [0.22.2](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.22.1...cozy-interapp@0.22.2) (2026-10-26)
 
 ### Bug Fixes
