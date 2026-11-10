@@ -269,6 +269,11 @@ describe('Interapp', () => {
         })
       })
 
+      it('does not give the data again to a service frame that loads again', () => {
+        window.dispatchEvent(mkMessage('ready', {}))
+        expect(iframe.contentWindow.postMessage).toHaveBeenCalledTimes(1)
+      })
+
       it('ignores the messages of another intent, silently', async () => {
         const warn = jest.spyOn(console, 'warn')
         window.dispatchEvent(

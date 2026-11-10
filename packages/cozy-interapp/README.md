@@ -123,7 +123,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 
 | Direction | `type` (or payload shape) | Fields | Meaning |
 |---|---|---|---|
-| Service → Client | `intent-{id}:ready` | — | Handshake. Client responds by posting the raw intent `data` back to the service. |
+| Service → Client | `intent-{id}:ready` | — | Handshake. Client responds by posting the raw intent `data` back to the service, at the first `ready` only: a service frame that loads again does not get the data twice. |
 | Client → Service | *(raw `data`, no envelope)* | whatever was passed to `intents.create(action, type, data, ...)` | Sent immediately after `ready`. The service reads it via `service.getData()`. This is the only way the data travel: they are not sent to the cozy-stack when the intent is created. |
 | Service → Client | `intent-{id}:readyToUse` | — | The service's UI is rendered and its initial data has loaded. Fires the client's `onReadyToUse` callback. Sent at most once. |
 | Client → Service | *(raw `doc`, no envelope)* | the resulting document of the composed intent | Sent back after the composed intent resolves. The service's `compose(...)` promise resolves with it. |
