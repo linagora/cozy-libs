@@ -21,9 +21,9 @@ jest.mock('../helpers/windowWrapper', () => ({
     return mockPopup
   })
 }))
-jest.mock('uuid/v4', () => {
-  return () => 'someuuid'
-})
+jest.mock('uuid', () => ({
+  v4: () => 'someuuid'
+}))
 
 function CozyRealtimeMock() {
   this.subscribe = jest

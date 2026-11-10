@@ -1,6 +1,6 @@
 // @ts-check
 import get from 'lodash/get'
-import uuid from 'uuid/v4'
+import { v4 as uuid } from 'uuid'
 
 import CozyClient from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
