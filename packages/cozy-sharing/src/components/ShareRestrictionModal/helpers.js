@@ -240,13 +240,21 @@ export const createPermissions = async ({
   ttl,
   password,
   editingRights,
+  activityReportEnabled,
   documentType,
   shareByLink,
   showAlert
 }) => {
   try {
     const verbs = editingRights === 'readOnly' ? READ_ONLY_PERMS : WRITE_PERMS
-    return shareByLink(file, { verbs, ttl, password })
+    return shareByLink(file, {
+      verbs,
+      ttl,
+      password,
+      ...(typeof activityReportEnabled === 'boolean' && {
+        activityReportEnabled
+      })
+    })
   } catch (err) {
     showAlert({
       message: t(`${documentType}.share.shareByLink.permserror`),
@@ -282,6 +290,7 @@ export const updatePermissions = async ({
   passwordToggle,
   password,
   editingRights,
+  activityReportEnabled,
   documentType,
   updateDocumentPermissions,
   showAlert
@@ -301,7 +310,10 @@ export const updatePermissions = async ({
     return updateDocumentPermissions(file, {
       verbs,
       expiresAt,
-      password: ensuredPassword
+      password: ensuredPassword,
+      ...(typeof activityReportEnabled === 'boolean' && {
+        activityReportEnabled
+      })
     })
   } catch (err) {
     showAlert({

@@ -419,6 +419,10 @@
     },
     "invalidPasswordMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings"
   },
+  "ActivityReport": {
+    "label": "Email an expiration report",
+    "description": "When the link expires, the owner of the instance hosting the file receives an email with recent activity, including visitors’ identities and IP addresses, and a private CSV report. No email is sent without an email address."
+  },
   "BoxDate": {
     "label": "Deadline",
     "text": "Remove access after a deadline"

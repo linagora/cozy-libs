@@ -419,6 +419,10 @@
     },
     "invalidPasswordMessage": "Falta %{smart_count} carácter |||| Faltan %{smart_count} caracteres"
   },
+  "ActivityReport": {
+    "label": "Enviar un informe por correo al caducar",
+    "description": "Cuando el enlace caduca, el propietario de la instancia que aloja el archivo recibe un correo con la actividad reciente, incluidas las identidades y direcciones IP de los visitantes, y un informe CSV privado. Sin dirección de correo no se envía ningún correo."
+  },
   "BoxDate": {
     "label": "Fecha límite",
     "text": "Retirar el acceso después de una fecha límite"

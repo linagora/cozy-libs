@@ -61,6 +61,11 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
       : flag('sharing.date-toggle.enabled')
   )
   const [passwordToggle, setPasswordToggle] = useState(hasPassword)
+  const [activityReportEnabled, setActivityReportEnabled] = useState(
+    permissions[0]?.attributes?.activity_report_enabled === true
+  )
+  const supportsActivityReport =
+    documentType === 'Files' && file.type !== 'directory'
   const editingRights =
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
 
@@ -78,6 +83,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
           passwordToggle,
           password,
           editingRights,
+          ...(supportsActivityReport && { activityReportEnabled }),
           documentType,
           updateDocumentPermissions,
           showAlert
@@ -88,6 +94,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
           ttl: makeTTL(dateToggle && selectedDate),
           password,
           editingRights,
+          ...(supportsActivityReport && { activityReportEnabled }),
           documentType,
           shareByLink,
           showAlert
@@ -125,6 +132,10 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
       content={
         <ShareRestrictionContentModal
           file={file}
+          activityReportEnabled={activityReportEnabled}
+          setActivityReportEnabled={
+            supportsActivityReport ? setActivityReportEnabled : null
+          }
           // Date
           dateToggle={dateToggle}
           setDateToggle={setDateToggle}

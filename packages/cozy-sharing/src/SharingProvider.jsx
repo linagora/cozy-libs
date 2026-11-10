@@ -657,14 +657,20 @@ export class SharingProvider extends Component {
     options
   ) => {
     const { client } = this.props
-    const { expiresAt, password } = options
+    const { expiresAt, password, activityReportEnabled } = options
     const drivePermissionCollection = client.collection('io.cozy.permissions', {
       driveId: document.driveId
     })
     const resp = await drivePermissionCollection.add(
       permissionDocument,
       updatedPermissions,
-      { expiresAt, password }
+      {
+        expiresAt,
+        password,
+        ...(typeof activityReportEnabled === 'boolean' && {
+          activityReportEnabled
+        })
+      }
     )
     this.dispatch(updateSharingLink(resp.data))
     return resp
@@ -688,7 +694,7 @@ export class SharingProvider extends Component {
     options,
     permissionsToUpdate = null
   ) => {
-    const { verbs, expiresAt, password } = options
+    const { verbs, expiresAt, password, activityReportEnabled } = options
     const documentId = getDocumentId(document)
     const permissions =
       permissionsToUpdate || getDocumentPermissions(this.state, documentId)
@@ -715,7 +721,13 @@ export class SharingProvider extends Component {
           : await this.permissionCol.add(
               permissionDocument,
               updatedPermissions,
-              { expiresAt, password }
+              {
+                expiresAt,
+                password,
+                ...(typeof activityReportEnabled === 'boolean' && {
+                  activityReportEnabled
+                })
+              }
             )
         this.dispatch(updateSharingLink(resp.data))
         return resp

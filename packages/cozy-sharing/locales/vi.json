@@ -419,6 +419,10 @@
     },
     "invalidPasswordMessage": "Thiếu %{smart_count} ký tự |||| Thiếu %{smart_count} ký tự"
   },
+  "ActivityReport": {
+    "label": "Gửi báo cáo khi liên kết hết hạn",
+    "description": "Khi liên kết hết hạn, chủ sở hữu của máy chủ lưu tệp sẽ nhận email về hoạt động gần đây, bao gồm danh tính và địa chỉ IP của khách truy cập, cùng báo cáo CSV riêng tư. Không có địa chỉ email thì không gửi email."
+  },
   "BoxDate": {
     "label": "Thời hạn",
     "text": "Xóa quyền truy cập sau một thời hạn"

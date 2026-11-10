@@ -469,6 +469,53 @@ describe('updateDocumentPermissions', () => {
     }
   }
 
+  it.each([undefined, false, true])(
+    'passes the report choice %s without changing unrelated updates',
+    async activityReportEnabled => {
+      const driveFile = {
+        _id: 'file_in_drive',
+        id: 'file_in_drive',
+        driveId: 'drive_123'
+      }
+      let saved = true
+      const add = jest.fn(async (permission, rules, options) => {
+        if (Object.hasOwn(options, 'activityReportEnabled')) {
+          saved = options.activityReportEnabled
+        }
+        return {
+          data: {
+            ...permission,
+            attributes: {
+              ...permission.attributes,
+              activity_report_enabled: saved
+            }
+          }
+        }
+      })
+      const client = createMockClient({})
+      client.collection = jest.fn().mockReturnValue({ add })
+      const provider = setupProvider(
+        client,
+        {},
+        reducer(undefined, addSharingLink(PERM_DRIVE_FILE))
+      )
+      const options = { verbs: ['GET'] }
+      if (activityReportEnabled !== undefined)
+        options.activityReportEnabled = activityReportEnabled
+
+      const [response] = await provider.updateDocumentPermissions(
+        driveFile,
+        options
+      )
+      expect(response.data.attributes.activity_report_enabled).toBe(
+        activityReportEnabled ?? true
+      )
+      expect(Object.hasOwn(add.mock.calls[0][2], 'activityReportEnabled')).toBe(
+        activityReportEnabled !== undefined
+      )
+    }
+  )
+
   it('sends only one PATCH request for a shared drive file', async () => {
     const driveFile = {
       _id: 'file_in_drive',

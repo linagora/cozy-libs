@@ -51,6 +51,91 @@ describe('ShareRestrictionModal', () => {
       </AppLike>
     )
 
+  it('persists the report choice and restores it on reopening the settings', async () => {
+    mockLink = 'url'
+    mockPermissions = [linkPermission(READ_ONLY_PERMS)]
+    mockPermissions[0].attributes.expires_at = new Date(
+      Date.now() + 86400000
+    ).toISOString()
+    mockUpdateDocumentPermissions.mockImplementation(async (_file, options) => {
+      mockPermissions[0].attributes.activity_report_enabled =
+        options.activityReportEnabled
+      return [{ data: mockPermissions[0] }]
+    })
+
+    const { unmount } = setup()
+    const reportSwitch = screen.getByRole('checkbox', {
+      name: 'Email an expiration report'
+    })
+    expect(reportSwitch).not.toBeChecked()
+    fireEvent.click(reportSwitch)
+    expect(reportSwitch).toBeChecked()
+    fireEvent.click(screen.getByText('Confirm'))
+    await waitFor(() =>
+      expect(mockPermissions[0].attributes.activity_report_enabled).toBe(true)
+    )
+
+    unmount()
+    const reopened = setup()
+    const savedReportSwitch = screen.getByRole('checkbox', {
+      name: 'Email an expiration report'
+    })
+    expect(savedReportSwitch).toBeChecked()
+    fireEvent.click(savedReportSwitch)
+    fireEvent.click(screen.getByText('Confirm'))
+    await waitFor(() =>
+      expect(mockPermissions[0].attributes.activity_report_enabled).toBe(false)
+    )
+    reopened.unmount()
+    setup()
+    expect(
+      screen.getByRole('checkbox', { name: 'Email an expiration report' })
+    ).not.toBeChecked()
+  })
+
+  it('requires an expiry to enable a report and does not offer one for folders', () => {
+    mockLink = null
+    mockPermissions = []
+    const { unmount } = setup()
+    expect(
+      screen.getByRole('checkbox', { name: 'Email an expiration report' })
+    ).toBeDisabled()
+    fireEvent.click(
+      screen.getByRole('checkbox', { name: 'Remove access after a deadline' })
+    )
+    expect(
+      screen.getByRole('checkbox', { name: 'Email an expiration report' })
+    ).toBeEnabled()
+    unmount()
+    setup({ sharedFile: { ...file, type: 'directory' } })
+    expect(
+      screen.queryByRole('checkbox', { name: 'Email an expiration report' })
+    ).toBe(null)
+  })
+
+  it('passes an opt-in for a new shared drive file', async () => {
+    mockLink = null
+    mockPermissions = []
+    mockShareByLink.mockResolvedValue({
+      data: linkPermission(READ_ONLY_PERMS)
+    })
+    const sharedFile = { ...file, driveId: 'drive-1' }
+    setup({ sharedFile })
+    fireEvent.click(
+      screen.getByRole('checkbox', { name: 'Remove access after a deadline' })
+    )
+    fireEvent.click(
+      screen.getByRole('checkbox', { name: 'Email an expiration report' })
+    )
+    fireEvent.click(screen.getByText('Confirm'))
+    await waitFor(() =>
+      expect(mockShareByLink).toHaveBeenCalledWith(
+        sharedFile,
+        expect.objectContaining({ activityReportEnabled: true })
+      )
+    )
+  })
+
   it('keeps editor rights when the settings of an editor link change', async () => {
     mockLink = 'url'
     mockPermissions = [linkPermission(WRITE_PERMS)]
@@ -70,7 +155,9 @@ describe('ShareRestrictionModal', () => {
   it('creates a viewer link when the settings are confirmed without link', async () => {
     mockLink = null
     mockPermissions = []
-    mockShareByLink.mockResolvedValue({ data: linkPermission(READ_ONLY_PERMS) })
+    mockShareByLink.mockResolvedValue({
+      data: linkPermission(READ_ONLY_PERMS)
+    })
     setup()
     fireEvent.click(screen.getByText('Confirm'))
     await waitFor(() =>
@@ -84,7 +171,9 @@ describe('ShareRestrictionModal', () => {
   it("copies a shared drive link from the drive owner's instance", async () => {
     mockLink = null
     mockPermissions = []
-    mockShareByLink.mockResolvedValue({ data: linkPermission(READ_ONLY_PERMS) })
+    mockShareByLink.mockResolvedValue({
+      data: linkPermission(READ_ONLY_PERMS)
+    })
     setup({ sharedFile: { ...file, driveId: 'drive-1' } })
     fireEvent.click(screen.getByText('Confirm'))
     await waitFor(() =>

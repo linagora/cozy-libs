@@ -2,6 +2,9 @@ import { addDays, isValid } from 'date-fns'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import FormControlLabel from 'cozy-ui/transpiled/react/FormControlLabel'
+import Switch from 'cozy-ui/transpiled/react/Switch'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
 import { BoxDate } from './BoxDate'
@@ -10,12 +13,14 @@ import { BoxPassword } from './BoxPassword'
 export const PASSWORD_MIN_LENGTH = 4
 
 export const ShareLinkSettings = ({
+  activityReportEnabled,
   dateEnabled,
   hasPassword = false,
   isPasswordValid,
   password,
   passwordEnabled,
   selectedDate,
+  setActivityReportEnabled,
   setDateEnabled,
   setIsDateValid,
   setIsPasswordValid,
@@ -58,6 +63,26 @@ export const ShareLinkSettings = ({
         onToggle={handleDateToggle}
         toggle={dateEnabled}
       />
+      {setActivityReportEnabled && (
+        <div>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={activityReportEnabled === true}
+                disabled={!dateEnabled}
+                onChange={event =>
+                  setActivityReportEnabled(event.target.checked)
+                }
+                color="primary"
+              />
+            }
+            label={t('ActivityReport.label')}
+          />
+          <Typography variant="body2">
+            {t('ActivityReport.description')}
+          </Typography>
+        </div>
+      )}
       <BoxPassword
         hasPassword={hasPassword}
         helperText={
@@ -78,6 +103,8 @@ export const ShareLinkSettings = ({
 }
 
 ShareLinkSettings.propTypes = {
+  activityReportEnabled: PropTypes.bool,
+  setActivityReportEnabled: PropTypes.func,
   dateEnabled: PropTypes.bool.isRequired,
   hasPassword: PropTypes.bool,
   isPasswordValid: PropTypes.bool.isRequired,
