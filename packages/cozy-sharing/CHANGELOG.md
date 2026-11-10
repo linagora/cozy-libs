@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [45.1.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.2...cozy-sharing@45.1.3) (2026-11-10)
+
+### Bug Fixes
+
+- **cozy-sharing:** Keep public access outside the members scroll area ([d7928b3](https://github.com/cozy/cozy-libs/commit/d7928b3d8b2be247a96cc063e15e74e039e051e0))
+
 ## [45.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.1...cozy-sharing@45.1.2) (2026-11-09)
 
 **Note:** Version bump only for package cozy-sharing
