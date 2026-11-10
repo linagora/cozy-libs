@@ -50,6 +50,9 @@ export function start(createIntent, intent, element, data, options = {}) {
       getSource: () => iframe.contentWindow,
 
       onReady: event => {
+        // A service frame that loads again does not get the data twice: an
+        // upload would store its files twice
+        if (serviceWindow) return
         serviceWindow = event.source
         event.source.postMessage(currentData, event.origin)
       },
