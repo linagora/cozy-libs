@@ -419,6 +419,9 @@
     },
     "invalidPasswordMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings"
   },
+  "ActivityReport": {
+    "label": "Send report with link statistics via email"
+  },
   "BoxDate": {
     "label": "Deadline",
     "text": "Remove access after a deadline"

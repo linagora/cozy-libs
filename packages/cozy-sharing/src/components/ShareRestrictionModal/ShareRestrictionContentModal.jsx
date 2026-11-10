@@ -11,6 +11,9 @@ import { useSharingContext } from '../../hooks/useSharingContext'
 
 export const ShareRestrictionContentModal = ({
   file,
+  activityReportEnabled,
+  isActivityReportShown,
+  setActivityReportEnabled,
   // Date
   selectedDate,
   setSelectedDate,
@@ -37,6 +40,9 @@ export const ShareRestrictionContentModal = ({
       </Typography>
 
       <ShareLinkSettings
+        activityReportEnabled={activityReportEnabled}
+        isActivityReportShown={isActivityReportShown}
+        setActivityReportEnabled={setActivityReportEnabled}
         dateEnabled={dateToggle}
         hasPassword={hasPassword}
         isPasswordValid={isPasswordValid}
@@ -56,6 +62,9 @@ export const ShareRestrictionContentModal = ({
 
 ShareRestrictionContentModal.propTypes = {
   file: PropTypes.object.isRequired,
+  activityReportEnabled: PropTypes.bool,
+  isActivityReportShown: PropTypes.bool,
+  setActivityReportEnabled: PropTypes.func,
   // Date
   selectedDate: PropTypes.object,
   setSelectedDate: PropTypes.func.isRequired,

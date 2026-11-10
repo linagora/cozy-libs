@@ -173,6 +173,30 @@ describe('ShareRestrictionModal/helpers', () => {
       })
     })
 
+    it('omits expiration when the date is unchanged', async () => {
+      const updateDocumentPermissions = jest.fn()
+      const file = { _id: '123' }
+
+      await updatePermissions({
+        file,
+        t: jest.fn(),
+        dateToggle: true,
+        selectedDate: new Date('2100-01-01T12:00:00.000Z'),
+        preserveExpiration: true,
+        passwordToggle: false,
+        password: '',
+        editingRights: 'readOnly',
+        documentType,
+        updateDocumentPermissions,
+        showAlert: jest.fn()
+      })
+
+      expect(updateDocumentPermissions).toHaveBeenCalledTimes(1)
+      expect(updateDocumentPermissions.mock.calls[0][1]).not.toHaveProperty(
+        'expiresAt'
+      )
+    })
+
     it('sets expiration to the end of the selected day so picking today stays valid', async () => {
       // Freeze time so the "expires in the future" assertion can't flake near
       // midnight or under slow CI.

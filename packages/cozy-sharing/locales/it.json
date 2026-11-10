@@ -419,6 +419,9 @@
     },
     "invalidPasswordMessage": "Manca %{smart_count} carattere |||| Mancano %{smart_count} caratteri"
   },
+  "ActivityReport": {
+    "label": "Invia via email un rapporto sulle statistiche del link"
+  },
   "BoxDate": {
     "label": "Scadenza",
     "text": "Rimuovi l'accesso dopo una scadenza"

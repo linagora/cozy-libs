@@ -99,6 +99,21 @@ const ToggleModal = () => {
 }
 ```
 
+To offer expiration reports, opt in on the public modal (the option is hidden
+by default):
+
+```jsx
+<ShareModal document={doc} onClose={close} enableActivityReport />
+```
+
+`FederatedFolderModal` also accepts `enableActivityReport` when used directly.
+Applications should enable the option only for supported file and folder links.
+The checkbox does not depend on `SharingProvider`'s `documentType` and is
+disabled without an expiration date. When hidden, the report field is
+omitted from link updates, preserving each link's existing setting. This does not
+disable a previously enabled report. `cozy-client` 62.2.0 or later and a
+compatible Stack are required; folder delivery has not been validated end to end.
+
 ### Render-prop components
 
 ```jsx
@@ -160,6 +175,10 @@ Creates a public URL accessible without a Twake account. One link per resource a
 | Expiration date | Off | Set in `ShareRestrictionModal` or `ShareLinkAccessModal`. Toggle; defaults to 30 days ahead when enabled; expires at end of that day |
 | Password | Off | Set in `ShareRestrictionModal` or `ShareLinkAccessModal`. Minimum 4 characters; owner communicates it out-of-band |
 
+The report records activity on the shared link itself. For folders, a root ZIP
+is included; individual child downloads and selection ZIPs are not included.
+Folder report delivery, including shared drives, has not been validated end to end.
+
 **Lifecycle:**
 
 - Deactivating a link (Public access menu) revokes the current permissions. Reactivating generates a **new URL** — the old one stays invalid.
@@ -206,6 +225,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Link deactivation | Revokes the permission document; regenerates a new URL on reactivation | `SharingProvider.jsx:635` |
 | Apps readable by the link | Only when `linkAppSlugs` is set, for new links outside shared drives; if the stack refuses the rule, the link is kept without it; the rule is not sent again when the link's rights change | `letLinkReadApps` in `SharingProvider.jsx` |
 | Password | 4+ characters; no limit on attempts | `ShareLinkSettings.jsx:10` |
+| Expiration report | Hidden by default; `enableActivityReport` exposes the checkbox independently of `documentType`; applications should opt in only for supported file and folder links; disabled without an expiration date; actual delivery requires a compatible client and Stack | `ShareRestrictionModal.jsx`, `ShareLinkSettings.jsx` |
 | Guest access | Via `/public` URL with `sharecode`; no auth required | `helpers.js:106` |
 
 ### Email sharing

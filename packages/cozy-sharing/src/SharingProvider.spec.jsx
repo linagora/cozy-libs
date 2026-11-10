@@ -626,6 +626,59 @@ describe('updateDocumentPermissions', () => {
     })
   })
 
+  it.each([
+    [false, undefined],
+    [false, false],
+    [false, true],
+    [true, undefined],
+    [true, false],
+    [true, true]
+  ])(
+    'passes report choice to the first permission (drive: %s, choice: %s)',
+    async (drive, activityReportEnabled) => {
+      const driveFile = {
+        _id: 'file_in_drive',
+        id: 'file_in_drive',
+        ...(drive && { driveId: 'drive_123' })
+      }
+      const permissions = [
+        PERM_DRIVE_FILE,
+        { ...PERM_DRIVE_FILE, id: 'second_permission' }
+      ]
+      const add = jest.fn(async permission => ({ data: permission }))
+      const client = createMockClient({})
+      client.collection = jest.fn().mockReturnValue({ add })
+      const provider = setupProvider(
+        client,
+        {},
+        reducer(undefined, addSharingLink(PERM_DRIVE_FILE))
+      )
+      provider.permissionCol = { add }
+      const options = {
+        verbs: ['GET'],
+        expiresAt: '2100-01-01T23:59:59.999Z',
+        password: 'secret',
+        activityReportEnabled
+      }
+
+      await provider.updateDocumentPermissions(driveFile, options, permissions)
+
+      expect(add).toHaveBeenCalledTimes(2)
+      expect(add.mock.calls[0][0].id).toBe(PERM_DRIVE_FILE.id)
+      expect(add.mock.calls[0][2]).toEqual({
+        expiresAt: options.expiresAt,
+        password: 'secret',
+        activityReportEnabled
+      })
+      expect(add.mock.calls[1][0].id).toBe('second_permission')
+      expect(add.mock.calls[1][2]).toEqual({
+        expiresAt: options.expiresAt,
+        password: 'secret',
+        activityReportEnabled: undefined
+      })
+    }
+  )
+
   it('sends only one PATCH request for a shared drive file', async () => {
     const driveFile = {
       _id: 'file_in_drive',

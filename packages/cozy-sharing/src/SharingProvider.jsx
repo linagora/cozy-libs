@@ -682,14 +682,18 @@ export class SharingProvider extends Component {
     options
   ) => {
     const { client } = this.props
-    const { expiresAt, password } = options
+    const { expiresAt, password, activityReportEnabled } = options
     const drivePermissionCollection = client.collection('io.cozy.permissions', {
       driveId: document.driveId
     })
     const resp = await drivePermissionCollection.add(
       permissionDocument,
       updatedPermissions,
-      { expiresAt, password }
+      {
+        expiresAt,
+        password,
+        activityReportEnabled
+      }
     )
     this.dispatch(updateSharingLink(resp.data))
     return resp
@@ -713,7 +717,7 @@ export class SharingProvider extends Component {
     options,
     permissionsToUpdate = null
   ) => {
-    const { verbs, expiresAt, password } = options
+    const { verbs, expiresAt, password, activityReportEnabled } = options
     const documentId = getDocumentId(document)
     const permissions =
       permissionsToUpdate || getDocumentPermissions(this.state, documentId)
@@ -723,7 +727,12 @@ export class SharingProvider extends Component {
     }
 
     const responses = await Promise.all(
-      permissions.map(async permissionDocument => {
+      permissions.map(async (permissionDocument, index) => {
+        const permissionOptions = {
+          expiresAt,
+          password,
+          activityReportEnabled: index === 0 ? activityReportEnabled : undefined
+        }
         // The stack keeps the rule letting the link read apps when it is
         // not sent again, and would duplicate it otherwise.
         const updatedPermissions = Object.fromEntries(
@@ -740,12 +749,12 @@ export class SharingProvider extends Component {
               document,
               permissionDocument,
               updatedPermissions,
-              options
+              permissionOptions
             )
           : await this.permissionCol.add(
               permissionDocument,
               updatedPermissions,
-              { expiresAt, password }
+              permissionOptions
             )
         this.dispatch(updateSharingLink(resp.data))
         return resp
