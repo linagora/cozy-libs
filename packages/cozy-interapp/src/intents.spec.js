@@ -137,6 +137,18 @@ describe('Interapp', () => {
       expect(iframe.getAttribute('src')).toBe(serviceURL)
       expect(iframe.classList.contains('coz-intent')).toBe(true)
       expect(iframe.getAttribute('allow')).toBe('clipboard-write')
+      expect(iframe.hasAttribute('title')).toBe(false)
+    })
+
+    it('titles the iframe', async () => {
+      prom.stop()
+      prom = intents
+        .create('EDIT', 'io.cozy.files')
+        .start(element, { title: 'Pick a file' })
+      await sleep(1)
+      expect(element.querySelector('iframe').getAttribute('title')).toBe(
+        'Pick a file'
+      )
     })
 
     it('ignores the messages of another window of the service origin, silently', async () => {
