@@ -2,6 +2,10 @@ import get from 'lodash/get'
 
 import { models } from 'cozy-client'
 
+// A share link may also read some apps, to tell the visitor whether they are
+// installed. That rule says nothing about the shared document.
+export const isAppsRule = rule => rule.type === 'io.cozy.apps'
+
 export const checkIsReadOnlyPermissions = permissions => {
   const permissionCategories = get(
     permissions,
@@ -9,8 +13,10 @@ export const checkIsReadOnlyPermissions = permissions => {
     {}
   )
   return (
-    Object.values(permissionCategories).filter(permissionCategory =>
-      models.permission.isReadOnly(permissionCategory)
+    Object.values(permissionCategories).filter(
+      permissionCategory =>
+        !isAppsRule(permissionCategory) &&
+        models.permission.isReadOnly(permissionCategory)
     ).length > 0
   )
 }
