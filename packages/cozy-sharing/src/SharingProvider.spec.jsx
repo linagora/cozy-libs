@@ -236,6 +236,81 @@ describe('shareByLink', () => {
 
     expect(mockCreateSharingLink).toHaveBeenCalledTimes(1)
   })
+
+  describe('with linkAppSlugs', () => {
+    const file = { _id: 'file_id', id: 'file_id' }
+    const link = {
+      _id: 'perm',
+      id: 'perm',
+      _type: 'io.cozy.permissions',
+      type: 'io.cozy.permissions',
+      attributes: {
+        permissions: {
+          rule0: { type: 'io.cozy.files', verbs: ['GET'], values: ['file_id'] }
+        }
+      }
+    }
+    const appsRule = {
+      type: 'io.cozy.apps',
+      verbs: ['GET'],
+      selector: 'slug',
+      values: ['notes']
+    }
+    const setup = ({ linkAppSlugs, add }) => {
+      const provider = setupProvider(createMockClient({}), { linkAppSlugs })
+      provider.permissionCol = {
+        createSharingLink: jest.fn().mockResolvedValue({ data: link }),
+        add
+      }
+      return provider
+    }
+
+    it('lets the link read the given apps', async () => {
+      const linkWithApps = {
+        ...link,
+        attributes: {
+          permissions: { ...link.attributes.permissions, apps: appsRule }
+        }
+      }
+      const add = jest.fn().mockResolvedValue({ data: linkWithApps })
+      const provider = setup({ linkAppSlugs: ['notes'], add })
+
+      const { data } = await provider.shareByLink(file, { verbs: ['GET'] })
+
+      expect(add).toHaveBeenCalledWith(link, { apps: appsRule })
+      expect(data).toBe(linkWithApps)
+      expect(
+        getDocumentPermissions(provider.state, 'file_id')[0].attributes
+          .permissions.apps
+      ).toEqual(appsRule)
+    })
+
+    it('keeps the link when the stack refuses to let it read apps', async () => {
+      // What a stack answers to a rule on a doctype it reserves.
+      const refused = Object.assign(
+        new Error('reserved doctype io.cozy.apps unwritable'),
+        { status: 403 }
+      )
+      const add = jest.fn().mockRejectedValue(refused)
+      const provider = setup({ linkAppSlugs: ['notes'], add })
+
+      const { data } = await provider.shareByLink(file, { verbs: ['GET'] })
+
+      expect(data).toBe(link)
+      expect(provider.permissionCol.createSharingLink).toHaveBeenCalledTimes(1)
+      expect(add).toHaveBeenCalledTimes(1)
+      expect(getDocumentPermissions(provider.state, 'file_id')).toEqual([link])
+    })
+
+    it('lets the link read no app by default', async () => {
+      const add = jest.fn()
+      const provider = setup({ add })
+
+      await provider.shareByLink(file, { verbs: ['GET'] })
+
+      expect(add).not.toHaveBeenCalled()
+    })
+  })
 })
 
 describe('ensureSharingLink', () => {
@@ -468,6 +543,48 @@ describe('updateDocumentPermissions', () => {
       shortcodes: { code: 'shortcode123' }
     }
   }
+
+  it('does not send again the rule letting the link read apps', async () => {
+    // The stack keeps the rules it is not sent, and would duplicate the ones
+    // it is sent again; an app that cannot read apps could not send it at all.
+    const file = { _id: 'file_id', id: 'file_id' }
+    const appsRule = {
+      type: 'io.cozy.apps',
+      verbs: ['GET'],
+      selector: 'slug',
+      values: ['notes']
+    }
+    const link = {
+      type: 'io.cozy.permissions',
+      id: 'perm',
+      attributes: {
+        type: 'share',
+        permissions: {
+          apps: appsRule,
+          rule0: { type: 'io.cozy.files', verbs: ['GET'], values: ['file_id'] }
+        }
+      }
+    }
+    const add = jest.fn().mockResolvedValue({ data: link })
+    const provider = setupProvider(
+      createMockClient({}),
+      {},
+      reducer(undefined, addSharingLink(link))
+    )
+    provider.permissionCol = { add }
+
+    await provider.updateDocumentPermissions(file, {
+      verbs: ['GET', 'POST', 'PUT', 'PATCH']
+    })
+
+    expect(add.mock.calls[0][1]).toEqual({
+      rule0: {
+        type: 'io.cozy.files',
+        verbs: ['GET', 'POST', 'PUT', 'PATCH'],
+        values: ['file_id']
+      }
+    })
+  })
 
   it('sends only one PATCH request for a shared drive file', async () => {
     const driveFile = {

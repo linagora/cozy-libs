@@ -27,6 +27,37 @@ function setupClient(verbs = []) {
 }
 
 describe('Getting the shared document', () => {
+  it('skips the rule letting the link read apps', async () => {
+    const client = {
+      collection: () => ({
+        getOwnPermissions: jest.fn().mockReturnValue({
+          data: {
+            attributes: {
+              permissions: {
+                apps: {
+                  type: 'io.cozy.apps',
+                  verbs: ['GET'],
+                  selector: 'slug',
+                  values: ['notes']
+                },
+                files: {
+                  type: 'io.cozy.files',
+                  verbs: ['ALL'],
+                  values: ['dir']
+                }
+              }
+            }
+          }
+        })
+      })
+    }
+
+    expect(await getSharedDocument(client)).toEqual({
+      id: 'dir',
+      isReadOnly: false
+    })
+  })
+
   it('should get the id', async () => {
     const client = setupClient(['GET'])
     const { id } = await getSharedDocument(client)

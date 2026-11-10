@@ -11,6 +11,7 @@ import SharingContext from './context'
 import { fetchNextPermissions } from './fetchNextPermissions'
 import { mapEffectiveRecipients } from './helpers/effectiveRecipients'
 import { fetchFilesPaths } from './helpers/files'
+import { isAppsRule } from './helpers/permissions'
 import {
   getSharingObject,
   createSharingInStore,
@@ -520,11 +521,33 @@ export class SharingProvider extends Component {
     return this.pendingSharingLinks[documentId]
   }
 
+  // A separate request, so that the link is still created if the rule is
+  // refused (an app without read permission on io.cozy.apps).
+  letLinkReadApps = async resp => {
+    const { linkAppSlugs = [] } = this.props
+    if (linkAppSlugs.length === 0) return resp
+    try {
+      return await this.permissionCol.add(resp.data, {
+        apps: {
+          type: 'io.cozy.apps',
+          verbs: ['GET'],
+          selector: 'slug',
+          values: linkAppSlugs
+        }
+      })
+    } catch (error) {
+      log.warn('The sharing link cannot read apps', error)
+      return resp
+    }
+  }
+
   createSharingLink = async (document, options) => {
     try {
       const resp = document.driveId
         ? await this.createSharedDriveSharingLink(document, options)
-        : await this.permissionCol.createSharingLink(document, options)
+        : await this.letLinkReadApps(
+            await this.permissionCol.createSharingLink(document, options)
+          )
       this.dispatch(addSharingLink(resp.data))
       return resp
     } catch (error) {
@@ -699,10 +722,15 @@ export class SharingProvider extends Component {
 
     const responses = await Promise.all(
       permissions.map(async permissionDocument => {
+        // The stack keeps the rule letting the link read apps when it is
+        // not sent again, and would duplicate it otherwise.
         const updatedPermissions = Object.fromEntries(
-          Object.entries(permissionDocument.attributes.permissions).map(
-            ([permissionType, rules]) => [permissionType, { ...rules, verbs }]
-          )
+          Object.entries(permissionDocument.attributes.permissions)
+            .filter(([, rules]) => !isAppsRule(rules))
+            .map(([permissionType, rules]) => [
+              permissionType,
+              { ...rules, verbs }
+            ])
         )
 
         const resp = document.driveId

@@ -795,6 +795,22 @@ describe('getPermissionDocIds method', () => {
     const docs = getPermissionDocIds(PERM_WITHOUT_DOC)
     expect(docs).toEqual([])
   })
+  it('should not take the apps a link may read for documents', () => {
+    const docs = getPermissionDocIds({
+      attributes: {
+        permissions: {
+          files: { type: 'io.cozy.files', values: ['folder_2'] },
+          apps: {
+            type: 'io.cozy.apps',
+            verbs: ['GET'],
+            selector: 'slug',
+            values: ['notes']
+          }
+        }
+      }
+    })
+    expect(docs).toEqual(['folder_2'])
+  })
 })
 
 describe('getSharingType selector', () => {

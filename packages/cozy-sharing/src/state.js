@@ -1,6 +1,7 @@
 import { generateWebLink } from 'cozy-client'
 import flag from 'cozy-flags'
 
+import { isAppsRule } from './helpers/permissions'
 import { getShortcode } from './helpers/shortcodes'
 
 const RECEIVE_SHARINGS = 'RECEIVE_SHARINGS'
@@ -627,12 +628,9 @@ export const getExternalSharingIds = (sharing, instanceUri) => {
 // be on a global doctype. In that case, we can't sort
 // them by id
 export const getPermissionDocIds = perm =>
-  Object.keys(perm.attributes.permissions)
-    .map(k =>
-      perm.attributes.permissions[k].values
-        ? perm.attributes.permissions[k].values
-        : []
-    )
+  Object.values(perm.attributes.permissions)
+    .filter(rule => !isAppsRule(rule))
+    .map(rule => (rule.values ? rule.values : []))
     .reduce((acc, val) => [...acc, ...val], [])
 
 const isSharingADrive = sharing => sharing.attributes.drive === true
