@@ -41,6 +41,16 @@ import SharingProvider from 'cozy-sharing'
 | `isPublic` | no | Set to `true` when rendering a public page (disables fetching) |
 | `previewPath` | no | Custom preview path sent to the share creation |
 | `contactsSuggestEnabled` | no | Suggest the recipients with `GET /contacts/suggest` instead of loading every contact |
+| `linkAppSlugs` | no | Slugs of the apps a share link may read (default none), e.g. `['notes']` |
+
+### Apps readable by a share link
+
+With `linkAppSlugs`, each new share link created by `SharingProvider`
+(outside shared drives) also gets a `GET` rule on `io.cozy.apps` for these
+slugs. Someone opening the link can then tell whether these apps are
+installed on the sharing instance: `GET /apps/:slug` answers `200` or
+`404`. The app needs read permission on `io.cozy.apps` in its manifest;
+without it the rule is refused and the link is created without it.
 
 ### Contact and group suggestions
 
@@ -194,6 +204,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Link rights | Viewer only for albums and for read-only members of a shared drive (the stack refuses editor links to them) | `helpers/publicAccess.js` |
 | Expiration date toggle default | Controlled by `sharing.date-toggle.enabled` flag (default: false) | `ShareRestrictionModal.jsx:62` |
 | Link deactivation | Revokes the permission document; regenerates a new URL on reactivation | `SharingProvider.jsx:635` |
+| Apps readable by the link | Only when `linkAppSlugs` is set, for new links outside shared drives; if the stack refuses the rule, the link is kept without it; the rule is not sent again when the link's rights change | `letLinkReadApps` in `SharingProvider.jsx` |
 | Password | 4+ characters; no limit on attempts | `ShareLinkSettings.jsx:10` |
 | Guest access | Via `/public` URL with `sharecode`; no auth required | `helpers.js:106` |
 

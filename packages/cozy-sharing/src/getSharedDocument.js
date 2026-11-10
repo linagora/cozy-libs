@@ -1,5 +1,7 @@
 import { isReadOnly } from 'cozy-client/dist/models/permission'
 
+import { isAppsRule } from './helpers/permissions'
+
 /**
  * Get the first shared document for the current shared token
  *
@@ -11,7 +13,9 @@ const getSharedDocument = async client => {
     .collection('io.cozy.permissions')
     .getOwnPermissions()
 
-  const permissions = Object.values(permissionsData.attributes.permissions)
+  const permissions = Object.values(
+    permissionsData.attributes.permissions
+  ).filter(rule => !isAppsRule(rule))
   // permissions contains several named keys, but the one to use depends on the situation. Using the first one is what we want in all known cases.
   const perm = permissions[0]
   return {
