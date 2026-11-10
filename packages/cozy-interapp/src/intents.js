@@ -29,7 +29,7 @@ class Intents {
 
     createPromise.start = (element, options = {}) => {
       const opts = {
-        filteredServices: data.filteredServices,
+        filterServices: data.filteredServices,
         onReady: options.onReady,
         onHideCross: options.onHideCross,
         onShowCross: options.onShowCross,

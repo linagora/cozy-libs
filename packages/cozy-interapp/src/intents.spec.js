@@ -171,6 +171,32 @@ describe('Interapp', () => {
       expect(element.style.height).toBe('')
     })
 
+    it('frames the service picked by filteredServices', async () => {
+      prom.stop()
+      api.reset()
+      api.respond('POST', '/intents', {
+        data: {
+          ...pickFileIntent,
+          attributes: {
+            ...pickFileIntent.attributes,
+            services: [
+              { slug: 'files', href: serviceURL },
+              { slug: 'photos', href: 'http://photos-mock/service' }
+            ]
+          }
+        }
+      })
+      prom = intents
+        .create('EDIT', 'io.cozy.files', {
+          filteredServices: service => service.slug === 'photos'
+        })
+        .start(element)
+      await sleep(1)
+      expect(
+        element.querySelector('iframe:last-child').getAttribute('src')
+      ).toBe('http://photos-mock/service')
+    })
+
     it('titles the iframe', async () => {
       prom.stop()
       prom = intents
