@@ -154,6 +154,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 > - `onReady` — called when the intent iframe has finished loading (iframe `onload`). Useful for running client code once the iframe is ready.
 > - `onServiceReady`: called when the service sends `ready` and gets its data, once. Unlike `onReadyToUse`, every service sends it.
 > - `title`: the `title` of the iframe, for assistive technologies.
+> - `onResize`: called with `{ dimensions, transition }` when the service asks to resize, in place of the styles the client otherwise writes on the element.
 > - `onHideCross` / `onShowCross` — called when the service asks the client to hide/show the close button.
 > - `onReadyToUse` — called when the service signals it is **truly ready** (UI rendered and initial data loaded), via `service.notifyReadyToUse()`. Distinct from `onReady`, which only signals the iframe loaded. See `intents.createService()` below.
 > - `onResult` — called with each result the service hands over with `service.sendResult(result)`, while the intent goes on. For a service that stays open and gives several results, where `terminate(doc)` gives one and ends the intent.

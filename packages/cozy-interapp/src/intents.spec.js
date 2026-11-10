@@ -149,6 +149,28 @@ describe('Interapp', () => {
       expect(element.querySelector('iframe')).toBe(null)
     })
 
+    it('lets the client resize', async () => {
+      prom.stop()
+      const onResize = jest.fn()
+      prom = intents
+        .create('EDIT', 'io.cozy.files')
+        .start(element, { onResize })
+      await sleep(1)
+      iframe = element.querySelector('iframe')
+      window.dispatchEvent(mkMessage('ready', {}))
+      window.dispatchEvent(
+        mkMessage('resize', {
+          dimensions: { height: 100 },
+          transition: '1s ease height'
+        })
+      )
+      expect(onResize).toHaveBeenCalledWith({
+        dimensions: { height: 100 },
+        transition: '1s ease height'
+      })
+      expect(element.style.height).toBe('')
+    })
+
     it('titles the iframe', async () => {
       prom.stop()
       prom = intents
