@@ -41,7 +41,8 @@ export function start(createIntent, intent, element, data, options = {}) {
       intent,
       element,
       service.href,
-      options.onReady
+      options.onReady,
+      options.title
     )
 
     receiver = new IntentListener({
