@@ -88,10 +88,11 @@ export function start(createIntent, intent, element, data, options = {}) {
 
       onResize: event => {
         const { transition, dimensions } = event.data
-        dom.applyStyle(element, {
-          transition: transition,
-          ...dimensions
-        })
+        if (options.onResize) {
+          options.onResize({ dimensions, transition })
+        } else {
+          dom.applyStyle(element, { transition, ...dimensions })
+        }
       },
 
       onExposeFrameRemoval: event => {
