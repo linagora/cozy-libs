@@ -115,7 +115,7 @@ sequenceDiagram
 
 All messages from service to client are objects with a `type` field of the form `intent-{intentId}:{subtype}`.
 
-The service sends all those messages via `serviceWindow.parent.postMessage(message, intent.attributes.client)`. The client must listen via `window.addEventListener('message', ...)` and filter by `event.origin === serviceOrigin`.
+The service sends all those messages via `serviceWindow.parent.postMessage(message, intent.attributes.client)`. The client listens via `window.addEventListener('message', ...)` and keeps only the messages of its intent from its iframe (`event.origin === serviceOrigin` and `event.source === iframe.contentWindow`). It ignores the others, so several intents can run side by side, even from the same origin.
 
 Errors are serialized: the service sends a plain object with `message` and `name` and the client can reconstruct a `new Error(message)` with the original properties copied back onto it.
 
