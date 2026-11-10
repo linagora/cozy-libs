@@ -36,6 +36,7 @@ class Intents {
         onReadyToUse: options.onReadyToUse,
         onServiceReady: options.onServiceReady,
         title: options.title,
+        focus: options.focus,
         onResize: options.onResize,
         onResult: options.onResult
       }
