@@ -42,7 +42,8 @@ export function start(createIntent, intent, element, data, options = {}) {
       element,
       service.href,
       options.onReady,
-      options.title
+      options.title,
+      options.focus !== false
     )
 
     receiver = new IntentListener({

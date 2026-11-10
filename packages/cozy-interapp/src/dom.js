@@ -57,13 +57,20 @@ export function iframeFromIntent(intent, node, url, title) {
   return iframe
 }
 
-export function insertIntentIframe(intent, element, url, onload, title) {
+export function insertIntentIframe(
+  intent,
+  element,
+  url,
+  onload,
+  title,
+  focus = true
+) {
   assertOKForIntentIframe(element)
 
   const iframe = iframeFromIntent(intent, element, url, title)
   // if callback provided for when iframe is loaded
   if (typeof onload === 'function') iframe.onload = onload
   element.appendChild(iframe)
-  iframe.focus()
+  if (focus) iframe.focus()
   return iframe
 }

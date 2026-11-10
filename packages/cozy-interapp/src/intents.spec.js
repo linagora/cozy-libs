@@ -197,6 +197,24 @@ describe('Interapp', () => {
       ).toBe('http://photos-mock/service')
     })
 
+    it('focuses the iframe it inserts', () => {
+      expect(document.activeElement).toBe(iframe)
+    })
+
+    it('leaves the focus where it is with focus: false', async () => {
+      prom.stop()
+      const button = document.createElement('button')
+      document.body.appendChild(button)
+      button.focus()
+      prom = intents
+        .create('EDIT', 'io.cozy.files')
+        .start(element, { focus: false })
+      await sleep(1)
+      expect(element.querySelector('iframe')).not.toBe(null)
+      expect(document.activeElement).toBe(button)
+      button.remove()
+    })
+
     it('titles the iframe', async () => {
       prom.stop()
       prom = intents
