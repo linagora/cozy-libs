@@ -47,6 +47,7 @@ export function start(createIntent, intent, element, data, options = {}) {
     receiver = new IntentListener({
       intentId: intent.id,
       origin: serviceOrigin,
+      getSource: () => iframe.contentWindow,
 
       onReady: event => {
         serviceWindow = event.source

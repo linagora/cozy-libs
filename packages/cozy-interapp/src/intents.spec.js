@@ -87,7 +87,12 @@ describe('Interapp', () => {
     let intent, element, iframe, prom
     const onResult = jest.fn()
 
-    const mkMessage = (type, data, _intent = intent) => {
+    const mkMessage = (
+      type,
+      data,
+      _intent = intent,
+      source = iframe.contentWindow
+    ) => {
       const ev = new Event('message')
       Object.assign(ev, {
         data: {
@@ -95,7 +100,7 @@ describe('Interapp', () => {
           ...data
         },
         origin: serviceOrigin,
-        source: window
+        source
       })
       return ev
     }
@@ -110,6 +115,7 @@ describe('Interapp', () => {
         body => body.data.attributes.action === 'EDIT'
       )
       element = document.createElement('div')
+      document.body.appendChild(element)
       const promIntent = intents.create('EDIT', 'io.cozy.files', {
         id: 'fileId'
       })
@@ -122,6 +128,7 @@ describe('Interapp', () => {
 
     afterEach(() => {
       prom.stop()
+      element.remove()
       jest.restoreAllMocks()
     })
 
@@ -132,6 +139,79 @@ describe('Interapp', () => {
       expect(iframe.getAttribute('allow')).toBe('clipboard-write')
     })
 
+    it('ignores the messages of another window of the service origin, silently', async () => {
+      const warn = jest.spyOn(console, 'warn')
+      jest.spyOn(iframe.contentWindow, 'postMessage')
+      const other = document.createElement('iframe')
+      document.body.appendChild(other)
+      window.dispatchEvent(mkMessage('ready', {}, intent, other.contentWindow))
+      window.dispatchEvent(
+        mkMessage('done', { document: 'forged' }, intent, other.contentWindow)
+      )
+      const embed = mkMessage('', {}, intent, other.contentWindow)
+      embed.data = { type: 'twake-embed:badges' }
+      window.dispatchEvent(embed)
+      window.dispatchEvent(mkMessage('ready', {}))
+      window.dispatchEvent(mkMessage('done', { document: 'mine' }))
+
+      await expect(prom).resolves.toBe('mine')
+      expect(iframe.contentWindow.postMessage).toHaveBeenCalledTimes(1)
+      expect(warn).not.toHaveBeenCalled()
+      other.remove()
+    })
+
+    it('ignores what is not an intent message, silently', async () => {
+      const warn = jest.spyOn(console, 'warn')
+      for (const data of [null, 'hello', { type: 'load' }, { type: 3 }]) {
+        const msg = mkMessage('', {})
+        msg.data = data
+        window.dispatchEvent(msg)
+      }
+      window.dispatchEvent(mkMessage('ready', {}))
+      window.dispatchEvent(mkMessage('done', { document: 'mine' }))
+
+      await expect(prom).resolves.toBe('mine')
+      expect(warn).not.toHaveBeenCalled()
+    })
+
+    it('runs intents of the same origin side by side', async () => {
+      api.respond(
+        'POST',
+        '/intents',
+        { data: { ...pickFileIntent, id: 'second-intent-id' } },
+        body => body.data.attributes.action === 'PICK'
+      )
+      const secondElement = document.createElement('div')
+      document.body.appendChild(secondElement)
+      const second = intents
+        .create('PICK', 'io.cozy.files', { id: 'secondFileId' })
+        .start(secondElement)
+      await sleep(1)
+      const secondFrame = secondElement.querySelector('iframe').contentWindow
+      const secondIntent = { id: 'second-intent-id' }
+      jest.spyOn(iframe.contentWindow, 'postMessage')
+      jest.spyOn(secondFrame, 'postMessage')
+
+      window.dispatchEvent(mkMessage('ready', {}, secondIntent, secondFrame))
+      window.dispatchEvent(mkMessage('ready', {}))
+      expect(secondFrame.postMessage).toHaveBeenCalledWith(
+        { id: 'secondFileId' },
+        serviceOrigin
+      )
+      expect(iframe.contentWindow.postMessage).toHaveBeenCalledWith(
+        { id: 'fileId' },
+        serviceOrigin
+      )
+
+      window.dispatchEvent(
+        mkMessage('done', { document: 'second' }, secondIntent, secondFrame)
+      )
+      window.dispatchEvent(mkMessage('done', { document: 'first' }))
+      await expect(second).resolves.toBe('second')
+      await expect(prom).resolves.toBe('first')
+      secondElement.remove()
+    })
+
     it('cannot handle message without handshake', async () => {
       window.dispatchEvent(mkMessage('done', { document: 'hello' }))
       expect(prom).rejects.toThrow(
@@ -140,12 +220,12 @@ describe('Interapp', () => {
     })
 
     it('gives the service the data sent before it is ready', () => {
-      jest.spyOn(window, 'postMessage')
+      jest.spyOn(iframe.contentWindow, 'postMessage')
       prom.sendData({ id: 'otherId' })
-      expect(window.postMessage).not.toHaveBeenCalled()
+      expect(iframe.contentWindow.postMessage).not.toHaveBeenCalled()
 
       window.dispatchEvent(mkMessage('ready', {}))
-      expect(window.postMessage).toHaveBeenCalledWith(
+      expect(iframe.contentWindow.postMessage).toHaveBeenCalledWith(
         { id: 'otherId' },
         serviceOrigin
       )
@@ -153,20 +233,20 @@ describe('Interapp', () => {
 
     describe('after handshake', () => {
       beforeEach(() => {
-        jest.spyOn(window, 'postMessage')
+        jest.spyOn(iframe.contentWindow, 'postMessage')
         window.dispatchEvent(mkMessage('ready', {}))
       })
 
       it('sends new data to the service while the intent goes on', () => {
         prom.sendData({ id: 'otherId' })
-        expect(window.postMessage).toHaveBeenLastCalledWith(
+        expect(iframe.contentWindow.postMessage).toHaveBeenLastCalledWith(
           { type: `intent-${intent.id}:data`, data: { id: 'otherId' } },
           serviceOrigin
         )
       })
 
       it('handles ready message', () => {
-        expect(window.postMessage).toHaveBeenCalledWith(
+        expect(iframe.contentWindow.postMessage).toHaveBeenCalledWith(
           { id: 'fileId' },
           serviceOrigin
         )
@@ -189,12 +269,14 @@ describe('Interapp', () => {
         })
       })
 
-      it('handles error message from handling message', async () => {
-        jest.spyOn(console, 'warn').mockReturnValue(null)
-        const msg = mkMessage('ready', {})
-        msg.data.type = 'intent-fakeid:ready'
-        window.dispatchEvent(msg)
-        await expect(prom).rejects.toThrow('Invalid event id')
+      it('ignores the messages of another intent, silently', async () => {
+        const warn = jest.spyOn(console, 'warn')
+        window.dispatchEvent(
+          mkMessage('done', { document: 'other' }, { id: 'other-intent-id' })
+        )
+        window.dispatchEvent(mkMessage('done', { document: 'mine' }))
+        await expect(prom).resolves.toBe('mine')
+        expect(warn).not.toHaveBeenCalled()
       })
 
       it('handles resize message from service', () => {
@@ -425,7 +507,12 @@ describe('Interapp', () => {
 
         // Finish the composed intent
         const mkCompositionMessage = (type, data) => {
-          const msg = mkMessage(type, data, { id: 'composition-intent-id' })
+          const msg = mkMessage(
+            type,
+            data,
+            { id: 'composition-intent-id' },
+            iframes[1].contentWindow
+          )
           msg.origin = 'http://install-apps'
           return msg
         }
