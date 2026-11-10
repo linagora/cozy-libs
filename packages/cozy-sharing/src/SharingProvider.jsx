@@ -704,7 +704,15 @@ export class SharingProvider extends Component {
     }
 
     const responses = await Promise.all(
-      permissions.map(async permissionDocument => {
+      permissions.map(async (permissionDocument, index) => {
+        const permissionOptions = {
+          expiresAt,
+          password,
+          ...(index === 0 &&
+            typeof activityReportEnabled === 'boolean' && {
+              activityReportEnabled
+            })
+        }
         const updatedPermissions = Object.fromEntries(
           Object.entries(permissionDocument.attributes.permissions).map(
             ([permissionType, rules]) => [permissionType, { ...rules, verbs }]
@@ -716,18 +724,12 @@ export class SharingProvider extends Component {
               document,
               permissionDocument,
               updatedPermissions,
-              options
+              permissionOptions
             )
           : await this.permissionCol.add(
               permissionDocument,
               updatedPermissions,
-              {
-                expiresAt,
-                password,
-                ...(typeof activityReportEnabled === 'boolean' && {
-                  activityReportEnabled
-                })
-              }
+              permissionOptions
             )
         this.dispatch(updateSharingLink(resp.data))
         return resp

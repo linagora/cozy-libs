@@ -1,0 +1,151 @@
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { endOfDay } from 'date-fns'
+import React, { useState } from 'react'
+
+import { createMockClient } from 'cozy-client'
+
+import { ShareRestrictionModal } from './ShareRestrictionModal'
+import AppLike from '../../../test/AppLike'
+import { SharingProvider } from '../../SharingProvider'
+import { addSharingLink } from '../../state'
+
+const file = { _id: 'file-1', id: 'file-1', name: 'file.txt' }
+const expiry = '2099-01-01T23:59:59.999Z'
+
+function makePermission(id, report) {
+  return {
+    id,
+    type: 'io.cozy.permissions',
+    attributes: {
+      permissions: {
+        files: { type: 'io.cozy.files', verbs: ['GET'], values: [file.id] }
+      },
+      shortcodes: { code: `code-${id}` },
+      expires_at: expiry,
+      ...(report !== undefined && { activity_report_enabled: report })
+    }
+  }
+}
+
+function Settings({ document }) {
+  const [open, setOpen] = useState(false)
+  return open ? (
+    <ShareRestrictionModal file={document} onClose={() => setOpen(false)} />
+  ) : (
+    <button onClick={() => setOpen(true)}>Reopen settings</button>
+  )
+}
+
+describe('sharing restriction consent with multiple links', () => {
+  it.each([
+    [false, true, false, null, [true, false]],
+    [false, false, true, null, [false, true]],
+    [false, false, false, 'toggle', [true, false]],
+    [false, true, true, 'toggle', [false, true]],
+    [false, true, undefined, null, [true, undefined]],
+    [true, true, false, null, [true, false]],
+    [true, false, true, null, [false, true]],
+    [true, false, false, 'toggle', [true, false]],
+    [true, true, true, 'toggle', [false, true]],
+    [true, true, undefined, null, [true, undefined]],
+    [false, true, false, 'change expiry', [true, false]],
+    [true, false, true, 'change expiry', [false, true]],
+    [false, true, false, 'remove expiry', [true, false]],
+    [true, true, false, 'remove expiry', [true, false]]
+  ])(
+    'preserves per-link consent (drive=%s, initial=%s/%s, action=%s)',
+    async (drive, first, second, action, expected) => {
+      const document = drive ? { ...file, driveId: 'drive-1' } : file
+      const stored = Object.fromEntries(
+        [makePermission('first', first), makePermission('second', second)].map(
+          permission => [permission.id, permission]
+        )
+      )
+      const add = async (permission, rules, options) => {
+        const current = stored[permission.id]
+        stored[permission.id] = {
+          ...current,
+          attributes: {
+            ...current.attributes,
+            permissions: rules,
+            expires_at: options.expiresAt,
+            ...(Object.hasOwn(options, 'activityReportEnabled') && {
+              activity_report_enabled: options.activityReportEnabled
+            })
+          }
+        }
+        return { data: stored[permission.id] }
+      }
+      const client = createMockClient({})
+      client.capabilities = { flat_subdomains: true }
+      client.getStackClient = () => ({ uri: 'https://me.cozy.example' })
+      client.collection = () => ({ add })
+      Object.assign(navigator, {
+        clipboard: { writeText: jest.fn(), write: jest.fn() }
+      })
+      const providerRef = React.createRef()
+      render(
+        <AppLike client={client}>
+          <SharingProvider
+            client={client}
+            documentType="Files"
+            ref={providerRef}
+          >
+            <Settings document={document} />
+          </SharingProvider>
+        </AppLike>
+      )
+      act(() => {
+        providerRef.current.dispatch(addSharingLink(Object.values(stored)))
+      })
+      fireEvent.click(screen.getByText('Reopen settings'))
+      if (action === 'toggle') {
+        fireEvent.click(
+          screen.getByRole('checkbox', { name: 'Email an expiration report' })
+        )
+      } else if (action === 'change expiry') {
+        fireEvent.change(screen.getByRole('textbox'), {
+          target: { value: '01/15/2099' }
+        })
+      } else if (action === 'remove expiry') {
+        fireEvent.click(
+          screen.getByRole('checkbox', {
+            name: 'Remove access after a deadline'
+          })
+        )
+      }
+      fireEvent.click(screen.getByText('Confirm'))
+      await screen.findByText('Reopen settings')
+      const permissions = providerRef.current.state.getDocumentPermissions(
+        file.id
+      )
+      expect(
+        permissions.map(p => p.attributes.activity_report_enabled)
+      ).toEqual(expected)
+      if (second === undefined) {
+        expect(permissions[1].attributes).not.toHaveProperty(
+          'activity_report_enabled'
+        )
+      }
+      const expectedExpiry =
+        action === 'remove expiry'
+          ? ''
+          : endOfDay(
+              action === 'change expiry'
+                ? new Date(2099, 0, 15)
+                : new Date(expiry)
+            ).toISOString()
+      expect(permissions.map(p => p.attributes.expires_at)).toEqual([
+        expectedExpiry,
+        expectedExpiry
+      ])
+      fireEvent.click(screen.getByText('Reopen settings'))
+      await waitFor(() => {
+        const report = screen.getByRole('checkbox', {
+          name: 'Email an expiration report'
+        })
+        expect(report.checked).toBe(expected[0])
+      })
+    }
+  )
+})
