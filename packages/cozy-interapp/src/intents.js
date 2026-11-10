@@ -34,6 +34,7 @@ class Intents {
         onHideCross: options.onHideCross,
         onShowCross: options.onShowCross,
         onReadyToUse: options.onReadyToUse,
+        onServiceReady: options.onServiceReady,
         onResult: options.onResult
       }
 

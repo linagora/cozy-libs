@@ -55,6 +55,7 @@ export function start(createIntent, intent, element, data, options = {}) {
         if (serviceWindow) return
         serviceWindow = event.source
         event.source.postMessage(currentData, event.origin)
+        if (options.onServiceReady) options.onServiceReady()
       },
 
       onReadyToUse: () => {
