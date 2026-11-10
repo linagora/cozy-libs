@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [45.1.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.3...cozy-sharing@45.1.4) (2026-11-10)
+
+### Bug Fixes
+
+- **cozy-sharing:** Hide the lone owner next to the empty members state ([aeef19b](https://github.com/cozy/cozy-libs/commit/aeef19b1a9c3e29f7a1483f0ed15633cdc090910))
+
 ## [45.1.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.2...cozy-sharing@45.1.3) (2026-11-10)
 
 ### Bug Fixes
