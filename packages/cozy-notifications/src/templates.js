@@ -100,8 +100,13 @@ const createContentBlock = name => {
       }
     ],
     program: {
-      type: 'Program'
-    }
+      type: 'Program',
+      body: []
+    },
+    // Handlebars >= 4.7.9 runs its whitespace control on the ASTs given to
+    // compile(), which reads the strip flags of every block.
+    openStrip: { open: false, close: false },
+    closeStrip: { open: false, close: false }
   }
 }
 
