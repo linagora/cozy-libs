@@ -140,6 +140,15 @@ describe('Interapp', () => {
       expect(iframe.hasAttribute('title')).toBe(false)
     })
 
+    it('opens nothing when stopped before the intent is created', async () => {
+      prom.stop()
+      iframe.remove()
+      const stopped = intents.create('EDIT', 'io.cozy.files').start(element)
+      stopped.stop()
+      await sleep(1)
+      expect(element.querySelector('iframe')).toBe(null)
+    })
+
     it('titles the iframe', async () => {
       prom.stop()
       prom = intents

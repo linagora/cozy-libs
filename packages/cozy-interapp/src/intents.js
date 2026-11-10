@@ -42,8 +42,11 @@ class Intents {
       delete data.filteredServices
 
       let intentManager
+      let stopped = false
       let currentData = data
       const prom = createPromise.then(intent => {
+        // Stopped while the intent was being created: no iframe, no result
+        if (stopped) return new Promise(() => {})
         intentManager = client.start(
           this.create,
           intent,
@@ -55,6 +58,7 @@ class Intents {
       })
 
       prom.stop = () => {
+        stopped = true
         intentManager && intentManager.destroy()
       }
 
