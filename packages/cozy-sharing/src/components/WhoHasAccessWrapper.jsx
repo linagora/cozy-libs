@@ -125,9 +125,11 @@ const WhoHasAccessWrapper = ({
     ? { ...ownerRecipient, isOrgSharedDrive: isOrgSharedDrive(document?._id) }
     : defaultOwner
 
+  // A lone owner row contradicts the "No one has been added yet" empty state
+  const hasOtherRecipients = markedRecipients.some(r => r.status !== 'owner')
   const members = makeMembers({
     t,
-    owner: showOwner ? owner : null,
+    owner: showOwner && (hasOtherRecipients || !showEmptyState) ? owner : null,
     recipients: markedRecipients,
     recipientsToBeConfirmed,
     isOwner,

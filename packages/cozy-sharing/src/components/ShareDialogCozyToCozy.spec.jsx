@@ -55,6 +55,16 @@ describe('ShareDialogCozyToCozy', () => {
     expect(getByText('Owner')).toBeTruthy()
   })
 
+  it('shows only the empty state, without the owner, when no one has been added', () => {
+    const { getByText, queryByText } = setup({
+      ...getMockProps(),
+      recipients: [mockRecipientAlice]
+    })
+
+    expect(getByText('No one has been added yet')).toBeTruthy()
+    expect(queryByText('Owner')).toBeNull()
+  })
+
   it('should show loading while calling getRecipientsToBeConfirmed', async () => {
     const { promise, resolve } = deferablePromise()
 
