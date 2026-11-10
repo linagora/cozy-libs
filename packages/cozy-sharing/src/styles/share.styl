@@ -32,8 +32,15 @@
 .share-dialog-members
     flex 1 1 auto
     min-height 0
-    overflow-y auto
     width 100%
+
+    > *
+        flex-shrink 0
+
+    .share-dialog-members-list
+        flex 0 1 auto
+        min-height 0
+        overflow-y auto
 
 .share-byemail-onlybylink
     background var(--defaultBackgroundColor)

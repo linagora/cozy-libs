@@ -102,7 +102,7 @@ export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
             recipients={existingRecipients}
             document={document}
             documentType="Files"
-            className={styles['share-dialog-members']}
+            className={`${styles['share-dialog-members']} u-flex u-flex-column`}
             onRevoke={revoke}
           />
           <div className="u-flex u-ph-2 u-pv-1">
