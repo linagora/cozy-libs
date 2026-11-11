@@ -44,6 +44,7 @@ class Intents {
         onServiceReady: options.onServiceReady,
         title: options.title,
         focus: options.focus,
+        readyTimeout: options.readyTimeout,
         onResize: options.onResize,
         onResult: options.onResult
       }
