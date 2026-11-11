@@ -136,7 +136,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 
 | Direction | `type` (or payload shape) | Fields | Meaning |
 |---|---|---|---|
-| Service → Client | `intent-{id}:resize` | `dimensions: { width?, height?, maxWidth?, maxHeight?, element? }`, `transition?: string` | Resizes the element that holds the iframe. `element` is measured client-side by the service and converted to `maxWidth` / `maxHeight`. `transition` is applied as a CSS `transition` property. |
+| Service → Client | `intent-{id}:resize` | `dimensions: { width?, height?, maxWidth?, maxHeight?, element? }`, `transition?: string` | Resizes the element that holds the iframe. The client keeps `width`, `height`, `maxWidth` and `maxHeight` only, as pixels from 0 to 10000 (numbers or `px` strings), and ignores the other properties. `element` is measured client-side by the service and converted to `maxWidth` / `maxHeight`. `transition` is applied as a CSS `transition` property. |
 | Service → Client | `intent-{id}:hideCross` | — | Ask the client to hide its close button. Fires `onHideCross`. |
 | Service → Client | `intent-{id}:showCross` | — | Ask the client to show its close button. Fires `onShowCross`. |
 | Client → Service | `intent-{id}:data` | `data` | New data for a service that stays open, sent with `sendData(data)` on the started intent. The service reads them with `getData()`, and gets them with `onData(listener)`. |
@@ -157,7 +157,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 > - `className`: classes added to the iframe, next to `coz-intent`, to style it.
 > - `readyTimeout`: milliseconds the service has to send `ready`. Past them, the intent fails and its iframe is removed. Once ready, the intent takes as long as it needs.
 > - `focus`: `false` leaves the focus where it is when the iframe is inserted, for a client that moves it itself (on `onReadyToUse`, for example). Defaults to `true`.
-> - `onResize`: called with `{ dimensions, transition }` when the service asks to resize, in place of the styles the client otherwise writes on the element.
+> - `onResize`: called with `{ dimensions, transition }` when the service asks to resize, in place of the styles the client otherwise writes on the element. `dimensions` holds the sizes the client keeps (see the `resize` message).
 > - `onHideCross` / `onShowCross` — called when the service asks the client to hide/show the close button.
 > - `onReadyToUse` — called when the service signals it is **truly ready** (UI rendered and initial data loaded), via `service.notifyReadyToUse()`. Distinct from `onReady`, which only signals the iframe loaded. See `intents.createService()` below.
 > - `onResult` — called with each result the service hands over with `service.sendResult(result)`, while the intent goes on. For a service that stays open and gives several results, where `terminate(doc)` gives one and ends the intent.
@@ -223,7 +223,7 @@ const app = await service.compose('INSTALL', 'io.cozy.apps', { slug: 'drive' })
 
 - `getData()`: returns the data passed to the service by the client.
 - `getIntent()`: returns the intent
-- `resizeClient(doc, transitionProperty)`: forces the size of the intent modale to a given width, maxWidth, height, maxHeight, or dimensions of a given element. The second optional argument `transitionProperty` can be used to add a CSS transition property on the intent in order to 'animate' the resizing.
+- `resizeClient(doc, transitionProperty)`: forces the size of the intent modale to a given width, maxWidth, height, maxHeight, or dimensions of a given element. The client keeps these four sizes only, as pixels from 0 to 10000, and ignores any other property. The second optional argument `transitionProperty` can be used to add a CSS transition property on the intent in order to 'animate' the resizing.
 
   ```js
   // resize the client ot 300 pixels max height

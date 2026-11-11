@@ -1,5 +1,5 @@
 import * as dom from './dom'
-import { errorSerializer, pickService } from './helpers'
+import { errorSerializer, pickService, pickSizes } from './helpers'
 import IntentListener from './listener'
 
 /**
@@ -89,10 +89,15 @@ export function start(createIntent, intent, element, data, options = {}) {
 
       onResize: event => {
         const { transition, dimensions } = event.data
+        const resize = { dimensions: pickSizes(dimensions) }
+        if (typeof transition === 'string') resize.transition = transition
         if (options.onResize) {
-          options.onResize({ dimensions, transition })
+          options.onResize(resize)
         } else {
-          dom.applyStyle(element, { transition, ...dimensions })
+          dom.applyStyle(element, {
+            transition: resize.transition,
+            ...resize.dimensions
+          })
         }
       },
 
