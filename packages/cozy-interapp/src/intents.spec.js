@@ -603,6 +603,26 @@ describe('Interapp', () => {
         expect(element.querySelector('iframe')).toBe(null)
       })
 
+      it('stops listening to the service at exposeFrameRemoval, before the iframe goes', async () => {
+        const removeListener = jest.spyOn(window, 'removeEventListener')
+        window.dispatchEvent(
+          mkMessage('exposeFrameRemoval', { document: 'mine' })
+        )
+        const res = await prom
+        expect(res.document).toBe('mine')
+        expect(removeListener).toHaveBeenCalledWith(
+          'message',
+          expect.any(Function)
+        )
+        window.dispatchEvent(
+          mkMessage('resize', { dimensions: { height: 100 } })
+        )
+        expect(element.style.height).toBe('')
+        expect(element.querySelector('iframe')).not.toBe(null)
+        res.removeIntentIframe()
+        expect(element.querySelector('iframe')).toBe(null)
+      })
+
       describe('service', () => {
         let service
         beforeEach(async () => {
