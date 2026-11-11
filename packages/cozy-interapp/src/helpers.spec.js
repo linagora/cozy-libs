@@ -1,6 +1,7 @@
 import {
   buildRedirectionURL,
   isFramedByAllowedOrigins,
+  pickService,
   removeQueryString
 } from './helpers'
 
@@ -55,5 +56,29 @@ describe('isFramedByAllowedOrigins', () => {
 
   it('leaves the handshake alone to guard when the browser does not tell the ancestors (Firefox before 148)', () => {
     expect(isFramedByAllowedOrigins([CHAT], null)).toBe(true)
+  })
+})
+
+describe('pickService', () => {
+  const intentWith = (...hrefs) => ({
+    attributes: { services: hrefs.map(href => ({ href })) }
+  })
+
+  it('picks the first service', () => {
+    expect(
+      pickService(intentWith('https://a.test/intent', 'https://b.test/intent'))
+    ).toEqual({ href: 'https://a.test/intent' })
+  })
+
+  it('refuses a service that is not a web page', () => {
+    for (const href of ['javascript:alert(1)', 'data:text/html,x', 'nope']) {
+      expect(() => pickService(intentWith(href))).toThrow(
+        'The service is not a web page'
+      )
+    }
+  })
+
+  it('throws without a service', () => {
+    expect(() => pickService(intentWith())).toThrow('Unable to find a service')
   })
 })

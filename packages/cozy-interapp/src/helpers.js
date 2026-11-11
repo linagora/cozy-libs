@@ -19,7 +19,7 @@ export const errorSerializer = (() => {
 /**
  *
  * Returns the first service from the services in the intent.
- * Throws if service not found.
+ * Throws if service not found, or if it is not a web page: the client frames it.
  *
  * If filterServices is passed, the first service matching filterServices
  * is returned.
@@ -33,7 +33,19 @@ export const pickService = (intent, filterServices) => {
   if (!service) {
     throw new Error('Unable to find a service')
   }
+  if (!isWebURL(service.href)) {
+    throw new Error('The service is not a web page')
+  }
   return service
+}
+
+const isWebURL = href => {
+  try {
+    const { protocol } = new URL(href)
+    return protocol === 'http:' || protocol === 'https:'
+  } catch {
+    return false
+  }
 }
 
 export const buildRedirectionURL = (url, data) => {
