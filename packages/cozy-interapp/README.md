@@ -141,7 +141,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 | Service → Client | `intent-{id}:showCross` | — | Ask the client to show its close button. Fires `onShowCross`. |
 | Client → Service | `intent-{id}:data` | `data` | New data for a service that stays open, sent with `sendData(data)` on the started intent. The service reads them with `getData()`, and gets them with `onData(listener)`. |
 | Service → Client | `intent-{id}:result` | `result` | The service hands a result to the client without ending the intent. Fires `onResult(result)`. May be sent any number of times before the intent terminates. |
-| Service → Client | `intent-{id}:compose` | `action`, `doctype`, `data` | Ask the client to start a nested intent. The client creates it, hides the current service iframe, runs the nested intent, then posts the resulting document back to the service via `postMessage(doc, origin)`. |
+| Service → Client | `intent-{id}:compose` | `action`, `doctype`, `data` | Ask the client to start a nested intent. The client creates it, hides the current service iframe, runs the nested intent with the `title`, `onResize` and `readyTimeout` options of its own `start()`, then posts the resulting document back to the service via `postMessage(doc, origin)`. |
 
 ## API reference
 

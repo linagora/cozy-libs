@@ -309,6 +309,83 @@ describe('Interapp', () => {
       })
     })
 
+    describe('composed intent', () => {
+      const composedIntent = {
+        id: 'composition-intent-id',
+        attributes: {
+          action: 'INSTALL',
+          type: 'io.cozy.apps',
+          services: [{ slug: 'store', href: 'http://install-apps/index.html' }]
+        }
+      }
+
+      const startAndCompose = async options => {
+        prom.stop()
+        jest.useFakeTimers()
+        prom = intents.create('EDIT', 'io.cozy.files').start(element, options)
+        await jest.advanceTimersByTimeAsync(0)
+        iframe = element.querySelector('iframe')
+        window.dispatchEvent(mkMessage('ready', {}))
+        api.respond(
+          'POST',
+          '/intents',
+          { data: composedIntent },
+          body => body.data.attributes.action === 'INSTALL'
+        )
+        window.dispatchEvent(
+          mkMessage('compose', {
+            action: 'INSTALL',
+            doctype: 'io.cozy.apps',
+            data: {}
+          })
+        )
+        await jest.advanceTimersByTimeAsync(0)
+        return element.querySelectorAll('iframe')[1]
+      }
+
+      afterEach(() => {
+        jest.useRealTimers()
+      })
+
+      it('takes the title and the resize handling of the client', async () => {
+        const onResize = jest.fn()
+        const composed = await startAndCompose({ onResize, title: 'Pick' })
+        expect(composed.getAttribute('title')).toBe('Pick')
+
+        const msg = mkMessage(
+          'ready',
+          {},
+          composedIntent,
+          composed.contentWindow
+        )
+        msg.origin = 'http://install-apps'
+        window.dispatchEvent(msg)
+        const resize = mkMessage(
+          'resize',
+          { dimensions: { height: 100 } },
+          composedIntent,
+          composed.contentWindow
+        )
+        resize.origin = 'http://install-apps'
+        window.dispatchEvent(resize)
+        expect(onResize).toHaveBeenCalledWith({ dimensions: { height: 100 } })
+        expect(element.style.height).toBe('')
+      })
+
+      it('fails when the composed service does not get ready in time', async () => {
+        await startAndCompose({ readyTimeout: 1000 })
+        const failed = jest.fn()
+        prom.catch(failed)
+        expect(element.querySelectorAll('iframe').length).toBe(2)
+        await jest.advanceTimersByTimeAsync(1000)
+        expect(failed).toHaveBeenCalled()
+        await expect(prom).rejects.toThrow(
+          'The intent service did not get ready in time'
+        )
+        expect(element.querySelector('iframe')).toBe(null)
+      })
+    })
+
     it('gives the iframe the classes of the client', async () => {
       prom.stop()
       prom = intents

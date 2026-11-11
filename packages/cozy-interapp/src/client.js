@@ -109,10 +109,17 @@ export function start(createIntent, intent, element, data, options = {}) {
         const intent = await createIntent(action, doctype, data)
         dom.hide(iframe)
         try {
-          const doc = await start(createIntent, intent, element, {
-            ...data,
-            exposeIntentFrameRemoval: false
-          })
+          const doc = await start(
+            createIntent,
+            intent,
+            element,
+            { ...data, exposeIntentFrameRemoval: false },
+            {
+              title: options.title,
+              onResize: options.onResize,
+              readyTimeout: options.readyTimeout
+            }
+          )
           source.postMessage(doc, origin)
         } finally {
           dom.show(iframe)
