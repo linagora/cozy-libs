@@ -570,6 +570,34 @@ describe('Interapp', () => {
         })
       })
 
+      it('fails when the composed intent cannot start', async () => {
+        api.respond(
+          'POST',
+          '/intents',
+          {
+            data: {
+              id: 'composition-intent-id',
+              attributes: {
+                action: 'INSTALL',
+                type: 'io.cozy.apps',
+                services: [{ slug: 'store', href: 'javascript:alert(1)' }]
+              }
+            }
+          },
+          body => body.data.attributes.action === 'INSTALL'
+        )
+        window.dispatchEvent(
+          mkMessage('compose', {
+            action: 'INSTALL',
+            data: { slug: 'myapp' },
+            doctype: 'io.cozy.apps'
+          })
+        )
+
+        await expect(prom).rejects.toThrow('The service is not a web page')
+        expect(element.querySelector('iframe')).toBe(null)
+      })
+
       it('handles composition', async () => {
         api.respond(
           'POST',
