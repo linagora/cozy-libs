@@ -17,12 +17,7 @@ export default class IntentListener {
   }
 
   handleMessage(event) {
-    // Other frames of the page, of the same origin or not, are none of this
-    // intent's business: other intents, embedded apps
-    if (
-      event.origin !== this.options.origin ||
-      event.source !== this.options.getSource()
-    ) {
+    if (event.origin !== this.options.origin) {
       return
     }
     const { data } = event
@@ -40,6 +35,16 @@ export default class IntentListener {
     }
 
     const subtype = parts[2]
+    // Other frames of the page, of the same origin or not, are none of this
+    // intent's business: other intents, embedded apps. Except for the cancel
+    // of a service page that went away: the browser gives it no source any
+    // more, its origin and the handshake vouch for it.
+    if (
+      event.source !== this.options.getSource() &&
+      !(subtype === 'cancel' && event.source === null && this.state.handshaken)
+    ) {
+      return
+    }
     if (subtype !== 'ready') {
       assert(
         this.state.handshaken,

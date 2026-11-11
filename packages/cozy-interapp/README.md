@@ -115,7 +115,7 @@ sequenceDiagram
 
 All messages from service to client are objects with a `type` field of the form `intent-{intentId}:{subtype}`.
 
-The service sends all those messages via `serviceWindow.parent.postMessage(message, intent.attributes.client)`. The client listens via `window.addEventListener('message', ...)` and keeps only the messages of its intent from its iframe (`event.origin === serviceOrigin` and `event.source === iframe.contentWindow`). It ignores the others, so several intents can run side by side, even from the same origin.
+The service sends all those messages via `serviceWindow.parent.postMessage(message, intent.attributes.client)`. The client listens via `window.addEventListener('message', ...)` and keeps only the messages of its intent from its iframe (`event.origin === serviceOrigin` and `event.source === iframe.contentWindow`). It ignores the others, so several intents can run side by side, even from the same origin. One exception: after the handshake, a `cancel` without a source is taken, as the browser gives none to the message of a page that went away.
 
 Errors are serialized: the service sends a plain object with `message` and `name` and the client can reconstruct a `new Error(message)` with the original properties copied back onto it.
 
@@ -129,7 +129,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 | Client → Service | *(raw `doc`, no envelope)* | the resulting document of the composed intent | Sent back after the composed intent resolves. The service's `compose(...)` promise resolves with it. |
 | Service → Client | `intent-{id}:done` | `document` | Successful termination. Client resolves the intent promise with `document`, removes the iframe. |
 | Service → Client | `intent-{id}:exposeFrameRemoval` | `document` | Like `done`, but the client keeps the iframe in the DOM and returns `{ document, removeIntentIframe }` so the caller can animate closing before removing the iframe. The client stops listening to the service at this message. Only sent when the client passed `exposeIntentFrameRemoval: true` in the intent data. |
-| Service → Client | `intent-{id}:cancel` | — | The service cancels. Client resolves the intent promise with `null`, removes the iframe. Also sent automatically on the service's `pagehide` event if the service was never terminated, unless the page goes to the back/forward cache. |
+| Service → Client | `intent-{id}:cancel` | — | The service cancels. Client resolves the intent promise with `null`, removes the iframe. Also sent automatically on the service's `pagehide` event if the service was never terminated, unless the page goes to the back/forward cache: the client takes this one although the browser gives it no source. |
 | Service → Client | `intent-{id}:error` | `error` | Failure. Client rejects the intent promise with a deserialized `Error`. |
 
 #### Optional messages
