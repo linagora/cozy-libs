@@ -1,6 +1,7 @@
 import 'cozy-search/dist/stylesheet.css'
 
-import './styles/index.styl'
+// css-modules-transform extracts a require() into dist/stylesheet.css, but leaves a bare import in the ES build
+require('./styles/index.styl')
 
 export { BarComponent } from './components/BarComponent'
 export { BarLeft } from './components/BarLeft'
