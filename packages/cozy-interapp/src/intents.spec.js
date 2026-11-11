@@ -458,6 +458,31 @@ describe('Interapp', () => {
       other.remove()
     })
 
+    it('takes the cancel of a service page that went away, after the handshake', async () => {
+      const other = document.createElement('iframe')
+      document.body.appendChild(other)
+      const settled = jest.fn()
+      prom.then(settled).catch(settled)
+      // Before the handshake
+      window.dispatchEvent(mkMessage('cancel', {}, intent, null))
+      await sleep(1)
+      expect(settled).not.toHaveBeenCalled()
+
+      window.dispatchEvent(mkMessage('ready', {}))
+      // From a window that still exists
+      window.dispatchEvent(mkMessage('cancel', {}, intent, other.contentWindow))
+      await sleep(1)
+      expect(settled).not.toHaveBeenCalled()
+      expect(element.querySelector('iframe')).not.toBe(null)
+
+      // From a page that went away: the browser gives it no source
+      window.dispatchEvent(mkMessage('cancel', {}, intent, null))
+      await sleep(1)
+      expect(settled).toHaveBeenCalledWith(null)
+      expect(element.querySelector('iframe')).toBe(null)
+      other.remove()
+    })
+
     it('tells the client when the service is ready, once', async () => {
       prom.stop()
       const onServiceReady = jest.fn()
