@@ -64,6 +64,18 @@ describe('Interapp', () => {
       const intent = await intents.create('EDIT', 'io.cozy.files')
       expect(intent).toBe(pickFileIntent)
     })
+
+    it('takes null data as no data', async () => {
+      api.respond('POST', '/intents', { data: pickFileIntent }, body =>
+        ['EDIT', 'REDIRECT'].includes(body.data.attributes.action)
+      )
+      await expect(intents.create('EDIT', 'io.cozy.files', null)).resolves.toBe(
+        pickFileIntent
+      )
+      await expect(
+        intents.getRedirectionURL('io.cozy.files', null)
+      ).resolves.toBe(serviceURL)
+    })
   })
 
   describe('unexisting service', () => {
@@ -197,6 +209,33 @@ describe('Interapp', () => {
       ).toBe('http://photos-mock/service')
     })
 
+    it('keeps the filter for each start of the intent', async () => {
+      prom.stop()
+      api.reset()
+      api.respond('POST', '/intents', {
+        data: {
+          ...pickFileIntent,
+          attributes: {
+            ...pickFileIntent.attributes,
+            services: [
+              { slug: 'files', href: serviceURL },
+              { slug: 'photos', href: 'http://photos-mock/service' }
+            ]
+          }
+        }
+      })
+      const data = { filteredServices: service => service.slug === 'photos' }
+      const created = intents.create('EDIT', 'io.cozy.files', data)
+      created.start(element).stop()
+      await sleep(1)
+      prom = created.start(element)
+      await sleep(1)
+      expect(element.querySelector('iframe').getAttribute('src')).toBe(
+        'http://photos-mock/service'
+      )
+      expect(data.filteredServices).toBeDefined()
+    })
+
     it('focuses the iframe it inserts', () => {
       expect(document.activeElement).toBe(iframe)
     })
@@ -320,6 +359,22 @@ describe('Interapp', () => {
         'Unexpected handshake message from intent service'
       )
     })
+
+    it.each([[['a', 'b']], [new Date(0)]])(
+      'gives the service data that are not an object as they are: %p',
+      async data => {
+        prom.stop()
+        prom = intents.create('EDIT', 'io.cozy.files', data).start(element)
+        await sleep(1)
+        iframe = element.querySelector('iframe')
+        jest.spyOn(iframe.contentWindow, 'postMessage')
+        window.dispatchEvent(mkMessage('ready', {}))
+        expect(iframe.contentWindow.postMessage).toHaveBeenCalledWith(
+          data,
+          serviceOrigin
+        )
+      }
+    )
 
     it('gives the service the data sent before it is ready', () => {
       jest.spyOn(iframe.contentWindow, 'postMessage')
