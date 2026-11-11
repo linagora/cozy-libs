@@ -17433,6 +17433,7 @@ __metadata:
     babel-preset-cozy-app: "npm:^2.8.4"
     jest: "npm:30.3.0"
     jest-environment-jsdom: "npm:30.3.0"
+    typescript: "npm:5.5.2"
   peerDependencies:
     "@babel/runtime": ">=7.12.5"
   languageName: unknown
