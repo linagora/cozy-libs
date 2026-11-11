@@ -254,6 +254,43 @@ describe('Interapp', () => {
       button.remove()
     })
 
+    describe('with readyTimeout', () => {
+      const startWithTimeout = async () => {
+        prom.stop()
+        jest.useFakeTimers()
+        prom = intents
+          .create('EDIT', 'io.cozy.files')
+          .start(element, { readyTimeout: 1000 })
+        await jest.advanceTimersByTimeAsync(0)
+        iframe = element.querySelector('iframe')
+      }
+
+      afterEach(() => {
+        jest.useRealTimers()
+      })
+
+      it('fails when the service does not get ready in time', async () => {
+        await startWithTimeout()
+        const failed = jest.fn()
+        prom.catch(failed)
+        await jest.advanceTimersByTimeAsync(999)
+        expect(failed).not.toHaveBeenCalled()
+        await jest.advanceTimersByTimeAsync(1)
+        await expect(prom).rejects.toThrow(
+          'The intent service did not get ready in time'
+        )
+        expect(element.querySelector('iframe')).toBe(null)
+      })
+
+      it('takes as long as needed once the service is ready', async () => {
+        await startWithTimeout()
+        window.dispatchEvent(mkMessage('ready', {}))
+        await jest.advanceTimersByTimeAsync(5000)
+        window.dispatchEvent(mkMessage('done', { document: 'mine' }))
+        await expect(prom).resolves.toBe('mine')
+      })
+    })
+
     it('titles the iframe', async () => {
       prom.stop()
       prom = intents

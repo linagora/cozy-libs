@@ -19,7 +19,7 @@ const extractOrigin = url => {
  *    at the beginning and removed when the intent has completed.
  */
 export function start(createIntent, intent, element, data, options = {}) {
-  let receiver, iframe
+  let receiver, iframe, readyTimer
   // Set when the service sends `ready`: messages sent before would be lost
   let serviceWindow = null
   // The data to give the service at the handshake; sendData() replaces them until then
@@ -28,6 +28,7 @@ export function start(createIntent, intent, element, data, options = {}) {
   const serviceOrigin = extractOrigin(service.href)
 
   const destroy = () => {
+    clearTimeout(readyTimer)
     iframe && dom.remove(iframe)
     receiver && receiver.stopListening()
   }
@@ -55,6 +56,7 @@ export function start(createIntent, intent, element, data, options = {}) {
         // A service frame that loads again does not get the data twice: an
         // upload would store its files twice
         if (serviceWindow) return
+        clearTimeout(readyTimer)
         serviceWindow = event.source
         event.source.postMessage(currentData, event.origin)
         if (options.onServiceReady) options.onServiceReady()
@@ -132,6 +134,14 @@ export function start(createIntent, intent, element, data, options = {}) {
     })
 
     receiver.listen()
+    // A service that never says ready (app missing, signed out, unreachable)
+    // would keep the intent pending forever
+    if (options.readyTimeout) {
+      readyTimer = setTimeout(() => {
+        reject(new Error('The intent service did not get ready in time'))
+        onComplete()
+      }, options.readyTimeout)
+    }
   })
 
   prom.destroy = destroy
