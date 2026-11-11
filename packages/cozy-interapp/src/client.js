@@ -95,9 +95,10 @@ export function start(createIntent, intent, element, data, options = {}) {
       },
 
       onExposeFrameRemoval: event => {
+        receiver.stopListening()
         resolve({
           document: event.data.document,
-          removeIntentIframe: () => dom.remove(iframe)
+          removeIntentIframe: destroy
         })
       },
 
