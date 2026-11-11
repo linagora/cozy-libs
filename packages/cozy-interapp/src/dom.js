@@ -25,6 +25,7 @@ const propFmt = {
 export const applyStyle = (node, style) => {
   Object.keys(style).forEach(prop => {
     const val = style[prop]
+    if (val === undefined) return
     node.style[prop] = `${propFmt[prop] ? propFmt[prop](val) : val}`
   })
 }

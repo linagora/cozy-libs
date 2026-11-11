@@ -2,8 +2,43 @@ import {
   buildRedirectionURL,
   isFramedByAllowedOrigins,
   pickService,
+  pickSizes,
   removeQueryString
 } from './helpers'
+
+describe('pickSizes', () => {
+  it('keeps the sizes of the element, as pixels', () => {
+    expect(
+      pickSizes({
+        width: 300,
+        height: '200px',
+        maxWidth: '400',
+        maxHeight: 0.5
+      })
+    ).toEqual({ width: 300, height: 200, maxWidth: 400, maxHeight: 0.5 })
+  })
+
+  it('leaves out the other properties and the sizes out of range', () => {
+    expect(
+      pickSizes({
+        position: 'fixed',
+        zIndex: 2147483647,
+        cssText: 'position: fixed',
+        width: -1,
+        height: 10001,
+        maxWidth: '100%',
+        maxHeight: NaN
+      })
+    ).toEqual({})
+    expect(pickSizes({ width: Infinity, height: '' })).toEqual({})
+  })
+
+  it('takes what is not an object as no size', () => {
+    expect(pickSizes(undefined)).toEqual({})
+    expect(pickSizes(null)).toEqual({})
+    expect(pickSizes('300')).toEqual({})
+  })
+})
 
 describe('[Interapp] helpers', () => {
   it('should have a function to remove query string', () => {

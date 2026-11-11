@@ -183,6 +183,24 @@ describe('Interapp', () => {
       expect(element.style.height).toBe('')
     })
 
+    it('gives the client the sizes of a resize only', async () => {
+      prom.stop()
+      const onResize = jest.fn()
+      prom = intents
+        .create('EDIT', 'io.cozy.files')
+        .start(element, { onResize })
+      await sleep(1)
+      iframe = element.querySelector('iframe')
+      window.dispatchEvent(mkMessage('ready', {}))
+      window.dispatchEvent(
+        mkMessage('resize', {
+          dimensions: { height: '100px', position: 'fixed', top: 0 },
+          transition: 42
+        })
+      )
+      expect(onResize).toHaveBeenCalledWith({ dimensions: { height: 100 } })
+    })
+
     it('frames the service picked by filteredServices', async () => {
       prom.stop()
       api.reset()
@@ -504,6 +522,27 @@ describe('Interapp', () => {
         expect(element.style.width).toBe('200px')
         expect(element.style.height).toBe('100px')
         expect(element.style.transition).toBe('1s ease height')
+      })
+
+      it('takes the sizes of a resize message only, as pixels', () => {
+        window.dispatchEvent(
+          mkMessage('resize', {
+            dimensions: {
+              height: '150px',
+              width: -1,
+              maxHeight: 20000,
+              position: 'fixed',
+              zIndex: 2147483647,
+              cssText: 'position: fixed'
+            }
+          })
+        )
+        expect(element.style.height).toBe('150px')
+        expect(element.style.width).toBe('')
+        expect(element.style.maxHeight).toBe('')
+        expect(element.style.position).toBe('')
+        expect(element.style.zIndex).toBe('')
+        expect(element.style.transition).toBe('')
       })
 
       it('handles success message', async () => {

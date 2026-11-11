@@ -48,6 +48,36 @@ const isWebURL = href => {
   }
 }
 
+const sizeProperties = ['width', 'height', 'maxWidth', 'maxHeight']
+const maxSize = 10000
+
+const toPixels = value => {
+  const pixels =
+    typeof value === 'number'
+      ? value
+      : typeof value === 'string' && /^\d+(\.\d+)?(px)?$/.test(value.trim())
+        ? parseFloat(value)
+        : NaN
+  return Number.isFinite(pixels) && pixels >= 0 && pixels <= maxSize
+    ? pixels
+    : null
+}
+
+/**
+ * Keeps, of the dimensions a service sends to resize, the sizes of the
+ * element only: width, height, maxWidth and maxHeight, as pixels from 0 to
+ * 10000, given as numbers or as `px` strings. The rest is left out.
+ */
+export const pickSizes = dimensions => {
+  const sizes = {}
+  if (!dimensions || typeof dimensions !== 'object') return sizes
+  for (const property of sizeProperties) {
+    const pixels = toPixels(dimensions[property])
+    if (pixels !== null) sizes[property] = pixels
+  }
+  return sizes
+}
+
 export const buildRedirectionURL = (url, data) => {
   const isSerializable = value => !['object', 'function'].includes(typeof value)
 
