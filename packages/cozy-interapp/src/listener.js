@@ -58,12 +58,16 @@ export default class IntentListener {
   }
 
   /**
-   * Primary handler for DOM messages. Passes any thrown error from
-   * the real message handler to the options.onError callback.
+   * Primary handler for DOM messages. Passes any error of the real message
+   * handler, thrown or rejected by an async one as compose, to the
+   * options.onError callback.
    */
   handleMessageWrapper(ev) {
     try {
-      this.handleMessage(ev)
+      const handled = this.handleMessage(ev)
+      if (handled && typeof handled.catch === 'function') {
+        handled.catch(this.options.onError)
+      }
     } catch (e) {
       this.options.onError(e)
     }
