@@ -129,7 +129,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 | Client → Service | *(raw `doc`, no envelope)* | the resulting document of the composed intent | Sent back after the composed intent resolves. The service's `compose(...)` promise resolves with it. |
 | Service → Client | `intent-{id}:done` | `document` | Successful termination. Client resolves the intent promise with `document`, removes the iframe. |
 | Service → Client | `intent-{id}:exposeFrameRemoval` | `document` | Like `done`, but the client keeps the iframe in the DOM and returns `{ document, removeIntentIframe }` so the caller can animate closing before removing the iframe. Only sent when the client passed `exposeIntentFrameRemoval: true` in the intent data. |
-| Service → Client | `intent-{id}:cancel` | — | The service cancels. Client resolves the intent promise with `null`, removes the iframe. Also sent automatically on the service's `unload` event if the service was never terminated. |
+| Service → Client | `intent-{id}:cancel` | — | The service cancels. Client resolves the intent promise with `null`, removes the iframe. Also sent automatically on the service's `pagehide` event if the service was never terminated, unless the page goes to the back/forward cache. |
 | Service → Client | `intent-{id}:error` | `error` | Failure. Client rejects the intent promise with a deserialized `Error`. |
 
 #### Optional messages
@@ -198,7 +198,7 @@ intents.create('EDIT', 'io.cozy.apps')
 
 `intents.createService([intentId, window, options])` has to be used in the intent service page. It initializes communication with the parent window (remember: the service is supposed to be in an iframe).
 
-If `intentId` and `window` parameters are not provided the method will try to retrieve them automatically.
+If `intentId` and `window` parameters are not provided the method will try to retrieve them automatically: the `intent` parameter of the page URL and the global `window`.
 
 `options`:
 

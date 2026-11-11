@@ -333,6 +333,33 @@ describe('Interapp', () => {
       )
     })
 
+    it('takes the origin of the service as the browser serializes it', async () => {
+      prom.stop()
+      api.reset()
+      api.respond('POST', '/intents', {
+        data: {
+          ...pickFileIntent,
+          attributes: {
+            ...pickFileIntent.attributes,
+            services: [
+              { slug: 'files', href: 'http://SERVICE-MOCK:80/custom-service' }
+            ]
+          }
+        }
+      })
+      prom = intents
+        .create('EDIT', 'io.cozy.files', { id: 'fileId' })
+        .start(element)
+      await sleep(1)
+      iframe = element.querySelector('iframe')
+      jest.spyOn(iframe.contentWindow, 'postMessage')
+      window.dispatchEvent(mkMessage('ready', {}))
+      expect(iframe.contentWindow.postMessage).toHaveBeenCalledWith(
+        { id: 'fileId' },
+        serviceOrigin
+      )
+    })
+
     it('ignores the messages of another window of the service origin, silently', async () => {
       const warn = jest.spyOn(console, 'warn')
       jest.spyOn(iframe.contentWindow, 'postMessage')
@@ -892,6 +919,73 @@ describe('Interapp', () => {
       await sleep(1)
 
       expect(postMessage.mock.calls).toEqual([[type('ready'), client]])
+    })
+  })
+
+  describe('service in its own window', () => {
+    const client = 'https://chat.example.com'
+    const intentId = 'window-intent-id'
+
+    const mockWindow = search => ({
+      document: window.document,
+      location: { search },
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      parent: { postMessage: jest.fn() }
+    })
+
+    const listenerOf = (serviceWindow, type) =>
+      serviceWindow.addEventListener.mock.calls.find(
+        ([eventType]) => eventType === type
+      )[1]
+
+    const startService = async search => {
+      api.respond('GET', `/intents/${intentId}`, {
+        data: { id: intentId, attributes: { client, services: [] } }
+      })
+      const serviceWindow = mockWindow(search)
+      const promise = intents.createService(
+        search ? null : intentId,
+        serviceWindow
+      )
+      promise.catch(() => {})
+      await sleep(1)
+      serviceWindow.parent.postMessage.mockClear()
+      return { serviceWindow, promise }
+    }
+
+    const hide = (serviceWindow, persisted) => {
+      listenerOf(serviceWindow, 'pagehide')({ persisted })
+      return serviceWindow.parent.postMessage.mock.calls
+    }
+
+    it('reads the id of the intent in the URL of its page', async () => {
+      await startService(`?session_code=abc&intent=${intentId}`)
+      expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        `/intents/${intentId}`
+      )
+    })
+
+    it('cancels the intent when its page goes away', async () => {
+      const { serviceWindow } = await startService()
+      expect(hide(serviceWindow, false)).toEqual([
+        [{ type: `intent-${intentId}:cancel` }, client]
+      ])
+    })
+
+    it('keeps the intent when its page may come back from the cache', async () => {
+      const { serviceWindow } = await startService()
+      expect(hide(serviceWindow, true)).toEqual([])
+    })
+
+    it('does not cancel an intent already terminated', async () => {
+      const { serviceWindow, promise } = await startService()
+      listenerOf(serviceWindow, 'message')({ origin: client, data: {} })
+      const service = await promise
+      service.terminate({})
+      serviceWindow.parent.postMessage.mockClear()
+      expect(hide(serviceWindow, false)).toEqual([])
     })
   })
 })

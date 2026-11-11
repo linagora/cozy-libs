@@ -3,13 +3,6 @@ import { errorSerializer, pickService, pickSizes } from './helpers'
 import IntentListener from './listener'
 
 /**
- * Keeps only http://domain:port/
- */
-const extractOrigin = url => {
-  return url.split('/', 3).join('/')
-}
-
-/**
  * Creates the intent iframe and reacts to its messages.
  *
  * 1. Converts done/error/cancel/exposeFrameRemoval into Promise resolve/reject
@@ -25,7 +18,7 @@ export function start(createIntent, intent, element, data, options = {}) {
   // The data to give the service at the handshake; sendData() replaces them until then
   let currentData = data
   const service = pickService(intent, options.filterServices)
-  const serviceOrigin = extractOrigin(service.href)
+  const serviceOrigin = new URL(service.href).origin
 
   const destroy = () => {
     clearTimeout(readyTimer)
