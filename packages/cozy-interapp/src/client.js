@@ -38,14 +38,12 @@ export function start(createIntent, intent, element, data, options = {}) {
   }
 
   let prom = new Promise((resolve, reject) => {
-    iframe = dom.insertIntentIframe(
-      intent,
-      element,
-      service.href,
-      options.onReady,
-      options.title,
-      options.focus !== false
-    )
+    iframe = dom.insertIntentIframe(intent, element, service.href, {
+      onload: options.onReady,
+      title: options.title,
+      className: options.className,
+      focus: options.focus !== false
+    })
 
     receiver = new IntentListener({
       intentId: intent.id,

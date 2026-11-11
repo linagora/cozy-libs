@@ -154,6 +154,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 > - `onReady` — called when the intent iframe has finished loading (iframe `onload`). Useful for running client code once the iframe is ready.
 > - `onServiceReady`: called when the service sends `ready` and gets its data, once. Unlike `onReadyToUse`, every service sends it.
 > - `title`: the `title` of the iframe, for assistive technologies.
+> - `className`: classes added to the iframe, next to `coz-intent`, to style it.
 > - `readyTimeout`: milliseconds the service has to send `ready`. Past them, the intent fails and its iframe is removed. Once ready, the intent takes as long as it needs.
 > - `focus`: `false` leaves the focus where it is when the iframe is inserted, for a client that moves it itself (on `onReadyToUse`, for example). Defaults to `true`.
 > - `onResize`: called with `{ dimensions, transition }` when the service asks to resize, in place of the styles the client otherwise writes on the element.
