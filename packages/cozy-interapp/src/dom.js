@@ -43,7 +43,7 @@ export const assertOKForIntentIframe = node => {
   }
 }
 
-export function iframeFromIntent(intent, node, url, title) {
+export function iframeFromIntent(intent, node, url, { title, className } = {}) {
   const document = node.ownerDocument
   if (!document)
     throw new Error('Cannot retrieve document object from given node')
@@ -54,6 +54,7 @@ export function iframeFromIntent(intent, node, url, title) {
   iframe.setAttribute('src', url)
   iframe.setAttribute('allow', 'clipboard-write')
   iframe.classList.add(intentClass)
+  if (className) iframe.classList.add(...className.split(/\s+/).filter(Boolean))
   return iframe
 }
 
@@ -61,13 +62,11 @@ export function insertIntentIframe(
   intent,
   element,
   url,
-  onload,
-  title,
-  focus = true
+  { onload, title, className, focus = true } = {}
 ) {
   assertOKForIntentIframe(element)
 
-  const iframe = iframeFromIntent(intent, element, url, title)
+  const iframe = iframeFromIntent(intent, element, url, { title, className })
   // if callback provided for when iframe is loaded
   if (typeof onload === 'function') iframe.onload = onload
   element.appendChild(iframe)

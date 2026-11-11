@@ -291,6 +291,19 @@ describe('Interapp', () => {
       })
     })
 
+    it('gives the iframe the classes of the client', async () => {
+      prom.stop()
+      prom = intents
+        .create('EDIT', 'io.cozy.files')
+        .start(element, { className: 'u-w-100  u-bdw-0' })
+      await sleep(1)
+      expect([...element.querySelector('iframe').classList]).toEqual([
+        'coz-intent',
+        'u-w-100',
+        'u-bdw-0'
+      ])
+    })
+
     it('titles the iframe', async () => {
       prom.stop()
       prom = intents
