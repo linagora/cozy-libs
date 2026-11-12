@@ -525,7 +525,7 @@ export class SharingProvider extends Component {
       const resp = document.driveId
         ? await this.createSharedDriveSharingLink(document, options)
         : await this.permissionCol.createSharingLink(document, options)
-      this.dispatch(addSharingLink(resp.data))
+      this.dispatch(addSharingLink(resp.data, { driveId: document.driveId }))
       return resp
     } catch (error) {
       if (document.driveId && error && error.status === 409) {
@@ -558,7 +558,9 @@ export class SharingProvider extends Component {
     )
 
     if (newPermissions.length > 0) {
-      this.dispatch(addSharingLink(newPermissions))
+      this.dispatch(
+        addSharingLink(newPermissions, { driveId: document.driveId })
+      )
     }
 
     return permissions
