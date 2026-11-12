@@ -332,11 +332,13 @@ describe('Interapp', () => {
           { data: composedIntent },
           body => body.data.attributes.action === 'INSTALL'
         )
+        // A service has no say on the iframe of the client
         window.dispatchEvent(
           mkMessage('compose', {
             action: 'INSTALL',
             doctype: 'io.cozy.apps',
-            data: {}
+            data: { className: 'from-service-data' },
+            className: 'from-service'
           })
         )
         await jest.advanceTimersByTimeAsync(0)
@@ -345,6 +347,17 @@ describe('Interapp', () => {
 
       afterEach(() => {
         jest.useRealTimers()
+      })
+
+      it('takes the classes of the client, not of the service', async () => {
+        const composed = await startAndCompose({
+          className: 'u-w-100 u-bdw-0'
+        })
+        expect([...composed.classList]).toEqual([
+          'coz-intent',
+          'u-w-100',
+          'u-bdw-0'
+        ])
       })
 
       it('takes the title and the resize handling of the client', async () => {
