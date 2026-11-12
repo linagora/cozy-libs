@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [45.1.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.6...cozy-sharing@45.1.7) (2026-11-12)
+
+### Bug Fixes
+
+- **cozy-sharing:** Refuse a blank shared drive name ([153e870](https://github.com/cozy/cozy-libs/commit/153e8708fabfcab7b43553403c3a75f2bd7e01de))
+
 ## [45.1.6](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.5...cozy-sharing@45.1.6) (2026-11-12)
 
 **Note:** Version bump only for package cozy-sharing
