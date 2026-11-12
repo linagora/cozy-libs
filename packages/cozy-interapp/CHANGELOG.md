@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.23.0...cozy-interapp@0.24.0) (2026-11-12)
+
+### Bug Fixes
+
+- **cozy-interapp:** Fail the intent when its composition fails ([31f04e5](https://github.com/cozy/cozy-libs/commit/31f04e5b2367e96de508abd29067da2aa9df3955))
+- **cozy-interapp:** Keep filteredServices for each start of an intent ([a65a207](https://github.com/cozy/cozy-libs/commit/a65a207896cb666faf2978f42bb66af9d4f1e92b))
+- **cozy-interapp:** Refuse a service that is not a web page ([306e4fb](https://github.com/cozy/cozy-libs/commit/306e4fb2561eb3ed6ff46b14eca459d36e12b501))
+
+### Features
+
+- **cozy-interapp:** Fail an intent whose service is not ready in time ([73fce44](https://github.com/cozy/cozy-libs/commit/73fce44230f62a38f680f8658035db5ceabfd43a))
+- **cozy-interapp:** Let the client style the intent iframe ([32a4d9f](https://github.com/cozy/cozy-libs/commit/32a4d9f43155a64074d65d6628fcbd856196e0c0))
+- **cozy-interapp:** Publish TypeScript types ([57a8d4b](https://github.com/cozy/cozy-libs/commit/57a8d4ba2782a1c05cbd27c8c00d057db25d2f68))
+
 # [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.22.2...cozy-interapp@0.23.0) (2026-11-10)
 
 ### Bug Fixes
