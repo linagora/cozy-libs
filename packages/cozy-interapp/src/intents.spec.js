@@ -413,13 +413,18 @@ describe('Interapp', () => {
     it('takes the origin of the service as the browser serializes it', async () => {
       prom.stop()
       api.reset()
+      // Host in capitals, default port, userinfo: none of them is in the
+      // origin of the messages
       api.respond('POST', '/intents', {
         data: {
           ...pickFileIntent,
           attributes: {
             ...pickFileIntent.attributes,
             services: [
-              { slug: 'files', href: 'http://SERVICE-MOCK:80/custom-service' }
+              {
+                slug: 'files',
+                href: 'http://user:pw@SERVICE-MOCK:80/custom-service'
+              }
             ]
           }
         }
