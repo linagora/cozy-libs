@@ -36,6 +36,7 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
   const { t } = useI18n()
   const {
     sharedDriveName,
+    isNameBlank,
     handleSharedDriveNameChange,
     pendingRecipients,
     setPendingRecipients,
@@ -97,6 +98,7 @@ export const SharedDriveForm = withLocales(({ onSuccess, onCancel }) => {
               }
             })
           }
+          disabled={isNameBlank}
           busy={isLoading}
         />
       </div>

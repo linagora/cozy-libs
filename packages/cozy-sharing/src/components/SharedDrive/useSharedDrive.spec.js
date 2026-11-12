@@ -46,6 +46,38 @@ describe('useSharedDrive', () => {
     expect(result.current.sharedDriveName).toBe('My Drive')
   })
 
+  it.each([
+    ['', true],
+    ['   ', true],
+    [' My Drive ', false]
+  ])('isNameBlank for %p is %p', (value, expected) => {
+    const { result } = renderHook(() => useSharedDrive())
+    act(() => {
+      result.current.handleSharedDriveNameChange({ target: { value } })
+    })
+    expect(result.current.isNameBlank).toBe(expected)
+  })
+
+  it('onCreate sends the trimmed name', async () => {
+    mockCreateSharedDrive.mockResolvedValue({})
+
+    const { result } = renderHook(() => useSharedDrive())
+
+    act(() => {
+      result.current.handleSharedDriveNameChange({
+        target: { value: '  My Drive  ' }
+      })
+    })
+
+    await act(async () => {
+      await result.current.onCreate()
+    })
+
+    expect(mockCreateSharedDrive).toHaveBeenCalledWith(
+      expect.objectContaining({ name: 'My Drive', description: 'My Drive' })
+    )
+  })
+
   it('onCreate calls createSharedDrive', async () => {
     mockCreateSharedDrive.mockResolvedValue({})
 
