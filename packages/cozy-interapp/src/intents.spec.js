@@ -399,6 +399,67 @@ describe('Interapp', () => {
       })
     })
 
+    describe('in the window of an overlay of the app', () => {
+      // A page of the origin of the app, in another window
+      let host, hostWindow, frame
+
+      const startInHost = async () => {
+        prom.stop()
+        host = document.createElement('iframe')
+        document.body.appendChild(host)
+        hostWindow = host.contentWindow
+        const box = host.contentDocument.body
+        prom = intents
+          .create('EDIT', 'io.cozy.files', { id: 'fileId' })
+          .start(box)
+        await sleep(1)
+        frame = box.querySelector('iframe')
+        jest.spyOn(frame.contentWindow, 'postMessage')
+      }
+
+      const hostMessage = (type, data) => {
+        const ev = new hostWindow.Event('message')
+        Object.assign(ev, {
+          data: { type: `intent-${intent.id}:${type}`, ...data },
+          origin: serviceOrigin,
+          source: frame.contentWindow
+        })
+        hostWindow.dispatchEvent(ev)
+      }
+
+      afterEach(() => {
+        host.remove()
+      })
+
+      it('listens on that window', async () => {
+        await startInHost()
+        const removeListener = jest.spyOn(hostWindow, 'removeEventListener')
+        hostMessage('ready', {})
+        expect(frame.contentWindow.postMessage).toHaveBeenCalledWith(
+          { id: 'fileId' },
+          serviceOrigin
+        )
+        hostMessage('done', { document: 'mine' })
+        await expect(prom).resolves.toBe('mine')
+        expect(removeListener).toHaveBeenCalledWith(
+          'message',
+          expect.any(Function)
+        )
+      })
+
+      it('reads the error of the service from that window', async () => {
+        await startInHost()
+        hostMessage('ready', {})
+        hostMessage('error', {
+          error: { message: 'Error from service', status: 409 }
+        })
+        await expect(prom).rejects.toMatchObject({
+          message: 'Error from service',
+          status: 409
+        })
+      })
+    })
+
     it('gives the iframe the classes of the client', async () => {
       prom.stop()
       prom = intents

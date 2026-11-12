@@ -79,11 +79,14 @@ export default class IntentListener {
   }
 
   listen() {
-    window.addEventListener('message', this.handleMessageWrapper)
+    this.options.window.addEventListener('message', this.handleMessageWrapper)
   }
 
   stopListening() {
-    window.removeEventListener('message', this.handleMessageWrapper)
+    this.options.window.removeEventListener(
+      'message',
+      this.handleMessageWrapper
+    )
   }
 }
 
