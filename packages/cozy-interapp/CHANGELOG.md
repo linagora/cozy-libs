@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.1](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.24.0...cozy-interapp@0.24.1) (2026-11-12)
+
+### Bug Fixes
+
+- **cozy-interapp:** Apply only sizes from a resize message ([537130d](https://github.com/cozy/cozy-libs/commit/537130d3207032c996ffb1eab414e855b91dc23e))
+- **cozy-interapp:** Give a composed intent the classes of the client ([c836777](https://github.com/cozy/cozy-libs/commit/c8367771fda28fed27cdc06ce222607bec09526c))
+- **cozy-interapp:** Give a composed intent the options of the client ([56b8b55](https://github.com/cozy/cozy-libs/commit/56b8b55321f89594910d4cff4e050afc4e8ce333))
+- **cozy-interapp:** Stop listening to the service at exposeFrameRemoval ([611ea36](https://github.com/cozy/cozy-libs/commit/611ea364b8723f79f9fdff6c0efa162991143793))
+- **cozy-interapp:** Take origin, intent id and page end from the browser ([ca16153](https://github.com/cozy/cozy-libs/commit/ca16153aea4f410ba39c64ea3c84346167d720ef))
+- **cozy-interapp:** Take the cancel of a service page that went away ([9c94134](https://github.com/cozy/cozy-libs/commit/9c94134b273b9f46fbd832c16ee4b3b082fd05a3))
+
 # [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.23.0...cozy-interapp@0.24.0) (2026-11-12)
 
 ### Bug Fixes
