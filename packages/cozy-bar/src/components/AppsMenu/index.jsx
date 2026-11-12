@@ -1,5 +1,6 @@
 import { Icon, Mosaic } from '@linagora/twake-icons'
 import AppsMenuContent from 'components/AppsMenu/AppsMenuContent'
+import useI18n from 'components/useI18n'
 import React, { useRef, useState } from 'react'
 
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -19,6 +20,7 @@ const useStyles = makeStyles({
 })
 
 const AppsMenu = ({ shortcuts, apps, homeApp, isFetchingApps }) => {
+  const { t } = useI18n()
   const [isOpen, setOpen] = useState(false)
   const containerRef = useRef()
   const buttonRef = useRef()
@@ -33,7 +35,12 @@ const AppsMenu = ({ shortcuts, apps, homeApp, isFetchingApps }) => {
 
   return (
     <nav ref={containerRef}>
-      <IconButton ref={buttonRef} onClick={toggleMenu} className="u-p-half">
+      <IconButton
+        ref={buttonRef}
+        onClick={toggleMenu}
+        className="u-p-half"
+        aria-label={t('menu.apps')}
+      >
         <Icon icon={Mosaic} size="18" />
       </IconButton>
       {isMobile ? (

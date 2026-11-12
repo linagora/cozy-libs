@@ -1,4 +1,5 @@
 import UserMenuContent from 'components/UserMenu/UserMenuContent'
+import useI18n from 'components/useI18n'
 import React, { useRef, useState } from 'react'
 
 import { useInstanceInfo } from 'cozy-client'
@@ -25,6 +26,7 @@ const UserMenu = ({
   isSettingsAppInstalled,
   showEmailDomainChip
 }) => {
+  const { t } = useI18n()
   const [isOpen, setOpen] = useState(false)
   const containerRef = useRef()
   const buttonRef = useRef()
@@ -46,6 +48,7 @@ const UserMenu = ({
         onClick={toggleMenu}
         disabled={!isLoaded}
         className="u-p-0 u-ml-half"
+        aria-label={t('profile')}
         data-testid="user-menu-button"
       >
         <AvatarMyself size={isMobile ? 's' : 'm'} />

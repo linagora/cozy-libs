@@ -82,6 +82,12 @@ describe('Bar', () => {
     expect(useQuery).toHaveBeenCalled()
   })
 
+  it('names the apps and profile menu buttons', () => {
+    const { getByRole } = setup()
+    expect(getByRole('button', { name: 'Apps' })).toBeInTheDocument()
+    expect(getByRole('button', { name: 'Profile' })).toBeInTheDocument()
+  })
+
   it('should not fetch apps if public', () => {
     setup({ isPublic: true })
     expect(useQuery).toHaveBeenCalledWith(
