@@ -147,7 +147,7 @@ Errors are serialized: the service sends a plain object with `message` and `name
 
 ### `intents.create()`
 
-`intents.create(action, doctype [, data, permissions])` create an intent. It returns a modified Promise for the intent document, having a custom `start(element)` method. This method interacts with the DOM to append an iframe to the given HTML element. This iframe will provide an access to an app, which will serve a service page able to manage the intent action for the intent doctype. The `start(element)` method returns a promise for the result document provided by intent service.
+`intents.create(action, doctype [, data, permissions])` create an intent. It returns a modified Promise for the intent document, having a custom `start(element)` method. This method interacts with the DOM to append an iframe to the given HTML element, and listens to the service on the window of the document of that element: the element may live in another window of the app, as an overlay. This iframe will provide an access to an app, which will serve a service page able to manage the intent action for the intent doctype. The `start(element)` method returns a promise for the result document provided by intent service.
 
 > **`start` options:** The `start` method takes an optional second argument, an options object: `start(element, options)`. Supported keys:
 >

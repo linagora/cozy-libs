@@ -19,6 +19,9 @@ export function start(createIntent, intent, element, data, options = {}) {
   let currentData = data
   const service = pickService(intent, options.filterServices)
   const serviceOrigin = new URL(service.href).origin
+  // The service posts to the window its frame is in: the one of the element,
+  // which may be an overlay of the app in another window
+  const view = element.ownerDocument.defaultView || window
 
   const destroy = () => {
     clearTimeout(readyTimer)
@@ -42,6 +45,7 @@ export function start(createIntent, intent, element, data, options = {}) {
       intentId: intent.id,
       origin: serviceOrigin,
       getSource: () => iframe.contentWindow,
+      window: view,
 
       onReady: event => {
         // A service frame that loads again does not get the data twice: an
@@ -72,8 +76,9 @@ export function start(createIntent, intent, element, data, options = {}) {
       },
 
       onError: errorOrEvent => {
+        // The event is of the realm of the window listened to
         reject(
-          errorOrEvent instanceof Event
+          errorOrEvent instanceof view.Event
             ? errorSerializer.deserialize(errorOrEvent.data.error)
             : errorOrEvent
         )
