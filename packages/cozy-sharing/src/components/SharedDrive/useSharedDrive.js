@@ -21,13 +21,15 @@ export const useSharedDrive = () => {
     setSharedDriveName(event.target.value)
   }
 
+  const trimmedName = sharedDriveName.trim()
+
   const onCreate = async () => {
     const { recipients: readWriteRecipients, readOnlyRecipients } =
       await resolveRecipients(pendingRecipients, selectedOption)
 
     await client.collection('io.cozy.sharings').createSharedDrive({
-      name: sharedDriveName,
-      description: sharedDriveName,
+      name: trimmedName,
+      description: trimmedName,
       recipients: readWriteRecipients,
       readOnlyRecipients
     })
@@ -35,6 +37,7 @@ export const useSharedDrive = () => {
 
   return {
     sharedDriveName,
+    isNameBlank: trimmedName === '',
     handleSharedDriveNameChange,
     pendingRecipients,
     setPendingRecipients,
