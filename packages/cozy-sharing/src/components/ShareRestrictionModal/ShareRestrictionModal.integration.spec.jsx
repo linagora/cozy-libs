@@ -51,11 +51,19 @@ describe('sharing restriction consent with multiple links', () => {
     [false, true, false, 'change expiry', [true, false]],
     [true, false, true, 'change expiry', [false, true]],
     [false, true, false, 'remove expiry', [true, false]],
-    [true, true, false, 'remove expiry', [true, false]]
+    [true, true, false, 'remove expiry', [true, false]],
+    [false, false, true, 'toggle', [true, true], true],
+    [true, true, false, 'toggle', [false, false], true],
+    [true, true, undefined, null, [true, undefined], true],
+    [true, false, true, 'cancel', [false, true], true]
   ])(
     'preserves per-link consent (drive=%s, initial=%s/%s, action=%s)',
-    async (drive, first, second, action, expected) => {
-      const document = drive ? { ...file, driveId: 'drive-1' } : file
+    async (drive, first, second, action, expected, directory = false) => {
+      const document = {
+        ...file,
+        ...(drive && { driveId: 'drive-1' }),
+        ...(directory && { type: 'directory' })
+      }
       const stored = Object.fromEntries(
         [makePermission('first', first), makePermission('second', second)].map(
           permission => [permission.id, permission]
@@ -99,9 +107,11 @@ describe('sharing restriction consent with multiple links', () => {
         providerRef.current.dispatch(addSharingLink(Object.values(stored)))
       })
       fireEvent.click(screen.getByText('Reopen settings'))
-      if (action === 'toggle') {
+      if (action === 'toggle' || action === 'cancel') {
         fireEvent.click(
-          screen.getByRole('checkbox', { name: 'Email an expiration report' })
+          screen.getByRole('checkbox', {
+            name: 'Send report with link statistics via email'
+          })
         )
       } else if (action === 'change expiry') {
         fireEvent.change(screen.getByRole('textbox'), {
@@ -114,7 +124,11 @@ describe('sharing restriction consent with multiple links', () => {
           })
         )
       }
-      fireEvent.click(screen.getByText('Confirm'))
+      if (action === 'cancel') {
+        fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' })
+      } else {
+        fireEvent.click(screen.getByText('Confirm'))
+      }
       await screen.findByText('Reopen settings')
       const permissions = providerRef.current.state.getDocumentPermissions(
         file.id
@@ -128,13 +142,15 @@ describe('sharing restriction consent with multiple links', () => {
         )
       }
       const expectedExpiry =
-        action === 'remove expiry'
-          ? ''
-          : endOfDay(
-              action === 'change expiry'
-                ? new Date(2099, 0, 15)
-                : new Date(expiry)
-            ).toISOString()
+        action === 'cancel'
+          ? expiry
+          : action === 'remove expiry'
+            ? ''
+            : endOfDay(
+                action === 'change expiry'
+                  ? new Date(2099, 0, 15)
+                  : new Date(expiry)
+              ).toISOString()
       expect(permissions.map(p => p.attributes.expires_at)).toEqual([
         expectedExpiry,
         expectedExpiry
@@ -142,7 +158,7 @@ describe('sharing restriction consent with multiple links', () => {
       fireEvent.click(screen.getByText('Reopen settings'))
       await waitFor(() => {
         const report = screen.getByRole('checkbox', {
-          name: 'Email an expiration report'
+          name: 'Send report with link statistics via email'
         })
         expect(report.checked).toBe(expected[0])
       })

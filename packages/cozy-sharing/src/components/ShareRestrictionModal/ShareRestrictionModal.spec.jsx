@@ -65,7 +65,7 @@ describe('ShareRestrictionModal', () => {
 
     const { unmount } = setup()
     const reportSwitch = screen.getByRole('checkbox', {
-      name: 'Email an expiration report'
+      name: 'Send report with link statistics via email'
     })
     expect(reportSwitch).not.toBeChecked()
     fireEvent.click(reportSwitch)
@@ -78,7 +78,7 @@ describe('ShareRestrictionModal', () => {
     unmount()
     const reopened = setup()
     const savedReportSwitch = screen.getByRole('checkbox', {
-      name: 'Email an expiration report'
+      name: 'Send report with link statistics via email'
     })
     expect(savedReportSwitch).toBeChecked()
     fireEvent.click(savedReportSwitch)
@@ -89,28 +89,36 @@ describe('ShareRestrictionModal', () => {
     reopened.unmount()
     setup()
     expect(
-      screen.getByRole('checkbox', { name: 'Email an expiration report' })
+      screen.getByRole('checkbox', {
+        name: 'Send report with link statistics via email'
+      })
     ).not.toBeChecked()
   })
 
-  it('requires an expiry to enable a report and does not offer one for folders', () => {
+  it('requires an expiry to enable a report for files and folders', () => {
     mockLink = null
     mockPermissions = []
     const { unmount } = setup()
     expect(
-      screen.getByRole('checkbox', { name: 'Email an expiration report' })
+      screen.getByRole('checkbox', {
+        name: 'Send report with link statistics via email'
+      })
     ).toBeDisabled()
     fireEvent.click(
       screen.getByRole('checkbox', { name: 'Remove access after a deadline' })
     )
     expect(
-      screen.getByRole('checkbox', { name: 'Email an expiration report' })
+      screen.getByRole('checkbox', {
+        name: 'Send report with link statistics via email'
+      })
     ).toBeEnabled()
     unmount()
     setup({ sharedFile: { ...file, type: 'directory' } })
     expect(
-      screen.queryByRole('checkbox', { name: 'Email an expiration report' })
-    ).toBe(null)
+      screen.getByRole('checkbox', {
+        name: 'Send report with link statistics via email'
+      })
+    ).toBeDisabled()
   })
 
   it('passes an opt-in for a new shared drive file', async () => {
@@ -125,7 +133,9 @@ describe('ShareRestrictionModal', () => {
       screen.getByRole('checkbox', { name: 'Remove access after a deadline' })
     )
     fireEvent.click(
-      screen.getByRole('checkbox', { name: 'Email an expiration report' })
+      screen.getByRole('checkbox', {
+        name: 'Send report with link statistics via email'
+      })
     )
     fireEvent.click(screen.getByText('Confirm'))
     await waitFor(() =>

@@ -64,8 +64,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const [activityReportEnabled, setActivityReportEnabled] = useState(
     permissions[0]?.attributes?.activity_report_enabled === true
   )
-  const supportsActivityReport =
-    documentType === 'Files' && file.type !== 'directory'
+  const supportsActivityReport = documentType === 'Files'
   const editingRights =
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
 

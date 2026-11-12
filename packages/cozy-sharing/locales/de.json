@@ -420,8 +420,7 @@
     "invalidPasswordMessage": "Es fehlt %{smart_count} Zeichen |||| Es fehlen %{smart_count} Zeichen"
   },
   "ActivityReport": {
-    "label": "Ablaufbericht per E-Mail senden",
-    "description": "Wenn der Link abläuft, erhält der Eigentümer der Instanz, die die Datei hostet, eine E-Mail mit den letzten Aktivitäten einschließlich Identität und IP-Adresse der Besucher sowie einen privaten CSV-Bericht. Ohne E-Mail-Adresse wird keine E-Mail gesendet."
+    "label": "Bericht mit Linkstatistiken per E-Mail senden"
   },
   "BoxDate": {
     "label": "Frist",

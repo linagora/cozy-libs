@@ -420,8 +420,7 @@
     "invalidPasswordMessage": "Manca %{smart_count} carattere |||| Mancano %{smart_count} caratteri"
   },
   "ActivityReport": {
-    "label": "Invia un rapporto via email alla scadenza",
-    "description": "Alla scadenza del link, il proprietario dell’istanza che ospita il file riceve un’email con le attività recenti, incluse identità e indirizzi IP dei visitatori, e un rapporto CSV privato. Senza un indirizzo email non viene inviata alcuna email."
+    "label": "Invia via email un rapporto sulle statistiche del link"
   },
   "BoxDate": {
     "label": "Scadenza",

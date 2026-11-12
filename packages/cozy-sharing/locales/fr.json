@@ -422,8 +422,7 @@
     "invalidPasswordMessage": "Il manque %{smart_count} caractère |||| Il manque %{smart_count} caractères"
   },
   "ActivityReport": {
-    "label": "Envoyer un rapport à l’expiration",
-    "description": "À l’expiration du lien, le propriétaire de l’instance qui héberge le fichier reçoit un courriel avec les activités récentes, y compris l’identité et l’adresse IP des visiteurs, ainsi qu’un rapport CSV privé. Sans adresse électronique, aucun courriel n’est envoyé."
+    "label": "Envoyer par e-mail un rapport sur les statistiques du lien"
   },
   "BoxDate": {
     "label": "Date limite",
