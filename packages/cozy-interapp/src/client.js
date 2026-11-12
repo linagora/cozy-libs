@@ -116,6 +116,7 @@ export function start(createIntent, intent, element, data, options = {}) {
             { ...data, exposeIntentFrameRemoval: false },
             {
               title: options.title,
+              className: options.className,
               onResize: options.onResize,
               readyTimeout: options.readyTimeout
             }
