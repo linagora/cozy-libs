@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [39.2.41](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@39.2.40...cozy-harvest-lib@39.2.41) (2026-11-12)
+
+### Bug Fixes
+
+- **cozy-harvest-lib:** Upgrade uuid from 3 to 11 ([4f16729](https://github.com/cozy/cozy-libs/commit/4f167297b9381722cc3edfe5a292cdf01e67b96a))
+
 ## [39.2.40](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@39.2.39...cozy-harvest-lib@39.2.40) (2026-11-12)
 
 **Note:** Version bump only for package cozy-harvest-lib

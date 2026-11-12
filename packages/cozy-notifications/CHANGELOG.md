@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.1](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.25.0...cozy-notifications@0.25.1) (2026-11-12)
+
+### Bug Fixes
+
+- **cozy-notifications:** Keep whitespace of rendered content blocks ([a21322f](https://github.com/cozy/cozy-libs/commit/a21322f6e55d6f676144652c6e26a1e7df325fa5))
+- **cozy-notifications:** Upgrade handlebars to 4.7.10 and refresh lodash and nanoid ([04f100d](https://github.com/cozy/cozy-libs/commit/04f100da6110613547b2f7cb8864e92de0b99ee3))
+
 # [0.25.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.24.1...cozy-notifications@0.25.0) (2026-10-06)
 
 ### Features

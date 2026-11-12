@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.2](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.24.1...cozy-interapp@0.24.2) (2026-11-12)
+
+### Bug Fixes
+
+- **cozy-interapp:** Listen to the service on the window of the element ([7146ccf](https://github.com/cozy/cozy-libs/commit/7146ccfa2b4640bca8c3266a427d32244f22f577))
+
 ## [0.24.1](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.24.0...cozy-interapp@0.24.1) (2026-11-12)
 
 ### Bug Fixes
