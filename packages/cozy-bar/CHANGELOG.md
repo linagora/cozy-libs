@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.0.9](https://github.com/cozy/cozy-libs/compare/cozy-bar@37.0.8...cozy-bar@37.0.9) (2026-11-12)
+
+### Bug Fixes
+
+- **cozy-bar:** Name the apps and profile menu buttons ([9c1e3bf](https://github.com/cozy/cozy-libs/commit/9c1e3bf5408cb604015d481a97ae7ead4ae0fa3c))
+
 ## [37.0.8](https://github.com/cozy/cozy-libs/compare/cozy-bar@37.0.7...cozy-bar@37.0.8) (2026-11-12)
 
 **Note:** Version bump only for package cozy-bar
