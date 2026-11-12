@@ -173,6 +173,46 @@ describe('shareByLink', () => {
     expect(permissions[0].id).toBe(PERM_DRIVE_FILE.id)
   })
 
+  const DRIVE_SHARING = {
+    id: 'drive_123',
+    type: 'io.cozy.sharings',
+    attributes: { drive: true, members: [], rules: [] }
+  }
+
+  it('keeps the link created on a shared drive file after a refresh', async () => {
+    const mockClient = createMockClient({})
+    mockClient.collection = jest.fn().mockReturnValue({
+      createSharingLink: jest.fn().mockResolvedValue({ data: PERM_DRIVE_FILE })
+    })
+    const provider = setupProvider(mockClient)
+
+    await provider.shareByLink(driveFile, { verbs: ['GET'] })
+    provider.dispatch(
+      receiveSharings({ sharings: [DRIVE_SHARING], permissions: [] })
+    )
+
+    expect(getDocumentPermissions(provider.state, driveFile._id)).toEqual([
+      PERM_DRIVE_FILE
+    ])
+  })
+
+  it('keeps the link fetched for a shared drive file after a refresh', async () => {
+    const mockClient = createMockClient({})
+    mockClient.collection = jest.fn().mockReturnValue({
+      findLinksByIds: jest.fn().mockResolvedValue({ data: [PERM_DRIVE_FILE] })
+    })
+    const provider = setupProvider(mockClient)
+
+    await provider.fetchSharedDriveSharingLinks(driveFile)
+    provider.dispatch(
+      receiveSharings({ sharings: [DRIVE_SHARING], permissions: [] })
+    )
+
+    expect(getDocumentPermissions(provider.state, driveFile._id)).toEqual([
+      PERM_DRIVE_FILE
+    ])
+  })
+
   it('dispatches addSharingLink once for a regular file (non shared drive)', async () => {
     const PERM_REGULAR_FILE = {
       type: 'io.cozy.permissions',
