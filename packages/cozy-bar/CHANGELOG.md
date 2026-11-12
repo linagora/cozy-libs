@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [37.0.5](https://github.com/cozy/cozy-libs/compare/cozy-bar@37.0.4...cozy-bar@37.0.5) (2026-11-12)
+
+### Bug Fixes
+
+- **cozy-bar:** Extract the bar stylesheet from the ES build ([3d0ec22](https://github.com/cozy/cozy-libs/commit/3d0ec220af9fdf2a71d980bb6e1915d623d536f1))
+
 ## [37.0.4](https://github.com/cozy/cozy-libs/compare/cozy-bar@37.0.3...cozy-bar@37.0.4) (2026-11-10)
 
 **Note:** Version bump only for package cozy-bar
