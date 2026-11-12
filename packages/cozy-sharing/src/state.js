@@ -96,7 +96,11 @@ export const revokeGroup = (sharing, index, path) => {
   }
 }
 export const revokeSelf = sharing => ({ type: REVOKE_SELF, sharing })
-export const addSharingLink = data => ({ type: ADD_SHARING_LINK, data })
+export const addSharingLink = (data, { driveId = null } = {}) => ({
+  type: ADD_SHARING_LINK,
+  data,
+  driveId
+})
 export const updateSharingLink = data => ({ type: UPDATE_SHARING_LINK, data })
 export const revokeSharingLink = permissions => ({
   type: REVOKE_SHARING_LINK,
@@ -226,10 +230,51 @@ const byDocId = (state = {}, action) => {
   }
 }
 
-const permissions = (state = [], action) => {
+const isDriveReceived = (action, driveId) =>
+  action.data.sharings.some(sharing => sharing.id === driveId)
+
+// The links of a shared drive live on the owner's instance: fetching the links
+// of the current instance never returns them, so a refresh must keep them as
+// long as their drive is still received. Indexed by link id, valued by drive id.
+const sharedDriveLinks = (state = {}, action) => {
   switch (action.type) {
+    case ADD_SHARING_LINK: {
+      if (!action.driveId) return state
+      const added = Array.isArray(action.data) ? action.data : [action.data]
+      return {
+        ...state,
+        ...Object.fromEntries(added.map(p => [p.id, action.driveId]))
+      }
+    }
+    case REVOKE_SHARING_LINK: {
+      const revokedIds = action.permissions.map(p => p.id)
+      return Object.fromEntries(
+        Object.entries(state).filter(([id]) => !revokedIds.includes(id))
+      )
+    }
     case RECEIVE_SHARINGS:
-      return action.data.permissions
+      return Object.fromEntries(
+        Object.entries(state).filter(([, driveId]) =>
+          isDriveReceived(action, driveId)
+        )
+      )
+    default:
+      return state
+  }
+}
+
+const permissions = (state = [], action, sharedDriveLinks = {}) => {
+  switch (action.type) {
+    case RECEIVE_SHARINGS: {
+      const receivedIds = action.data.permissions.map(p => p.id)
+      const keptDriveLinks = state.filter(
+        p =>
+          sharedDriveLinks[p.id] &&
+          isDriveReceived(action, sharedDriveLinks[p.id]) &&
+          !receivedIds.includes(p.id)
+      )
+      return [...action.data.permissions, ...keptDriveLinks]
+    }
     case ADD_SHARING_LINK:
       if (!Array.isArray(action.data)) {
         return [...state, action.data]
@@ -330,7 +375,8 @@ const effectiveRecipients = (state = {}, action) => {
 const reducer = (state = {}, action = {}) => ({
   byDocId: byDocId(state.byDocId, action),
   sharings: sharings(state.sharings, action),
-  permissions: permissions(state.permissions, action),
+  permissions: permissions(state.permissions, action, state.sharedDriveLinks),
+  sharedDriveLinks: sharedDriveLinks(state.sharedDriveLinks, action),
   sharedPaths: sharedPaths(state.sharedPaths, action),
   effectiveRecipients: effectiveRecipients(state.effectiveRecipients, action)
 })
@@ -539,7 +585,9 @@ export const getSharingById = (state, id) =>
 export const getDocumentPermissions = (state, docId) =>
   !state.byDocId[docId]
     ? []
-    : state.byDocId[docId].permissions.map(id => getPermissionById(state, id))
+    : state.byDocId[docId].permissions
+        .map(id => getPermissionById(state, id))
+        .filter(Boolean)
 
 const getPermissionById = (state, id) =>
   state.permissions.find(s => s.id === id)
