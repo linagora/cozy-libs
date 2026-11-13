@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 import { createMockClient } from 'cozy-client'
 
+import { ActivityReportContext } from './ActivityReportContext'
 import { ShareRestrictionModal } from './ShareRestrictionModal'
 import AppLike from '../../../test/AppLike'
 import { SharingProvider } from '../../SharingProvider'
@@ -27,10 +28,12 @@ function makePermission(id, report) {
   }
 }
 
-function Settings({ document }) {
+function Settings({ document, enabled = true }) {
   const [open, setOpen] = useState(false)
   return open ? (
-    <ShareRestrictionModal file={document} onClose={() => setOpen(false)} />
+    <ActivityReportContext.Provider value={enabled}>
+      <ShareRestrictionModal file={document} onClose={() => setOpen(false)} />
+    </ActivityReportContext.Provider>
   ) : (
     <button onClick={() => setOpen(true)}>Reopen settings</button>
   )
@@ -55,7 +58,10 @@ describe('sharing restriction consent with multiple links', () => {
     [false, false, true, 'toggle', [true, true], true],
     [true, true, false, 'toggle', [false, false], true],
     [true, true, undefined, null, [true, undefined], true],
-    [true, false, true, 'cancel', [false, true], true]
+    [true, false, true, 'cancel', [false, true], true],
+    [false, true, false, 'hidden', [true, false]],
+    [true, false, true, 'hidden', [false, true], true],
+    [false, undefined, true, 'hidden', [undefined, true]]
   ])(
     'preserves per-link consent (drive=%s, initial=%s/%s, action=%s)',
     async (drive, first, second, action, expected, directory = false) => {
@@ -99,7 +105,7 @@ describe('sharing restriction consent with multiple links', () => {
             documentType="Files"
             ref={providerRef}
           >
-            <Settings document={document} />
+            <Settings document={document} enabled={action !== 'hidden'} />
           </SharingProvider>
         </AppLike>
       )
@@ -156,6 +162,14 @@ describe('sharing restriction consent with multiple links', () => {
         expectedExpiry
       ])
       fireEvent.click(screen.getByText('Reopen settings'))
+      if (action === 'hidden') {
+        expect(
+          screen.queryByRole('checkbox', {
+            name: 'Send report with link statistics via email'
+          })
+        ).toBeNull()
+        return
+      }
       await waitFor(() => {
         const report = screen.getByRole('checkbox', {
           name: 'Send report with link statistics via email'

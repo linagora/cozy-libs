@@ -3,6 +3,7 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
+import { ActivityReportContext } from './ActivityReportContext'
 import { ShareRestrictionModal } from './ShareRestrictionModal'
 import { READ_ONLY_PERMS, WRITE_PERMS } from './helpers'
 import AppLike from '../../../test/AppLike'
@@ -47,7 +48,9 @@ describe('ShareRestrictionModal', () => {
   const setup = ({ sharedFile = file } = {}) =>
     render(
       <AppLike client={client}>
-        <ShareRestrictionModal file={sharedFile} onClose={jest.fn()} />
+        <ActivityReportContext.Provider value>
+          <ShareRestrictionModal file={sharedFile} onClose={jest.fn()} />
+        </ActivityReportContext.Provider>
       </AppLike>
     )
 

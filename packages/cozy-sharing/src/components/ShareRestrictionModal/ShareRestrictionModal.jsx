@@ -1,6 +1,6 @@
 import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
@@ -9,6 +9,7 @@ import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
+import { ActivityReportContext } from './ActivityReportContext'
 import { ShareRestrictionContentModal } from './ShareRestrictionContentModal'
 import {
   copyToClipboard,
@@ -26,6 +27,7 @@ import {
 import { useSharingContext } from '../../hooks/useSharingContext'
 
 export const ShareRestrictionModal = ({ file, onClose }) => {
+  const enableActivityReport = useContext(ActivityReportContext)
   const client = useClient()
   const { t } = useI18n()
   const { showAlert } = useAlert()
@@ -64,7 +66,8 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const [activityReportEnabled, setActivityReportEnabled] = useState(
     permissions[0]?.attributes?.activity_report_enabled === true
   )
-  const supportsActivityReport = documentType === 'Files'
+  const supportsActivityReport =
+    enableActivityReport && documentType === 'Files'
   const editingRights =
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
 

@@ -19,6 +19,7 @@ import styles from '../../styles/share.styl'
 import AntivirusAlert from '../AntivirusAlert'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import ShareByLink from '../ShareByLink'
+import { ActivityReportContext } from '../ShareRestrictionModal/ActivityReportContext'
 import WhoHasAccessWrapper from '../WhoHasAccessWrapper'
 
 const log = minilog('FederatedFolderModal')
@@ -343,13 +344,18 @@ const FederatedFolderModalWrapper = ({ document, ...props }) => {
   )
 }
 
-export const FederatedFolderModal = withLocales(props => (
-  <ConfirmDialogProvider>
-    <FederatedFolderModalWrapper {...props} />
-  </ConfirmDialogProvider>
-))
+export const FederatedFolderModal = withLocales(
+  ({ enableActivityReport = false, ...props }) => (
+    <ActivityReportContext.Provider value={enableActivityReport}>
+      <ConfirmDialogProvider>
+        <FederatedFolderModalWrapper {...props} />
+      </ConfirmDialogProvider>
+    </ActivityReportContext.Provider>
+  )
+)
 
 FederatedFolderModal.propTypes = {
+  enableActivityReport: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   onRevokeSuccess: PropTypes.func,
   document: PropTypes.object.isRequired,
