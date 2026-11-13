@@ -2,6 +2,7 @@ import { addDays, isValid } from 'date-fns'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import { useI18n } from 'twake-i18n'
 
 import { BoxDate } from './BoxDate'
@@ -10,12 +11,14 @@ import { BoxPassword } from './BoxPassword'
 export const PASSWORD_MIN_LENGTH = 4
 
 export const ShareLinkSettings = ({
+  activityReportEnabled,
   dateEnabled,
   hasPassword = false,
   isPasswordValid,
   password,
   passwordEnabled,
   selectedDate,
+  setActivityReportEnabled,
   setDateEnabled,
   setIsDateValid,
   setIsPasswordValid,
@@ -73,11 +76,23 @@ export const ShareLinkSettings = ({
         toggle={passwordEnabled}
         inputProps={{ minLength: PASSWORD_MIN_LENGTH }}
       />
+      {setActivityReportEnabled && (
+        <Checkbox
+          className="u-w-100 u-flex u-flex-justify-between"
+          label={t('ActivityReport.label')}
+          labelPlacement="start"
+          checked={activityReportEnabled === true}
+          disabled={!dateEnabled}
+          onChange={event => setActivityReportEnabled(event.target.checked)}
+        />
+      )}
     </>
   )
 }
 
 ShareLinkSettings.propTypes = {
+  activityReportEnabled: PropTypes.bool,
+  setActivityReportEnabled: PropTypes.func,
   dateEnabled: PropTypes.bool.isRequired,
   hasPassword: PropTypes.bool,
   isPasswordValid: PropTypes.bool.isRequired,

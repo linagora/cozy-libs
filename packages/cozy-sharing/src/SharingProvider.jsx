@@ -657,14 +657,20 @@ export class SharingProvider extends Component {
     options
   ) => {
     const { client } = this.props
-    const { expiresAt, password } = options
+    const { expiresAt, password, activityReportEnabled } = options
     const drivePermissionCollection = client.collection('io.cozy.permissions', {
       driveId: document.driveId
     })
     const resp = await drivePermissionCollection.add(
       permissionDocument,
       updatedPermissions,
-      { expiresAt, password }
+      {
+        expiresAt,
+        password,
+        ...(typeof activityReportEnabled === 'boolean' && {
+          activityReportEnabled
+        })
+      }
     )
     this.dispatch(updateSharingLink(resp.data))
     return resp
@@ -688,7 +694,7 @@ export class SharingProvider extends Component {
     options,
     permissionsToUpdate = null
   ) => {
-    const { verbs, expiresAt, password } = options
+    const { verbs, expiresAt, password, activityReportEnabled } = options
     const documentId = getDocumentId(document)
     const permissions =
       permissionsToUpdate || getDocumentPermissions(this.state, documentId)
@@ -698,7 +704,15 @@ export class SharingProvider extends Component {
     }
 
     const responses = await Promise.all(
-      permissions.map(async permissionDocument => {
+      permissions.map(async (permissionDocument, index) => {
+        const permissionOptions = {
+          expiresAt,
+          password,
+          ...(index === 0 &&
+            typeof activityReportEnabled === 'boolean' && {
+              activityReportEnabled
+            })
+        }
         const updatedPermissions = Object.fromEntries(
           Object.entries(permissionDocument.attributes.permissions).map(
             ([permissionType, rules]) => [permissionType, { ...rules, verbs }]
@@ -710,12 +724,12 @@ export class SharingProvider extends Component {
               document,
               permissionDocument,
               updatedPermissions,
-              options
+              permissionOptions
             )
           : await this.permissionCol.add(
               permissionDocument,
               updatedPermissions,
-              { expiresAt, password }
+              permissionOptions
             )
         this.dispatch(updateSharingLink(resp.data))
         return resp

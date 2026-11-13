@@ -419,6 +419,9 @@
     },
     "invalidPasswordMessage": "Thiếu %{smart_count} ký tự |||| Thiếu %{smart_count} ký tự"
   },
+  "ActivityReport": {
+    "label": "Gửi báo cáo thống kê liên kết qua email"
+  },
   "BoxDate": {
     "label": "Thời hạn",
     "text": "Xóa quyền truy cập sau một thời hạn"

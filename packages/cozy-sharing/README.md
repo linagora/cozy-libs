@@ -89,6 +89,19 @@ const ToggleModal = () => {
 }
 ```
 
+To offer expiration reports, opt in on the public modal (the default is
+`false`, so existing applications no longer show the checkbox):
+
+```jsx
+<ShareModal document={doc} onClose={close} enableActivityReport />
+```
+
+`FederatedFolderModal` also accepts `enableActivityReport` when used directly.
+The application may decide when to enable it. When hidden, the report field is
+omitted from link updates, preserving each link's existing setting. This does not
+disable a previously enabled report. A compatible client and Stack are required;
+folder delivery has not been validated end to end.
+
 ### Render-prop components
 
 ```jsx
@@ -150,6 +163,10 @@ Creates a public URL accessible without a Twake account. One link per resource a
 | Expiration date | Off | Set in `ShareRestrictionModal` or `ShareLinkAccessModal`. Toggle; defaults to 30 days ahead when enabled; expires at end of that day |
 | Password | Off | Set in `ShareRestrictionModal` or `ShareLinkAccessModal`. Minimum 4 characters; owner communicates it out-of-band |
 
+The report records activity on the shared link itself. For folders, a root ZIP
+is included; individual child downloads and selection ZIPs are not included.
+Folder report delivery, including shared drives, has not been validated end to end.
+
 **Lifecycle:**
 
 - Deactivating a link (Public access menu) revokes the current permissions. Reactivating generates a **new URL** — the old one stays invalid.
@@ -195,6 +212,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Expiration date toggle default | Controlled by `sharing.date-toggle.enabled` flag (default: false) | `ShareRestrictionModal.jsx:62` |
 | Link deactivation | Revokes the permission document; regenerates a new URL on reactivation | `SharingProvider.jsx:635` |
 | Password | 4+ characters; no limit on attempts | `ShareLinkSettings.jsx:10` |
+| Expiration report | Hidden by default; `enableActivityReport` exposes it for individual file and folder links, enabled only with an expiration date; actual delivery requires a compatible client and Stack | `ShareRestrictionModal.jsx`, `ShareLinkSettings.jsx` |
 | Guest access | Via `/public` URL with `sharecode`; no auth required | `helpers.js:106` |
 
 ### Email sharing

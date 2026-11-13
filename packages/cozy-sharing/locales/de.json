@@ -419,6 +419,9 @@
     },
     "invalidPasswordMessage": "Es fehlt %{smart_count} Zeichen |||| Es fehlen %{smart_count} Zeichen"
   },
+  "ActivityReport": {
+    "label": "Bericht mit Linkstatistiken per E-Mail senden"
+  },
   "BoxDate": {
     "label": "Frist",
     "text": "Zugriff nach einer Frist entziehen"
