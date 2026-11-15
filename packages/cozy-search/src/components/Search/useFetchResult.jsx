@@ -6,6 +6,7 @@ import { useDataProxy } from 'cozy-dataproxy-lib'
 import Minilog from 'cozy-minilog'
 
 import { getIconForSearchResult } from './getIconForSearchResult'
+import { searchFilesOnStack } from './searchFiles'
 
 const log = Minilog('🔍 [useFetchResult]')
 
@@ -43,18 +44,34 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
 
   useEffect(() => {
     const fetch = async (searchValue, searchOptions) => {
-      if (!dataProxy.dataProxyServicesAvailable) {
-        log.log('DataProxy services are not available. Skipping search...')
-        return
-      }
-
       setState({ isLoading: true, results: null, searchValue })
 
-      const searchResults = await searchWithRetry(
-        dataProxy,
-        searchValue,
-        searchOptions
-      )
+      let searchResults
+      try {
+        searchResults = await searchFilesOnStack(client, searchValue)
+      } catch (err) {
+        log.error('Stack search failed', err)
+        searchResults = []
+      }
+      if (searchResults === null) {
+        // The stack cannot search: fall back on DataProxy
+        if (!dataProxy.dataProxyServicesAvailable) {
+          log.log('DataProxy services are not available. Skipping search...')
+          // Searched again once DataProxy is ready
+          setState({
+            isLoading: false,
+            results: [],
+            searchValue,
+            pendingDataProxy: true
+          })
+          return
+        }
+        searchResults = await searchWithRetry(
+          dataProxy,
+          searchValue,
+          searchOptions
+        )
+      }
 
       const results = searchResults.map(r => {
         // Begin Retrocompatibility code, to be removed when following PR is merged: https://github.com/cozy/cozy-web-data-proxy/pull/10
@@ -90,14 +107,24 @@ export const useFetchResult = (searchValue, searchOptions = {}) => {
     }
 
     if (searchValue) {
-      if (searchValue !== state.searchValue) {
+      if (
+        searchValue !== state.searchValue ||
+        (state.pendingDataProxy && dataProxy.dataProxyServicesAvailable)
+      ) {
         fetch(searchValue, searchOptions)
       }
     } else {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setState({ isLoading: true, results: null, searchValue: null })
     }
-  }, [dataProxy, searchValue, state.searchValue, setState])
+  }, [
+    client,
+    dataProxy,
+    searchValue,
+    state.searchValue,
+    state.pendingDataProxy,
+    setState
+  ])
 
   return {
     isLoading: state.isLoading,
