@@ -9,7 +9,7 @@ const NoResultItem = () => {
 
   return (
     <ListItem size="small">
-      <ListItemText primary={t('assistant.search.noItem')} />
+      <ListItemText primary={t('search.noItem')} />
     </ListItem>
   )
 }

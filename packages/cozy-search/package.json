@@ -1,6 +1,6 @@
 {
   "name": "cozy-search",
-  "description": "UI components about search bar and IA assistant",
+  "description": "UI components about search bar",
   "version": "3.0.9",
   "author": {
     "name": "Cozy Cloud",
@@ -10,32 +10,20 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "dependencies": {
-    "@assistant-ui/react": "^0.12.5",
     "classnames": "^2.5.1",
     "lodash": "^4.17.21",
-    "mime-types": "2.1.35",
-    "react-type-animation": "3.2.0",
-    "rooks": "7.14.1"
+    "mime-types": "2.1.35"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",
     "@babel/core": "7.16.12",
     "@linagora/twake-icons": "^2.6.6",
-    "@testing-library/react": "12.1.5",
-    "@testing-library/react-hooks": "8.0.1",
     "babel-plugin-inline-react-svg": "1.1.2",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-tsconfig-paths": "^1.0.3",
     "babel-preset-cozy-app": "^2.8.4",
     "cozy-client": "60.30.6",
-    "cozy-device-helper": "^4.0.3",
-    "cozy-flags": "^4.9.2",
-    "cozy-intent": "^2.31.1",
-    "cozy-interapp": "^0.17.1",
-    "cozy-logger": "^1.18.1",
     "cozy-minilog": "^3.10.1",
-    "cozy-pouch-link": "^54.0.0",
-    "cozy-realtime": "^5.9.4",
     "cozy-ui": "^138.4.0",
     "cozy-ui-plus": "^15.0.9",
     "cross-fetch": "^4.0.0",
@@ -64,14 +52,7 @@
   "peerDependencies": {
     "@linagora/twake-icons": ">=2.6.6",
     "cozy-client": ">=60.30.6",
-    "cozy-device-helper": ">=3.7.1",
-    "cozy-flags": ">=4.6.1",
-    "cozy-intent": ">=2.26.0",
-    "cozy-interapp": ">=0.17.1",
-    "cozy-logger": ">=1.10.4",
     "cozy-minilog": ">=3.3.1",
-    "cozy-pouch-link": "54.0.0",
-    "cozy-realtime": ">=5.6.4",
     "cozy-ui": ">=138.4.0",
     "cozy-ui-plus": ">=6.0.0",
     "react": ">=18.0.0",

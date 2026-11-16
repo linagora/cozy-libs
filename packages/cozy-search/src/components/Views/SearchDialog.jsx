@@ -6,7 +6,6 @@ import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useExtendI18n } from 'twake-i18n'
 
 import { locales } from '../../locales'
-import AssistantProvider from '../AssistantProvider'
 import ResultMenuContent from '../ResultMenu/ResultMenuContent'
 import SearchBar from '../Search/SearchBar'
 import { useSearch } from '../Search/SearchProvider'
@@ -51,11 +50,9 @@ const SearchDialog = () => {
 const SearchDialogWithProviders = () => {
   return (
     <CozyTheme variant="normal">
-      <AssistantProvider>
-        <SearchProvider>
-          <SearchDialog />
-        </SearchProvider>
-      </AssistantProvider>
+      <SearchProvider>
+        <SearchDialog />
+      </SearchProvider>
     </CozyTheme>
   )
 }
