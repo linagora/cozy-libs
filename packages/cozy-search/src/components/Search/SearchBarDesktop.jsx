@@ -5,11 +5,9 @@ import React, { useRef } from 'react'
 import ClickAwayListener from 'cozy-ui/transpiled/react/ClickAwayListener'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 
-import { AssistantButton } from './AssistantButton'
 import { useSearch } from './SearchProvider'
 import styles from './styles.styl'
 import ResultMenu from '../ResultMenu/ResultMenu'
-import { isAssistantEnabled } from '../helpers'
 
 const SearchBarDesktop = ({
   value,
@@ -19,8 +17,7 @@ const SearchBarDesktop = ({
   size,
   hasHalfBorderRadius,
   className,
-  disabledHover,
-  disabledAssistantButton
+  disabledHover
 }) => {
   const { searchValue, results, selectedIndex, setSelectedIndex } = useSearch()
   const searchRef = useRef()
@@ -95,9 +92,7 @@ const SearchBarDesktop = ({
           value={value}
           componentsProps={{
             inputBase: {
-              onKeyDown: handleKeyDown,
-              endAdornment: isAssistantEnabled() &&
-                !disabledAssistantButton && <AssistantButton size={size} />
+              onKeyDown: handleKeyDown
             }
           }}
           disabledClear

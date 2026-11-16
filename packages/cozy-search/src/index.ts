@@ -1,29 +1,3 @@
-export { default as AssistantLink } from './components/Search/AssistantLink'
 export { default as AssistantDesktop } from './components/AssistantDesktop'
 export { default as AssistantMobile } from './components/AssistantMobile'
-export { default as AssistantDialog } from './components/Views/AssistantDialog'
-export { default as CreateAssistantDialog } from './components/Views/CreateAssistantDialog'
 export { default as SearchDialog } from './components/Views/SearchDialog'
-export { default as AiText } from './components/Icons/AiText'
-
-// New assistant-ui based components
-export { default as CozyAssistantRuntimeProvider } from './components/CozyAssistantRuntimeProvider'
-export { default as CozyComposer } from './components/Conversations/ConversationComposer'
-export {
-  StreamBridge,
-  createCozyRealtimeChatAdapter
-} from './components/adapters'
-export { default as AssistantView } from './components/Views/AssistantView'
-export {
-  assistantIdFromName,
-  AUTOPROVISION_FLAG,
-  ensureProvisionedAssistants,
-  getDefaultProvisionedAssistantId
-} from './components/KnowledgeBase/provisioning'
-export { setupRagIndexing } from './components/KnowledgeBase/ragIndexing'
-export {
-  autoprovisionAssistants,
-  ensureAssistantsSetup
-} from './components/KnowledgeBase/autoprovision'
-export { useAssistantsSetup } from './components/KnowledgeBase/useAssistantsSetup'
-export { useAssistantsAutoprovision } from './components/KnowledgeBase/useAssistantsAutoprovision'

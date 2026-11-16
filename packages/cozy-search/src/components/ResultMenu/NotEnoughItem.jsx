@@ -9,7 +9,7 @@ const NotEnoughItem = () => {
 
   return (
     <ListItem size="small">
-      <ListItemText primary={t('assistant.search.notEnough')} />
+      <ListItemText primary={t('search.notEnough')} />
     </ListItem>
   )
 }

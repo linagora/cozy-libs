@@ -2,7 +2,7 @@ import React from 'react'
 
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 
-import styles from '../Conversations/styles.styl'
+import styles from './styles.styl'
 
 const SearchBarMobile = ({ value, onClear, onChange }) => {
   const handleClear = () => {
@@ -11,14 +11,14 @@ const SearchBarMobile = ({ value, onClear, onChange }) => {
 
   return (
     <SearchBar
-      className={styles['conversationBar']}
+      className={styles['searchBarMobile']}
       size="auto"
       icon={null}
       value={value}
       componentsProps={{
         inputBase: {
           inputProps: {
-            className: styles['conversationBar-input']
+            className: styles['searchBarMobile-input']
           },
           autoFocus: true
         }
