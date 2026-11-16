@@ -106,9 +106,6 @@ Bar.propTypes = {
     BarLeft: PropTypes.shape({
       noCozyHome: PropTypes.bool
     }),
-    BarSearch: PropTypes.shape({
-      disabledAssistantButton: PropTypes.bool
-    }),
     UserMenu: PropTypes.shape({
       showEmailDomainChip: PropTypes.bool
     })
