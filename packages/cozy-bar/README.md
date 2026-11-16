@@ -111,14 +111,6 @@ To disable search:
 <BarComponent searchOptions={{ enabled: false }} />
 ```
 
-To hide the AI assistant button in the search bar (e.g. when the assistant is already displayed):
-
-```jsx
-<BarComponent
-  componentsProps={{ BarSearch: { disabledAssistantButton: true } }}
-/>
-```
-
 ## Standalone bar
 
 `dist/standalone.js` is a self-contained bundle (React and every dependency included) for apps that are not Cozy React apps. Load it with a script tag, it exposes `window.TwakeBar`:
