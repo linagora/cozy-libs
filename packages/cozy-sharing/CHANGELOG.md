@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [45.1.10](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.9...cozy-sharing@45.1.10) (2026-11-16)
+
+### Bug Fixes
+
+- **cozy-sharing:** Keep drive links on refresh ([5715fc5](https://github.com/cozy/cozy-libs/commit/5715fc56e8b2f3da14f951efc38abe28821fbbde))
+- **cozy-sharing:** Keep only remote drive links ([3491d0f](https://github.com/cozy/cozy-libs/commit/3491d0f4af8f45aed6a37737b2af0e40c07b304d))
+
 ## [45.1.9](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.8...cozy-sharing@45.1.9) (2026-11-12)
 
 **Note:** Version bump only for package cozy-sharing
