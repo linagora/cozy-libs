@@ -176,7 +176,7 @@ describe('shareByLink', () => {
   const DRIVE_SHARING = {
     id: 'drive_123',
     type: 'io.cozy.sharings',
-    attributes: { drive: true, members: [], rules: [] }
+    attributes: { drive: true, owner: false, members: [], rules: [] }
   }
 
   it('keeps the link created on a shared drive file after a refresh', async () => {
