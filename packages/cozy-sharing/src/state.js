@@ -230,12 +230,16 @@ const byDocId = (state = {}, action) => {
   }
 }
 
-const isDriveReceived = (action, driveId) =>
-  action.data.sharings.some(sharing => sharing.id === driveId)
+const isRemoteDriveReceived = (action, driveId) =>
+  action.data.sharings.some(
+    sharing => sharing.id === driveId && !sharing.attributes.owner
+  )
 
 // The links of a shared drive live on the owner's instance: fetching the links
-// of the current instance never returns them, so a refresh must keep them as
-// long as their drive is still received. Indexed by link id, valued by drive id.
+// of a member's instance never returns them, so a refresh must keep them as
+// long as the drive is still received from its owner. The owner fetches its
+// own links, which must replace any kept copy. Indexed by link id, valued by
+// drive id.
 const sharedDriveLinks = (state = {}, action) => {
   switch (action.type) {
     case ADD_SHARING_LINK: {
@@ -255,7 +259,7 @@ const sharedDriveLinks = (state = {}, action) => {
     case RECEIVE_SHARINGS:
       return Object.fromEntries(
         Object.entries(state).filter(([, driveId]) =>
-          isDriveReceived(action, driveId)
+          isRemoteDriveReceived(action, driveId)
         )
       )
     default:
@@ -270,7 +274,7 @@ const permissions = (state = [], action, sharedDriveLinks = {}) => {
       const keptDriveLinks = state.filter(
         p =>
           sharedDriveLinks[p.id] &&
-          isDriveReceived(action, sharedDriveLinks[p.id]) &&
+          isRemoteDriveReceived(action, sharedDriveLinks[p.id]) &&
           !receivedIds.includes(p.id)
       )
       return [...action.data.permissions, ...keptDriveLinks]

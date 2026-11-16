@@ -511,15 +511,23 @@ describe('Sharing state', () => {
   })
 
   describe('when the sharings are received again', () => {
+    const RECEIVED_DRIVE = {
+      ...SHARING_2,
+      attributes: { ...SHARING_2.attributes, drive: true, owner: false }
+    }
+    const OWNED_DRIVE = {
+      ...SHARING_2,
+      attributes: { ...SHARING_2.attributes, drive: true, owner: true }
+    }
     const driveLinkState = reducer(
       undefined,
-      addSharingLink(PERM_2, { driveId: SHARING_2.id })
+      addSharingLink(PERM_2, { driveId: RECEIVED_DRIVE.id })
     )
 
     it('keeps the links of a shared drive', () => {
       const newState = reducer(
         driveLinkState,
-        receiveSharings({ sharings: [SHARING_2], permissions: [PERM_1] })
+        receiveSharings({ sharings: [RECEIVED_DRIVE], permissions: [PERM_1] })
       )
       expect(getDocumentPermissions(newState, 'folder_2')).toEqual([PERM_2])
     })
@@ -539,9 +547,41 @@ describe('Sharing state', () => {
       }
       const newState = reducer(
         driveLinkState,
-        receiveSharings({ sharings: [SHARING_2], permissions: [receivedPerm] })
+        receiveSharings({
+          sharings: [RECEIVED_DRIVE],
+          permissions: [receivedPerm]
+        })
       )
       expect(newState.permissions).toEqual([receivedPerm])
+    })
+
+    it('forgets a link of an owned shared drive that is not received', () => {
+      const initialState = reducer(
+        undefined,
+        addSharingLink(PERM_2, { driveId: OWNED_DRIVE.id })
+      )
+      const newState = reducer(
+        initialState,
+        receiveSharings({ sharings: [OWNED_DRIVE], permissions: [] })
+      )
+      expect(getDocumentPermissions(newState, 'folder_2')).toEqual([])
+    })
+
+    it('keeps the updated version of an owned shared drive link received on a later page', () => {
+      const updatedPerm = {
+        ...PERM_2,
+        attributes: { ...PERM_2.attributes, password: true }
+      }
+      const initialState = reducer(
+        undefined,
+        addSharingLink(PERM_2, { driveId: OWNED_DRIVE.id })
+      )
+      const firstPageState = reducer(
+        initialState,
+        receiveSharings({ sharings: [OWNED_DRIVE], permissions: [PERM_1] })
+      )
+      const newState = reducer(firstPageState, addSharingLink([updatedPerm]))
+      expect(newState.permissions).toEqual([PERM_1, updatedPerm])
     })
 
     it('forgets a link of the current instance that is not received', () => {
@@ -557,7 +597,7 @@ describe('Sharing state', () => {
       const initialState = reducer(driveLinkState, revokeSharingLink([PERM_2]))
       const newState = reducer(
         reducer(initialState, addSharingLink(PERM_2)),
-        receiveSharings({ sharings: [SHARING_2], permissions: [] })
+        receiveSharings({ sharings: [RECEIVED_DRIVE], permissions: [] })
       )
       expect(getDocumentPermissions(newState, 'folder_2')).toEqual([])
     })
