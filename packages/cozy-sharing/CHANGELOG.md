@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [45.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.10...cozy-sharing@45.2.0) (2026-11-17)
+
+### Features
+
+- **cozy-sharing:** Let share links read the apps given by the app ([4e47be3](https://github.com/cozy/cozy-libs/commit/4e47be38042ce371d86fa3105415e048c662f35d))
+
 ## [45.1.10](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.9...cozy-sharing@45.1.10) (2026-11-16)
 
 ### Bug Fixes
