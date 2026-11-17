@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [38.0.0](https://github.com/cozy/cozy-libs/compare/cozy-bar@37.0.11...cozy-bar@38.0.0) (2026-11-17)
+
+### Features
+
+- **cozy-bar:** Remove assistant route and assistant button prop ([87a9677](https://github.com/cozy/cozy-libs/commit/87a96777a29d2087c116c936ed5abd8909eac832))
+
+### BREAKING CHANGES
+
+- **cozy-bar:** BarRoutes no longer provides the assistant/:conversationId route and BarSearch no longer accepts disabledAssistantButton. The AI assistant now lives in twake-assistant.
+
 ## [37.0.11](https://github.com/cozy/cozy-libs/compare/cozy-bar@37.0.10...cozy-bar@37.0.11) (2026-11-16)
 
 **Note:** Version bump only for package cozy-bar

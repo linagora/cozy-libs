@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-search@3.0.9...cozy-search@4.0.0) (2026-11-17)
+
+### Features
+
+- **cozy-search:** Remove AI assistant code ([4acde78](https://github.com/cozy/cozy-libs/commit/4acde781c1e3edd0527bfb68fc77e6c2fd035fc5))
+
+### BREAKING CHANGES
+
+- **cozy-search:** AssistantLink, AssistantDialog, CreateAssistantDialog, AiText, CozyAssistantRuntimeProvider, CozyComposer, StreamBridge, createCozyRealtimeChatAdapter, AssistantView, the knowledge base provisioning helpers and the disabledAssistantButton prop are removed. Use twake-assistant instead.
+
 ## [3.0.9](https://github.com/cozy/cozy-libs/compare/cozy-search@3.0.8...cozy-search@3.0.9) (2026-11-16)
 
 **Note:** Version bump only for package cozy-search
