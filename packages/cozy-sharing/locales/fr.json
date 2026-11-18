@@ -425,6 +425,7 @@
     "label": "Envoyer par e-mail un rapport sur les statistiques du lien"
   },
   "BoxDate": {
+    "invalidExpiration": "Choisissez une date limite valide et future ou désactivez la date limite.",
     "label": "Date limite",
     "text": "Restreindre l'accès après une date limite"
   },

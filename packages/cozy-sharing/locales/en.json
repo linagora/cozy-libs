@@ -423,6 +423,7 @@
     "label": "Send report with link statistics via email"
   },
   "BoxDate": {
+    "invalidExpiration": "Choose a valid future expiration date or turn off the deadline.",
     "label": "Deadline",
     "text": "Remove access after a deadline"
   },

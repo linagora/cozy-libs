@@ -285,6 +285,7 @@ export const updatePermissions = async ({
   t,
   dateToggle,
   selectedDate,
+  preserveExpiration,
   passwordToggle,
   password,
   editingRights,
@@ -307,7 +308,7 @@ export const updatePermissions = async ({
     })
     return updateDocumentPermissions(file, {
       verbs,
-      expiresAt,
+      ...(!preserveExpiration && { expiresAt }),
       password: ensuredPassword,
       activityReportEnabled
     })

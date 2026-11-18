@@ -423,6 +423,7 @@
     "label": "Bericht mit Linkstatistiken per E-Mail senden"
   },
   "BoxDate": {
+    "invalidExpiration": "Wählen Sie ein gültiges zukünftiges Ablaufdatum oder deaktivieren Sie die Frist.",
     "label": "Frist",
     "text": "Zugriff nach einer Frist entziehen"
   },
