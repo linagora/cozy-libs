@@ -423,6 +423,7 @@
     "label": "Gửi báo cáo thống kê liên kết qua email"
   },
   "BoxDate": {
+    "invalidExpiration": "Chọn ngày hết hạn hợp lệ trong tương lai hoặc tắt thời hạn.",
     "label": "Thời hạn",
     "text": "Xóa quyền truy cập sau một thời hạn"
   },

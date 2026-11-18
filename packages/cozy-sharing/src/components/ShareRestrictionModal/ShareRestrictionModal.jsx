@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
+import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
@@ -33,6 +34,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const { showAlert } = useAlert()
   const [password, setPassword] = useState('')
   const [isValidDate, setIsValidDate] = useState(true)
+  const [isExpiredDate, setIsExpiredDate] = useState(false)
   const [isValidPassword, setIsValidPassword] = useState(true)
   const [loading, setLoading] = useState(false)
 
@@ -57,6 +59,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     : addDays(new Date(), 30)
 
   const [selectedDate, setSelectedDate] = useState(defaultDate)
+  const [hasChangedDate, setHasChangedDate] = useState(false)
   const [dateToggle, setDateToggle] = useState(
     permissions.length > 0
       ? hasExpiresDate
@@ -71,6 +74,16 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
 
   const handleClick = async () => {
+    const ttl = dateToggle ? makeTTL(selectedDate) : null
+    const unchangedExpiry = !hasChangedDate && hasSharingLink && expiresDate
+    if (
+      (unchangedExpiry && new Date(unchangedExpiry).getTime() <= Date.now()) ||
+      (dateToggle && (!ttl || ttl === '0s'))
+    ) {
+      setIsExpiredDate(true)
+      return
+    }
+    setIsExpiredDate(false)
     setLoading(true)
     // The clipboard write must be initiated synchronously within the click
     // handler for Safari to honor the user gesture; we pass a pending blob
@@ -81,6 +94,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
           t,
           dateToggle,
           selectedDate,
+          preserveExpiration: !hasChangedDate,
           passwordToggle,
           password,
           editingRights,
@@ -94,7 +108,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
       : createPermissions({
           file,
           t,
-          ttl: makeTTL(dateToggle && selectedDate),
+          ttl,
           password,
           editingRights,
           ...(supportsActivityReport && {
@@ -130,30 +144,47 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     onClose()
   }
 
+  const handleDateToggle = value => {
+    setHasChangedDate(true)
+    setIsExpiredDate(false)
+    setDateToggle(value)
+  }
+
+  const handleSelectedDateChange = value => {
+    setHasChangedDate(true)
+    setIsExpiredDate(false)
+    setSelectedDate(value)
+  }
+
   return (
     <ConfirmDialog
       open
       onClose={onClose}
       content={
-        <ShareRestrictionContentModal
-          file={file}
-          activityReportEnabled={activityReportEnabled}
-          isActivityReportShown={supportsActivityReport}
-          setActivityReportEnabled={setActivityReportEnabled}
-          // Date
-          dateToggle={dateToggle}
-          setDateToggle={setDateToggle}
-          setSelectedDate={setSelectedDate}
-          selectedDate={selectedDate}
-          setIsValidDate={setIsValidDate}
-          // Password
-          isPasswordValid={isValidPassword}
-          passwordToggle={passwordToggle}
-          setPasswordToggle={setPasswordToggle}
-          password={password}
-          setPassword={setPassword}
-          setIsValidPassword={setIsValidPassword}
-        />
+        <>
+          {isExpiredDate && (
+            <Alert severity="error">{t('BoxDate.invalidExpiration')}</Alert>
+          )}
+          <ShareRestrictionContentModal
+            file={file}
+            activityReportEnabled={activityReportEnabled}
+            isActivityReportShown={supportsActivityReport}
+            setActivityReportEnabled={setActivityReportEnabled}
+            // Date
+            dateToggle={dateToggle}
+            setDateToggle={handleDateToggle}
+            setSelectedDate={handleSelectedDateChange}
+            selectedDate={selectedDate}
+            setIsValidDate={setIsValidDate}
+            // Password
+            isPasswordValid={isValidPassword}
+            passwordToggle={passwordToggle}
+            setPasswordToggle={setPasswordToggle}
+            password={password}
+            setPassword={setPassword}
+            setIsValidPassword={setIsValidPassword}
+          />
+        </>
       }
       actions={
         <Button

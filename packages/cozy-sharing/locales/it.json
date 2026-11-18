@@ -423,6 +423,7 @@
     "label": "Invia via email un rapporto sulle statistiche del link"
   },
   "BoxDate": {
+    "invalidExpiration": "Scegli una data di scadenza valida e futura oppure disattiva la scadenza.",
     "label": "Scadenza",
     "text": "Rimuovi l'accesso dopo una scadenza"
   },

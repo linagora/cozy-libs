@@ -208,6 +208,135 @@ describe('ShareRestrictionModal', () => {
     )
   })
 
+  it.each([false, true])(
+    'rejects an expired deadline before saving (existing link: %s)',
+    existing => {
+      jest.useFakeTimers()
+      jest.setSystemTime(new Date(2098, 0, 1, 12))
+      try {
+        mockLink = existing ? 'url' : null
+        mockPermissions = existing ? [linkPermission(READ_ONLY_PERMS)] : []
+        if (existing) {
+          mockPermissions[0].attributes.expires_at = new Date(
+            2098,
+            0,
+            2,
+            12
+          ).toISOString()
+          mockPermissions[0].attributes.activity_report_enabled = true
+        }
+        setup()
+        if (!existing) {
+          fireEvent.click(
+            screen.getByRole('checkbox', {
+              name: 'Remove access after a deadline'
+            })
+          )
+          fireEvent.click(
+            screen.getByRole('checkbox', {
+              name: 'Send report with link statistics via email'
+            })
+          )
+        }
+        jest.setSystemTime(new Date(2098, 2, 1, 12))
+        fireEvent.click(screen.getByText('Confirm'))
+        expect(screen.getByRole('alert')).toHaveTextContent(
+          'Choose a valid future expiration date or turn off the deadline.'
+        )
+        expect(screen.getByRole('dialog')).toBeInTheDocument()
+        expect(mockShareByLink).not.toHaveBeenCalled()
+        expect(mockUpdateDocumentPermissions).not.toHaveBeenCalled()
+        expect(navigator.clipboard.write).not.toHaveBeenCalled()
+        expect(navigator.clipboard.writeText).not.toHaveBeenCalled()
+        fireEvent.click(
+          screen.getByRole('checkbox', {
+            name: 'Remove access after a deadline'
+          })
+        )
+        expect(screen.queryByRole('alert')).toBeNull()
+      } finally {
+        jest.useRealTimers()
+      }
+    }
+  )
+
+  it('disables confirmation without showing an expiration alert while entering an invalid date', () => {
+    mockLink = null
+    mockPermissions = []
+    setup()
+    fireEvent.click(
+      screen.getByRole('checkbox', { name: 'Remove access after a deadline' })
+    )
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'invalid' }
+    })
+    expect(screen.queryByRole('alert')).toBeNull()
+    expect(screen.getByRole('button', { name: 'Confirm' })).toBeDisabled()
+    expect(mockShareByLink).not.toHaveBeenCalled()
+  })
+
+  it.each([800, 999])(
+    'rejects a deadline with no positive TTL at the boundary (%s ms)',
+    milliseconds => {
+      jest.useFakeTimers()
+      jest.setSystemTime(new Date(2098, 0, 1, 12))
+      try {
+        mockLink = null
+        mockPermissions = []
+        setup()
+        fireEvent.click(
+          screen.getByRole('checkbox', {
+            name: 'Remove access after a deadline'
+          })
+        )
+        fireEvent.click(
+          screen.getByRole('checkbox', {
+            name: 'Send report with link statistics via email'
+          })
+        )
+        jest.setSystemTime(new Date(2098, 0, 31, 23, 59, 59, milliseconds))
+        fireEvent.click(screen.getByText('Confirm'))
+        expect(screen.getByRole('alert')).toHaveTextContent(
+          'Choose a valid future expiration date or turn off the deadline.'
+        )
+        expect(mockShareByLink).not.toHaveBeenCalled()
+        expect(navigator.clipboard.write).not.toHaveBeenCalled()
+      } finally {
+        jest.useRealTimers()
+      }
+    }
+  )
+
+  it('accepts a positive TTL just before the rounding boundary', () => {
+    jest.useFakeTimers()
+    jest.setSystemTime(new Date(2098, 0, 1, 12))
+    try {
+      mockLink = null
+      mockPermissions = []
+      mockShareByLink.mockResolvedValue({
+        data: linkPermission(READ_ONLY_PERMS)
+      })
+      setup()
+      fireEvent.click(
+        screen.getByRole('checkbox', { name: 'Remove access after a deadline' })
+      )
+      fireEvent.click(
+        screen.getByRole('checkbox', {
+          name: 'Send report with link statistics via email'
+        })
+      )
+      jest.setSystemTime(new Date(2098, 0, 31, 23, 59, 59, 499))
+      fireEvent.click(screen.getByText('Confirm'))
+      expect(screen.queryByRole('alert')).toBeNull()
+      expect(mockShareByLink).toHaveBeenCalledWith(
+        file,
+        expect.objectContaining({ ttl: '1s', activityReportEnabled: true })
+      )
+    } finally {
+      jest.useRealTimers()
+    }
+  })
+
   it('keeps editor rights when the settings of an editor link change', async () => {
     mockLink = 'url'
     mockPermissions = [linkPermission(WRITE_PERMS)]
