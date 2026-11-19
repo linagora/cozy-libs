@@ -727,12 +727,8 @@ export class SharingProvider extends Component {
     }
 
     const responses = await Promise.all(
-      permissions.map(async (permissionDocument, index) => {
-        const permissionOptions = {
-          expiresAt,
-          password,
-          activityReportEnabled: index === 0 ? activityReportEnabled : undefined
-        }
+      permissions.map(async permissionDocument => {
+        const permissionOptions = { expiresAt, password, activityReportEnabled }
         // The stack keeps the rule letting the link read apps when it is
         // not sent again, and would duplicate it otherwise.
         const updatedPermissions = Object.fromEntries(
