@@ -29,6 +29,7 @@ import reducer, {
   revokeRecipient,
   revokeGroup as revokeGroupFromState,
   revokeSelf,
+  shouldForgetSharing,
   receivePaths,
   receiveEffectiveRecipients,
   updateEffectiveRecipient,
@@ -196,7 +197,7 @@ export class SharingProvider extends Component {
     const newSharing = getSharingObject(internalSharing, sharing)
     if (internalSharing) {
       updateSharingInStore(this.dispatch, newSharing)
-    } else {
+    } else if (!shouldForgetSharing(newSharing)) {
       const docsId = getExternalSharingIds(
         newSharing,
         client.getStackClient().uri
@@ -264,6 +265,10 @@ export class SharingProvider extends Component {
     sharedDrive
   }) => {
     const { client, doctype } = this.props
+    // A drive missing from the loaded sharings has been deleted by the stack
+    const isDriveDeleted =
+      this.state.allLoaded && !getSharingById(this.state, document.driveId)
+    const driveId = isDriveDeleted ? undefined : document.driveId
     const sharing = getDocumentSharing(this.state, document.id)
     if (sharing) {
       const sharingResult = await this.addRecipients({
@@ -274,10 +279,7 @@ export class SharingProvider extends Component {
 
       await this.state.onShared({ document, recipients, readOnlyRecipients })
 
-      await this.fetchEffectiveRecipients(
-        getDocumentId(document),
-        document.driveId
-      )
+      await this.fetchEffectiveRecipients(getDocumentId(document), driveId)
 
       return sharingResult
     }
@@ -286,8 +288,6 @@ export class SharingProvider extends Component {
 
     // Pass driveId so SharingCollection delegates the creation to the drive
     // owner's instance when the document lives in a shared drive we don't own.
-    const { driveId } = document
-
     const { data } = await this.sharingCol.create({
       document,
       recipients,
@@ -307,10 +307,7 @@ export class SharingProvider extends Component {
     )
 
     await this.state.onShared({ document, recipients, readOnlyRecipients })
-    await this.fetchEffectiveRecipients(
-      getDocumentId(document),
-      document.driveId
-    )
+    await this.fetchEffectiveRecipients(getDocumentId(document), driveId)
     return data
   }
 

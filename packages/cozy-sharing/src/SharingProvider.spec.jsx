@@ -662,6 +662,7 @@ describe('shared drive recipient revocation', () => {
     attributes: {
       drive: true,
       owner: true,
+      active: true,
       description: 'Shared folder',
       rules: [
         {
@@ -695,6 +696,7 @@ describe('shared drive recipient revocation', () => {
   const document = {
     _id: 'folder_123',
     id: 'folder_123',
+    driveId: SHARED_DRIVE.id,
     path: '/Shared folder'
   }
   const recipient = {
@@ -718,6 +720,7 @@ describe('shared drive recipient revocation', () => {
       {},
       reducer(undefined, receiveSharings({ sharings: [SHARED_DRIVE] }))
     )
+    provider.state.allLoaded = true
     sharingCol = {
       addRecipients: jest.fn().mockResolvedValue({ data: SHARED_DRIVE }),
       create: jest.fn().mockResolvedValue({ data: NEW_SHARING }),
@@ -728,20 +731,8 @@ describe('shared drive recipient revocation', () => {
     provider.sharingCol = sharingCol
   })
 
-  it('keeps the shared drive when revoking its last recipient', async () => {
-    await provider.revoke(document, SHARED_DRIVE.id, 1)
-
-    expect(sharingCol.revokeRecipient).toHaveBeenCalledWith(SHARED_DRIVE, 1)
-    expect(getDocumentSharing(provider.state, document.id)).toMatchObject({
-      id: SHARED_DRIVE.id,
-      attributes: { members: [{ status: 'owner' }, { status: 'revoked' }] }
-    })
-  })
-
-  it('adds a recipient to the existing drive after the last recipient was revoked', async () => {
-    await provider.revoke(document, SHARED_DRIVE.id, 1)
-
-    await provider.share({
+  const shareWithRecipient = () =>
+    provider.share({
       document,
       recipients: [recipient],
       readOnlyRecipients: [],
@@ -750,8 +741,67 @@ describe('shared drive recipient revocation', () => {
       sharedDrive: true
     })
 
+  it('creates a new drive when sharing again after the last recipient was revoked', async () => {
+    await provider.revoke(document, SHARED_DRIVE.id, 1)
+    await shareWithRecipient()
+
+    expect(sharingCol.create).toHaveBeenCalledWith(
+      expect.objectContaining({
+        document,
+        recipients: [recipient],
+        driveId: undefined
+      })
+    )
+    expect(sharingCol.addRecipients).not.toHaveBeenCalled()
+  })
+
+  it('delegates the creation to a drive while the sharings are loading', async () => {
+    provider.state.allLoaded = false
+    const documentInUnloadedDrive = {
+      _id: 'nested_folder_789',
+      id: 'nested_folder_789',
+      driveId: 'unloaded_drive',
+      path: '/Received drive/Sub folder'
+    }
+
+    await provider.share({
+      document: documentInUnloadedDrive,
+      recipients: [recipient],
+      readOnlyRecipients: [],
+      description: 'Shared folder',
+      openSharing: true,
+      sharedDrive: true
+    })
+
+    expect(sharingCol.create).toHaveBeenCalledWith(
+      expect.objectContaining({ driveId: 'unloaded_drive' })
+    )
+  })
+
+  it('does not restore the revoked drive from its realtime update', async () => {
+    await provider.revoke(document, SHARED_DRIVE.id, 1)
+    const { active, ...deactivatedDrive } = SHARED_DRIVE.attributes
+    await provider.handleCreateOrUpdateSharings({
+      _id: SHARED_DRIVE.id,
+      ...deactivatedDrive,
+      members: [deactivatedDrive.members[0], { status: 'revoked' }]
+    })
+
+    expect(getDocumentSharing(provider.state, document.id)).toBeNull()
+  })
+
+  it('adds a recipient to an organization drive after its last recipient was revoked', async () => {
+    const ORG_DRIVE = {
+      ...SHARED_DRIVE,
+      attributes: { ...SHARED_DRIVE.attributes, org_drive: true }
+    }
+    provider.dispatch(receiveSharings({ sharings: [ORG_DRIVE] }))
+
+    await provider.revoke(document, ORG_DRIVE.id, 1)
+    await shareWithRecipient()
+
     expect(sharingCol.addRecipients).toHaveBeenCalledWith({
-      document: expect.objectContaining({ id: SHARED_DRIVE.id }),
+      document: expect.objectContaining({ id: ORG_DRIVE.id }),
       recipients: [recipient],
       readOnlyRecipients: []
     })
@@ -901,6 +951,7 @@ describe('share flow reused by PermissionTypeMenu upgrade', () => {
     attributes: {
       drive: true,
       owner: true,
+      active: true,
       description: 'Shared folder',
       rules: [
         {
@@ -934,6 +985,7 @@ describe('share flow reused by PermissionTypeMenu upgrade', () => {
     attributes: {
       drive: true,
       owner: true,
+      active: true,
       description: 'child',
       rules: [
         {
@@ -1669,6 +1721,7 @@ describe('hasWriteAccess', () => {
     attributes: {
       owner: true,
       drive: true,
+      active: true,
       members: [{ read_only: false, instance: 'http://cozy.tools:8080' }],
       rules: [{ values: ['owner-folder'] }]
     }
