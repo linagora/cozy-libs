@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [45.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.2.0...cozy-sharing@45.2.1) (2026-11-19)
+
+### Bug Fixes
+
+- **cozy-sharing:** Forget a drive deleted after its last recipient ([acf1635](https://github.com/cozy/cozy-libs/commit/acf163519f27631dc95e4a49d09120ae47aa2a0b))
+
 # [45.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.1.10...cozy-sharing@45.2.0) (2026-11-17)
 
 ### Features
