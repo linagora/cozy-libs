@@ -2,7 +2,7 @@ import { act, render, screen } from '@testing-library/react'
 import { endOfDay } from 'date-fns'
 import React from 'react'
 
-import { createMockClient } from 'cozy-client'
+import CozyClient, { createMockClient } from 'cozy-client'
 
 import { SharingProvider } from './SharingProvider'
 import SharingContext from './context'
@@ -634,48 +634,70 @@ describe('updateDocumentPermissions', () => {
     [true, false],
     [true, true]
   ])(
-    'passes report choice to the first permission (drive: %s, choice: %s)',
+    'serializes the report choice for every link (drive: %s, choice: %s)',
     async (drive, activityReportEnabled) => {
-      const driveFile = {
+      const client = new CozyClient({ uri: 'https://me.cozy.example' })
+      const provider = setupProvider(client)
+      const document = {
         _id: 'file_in_drive',
-        id: 'file_in_drive',
         ...(drive && { driveId: 'drive_123' })
       }
-      const permissions = [
-        PERM_DRIVE_FILE,
-        { ...PERM_DRIVE_FILE, id: 'second_permission' }
-      ]
-      const add = jest.fn(async permission => ({ data: permission }))
-      const client = createMockClient({})
-      client.collection = jest.fn().mockReturnValue({ add })
-      const provider = setupProvider(
-        client,
-        {},
-        reducer(undefined, addSharingLink(PERM_DRIVE_FILE))
-      )
-      provider.permissionCol = { add }
-      const options = {
-        verbs: ['GET'],
-        expiresAt: '2100-01-01T23:59:59.999Z',
-        password: 'secret',
-        activityReportEnabled
+      const permissions = ['first', 'second'].map(id => ({
+        ...PERM_DRIVE_FILE,
+        id,
+        _id: id,
+        _type: 'io.cozy.permissions'
+      }))
+      const requests = []
+      const originalFetch = global.fetch
+      global.fetch = async (url, options) => {
+        const id = url.split('/').pop()
+        const permission = permissions.find(item => item.id === id)
+        if (!permission || options.method !== 'PATCH') {
+          throw new Error(`Unexpected request: ${options.method} ${url}`)
+        }
+        requests.push({ url, body: JSON.parse(options.body) })
+        return {
+          ok: true,
+          headers: { get: () => 'application/json' },
+          json: async () => ({ data: permission })
+        }
       }
 
-      await provider.updateDocumentPermissions(driveFile, options, permissions)
+      try {
+        await provider.updateDocumentPermissions(
+          document,
+          {
+            verbs: ['GET'],
+            expiresAt: '2100-01-01T23:59:59.999Z',
+            password: 'secret',
+            activityReportEnabled
+          },
+          permissions
+        )
 
-      expect(add).toHaveBeenCalledTimes(2)
-      expect(add.mock.calls[0][0].id).toBe(PERM_DRIVE_FILE.id)
-      expect(add.mock.calls[0][2]).toEqual({
-        expiresAt: options.expiresAt,
-        password: 'secret',
-        activityReportEnabled
-      })
-      expect(add.mock.calls[1][0].id).toBe('second_permission')
-      expect(add.mock.calls[1][2]).toEqual({
-        expiresAt: options.expiresAt,
-        password: 'secret',
-        activityReportEnabled: undefined
-      })
+        expect(requests).toHaveLength(2)
+        for (const id of ['first', 'second']) {
+          const request = requests.find(item => item.url.endsWith(`/${id}`))
+          expect(new URL(request.url).pathname).toBe(
+            drive
+              ? `/sharings/drives/drive_123/permissions/${id}`
+              : `/permissions/${id}`
+          )
+          const attributes = request.body.data.attributes
+          expect(attributes.expires_at).toBe('2100-01-01T23:59:59.999Z')
+          expect(attributes.password).toBe('secret')
+          if (activityReportEnabled === undefined) {
+            expect(attributes).not.toHaveProperty('activity_report_enabled')
+          } else {
+            expect(attributes.activity_report_enabled).toBe(
+              activityReportEnabled
+            )
+          }
+        }
+      } finally {
+        global.fetch = originalFetch
+      }
     }
   )
 
