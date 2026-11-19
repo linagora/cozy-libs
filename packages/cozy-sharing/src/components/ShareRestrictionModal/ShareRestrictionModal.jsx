@@ -54,21 +54,27 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const hasPassword = checkIsPermissionHasPassword(permissions)
   const hasExpiresDate = checkIsPermissionHasExpiresDate(permissions)
   const expiresDate = getPermissionExpiresDate(permissions)
-  const defaultDate = expiresDate
-    ? new Date(expiresDate)
-    : addDays(new Date(), 30)
-
-  const [selectedDate, setSelectedDate] = useState(defaultDate)
+  const [defaultDate] = useState(() => addDays(new Date(), 30))
+  const [draftDate, setDraftDate] = useState(null)
   const [hasChangedDate, setHasChangedDate] = useState(false)
-  const [dateToggle, setDateToggle] = useState(
-    permissions.length > 0
-      ? hasExpiresDate
-      : flag('sharing.date-toggle.enabled')
-  )
+  const [draftDateToggle, setDraftDateToggle] = useState(null)
   const [passwordToggle, setPasswordToggle] = useState(hasPassword)
-  const [activityReportEnabled, setActivityReportEnabled] = useState(
+  const [draftActivityReportEnabled, setActivityReportEnabled] = useState(null)
+
+  // Shared-drive permissions can arrive after the dialog opens.
+  const selectedDate = hasChangedDate
+    ? draftDate
+    : expiresDate
+      ? new Date(expiresDate)
+      : defaultDate
+  const dateToggle =
+    draftDateToggle ??
+    (permissions.length > 0
+      ? hasExpiresDate
+      : flag('sharing.date-toggle.enabled'))
+  const activityReportEnabled =
+    draftActivityReportEnabled ??
     permissions[0]?.attributes?.activity_report_enabled === true
-  )
   const supportsActivityReport = enableActivityReport
   const editingRights =
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
@@ -147,13 +153,13 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const handleDateToggle = value => {
     setHasChangedDate(true)
     setIsExpiredDate(false)
-    setDateToggle(value)
+    setDraftDateToggle(value)
   }
 
   const handleSelectedDateChange = value => {
     setHasChangedDate(true)
     setIsExpiredDate(false)
-    setSelectedDate(value)
+    setDraftDate(value)
   }
 
   return (
