@@ -194,7 +194,7 @@ describe('Sharing state', () => {
     expect(state.sharings).toEqual([updatedSharing])
   })
 
-  it('keeps a shared drive when revoking its last group', () => {
+  it('forgets a shared drive when revoking its last group', () => {
     const SHARED_DRIVE_WITH_GROUP = {
       ...SHARING_1,
       id: 'shared_drive_group',
@@ -242,14 +242,12 @@ describe('Sharing state', () => {
       revokeGroup(SHARED_DRIVE_WITH_GROUP, 0, sharedDrivePath)
     )
 
-    expect(state.byDocId.shared_drive_group_folder.sharings).toEqual([
-      SHARED_DRIVE_WITH_GROUP.id
-    ])
-    expect(state.sharings[0].attributes.groups[0].revoked).toBe(true)
-    expect(state.sharedPaths).toEqual([sharedDrivePath])
+    expect(state.byDocId).toEqual({})
+    expect(state.sharings).toEqual([])
+    expect(state.sharedPaths).toEqual([])
   })
 
-  it('keeps a shared drive when revoking its last recipient', () => {
+  it('forgets a shared drive when revoking its last recipient', () => {
     const SHARED_DRIVE_WITH_ONE_RECIPIENT = {
       ...SHARING_1,
       id: 'shared_drive_one_recipient',
@@ -297,11 +295,109 @@ describe('Sharing state', () => {
       revokeRecipient(SHARED_DRIVE_WITH_ONE_RECIPIENT, 1, sharedDrivePath)
     )
 
-    expect(state.byDocId.shared_drive_folder.sharings).toEqual([
-      SHARED_DRIVE_WITH_ONE_RECIPIENT.id
-    ])
+    expect(state.byDocId).toEqual({})
+    expect(state.sharings).toEqual([])
+    expect(state.sharedPaths).toEqual([])
+  })
+
+  it('forgets a shared drive when revoking both groups of its last member', () => {
+    const DRIVE_WITH_TWO_GROUPS = {
+      ...SHARING_1,
+      attributes: {
+        ...SHARING_1.attributes,
+        drive: true,
+        members: [
+          { status: 'owner', instance: 'http://cozy.tools:8080' },
+          {
+            status: 'ready',
+            instance: 'http://cozy.local:8080',
+            only_in_groups: true,
+            groups: [0, 1]
+          }
+        ],
+        groups: [
+          { name: 'Team', addedBy: 0 },
+          { name: 'Board', addedBy: 0 }
+        ]
+      }
+    }
+    const initialState = reducer(
+      undefined,
+      receiveSharings({ sharings: [DRIVE_WITH_TWO_GROUPS] })
+    )
+    const firstGroupRevokedState = reducer(
+      initialState,
+      revokeGroup(DRIVE_WITH_TWO_GROUPS, 0)
+    )
+    const state = reducer(
+      firstGroupRevokedState,
+      revokeGroup(firstGroupRevokedState.sharings[0], 1)
+    )
+
+    expect(firstGroupRevokedState.sharings[0].attributes.members[1]).toEqual(
+      expect.objectContaining({ status: 'ready', groups: [1] })
+    )
+    expect(state.byDocId).toEqual({})
+    expect(state.sharings).toEqual([])
+  })
+
+  it('keeps an organization drive when revoking its last recipient', () => {
+    const ORG_DRIVE = {
+      ...SHARING_1,
+      attributes: {
+        ...SHARING_1.attributes,
+        drive: true,
+        org_drive: true,
+        members: [
+          { status: 'owner', instance: 'http://cozy.tools:8080' },
+          { status: 'ready', instance: 'http://cozy.local:8080' }
+        ]
+      }
+    }
+    const initialState = reducer(
+      undefined,
+      receiveSharings({ sharings: [ORG_DRIVE] })
+    )
+    const state = reducer(initialState, revokeRecipient(ORG_DRIVE, 1))
+
+    expect(state.byDocId.folder_1.sharings).toEqual([ORG_DRIVE.id])
     expect(state.sharings[0].attributes.members[1].status).toBe('revoked')
-    expect(state.sharedPaths).toEqual([sharedDrivePath])
+  })
+
+  it('keeps a shared drive when revoking a group while a recipient remains', () => {
+    const DRIVE_WITH_GROUP_AND_RECIPIENT = {
+      ...SHARING_1,
+      attributes: {
+        ...SHARING_1.attributes,
+        drive: true,
+        members: [
+          { status: 'owner', instance: 'http://cozy.tools:8080' },
+          {
+            status: 'ready',
+            instance: 'http://group-member.cozy.tools:8080',
+            only_in_groups: true,
+            groups: [0]
+          },
+          { status: 'ready', instance: 'http://cozy.local:8080' }
+        ],
+        groups: [{ name: 'Team', addedBy: 0 }]
+      }
+    }
+    const initialState = reducer(
+      undefined,
+      receiveSharings({ sharings: [DRIVE_WITH_GROUP_AND_RECIPIENT] })
+    )
+    const state = reducer(
+      initialState,
+      revokeGroup(DRIVE_WITH_GROUP_AND_RECIPIENT, 0)
+    )
+
+    expect(state.byDocId.folder_1.sharings).toEqual([
+      DRIVE_WITH_GROUP_AND_RECIPIENT.id
+    ])
+    expect(
+      state.sharings[0].attributes.members.map(member => member.status)
+    ).toEqual(['owner', 'revoked', 'ready'])
   })
 
   it('should index received permissions', () => {

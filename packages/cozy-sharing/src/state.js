@@ -31,9 +31,7 @@ export const receiveSharings = ({
   type: RECEIVE_SHARINGS,
   data: {
     sharings: sharings.filter(
-      s =>
-        // Shared drives without recipients are valid and should be kept
-        !shouldForgetSharing(s) && !hasBeenSelfRevoked(s, instanceUri)
+      s => !shouldForgetSharing(s) && !hasBeenSelfRevoked(s, instanceUri)
     ),
     permissions
   }
@@ -54,7 +52,7 @@ export const revokeRecipient = (sharing, index, path) => {
     We can't just simply remove it, 'cauz we use the index
     to remove members..
     */
-    sharing: {
+    sharing: deactivateEmptyDrive({
       ...sharing,
       attributes: {
         ...sharing.attributes,
@@ -68,7 +66,7 @@ export const revokeRecipient = (sharing, index, path) => {
           return m
         })
       }
-    },
+    }),
     path
   }
 }
@@ -78,10 +76,17 @@ export const revokeGroup = (sharing, index, path) => {
     /* We can't just simply remove a group,
     because we use the index to remove the other group
     */
-    sharing: {
+    sharing: deactivateEmptyDrive({
       ...sharing,
       attributes: {
         ...sharing.attributes,
+        members: sharing.attributes.members.map(m => {
+          if (!m.groups?.includes(index)) return m
+          const groups = m.groups.filter(groupIndex => groupIndex !== index)
+          return m.only_in_groups && groups.length === 0
+            ? { ...m, groups, status: 'revoked' }
+            : { ...m, groups }
+        }),
         groups: sharing.attributes.groups.map((g, idx) => {
           if (idx === index) {
             return {
@@ -92,7 +97,7 @@ export const revokeGroup = (sharing, index, path) => {
           return g
         })
       }
-    },
+    }),
     path
   }
 }
@@ -412,9 +417,7 @@ export const isOrgSharedDrive = (state, docId) => {
   if (state.byDocId[docId] && state.byDocId[docId].sharings.length !== 0) {
     const sharing = getSharingById(state, state.byDocId[docId].sharings[0])
 
-    return (
-      sharing.attributes.drive === true && sharing.attributes.org_drive === true
-    )
+    return isOrgDrive(sharing)
   }
   return false
 }
@@ -687,12 +690,34 @@ export const getPermissionDocIds = perm =>
 
 const isSharingADrive = sharing => sharing.attributes.drive === true
 
-const areAllRecipientsRevoked = sharing =>
-  sharing.attributes.owner &&
-  sharing.attributes.members.filter(m => m.status !== 'revoked').length === 1
+const isOrgDrive = sharing =>
+  isSharingADrive(sharing) && sharing.attributes.org_drive === true
 
-const shouldForgetSharing = sharing =>
-  !isSharingADrive(sharing) && areAllRecipientsRevoked(sharing)
+const hasRemainingMembers = sharing =>
+  sharing.attributes.members.some(
+    (member, index) => index > 0 && member.status !== 'revoked'
+  )
+
+const hasRemainingRecipients = sharing =>
+  hasRemainingMembers(sharing) ||
+  (sharing.attributes.groups ?? []).some(group => !group.revoked)
+
+const areAllRecipientsRevoked = sharing =>
+  sharing.attributes.owner && !hasRemainingMembers(sharing)
+
+// The stack deactivates then deletes a drive left without recipients, unless
+// it is an organization drive
+const deactivateEmptyDrive = sharing =>
+  isSharingADrive(sharing) &&
+  !isOrgDrive(sharing) &&
+  !hasRemainingRecipients(sharing)
+    ? { ...sharing, attributes: { ...sharing.attributes, active: false } }
+    : sharing
+
+export const shouldForgetSharing = sharing =>
+  isSharingADrive(sharing)
+    ? sharing.attributes.owner === true && sharing.attributes.active !== true
+    : areAllRecipientsRevoked(sharing)
 
 const hasBeenSelfRevoked = (sharing, instanceUri) => {
   const me = sharing.attributes.members.find(matchingInstanceName(instanceUri))
