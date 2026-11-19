@@ -56,6 +56,65 @@ describe('ShareRestrictionModal', () => {
       </AppLike>
     )
 
+  it('preserves a password when permissions arrive after the dialog opens', async () => {
+    mockLink = 'url'
+    mockPermissions = []
+    const { rerender, unmount } = setup()
+    const passwordToggle = screen.getByRole('checkbox', {
+      name: 'Limit access with a password'
+    })
+    expect(passwordToggle).not.toBeChecked()
+
+    mockPermissions = [linkPermission(READ_ONLY_PERMS)]
+    mockPermissions[0].attributes.password = true
+    mockUpdateDocumentPermissions.mockImplementation(async (_file, options) => {
+      if (options.password === '')
+        mockPermissions[0].attributes.password = false
+      return [{ data: mockPermissions[0] }]
+    })
+    rerender(
+      <AppLike client={client}>
+        <ActivityReportContext.Provider value>
+          <ShareRestrictionModal file={file} onClose={jest.fn()} />
+        </ActivityReportContext.Provider>
+      </AppLike>
+    )
+    expect(passwordToggle).toBeChecked()
+    fireEvent.click(screen.getByText('Confirm'))
+    await waitFor(() =>
+      expect(mockUpdateDocumentPermissions).toHaveBeenCalled()
+    )
+    unmount()
+    setup()
+    expect(
+      screen.getByRole('checkbox', { name: 'Limit access with a password' })
+    ).toBeChecked()
+  })
+
+  it.each([true, false])(
+    'keeps an explicit password choice (%s) when permissions arrive',
+    choice => {
+      mockLink = 'url'
+      mockPermissions = []
+      const { rerender } = setup()
+      const passwordToggle = screen.getByRole('checkbox', {
+        name: 'Limit access with a password'
+      })
+      fireEvent.click(passwordToggle)
+      if (!choice) fireEvent.click(passwordToggle)
+      mockPermissions = [linkPermission(READ_ONLY_PERMS)]
+      mockPermissions[0].attributes.password = !choice
+      rerender(
+        <AppLike client={client}>
+          <ActivityReportContext.Provider value>
+            <ShareRestrictionModal file={file} onClose={jest.fn()} />
+          </ActivityReportContext.Provider>
+        </AppLike>
+      )
+      expect(passwordToggle.checked).toBe(choice)
+    }
+  )
+
   it('persists the report choice and restores it on reopening the settings', async () => {
     mockLink = 'url'
     mockPermissions = [linkPermission(READ_ONLY_PERMS)]

@@ -58,7 +58,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const [draftDate, setDraftDate] = useState(null)
   const [hasChangedDate, setHasChangedDate] = useState(false)
   const [draftDateToggle, setDraftDateToggle] = useState(null)
-  const [passwordToggle, setPasswordToggle] = useState(hasPassword)
+  const [draftPasswordToggle, setPasswordToggle] = useState(null)
   const [draftActivityReportEnabled, setActivityReportEnabled] = useState(null)
 
   // Shared-drive permissions can arrive after the dialog opens.
@@ -72,6 +72,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     (permissions.length > 0
       ? hasExpiresDate
       : flag('sharing.date-toggle.enabled'))
+  const passwordToggle = draftPasswordToggle ?? hasPassword
   const activityReportEnabled =
     draftActivityReportEnabled ??
     permissions[0]?.attributes?.activity_report_enabled === true
