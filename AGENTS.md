@@ -1,5 +1,7 @@
 # Configuration for AI agents
 
+- Decisions: each package keeps its own `<package>/docs/decisions.md`, mandatory. Search it before asking a question or proposing a change; record every decision there, in the commit that applies it (skill `twake-decisions`).
+
 ## ESLint Configuration
 
 This project uses ESLint rules from `cozy-libs`. When generating code, strictly follow these rules:
