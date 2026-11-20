@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [46.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.2.1...cozy-sharing@46.0.0) (2026-11-20)
+
+### Bug Fixes
+
+- **cozy-sharing:** Apply report choice to all permissions ([d97d287](https://github.com/cozy/cozy-libs/commit/d97d2876c6a9e4e7b37141617fe3b82117bad559))
+- **cozy-sharing:** Keep link deadlines intact ([483fa8b](https://github.com/cozy/cozy-libs/commit/483fa8b50751745d54e14fbdabefad71536e313e))
+- **cozy-sharing:** Preserve late-loaded report consent ([2af4256](https://github.com/cozy/cozy-libs/commit/2af425618c3ab19d282b7b5ee9278f42d96c810b))
+- **cozy-sharing:** Preserve password on delayed permission load ([0e3acff](https://github.com/cozy/cozy-libs/commit/0e3acffb03193c8adfc7107854c9fdeb189c2b9d))
+
+### chore
+
+- **cozy-sharing:** Upgrade cozy-client to 62.2.0 ([ad8a3a4](https://github.com/cozy/cozy-libs/commit/ad8a3a4fe032c07b9dfac2c2a0f5ea8e5127a665))
+
+### Features
+
+- **cozy-sharing:** Add opt-in link expiration reports ([d7136a1](https://github.com/cozy/cozy-libs/commit/d7136a1f537810492a6455500e6d4cf05d0aacbd))
+
+### BREAKING CHANGES
+
+- **cozy-sharing:** Upgrade the consuming application's cozy-client to 62.2.0 or later before upgrading cozy-sharing.
+
 ## [45.2.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@45.2.0...cozy-sharing@45.2.1) (2026-11-19)
 
 ### Bug Fixes
