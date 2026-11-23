@@ -9,8 +9,8 @@ import SelectBox from 'cozy-ui/transpiled/react/SelectBox'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import Input from 'cozy-ui/transpiled/react/legacy/Input'
 
-import styles from './styles.styl'
 import ContactPicker from '../ContactPicker'
+import styles from './styles.styl'
 
 /**
  * PropTypes to pass to Input but not to other components, like SelectBox

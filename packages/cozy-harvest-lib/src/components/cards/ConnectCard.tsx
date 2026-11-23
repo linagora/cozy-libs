@@ -1,6 +1,6 @@
-import { CloudSync2 } from '@linagora/twake-icons'
 import React from 'react'
 
+import { CloudSync2 } from '@linagora/twake-icons'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Empty from 'cozy-ui/transpiled/react/Empty'

@@ -5,6 +5,9 @@ import React from 'react'
 import { Icon, WrenchCircle } from '@linagora/twake-icons'
 import { createUseI18n } from 'twake-i18n'
 
+import AppIcon from '../AppIcon'
+import { isShortcutFile } from '../AppSections/helpers.js'
+import { ShortcutTile } from '../ShortcutTile'
 import Tile, {
   TileTitle,
   TileSubtitle,
@@ -12,6 +15,7 @@ import Tile, {
   TileIcon,
   TileDescription
 } from '../Tile'
+import { AppDoctype } from '../proptypes'
 import { APP_STATUS, getCurrentStatusLabel } from './helpers'
 import de from './locales/de.json'
 import en from './locales/en.json'
@@ -21,10 +25,6 @@ import it from './locales/it.json'
 import ru from './locales/ru.json'
 import vi from './locales/vi.json'
 import styles from './styles.styl'
-import AppIcon from '../AppIcon'
-import { isShortcutFile } from '../AppSections/helpers.js'
-import { ShortcutTile } from '../ShortcutTile'
-import { AppDoctype } from '../proptypes'
 
 const locales = { de, en, es, fr, it, ru, vi }
 

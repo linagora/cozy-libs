@@ -4,8 +4,8 @@ import minilog from 'cozy-minilog'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import { useMemberPermissionType } from './useMemberPermissionType'
 import { isDowngradeConfirmationNeeded } from '../helpers/permissions'
+import { useMemberPermissionType } from './useMemberPermissionType'
 
 const log = minilog('useMemberTypeChange')
 

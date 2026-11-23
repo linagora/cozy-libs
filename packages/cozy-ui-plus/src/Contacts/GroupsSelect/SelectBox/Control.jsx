@@ -1,7 +1,7 @@
-import { Icon, BottomSelect } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, BottomSelect } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 

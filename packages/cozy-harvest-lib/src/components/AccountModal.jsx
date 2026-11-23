@@ -12,14 +12,14 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
-import AccountModalHeader from './AccountModalWithoutTabs/AccountModalHeader'
-import KonnectorAccountWrapper from './KonnectorConfiguration/KonnectorAccountWrapper'
-import withLocales from './hoc/withLocales'
 import { fetchAccount } from '../connections/accounts'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../helpers/proptypes'
+import AccountModalHeader from './AccountModalWithoutTabs/AccountModalHeader'
+import KonnectorAccountWrapper from './KonnectorConfiguration/KonnectorAccountWrapper'
+import withLocales from './hoc/withLocales'
 
 /**
  * Takes an accountId and a list of accounts containing their respecting triggers

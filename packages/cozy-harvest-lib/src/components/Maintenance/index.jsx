@@ -6,8 +6,8 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { translate } from 'twake-i18n'
 
-import MaintenanceHeader from './MaintenanceHeader'
 import TriggerMaintenanceDescription from '../infos/TriggerMaintenanceDescription'
+import MaintenanceHeader from './MaintenanceHeader'
 
 const KonnectorMaintenance = ({ maintenanceMessages, lang, t }) => {
   const longMessage = get(maintenanceMessages, [lang, 'long_message'])

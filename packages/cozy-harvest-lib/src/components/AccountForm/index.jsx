@@ -1,10 +1,10 @@
-import { Icon, Info } from '@linagora/twake-icons'
 import compose from 'lodash/flowRight'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { Form } from 'react-final-form'
 
+import { Icon, Info } from '@linagora/twake-icons'
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -12,10 +12,6 @@ import Link from 'cozy-ui/transpiled/react/Link'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 
-import AccountFields from './AccountFields'
-import CannotConnectModal from './CannotConnectModal'
-import { InstallFlagshipButton } from './InstallFlagshipButton'
-import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import fieldHelpers, {
   getEncryptedFieldName,
   SECRET
@@ -28,6 +24,10 @@ import { ConnectCard } from '../cards/ConnectCard'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withLocales from '../hoc/withLocales'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
+import AccountFields from './AccountFields'
+import CannotConnectModal from './CannotConnectModal'
+import { InstallFlagshipButton } from './InstallFlagshipButton'
+import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 

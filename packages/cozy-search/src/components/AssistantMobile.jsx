@@ -1,9 +1,9 @@
-import { Icon, Magnifier } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
+import { Icon, Magnifier } from '@linagora/twake-icons'
 import SearchBar from 'cozy-ui/transpiled/react/SearchBar'
 import { useExtendI18n } from 'twake-i18n'
 

@@ -12,6 +12,8 @@ import Divider from 'cozy-ui/transpiled/react/Divider'
 import List from 'cozy-ui/transpiled/react/List'
 import QualificationModal from 'cozy-ui-plus/dist/Qualification/QualificationModal'
 
+import ExpirationAlert from '../components/ExpirationAlert'
+import { withViewerLocales } from '../hoc/withViewerLocales'
 import ActionMenuWrapper from './ActionMenuWrapper'
 import QualificationListItemContact from './Qualifications/QualificationListItemContact'
 import QualificationListItemDate from './Qualifications/QualificationListItemDate'
@@ -24,8 +26,6 @@ import {
   makeFormattedMetadataQualification,
   isExpirationAlertHidden
 } from './helpers'
-import ExpirationAlert from '../components/ExpirationAlert'
-import { withViewerLocales } from '../hoc/withViewerLocales'
 
 const ComponentFromMetadataQualificationType = {
   contact: QualificationListItemContact,

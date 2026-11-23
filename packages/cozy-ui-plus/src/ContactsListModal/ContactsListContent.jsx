@@ -4,9 +4,9 @@ import { getDisplayName } from 'cozy-client/dist/models/contact'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'twake-i18n'
 
+import ContactsList from '../ContactsList'
 import EmptyMessage from './EmptyMessage'
 import { withContactsListLocales } from './withContactsListLocales'
-import ContactsList from '../ContactsList'
 
 const mkFilter = filterStr => contacts => {
   if (!filterStr) {

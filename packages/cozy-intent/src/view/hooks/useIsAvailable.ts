@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
-import { useWebviewIntent } from './useWebviewIntent'
 import { getErrorMessage } from '../../utils'
+import { useWebviewIntent } from './useWebviewIntent'
 
 interface UseIsAvailableResult {
   isAvailable: boolean | null

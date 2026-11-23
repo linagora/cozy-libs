@@ -1,7 +1,7 @@
-import { Icon, Trash } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useState, forwardRef } from 'react'
 
+import { Icon, Trash } from '@linagora/twake-icons'
 import {
   useClient,
   isQueryLoading,
@@ -30,15 +30,15 @@ import BaseContactPicker from 'cozy-ui-plus/dist/ContactPicker'
 import Field from 'cozy-ui-plus/dist/Field'
 import { useI18n } from 'twake-i18n'
 
+import { buildAppsByIdQuery } from '../../../helpers/queries'
+import { useTracker, useTrackPage } from '../../hoc/tracking'
+import withLocales from '../../hoc/withLocales'
 import {
   getAccountLabel,
   getAccountInstitutionLabel,
   getAccountOwners
 } from './bankAccountHelpers'
 import { updateContract } from './helpers'
-import { buildAppsByIdQuery } from '../../../helpers/queries'
-import { useTracker, useTrackPage } from '../../hoc/tracking'
-import withLocales from '../../hoc/withLocales'
 
 const EditContractContactPicker = function (props, ref) {
   const { t } = useI18n()

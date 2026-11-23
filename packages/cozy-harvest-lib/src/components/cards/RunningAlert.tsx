@@ -1,6 +1,6 @@
-import { Icon, ArrowUp } from '@linagora/twake-icons'
 import React, { useState } from 'react'
 
+import { Icon, ArrowUp } from '@linagora/twake-icons'
 import { isFlagshipApp } from 'cozy-device-helper'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import AlertTitle from 'cozy-ui/transpiled/react/AlertTitle'

@@ -3,9 +3,9 @@ import React from 'react'
 
 import { useClient } from 'cozy-client'
 
+import withLocales from '../../hoc/withLocales'
 import { SharingBanner } from './components/SharingBanner'
 import { useSharingInfos } from './hooks/useSharingInfos'
-import withLocales from '../../hoc/withLocales'
 
 const Plugin = ({ previewPath, hideCreateCozyAction }) => {
   const client = useClient()

@@ -1,6 +1,6 @@
-import { TwakeWorkplace } from '@linagora/twake-icons'
 import React, { useCallback } from 'react'
 
+import { TwakeWorkplace } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import AppIcon from 'cozy-ui-plus/dist/AppIcon'

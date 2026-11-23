@@ -8,8 +8,8 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import MemberRecipientStatus from './MemberRecipientStatus'
 import { getInitials, getDisplayName } from '../../models'
+import MemberRecipientStatus from './MemberRecipientStatus'
 
 const GroupRecipientDetailWithAccess = ({ withAccess }) => {
   const { t } = useI18n()

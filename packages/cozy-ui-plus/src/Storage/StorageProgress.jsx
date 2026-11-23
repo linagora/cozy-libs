@@ -1,6 +1,6 @@
-import { Icon, Cloud } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon, Cloud } from '@linagora/twake-icons'
 import { useInstanceInfo } from 'cozy-client'
 import { makeDiskInfos } from 'cozy-client/dist/models/instance'
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'

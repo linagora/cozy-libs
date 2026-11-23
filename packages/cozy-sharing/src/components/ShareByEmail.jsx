@@ -4,13 +4,13 @@ import React from 'react'
 import flag from 'cozy-flags'
 import { useI18n } from 'twake-i18n'
 
-import ShareAutosuggestWrapper from './ShareAutosuggestWrapper'
 import {
   mergeRecipients,
   spreadGroupAndMergeRecipients
 } from '../helpers/recipients'
 import { isReadOnlySharing } from '../state'
 import styles from '../styles/share.styl'
+import ShareAutosuggestWrapper from './ShareAutosuggestWrapper'
 
 export const ShareByEmail = ({
   document,

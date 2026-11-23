@@ -4,16 +4,16 @@ import React, { useMemo, useState } from 'react'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import { default as DumbShareByLink } from './ShareByLink'
-import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
-import { ShareDiscardChangesModal } from './ShareDiscardChangesModal'
-import { ShareRecipientsLimitModal } from './ShareRecipientsLimitModal'
-import SharingContent from './SharingContent'
 import { hasReachRecipientsLimit } from '../helpers/recipients'
 import { getErrorMessage, getSuccessMessage } from '../helpers/share'
 import { usePendingRecipients } from '../hooks/usePendingRecipients'
 import { useResolveRecipients } from '../hooks/useResolveRecipients'
 import { useSharingContext } from '../hooks/useSharingContext'
+import { default as DumbShareByLink } from './ShareByLink'
+import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
+import { ShareDiscardChangesModal } from './ShareDiscardChangesModal'
+import { ShareRecipientsLimitModal } from './ShareRecipientsLimitModal'
+import SharingContent from './SharingContent'
 
 const SharingTitleFunction = ({ documentType, document }) =>
   function SharingTitle() {

@@ -3,10 +3,10 @@ import React from 'react'
 
 import { VaultProvider } from 'cozy-keys-lib'
 
-import ConfigurationTab from './ConfigurationTab'
-import KonnectorAccountWrapper from './KonnectorAccountWrapper'
 import AppLike from '../../../test/AppLike'
 import VaultUnlockProvider from '../VaultUnlockProvider'
+import ConfigurationTab from './ConfigurationTab'
+import KonnectorAccountWrapper from './KonnectorAccountWrapper'
 
 jest.mock('./ConfigurationTab/Contracts.jsx', () => {
   return {

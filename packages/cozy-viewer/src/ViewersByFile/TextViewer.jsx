@@ -6,10 +6,10 @@ import ReactMarkdown from 'react-markdown'
 import { withClient, models } from 'cozy-client'
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
-import styles from './styles.styl'
 import NoViewer from '../NoViewer'
 import ViewerSpinner from '../components/ViewerSpinner'
 import withFileUrl from '../hoc/withFileUrl'
+import styles from './styles.styl'
 
 const MarkdownRenderer = ({ text }) => (
   <ReactMarkdown className={cx(styles['viewer-textviewer-content'], 'u-p-1')}>

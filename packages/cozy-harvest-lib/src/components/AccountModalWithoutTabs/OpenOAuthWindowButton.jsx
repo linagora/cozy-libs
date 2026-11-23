@@ -1,7 +1,7 @@
-import { Icon, Sync } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useCallback } from 'react'
 
+import { Icon, Sync } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'

@@ -3,13 +3,13 @@ import {
   getPrimaryEmail
 } from 'cozy-client/dist/models/contact'
 
+import { DOCTYPE_GROUPS, getDisplayName, getInitials } from '../models'
 import {
   getGroupRecipientSecondaryText,
   getMemberStatusText,
   hasMemberActions,
   makeAvatarUrl
 } from './recipients'
-import { DOCTYPE_GROUPS, getDisplayName, getInitials } from '../models'
 
 /**
  * Finds the confirmation data of a recipient waiting for the two steps

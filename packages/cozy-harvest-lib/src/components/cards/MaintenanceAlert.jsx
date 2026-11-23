@@ -1,13 +1,14 @@
-import { Icon, WrenchCircle } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Icon, WrenchCircle } from '@linagora/twake-icons'
+
+import { isDisconnected } from '../../helpers/konnectors'
+import TriggerMaintenanceDescription from '../infos/TriggerMaintenanceDescription'
 import { LaunchTriggerAlertMenu } from './LaunchTriggerAlertMenu'
 import { TriggerAlertTemplate } from './TriggerAlertTemplate'
 import { connectAction, configureAction } from './actions'
-import { isDisconnected } from '../../helpers/konnectors'
-import TriggerMaintenanceDescription from '../infos/TriggerMaintenanceDescription'
 
 /**
  * This component warns the user that the connector displayed is in maintenance mode.

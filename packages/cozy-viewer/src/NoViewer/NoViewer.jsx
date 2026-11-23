@@ -3,9 +3,9 @@ import React from 'react'
 
 import { FileDoctype } from 'cozy-ui-plus/dist/proptypes'
 
+import styles from '../ViewersByFile/styles.styl'
 import DownloadButton from './DownloadButton'
 import FileIcon from './FileIcon'
-import styles from '../ViewersByFile/styles.styl'
 
 const NoViewer = ({ file, url, message, renderFallbackExtraContent }) => (
   <div className={styles['viewer-noviewer']} data-testid="no-viewer">

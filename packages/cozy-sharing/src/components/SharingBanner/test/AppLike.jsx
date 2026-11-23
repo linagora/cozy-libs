@@ -6,13 +6,13 @@ import { CozyProvider } from 'cozy-client'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { I18n } from 'twake-i18n'
 
+import langEn from '../../../../locales/en.json'
+import SharingContext from '../../../context'
 import { AcceptingSharingProvider } from './AcceptingSharingContext'
 import FabProvider from './FabProvider'
 import { ModalContext } from './ModalContext'
 import { RouterContext } from './RouterContext'
 import { ThumbnailSizeContextProvider } from './ThumbnailSizeContext'
-import langEn from '../../../../locales/en.json'
-import SharingContext from '../../../context'
 
 const mockStore = createStore(() => ({
   mobile: {

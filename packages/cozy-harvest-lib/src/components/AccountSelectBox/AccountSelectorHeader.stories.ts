@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { AccountSelectorHeader } from './AccountSelectorHeader'
 import { AccountSelectorHeaderFixtures } from '../../../.storybook/fixtures/AccountSelectorHeader.fixtures'
+import { AccountSelectorHeader } from './AccountSelectorHeader'
 
 const meta: Meta<typeof AccountSelectorHeader> = {
   component: AccountSelectorHeader,

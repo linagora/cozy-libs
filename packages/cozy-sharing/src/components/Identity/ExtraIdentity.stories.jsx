@@ -1,5 +1,5 @@
-import { ExtraIdentity } from './ExtraIdentity'
 import { recipients } from '../../../.storybook/fixtures/recipients'
+import { ExtraIdentity } from './ExtraIdentity'
 
 const meta = {
   component: ExtraIdentity,

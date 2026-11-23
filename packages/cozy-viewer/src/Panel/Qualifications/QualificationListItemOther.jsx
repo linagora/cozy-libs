@@ -15,8 +15,8 @@ import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import QualificationListItemText from './QualificationListItemText'
 import IntentOpener from '../../components/IntentOpener'
+import QualificationListItemText from './QualificationListItemText'
 
 const QualificationListItemOther = forwardRef(
   (

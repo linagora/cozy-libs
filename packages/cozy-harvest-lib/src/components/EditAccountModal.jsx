@@ -9,12 +9,12 @@ import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
-import LegacyTriggerManager from './TriggerManager'
-import { withTracker } from './hoc/tracking'
-import useTimeout from './hooks/useTimeout'
 import { fetchAccount } from '../connections/accounts'
 import { intentsApiProptype } from '../helpers/proptypes'
 import logger from '../logger'
+import LegacyTriggerManager from './TriggerManager'
+import { withTracker } from './hoc/tracking'
+import useTimeout from './hooks/useTimeout'
 
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }

@@ -1,10 +1,10 @@
 import { ensureKonnectorFolder } from 'cozy-client/dist/models/konnectorFolder'
 import { triggers as triggersModel } from 'cozy-client/dist/models/trigger'
 
-import { fetchAccount, updateAccount } from './accounts'
 import * as accounts from '../helpers/accounts'
 import cron from '../helpers/cron'
 import * as konnectors from '../helpers/konnectors'
+import { fetchAccount, updateAccount } from './accounts'
 
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 

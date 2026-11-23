@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import TriggerErrorAction from './TriggerErrorAction'
 import { intentsApiProptype } from '../../helpers/proptypes'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
+import TriggerErrorAction from './TriggerErrorAction'
 
 const TriggerError = ({ flow, konnector, account, trigger, intentsApi }) => {
   const flowState = flow.getState()

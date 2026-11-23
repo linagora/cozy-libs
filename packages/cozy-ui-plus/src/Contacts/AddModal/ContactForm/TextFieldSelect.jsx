@@ -4,8 +4,8 @@ import MenuItem from 'cozy-ui/transpiled/react/MenuItem'
 import TextField from 'cozy-ui/transpiled/react/TextField'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
-import { locales } from './locales'
 import { FieldInputWrapperPropTypes } from '../types'
+import { locales } from './locales'
 
 const TextFieldSelect = ({ options, ...props }) => {
   useExtendI18n(locales)

@@ -1,8 +1,8 @@
-import { Icon, BottomSelect } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, BottomSelect } from '@linagora/twake-icons'
 import Box from 'cozy-ui/transpiled/react/Box'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/deprecated/Media'
 

@@ -4,9 +4,6 @@ import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import DowngradePermissionConfirmDialog from './Recipient/DowngradePermissionConfirmDialog'
-import { GroupRecipientDetail } from './Recipient/GroupRecipientDetail'
-import WhoHasAccess from './WhoHasAccess'
 import {
   findRecipientConfirmationData,
   makeMemberRoles,
@@ -22,6 +19,9 @@ import { useMemberTypeChange } from '../hooks/useMemberTypeChange'
 import { useSharingContext } from '../hooks/useSharingContext'
 import logger from '../logger'
 import { buildInstanceSettingsQuery } from '../queries/queries'
+import DowngradePermissionConfirmDialog from './Recipient/DowngradePermissionConfirmDialog'
+import { GroupRecipientDetail } from './Recipient/GroupRecipientDetail'
+import WhoHasAccess from './WhoHasAccess'
 
 // When the owner is not part of a sharing's members (eg. the folder only has
 // a link), there is no per-sharing avatar to reference. The instance's public

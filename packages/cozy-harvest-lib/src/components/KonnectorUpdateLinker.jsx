@@ -1,7 +1,7 @@
-import { Eye } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { memo } from 'react'
 
+import { Eye } from '@linagora/twake-icons'
 import { useQuery } from 'cozy-client'
 import { Application } from 'cozy-doctypes'
 import Button from 'cozy-ui/transpiled/react/Buttons'

@@ -2,9 +2,9 @@ import React from 'react'
 
 import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
-import MemberRecipientLite from './MemberRecipientLite'
 import withLocales from '../../hoc/withLocales'
 import { buildInstanceSettingsQuery } from '../../queries/queries'
+import MemberRecipientLite from './MemberRecipientLite'
 
 // See containers/WhoHasAccess: show the instance public avatar (with an initials
 // fallback) when the owner has no per-sharing avatar to reference.

@@ -3,8 +3,8 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
 import AppLike from '../../test/AppLike'
+import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
 
 describe('CozyPassFingerprintDialogContent', () => {
   const client = createMockClient({})

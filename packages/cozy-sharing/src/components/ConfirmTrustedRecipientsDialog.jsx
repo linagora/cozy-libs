@@ -7,9 +7,9 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
 import { makeMemberRoles, makeMembers } from '../helpers/members'
 import { addAvatarUrls } from '../helpers/recipients'
+import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
 
 /**
  * Displays the sharing interface that can be used when ConfirmTrustedRecipientsDialog is in sharing state

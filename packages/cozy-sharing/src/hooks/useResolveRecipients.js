@@ -2,9 +2,9 @@ import { useCallback } from 'react'
 
 import { useClient } from 'cozy-client'
 
-import { useSharingContext } from './useSharingContext'
 import { getOrCreateFromArray } from '../helpers/contacts'
 import { DOCTYPE_CONTACTS } from '../models'
+import { useSharingContext } from './useSharingContext'
 
 /**
  * Turns the recipients picked in a sharing form into contacts, creating the

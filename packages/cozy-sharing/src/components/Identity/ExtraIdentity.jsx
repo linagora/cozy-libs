@@ -2,10 +2,10 @@ import React from 'react'
 
 import { useI18n } from 'twake-i18n'
 
-import Identity from './Identity'
 import { getDisplayName } from '../../models'
 import styles from '../../styles/recipient.styl'
 import { ExtraAvatar } from '../Avatar/ExtraAvatar'
+import Identity from './Identity'
 
 const ExtraIdentity = ({ extraRecipients }) => {
   const { t } = useI18n()

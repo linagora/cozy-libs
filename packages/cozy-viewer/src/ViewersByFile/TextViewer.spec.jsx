@@ -2,8 +2,8 @@ import '@testing-library/jest-dom'
 import { render, waitFor } from '@testing-library/react'
 import React from 'react'
 
-import { TextViewer, isMarkdown } from './TextViewer'
 import DemoProvider from '../providers/DemoProvider'
+import { TextViewer, isMarkdown } from './TextViewer'
 
 jest.mock('../NoViewer/DownloadButton', () => () => (
   <div data-testid="dl-btn-no-viewer">DownloadButton</div>

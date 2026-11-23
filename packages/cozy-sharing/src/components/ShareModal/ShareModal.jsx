@@ -5,12 +5,12 @@ import { useLocation } from 'react-router'
 
 import flag from 'cozy-flags'
 
-import EditableSharingModal from './EditableSharingModal'
-import SharingDetailsModal from './SharingDetailsModal'
 import withLocales from '../../hoc/withLocales'
 import { useSharingContext } from '../../hooks/useSharingContext'
 import FederatedFolderModal from '../FederatedFolder/FederatedFolderModal'
 import { ActivityReportContext } from '../ShareRestrictionModal/ActivityReportContext'
+import EditableSharingModal from './EditableSharingModal'
+import SharingDetailsModal from './SharingDetailsModal'
 
 const ShareModalContent = props => {
   const location = useLocation?.()

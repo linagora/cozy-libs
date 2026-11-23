@@ -1,8 +1,8 @@
-import { Icon, Plus } from '@linagora/twake-icons'
 import cx from 'classnames'
 import React from 'react'
 import { FieldArray } from 'react-final-form-arrays'
 
+import { Icon, Plus } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n, useExtendI18n } from 'twake-i18n'
 

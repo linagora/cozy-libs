@@ -6,10 +6,10 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import { useSharingContext } from '../hooks/useSharingContext'
 import AntivirusAlert from './AntivirusAlert'
 import { default as DumbShareByLink } from './ShareByLink'
 import WhoHasAccessWrapper from './WhoHasAccessWrapper'
-import { useSharingContext } from '../hooks/useSharingContext'
 
 const ShareDialogOnlyByLink = ({
   isOwner,

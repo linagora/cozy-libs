@@ -8,13 +8,13 @@ import { Document, Page } from 'react-pdf'
 import { Bottom, Dash, Icon, Pen, Plus, Top } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 
-import styles from './styles.styl'
 import NoViewer from '../NoViewer'
 import ToolbarButton from '../components/PdfToolbarButton'
 import ViewerSpinner from '../components/ViewerSpinner'
 import withFileUrl from '../hoc/withFileUrl'
 import { withViewerLocales } from '../hoc/withViewerLocales'
 import { ViewerContext } from '../providers/ViewerProvider'
+import styles from './styles.styl'
 
 export const MIN_SCALE = 0.25
 export const MAX_SCALE = 3

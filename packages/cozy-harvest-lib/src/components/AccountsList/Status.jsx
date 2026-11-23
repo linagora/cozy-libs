@@ -1,7 +1,7 @@
-import { Icon, Check, Warning } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import { Icon, Check, Warning } from '@linagora/twake-icons'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { translate } from 'twake-i18n'

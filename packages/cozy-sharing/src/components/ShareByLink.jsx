@@ -9,13 +9,13 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
+import { useSharingContext } from '../hooks/useSharingContext'
+import { buildAppsQuery } from '../queries/queries'
 import { ShareRestrictionModal } from './ShareRestrictionModal/ShareRestrictionModal'
 import {
   copyToClipboard,
   createSharingLink
 } from './ShareRestrictionModal/helpers'
-import { useSharingContext } from '../hooks/useSharingContext'
-import { buildAppsQuery } from '../queries/queries'
 
 const COPIED_DURATION = 2000
 const ROUND_BUTTON_CLASSNAME = 'u-miw-auto u-mih-auto u-w-2 u-h-2 u-bdrs-circle'

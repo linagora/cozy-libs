@@ -9,7 +9,6 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useSubmitWithLoader } from 'cozy-ui/transpiled/react/hooks/useSubmitWithLoader'
 import { useI18n } from 'twake-i18n'
 
-import SharedDriveHeader from './SharedDriveHeader'
 import withLocales from '../../hoc/withLocales'
 import { usePendingRecipients } from '../../hooks/usePendingRecipients'
 import { useResolveRecipients } from '../../hooks/useResolveRecipients'
@@ -17,6 +16,7 @@ import { useSharingContext } from '../../hooks/useSharingContext'
 import styles from '../../styles/share.styl'
 import { default as DumbShareByEmail } from '../ShareByEmail'
 import WhoHasAccessWrapper from '../WhoHasAccessWrapper'
+import SharedDriveHeader from './SharedDriveHeader'
 
 export const EditSharedDriveModal = withLocales(({ onClose, document }) => {
   const client = useClient()

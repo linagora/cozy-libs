@@ -3,9 +3,9 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
+import AppLike from '../../test/AppLike'
 import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
-import AppLike from '../../test/AppLike'
 
 const FakeSharingContent = ({ recipientsToBeConfirmed, verifyRecipient }) => {
   const verify = recipientConfirmationData => () => {

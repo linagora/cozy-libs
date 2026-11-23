@@ -1,7 +1,7 @@
-import { Icon, Right, Wallet } from '@linagora/twake-icons'
 import startCase from 'lodash/startCase'
 import React, { useState } from 'react'
 
+import { Icon, Right, Wallet } from '@linagora/twake-icons'
 import ListItem from 'cozy-ui/transpiled/react/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryAction'

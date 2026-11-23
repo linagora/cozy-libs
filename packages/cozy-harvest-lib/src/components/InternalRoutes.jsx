@@ -3,6 +3,7 @@ import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 
 import flag from 'cozy-flags'
 
+import { ViewerModal } from '../datacards/ViewerModal'
 import AccountModal from './AccountModal'
 import EditAccountModal from './EditAccountModal'
 import HarvestModalRoot from './HarvestModalRoot'
@@ -10,7 +11,6 @@ import ConfigurationTab from './KonnectorConfiguration/ConfigurationTab'
 import DataTab from './KonnectorConfiguration/DataTab'
 import KonnectorSuccess from './KonnectorSuccess'
 import NewAccountModal from './NewAccountModal'
-import { ViewerModal } from '../datacards/ViewerModal'
 
 const HarvestParamsWrapper = props => {
   const params = useParams()

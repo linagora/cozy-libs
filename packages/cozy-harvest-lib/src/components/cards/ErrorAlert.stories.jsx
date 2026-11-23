@@ -1,5 +1,5 @@
-import { ErrorAlert } from './ErrorAlert'
 import { KonnectorJobError } from '../../helpers/konnectors'
+import { ErrorAlert } from './ErrorAlert'
 
 const meta = {
   component: ErrorAlert,

@@ -3,9 +3,9 @@ import React from 'react'
 
 import flag from 'cozy-flags'
 
-import { ShareByEmail } from './ShareByEmail'
 import AppLike from '../../test/AppLike'
 import SharingContext from '../context'
+import { ShareByEmail } from './ShareByEmail'
 
 const mockMember = { _id: 'alice', email: [{ address: 'alice@example.org' }] }
 const mockGroup = {

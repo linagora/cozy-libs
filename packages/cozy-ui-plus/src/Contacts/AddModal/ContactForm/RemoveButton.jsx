@@ -1,6 +1,6 @@
-import { Icon, CrossCircle } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon, CrossCircle } from '@linagora/twake-icons'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ListItemIcon from 'cozy-ui/transpiled/react/ListItemIcon'
 
