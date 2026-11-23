@@ -1,5 +1,7 @@
 # cozy-sharing — agent rules
 
+- Decisions: `docs/decisions.md`, mandatory. Search it before asking a question or proposing a change; record every decision there, in the commit that applies it (skill `twake-decisions`).
+
 ## Keep README.md in sync with the code
 
 The implementation is the behavioral source of truth. `README.md` documents the implemented behavior and usage, and MUST be updated in the same commit/PR whenever the behavior or usage changes.
