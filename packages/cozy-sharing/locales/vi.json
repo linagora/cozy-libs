@@ -368,7 +368,8 @@
       }
     },
     "fingerprint": {
-      "instruction": "Vì lý do bảo mật, vui lòng xác minh danh tính của **%{userName} (%{userEmail})**. Để làm điều này, hãy liên hệ với **%{userName}** thông qua phương tiện liên lạc mà bạn chọn (cuộc gọi, tin nhắn văn bản, ứng dụng nhắn tin tức thì...) và xác minh mã bảo mật của họ.<br><br>Mỗi người dùng Twake đều có một mã bảo mật mà họ có thể tìm thấy bằng ứng dụng web của mình. Mã bảo mật của họ phải tương ứng với:",
+      "instruction": "Vì lý do bảo mật, vui lòng xác minh danh tính của %{userName} (%{userEmail}). Để làm điều này, hãy liên hệ với %{userName} thông qua phương tiện liên lạc mà bạn chọn (cuộc gọi, tin nhắn văn bản, ứng dụng nhắn tin tức thì...) và xác minh mã bảo mật của họ.",
+      "securityCode": "Mỗi người dùng Twake đều có một mã bảo mật mà họ có thể tìm thấy bằng ứng dụng web của mình. Mã bảo mật của họ phải tương ứng với:",
       "instruction2": "Nếu đúng như vậy, thì bạn có thể xác nhận liên hệ này, người sẽ được coi là an toàn cho các lần chia sẻ tiếp theo của bạn."
     }
   },
