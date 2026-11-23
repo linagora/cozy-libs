@@ -7,8 +7,6 @@ import { isFlagshipApp } from 'cozy-device-helper'
 import CozyRealtime from 'cozy-realtime'
 import { translate } from 'twake-i18n'
 
-import InAppBrowser from './InAppBrowser'
-import Popup from './Popup'
 import {
   prepareOAuth,
   checkOAuthData,
@@ -18,6 +16,8 @@ import {
 // TODO use PopUp from cozy-ui
 import { intentsApiProptype } from '../helpers/proptypes'
 import logger from '../logger'
+import InAppBrowser from './InAppBrowser'
+import Popup from './Popup'
 
 const OAUTH_POPUP_HEIGHT = 800
 const OAUTH_POPUP_WIDTH = 800

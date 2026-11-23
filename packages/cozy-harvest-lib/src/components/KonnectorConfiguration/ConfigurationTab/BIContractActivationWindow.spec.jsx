@@ -5,10 +5,10 @@ import React from 'react'
 import CozyClient from 'cozy-client'
 import { WebviewIntentProvider } from 'cozy-intent'
 
-import BIContractActivationWindow from './BiContractActivationWindow'
 import AppLike from '../../../../test/AppLike'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import { CozyConfirmDialogProvider } from '../../CozyConfirmDialogProvider'
+import BIContractActivationWindow from './BiContractActivationWindow'
 
 const fetchExtraOAuthUrlParams = jest.fn()
 const refreshContracts = jest.fn()

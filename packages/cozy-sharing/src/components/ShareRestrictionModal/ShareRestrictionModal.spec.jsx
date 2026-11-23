@@ -3,10 +3,10 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
+import AppLike from '../../../test/AppLike'
 import { ActivityReportContext } from './ActivityReportContext'
 import { ShareRestrictionModal } from './ShareRestrictionModal'
 import { READ_ONLY_PERMS, WRITE_PERMS } from './helpers'
-import AppLike from '../../../test/AppLike'
 
 const mockUpdateDocumentPermissions = jest.fn()
 const mockShareByLink = jest.fn()

@@ -15,7 +15,6 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import PublicAccessMenu from './PublicAccessMenu'
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import {
   getPublicAccessStatus,
@@ -28,6 +27,7 @@ import {
   WRITE_PERMS,
   createSharingLink
 } from '../ShareRestrictionModal/helpers'
+import PublicAccessMenu from './PublicAccessMenu'
 
 const getMenuValue = ({ link, permissions }) => {
   if (!link) return 'restricted'

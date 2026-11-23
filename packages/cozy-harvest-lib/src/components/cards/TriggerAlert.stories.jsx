@@ -1,5 +1,5 @@
-import { TriggerAlert } from './TriggerAlert'
 import { KonnectorJobError } from '../../helpers/konnectors'
+import { TriggerAlert } from './TriggerAlert'
 
 const meta = {
   component: TriggerAlert,

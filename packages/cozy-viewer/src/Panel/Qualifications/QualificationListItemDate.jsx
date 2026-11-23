@@ -17,9 +17,9 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
-import QualificationListItemText from './QualificationListItemText'
 import ExpirationAnnotation from '../../components/ExpirationAnnotation'
 import IntentOpener from '../../components/IntentOpener'
+import QualificationListItemText from './QualificationListItemText'
 
 const QualificationListItemDate = forwardRef(
   (

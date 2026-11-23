@@ -3,8 +3,8 @@ import React from 'react'
 import { Icon, CloudBroken } from '@linagora/twake-icons'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 
-import styles from './styles.styl'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import styles from './styles.styl'
 
 const NoNetworkViewer = ({ t, onReload }) => (
   <div className={styles['viewer-canceled']}>

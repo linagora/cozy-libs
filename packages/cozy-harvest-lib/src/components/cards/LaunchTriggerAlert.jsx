@@ -4,13 +4,13 @@ import React, { useState, useEffect } from 'react'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
 
-import { RunningAlert } from './RunningAlert'
-import { TriggerAlert } from './TriggerAlert'
 import { intentsApiProptype } from '../../helpers/proptypes'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import { SUCCESS } from '../../models/flowEvents'
 import { useFlowState } from '../../models/withConnectionFlow'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
+import { RunningAlert } from './RunningAlert'
+import { TriggerAlert } from './TriggerAlert'
 
 export const LaunchTriggerAlert = ({
   flow,

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 
-import styles from './styles.styl'
 import NoViewer from '../NoViewer'
 import withFileUrl from '../hoc/withFileUrl'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import styles from './styles.styl'
 
 const VideoViewer = ({ t, file, url, renderFallbackExtraContent }) => {
   const [isUnplayable, setIsUnplayable] = useState(false)

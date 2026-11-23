@@ -1,7 +1,7 @@
-import { Icon, Magnifier } from '@linagora/twake-icons'
 import React, { useCallback } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import { Icon, Magnifier } from '@linagora/twake-icons'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 
 const SearchButton = () => {

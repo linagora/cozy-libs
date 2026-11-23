@@ -1,9 +1,9 @@
-import { Icon, LinkOut, Plus, WarningCircle } from '@linagora/twake-icons'
 import cx from 'classnames'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 
+import { Icon, LinkOut, Plus, WarningCircle } from '@linagora/twake-icons'
 import { nameToColor } from 'cozy-ui/transpiled/react/Avatar/helpers'
 import Badge from 'cozy-ui/transpiled/react/Badge'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -11,10 +11,10 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { alpha, makeStyles } from 'cozy-ui/transpiled/react/styles'
 
-import { IconCheckAnimated, IconCrossAnimated } from './AnimatedIcons'
-import styles from './styles.styl'
 import AppIcon from '../AppIcon'
 import { useCozyTheme } from '../providers/CozyTheme'
+import { IconCheckAnimated, IconCrossAnimated } from './AnimatedIcons'
+import styles from './styles.styl'
 
 const makeTwakeColor = theme =>
   theme.variant === 'inverted' || theme.type === 'dark'

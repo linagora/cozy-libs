@@ -3,9 +3,9 @@ import React from 'react'
 
 import { translate } from 'twake-i18n'
 
-import LaunchTriggerAlert from './LaunchTriggerAlert'
 import { intentsApiProptype } from '../../helpers/proptypes'
 import FlowProvider from '../FlowProvider'
+import LaunchTriggerAlert from './LaunchTriggerAlert'
 
 /**
  * Shows the state of the trigger and provides the ability to

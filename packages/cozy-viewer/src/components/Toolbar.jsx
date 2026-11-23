@@ -20,12 +20,12 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import { useI18n } from 'twake-i18n'
 
-import SummarizeByAIButton from './SummarizeByAIButton'
-import { ToolbarFilePath } from './ToolbarFilePath'
-import styles from './styles.styl'
 import { extractChildrenCompByName } from '../Footer/helpers'
 import { useShareModal } from '../providers/ShareModalProvider'
 import { useViewer } from '../providers/ViewerProvider'
+import SummarizeByAIButton from './SummarizeByAIButton'
+import { ToolbarFilePath } from './ToolbarFilePath'
+import styles from './styles.styl'
 
 const Toolbar = ({
   hidden,

@@ -1,5 +1,5 @@
-import contactToFormValues from './contactToFormValues'
 import { johnDoeContact, johnDoeFormValues } from '../mocks'
+import contactToFormValues from './contactToFormValues'
 
 describe('contactToFormValues function', () => {
   const tSpy = jest.fn()

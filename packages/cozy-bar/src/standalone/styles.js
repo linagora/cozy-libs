@@ -2,8 +2,8 @@ import cozyUiUtilsCss from 'cozy-ui/dist/cozy-ui.utils.min.css'
 import cozyUiCss from 'cozy-ui/transpiled/react/stylesheet.css'
 import cozyUiPlusCss from 'cozy-ui-plus/dist/stylesheet.css'
 
-import { getVariablesRules } from './getVariablesRules'
 import barCss from '../styles/index.styl'
+import { getVariablesRules } from './getVariablesRules'
 
 const FONTS_LINK_ID = 'twake-bar-fonts'
 

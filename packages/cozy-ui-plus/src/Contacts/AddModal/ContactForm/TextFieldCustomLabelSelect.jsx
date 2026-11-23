@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 
 import { useI18n, useExtendI18n } from 'twake-i18n'
 
+import CustomLabelDialog from '../CustomLabelDialog'
+import { FieldInputWrapperPropTypes } from '../types'
 import TextFieldSelect from './TextFieldSelect'
 import { makeCustomLabel, makeInitialCustomValue } from './helpers'
 import { locales } from './locales'
-import CustomLabelDialog from '../CustomLabelDialog'
-import { FieldInputWrapperPropTypes } from '../types'
 
 const TextFieldCustomLabelSelect = ({
   name,

@@ -3,9 +3,9 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import PublicAccess from './PublicAccess'
 import AppLike from '../../../test/AppLike'
 import { READ_ONLY_PERMS, WRITE_PERMS } from '../ShareRestrictionModal/helpers'
+import PublicAccess from './PublicAccess'
 
 const mockShareByLink = jest.fn()
 const mockHasWriteAccess = jest.fn()

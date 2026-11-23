@@ -8,11 +8,11 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'twake-i18n'
 
-import MemberRecipientStatus from './MemberRecipientStatus'
 import { DEFAULT_DISPLAY_NAME } from '../../helpers/recipients'
 import withLocales from '../../hoc/withLocales'
 import { getDisplayName } from '../../models'
 import { MemberAvatarWrapper } from '../Avatar/MemberAvatarWrapper'
+import MemberRecipientStatus from './MemberRecipientStatus'
 
 const MemberRecipientLite = ({ recipient, isOwner, ...props }) => {
   const { t } = useI18n()

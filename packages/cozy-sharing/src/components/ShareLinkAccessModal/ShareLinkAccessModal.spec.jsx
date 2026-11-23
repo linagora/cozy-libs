@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import React from 'react'
 
-import { ShareLinkAccessModal } from './ShareLinkAccessModal'
 import { useSharingContext } from '../../hooks/useSharingContext'
+import { ShareLinkAccessModal } from './ShareLinkAccessModal'
 
 jest.mock('../../hooks/useSharingContext', () => ({
   useSharingContext: jest.fn()

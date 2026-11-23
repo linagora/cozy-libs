@@ -1,9 +1,9 @@
 import cx from 'classnames'
 import React from 'react'
 
+import styles from '../styles/recipient.styl'
 import { ExtraIdentity } from './Identity/ExtraIdentity'
 import { MemberIdentity } from './Identity/MemberIdentity'
-import styles from '../styles/recipient.styl'
 
 const MAX_DISPLAYED_RECIPIENTS = 2
 

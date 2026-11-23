@@ -1,14 +1,14 @@
-import { Icon, Cube } from '@linagora/twake-icons'
 import cx from 'classnames'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
+import { Icon, Cube } from '@linagora/twake-icons'
 import { withClient } from 'cozy-client'
 
-import styles from './styles.styl'
 import { isShortcutFile } from '../AppSections/helpers'
 import { ShortcutTile } from '../ShortcutTile'
 import { AppDoctype } from '../proptypes'
+import styles from './styles.styl'
 
 const DONE = 'done'
 const ERRORED = 'errored'

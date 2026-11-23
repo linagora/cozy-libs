@@ -1,13 +1,13 @@
 import { CloudPlusOutlined, Sync, ToTheCloud } from '@linagora/twake-icons'
 import { Q } from 'cozy-client'
 
+import logger from '../logger'
+import { addSharing, updateSharing } from '../state'
 import { fetchFilesPaths } from './files'
 import {
   updateInternalObjectFromRealtime,
   normalizeDocFromRealtime
 } from './realtime'
-import logger from '../logger'
-import { addSharing, updateSharing } from '../state'
 
 const CREATE_COZY_HREF = 'https://sign-up.twake.app'
 

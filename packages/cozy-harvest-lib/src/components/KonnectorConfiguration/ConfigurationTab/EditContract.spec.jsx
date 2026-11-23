@@ -3,9 +3,9 @@ import React from 'react'
 
 import { createMockClient, useQuery } from 'cozy-client'
 
+import AppLike from '../../../../test/AppLike'
 import EditContract from './EditContract'
 import bankAccount from './bank-account-fixture.json'
-import AppLike from '../../../../test/AppLike'
 
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),

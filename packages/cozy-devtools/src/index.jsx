@@ -1,6 +1,6 @@
-import { Icon, CrossMedium, Gear } from '@linagora/twake-icons'
 import React, { useCallback, useMemo, useRef } from 'react'
 
+import { Icon, CrossMedium, Gear } from '@linagora/twake-icons'
 import Box from 'cozy-ui/transpiled/react/Box'
 import Fab from 'cozy-ui/transpiled/react/Fab'
 import Grid from 'cozy-ui/transpiled/react/Grid'

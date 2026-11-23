@@ -3,8 +3,8 @@ import React from 'react'
 import { Icon, FileTypeAudio } from '@linagora/twake-icons'
 import isTesting from 'cozy-ui/transpiled/react/helpers/isTesting'
 
-import styles from './styles.styl'
 import withFileUrl from '../hoc/withFileUrl'
+import styles from './styles.styl'
 
 const AudioViewer = ({ file, url }) => (
   <div className={styles['viewer-audioviewer']}>

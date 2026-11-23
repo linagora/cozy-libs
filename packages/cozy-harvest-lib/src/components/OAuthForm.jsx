@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom'
 import { useClient } from 'cozy-client'
 import { useWebviewIntent } from 'cozy-intent'
 
+import { KonnectorJobError } from '../helpers/konnectors'
+import { intentsApiProptype } from '../helpers/proptypes'
+import { findKonnectorPolicy } from '../konnector-policies'
+import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
+import { useFlowState } from '../models/withConnectionFlow'
 import {
   OAUTH_SERVICE_ERROR,
   OAUTH_SERVICE_OK,
@@ -16,11 +21,6 @@ import { ConnectCard } from './cards/ConnectCard'
 import withLocales from './hoc/withLocales'
 import useOAuthExtraParams from './hooks/useOAuthExtraParams'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
-import { KonnectorJobError } from '../helpers/konnectors'
-import { intentsApiProptype } from '../helpers/proptypes'
-import { findKonnectorPolicy } from '../konnector-policies'
-import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
-import { useFlowState } from '../models/withConnectionFlow'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It

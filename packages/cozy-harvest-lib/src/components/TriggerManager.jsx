@@ -9,10 +9,10 @@ import {
 } from 'cozy-keys-lib'
 import { translate } from 'twake-i18n'
 
+import withConnectionFlow from '../models/withConnectionFlow'
 import { DumbTriggerManager } from './DumbTriggerManager'
 import FlowProvider from './FlowProvider'
 import HarvestWrapper from './HarvestWrapper'
-import withConnectionFlow from '../models/withConnectionFlow'
 
 const TriggerManager = compose(
   translate(),

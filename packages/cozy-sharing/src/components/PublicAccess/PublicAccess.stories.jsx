@@ -1,7 +1,7 @@
 import React from 'react'
 
-import PublicAccess from './PublicAccess'
 import SharingContext from '../../context'
+import PublicAccess from './PublicAccess'
 
 const READ_ONLY = { files: { verbs: ['GET'] } }
 const WRITE = { files: { verbs: ['GET', 'POST', 'PUT', 'PATCH'] } }

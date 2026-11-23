@@ -4,12 +4,12 @@ import { useClient } from 'cozy-client'
 import MemberRoleMenu from 'cozy-ui/transpiled/react/MemberRow/MemberRoleMenu'
 import { useI18n } from 'twake-i18n'
 
-import DowngradePermissionConfirmDialog from './DowngradePermissionConfirmDialog'
 import { makeMemberRoles } from '../../helpers/members'
 import { makeAvatarUrl } from '../../helpers/recipients'
 import withLocales from '../../hoc/withLocales'
 import { useMemberTypeChange } from '../../hooks/useMemberTypeChange'
 import { getDisplayName, getInitials } from '../../models'
+import DowngradePermissionConfirmDialog from './DowngradePermissionConfirmDialog'
 
 const PermissionTypeMenuWrapper = ({
   sharingId,

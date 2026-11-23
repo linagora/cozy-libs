@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useBreakpoints } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
+import { isDisconnected } from '../../helpers/konnectors'
+import KonnectorIcon from '../KonnectorIcon'
 import { LaunchButton } from './LaunchButton'
 import { LaunchTriggerAlertMenu } from './LaunchTriggerAlertMenu'
 import { TriggerAlertTemplate } from './TriggerAlertTemplate'
 import { UnrunnableAlert } from './UnrunnableAlert'
 import { launchAction, connectAction, configureAction } from './actions'
-import { isDisconnected } from '../../helpers/konnectors'
-import KonnectorIcon from '../KonnectorIcon'
 
 /**
  * This component allows users to synchronise their connector. It also warns the user when the connector is running.

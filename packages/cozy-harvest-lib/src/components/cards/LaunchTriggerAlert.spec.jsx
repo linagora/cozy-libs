@@ -2,10 +2,10 @@ import { render, waitFor, fireEvent } from '@testing-library/react'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { LaunchTriggerAlert } from './LaunchTriggerAlert'
 import AppLike from '../../../test/AppLike'
 import ConnectionFlow from '../../models/ConnectionFlow'
 import OpenOAuthWindowButton from '../AccountModalWithoutTabs/OpenOAuthWindowButton'
+import { LaunchTriggerAlert } from './LaunchTriggerAlert'
 
 jest.mock('../AccountModalWithoutTabs/OpenOAuthWindowButton')
 

@@ -1,7 +1,7 @@
-import { Icon, CozyUpgrade } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useEffect, useState } from 'react'
 
+import { Icon, CozyUpgrade } from '@linagora/twake-icons'
 import { useInstanceInfo } from 'cozy-client'
 import { buildPremiumLink } from 'cozy-client/dist/models/instance'
 import { isFlagshipApp } from 'cozy-device-helper'

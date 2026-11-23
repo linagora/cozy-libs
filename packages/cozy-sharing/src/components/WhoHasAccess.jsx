@@ -4,8 +4,8 @@ import React from 'react'
 import MemberList from 'cozy-ui/transpiled/react/MemberList'
 import { useI18n } from 'twake-i18n'
 
-import PublicAccess from './PublicAccess/PublicAccess'
 import styles from '../styles/share.styl'
+import PublicAccess from './PublicAccess/PublicAccess'
 
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing

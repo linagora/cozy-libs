@@ -1,7 +1,7 @@
-import { Icon, Dots } from '@linagora/twake-icons'
 import PropTypes from 'prop-types'
 import React, { useRef, useState } from 'react'
 
+import { Icon, Dots } from '@linagora/twake-icons'
 import ActionsMenu from 'cozy-ui/transpiled/react/ActionsMenu'
 import { makeActions } from 'cozy-ui/transpiled/react/ActionsMenu/Actions'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'

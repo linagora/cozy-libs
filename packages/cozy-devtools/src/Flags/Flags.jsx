@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import List from 'cozy-ui/transpiled/react/List'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import PanelContent from '../PanelContent'
 import { FlagEdit } from './FlagEdit'
 import FlagItem from './FlagItem'
 import { computeFlags } from './helpers'
-import PanelContent from '../PanelContent'
 
 const Flags = () => {
   const [edited, setEdited] = useState(null)

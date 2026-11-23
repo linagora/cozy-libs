@@ -9,10 +9,10 @@ import AppLinker from 'cozy-ui-plus/dist/AppLinker'
 import CozyTheme from 'cozy-ui-plus/dist/providers/CozyTheme'
 import { useI18n } from 'twake-i18n'
 
-import DataTypes from './DataTypes'
-import Illustration from './Illustration'
 import { getSuggestionReason } from '../../helpers/appSuggestions'
 import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
+import DataTypes from './DataTypes'
+import Illustration from './Illustration'
 
 const KonnectorSuggestionModal = ({
   konnectorAppSuggestion,

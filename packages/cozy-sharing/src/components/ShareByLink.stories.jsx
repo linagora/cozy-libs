@@ -2,8 +2,8 @@ import React from 'react'
 
 import { CozyProvider, createFakeClient } from 'cozy-client'
 
-import ShareByLink from './ShareByLink'
 import SharingContext from '../context'
+import ShareByLink from './ShareByLink'
 
 const makeClient = apps =>
   createFakeClient({

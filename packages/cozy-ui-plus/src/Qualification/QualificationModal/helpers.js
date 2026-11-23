@@ -1,6 +1,6 @@
-import { Icon, Note } from '@linagora/twake-icons'
 import React from 'react'
 
+import { Icon, Note } from '@linagora/twake-icons'
 import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
 import { isQualificationNote } from 'cozy-client/dist/models/document/documentTypeDataHelpers'
 import { getBoundT } from 'cozy-client/dist/models/document/locales'

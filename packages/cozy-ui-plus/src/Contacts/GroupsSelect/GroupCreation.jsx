@@ -1,7 +1,7 @@
-import { Icon, Plus } from '@linagora/twake-icons'
 import classNames from 'classnames'
 import React, { Component } from 'react'
 
+import { Icon, Plus } from '@linagora/twake-icons'
 import Input from 'cozy-ui/transpiled/react/legacy/Input'
 import { translate } from 'twake-i18n'
 

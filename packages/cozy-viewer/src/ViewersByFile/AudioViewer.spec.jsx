@@ -3,8 +3,8 @@ import React from 'react'
 
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/providers/Breakpoints'
 
-import AudioViewer from './AudioViewer'
 import DemoProvider from '../providers/DemoProvider'
+import AudioViewer from './AudioViewer'
 
 const file = {
   _id: 'audio',

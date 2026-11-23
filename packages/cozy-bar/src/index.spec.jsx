@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
-import { BarComponent, BarProvider, BarLeft } from './index'
 import { BarLike } from '../test/lib/BarLike'
+import { BarComponent, BarProvider, BarLeft } from './index'
 
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),

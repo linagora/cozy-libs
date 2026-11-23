@@ -2,8 +2,8 @@ import Polyglot from 'node-polyglot'
 
 import { updateIndexFullNameAndDisplayName } from 'cozy-client/dist/models/contact'
 
-import formValuesToContact from './formValuesToContact'
 import { johnDoeFormValues, johnDoeContact } from '../mocks'
+import formValuesToContact from './formValuesToContact'
 import en from './locales/en.json'
 
 const polyglot = new Polyglot()

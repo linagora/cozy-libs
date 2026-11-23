@@ -10,6 +10,13 @@ import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
+import {
+  checkIsPermissionHasExpiresDate,
+  checkIsPermissionHasPassword,
+  checkIsReadOnlyPermissions,
+  getPermissionExpiresDate
+} from '../../helpers/permissions'
+import { useSharingContext } from '../../hooks/useSharingContext'
 import { ActivityReportContext } from './ActivityReportContext'
 import { ShareRestrictionContentModal } from './ShareRestrictionContentModal'
 import {
@@ -19,13 +26,6 @@ import {
   createPermissions,
   generateShareLinkFromFile
 } from './helpers'
-import {
-  checkIsPermissionHasExpiresDate,
-  checkIsPermissionHasPassword,
-  checkIsReadOnlyPermissions,
-  getPermissionExpiresDate
-} from '../../helpers/permissions'
-import { useSharingContext } from '../../hooks/useSharingContext'
 
 export const ShareRestrictionModal = ({ file, onClose }) => {
   const enableActivityReport = useContext(ActivityReportContext)

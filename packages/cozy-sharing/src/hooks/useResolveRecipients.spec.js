@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 
-import { useResolveRecipients } from './useResolveRecipients'
 import { getOrCreateFromArray } from '../helpers/contacts'
+import { useResolveRecipients } from './useResolveRecipients'
 
 const mockClient = { create: jest.fn() }
 

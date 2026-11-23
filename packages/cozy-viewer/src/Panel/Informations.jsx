@@ -27,8 +27,8 @@ import ListItemSecondaryAction from 'cozy-ui/transpiled/react/ListItemSecondaryA
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'twake-i18n'
 
-import { makeFormat, makeSize, makeDate, makePath } from './helpers'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import { makeFormat, makeSize, makeDate, makePath } from './helpers'
 
 const Informations = ({ file, isPublic, t }) => {
   const [showMenu, setShowMenu] = useState(false)

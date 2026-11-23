@@ -5,10 +5,10 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import useBreakpoints from 'cozy-ui/transpiled/react/providers/Breakpoints'
 import { useI18n } from 'twake-i18n'
 
-import ActionMenuDesktop from './ActionMenuDesktop'
-import ActionMenuMobile from './ActionMenuMobile'
 import { isEditableAttribute } from '../helpers'
 import { useViewer } from '../providers/ViewerProvider'
+import ActionMenuDesktop from './ActionMenuDesktop'
+import ActionMenuMobile from './ActionMenuMobile'
 
 const ActionMenuWrapper = forwardRef(
   ({ optionFile, isReadOnly, onClose }, ref) => {

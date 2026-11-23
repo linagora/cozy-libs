@@ -2,8 +2,8 @@ import React from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 
-import { AvatarList } from './AvatarList'
 import { recipients } from '../../../.storybook/fixtures/recipients'
+import { AvatarList } from './AvatarList'
 
 const meta = {
   component: AvatarList,

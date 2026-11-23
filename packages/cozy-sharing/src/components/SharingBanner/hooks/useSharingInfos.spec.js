@@ -3,8 +3,8 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import { useSharingInfos } from './useSharingInfos'
 import AppLike from '../test/AppLike'
+import { useSharingInfos } from './useSharingInfos'
 
 describe('useSharingInfos', () => {
   const mockClient = createMockClient({})

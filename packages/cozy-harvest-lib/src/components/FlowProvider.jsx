@@ -4,8 +4,6 @@ import React, { Component } from 'react'
 import { withClient } from 'cozy-client'
 import { translate } from 'twake-i18n'
 
-import ConnectionBackdrop from './AccountForm/ConnectionBackdrop'
-import TwoFAModal from './TwoFAModal'
 import assert from '../assert'
 import logger from '../logger'
 import ConnectionFlow from '../models/ConnectionFlow'
@@ -17,6 +15,8 @@ import {
   TRIGGER_LAUNCH_EVENT,
   UPDATE_EVENT
 } from '../models/flowEvents'
+import ConnectionBackdrop from './AccountForm/ConnectionBackdrop'
+import TwoFAModal from './TwoFAModal'
 
 /**
  * FlowProvider instantiates a ConnectionFlow and provides it to its children.

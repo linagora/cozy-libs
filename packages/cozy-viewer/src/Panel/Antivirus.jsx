@@ -11,8 +11,8 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Popover from 'cozy-ui/transpiled/react/Popover'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { getAntivirusStatus } from './helpers'
 import { withViewerLocales } from '../hoc/withViewerLocales'
+import { getAntivirusStatus } from './helpers'
 
 const Antivirus = ({ file, t }) => {
   const [anchorEl, setAnchorEl] = useState(null)

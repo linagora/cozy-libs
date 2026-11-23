@@ -6,9 +6,9 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import Infos from 'cozy-ui/transpiled/react/deprecated/Infos'
 import { translate } from 'twake-i18n'
 
-import TriggerErrorDescription from './TriggerErrorDescription'
 import { getErrorLocale } from '../../helpers/konnectors'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
+import TriggerErrorDescription from './TriggerErrorDescription'
 
 /**
  * Component used to show an error related to an account or to a konnector job

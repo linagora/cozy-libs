@@ -5,7 +5,6 @@ import { useOnline } from 'rooks'
 import { useClient, useQueryAll } from 'cozy-client'
 import flag from 'cozy-flags'
 
-import ShareAutosuggest from './ShareAutosuggest'
 import {
   computeContactsAndGroups,
   hasContactSuggestions,
@@ -17,6 +16,7 @@ import {
   buildContactGroupsQuery,
   buildUnreachableContactsWithGroupsQuery
 } from '../queries/queries'
+import ShareAutosuggest from './ShareAutosuggest'
 
 /**
  * ShareAutosuggestWrapper is responsible for fetching contacts and groups.

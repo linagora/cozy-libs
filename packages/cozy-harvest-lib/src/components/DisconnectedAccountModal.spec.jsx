@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 
+import AppLike from '../../test/AppLike'
 import { CozyConfirmDialogProvider } from './CozyConfirmDialogProvider'
 import DisconnectedAccountModal from './DisconnectedAccountModal'
 import bankAccounts from './KonnectorConfiguration/ConfigurationTab/bank-account-fixture.json'
-import AppLike from '../../test/AppLike'
 
 describe('DisconnectedAccountModal', () => {
   const setup = () => {

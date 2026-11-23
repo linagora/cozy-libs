@@ -4,8 +4,8 @@ import React from 'react'
 import CozyClient, { CozyProvider } from 'cozy-client'
 import I18n from 'twake-i18n'
 
-import ShortcutViewer from './ShortcutViewer'
 import en from '../locales/en.json'
+import ShortcutViewer from './ShortcutViewer'
 
 export const locales = {
   en

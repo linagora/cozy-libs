@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { Icon, File } from '@linagora/twake-icons'
 import { RealTimeQueries } from 'cozy-client'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Box from 'cozy-ui/transpiled/react/Box'
@@ -19,12 +20,10 @@ import { Media, Bd, Img } from 'cozy-ui/transpiled/react/deprecated/Media'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { useI18n } from 'twake-i18n'
 
-import { getFileIcon } from './mime-utils'
-import { useDataCardFiles } from './useDataCardFiles'
 import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
 import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
-
-import { Icon, File } from '@linagora/twake-icons'
+import { getFileIcon } from './mime-utils'
+import { useDataCardFiles } from './useDataCardFiles'
 
 const LoadingFileListItem = ({ divider }) => {
   return (

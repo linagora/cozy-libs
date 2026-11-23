@@ -5,9 +5,9 @@ const merge = require('lodash/merge')
 
 const log = require('cozy-logger').namespace('BankAccount')
 
+const Document = require('../Document')
 const matching = require('./matching-accounts')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
-const Document = require('../Document')
 
 const connectionId = account => account?.relationships?.connection?.data?._id
 

@@ -3,9 +3,9 @@ import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import ShareAutosuggestWrapper from './ShareAutosuggestWrapper'
 import AppLike from '../../test/AppLike'
 import SharingContext from '../context'
+import ShareAutosuggestWrapper from './ShareAutosuggestWrapper'
 
 jest.mock('cozy-flags', () => ({ __esModule: true, default: () => false }))
 

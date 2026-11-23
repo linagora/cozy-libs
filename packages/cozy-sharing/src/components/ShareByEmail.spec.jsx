@@ -2,8 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
 
-import { ShareByEmail } from './ShareByEmail'
 import AppLike from '../../test/AppLike'
+import { ShareByEmail } from './ShareByEmail'
 
 describe('ShareByEmail (controlled)', () => {
   const setup = (overrides = {}) => {
