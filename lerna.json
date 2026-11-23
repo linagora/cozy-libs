@@ -1,6 +1,7 @@
 {
   "npmClient": "yarn",
   "version": "independent",
+  "ignoreChanges": ["**/docs/decisions.md", "**/AGENTS.md"],
   "command": {
     "version": {
       "conventionalCommits": true,
