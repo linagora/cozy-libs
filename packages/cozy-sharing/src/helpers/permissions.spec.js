@@ -1,7 +1,59 @@
 import {
+  checkCanDownloadActivityReport,
   checkIsReadOnlyPermissions,
   isDowngradeConfirmationNeeded
 } from './permissions'
+
+describe('checkCanDownloadActivityReport', () => {
+  const eligibleLink = {
+    file: {},
+    permissions: [
+      {
+        id: 'permission-id',
+        attributes: {
+          permissions: {
+            files: {
+              type: 'io.cozy.files',
+              verbs: ['GET'],
+              values: ['file-id']
+            }
+          }
+        }
+      }
+    ],
+    hasSharingLink: true
+  }
+
+  it('allows a public file link', () => {
+    expect(checkCanDownloadActivityReport(eligibleLink)).toBe(true)
+  })
+
+  it.each([
+    ['without a public link', { hasSharingLink: false }],
+    ['without a permission ID', { permissions: [] }],
+    [
+      'with an apps rule',
+      {
+        permissions: [
+          {
+            ...eligibleLink.permissions[0],
+            attributes: {
+              permissions: {
+                ...eligibleLink.permissions[0].attributes.permissions,
+                readApps: { type: 'io.cozy.apps', verbs: ['GET'] }
+              }
+            }
+          }
+        ]
+      }
+    ],
+    ['in a shared drive', { file: { driveId: 'drive-id' } }]
+  ])('blocks downloading %s', (_label, overrides) => {
+    expect(
+      checkCanDownloadActivityReport({ ...eligibleLink, ...overrides })
+    ).toBe(false)
+  })
+})
 
 describe('checkIsReadOnlyPermissions', () => {
   it('ignores the rule letting the link read apps', () => {

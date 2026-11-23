@@ -421,7 +421,9 @@
     "invalidPasswordMessage": "Manca %{smart_count} carattere |||| Mancano %{smart_count} caratteri"
   },
   "ActivityReport": {
-    "label": "Invia via email un rapporto sulle statistiche del link"
+    "label": "Invia via email un rapporto sulle statistiche del link",
+    "download": "Scarica rapporto",
+    "downloadError": "Impossibile scaricare il rapporto"
   },
   "BoxDate": {
     "invalidExpiration": "Scegli una data di scadenza valida e futura oppure disattiva la scadenza.",

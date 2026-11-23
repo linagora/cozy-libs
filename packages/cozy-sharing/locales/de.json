@@ -421,7 +421,9 @@
     "invalidPasswordMessage": "Es fehlt %{smart_count} Zeichen |||| Es fehlen %{smart_count} Zeichen"
   },
   "ActivityReport": {
-    "label": "Bericht mit Linkstatistiken per E-Mail senden"
+    "label": "Bericht mit Linkstatistiken per E-Mail senden",
+    "download": "Bericht herunterladen",
+    "downloadError": "Der Bericht konnte nicht heruntergeladen werden"
   },
   "BoxDate": {
     "invalidExpiration": "Wählen Sie ein gültiges zukünftiges Ablaufdatum oder deaktivieren Sie die Frist.",

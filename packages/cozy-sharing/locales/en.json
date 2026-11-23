@@ -421,7 +421,9 @@
     "invalidPasswordMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings"
   },
   "ActivityReport": {
-    "label": "Send report with link statistics via email"
+    "label": "Send report with link statistics via email",
+    "download": "Download report",
+    "downloadError": "Could not download the report"
   },
   "BoxDate": {
     "invalidExpiration": "Choose a valid future expiration date or turn off the deadline.",

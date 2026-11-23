@@ -226,6 +226,7 @@ Link and email sharing can coexist on the same resource. The recipient's permiss
 | Apps readable by the link | Only when `linkAppSlugs` is set, for new links outside shared drives; if the stack refuses the rule, the link is kept without it; the rule is not sent again when the link's rights change | `letLinkReadApps` in `SharingProvider.jsx` |
 | Password | 4+ characters; no limit on attempts | `ShareLinkSettings.jsx:10` |
 | Expiration report | Hidden by default; `enableActivityReport` exposes the checkbox independently of `documentType`; applications should opt in only for supported file and folder links; disabled without an expiration date; actual delivery requires a compatible client and Stack | `ShareRestrictionModal.jsx`, `ShareLinkSettings.jsx` |
+| Download report | Shown with the expiration report setting; downloads the current link's CSV independently of the expiration date and email setting. Disabled until a link exists, for links with an `io.cozy.apps` rule (not supported by the export endpoint), and provisionally for files with `driveId` because their links may belong to another instance. The Stack authorizes the request; visibility does not imply ownership or permission to export. The app token needs GET on all `io.cozy.public_links.events` and the link's file permissions. Reopening the dialog while a download is in progress allows another download to start. | `ShareRestrictionModal.jsx` |
 | Guest access | Via `/public` URL with `sharecode`; no auth required | `helpers.js:106` |
 
 ### Email sharing
