@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge-container@1.3.3...cozy-external-bridge-container@1.3.4) (2026-11-23)
+
+
+### Bug Fixes
+
+* **cozy-external-bridge-container:** Restrict bridge to method calls ([6c54ede](https://github.com/cozy/cozy-libs/commit/6c54ede16f95c1177e0462c4ae1bd481f7938d23))
+
+
+
+
+
 ## [1.3.3](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge-container@1.3.2...cozy-external-bridge-container@1.3.3) (2026-11-23)
 
 **Note:** Version bump only for package cozy-external-bridge-container

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [46.0.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@46.0.1...cozy-sharing@46.0.2) (2026-11-23)
+
+
+### Bug Fixes
+
+* **cozy-sharing:** Render the fingerprint recipient as plain text ([9186653](https://github.com/cozy/cozy-libs/commit/918665360cce8f1134af0e36a9e91bd8d58bc6fb))
+
+
+
+
+
 ## [46.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@46.0.0...cozy-sharing@46.0.1) (2026-11-23)
 
 **Note:** Version bump only for package cozy-sharing
