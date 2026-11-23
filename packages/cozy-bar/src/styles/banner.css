@@ -1,41 +1,41 @@
 @media (max-width: 63.9375rem) {
-  .has-banner [role=application] .o-layout-2panes:before {
+  .has-banner [role='application'] .o-layout-2panes:before {
     height: 6rem;
   }
 
-  [role=banner] .coz-bar-banner {
+  [role='banner'] .coz-bar-banner {
     font-size: 14px;
     transition: none;
     transition-delay: none;
   }
 
-  [role=banner] .coz-bar-banner-button {
+  [role='banner'] .coz-bar-banner-button {
     max-width: 7rem;
   }
 }
 
 @media (max-width: 30rem) {
-  .has-banner [role=application] .o-layout-2panes:before {
+  .has-banner [role='application'] .o-layout-2panes:before {
     height: 7rem;
   }
 
-  [role=banner] .coz-bar-banner {
+  [role='banner'] .coz-bar-banner {
     height: auto;
     font-size: 13px;
   }
 }
 
 @media (max-width: 18rem) {
-  .has-banner [role=application] .o-layout-2panes:before {
+  .has-banner [role='application'] .o-layout-2panes:before {
     height: 8rem;
   }
 }
 
-[role=banner] .coz-bar-banner.unmounted {
+[role='banner'] .coz-bar-banner.unmounted {
   height: 0;
 }
 
-[role=banner] .coz-bar-banner {
+[role='banner'] .coz-bar-banner {
   display: flex;
   background: var(--primaryColor);
   box-sizing: border-box;
@@ -51,11 +51,14 @@
   transition-delay: 1s;
 }
 
-[role=banner] .coz-bar-banner-button,
-[role=banner] .coz-bar-banner-button:hover,
-[role=banner] .coz-bar-banner-button:visited
-[role=banner] .coz-bar-banner-button:active
-[role=banner] .coz-bar-banner-button:focus {
+[role='banner'] .coz-bar-banner-button,
+[role='banner'] .coz-bar-banner-button:hover,
+[role='banner']
+  .coz-bar-banner-button:visited
+  [role='banner']
+  .coz-bar-banner-button:active
+  [role='banner']
+  .coz-bar-banner-button:focus {
   border-color: var(--primaryContrastTextColor) !important;
   min-height: 2rem;
   height: 2rem;
@@ -67,14 +70,14 @@
 
 /* No height: the node is already sized by its parent, and 100% ignores the bar
    above it, pushing the application below the fold. */
-[role=application].has-platform-banners {
+[role='application'].has-platform-banners {
   display: flex;
   flex-direction: column;
 }
 
 /* Class specificity, so an application can still override it. The container is
    exempted by the id rule below. */
-[role=application].has-platform-banners > * {
+[role='application'].has-platform-banners > * {
   flex: 1 1 auto;
   min-height: 0;
 }
