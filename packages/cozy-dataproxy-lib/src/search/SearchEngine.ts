@@ -81,7 +81,7 @@ export class SearchEngine {
     engineOptions: EngineOptions = {}
   ) {
     this.client = client
-    this.searchIndexes = {} as SearchIndexes
+    this.searchIndexes = {}
     this.storage = storage
     this.performanceApi = performanceApi ?? defaultPerformanceApi
     this.engineOptions = { shouldInit: true, ...engineOptions }
@@ -196,12 +196,8 @@ export class SearchEngine {
 
   async init(): Promise<void> {
     // Ensure login is done before plugin register
-    const realtimePlugin = RealtimePlugin as unknown as {
-      (): void
-      pluginName: 'realtime'
-    }
-    if (!this.client.plugins[realtimePlugin.pluginName]) {
-      this.client.registerPlugin(realtimePlugin, {})
+    if (!this.client.plugins[RealtimePlugin.pluginName]) {
+      this.client.registerPlugin(RealtimePlugin, {})
     }
 
     // Realtime subscription
