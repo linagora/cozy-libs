@@ -368,7 +368,8 @@
       }
     },
     "fingerprint": {
-      "instruction": "Per motivi di sicurezza, verifica l'identità di **%{userName} (%{userEmail})**. Per farlo, contatta **%{userName}** con il mezzo di comunicazione che preferisci (chiamata, SMS, app di messaggistica istantanea...) e verifica il suo codice di sicurezza.<br><br>Ogni utente Twake ha un codice di sicurezza che può trovare nella propria applicazione web. Il suo codice di sicurezza deve corrispondere a:",
+      "instruction": "Per motivi di sicurezza, verifica l'identità di %{userName} (%{userEmail}). Per farlo, contatta %{userName} con il mezzo di comunicazione che preferisci (chiamata, SMS, app di messaggistica istantanea...) e verifica il suo codice di sicurezza.",
+      "securityCode": "Ogni utente Twake ha un codice di sicurezza che può trovare nella propria applicazione web. Il suo codice di sicurezza deve corrispondere a:",
       "instruction2": "Se è così, puoi confermare questo contatto, che sarà considerato sicuro per le tue prossime condivisioni."
     }
   },

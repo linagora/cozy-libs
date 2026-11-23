@@ -368,7 +368,8 @@
       }
     },
     "fingerprint": {
-      "instruction": "Bitte überprüfen Sie aus Sicherheitsgründen die Identität von **%{userName} (%{userEmail})**. Kontaktieren Sie dazu **%{userName}** über ein Kommunikationsmittel Ihrer Wahl (Anruf, SMS, Messenger...) und überprüfen Sie den Sicherheitscode.<br><br>Alle Twake-Benutzer haben einen Sicherheitscode, den sie in ihrer Webanwendung finden. Der Sicherheitscode muss folgendem entsprechen:",
+      "instruction": "Bitte überprüfen Sie aus Sicherheitsgründen die Identität von %{userName} (%{userEmail}). Kontaktieren Sie dazu %{userName} über ein Kommunikationsmittel Ihrer Wahl (Anruf, SMS, Messenger...) und überprüfen Sie den Sicherheitscode.",
+      "securityCode": "Alle Twake-Benutzer haben einen Sicherheitscode, den sie in ihrer Webanwendung finden. Der Sicherheitscode muss folgendem entsprechen:",
       "instruction2": "Wenn das der Fall ist, können Sie diesen Kontakt bestätigen. Er gilt dann für Ihre nächsten Freigaben als sicher."
     }
   },
