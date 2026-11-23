@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.10.2](https://github.com/cozy/cozy-libs/compare/cozy-minilog@3.10.1...cozy-minilog@3.10.2) (2026-11-23)
+
+**Note:** Version bump only for package cozy-minilog
+
+
+
+
+
 ## [3.10.1](https://github.com/cozy/cozy-libs/compare/cozy-minilog@3.10.0...cozy-minilog@3.10.1) (2026-03-16)
 
 **Note:** Version bump only for package cozy-minilog

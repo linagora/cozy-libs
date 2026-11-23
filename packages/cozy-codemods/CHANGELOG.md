@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.2](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.35.1...@cozy/codemods@1.35.2) (2026-11-23)
+
+**Note:** Version bump only for package @cozy/codemods
+
+
+
+
+
 ## [1.35.1](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.35.0...@cozy/codemods@1.35.1) (2026-06-25)
 
 **Note:** Version bump only for package @cozy/codemods
