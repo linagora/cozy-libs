@@ -83,8 +83,7 @@ declare module 'cozy-client' {
   }
 
   type SetPassphraseFlagshipResult =
-    | AccessToken
-    | FlagshipVerificationNeededResult
+    AccessToken | FlagshipVerificationNeededResult
 
   interface StackClient {
     fetchJSON: <T>(method: string, path: string, body?: unknown) => Promise<T>

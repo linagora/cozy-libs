@@ -1,12 +1,5 @@
 {
   "extends": "cozy-tsconfig",
-  "include": [
-    "src/**/*",
-    ".storybook/**/*",
-    "tests"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["src/**/*", ".storybook/**/*", "tests"],
+  "exclude": ["node_modules", "dist"]
 }
