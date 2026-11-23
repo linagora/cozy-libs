@@ -10,7 +10,7 @@ import flag from 'cozy-flags'
 import Minilog from 'cozy-minilog'
 
 import { BRIDGE_ROUTE_PREFIX } from './constants'
-import { getIframe, extractUrl } from './helpers'
+import { getIframe, extractUrl, restrictToMethodCalls } from './helpers'
 
 const log = Minilog('🌉 [Container bridge]')
 
@@ -173,10 +173,13 @@ export const useListenBridgeRequests = (
 
     Comlink.expose(
       exposedMethods,
-      Comlink.windowEndpoint(
-        getIframe().contentWindow as PostMessageWithOrigin,
-        self,
-        targetOrigin
+      restrictToMethodCalls(
+        Comlink.windowEndpoint(
+          getIframe().contentWindow as PostMessageWithOrigin,
+          self,
+          targetOrigin
+        ),
+        exposedMethods
       ),
       [targetOrigin]
     )
