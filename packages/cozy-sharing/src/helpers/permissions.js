@@ -6,6 +6,22 @@ import { models } from 'cozy-client'
 // installed. That rule says nothing about the shared document.
 export const isAppsRule = rule => rule.type === 'io.cozy.apps'
 
+export const checkCanDownloadActivityReport = ({
+  file,
+  permissions,
+  hasSharingLink
+}) => {
+  const [linkPermission] = permissions
+  const rules = Object.values(linkPermission?.attributes?.permissions ?? {})
+
+  return (
+    hasSharingLink &&
+    Boolean(linkPermission?.id) &&
+    !file.driveId &&
+    !rules.some(isAppsRule)
+  )
+}
+
 export const checkIsReadOnlyPermissions = permissions => {
   const permissionCategories = get(
     permissions,

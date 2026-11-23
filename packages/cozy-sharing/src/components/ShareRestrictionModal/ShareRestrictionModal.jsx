@@ -2,6 +2,7 @@ import { addDays } from 'date-fns'
 import PropTypes from 'prop-types'
 import React, { useContext, useState } from 'react'
 
+import { Download, Icon } from '@linagora/twake-icons'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 import Alert from 'cozy-ui/transpiled/react/Alert'
@@ -11,6 +12,7 @@ import { useAlert } from 'cozy-ui/transpiled/react/providers/Alert'
 import { useI18n } from 'twake-i18n'
 
 import {
+  checkCanDownloadActivityReport,
   checkIsPermissionHasExpiresDate,
   checkIsPermissionHasPassword,
   checkIsReadOnlyPermissions,
@@ -37,6 +39,7 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const [isExpiredDate, setIsExpiredDate] = useState(false)
   const [isValidPassword, setIsValidPassword] = useState(true)
   const [loading, setLoading] = useState(false)
+  const [downloading, setDownloading] = useState(false)
 
   const {
     documentType,
@@ -50,6 +53,13 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
 
   const hasSharingLink = getSharingLink(file._id) !== null
   const permissions = getDocumentPermissions(file._id)
+  const [linkPermission] = permissions
+  const permissionId = linkPermission?.id
+  const canDownloadReport = checkCanDownloadActivityReport({
+    file,
+    permissions,
+    hasSharingLink
+  })
   const isReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
   const hasPassword = checkIsPermissionHasPassword(permissions)
   const hasExpiresDate = checkIsPermissionHasExpiresDate(permissions)
@@ -79,6 +89,44 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
   const supportsActivityReport = enableActivityReport
   const editingRights =
     isReadOnlyPermissions || permissions.length === 0 ? 'readOnly' : 'write'
+
+  const handleDownload = async () => {
+    setDownloading(true)
+    let objectUrl
+    try {
+      const response = await client
+        .getStackClient()
+        .fetch(
+          'GET',
+          `/permissions/${encodeURIComponent(permissionId)}/statistics`
+        )
+      if (!response.ok) {
+        throw new Error('Report download failed')
+      }
+      // A direct download link cannot send the app's Authorization header.
+      const blob = await response.blob()
+      const downloadUrl = URL.createObjectURL(blob)
+      objectUrl = downloadUrl
+      const link = document.createElement('a')
+      link.href = downloadUrl
+      link.download = 'public-link-statistics.csv'
+      document.body.appendChild(link)
+      link.click()
+      // WebKit may resolve the Blob URL after the click returns.
+      setTimeout(() => URL.revokeObjectURL(downloadUrl), 40 * 1000)
+      objectUrl = null
+      link.remove()
+    } catch {
+      showAlert({
+        message: t('ActivityReport.downloadError'),
+        severity: 'error',
+        variant: 'filled'
+      })
+    } finally {
+      if (objectUrl) URL.revokeObjectURL(objectUrl)
+      setDownloading(false)
+    }
+  }
 
   const handleClick = async () => {
     const ttl = dateToggle ? makeTTL(selectedDate) : null
@@ -194,12 +242,25 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
         </>
       }
       actions={
-        <Button
-          label={t('ShareRestrictionModal.action.confirm')}
-          onClick={handleClick}
-          disabled={!isValidDate || !isValidPassword}
-          busy={loading}
-        />
+        <>
+          {supportsActivityReport && (
+            <Button
+              className="u-mr-auto"
+              variant="ghost"
+              label={t('ActivityReport.download')}
+              startIcon={<Icon icon={Download} size={18} />}
+              disabled={!canDownloadReport}
+              busy={downloading}
+              onClick={handleDownload}
+            />
+          )}
+          <Button
+            label={t('ShareRestrictionModal.action.confirm')}
+            disabled={!isValidDate || !isValidPassword}
+            busy={loading}
+            onClick={handleClick}
+          />
+        </>
       }
     />
   )
