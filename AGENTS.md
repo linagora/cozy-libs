@@ -1,5 +1,7 @@
 # Configuration for AI agents
 
+- Decisions: `docs/decisions.md`, mandatory. Search it before asking a question or proposing a change; record every decision there, in the commit that applies it (skill `twake-decisions`).
+
 ## Lint and format
 
 This project is linted with Rslint (`yarn lint`) and formatted with `rs fmt` (`yarn fmt`), both from Rstack and configured in `rstack.config.mjs`. When generating code, strictly follow these rules:
