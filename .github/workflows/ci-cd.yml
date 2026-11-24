@@ -84,4 +84,10 @@ jobs:
       # lerna pushes the tags before it publishes: from-package publishes every
       # version missing from the registry, so a manual run finishes a failed release.
       - name: Publish to npm
-        run: yarn lerna publish from-package --yes
+        run: |
+          # Only a release commit is published, so that a version always holds the code of its tag
+          if [ -z "$(git tag --points-at HEAD)" ]; then
+            echo "HEAD is not a release commit: nothing to publish"
+            exit 0
+          fi
+          yarn lerna publish from-package --yes
