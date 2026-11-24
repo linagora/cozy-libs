@@ -5,17 +5,26 @@ on:
   push:
     branches:
       - master
+  # On master, publishes the versions that a failed release left unpublished.
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # Never cancel a run on master, it may be publishing.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    name: Build and publish
+    name: Build and test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{ github.ref == 'refs/heads/master' && secrets.GH_TOKEN || github.token }}
-          fetch-depth: 0
+          persist-credentials: false
       - name: Enable Corepack
         run: corepack enable
       - name: Use Node.js
@@ -36,14 +45,43 @@ jobs:
       - name: Check documentation
         run: |
           git diff --exit-code -- '*.md' || (echo "Docs are not up-to-date, please run yarn lint:md -f and repush" && exit 1)
-      - name: Publish to NPM
-        if: github.ref == 'refs/heads/master'
+
+  release:
+    name: Publish
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read # the release commit, the tags and the GitHub releases are pushed as cozy-bot
+      id-token: write # npm trusted publishing (OIDC)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0 # lerna reads the tags and the commits since the last release
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install dependencies
+        run: yarn install --immutable
+      # Not every package builds itself when it is packed
+      - name: Build
+        run: yarn build
+      - name: Version
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           git config user.name "Cozy Bot"
           git config user.email "npm@cozycloud.cc"
-          git remote set-url origin https://cozy-bot:$GH_TOKEN@github.com/cozy/cozy-libs.git
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          yarn lerna publish --yes -m "[skip ci] Publish"
+          git remote set-url origin "https://cozy-bot:$GH_TOKEN@github.com/linagora/cozy-libs.git"
+          yarn lerna version --yes -m "[skip ci] Publish"
+          git remote set-url origin https://github.com/linagora/cozy-libs.git
+      # lerna pushes the tags before it publishes: from-package publishes every
+      # version missing from the registry, so a manual run finishes a failed release.
+      - name: Publish to npm
+        run: yarn lerna publish from-package --yes
