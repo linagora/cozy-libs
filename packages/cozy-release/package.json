@@ -6,7 +6,8 @@
   "bin": "./cozy-release.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cozy/cozy-libs.git"
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "packages/cozy-release"
   },
   "author": "Cozy",
   "license": "MIT",

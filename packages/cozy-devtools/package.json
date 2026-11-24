@@ -7,7 +7,8 @@
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-devtools/README.md",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cozy/cozy-libs.git"
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "packages/cozy-devtools"
   },
   "bugs": {
     "url": "https://github.com/cozy/cozy-libs/issues"

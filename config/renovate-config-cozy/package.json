@@ -1,6 +1,11 @@
 {
   "name": "renovate-config-cozy",
   "version": "0.16.2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "config/renovate-config-cozy"
+  },
   "description": "Renovate config for Cozy (Cozy Cloud)",
   "renovate-config": {
     "default": {

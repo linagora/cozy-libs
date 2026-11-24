@@ -18,7 +18,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cozy/cozy-libs.git"
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "packages/cozy-minilog"
   },
   "author": {
     "name": "Mikito Takada",
