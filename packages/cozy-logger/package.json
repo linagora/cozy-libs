@@ -5,6 +5,11 @@
   "main": "src/index.js",
   "browser": "dist/index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "packages/cozy-logger"
+  },
   "dependencies": {
     "chalk": "^2.4.2",
     "json-stringify-safe": "5.0.1"

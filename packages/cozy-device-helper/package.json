@@ -20,7 +20,8 @@
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cozy/cozy-libs.git"
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "packages/cozy-device-helper"
   },
   "scripts": {
     "build": "yarn clean && yarn types && babel --extensions .ts,.tsx ./src -d ./dist",

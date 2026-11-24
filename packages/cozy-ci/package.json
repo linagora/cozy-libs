@@ -3,6 +3,11 @@
   "version": "0.12.2",
   "description": "Utility scripts for Cozy Cloud CI integration",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "packages/cozy-ci"
+  },
   "bin": {
     "cozy-ci-github": "./github-comment.sh",
     "cozy-ci-transifex": "./transifex.sh",

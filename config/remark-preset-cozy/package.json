@@ -3,6 +3,11 @@
   "version": "1.8.2",
   "main": "index.js",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "config/remark-preset-cozy"
+  },
   "dependencies": {
     "remark-preset-lint-recommended": "^4.0.1"
   }

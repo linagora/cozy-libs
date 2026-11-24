@@ -3,7 +3,11 @@
   "version": "1.35.2",
   "description": "Codeshifts used inside Cozies",
   "main": "index.js",
-  "repository": "https://github.com/cozy/cozy-libs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linagora/cozy-libs.git",
+    "directory": "packages/cozy-codemods"
+  },
   "author": "Cozy",
   "license": "MIT",
   "bin": {
