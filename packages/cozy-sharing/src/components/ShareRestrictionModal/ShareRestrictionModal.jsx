@@ -92,23 +92,20 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
 
   const handleDownload = async () => {
     setDownloading(true)
-    let objectUrl
     try {
       const response = await client
         .collection('io.cozy.permissions')
         .fetchStatistics(permissionId)
       // A direct download link cannot send the app's Authorization header.
       const blob = await response.blob()
-      const downloadUrl = URL.createObjectURL(blob)
-      objectUrl = downloadUrl
+      const objectUrl = URL.createObjectURL(blob)
+      // WebKit may resolve the Blob URL after the click returns.
+      setTimeout(() => URL.revokeObjectURL(objectUrl), 40 * 1000)
       const link = document.createElement('a')
-      link.href = downloadUrl
+      link.href = objectUrl
       link.download = 'public-link-statistics.csv'
       document.body.appendChild(link)
       link.click()
-      // WebKit may resolve the Blob URL after the click returns.
-      setTimeout(() => URL.revokeObjectURL(downloadUrl), 40 * 1000)
-      objectUrl = null
       link.remove()
     } catch {
       showAlert({
@@ -117,7 +114,6 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
         variant: 'filled'
       })
     } finally {
-      if (objectUrl) URL.revokeObjectURL(objectUrl)
       setDownloading(false)
     }
   }
