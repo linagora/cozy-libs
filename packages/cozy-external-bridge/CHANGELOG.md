@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/linagora/cozy-libs/compare/cozy-external-bridge@1.3.1...cozy-external-bridge@1.3.2) (2026-11-25)
+
+
+### Bug Fixes
+
+* Point each package to linagora/cozy-libs in its repository field ([b4e81eb](https://github.com/linagora/cozy-libs/commit/b4e81eb479c2a61263f9c41dade3d459cad28d4b))
+* Point the homepage and bugs fields to linagora/cozy-libs ([5c377b8](https://github.com/linagora/cozy-libs/commit/5c377b838f838611fae3f6ba7fcc6b5e0773ba54))
+
+
+
+
+
 ## [1.3.1](https://github.com/cozy/cozy-libs/compare/cozy-external-bridge@1.3.0...cozy-external-bridge@1.3.1) (2026-11-23)
 
 **Note:** Version bump only for package cozy-external-bridge

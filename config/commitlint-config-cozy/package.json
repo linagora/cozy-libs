@@ -1,6 +1,6 @@
 {
   "name": "commitlint-config-cozy",
-  "version": "0.16.1",
+  "version": "0.16.2",
   "description": "Shareable commitlint config enforcing the cozy commit convention",
   "main": "index.js",
   "author": "Cozy",
@@ -21,7 +21,7 @@
     "@babel/core": "7.16.12",
     "@commitlint/lint": "16.2.4",
     "babel-jest": "30.3.0",
-    "babel-preset-cozy-app": "^2.8.4",
+    "babel-preset-cozy-app": "^2.8.5",
     "jest": "30.3.0"
   },
   "dependencies": {

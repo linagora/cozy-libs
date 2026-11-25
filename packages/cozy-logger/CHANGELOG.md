@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.3](https://github.com/linagora/cozy-libs/compare/cozy-logger@1.18.2...cozy-logger@1.18.3) (2026-11-25)
+
+
+### Bug Fixes
+
+* Point each package to linagora/cozy-libs in its repository field ([b4e81eb](https://github.com/linagora/cozy-libs/commit/b4e81eb479c2a61263f9c41dade3d459cad28d4b))
+
+
+
+
+
 ## [1.18.2](https://github.com/cozy/cozy-libs/compare/cozy-logger@1.18.1...cozy-logger@1.18.2) (2026-11-23)
 
 **Note:** Version bump only for package cozy-logger

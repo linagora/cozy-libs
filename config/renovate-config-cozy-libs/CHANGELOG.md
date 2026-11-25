@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/linagora/cozy-libs/compare/renovate-config-cozy-libs@0.9.2...renovate-config-cozy-libs@0.9.3) (2026-11-25)
+
+
+### Bug Fixes
+
+* Point each package to linagora/cozy-libs in its repository field ([b4e81eb](https://github.com/linagora/cozy-libs/commit/b4e81eb479c2a61263f9c41dade3d459cad28d4b))
+
+
+
+
+
 ## [0.9.2](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy-libs@0.9.1...renovate-config-cozy-libs@0.9.2) (2026-01-29)
 
 **Note:** Version bump only for package renovate-config-cozy-libs

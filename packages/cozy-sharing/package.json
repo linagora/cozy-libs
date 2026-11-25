@@ -1,6 +1,6 @@
 {
   "name": "cozy-sharing",
-  "version": "46.0.2",
+  "version": "46.0.3",
   "description": "Provides sharing login for React applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -56,18 +56,18 @@
     "babel-plugin-css-modules-transform": "1.6.2",
     "babel-plugin-inline-react-svg": "1.1.2",
     "cozy-client": "^62.2.0",
-    "cozy-device-helper": "^4.0.4",
-    "cozy-intent": "^2.31.2",
-    "cozy-minilog": "^3.10.2",
+    "cozy-device-helper": "^4.0.5",
+    "cozy-intent": "^2.31.3",
+    "cozy-minilog": "^3.10.3",
     "cozy-ui": "^146.5.1",
-    "cozy-ui-plus": "^15.0.14",
+    "cozy-ui-plus": "^15.0.15",
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "react": "16.12.0",
     "react-dom": "16.13.0",
     "react-router": "^5.0.1",
     "storybook": "7.6.0",
-    "twake-i18n": "^0.7.2"
+    "twake-i18n": "^0.7.3"
   },
   "peerDependencies": {
     "@linagora/twake-icons": ">=2.9.0",

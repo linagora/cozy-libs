@@ -1,7 +1,7 @@
 {
   "name": "cozy-search",
   "description": "UI components about search bar",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "author": {
     "name": "Cozy Cloud",
     "url": "https://github.com/cozy"
@@ -21,18 +21,18 @@
     "babel-plugin-inline-react-svg": "1.1.2",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-tsconfig-paths": "^1.0.3",
-    "babel-preset-cozy-app": "^2.8.4",
+    "babel-preset-cozy-app": "^2.8.5",
     "cozy-client": "60.30.6",
-    "cozy-minilog": "^3.10.2",
+    "cozy-minilog": "^3.10.3",
     "cozy-ui": "^138.4.0",
-    "cozy-ui-plus": "^15.0.14",
+    "cozy-ui-plus": "^15.0.15",
     "cross-fetch": "^4.0.0",
     "jest": "30.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.14.2",
     "stylus": "^0.64.0",
-    "twake-i18n": "^0.7.2",
+    "twake-i18n": "^0.7.3",
     "typescript": "5.5.2"
   },
   "files": [
