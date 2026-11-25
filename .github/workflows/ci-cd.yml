@@ -32,7 +32,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
+      # Same install as the release job
       - name: Install dependencies
+        env:
+          YARN_ENABLE_SCRIPTS: 'false'
         run: yarn install --immutable
       - name: Build
         run: yarn build
@@ -68,7 +71,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
+      # No install scripts of the dependencies. The build still runs in this job,
+      # where the OIDC token can be requested.
       - name: Install dependencies
+        env:
+          YARN_ENABLE_SCRIPTS: 'false'
         run: yarn install --immutable
       # Not every package builds itself when it is packed
       - name: Build

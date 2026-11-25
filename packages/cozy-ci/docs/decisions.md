@@ -31,3 +31,10 @@ Categories: UX, UI, Product, Architecture, Infra, Tech.
 - Decided by: agent ([linagora/cozy-libs#3263](https://github.com/linagora/cozy-libs/pull/3263)), to be confirmed by Théo Poizat
 - Why: when master moves during a run, lerna skips the versioning and exits with success (`EBEHIND`); publishing from that commit would give a version left unpublished by an earlier failure a code newer than its tag.
 - Scope: every package of the monorepo. The run of the newer commit, or a manual run on a release commit, publishes what is missing.
+
+## 2026-11-25, \[Infra] The CI installs the dependencies without their install scripts
+
+- Decision: both jobs of `.github/workflows/ci-cd.yml` install with `YARN_ENABLE_SCRIPTS=false`; the build of the packages still runs in the `Publish` job.
+- Decided by: Théo Poizat (maintainer), [review comment](https://github.com/linagora/cozy-libs/pull/3263#issuecomment-7157520385)
+- Why: every step of the `Publish` job can request the OIDC token that publishes the 37 packages, so the install scripts of the dependencies must not run there; the `Build and publish` job installs the same way so that a pull request shows a build that needs one of them.
+- Scope: every package of the monorepo. Packing in a job without the token and publishing the tarballs from another one was set aside for this pull request.
