@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [47.0.0](https://github.com/linagora/cozy-libs/compare/cozy-sharing@46.0.3...cozy-sharing@47.0.0) (2026-11-25)
+
+
+### Features
+
+* **cozy-sharing:** Add public link report download ([4aef667](https://github.com/linagora/cozy-libs/commit/4aef667a85e764f741bc2f0dc4be97549c8054a2))
+* **cozy-sharing:** Use the client API for report downloads ([fe918a7](https://github.com/linagora/cozy-libs/commit/fe918a7f1df4de569d1027fa5fea9e18f66b38d5)), closes [linagora/cozy-client#1862](https://github.com/linagora/cozy-client/issues/1862)
+
+
+### BREAKING CHANGES
+
+* **cozy-sharing:** cozy-sharing now requires cozy-client 62.4.0 or later.
+* **cozy-sharing:** The public link settings now show a "Download report"
+button when `enableActivityReport` is set. Apps passing
+`enableActivityReport` must add a GET permission on
+`io.cozy.public_links.events` to their manifest.webapp and run a Stack
+serving `GET /permissions/:id/statistics`, otherwise the download fails.
+
+
+
+
+
 ## [46.0.3](https://github.com/linagora/cozy-libs/compare/cozy-sharing@46.0.2...cozy-sharing@46.0.3) (2026-11-25)
 
 
