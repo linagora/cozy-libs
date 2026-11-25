@@ -17962,16 +17962,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-client@npm:^62.2.0":
-  version: 62.2.0
-  resolution: "cozy-client@npm:62.2.0"
+"cozy-client@npm:^62.4.0":
+  version: 62.4.0
+  resolution: "cozy-client@npm:62.4.0"
   dependencies:
     "@cozy/minilog": "npm:1.0.0"
     "@fastify/deepmerge": "npm:^2.0.2"
     "@types/jest": "npm:^26.0.20"
     "@types/lodash": "npm:^4.14.170"
     btoa: "npm:^1.2.1"
-    cozy-stack-client: "npm:^62.2.0"
+    cozy-stack-client: "npm:^62.4.0"
     date-fns: "npm:^2.30.0"
     fast-deep-equal: "npm:^3.1.3"
     json-stable-stringify: "npm:^1.0.1"
@@ -18006,7 +18006,7 @@ __metadata:
       optional: true
     react-native-ios11-devicecheck:
       optional: true
-  checksum: 10c0/85ef32f6aafafc89377df95f325228f5108477e1501b2c622d1cdbe6cca9560c3e06c077af1d5e566064d81d2f470d092ca7f80f4da095b19ef8e912d822fa4a
+  checksum: 10c0/75bc7d2e59e0e9755fe28e5389f227f9f47c0956ab9b735fce2116b50c93b6e9605d7b180ef9df6774cec179225686ca039989b98c41a16b969f2e404f4a0164
   languageName: node
   linkType: hard
 
@@ -18648,7 +18648,7 @@ __metadata:
     babel-plugin-css-modules-transform: "npm:1.6.2"
     babel-plugin-inline-react-svg: "npm:1.1.2"
     classnames: "npm:^2.5.1"
-    cozy-client: "npm:^62.2.0"
+    cozy-client: "npm:^62.4.0"
     cozy-device-helper: "npm:^4.0.5"
     cozy-intent: "npm:^2.31.3"
     cozy-minilog: "npm:^3.10.3"
@@ -18669,7 +18669,7 @@ __metadata:
     twake-i18n: "npm:^0.7.3"
   peerDependencies:
     "@linagora/twake-icons": ">=2.9.0"
-    cozy-client: ">=62.2.0"
+    cozy-client: ">=62.4.0"
     cozy-device-helper: ">=4.0.0"
     cozy-flags: ">=4.8.1"
     cozy-intent: ">=2.29.1"
@@ -18824,9 +18824,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cozy-stack-client@npm:^62.2.0":
-  version: 62.2.0
-  resolution: "cozy-stack-client@npm:62.2.0"
+"cozy-stack-client@npm:^62.4.0":
+  version: 62.4.0
+  resolution: "cozy-stack-client@npm:62.4.0"
   dependencies:
     detect-node: "npm:^2.0.4"
     lodash: "npm:^4.18.1"
@@ -18834,7 +18834,7 @@ __metadata:
     qs: "npm:^6.16.1"
   peerDependencies:
     cozy-flags: ">2.8.6"
-  checksum: 10c0/4bd58a1a9bf16c5308e43b84596d44345a2d7853ed7e4451961b237cc9a5eb6cfb446edec3c4bb6e6b318afcebdc8b4b27c145be095667d4f8e6cfa6ccede942
+  checksum: 10c0/cb532184c4c7afd7e0a28434110f06b858415959ae1452404594df4bd50bd923aa0263d604b40787c1aff564b0ff8988243f9d8a912b6b098c4647ad280474a1
   languageName: node
   linkType: hard
 

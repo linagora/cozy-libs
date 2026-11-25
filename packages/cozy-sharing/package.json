@@ -55,7 +55,7 @@
     "babel-jest": "30.3.0",
     "babel-plugin-css-modules-transform": "1.6.2",
     "babel-plugin-inline-react-svg": "1.1.2",
-    "cozy-client": "^62.2.0",
+    "cozy-client": "^62.4.0",
     "cozy-device-helper": "^4.0.5",
     "cozy-intent": "^2.31.3",
     "cozy-minilog": "^3.10.3",
@@ -71,7 +71,7 @@
   },
   "peerDependencies": {
     "@linagora/twake-icons": ">=2.9.0",
-    "cozy-client": ">=62.2.0",
+    "cozy-client": ">=62.4.0",
     "cozy-device-helper": ">=4.0.0",
     "cozy-flags": ">=4.8.1",
     "cozy-intent": ">=2.29.1",
