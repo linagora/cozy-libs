@@ -4,7 +4,7 @@
   "version": "4.0.4",
   "author": "Cozy",
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",
@@ -15,7 +15,7 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-device-helper/README.md",
+  "homepage": "https://github.com/linagora/cozy-libs/blob/master/packages/cozy-device-helper/README.md",
   "license": "MIT",
   "main": "dist/index.js",
   "repository": {

@@ -7,14 +7,14 @@
   "contributors": [
     "Antonin Cezard <antonin.cezard@cozycloud.cc>"
   ],
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-tsconfig/readme.md",
+  "homepage": "https://github.com/linagora/cozy-libs/blob/master/packages/cozy-tsconfig/readme.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linagora/cozy-libs.git",
     "directory": "packages/cozy-tsconfig"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "main": "tsconfig.json",
   "peerDependencies": {

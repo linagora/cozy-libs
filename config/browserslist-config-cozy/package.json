@@ -5,14 +5,14 @@
   "main": "index.js",
   "author": "Cozy",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/browserslist-config-cozy/README.md",
+  "homepage": "https://github.com/linagora/cozy-libs/blob/master/config/browserslist-config-cozy/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linagora/cozy-libs.git",
     "directory": "config/browserslist-config-cozy"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "files": [
     "index.js",

@@ -4,14 +4,14 @@
   "description": "Use MJML custom components for Cozy emails",
   "author": "Cozy",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mjml/README.md",
+  "homepage": "https://github.com/linagora/cozy-libs/blob/master/packages/cozy-mjml/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linagora/cozy-libs.git",
     "directory": "packages/cozy-mjml"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "devDependencies": {
     "jest": "30.3.0",

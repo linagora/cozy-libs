@@ -3,13 +3,13 @@
   "description": "Sharing Helpers for Cozy Application Development",
   "author": "Cozy",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs#readme",
+  "homepage": "https://github.com/linagora/cozy-libs#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cozy/cozy-libs.git"
+    "url": "git+https://github.com/linagora/cozy-libs.git"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "scripts": {
     "lint": "rs lint",

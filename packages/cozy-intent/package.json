@@ -7,7 +7,7 @@
     "url": "https://github.com/cozy"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "dependencies": {
     "cozy-minilog": "^3.10.2",
@@ -29,7 +29,7 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/cozy/cozy-libs/packages/cozy-intent",
+  "homepage": "https://github.com/linagora/cozy-libs/tree/master/packages/cozy-intent",
   "keywords": [
     "cozy",
     "cozy-libs",

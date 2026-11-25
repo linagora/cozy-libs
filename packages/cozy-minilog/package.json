@@ -7,7 +7,7 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-minilog/readme.md",
+  "homepage": "https://github.com/linagora/cozy-libs/blob/master/packages/cozy-minilog/readme.md",
   "dependencies": {
     "microee": "0.0.6"
   },

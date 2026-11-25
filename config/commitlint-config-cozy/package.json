@@ -5,14 +5,14 @@
   "main": "index.js",
   "author": "Cozy",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/commitlint-config/README.md",
+  "homepage": "https://github.com/linagora/cozy-libs/blob/master/config/commitlint-config-cozy/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linagora/cozy-libs.git",
     "directory": "config/commitlint-config-cozy"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "scripts": {
     "test": "jest --env node ./*.spec.js"
