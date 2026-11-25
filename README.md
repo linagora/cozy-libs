@@ -44,8 +44,18 @@ is merged: it publishes the versions missing from the registry. Otherwise the
 next release does it, and a package changed in between gets a new version while
 its failed one stays unpublished.
 
+The manual run only finishes the npm publish. If the job failed after pushing
+the tags and before creating the GitHub releases, create them by hand from the
+tags.
+
+When master moves while a run is in progress, that run releases nothing: lerna
+warns `EBEHIND` and stops, the job stays green, and the run of the newer commit
+releases the changes of both.
+
 A new package must exist on npm and have a trusted publisher before its first
-merge to master, or the publish of every package fails:
+merge to master, or the publish fails at that package and leaves the release
+partly published. Do the two steps below, then finish the release with the
+manual run:
 
 1. Publish a `0.0.0` placeholder by hand: set the version to `0.0.0` locally (do
    not commit it) and run `npm publish`.

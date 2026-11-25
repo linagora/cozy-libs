@@ -24,3 +24,10 @@ Categories: UX, UI, Product, Architecture, Infra, Tech.
 - Decided by: agent ([linagora/cozy-libs#3263](https://github.com/linagora/cozy-libs/pull/3263)), to be confirmed by Théo Poizat
 - Why: under trusted publishing lerna publishes with provenance, and npm rejects a publish whose provenance does not match `repository.url`.
 - Scope: every package of the monorepo; a new package needs it before its first release.
+
+## 2026-11-24, \[Infra] Only a release commit is published
+
+- Decision: the `Publish` job runs `lerna publish from-package` only when a tag points at HEAD, and publishes nothing otherwise.
+- Decided by: agent ([linagora/cozy-libs#3263](https://github.com/linagora/cozy-libs/pull/3263)), to be confirmed by Théo Poizat
+- Why: when master moves during a run, lerna skips the versioning and exits with success (`EBEHIND`); publishing from that commit would give a version left unpublished by an earlier failure a code newer than its tag.
+- Scope: every package of the monorepo. The run of the newer commit, or a manual run on a release commit, publishes what is missing.
