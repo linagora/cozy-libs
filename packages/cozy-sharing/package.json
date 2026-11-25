@@ -5,14 +5,14 @@
   "main": "dist/index.js",
   "author": "Cozy",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-sharing/README.md",
+  "homepage": "https://github.com/linagora/cozy-libs/blob/master/packages/cozy-sharing/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linagora/cozy-libs.git",
     "directory": "packages/cozy-sharing"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "scripts": {
     "build": "env BABEL_ENV=transpilation babel src -d dist --copy-files --verbose",

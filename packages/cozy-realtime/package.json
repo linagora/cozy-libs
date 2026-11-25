@@ -13,7 +13,7 @@
     "directory": "packages/cozy-realtime"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "scripts": {
     "test": "jest",

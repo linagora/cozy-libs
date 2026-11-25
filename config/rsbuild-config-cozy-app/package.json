@@ -8,11 +8,11 @@
     "url": "git+https://github.com/linagora/cozy-libs.git",
     "directory": "config/rsbuild-config-cozy-app"
   },
-  "homepage": "https://github.com/cozy/cozy-libs/tree/master/packages/rsbuild-config-cozy-app",
+  "homepage": "https://github.com/linagora/cozy-libs/tree/master/config/rsbuild-config-cozy-app",
   "license": "MIT",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "files": [
     "index.js",

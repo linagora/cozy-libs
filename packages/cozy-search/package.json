@@ -7,7 +7,7 @@
     "url": "https://github.com/cozy"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "dependencies": {
     "classnames": "^2.5.1",
@@ -38,7 +38,7 @@
   "files": [
     "dist"
   ],
-  "homepage": "https://github.com/cozy/cozy-libs/packages/cozy-search",
+  "homepage": "https://github.com/linagora/cozy-libs/tree/master/packages/cozy-search",
   "keywords": [
     "cozy",
     "cozy-libs"

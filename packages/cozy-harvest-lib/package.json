@@ -5,14 +5,14 @@
   "main": "dist/index.js",
   "author": "Cozy",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-harvest-lib/README.md",
+  "homepage": "https://github.com/linagora/cozy-libs/blob/master/packages/cozy-harvest-lib/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/linagora/cozy-libs.git",
     "directory": "packages/cozy-harvest-lib"
   },
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "scripts": {
     "build": "babel --extensions .js,.jsx,.ts,.tsx --ignore '**/*.spec.tsx','**/*.spec.ts' ./src -d ./dist  --copy-files --verbose",

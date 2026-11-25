@@ -12,9 +12,9 @@
     "url": "git+https://github.com/linagora/cozy-libs.git",
     "directory": "packages/cozy-bar"
   },
-  "homepage": "https://github.com/cozy/cozy-libs/packages/cozy-bar",
+  "homepage": "https://github.com/linagora/cozy-libs/tree/master/packages/cozy-bar",
   "bugs": {
-    "url": "https://github.com/cozy/cozy-libs/issues"
+    "url": "https://github.com/linagora/cozy-libs/issues"
   },
   "license": "MIT",
   "scripts": {
