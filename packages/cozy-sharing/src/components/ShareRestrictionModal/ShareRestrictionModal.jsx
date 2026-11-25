@@ -95,14 +95,8 @@ export const ShareRestrictionModal = ({ file, onClose }) => {
     let objectUrl
     try {
       const response = await client
-        .getStackClient()
-        .fetch(
-          'GET',
-          `/permissions/${encodeURIComponent(permissionId)}/statistics`
-        )
-      if (!response.ok) {
-        throw new Error('Report download failed')
-      }
+        .collection('io.cozy.permissions')
+        .fetchStatistics(permissionId)
       // A direct download link cannot send the app's Authorization header.
       const blob = await response.blob()
       const downloadUrl = URL.createObjectURL(blob)
