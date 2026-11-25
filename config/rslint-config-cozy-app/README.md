@@ -45,7 +45,21 @@ Then in `package.json`:
   - `noUnusedVarsOptions`: the options of the `no-unused-vars` rules;
   - `testFiles`: the globs of test files (`*.spec.*`, `*.test.*` and the files under `__tests__/`).
 - `rslint-config-cozy-app/react`: function returning `basics` plus the React, React Hooks and type-aware TypeScript rules. The React rules apply to `.js`, `.jsx` and `.tsx` files. The TypeScript rules apply to `.ts`, `.tsx`, `.mts` and `.cts` files, with `projectService: true`.
+- `rslint-config-cozy-app/node-esm`: opt-in function returning the rule `node/file-extension-in-import`, for a package published as ES modules that Node loads as is. Node refuses a relative import without its extension; an app bundled by rsbuild or webpack does not need it.
 - `rslint-config-cozy-app/fmt`: the formatting options for `define.fmt()`.
+
+## Packages published as ES modules
+
+Add `node-esm` after the other presets:
+
+```js
+import nodeEsm from 'rslint-config-cozy-app/node-esm'
+import react from 'rslint-config-cozy-app/react'
+
+define.lint(lint => [...react(lint), ...nodeEsm()])
+```
+
+`rs lint --fix` adds the missing extensions.
 
 ## Extend `import/order`
 

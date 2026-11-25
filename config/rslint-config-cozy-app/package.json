@@ -18,14 +18,19 @@
     ".": "./index.js",
     "./basics": "./basics.js",
     "./react": "./react.js",
+    "./node-esm": "./node-esm.js",
     "./fmt": "./fmt.js"
   },
   "files": [
     "index.js",
     "basics.js",
     "react.js",
+    "node-esm.js",
     "fmt.js"
   ],
+  "scripts": {
+    "test": "node --test test/node-esm.spec.js"
+  },
   "peerDependencies": {
     "rstack": ">=0.8.5 <0.9.0"
   }
