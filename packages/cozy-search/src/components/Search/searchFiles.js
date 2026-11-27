@@ -1,4 +1,4 @@
-import { generateWebLink } from 'cozy-client'
+import { generateWebLink, models } from 'cozy-client'
 
 const FILES_DOCTYPE = 'io.cozy.files'
 const SEARCH_LIMIT = 20
@@ -46,9 +46,9 @@ const makeDriveLink = (client, hash) =>
 /**
  * Turns a hit of the stack search into a result in the DataProxy shape.
  *
- * shortcut: the hits have no metadata, so notes, shortcuts and Nextcloud
- * entries open in the Drive viewer like other files; add the fields to the
- * hits if they need their own route.
+ * shortcut: the hits have no metadata, so a note is found by its name, and a
+ * Nextcloud entry opens as a shortcut; add the fields to the hits if they need
+ * the exact checks.
  *
  * @param {import('cozy-client').default} client - cozy client
  * @param {object} file - a hit of FileCollection.search
@@ -56,23 +56,33 @@ const makeDriveLink = (client, hash) =>
  */
 export const normalizeStackHit = (client, file) => {
   const isDir = file.type === 'directory'
-  const dirId = isDir ? file._id : file.dir_id
-  const folderHash = file.drive_id
-    ? `/shareddrive/${file.drive_id}/${dirId}`
-    : `/folder/${dirId}`
-  const parentHash = file.drive_id
-    ? `/shareddrive/${file.drive_id}/${file.dir_id}`
-    : `/folder/${file.dir_id}`
+  const driveId = file.drive_id
+  const folderHash = id =>
+    driveId ? `/shareddrive/${driveId}/${id}` : `/folder/${id}`
+  const dirHash = folderHash(isDir ? file._id : file.dir_id)
+  const inDrive = driveId ? `${driveId}/` : ''
+
+  let hash = dirHash
+  if (isDir) {
+    // The folder itself
+  } else if (models.file.isShortcut(file)) {
+    hash = `/external/${inDrive}${file._id}`
+  } else if (file.name?.endsWith('.cozy-note')) {
+    // Drive opens the note on the instance that created it
+    hash = `/note/${inDrive}${file._id}`
+  } else if (!driveId && models.file.shouldBeOpenedByOnlyOffice(file)) {
+    hash = `/onlyoffice/${file._id}?redirectLink=drive${dirHash}`
+  } else {
+    hash = `${dirHash}/file/${file._id}`
+  }
+
   return {
-    doc: { ...file, _type: FILES_DOCTYPE, driveId: file.drive_id },
+    doc: { ...file, _type: FILES_DOCTYPE, driveId },
     slug: 'drive',
     title: file.name,
     subTitle: file.path,
-    url: makeDriveLink(
-      client,
-      isDir ? folderHash : `${folderHash}/file/${file._id}`
-    ),
-    secondaryUrl: makeDriveLink(client, parentHash)
+    url: makeDriveLink(client, hash),
+    secondaryUrl: makeDriveLink(client, folderHash(file.dir_id))
   }
 }
 

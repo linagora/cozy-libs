@@ -47,6 +47,39 @@ describe('normalizeStackHit', () => {
     )
     expect(res.doc.driveId).toBe('s1')
   })
+
+  it('links the shortcuts, notes and OnlyOffice files like DataProxy', () => {
+    const link = file => normalizeStackHit(client, file).url
+    const shortcut = {
+      _id: 'f1',
+      type: 'file',
+      class: 'shortcut',
+      dir_id: 'd1'
+    }
+    expect(link(shortcut)).toBe(
+      'https://alice-drive.cozy.example/#/external/f1'
+    )
+    expect(link({ ...shortcut, drive_id: 's1' })).toBe(
+      'https://alice-drive.cozy.example/#/external/s1/f1'
+    )
+
+    const note = { _id: 'f2', type: 'file', name: 'a.cozy-note', dir_id: 'd1' }
+    expect(link(note)).toBe('https://alice-drive.cozy.example/#/note/f2')
+    expect(link({ ...note, drive_id: 's1' })).toBe(
+      'https://alice-drive.cozy.example/#/note/s1/f2'
+    )
+
+    const sheet = {
+      _id: 'f3',
+      type: 'file',
+      name: 'a.xlsx',
+      class: 'spreadsheet',
+      dir_id: 'd1'
+    }
+    expect(link(sheet)).toBe(
+      'https://alice-drive.cozy.example/#/onlyoffice/f3?redirectLink=drive/folder/d1'
+    )
+  })
 })
 
 describe('searchFilesOnStack', () => {
