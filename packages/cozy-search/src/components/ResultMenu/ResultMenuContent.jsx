@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react'
 
-import { useDataProxy } from 'cozy-dataproxy-lib'
 import List from 'cozy-ui/transpiled/react/List'
 import ListItemSkeleton from 'cozy-ui/transpiled/react/Skeletons/ListItemSkeleton'
 
@@ -48,11 +47,9 @@ const SearchResult = ({ onClear }) => {
 }
 
 const ResultMenuContent = forwardRef(({ onClear }, ref) => {
-  const { dataProxyServicesAvailable } = useDataProxy()
-
   return (
     <List ref={ref}>
-      {dataProxyServicesAvailable && <SearchResult onClear={onClear} />}
+      <SearchResult onClear={onClear} />
     </List>
   )
 })
