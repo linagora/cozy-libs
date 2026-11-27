@@ -56,7 +56,7 @@ const makeDriveLink = (client, hash) =>
  */
 export const normalizeStackHit = (client, file) => {
   const isDir = file.type === 'directory'
-  const driveId = file.drive_id
+  const driveId = file.driveId
   const folderHash = id =>
     driveId ? `/shareddrive/${driveId}/${id}` : `/folder/${id}`
   const dirHash = folderHash(isDir ? file._id : file.dir_id)
@@ -77,10 +77,11 @@ export const normalizeStackHit = (client, file) => {
   }
 
   return {
-    doc: { ...file, _type: FILES_DOCTYPE, driveId },
+    doc: { ...file, _type: FILES_DOCTYPE },
     slug: 'drive',
     title: file.name,
-    subTitle: file.path,
+    // The folder of the item, as DataProxy shows it
+    subTitle: file.path.slice(0, file.path.lastIndexOf('/')) || '/',
     url: makeDriveLink(client, hash),
     secondaryUrl: makeDriveLink(client, folderHash(file.dir_id))
   }

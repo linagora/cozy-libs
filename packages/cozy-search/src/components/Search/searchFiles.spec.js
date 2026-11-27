@@ -20,7 +20,7 @@ describe('normalizeStackHit', () => {
       name: 'Report.pdf',
       mime: 'application/pdf',
       dir_id: 'd1',
-      path: '/Documents'
+      path: '/Documents/Report.pdf'
     })
     expect(res).toMatchObject({
       slug: 'drive',
@@ -38,14 +38,15 @@ describe('normalizeStackHit', () => {
       type: 'directory',
       name: 'Specs',
       dir_id: 'd1',
-      path: '/Team',
-      drive_id: 's1'
+      path: '/Team/Specs',
+      driveId: 's1'
     })
     expect(res.url).toBe('https://alice-drive.cozy.example/#/shareddrive/s1/d2')
     expect(res.secondaryUrl).toBe(
       'https://alice-drive.cozy.example/#/shareddrive/s1/d1'
     )
     expect(res.doc.driveId).toBe('s1')
+    expect(res.subTitle).toBe('/Team')
   })
 
   it('links the shortcuts, notes and OnlyOffice files like DataProxy', () => {
@@ -54,18 +55,25 @@ describe('normalizeStackHit', () => {
       _id: 'f1',
       type: 'file',
       class: 'shortcut',
-      dir_id: 'd1'
+      dir_id: 'd1',
+      path: '/a.url'
     }
     expect(link(shortcut)).toBe(
       'https://alice-drive.cozy.example/#/external/f1'
     )
-    expect(link({ ...shortcut, drive_id: 's1' })).toBe(
+    expect(link({ ...shortcut, driveId: 's1' })).toBe(
       'https://alice-drive.cozy.example/#/external/s1/f1'
     )
 
-    const note = { _id: 'f2', type: 'file', name: 'a.cozy-note', dir_id: 'd1' }
+    const note = {
+      _id: 'f2',
+      type: 'file',
+      name: 'a.cozy-note',
+      dir_id: 'd1',
+      path: '/a.cozy-note'
+    }
     expect(link(note)).toBe('https://alice-drive.cozy.example/#/note/f2')
-    expect(link({ ...note, drive_id: 's1' })).toBe(
+    expect(link({ ...note, driveId: 's1' })).toBe(
       'https://alice-drive.cozy.example/#/note/s1/f2'
     )
 
@@ -74,7 +82,8 @@ describe('normalizeStackHit', () => {
       type: 'file',
       name: 'a.xlsx',
       class: 'spreadsheet',
-      dir_id: 'd1'
+      dir_id: 'd1',
+      path: '/a.xlsx'
     }
     expect(link(sheet)).toBe(
       'https://alice-drive.cozy.example/#/onlyoffice/f3?redirectLink=drive/folder/d1'
@@ -89,7 +98,9 @@ describe('searchFilesOnStack', () => {
 
   it('returns the normalized hits', async () => {
     const search = jest.fn().mockResolvedValue({
-      data: [{ _id: 'f1', type: 'file', name: 'a.txt', dir_id: 'd1' }]
+      data: [
+        { _id: 'f1', type: 'file', name: 'a.txt', dir_id: 'd1', path: '/a.txt' }
+      ]
     })
     const results = await searchFilesOnStack(makeClient(search), 'a')
     expect(search).toHaveBeenCalledWith('a', { limit: 20 })
